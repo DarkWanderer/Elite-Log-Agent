@@ -1,4 +1,5 @@
 ﻿using DW.Inara.LogUploader.Inara;
+using DW.Inara.LogUploader.Persistence;
 using DW.Inara.LogUploader.Tray;
 using System;
 using System.Threading;
@@ -24,9 +25,16 @@ namespace DW.Inara.LogUploader
                 if (!createdNewMutex)
                     return; // Application is already running
 
-                using (var uploadController = new UploadController())
-                using (var trayController = new TrayController(uploadController))
+                var registryInfoStorage = new RegistryInformationStorage();
+
+                using (var uploadController = new UploadController(registryInfoStorage))
+                using (var processWatcher = new ProcessWatcher("EliteDangerous64.exe", "EliteDangerous32.exe"))
+                using (var trayController = new TrayController(uploadController, registryInfoStorage))
+                {
+                    uploadController.Settings = registryInfoStorage.Load();
+                    processWatcher.ProcessFinished += (o, e) => uploadController.UploadLatestFile(true);
                     Application.Run();
+                }
             }
             finally
             {

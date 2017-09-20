@@ -1,4 +1,5 @@
 ﻿using DW.Inara.LogUploader.Inara;
+using DW.Inara.LogUploader.Persistence;
 using DW.Inara.LogUploader.Settings;
 using System;
 using System.IO;
@@ -10,21 +11,9 @@ namespace DW.Inara.LogUploader
 {
     internal class UploadController : IDisposable
     {
-        public class LogUploadEventArgs : EventArgs
+        public UploadController(IPersistentFileInfoStorage fileInfoStorage)
         {
-            public LogUploadEventArgs(string fileName)
-            {
-                FileName = fileName;
-            }
-
-            public LogUploadEventArgs(string fileName, string error)
-            {
-                FileName = fileName;
-                Error = error;
-            }
-
-            public string FileName { get; }
-            public string Error { get; }
+            this.fileInfoStorage = fileInfoStorage;
         }
 
         private UploaderSettings settings;
@@ -32,14 +21,12 @@ namespace DW.Inara.LogUploader
         {
             get
             {
-                if (settings == null)
-                    throw new InvalidOperationException("Uploader settings not set");
+                //if (settings == null)
+                //    throw new InvalidOperationException("Uploader settings not set");
                 return settings;
             }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
                 settings = value;
             }
         }
@@ -47,28 +34,34 @@ namespace DW.Inara.LogUploader
         public event EventHandler<LogUploadEventArgs> LogUploadSuccessful;
         public event EventHandler<LogUploadEventArgs> LogUploadFailed;
 
-        public void UploadLatestFile()
+        public void UploadLatestFile(bool checkIfUploadedBefore)
         {
             var filePath = LatestLogFileName;
+            var fileName = Path.GetFileName(filePath);
+
+            if (checkIfUploadedBefore && fileInfoStorage?.GetLatestSavedFile() == fileName)
+                return; // file has been uploaded before, nothing to do
+
             try
             {
                 Uploader.UploadFile(filePath, Settings.InaraUsername, Settings.InaraPassword);
-                OnLogUploadSuccessful(filePath);
+                fileInfoStorage?.SetLatestSavedFile(fileName);
+                OnLogUploadSuccessful(fileName);
             }
             catch (Exception e)
             {
-                OnLogUploadFailed(filePath, e);
+                OnLogUploadFailed(fileName, e);
             }
         }
 
-        private void OnLogUploadFailed(string filePath, Exception e)
+        private void OnLogUploadFailed(string fileName, Exception e)
         {
-            LogUploadFailed?.Invoke(this, new LogUploadEventArgs(Path.GetFileName(filePath), e.Message));
+            LogUploadFailed?.Invoke(this, new LogUploadEventArgs(fileName, e.Message));
         }
 
-        private void OnLogUploadSuccessful(string filePath)
+        private void OnLogUploadSuccessful(string fileName)
         {
-            LogUploadSuccessful?.Invoke(this, new LogUploadEventArgs(Path.GetFileName(filePath)));
+            LogUploadSuccessful?.Invoke(this, new LogUploadEventArgs(fileName));
         }
 
         private string LatestLogFileName
@@ -85,8 +78,7 @@ namespace DW.Inara.LogUploader
         {
             get
             {
-                IntPtr path;
-                int result = SHGetKnownFolderPath(new Guid("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4"), 0, new IntPtr(0), out path);
+                int result = SHGetKnownFolderPath(new Guid("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4"), 0, new IntPtr(0), out IntPtr path);
                 if (result >= 0)
                 {
                     return Marshal.PtrToStringUni(path) + @"\Frontier Developments\Elite Dangerous";
@@ -103,6 +95,7 @@ namespace DW.Inara.LogUploader
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
+        private IPersistentFileInfoStorage fileInfoStorage;
 
         protected virtual void Dispose(bool disposing)
         {

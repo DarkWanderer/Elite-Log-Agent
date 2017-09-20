@@ -55,6 +55,11 @@
     </Compile>
     <Compile Include="Extensions\HttpExtensions.cs" />
     <Compile Include="Inara\Uploader.cs" />
+    <Compile Include="LogUploadEventArgs.cs" />
+    <Compile Include="Persistence\IPersistentFileInfoStorage.cs" />
+    <Compile Include="Persistence\IPersistentSettingsStorage.cs" />
+    <Compile Include="Persistence\RegistryInformationStorage.cs" />
+    <Compile Include="ProcessWatcher.cs" />
     <Compile Include="Settings\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
