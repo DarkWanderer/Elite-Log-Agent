@@ -44,6 +44,9 @@ namespace DW.Inara.LogUploader
 
             try
             {
+                if (Settings == null)
+                    throw new InvalidOperationException("INARA credentials not set");
+
                 Uploader.UploadFile(filePath, Settings.InaraUsername, Settings.InaraPassword);
                 fileInfoStorage?.SetLatestSavedFile(fileName);
                 OnLogUploadSuccessful(fileName);
