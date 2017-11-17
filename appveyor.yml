@@ -8,12 +8,15 @@ build:
   publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: normal
+artifacts: 
+  - path: bin\Release\DW.Inara.LogUploader.exe
+    name: executable
 deploy:
 - provider: GitHub
   tag: release-$(appveyor_build_version)
   release: $(appveyor_build_version)
   auth_token:
     secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-  artifact: bin\Release\DW.Inara.LogUploader.exe
+  artifact: executable
   draft: true
   force_update: true
