@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DW.Inara.LogUploader
@@ -18,6 +20,19 @@ namespace DW.Inara.LogUploader
                 throw new ArgumentException(nameof(watchedProcessNames) + " must not be empty");
 
             this.watchedProcessNames = watchedProcessNames;
+        }
+
+        private void Run(CancellationToken token)
+        {
+            var managementScope = new ManagementScope(@"\\mysever\root\onguard");
+            managementScope.Connect();
+            while (!token.IsCancellationRequested)
+            {
+                var query = new EventQuery("SELECT TargetInstance FROM __InstanceDeletionEvent WHERE TargetInstance ISA \"Win32_Process\"");
+                var eventWatcher = new ManagementEventWatcher(managementScope, query);
+                var wmiEvent = eventWatcher.WaitForNextEvent();
+                Console.Out.WriteLine(wmiEvent.GetPropertyValue("Description"));
+            }
         }
 
         public class ProcessEventArgs : EventArgs

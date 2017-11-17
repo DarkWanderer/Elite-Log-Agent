@@ -55,7 +55,8 @@ namespace DW.Inara.LogUploader.Tray
         private ContextMenuStrip CreateMenuStrip()
         {
             var menuStrip = new ContextMenuStrip();
-            menuStrip.Items.Add("Upload latest log", Resources.InaraIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFile(false));
+            menuStrip.Items.Add("Upload latest log", Resources.InaraIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(1, false));
+            menuStrip.Items.Add("Upload 5 latest logs", Resources.InaraIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(5, false));
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Settings", SystemIcons.Application.ToBitmap(), (o, e) =>
             {

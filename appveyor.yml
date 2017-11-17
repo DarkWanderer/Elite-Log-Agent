@@ -1,0 +1,19 @@
+version: 0.1.{build}
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+build:
+  project: DW.Inara.LogUploader.sln
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: normal
+deploy:
+- provider: GitHub
+  tag: release-$(appveyor_build_version)
+  release: $(appveyor_build_version)
+  auth_token:
+    secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
+  artifact: bin\Release\DW.Inara.LogUploader.exe
+  draft: true
+  force_update: true

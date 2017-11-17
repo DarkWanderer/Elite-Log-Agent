@@ -28,11 +28,11 @@ namespace DW.Inara.LogUploader
                 var registryInfoStorage = new RegistryInformationStorage();
 
                 using (var uploadController = new UploadController(registryInfoStorage))
-                using (var processWatcher = new ProcessWatcher("EliteDangerous64.exe", "EliteDangerous32.exe"))
+                using (var processWatcher = new ProcessWatcher("EliteDangerous64.exe", "EliteDangerous32.exe", "EDLaunch.exe"))
                 using (var trayController = new TrayController(uploadController, registryInfoStorage))
                 {
                     uploadController.Settings = registryInfoStorage.Load();
-                    processWatcher.ProcessFinished += (o, e) => uploadController.UploadLatestFile(true);
+                    processWatcher.ProcessFinished += (o, e) => uploadController.UploadLatestFiles(1,true);
                     Application.Run();
                 }
             }

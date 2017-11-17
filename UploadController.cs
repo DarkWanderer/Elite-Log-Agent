@@ -2,6 +2,7 @@
 using DW.Inara.LogUploader.Persistence;
 using DW.Inara.LogUploader.Settings;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -34,26 +35,30 @@ namespace DW.Inara.LogUploader
         public event EventHandler<LogUploadEventArgs> LogUploadSuccessful;
         public event EventHandler<LogUploadEventArgs> LogUploadFailed;
 
-        public void UploadLatestFile(bool checkIfUploadedBefore)
+        public void UploadLatestFiles(int filesCount, bool checkIfUploadedBefore)
         {
-            var filePath = LatestLogFileName;
-            var fileName = Path.GetFileName(filePath);
+            var files = LatestLogFileNames.Take(filesCount).Reverse().ToList();
+            //var fileName = Path.GetFileName(filePath);
 
-            if (checkIfUploadedBefore && fileInfoStorage?.GetLatestSavedFile() == fileName)
-                return; // file has been uploaded before, nothing to do
 
-            try
+            foreach (var filePath in files)
             {
-                if (Settings == null)
-                    throw new InvalidOperationException("INARA credentials not set");
+                var fileName = Path.GetFileName(filePath);
+                try
+                {
+                    if (checkIfUploadedBefore && fileInfoStorage?.GetLatestSavedFile() == fileName)
+                        break; // file has been uploaded before, nothing to do
+                    if (Settings == null)
+                        throw new InvalidOperationException("INARA credentials not set");
 
-                Uploader.UploadFile(filePath, Settings.InaraUsername, Settings.InaraPassword);
-                fileInfoStorage?.SetLatestSavedFile(fileName);
-                OnLogUploadSuccessful(fileName);
-            }
-            catch (Exception e)
-            {
-                OnLogUploadFailed(fileName, e);
+                    Uploader.UploadFile(filePath, Settings.InaraUsername, Settings.InaraPassword);
+                    fileInfoStorage?.SetLatestSavedFile(fileName);
+                    OnLogUploadSuccessful(fileName);
+                }
+                catch (Exception e)
+                {
+                    OnLogUploadFailed(fileName, e);
+                }
             }
         }
 
@@ -67,13 +72,12 @@ namespace DW.Inara.LogUploader
             LogUploadSuccessful?.Invoke(this, new LogUploadEventArgs(fileName));
         }
 
-        private string LatestLogFileName
+        private IEnumerable<string> LatestLogFileNames
         {
             get
             {
                 var savedGamesDirectoryInfo = new DirectoryInfo(SavedGamesDirectory);
-                var latestFile = savedGamesDirectoryInfo.GetFiles().OrderByDescending(f => f.CreationTimeUtc).FirstOrDefault()?.FullName;
-                return latestFile;
+                return savedGamesDirectoryInfo.GetFiles().OrderByDescending(f => f.CreationTimeUtc).Select(f => f.FullName);
             }
         }
 
