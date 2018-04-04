@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DW.Inara.LogUploader
+namespace TrayAgent
 {
-    public partial class AboutForm : Form
+    public partial class Form1 : Form
     {
-        public AboutForm()
+        public Form1()
         {
             InitializeComponent();
         }
