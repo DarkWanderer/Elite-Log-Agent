@@ -3,7 +3,7 @@ image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 build:
-  project: DW.Inara.LogUploader.sln
+  project: Elite-Log-Agent.sln
   publish_nuget: true
   publish_nuget_symbols: true
   include_nuget_references: true
