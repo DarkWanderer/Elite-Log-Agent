@@ -2,6 +2,8 @@ version: 0.1.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
+before_build:
+- cmd: nuget restore
 build:
   project: Elite-Log-Agent.sln
   publish_nuget: true
