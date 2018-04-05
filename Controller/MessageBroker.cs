@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    public class Class1
+    public class MessageBroker
     {
     }
 }

@@ -2,24 +2,33 @@ version: 0.1.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
+
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
+
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.cs'
   assembly_version: $(appveyor_build_version)
   assembly_file_version: $(appveyor_build_version)
   assembly_informational_version: $(appveyor_build_version)
+
 build:
   project: Elite-Log-Agent.sln
   publish_nuget: true
   publish_nuget_symbols: true
   include_nuget_references: true
   verbosity: normal
+
+after_build:
+- cmd: mkdir bin\Release
+- cmd: ILMerge\tools\ilmerge.exe /wildcards /out:bin\Release\EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
+
 artifacts: 
-  - path: TrayAgent\bin\Release\*
+  - path: TrayAgent\bin\Release\TrayAgent.exe
     name: executable
+
 deploy:
 - provider: GitHub
   tag: release-$(appveyor_build_version)

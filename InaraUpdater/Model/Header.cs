@@ -9,6 +9,13 @@ namespace InaraUpdater.Model
 {
     public class Header
     {
+        public Header(string commander, string apiKey)
+        {
+            CommanderName = commander;
+            ApiKey = apiKey;
+            EventStatus = 200;
+        }
+
         // Input fields
         [JsonProperty("appName")]
         public const string AppName = "EliteLogAgent";
@@ -27,10 +34,7 @@ namespace InaraUpdater.Model
         [JsonProperty("eventStatusText")]
         public string EventStatusText { get; internal set; }
 
-        public Header(string commander, string apiKey)
-        {
-            CommanderName = commander;
-            ApiKey = apiKey;
-        }
+        public override string ToString() => JsonConvert.SerializeObject(this);
+
     }
 }

@@ -27,6 +27,7 @@ namespace InaraUpdater.Model
             [JsonProperty("events")]
             public ICollection<Event> Events;
 
+            public override string ToString() => JsonConvert.SerializeObject(this);
         }
 
         public async Task<Event> ApiCall(Event @event) 
@@ -41,7 +42,12 @@ namespace InaraUpdater.Model
                 Header = new Header(commanderName, apiKey),
                 Events = events
             };
-            var inputJson = JsonConvert.SerializeObject(inputData);
+            var inputJson = JsonConvert.SerializeObject(inputData, Formatting.Indented,
+                            new JsonSerializerSettings
+                            {
+                                DateFormatString = "u",
+                                NullValueHandling = NullValueHandling.Ignore
+                            });
             var outputJson = await client.PostAsync(inputJson);
             var outputData = JsonConvert.DeserializeObject<ApiInputOutput>(outputJson);
 

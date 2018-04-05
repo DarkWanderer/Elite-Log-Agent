@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ApiFacade.cs" />
-    <Compile Include="Model\GetCommanderProfileEvent.cs" />
     <Compile Include="Model\IRestClient.cs" />
     <Compile Include="RestClient.cs" />
     <Compile Include="Uploader.cs" />

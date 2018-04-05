@@ -7,18 +7,30 @@ using System.Threading.Tasks;
 
 namespace InaraUpdater.Model
 {
-    public abstract class Event
+    public sealed class Event
     {
+        private readonly DateTime _timestamp;
+
+        public Event(string eventName, IDictionary<string, object> eventData)
+        {
+            EventName = eventName;
+            _timestamp = DateTime.UtcNow;
+            CustomID = 0;
+            EventData = eventData;
+        }
+
         [JsonProperty("eventName")]
-        public abstract string EventName { get; }
+        public string EventName { get; }
 
         [JsonProperty("eventTimestamp")]
-        public DateTime Timestamp { get; }
+        public DateTime Timestamp => _timestamp;
 
         [JsonProperty("eventCustomID")]
         public int CustomID { get; }
 
         [JsonProperty("eventData")]
-        public abstract object EventData { get; }
+        public IDictionary<string, object> EventData { get; }
+
+        public override string ToString() => JsonConvert.SerializeObject(this);
     }
 }
