@@ -19,6 +19,6 @@ namespace InaraUpdater.Model
         public int CustomID { get; }
 
         [JsonProperty("eventData")]
-        public object EventData { get; }
+        public abstract object EventData { get; }
     }
 }

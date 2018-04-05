@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InaraUpdater
 {
-    public class Class1
+    public class Uploader
     {
     }
 }

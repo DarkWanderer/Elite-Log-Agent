@@ -7,19 +7,25 @@ using System.Threading.Tasks;
 
 namespace InaraUpdater.Model
 {
-    [JsonObject(Title = "header")]
     public class Header
     {
+        // Input fields
         [JsonProperty("appName")]
         public const string AppName = "EliteLogAgent";
         [JsonProperty("appVersion")]
         public const string AppVersion = "0.1";
         [JsonProperty("isDeveloped")]
         public const bool IsDeveloped = true;
-        [JsonProperty("APIKey")]
+        [JsonProperty("APIkey")]
         public string ApiKey { get; }
         [JsonProperty("commanderName")]
         public string CommanderName { get; }
+
+        // Output fields
+        [JsonProperty("eventStatus")]
+        public int EventStatus { get; internal set; }
+        [JsonProperty("eventStatusText")]
+        public string EventStatusText { get; internal set; }
 
         public Header(string commander, string apiKey)
         {
