@@ -11,7 +11,7 @@ build:
   include_nuget_references: true
   verbosity: normal
 artifacts: 
-  - path: TrayAgent\bin\Debug\*
+  - path: TrayAgent\bin\Release\*
     name: executable
 deploy:
 - provider: GitHub
