@@ -11,7 +11,7 @@ build:
   include_nuget_references: true
   verbosity: normal
 artifacts: 
-  - path: bin\Release\DW.Inara.LogUploader.exe
+  - path: TrayAgent\bin\Debug\*
     name: executable
 deploy:
 - provider: GitHub
