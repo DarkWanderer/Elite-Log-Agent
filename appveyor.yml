@@ -13,6 +13,7 @@ build:
 artifacts: 
   - path: TrayAgent\bin\Release\*
     name: executable
+    type: zip
 deploy:
 - provider: GitHub
   tag: release-$(appveyor_build_version)
