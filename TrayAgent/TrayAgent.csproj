@@ -72,6 +72,9 @@
     <Compile Include="Settings\IPersistentSettingsStorage.cs" />
     <Compile Include="Settings\RegistryInformationStorage.cs" />
     <Compile Include="Settings\UploaderSettings.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
