@@ -26,7 +26,7 @@ after_build:
 - cmd: ILMerge\tools\ilmerge.exe /wildcards /out:bin\Release\EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
 
 artifacts: 
-  - path: TrayAgent\bin\Release\TrayAgent.exe
+  - path: bin\Release\EliteLogAgent.exe
     name: executable
 
 deploy:
