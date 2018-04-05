@@ -4,6 +4,7 @@ configuration: Release
 platform: Any CPU
 before_build:
 - cmd: nuget restore
+- cmd: nuget install -ExcludeVersion ILMerge
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.cs'
@@ -19,7 +20,6 @@ build:
 artifacts: 
   - path: TrayAgent\bin\Release\*
     name: executable
-    type: zip
 deploy:
 - provider: GitHub
   tag: release-$(appveyor_build_version)
