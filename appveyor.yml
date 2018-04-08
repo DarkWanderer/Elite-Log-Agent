@@ -26,9 +26,10 @@ after_build:
 - cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
 
 artifacts: 
-  - path: EliteLogAgent.exe
-    path: TrayAgent\bin\Release\*
-    name: executable
+- path: EliteLogAgent.exe
+  name: single-executable
+- path: TrayAgent\bin\Release\*
+  name: clickonce-deploy
 
 deploy:
 - provider: GitHub
@@ -39,6 +40,6 @@ deploy:
   release: $(appveyor_build_version)
   auth_token:
     secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-  artifact: executable
+  artifact: single-executable
   draft: true
   force_update: true
