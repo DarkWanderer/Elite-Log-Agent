@@ -14,27 +14,41 @@ assembly_info:
   assembly_file_version: $(appveyor_build_version)
   assembly_informational_version: $(appveyor_build_version)
 
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: $(appveyor_build_version)
+  package_version: $(appveyor_build_version)
+  assembly_version: $(appveyor_build_version)
+  file_version: $(appveyor_build_version)
+  informational_version: $(appveyor_build_version)
+
 build:
   project: Elite-Log-Agent.sln
   publish_nuget: true
   publish_nuget_symbols: true
   include_nuget_references: true
-  verbosity: normal
+  verbosity: normal  
+  parallel: true
+
 
 after_build:
 - cmd: mkdir bin\Release
 - cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
+- cmd: msbuild /target:Publish Elite-Log-Agent.sln /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release 
 
 artifacts: 
 - path: EliteLogAgent.exe
   name: single-executable
 - path: TrayAgent\bin\Release\*
-  name: clickonce-deploy
+  name: trayagent-binaries
+- path: TrayAgent\publish\*
+  name: published
 
 deploy:
 - provider: GitHub
   on:
-    branch: master develop
+    branch: master
   tag: release-$(appveyor_build_version)
   release: $(appveyor_build_version)
   auth_token:
