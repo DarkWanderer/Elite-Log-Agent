@@ -1,4 +1,5 @@
-﻿using InaraUpdater;
+﻿using Controller;
+using InaraUpdater;
 using InaraUpdater.Model;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TrayAgent
 {
-    static class Program
+    static partial class Program
     {
         /// <summary>
         /// The main entry point for the application.

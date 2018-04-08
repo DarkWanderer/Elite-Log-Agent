@@ -1,4 +1,4 @@
-version: 0.1.{build}
+version: 0.2.0.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
@@ -23,14 +23,18 @@ build:
 
 after_build:
 - cmd: mkdir bin\Release
-- cmd: ILMerge\tools\ilmerge.exe /wildcards /out:bin\Release\EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
+- cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
 
 artifacts: 
-  - path: bin\Release\EliteLogAgent.exe
+  - path: EliteLogAgent.exe
+    path: TrayAgent\bin\Release\*
     name: executable
 
 deploy:
 - provider: GitHub
+  on:
+    branch: master
+    branch: develop
   tag: release-$(appveyor_build_version)
   release: $(appveyor_build_version)
   auth_token:

@@ -40,13 +40,12 @@
             this.label1.Size = new System.Drawing.Size(120, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "It\'s alive!";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(143, 51);
+            this.ClientSize = new System.Drawing.Size(459, 158);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
