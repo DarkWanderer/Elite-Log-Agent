@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Controller
 {
-    public class LogEventTypeCounter : IObserver<string>
+    public class LogEventTypeCounter : IObserver<JObject>
     {
-        private static IDictionary<string, int> eventTypeCounters = new Dictionary<string,int>();
+        private IDictionary<string, int> eventTypeCounters = new Dictionary<string,int>();
 
         public void OnCompleted()
         {
@@ -18,15 +19,23 @@ namespace Controller
 
         }
 
-        public void OnNext(string value)
-        {
-            var data = JsonConvert.DeserializeObject<IDictionary<string, object>>(value);
-            var name = data["event"] as string;
+        public IReadOnlyCollection<string> EventTypes => 
+            eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();
 
-            if (!eventTypeCounters.ContainsKey(name))
-                eventTypeCounters.Add(name, 1);
-            else
-                eventTypeCounters[name]++;
+        public void OnNext(JObject value)
+        {
+            try
+            {
+                var name = value["event"].ToString();
+
+                if (!eventTypeCounters.ContainsKey(name))
+                    eventTypeCounters.Add(name, 1);
+                else
+                    eventTypeCounters[name]++;
+            }
+            catch
+            {
+            }
         }
     }
 }

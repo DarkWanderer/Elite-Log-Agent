@@ -1,26 +1,29 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Controller
 {
     /// <summary>
     /// This class replays N last log files to observers - to fill up historic data
     /// </summary>
-    public class LogBurstPlayer : AbstractObservable<string>
+    public class LogBurstPlayer : AbstractObservable<JObject>
     {
         public void Play()
         {
-            var logLines = LatestLogFiles
-                .Take(50)
-                .Reverse()
-                .SelectMany(File.ReadAllLines)
-                .ToList();
-
-            logLines.ForEach(OnNext);
+            foreach (var file in LatestLogFiles)
+                using (var textReader = File.OpenText(file))
+                using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent  = true})
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    while (jsonReader.Read())
+                    {
+                        var @object = (JObject)serializer.Deserialize(jsonReader);
+                        OnNext(@object);
+                    }
+                }
             OnCompleted();
         }
 
@@ -28,7 +31,8 @@ namespace Controller
         {
             get
             {
-                var savedGamesDirectoryInfo = new DirectoryInfo(SavedGamesDirectoryHelper.Directory);
+                //var savedGamesDirectoryInfo = new DirectoryInfo(SavedGamesDirectoryHelper.Directory);
+                var savedGamesDirectoryInfo = new DirectoryInfo(@"D:\Oleg\Projects\Elite-Log-Agent\LogSamples");
                 return savedGamesDirectoryInfo.GetFiles()
                     .OrderByDescending(f => f.CreationTimeUtc).Select(f => f.FullName);
             }

@@ -63,7 +63,7 @@ namespace TrayAgent
                 var decryptedBytes = ProtectedData.Unprotect(encryptedBytes, s_aditionalEntropy, DataProtectionScope.CurrentUser);
                 return Encoding.Unicode.GetString(decryptedBytes);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
