@@ -25,7 +25,7 @@ build:
 after_build:
 - cmd: mkdir bin\Release
 - cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
-- cmd: msbuild Elite-Log-Agent.sln /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion="$env:APPVEYOR_BUILD_VERSION"
+- cmd: msbuild Elite-Log-Agent.sln /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion="$(appveyor_build_version)"
 
 artifacts: 
 - path: EliteLogAgent.exe
