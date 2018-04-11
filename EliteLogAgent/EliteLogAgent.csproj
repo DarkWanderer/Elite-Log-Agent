@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://ci.appveyor.com/api/projects/DarkWanderer/elite-log-agent/artifacts/TrayAgent/bin/Release/</InstallUrl>
+    <InstallUrl>https://dwapps.blob.core.windows.net/app-distrib/</InstallUrl>
     <ErrorReportUrl>https://github.com/DarkWanderer/Elite-Log-Agent</ErrorReportUrl>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
