@@ -30,7 +30,7 @@ after_build:
 artifacts: 
 - path: EliteLogAgent.exe
   name: single-executable
-- path: EliteLogAgent\bin\Release\app.publish\**\*
+- path: EliteLogAgent\bin\Release\app.publish
   name: clickonce-files
 
 deploy:
@@ -48,8 +48,10 @@ deploy:
 - provider: AzureBlob
   on:
     branch: master
+  artifact: clickonce-files
   storage_account_name: dwapps
   container: app-distrib
+  unzip: true
   storage_access_key:
     secure: RahMT0WmdO8rhPNnVMtKIkvOZrESRzG+TEDBLmjKQxD1GFEC3Ec6ir5njKMaJ9QnHsqsTczBt3/HGtnnC8wf0EIV+zJNK9WsjaaBDY9bLdTPBjF9DKphghG72CrdoEdd
 
