@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrayAgent", "TrayAgent\TrayAgent.csproj", "{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogModel", "LogModel\LogModel.csproj", "{6FCCA2A4-9D3E-4E91-BB46-3F75EA0F989E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{14C53350-191B-4367-BEC4-7B749E7B1EEB}"
@@ -23,16 +21,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerplayGoogleSheetReporte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EliteLogAgent", "EliteLogAgent\EliteLogAgent.csproj", "{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FCCA2A4-9D3E-4E91-BB46-3F75EA0F989E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FCCA2A4-9D3E-4E91-BB46-3F75EA0F989E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FCCA2A4-9D3E-4E91-BB46-3F75EA0F989E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +49,10 @@ Global
 		{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

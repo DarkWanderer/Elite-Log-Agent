@@ -24,14 +24,14 @@ build:
 
 after_build:
 - cmd: mkdir bin\Release
-- cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe TrayAgent\bin\Release\TrayAgent.exe TrayAgent\bin\Release\*.dll
+- cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 - cmd: msbuild Elite-Log-Agent.sln /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 artifacts: 
 - path: EliteLogAgent.exe
   name: single-executable
-- path: TrayAgent\bin\Release\**\*
-  name: trayagent-binaries
+- path: EliteLogAgent\bin\Release\publish\**\*
+  name: clickonce-files
 
 deploy:
 - provider: GitHub
@@ -44,3 +44,13 @@ deploy:
   artifact: single-executable
   draft: true
   force_update: true
+
+- provider: AzureBlob
+  on:
+    branch: master
+  storage_account_name: dwapps
+  container: app-distrib
+  storage_access_key:
+    secure: RahMT0WmdO8rhPNnVMtKIkvOZrESRzG+TEDBLmjKQxD1GFEC3Ec6ir5njKMaJ9QnHsqsTczBt3/HGtnnC8wf0EIV+zJNK9WsjaaBDY9bLdTPBjF9DKphghG72CrdoEdd
+
+  
