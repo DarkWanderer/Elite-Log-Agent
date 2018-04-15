@@ -46,7 +46,7 @@ namespace TrayAgent
                 var encryptedData = ProtectedData.Protect(plainBytes, s_aditionalEntropy, DataProtectionScope.CurrentUser);
                 return Convert.ToBase64String(encryptedData);
             }
-            catch (CryptographicException e)
+            catch (CryptographicException)
             {
                 return null;
             }
