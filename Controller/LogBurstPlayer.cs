@@ -13,7 +13,9 @@ namespace Controller
     {
         public void Play()
         {
-            foreach (var file in LatestLogFiles)
+            var files = LatestLogFiles.Reverse().ToList();
+
+            foreach (var file in files)
                 using (var textReader = File.OpenText(file))
                 using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent  = true})
                 {
@@ -34,7 +36,7 @@ namespace Controller
                 //var savedGamesDirectoryInfo = new DirectoryInfo(SavedGamesDirectoryHelper.Directory);
                 var savedGamesDirectoryInfo = new DirectoryInfo(@"D:\Oleg\Projects\Elite-Log-Agent\LogSamples");
                 return savedGamesDirectoryInfo.GetFiles()
-                    .OrderByDescending(f => f.CreationTimeUtc).Select(f => f.FullName);
+                    .OrderByDescending(f => f.Name).Select(f => f.FullName);
             }
         }
     }

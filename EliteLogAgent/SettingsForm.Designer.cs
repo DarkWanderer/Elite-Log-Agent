@@ -1,6 +1,6 @@
 ﻿namespace TrayAgent
 {
-    partial class Form1
+    partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.uploadLatestDataButton = new System.Windows.Forms.Button();
+            this.uploadOnStartupCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -41,13 +43,35 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "It\'s alive!";
             // 
-            // Form1
+            // uploadLatestDataButton
+            // 
+            this.uploadLatestDataButton.Location = new System.Drawing.Point(345, 12);
+            this.uploadLatestDataButton.Name = "uploadLatestDataButton";
+            this.uploadLatestDataButton.Size = new System.Drawing.Size(114, 23);
+            this.uploadLatestDataButton.TabIndex = 1;
+            this.uploadLatestDataButton.Text = "Upload latest logs";
+            this.uploadLatestDataButton.UseVisualStyleBackColor = true;
+            this.uploadLatestDataButton.Click += new System.EventHandler(this.uploadLatestDataButton_Click);
+            // 
+            // uploadOnStartupCheckbox
+            // 
+            this.uploadOnStartupCheckbox.AutoSize = true;
+            this.uploadOnStartupCheckbox.Location = new System.Drawing.Point(345, 41);
+            this.uploadOnStartupCheckbox.Name = "uploadOnStartupCheckbox";
+            this.uploadOnStartupCheckbox.Size = new System.Drawing.Size(114, 17);
+            this.uploadOnStartupCheckbox.TabIndex = 2;
+            this.uploadOnStartupCheckbox.Text = "Upload On Startup";
+            this.uploadOnStartupCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(459, 158);
+            this.ClientSize = new System.Drawing.Size(471, 214);
+            this.Controls.Add(this.uploadOnStartupCheckbox);
+            this.Controls.Add(this.uploadLatestDataButton);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "SettingsForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -57,6 +81,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button uploadLatestDataButton;
+        private System.Windows.Forms.CheckBox uploadOnStartupCheckbox;
     }
 }
 

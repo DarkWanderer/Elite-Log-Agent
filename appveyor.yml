@@ -14,18 +14,11 @@ assembly_info:
   assembly_file_version: $(appveyor_build_version)
   assembly_informational_version: $(appveyor_build_version)
 
-build:
-  project: Elite-Log-Agent.sln
-  publish_nuget: true
-  publish_nuget_symbols: true
-  include_nuget_references: true
-  verbosity: minimal  
-  parallel: true
+before_build:
+- cmd: msbuild Elite-Log-Agent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
-- cmd: mkdir bin\Release
 - cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
-- cmd: msbuild Elite-Log-Agent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 artifacts: 
 - path: EliteLogAgent.exe
