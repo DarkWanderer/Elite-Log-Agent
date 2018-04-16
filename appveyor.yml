@@ -3,10 +3,6 @@ image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 
-before_build:
-- cmd: nuget restore
-- cmd: nuget install -ExcludeVersion ILMerge
-
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.cs'
@@ -15,9 +11,11 @@ assembly_info:
   assembly_informational_version: $(appveyor_build_version)
 
 before_build:
-- cmd: msbuild Elite-Log-Agent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- cmd: nuget restore
+- cmd: nuget install -ExcludeVersion ILMerge
 
 after_build:
+- cmd: msbuild Elite-Log-Agent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 - cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 artifacts: 
