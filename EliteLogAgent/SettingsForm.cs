@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
+using Interfaces;
 
 namespace TrayAgent
 {
@@ -17,37 +18,41 @@ namespace TrayAgent
     {
         internal IPersistentSettingsStorage SettingsProvider { get; set; }
         internal MessageBroker MessageBroker { get; set; }
+        internal List<IPlugin> Plugins { get; set; }
+
+        private IDictionary<string, Control> SettingsCategories = new Dictionary<string, Control>();
 
         public SettingsForm()
         {
             InitializeComponent();
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            label1.Text = "Version: " + fvi.FileVersion;
+            versionLabel.Text = "Version: " + fvi.FileVersion;
+            Text += ". " + versionLabel.Text;
+            Load += SettingsForm_Load;
         }
 
-        private async void uploadLatestDataButton_Click(object sender, EventArgs e)
+        private void SettingsForm_Load(object sender, EventArgs e)
         {
-            uploadLatestDataButton.Enabled = false;
-            await Task.Factory.StartNew(UploadLatestData);
-            uploadLatestDataButton.Enabled = true;
+            SettingsCategories.Add("General", new GeneralSettingsControl() { MessageBroker = MessageBroker });
+            foreach (var plugin in Plugins)
+            {
+                var control = plugin.GetPluginSettingsControl();
+                control.Dock = DockStyle.Fill;
+                control.PerformLayout();
+                SettingsCategories.Add(plugin.SettingsLabel, control);
+            }
+
+            foreach (var category in SettingsCategories.Keys)
+                settingsCategorySelector.Items.Add(category);
         }
 
-        private void UploadLatestData()
+        private void settingsCategorySelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var logEventSource = new LogBurstPlayer();
-            using (var subscription = logEventSource.Subscribe(MessageBroker))
-                logEventSource.Play();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            var selectedSettingsItem = settingsCategorySelector.SelectedItem as string;
+            splitContainer1.Panel2.Controls.Clear();
+            if (selectedSettingsItem != null)
+                splitContainer1.Panel2.Controls.Add(SettingsCategories[selectedSettingsItem]);
         }
     }
 }

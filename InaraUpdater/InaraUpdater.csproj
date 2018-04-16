@@ -35,6 +35,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,16 +47,30 @@
   <ItemGroup>
     <Compile Include="EventBroker.cs" />
     <Compile Include="InaraApiException.cs" />
+    <Compile Include="InaraSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InaraUpdaterPlugin.cs" />
     <Compile Include="Model\ApiFacade.cs" />
     <Compile Include="Model\IRestClient.cs" />
     <Compile Include="ThrottlingRestClient.cs" />
-    <Compile Include="Uploader.cs" />
     <Compile Include="Model\ApiEvent.cs" />
     <Compile Include="Model\Header.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{fd518ed2-7a6e-42f7-8c90-603235c1fee6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InaraSettingsControl.resx">
+      <DependentUpon>InaraSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

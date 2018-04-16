@@ -1,6 +1,8 @@
 ﻿using Controller;
 using InaraUpdater;
 using InaraUpdater.Model;
+using Interfaces;
+using PowerplayGoogleSheetReporter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,11 @@ namespace TrayAgent
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // TODO: add dynamic plugin loader
+            loadedPlugins.Add(new InaraUpdaterPlugin());
+            loadedPlugins.Add(new PowerplayReporterPlugin());
+
             var mainBroker = new MessageBroker();
             var inaraUploader = new EventBroker(
                 new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"),
@@ -28,11 +35,14 @@ namespace TrayAgent
             using (var settingsForm = new SettingsForm()
             {
                 SettingsProvider = new RegistryInformationStorage(),
-                MessageBroker = mainBroker
+                MessageBroker = mainBroker,
+                Plugins = loadedPlugins
             })
             {
                 Application.Run(settingsForm);
             }
         }
+
+        private static List<IPlugin> loadedPlugins = new List<IPlugin>();
     }
 }

@@ -10,7 +10,9 @@ namespace Interfaces
 {
     public interface IPlugin
     {
-        IObserver<JObject> GetLogObserver();
+        string SettingsLabel { get; }
+
+        //IObserver<JObject> GetLogObserver();
         Control GetPluginSettingsControl();
     }
 }
