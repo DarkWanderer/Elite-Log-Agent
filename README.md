@@ -6,7 +6,7 @@ A tiny Windows utility which scans Elite: Dangerous logs and updates various sit
 # Download
 
 * ClickOnce application installer [here](https://dwapps.blob.core.windows.net/app-distrib/EliteLogAgent.application)
-* Latest (pre-)release [here](https://github.com/DarkWanderer/Elite-Log-Agent/releases)
+* Latest (pre-)release merged .exe [here](https://github.com/DarkWanderer/Elite-Log-Agent/releases)
 
 # Links
 
