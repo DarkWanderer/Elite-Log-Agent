@@ -28,20 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.uploadLatestDataButton = new System.Windows.Forms.Button();
             this.uploadOnStartupCheckbox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.settingsTree = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "It\'s alive!";
             // 
             // uploadLatestDataButton
             // 
@@ -63,11 +54,30 @@
             this.uploadOnStartupCheckbox.Text = "Upload On Startup";
             this.uploadOnStartupCheckbox.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(406, 271);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 25);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Version: 1.2.3.123";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // settingsTree
+            // 
+            this.settingsTree.Location = new System.Drawing.Point(12, 12);
+            this.settingsTree.Name = "settingsTree";
+            this.settingsTree.Size = new System.Drawing.Size(236, 284);
+            this.settingsTree.TabIndex = 3;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 214);
+            this.ClientSize = new System.Drawing.Size(605, 305);
+            this.Controls.Add(this.settingsTree);
             this.Controls.Add(this.uploadOnStartupCheckbox);
             this.Controls.Add(this.uploadLatestDataButton);
             this.Controls.Add(this.label1);
@@ -79,10 +89,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button uploadLatestDataButton;
         private System.Windows.Forms.CheckBox uploadOnStartupCheckbox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TreeView settingsTree;
     }
 }
 
