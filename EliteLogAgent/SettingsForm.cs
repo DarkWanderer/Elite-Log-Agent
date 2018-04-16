@@ -39,5 +39,15 @@ namespace TrayAgent
             using (var subscription = logEventSource.Subscribe(MessageBroker))
                 logEventSource.Play();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
