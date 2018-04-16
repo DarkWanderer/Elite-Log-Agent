@@ -10,6 +10,15 @@ assembly_info:
   assembly_file_version: $(appveyor_build_version)
   assembly_informational_version: $(appveyor_build_version)
 
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: $(appveyor_build_version)
+  package_version: $(appveyor_build_version)
+  assembly_version: $(appveyor_build_version)
+  file_version: $(appveyor_build_version)
+  informational_version: $(appveyor_build_version)
+
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
