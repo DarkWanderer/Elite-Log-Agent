@@ -3,6 +3,11 @@ A tiny Windows utility which scans Elite: Dangerous logs and updates various sit
 
 [![appveyor build status][image]][project]
 
+# Download
+
+* ClickOnce application installer [here](https://dwapps.blob.core.windows.net/app-distrib/EliteLogAgent.application)
+* Latest (pre-)release [here](https://github.com/DarkWanderer/Elite-Log-Agent/releases)
+
 # Links
 
 * [Elite: Dangerous in official store](https://www.frontierstore.net/games/elite-dangerous-cat.html)
