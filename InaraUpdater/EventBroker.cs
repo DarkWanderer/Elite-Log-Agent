@@ -57,10 +57,12 @@ namespace InaraUpdater
                 switch (eventName)
                 {
                     case "LoadGame": Queue(ToCommanderCreditsEvent(@event)); break;
-                    case "FSDJump": Queue(ToFsdJumpEvent(@event)); break;
                     case "Materials": Queue(ToMaterialsInventoryEvent(@event)); break;
-                    case "Docked": Queue(ToDockedEvent(@event)); break;
                     case "Statistics": Queue(ToStatisticsEvent(@event)); break;
+                    case "FSDJump": Queue(ToFsdJumpEvent(@event)); break;
+                    case "Docked": Queue(ToDockedEvent(@event)); break;
+
+                    case "EngineerProgress": Queue(ToEngineerProgressEvent(@event)); break;
                 }
             }
             catch
@@ -79,19 +81,13 @@ namespace InaraUpdater
 
         private ApiEvent ToDockedEvent(JObject @event)
         {
-            var data = new Dictionary<string, object> {
-                    { "starsystemName", @event["StarSystem"].ToString() },
-                    { "stationName", @event["StationName"].ToString()},
-                };
-            long marketId;
-            var marketIdElement = @event["MarketID"];
-            if (marketIdElement != null && Int64.TryParse(marketIdElement.ToString(), out marketId))
-                data.Add("marketID", marketId);
-
-
             return new ApiEvent("addCommanderTravelDock")
             {
-                EventData = data,
+                EventData = new Dictionary<string, object> {
+                    { "starsystemName", @event["StarSystem"].ToString() },
+                    { "stationName", @event["StationName"].ToString()},
+                    { "marketID", @event["MarketID"]?.ToObject<Int64>() }
+                },
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
         }
@@ -100,13 +96,13 @@ namespace InaraUpdater
         {
             var materialCounts = @event["Raw"]
                 .ToDictionary(
-                    arrayItem => arrayItem["Name"].ToString(), 
+                    arrayItem => arrayItem["Name"].ToString(),
                     arrayItem => (object)Int32.Parse(arrayItem["Count"].ToString())
                 );
 
             return new ApiEvent("setCommanderInventoryMaterials")
             {
-                EventData = materialCounts.Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value}),
+                EventData = materialCounts.Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value }).ToArray(),
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
         }
@@ -117,7 +113,7 @@ namespace InaraUpdater
             {
                 EventData = new Dictionary<string, object> {
                     { "starsystemName", @event["StarSystem"].ToString() },
-                    { "jumpDistance", Double.Parse(@event["JumpDist"].ToString())}
+                    { "jumpDistance", @event["JumpDist"].ToObject<double>() }
                 },
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
@@ -127,7 +123,23 @@ namespace InaraUpdater
         {
             return new ApiEvent("setCommanderCredits")
             {
-                EventData = new Dictionary<string, object> { { "commanderCredits", Int64.Parse(@event["Credits"].ToString()) } },
+                EventData = new Dictionary<string, object> {
+                    { "commanderCredits", @event["Credits"]?.ToObject<Int64>() },
+                    { "commanderLoan", @event["Loan"]?.ToObject<Int64>() }
+                },
+                Timestamp = DateTime.Parse(@event["timestamp"].ToString())
+            };
+        }
+
+        private ApiEvent ToEngineerProgressEvent(JObject @event)
+        {
+            return new ApiEvent("setCommanderRankEngineer")
+            {
+                EventData = new Dictionary<string, object> {
+                    { "engineerName", @event["Engineer"].ToString() },
+                    { "rankStage", @event["Progress"]?.ToString() },
+                    { "rankValue", @event["Rank"]?.ToObject<int>() }
+                },
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
         }
