@@ -38,7 +38,9 @@ namespace EliteLogAgent.Settings
         private void UploadLatestData()
         {
             var logEventSource = new LogBurstPlayer(SavedGamesDirectoryHelper.Directory);
-            using (var subscription = logEventSource.Subscribe(MessageBroker))
+            var logCounter = new LogEventTypeCounter();
+            using (logEventSource.Subscribe(logCounter))
+            using (logEventSource.Subscribe(MessageBroker))
             {
                 logEventSource.Play();
             }
