@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Utility;
 
 namespace Controller
 {
     public abstract class AbstractObservable<T> : IObservable<T>
     {
-        private readonly List<IObserver<T>> observers = new List<IObserver<T>>();
+        protected readonly List<IObserver<T>> Observers = new List<IObserver<T>>();
 
         public IDisposable Subscribe(IObserver<T> observer)
         {
-            lock (observers)
+            lock (Observers)
             {
-                if (!observers.Contains(observer))
-                    observers.Add(observer);
+                if (!Observers.Contains(observer))
+                    Observers.Add(observer);
             }
-            return new Unsubscriber(observers, observer);
+            return new Unsubscriber(Observers, observer);
         }
 
         private class Unsubscriber : IDisposable
@@ -38,25 +40,22 @@ namespace Controller
             }
         }
 
-        protected void OnError(Exception exception)
+        protected virtual void OnError(Exception exception)
         {
-            lock (observers)
-                foreach (var observer in observers)
-                    observer.OnError(exception);
+            lock (Observers)
+                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnError(exception));
         }
 
-        protected void OnNext(T next)
+        protected virtual void OnNext(T next)
         {
-            lock (observers)
-                foreach (var observer in observers)
-                    observer.OnNext(next);
+            lock (Observers)
+                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnNext(next));
         }
 
-        protected void OnCompleted()
+        protected virtual void OnCompleted()
         {
-            lock (observers)
-                foreach (var observer in observers)
-                    observer.OnCompleted();
+            lock (Observers)
+                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnCompleted());
         }
     }
 }

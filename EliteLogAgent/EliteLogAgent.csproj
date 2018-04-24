@@ -86,11 +86,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractSettingsControl.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Settings\GeneralSettingsControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GeneralSettingsControl.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Settings\GeneralSettingsControl.Designer.cs">
+      <DependentUpon>GeneralSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
@@ -103,7 +103,7 @@
     <Compile Include="Settings\IPersistentSettingsStorage.cs" />
     <Compile Include="Settings\RegistryInformationStorage.cs" />
     <Compile Include="Settings\UploaderSettings.cs" />
-    <EmbeddedResource Include="GeneralSettingsControl.resx">
+    <EmbeddedResource Include="Settings\GeneralSettingsControl.resx">
       <DependentUpon>GeneralSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
@@ -156,6 +156,10 @@
     <ProjectReference Include="..\PowerplayGoogleSheetReporter\PowerplayGoogleSheetReporter.csproj">
       <Project>{eeef1770-9a60-4e12-87dd-dfd43ea19c29}</Project>
       <Name>PowerplayGoogleSheetReporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{93DCDB11-335D-400C-BD87-554A0C1E2CEE}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

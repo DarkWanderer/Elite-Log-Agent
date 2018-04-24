@@ -11,13 +11,23 @@ namespace Controller
     /// </summary>
     public class LogBurstPlayer : AbstractObservable<JObject>
     {
+        private readonly string LogDirectory;
+
+        public LogBurstPlayer(string logDirectory)
+        {
+            LogDirectory = logDirectory;
+        }
+
         public void Play()
         {
-            var files = LatestLogFiles.Reverse().ToList();
+            var files = LogEnumerator.GetLogFiles(LogDirectory)
+                .Take(3)
+                .Reverse()
+                .ToList();
 
             foreach (var file in files)
                 using (var textReader = File.OpenText(file))
-                using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent  = true})
+                using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true })
                 {
                     JsonSerializer serializer = new JsonSerializer();
                     while (jsonReader.Read())
@@ -27,17 +37,6 @@ namespace Controller
                     }
                 }
             OnCompleted();
-        }
-
-        private IEnumerable<string> LatestLogFiles
-        {
-            get
-            {
-                //var savedGamesDirectoryInfo = new DirectoryInfo(SavedGamesDirectoryHelper.Directory);
-                var savedGamesDirectoryInfo = new DirectoryInfo(@"D:\Oleg\Projects\Elite-Log-Agent\LogSamples");
-                return savedGamesDirectoryInfo.GetFiles()
-                    .OrderByDescending(f => f.Name).Select(f => f.FullName);
-            }
         }
     }
 }

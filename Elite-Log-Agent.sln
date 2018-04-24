@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EliteLogAgent", "EliteLogAgent\EliteLogAgent.csproj", "{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{93DCDB11-335D-400C-BD87-554A0C1E2CEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93DCDB11-335D-400C-BD87-554A0C1E2CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93DCDB11-335D-400C-BD87-554A0C1E2CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93DCDB11-335D-400C-BD87-554A0C1E2CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93DCDB11-335D-400C-BD87-554A0C1E2CEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

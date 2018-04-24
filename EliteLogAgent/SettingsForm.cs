@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
+using EliteLogAgent.Settings;
 using Interfaces;
 
 namespace TrayAgent
@@ -17,7 +18,7 @@ namespace TrayAgent
     public partial class SettingsForm : Form
     {
         internal IPersistentSettingsStorage SettingsProvider { get; set; }
-        internal MessageBroker MessageBroker { get; set; }
+        internal AsyncMessageBroker MessageBroker { get; set; }
         internal List<IPlugin> Plugins { get; set; }
 
         private IDictionary<string, Control> SettingsCategories = new Dictionary<string, Control>();
@@ -27,8 +28,8 @@ namespace TrayAgent
             InitializeComponent();
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            versionLabel.Text = "Version: " + fvi.FileVersion;
-            Text += ". " + versionLabel.Text;
+            var versionLabel = "Version: " + fvi.FileVersion;
+            Text += ". " + versionLabel;
             Load += SettingsForm_Load;
         }
 
