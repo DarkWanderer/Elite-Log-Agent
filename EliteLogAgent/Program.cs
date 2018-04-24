@@ -26,12 +26,16 @@ namespace TrayAgent
             loadedPlugins.Add(new InaraUpdaterPlugin());
             loadedPlugins.Add(new PowerplayReporterPlugin());
 
-            var mainBroker = new MessageBroker();
+            var mainBroker = new AsyncMessageBroker();
             var inaraUploader = new EventBroker(
                 new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"),
                 "7nkcf9cb8vkskwwkk8osck0s0g8k8wckoc8cokg",
                 "EliteLogAgentTestUser"));
-            using (var subscription = mainBroker.Subscribe(inaraUploader))
+
+            var logMonitor = new JsonLogMonitor(SavedGamesDirectoryHelper.Directory);
+
+            using (mainBroker.Subscribe(inaraUploader))
+            using (logMonitor.Subscribe(mainBroker))
             using (var settingsForm = new SettingsForm()
             {
                 SettingsProvider = new RegistryInformationStorage(),

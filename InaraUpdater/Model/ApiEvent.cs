@@ -25,7 +25,7 @@ namespace InaraUpdater.Model
         public int CustomID { get; }
 
         [JsonProperty("eventData")]
-        public IDictionary<string, object> EventData { get; internal set; }
+        public object EventData { get; internal set; }
 
         public override string ToString() => JsonConvert.SerializeObject(this);
 
