@@ -51,8 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventBroker.cs" />
     <Compile Include="InaraApiException.cs" />
+    <Compile Include="InaraEventBroker.cs" />
     <Compile Include="InaraSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

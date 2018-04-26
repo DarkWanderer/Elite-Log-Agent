@@ -25,6 +25,7 @@ namespace Controller
             CurrentFile = LogEnumerator.GetLogFiles(LogDirectory)[0];
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
+            fileWatcher.EnableRaisingEvents = true;
         }
 
         private void FileWatcher_Created(object sender, FileSystemEventArgs e)

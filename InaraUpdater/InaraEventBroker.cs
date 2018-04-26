@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace InaraUpdater
 {
-    public class EventBroker : IObserver<JObject>
+    public class InaraEventBroker : IObserver<JObject>
     {
         private readonly ApiFacade apiFacade;
         private readonly List<ApiEvent> eventQueue = new List<ApiEvent>();
@@ -18,7 +18,7 @@ namespace InaraUpdater
             "setCommanderGameStatistics"
         };
 
-        public EventBroker(ApiFacade apiFacade)
+        public InaraEventBroker(ApiFacade apiFacade)
         {
             this.apiFacade = apiFacade ?? throw new ArgumentNullException(nameof(apiFacade));
         }
@@ -53,18 +53,65 @@ namespace InaraUpdater
                 var eventName = @event["event"].ToString();
                 switch (eventName)
                 {
+                    // Generic
                     case "LoadGame": Queue(ToCommanderCreditsEvent(@event)); break;
                     case "Materials": Queue(ToMaterialsInventoryEvent(@event)); break;
                     case "Statistics": Queue(ToStatisticsEvent(@event)); break;
+
+                    // Travel
                     case "FSDJump": Queue(ToFsdJumpEvent(@event)); break;
                     case "Docked": Queue(ToDockedEvent(@event)); break;
 
+                    // Engineers
                     case "EngineerProgress": Queue(ToEngineerProgressEvent(@event)); break;
+
+                    // Combat
+                    case "Interdicted":
+                    case "Interdiction":
+                    case "EscapeInterdiction":
+                        Queue(ToInterdictionEvent(@event)); break;
+                    //case "PVPKill":
+                        //Queue(ToPvpKillEvent(@event)); break; 
                 }
             }
             catch
             {
             }
+        }
+
+        private ApiEvent ToPvpKillEvent(JObject @event)
+        {
+            // TODO: where do I take star system from?
+            return new ApiEvent("addCommanderCombatKill")
+            {
+                EventData = new Dictionary<string, object> {
+                    { "starsystemName", @event["StarSystem"].ToString() },
+                    { "opponentName", @event["Victim"].ToString() },
+                },
+                Timestamp = DateTime.Parse(@event["timestamp"].ToString())
+            };
+        }
+
+        private ApiEvent ToInterdictionEvent(JObject @event)
+        {
+            string eventType;
+            switch (@event["event"].ToString())
+            {
+                case "Interdicted": eventType = "addCommanderCombatInterdicted"; break;
+                case "Interdiction": eventType = "addCommanderCombatInterdiction"; break;
+                case "EscapeInterdiction": eventType = "addCommanderCombatInterdictionEscape"; break;
+                default: throw new ArgumentOutOfRangeException(nameof(@eventType));
+            }
+            return new ApiEvent(eventType)
+            {
+                EventData = new Dictionary<string, object> {
+                    { "starsystemName", @event["StarSystem"].ToString() },
+                    { "opponentName", (@event["Interdicted"] ?? @event["Interdictor"]).ToString() },
+                    { "isPlayer", @event["IsPlayer"]?.ToObject<Int64>() },
+                    { "isSuccess", @event["Success"]?.ToObject<bool>() }
+                },
+                Timestamp = DateTime.Parse(@event["timestamp"].ToString())
+            };
         }
 
         private ApiEvent ToStatisticsEvent(JObject @event)
