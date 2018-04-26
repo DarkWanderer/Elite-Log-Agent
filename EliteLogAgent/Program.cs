@@ -25,7 +25,7 @@ namespace EliteLogAgent
             loadedPlugins.Add(new PowerplayReporterPlugin());
 
             var mainBroker = new AsyncMessageBroker();
-            var inaraUploader = new EventBroker(
+            var inaraUploader = new InaraEventBroker(
                 new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"),
                 "7nkcf9cb8vkskwwkk8osck0s0g8k8wckoc8cokg",
                 "EliteLogAgentTestUser"));
