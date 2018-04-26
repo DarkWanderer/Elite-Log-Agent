@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -21,7 +20,7 @@ namespace Controller
         public void Play()
         {
             var files = LogEnumerator.GetLogFiles(LogDirectory)
-                .Take(3)
+                .Take(100)
                 .Reverse()
                 .ToList();
 

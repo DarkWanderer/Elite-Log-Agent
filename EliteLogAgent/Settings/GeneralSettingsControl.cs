@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
 using Utility.Extensions;
+using Interfaces;
+using Newtonsoft.Json.Linq;
 
 namespace EliteLogAgent.Settings
 {
-    public partial class GeneralSettingsControl : UserControl
+    public partial class GeneralSettingsControl : AbstractSettingsControl
     {
         internal AsyncMessageBroker MessageBroker { get; set; }
+
+        public override JObject Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public GeneralSettingsControl()
         {
