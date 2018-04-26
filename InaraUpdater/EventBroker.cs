@@ -1,12 +1,9 @@
 ﻿using InaraUpdater.Model;
+using MoreLinq;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Utility.Extensions;
 
 namespace InaraUpdater
 {
@@ -40,7 +37,7 @@ namespace InaraUpdater
                 .GroupBy(e => e.EventName, e => e)
                 .ToDictionary(g => g.Key, g => g.ToArray());
             foreach (var type in compactableEvents.Intersect(eventsByType.Keys))
-                eventsByType[type] = new[] { eventsByType[type].WithMaximal(e => e.Timestamp) };
+                eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp) };
 
             return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
         }

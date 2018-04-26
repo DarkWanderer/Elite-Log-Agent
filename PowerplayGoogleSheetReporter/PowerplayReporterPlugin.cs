@@ -1,10 +1,4 @@
 ﻿using Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PowerplayGoogleSheetReporter
 {
@@ -12,9 +6,9 @@ namespace PowerplayGoogleSheetReporter
     {
         public string SettingsLabel => "Powerplay Sheet Settings";
 
-        public Control GetPluginSettingsControl()
+        public AbstractSettingsControl GetPluginSettingsControl()
         {
-            return new Label() { Text = SettingsLabel };
+            return new SettingsControl();
         }
     }
 }

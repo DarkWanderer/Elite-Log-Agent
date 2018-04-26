@@ -5,11 +5,9 @@ using Interfaces;
 using PowerplayGoogleSheetReporter;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TrayAgent
+namespace EliteLogAgent
 {
     static partial class Program
     {
@@ -38,7 +36,7 @@ namespace TrayAgent
             using (logMonitor.Subscribe(mainBroker))
             using (var settingsForm = new SettingsForm()
             {
-                SettingsProvider = new RegistryInformationStorage(),
+                Provider = new FileSettingsStorage(),
                 MessageBroker = mainBroker,
                 Plugins = loadedPlugins
             })
