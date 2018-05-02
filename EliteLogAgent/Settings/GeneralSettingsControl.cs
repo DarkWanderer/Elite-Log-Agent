@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Controller;
 using Utility.Extensions;
-using Interfaces;
 using Newtonsoft.Json.Linq;
 
-namespace EliteLogAgent.Settings
+namespace Interfaces.Settings
 {
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
@@ -25,11 +24,14 @@ namespace EliteLogAgent.Settings
             {
                 uploadLatestDataButton.Enabled = false;
                 await Task.Factory.StartNew(UploadLatestData);
-                uploadLatestDataButton.Enabled = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error processing update:\n" + ex.GetStackedErrorMessages(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                uploadLatestDataButton.Enabled = true;
             }
         }
 

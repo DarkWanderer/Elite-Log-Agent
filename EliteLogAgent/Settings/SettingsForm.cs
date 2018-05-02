@@ -5,11 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Controller;
-using EliteLogAgent.Settings;
-using Interfaces;
+using Interfaces.Settings;
 using Newtonsoft.Json.Linq;
 
-namespace EliteLogAgent
+namespace Interfaces
 {
     public partial class SettingsForm : Form
     {

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utility;
 
-namespace Controller
+namespace Utility.Observable
 {
     public abstract class AbstractObservable<T> : IObservable<T>
     {

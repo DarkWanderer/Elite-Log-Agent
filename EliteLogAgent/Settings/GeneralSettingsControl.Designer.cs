@@ -1,4 +1,4 @@
-﻿namespace EliteLogAgent.Settings
+﻿namespace Interfaces.Settings
 {
     partial class GeneralSettingsControl
     {

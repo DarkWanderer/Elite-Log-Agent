@@ -1,4 +1,4 @@
-﻿namespace EliteLogAgent
+﻿namespace Interfaces
 {
     partial class SettingsForm
     {

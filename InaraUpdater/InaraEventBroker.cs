@@ -11,7 +11,12 @@ namespace InaraUpdater
     {
         private readonly ApiFacade apiFacade;
         private readonly List<ApiEvent> eventQueue = new List<ApiEvent>();
-        private void Queue(ApiEvent e) => eventQueue.Add(e);
+
+        private void Queue(ApiEvent e)
+        {
+            if (e!= null)
+                eventQueue.Add(e);
+        }
 
         private static readonly string[] compactableEvents = new[] {
             "setCommanderInventoryMaterials",
@@ -102,11 +107,15 @@ namespace InaraUpdater
                 case "EscapeInterdiction": eventType = "addCommanderCombatInterdictionEscape"; break;
                 default: throw new ArgumentOutOfRangeException(nameof(@eventType));
             }
+
+            if (@event["StarSystem"] == null)
+                return null;
+
             return new ApiEvent(eventType)
             {
                 EventData = new Dictionary<string, object> {
-                    { "starsystemName", @event["StarSystem"].ToString() },
-                    { "opponentName", (@event["Interdicted"] ?? @event["Interdictor"]).ToString() },
+                    { "starsystemName", @event["StarSystem"]?.ToString() },
+                    { "opponentName", (@event["Interdicted"] ?? @event["Interdictor"] ?? "Unknown").ToString() },
                     { "isPlayer", @event["IsPlayer"]?.ToObject<Int64>() },
                     { "isSuccess", @event["Success"]?.ToObject<bool>() }
                 },

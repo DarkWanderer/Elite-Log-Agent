@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
-namespace EliteLogAgent.Settings
+namespace Interfaces.Settings
 {
     public class GlobalSettings
     {
