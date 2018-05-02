@@ -1,11 +1,11 @@
 ﻿using Controller;
 using InaraUpdater;
-using InaraUpdater.Model;
 using Interfaces;
 using PowerplayGoogleSheetReporter;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Utility;
 
 namespace EliteLogAgent
 {
@@ -20,20 +20,19 @@ namespace EliteLogAgent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var settingsProvider = new FileSettingsStorage();
+            LogManager.Setup(settingsProvider);
+
             // TODO: add dynamic plugin loader
-            loadedPlugins.Add(new InaraUpdaterPlugin());
-            loadedPlugins.Add(new PowerplayReporterPlugin());
 
             var mainBroker = new AsyncMessageBroker();
-            var inaraUploader = new InaraEventBroker(
-                new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"),
-                "7nkcf9cb8vkskwwkk8osck0s0g8k8wckoc8cokg",
-                "EliteLogAgentTestUser"));
+
+            loadedPlugins.Add(new InaraUpdaterPlugin(settingsProvider));
+            loadedPlugins.Add(new PowerplayReporterPlugin(settingsProvider));
 
             var logMonitor = new JsonLogMonitor(SavedGamesDirectoryHelper.Directory);
 
-            using (mainBroker.Subscribe(inaraUploader))
-            using (logMonitor.Subscribe(mainBroker))
+            using (new CompositeDisposable(logMonitor.Subscribe(mainBroker)))
             using (var settingsForm = new SettingsForm()
             {
                 Provider = new FileSettingsStorage(),

@@ -93,8 +93,6 @@
     <Compile Include="Settings\GeneralSettingsControl.Designer.cs">
       <DependentUpon>GeneralSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\GlobalSettings.cs" />
-    <Compile Include="Settings\ISettingsProvider.cs" />
     <Compile Include="Settings\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +101,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrayIconController.cs" />
     <EmbeddedResource Include="Settings\GeneralSettingsControl.resx">
       <DependentUpon>GeneralSettingsControl.cs</DependentUpon>
     </EmbeddedResource>

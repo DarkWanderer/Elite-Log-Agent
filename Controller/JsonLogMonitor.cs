@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
+using Utility.Observable;
 
 namespace Controller
 {
@@ -19,9 +20,18 @@ namespace Controller
         public JsonLogMonitor(string logDirectory)
         {
             LogDirectory = logDirectory;
-            fileWatcher = new FileSystemWatcher(LogDirectory, "*.log");
+            fileWatcher = new FileSystemWatcher(LogDirectory);
+
             fileWatcher.Changed += FileWatcher_Changed;
             fileWatcher.Created += FileWatcher_Created;
+            fileWatcher.NotifyFilter = NotifyFilters.Attributes |
+                                        NotifyFilters.CreationTime |
+                                        NotifyFilters.FileName |
+                                        NotifyFilters.LastAccess |
+                                        NotifyFilters.LastWrite |
+                                        NotifyFilters.Size |
+                                        NotifyFilters.Security;
+
             CurrentFile = LogEnumerator.GetLogFiles(LogDirectory)[0];
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
@@ -36,6 +46,8 @@ namespace Controller
 
         private void FileWatcher_Changed(object sender, FileSystemEventArgs e)
         {
+            if (Path.GetExtension(e.FullPath) != ".log")
+                return;
             lock (@lock)
                 Update(checkOtherFiles: e.FullPath != CurrentFile);
         }

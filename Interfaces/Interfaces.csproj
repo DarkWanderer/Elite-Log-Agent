@@ -47,7 +47,9 @@
     <Compile Include="AbstractSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="GlobalSettings.cs" />
     <Compile Include="IPlugin.cs" />
+    <Compile Include="ISettingsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

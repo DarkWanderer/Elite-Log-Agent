@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EliteLogAgent.Properties {
+namespace Interfaces.Properties {
     using System;
     
     

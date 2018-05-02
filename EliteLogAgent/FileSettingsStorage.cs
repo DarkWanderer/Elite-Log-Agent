@@ -1,8 +1,10 @@
-﻿using EliteLogAgent.Settings;
+﻿using Interfaces;
+using Interfaces.Settings;
+using Newtonsoft.Json.Linq;
 
 namespace EliteLogAgent
 {
-    internal class FileSettingsStorage : ISettingsProvider
+    public class FileSettingsStorage : ISettingsProvider
     {
         public GlobalSettings Settings
         {
@@ -11,6 +13,13 @@ namespace EliteLogAgent
                 return new GlobalSettings();
             }
             set { }
+        }
+
+        public JObject GetPluginSettings(string plugin)
+        {
+            JObject result;
+            Settings.PluginSettings.TryGetValue(plugin, out result);
+            return result;
         }
     }
 }
