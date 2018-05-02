@@ -3,7 +3,7 @@ using System;
 
 namespace Controller
 {
-    public class LogManager
+    public static class LogSettingsManager
     {
         public static void Setup(ISettingsProvider settingsProvider)
         {

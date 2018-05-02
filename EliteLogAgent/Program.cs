@@ -21,7 +21,7 @@ namespace EliteLogAgent
             Application.SetCompatibleTextRenderingDefault(false);
 
             var settingsProvider = new FileSettingsStorage();
-            LogManager.Setup(settingsProvider);
+            LogSettingsManager.Setup(settingsProvider);
 
             // TODO: add dynamic plugin loader
 
