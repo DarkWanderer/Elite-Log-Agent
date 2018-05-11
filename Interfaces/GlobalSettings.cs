@@ -13,5 +13,8 @@ namespace Interfaces.Settings
 
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; }
+
+        [JsonIgnore]
+        public string LogLevel { get; set; }
     }
 }

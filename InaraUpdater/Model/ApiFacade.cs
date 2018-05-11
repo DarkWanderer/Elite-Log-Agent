@@ -29,10 +29,7 @@ namespace InaraUpdater.Model
             public override string ToString() => JsonConvert.SerializeObject(this);
         }
 
-        public async Task<ApiEvent> ApiCall(ApiEvent @event) 
-        {
-            return (await ApiCall(new[] { @event })).Single();
-        }
+        public async Task<ApiEvent> ApiCall(ApiEvent @event) => (await ApiCall(new[] { @event })).Single();
 
         public async Task<ICollection<ApiEvent>> ApiCall(IList<ApiEvent> events)
         {

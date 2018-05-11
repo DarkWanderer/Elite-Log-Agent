@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Interfaces.Properties {
+namespace EliteLogAgent.Properties {
     using System;
     
     
@@ -57,6 +57,16 @@ namespace Interfaces.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon EliteIcon {
+            get {
+                object obj = ResourceManager.GetObject("EliteIcon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

@@ -14,10 +14,7 @@ namespace InaraUpdater
         private Label credentialsStatusLabel;
         private Button button1;
 
-        public InaraSettingsControl()
-        {
-            InitializeComponent();
-        }
+        public InaraSettingsControl() => InitializeComponent();
 
         public override JObject Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 

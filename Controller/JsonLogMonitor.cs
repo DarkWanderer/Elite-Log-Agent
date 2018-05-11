@@ -12,7 +12,7 @@ namespace Controller
     public class JsonLogMonitor : AbstractObservable<JObject>
     {
         private FileSystemWatcher fileWatcher;
-        private string CurrentFile;
+        private readonly string CurrentFile;
         private readonly string LogDirectory;
         private long filePosition;
         private object @lock = new object();

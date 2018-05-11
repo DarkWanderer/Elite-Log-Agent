@@ -36,9 +36,17 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.3\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -53,12 +61,12 @@
   <ItemGroup>
     <Compile Include="InaraApiException.cs" />
     <Compile Include="InaraEventBroker.cs" />
-    <Compile Include="InaraSettingsControl.cs">
+    <Compile Include="Settings\InaraSettings.cs" />
+    <Compile Include="Settings\InaraSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="InaraUpdaterPlugin.cs" />
     <Compile Include="Model\ApiFacade.cs" />
-    <Compile Include="Model\IRestClient.cs" />
     <Compile Include="ThrottlingRestClient.cs" />
     <Compile Include="Model\ApiEvent.cs" />
     <Compile Include="Model\Header.cs" />
@@ -78,12 +86,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="InaraSettingsControl.resx">
+    <EmbeddedResource Include="Settings\InaraSettingsControl.resx">
       <DependentUpon>InaraSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

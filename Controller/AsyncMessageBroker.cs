@@ -57,14 +57,8 @@ namespace Controller
             OnCompleted();
         }
 
-        void IObserver<JObject>.OnError(Exception error)
-        {
-            OnError(error);
-        }
+        void IObserver<JObject>.OnError(Exception error) => OnError(error);
 
-        void IObserver<JObject>.OnNext(JObject value)
-        {
-            OnNext(value);
-        }
+        void IObserver<JObject>.OnNext(JObject value) => OnNext(value);
     }
 }

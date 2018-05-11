@@ -9,8 +9,6 @@ namespace Utility
     public sealed class CompositeDisposable : ICollection<IDisposable>, IDisposable
     {
         private readonly object _gate = new object();
-
-        private bool _disposed;
         private List<IDisposable> _disposables;
         private int _count;
         private const int SHRINK_THRESHOLD = 64;
@@ -88,8 +86,8 @@ namespace Utility
             var shouldDispose = false;
             lock (_gate)
             {
-                shouldDispose = _disposed;
-                if (!_disposed)
+                shouldDispose = IsDisposed;
+                if (!IsDisposed)
                 {
                     _disposables.Add(item);
                     _count++;
@@ -114,7 +112,7 @@ namespace Utility
 
             lock (_gate)
             {
-                if (!_disposed)
+                if (!IsDisposed)
                 {
                     //
                     // List<T> doesn't shrink the size of the underlying array but does collapse the array
@@ -157,9 +155,9 @@ namespace Utility
             var currentDisposables = default(IDisposable[]);
             lock (_gate)
             {
-                if (!_disposed)
+                if (!IsDisposed)
                 {
-                    _disposed = true;
+                    IsDisposed = true;
                     currentDisposables = _disposables.ToArray();
                     _disposables.Clear();
                     _count = 0;
@@ -238,10 +236,7 @@ namespace Utility
         /// <summary>
         /// Always returns false.
         /// </summary>
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// Returns an enumerator that iterates through the CompositeDisposable.
@@ -266,17 +261,11 @@ namespace Utility
         /// Returns an enumerator that iterates through the CompositeDisposable.
         /// </summary>
         /// <returns>An enumerator to iterate over the disposables.</returns>
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
         /// Gets a value that indicates whether the object is disposed.
         /// </summary>
-        public bool IsDisposed
-        {
-            get { return _disposed; }
-        }
+        public bool IsDisposed { get; private set; }
     }
 }

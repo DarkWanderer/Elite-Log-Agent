@@ -4,8 +4,10 @@ using Interfaces;
 using PowerplayGoogleSheetReporter;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Utility;
+using MoreLinq;
 
 namespace EliteLogAgent
 {
@@ -32,15 +34,16 @@ namespace EliteLogAgent
 
             var logMonitor = new JsonLogMonitor(SavedGamesDirectoryHelper.Directory);
 
-            using (new CompositeDisposable(logMonitor.Subscribe(mainBroker)))
-            using (var settingsForm = new SettingsForm()
+            using (new CompositeDisposable(loadedPlugins.Select(p => mainBroker.Subscribe(p.GetLogObserver())).Concat(logMonitor.Subscribe(mainBroker))))
+            using (new TrayIconController())
+            //using (var settingsForm = new SettingsForm()
+            //{
+            //    Provider = new FileSettingsStorage(),
+            //    MessageBroker = mainBroker,
+            //    Plugins = loadedPlugins
+            //})
             {
-                Provider = new FileSettingsStorage(),
-                MessageBroker = mainBroker,
-                Plugins = loadedPlugins
-            })
-            {
-                Application.Run(settingsForm);
+                Application.Run();
             }
         }
 

@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="IPlugin.cs" />
+    <Compile Include="IRestClient.cs" />
     <Compile Include="ISettingsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,23 +6,14 @@ namespace PowerplayGoogleSheetReporter
 {
     public class PowerplayReporterPlugin : IPlugin
     {
-        private ISettingsProvider settingsProvider;
+        private readonly ISettingsProvider settingsProvider;
 
-        public PowerplayReporterPlugin(ISettingsProvider settingsProvider)
-        {
-            this.settingsProvider = settingsProvider;
-        }
+        public PowerplayReporterPlugin(ISettingsProvider settingsProvider) => this.settingsProvider = settingsProvider;
 
         public string SettingsLabel => "Powerplay Sheet Settings";
 
-        public IObserver<JObject> GetLogObserver()
-        {
-            throw new NotImplementedException();
-        }
+        public IObserver<JObject> GetLogObserver() => new DummyObserver();
 
-        public AbstractSettingsControl GetPluginSettingsControl()
-        {
-            return new SettingsControl();
-        }
+        public AbstractSettingsControl GetPluginSettingsControl() => new SettingsControl();
     }
 }
