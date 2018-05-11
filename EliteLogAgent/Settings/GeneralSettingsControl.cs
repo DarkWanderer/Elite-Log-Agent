@@ -11,7 +11,7 @@ namespace Interfaces.Settings
     {
         internal AsyncMessageBroker MessageBroker { get; set; }
 
-        public override JObject Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override JObject Settings { get { throw new NotImplementedException(); } set => throw new NotImplementedException(); }
 
         public GeneralSettingsControl()
         {

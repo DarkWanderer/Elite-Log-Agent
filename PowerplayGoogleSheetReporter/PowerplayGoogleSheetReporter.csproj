@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DummyObserver.cs" />
     <Compile Include="PowerplayReporterPlugin.cs" />
     <Compile Include="PowerplaySheetReporterSettingsControl.cs">
       <SubType>Component</SubType>

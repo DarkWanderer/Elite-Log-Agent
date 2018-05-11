@@ -15,9 +15,6 @@ namespace InaraUpdater
             InputJson = inputJson;
         }
 
-        public override string ToString()
-        {
-            return base.ToString() + "; input was:\n" + InputJson;
-        }
+        public override string ToString() => base.ToString() + "; input was:\n" + InputJson;
     }
 }

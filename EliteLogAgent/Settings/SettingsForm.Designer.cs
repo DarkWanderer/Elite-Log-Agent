@@ -1,4 +1,4 @@
-﻿namespace Interfaces
+﻿namespace EliteLogAgent
 {
     partial class SettingsForm
     {
@@ -46,7 +46,7 @@
             this.settingsCategorySelector.Name = "settingsCategorySelector";
             this.settingsCategorySelector.Size = new System.Drawing.Size(144, 301);
             this.settingsCategorySelector.TabIndex = 3;
-            this.settingsCategorySelector.SelectedIndexChanged += new System.EventHandler(this.settingsCategorySelector_SelectedIndexChanged);
+            this.settingsCategorySelector.SelectedIndexChanged += new System.EventHandler(this.SettingsCategorySelector_SelectedIndexChanged);
             // 
             // splitContainer1
             // 

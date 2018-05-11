@@ -18,24 +18,25 @@ namespace EliteLogAgent
             {
                 try
                 {
-                    return JsonConvert.DeserializeObject<GlobalSettings>(File.ReadAllText(SettingsFilePath));
+                    if (File.Exists(SettingsFilePath))
+                        return JsonConvert.DeserializeObject<GlobalSettings>(File.ReadAllText(SettingsFilePath));
                 }
                 catch (Exception e)
                 {
                     Log.Warn(e, "Exception while reading settings, using defaults");
-                    return new GlobalSettings();
                 }
+                return new GlobalSettings();
             }
             set
             {
                 Directory.CreateDirectory(SettingsFileDirectory);
 
                 using (FileStream fileStream = File.Open(SettingsFilePath, FileMode.Create))
-                using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                using (var streamWriter = new StreamWriter(fileStream))
                 using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
                 {
                     jsonWriter.Formatting = Formatting.Indented;
-                    JsonSerializer serializer = new JsonSerializer();
+                    var serializer = new JsonSerializer();
                     serializer.Serialize(jsonWriter, value);
                 }
             }
@@ -43,8 +44,7 @@ namespace EliteLogAgent
 
         public JObject GetPluginSettings(string plugin)
         {
-            JObject result;
-            Settings.PluginSettings.TryGetValue(plugin, out result);
+            Settings.PluginSettings.TryGetValue(plugin, out var result);
             return result;
         }
 

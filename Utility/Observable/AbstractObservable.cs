@@ -9,6 +9,9 @@ namespace Utility.Observable
 
         public IDisposable Subscribe(IObserver<T> observer)
         {
+            if (observer == null)
+                throw new ArgumentNullException(nameof(observer));
+
             lock (Observers)
             {
                 if (!Observers.Contains(observer))
@@ -20,7 +23,7 @@ namespace Utility.Observable
         private class Unsubscriber : IDisposable
         {
             private List<IObserver<T>> observers;
-            private IObserver<T> observer;
+            private readonly IObserver<T> observer;
 
             public Unsubscriber(List<IObserver<T>> observers, IObserver<T> observer)
             {

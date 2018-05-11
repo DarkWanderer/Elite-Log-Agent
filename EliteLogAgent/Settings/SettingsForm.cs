@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Controller;
+using Interfaces;
+using Interfaces.Settings;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using Controller;
-using Interfaces.Settings;
-using Newtonsoft.Json.Linq;
 
-namespace Interfaces
+namespace EliteLogAgent
 {
     public partial class SettingsForm : Form
     {
@@ -46,7 +47,7 @@ namespace Interfaces
             Settings = Provider.Settings;
         }
 
-        private void settingsCategorySelector_SelectedIndexChanged(object sender, EventArgs e)
+        private void SettingsCategorySelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             splitContainer1.Panel2.Controls.Clear();
             if (settingsCategorySelector.SelectedItem is string selectedSettingsItem)
@@ -59,27 +60,23 @@ namespace Interfaces
             Close();
         }
 
-        private void ApplyButton_Click(object sender, EventArgs e)
-        {
-            ApplySettings();
-        }
+        private void ApplyButton_Click(object sender, EventArgs e) => ApplySettings();
 
         private void ApplySettings()
         {
             Provider.Settings = Settings;
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void CancelButton_Click(object sender, EventArgs e) => Close();
 
         GlobalSettings Settings
         {
             get
             {
-                var newSettings = new GlobalSettings();
-                newSettings.PluginSettings = SettingsCategories.ToDictionary(c => c.Key, c => c.Value.Settings);
+                var newSettings = new GlobalSettings
+                {
+                    PluginSettings = SettingsCategories.ToDictionary(c => c.Key, c => c.Value.Settings)
+                };
                 return newSettings;
             }
             set
