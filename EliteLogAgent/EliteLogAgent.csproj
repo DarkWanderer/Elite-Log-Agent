@@ -56,10 +56,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>BAA49BC17D89C312604EED8F5A50175C63CBE5A5</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F70DAA7D1BF12E9EEC84455E7CF6B3218722C6EB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>manifest-sifn-key.pfx</ManifestKeyFile>
+    <ManifestKeyFile>code-signing.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -79,7 +79,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>manifest-sifn-key.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -161,7 +162,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="manifest-sifn-key.pfx" />
+    <None Include="code-signing.cer" />
+    <None Include="code-signing.pfx" />
+    <None Include="code-signing.pvk" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

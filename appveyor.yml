@@ -3,6 +3,10 @@ image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 
+environment:
+  PFX_PASSWORD:
+    secure: wB19redOwiER/t000/oJpCZEu41oxfSlcBuVUNaILO0=
+
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.cs'
@@ -22,6 +26,7 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
+- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -Password "$env:PFX_PASSWORD"
 
 after_build:
 - cmd: msbuild Elite-Log-Agent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
@@ -54,5 +59,3 @@ deploy:
   unzip: true
   storage_access_key:
     secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
-
-  
