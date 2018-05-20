@@ -1,13 +1,14 @@
 ﻿using Controller;
-using InaraUpdater;
 using Interfaces;
-using PowerplayGoogleSheetReporter;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
+using Castle.Windsor;
+using Castle.MicroKernel.Registration;
+using Castle.Facilities.Logging;
+using Castle.Services.Logging.NLogIntegration;
+using NLog;
 using Utility;
-using MoreLinq;
+using System.Linq;
 
 namespace EliteLogAgent
 {
@@ -22,31 +23,49 @@ namespace EliteLogAgent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var settingsProvider = new FileSettingsStorage();
-            LogSettingsManager.Setup(settingsProvider);
-
-            // TODO: add dynamic plugin loader
-
-            var mainBroker = new AsyncMessageBroker();
-
-            loadedPlugins.Add(new InaraUpdaterPlugin(settingsProvider));
-            loadedPlugins.Add(new PowerplayReporterPlugin(settingsProvider));
-
-            var logMonitor = new JsonLogMonitor(SavedGamesDirectoryHelper.Directory);
-
-            using (new CompositeDisposable(loadedPlugins.Select(p => mainBroker.Subscribe(p.GetLogObserver())).Concat(logMonitor.Subscribe(mainBroker))))
-            using (new TrayIconController())
-            //using (var settingsForm = new SettingsForm()
-            //{
-            //    Provider = new FileSettingsStorage(),
-            //    MessageBroker = mainBroker,
-            //    Plugins = loadedPlugins
-            //})
+            using (var container = new WindsorContainer())
             {
-                Application.Run();
+                // Initalize infrastructure classes - NLog, Windsor
+                container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().ConfiguredExternally());
+                container.Register(
+                    Component.For<ISettingsProvider>().ImplementedBy<FileSettingsStorage>().LifestyleSingleton(),
+                    Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
+                    Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),
+                    Component.For<IWindsorContainer>().Instance(container),
+                    Component.For<ILogger>().UsingFactoryMethod((kernel, context) => LogManager.GetLogger(context.Handler.ComponentModel.Name))
+                );
+                container.Resolve<ILogSettingsBootstrapper>().Setup();
+
+                // Register core classes
+                container.Register(
+                    Component.For<ILogDirectoryNameProvider>().ImplementedBy<SavedGamesDirectoryHelper>().LifestyleSingleton(),
+                    Component.For<ILogRealTimeDataSource>().ImplementedBy<JsonLogMonitor>().LifestyleSingleton(),
+                    Component.For<IMessageBroker>().ImplementedBy<AsyncMessageBroker>().LifestyleSingleton(),
+                    Component.For<IPlayerStateHistoryRecorder>().ImplementedBy<PlayerStateRecorder>().LifestyleSingleton()
+                );
+
+                // Register UI classes
+                container.Register(Component.For<ITrayIconController>().ImplementedBy<TrayIconController>().LifestyleSingleton());
+
+                // Load plugins
+                // TODO: add dynamic plugin loader
+                var pluginManager = container.Resolve<IPluginManager>();
+                pluginManager.LoadPlugin("InaraUpdater");
+                pluginManager.LoadPlugin("PowerplayGoogleSheetReporter");
+
+                var broker = container.Resolve<IMessageBroker>();
+                var logMonitor = container.Resolve<ILogRealTimeDataSource>();
+                var trayController = container.Resolve<ITrayIconController>();
+                var playerStateRecorder = container.Resolve<IPlayerStateHistoryRecorder>();
+
+                using (logMonitor.Subscribe(broker)) // subscription 'token' is IDisposable
+                using (broker.Subscribe(playerStateRecorder))
+                using (new CompositeDisposable(pluginManager.LoadedPlugins.Select(p => broker.Subscribe(p.GetLogObserver()))))
+                {
+                    Application.Run();
+                }
             }
         }
 
-        private static List<IPlugin> loadedPlugins = new List<IPlugin>();
     }
 }

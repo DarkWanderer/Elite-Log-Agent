@@ -16,87 +16,121 @@ namespace InaraUpdater
 
         public InaraSettingsControl() => InitializeComponent();
 
-        public override JObject Settings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        internal InaraSettings ActualSettings
+        {
+            get
+            {
+                return new InaraSettings()
+                {
+                    ApiKey = inaraApiKeyTextBox.Text,
+                    CommanderName = usernameTextBox.Text
+                };
+            }
+            set
+            {
+                inaraApiKeyTextBox.Text = value.ApiKey;
+                usernameTextBox.Text = value.CommanderName;
+            }
+        }
+
+        public override JObject Settings
+        {
+            get => JObject.FromObject(ActualSettings);
+            set => ActualSettings = value.ToObject<InaraSettings>();
+        }
 
         private void InitializeComponent()
         {
-            button1 = new Button();
-            usernameTextBox = new TextBox();
-            inaraApiKeyTextBox = new TextBox();
-            testCredentialsButton = new Button();
-            credentialsStatusLabel = new Label();
-            SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
+            this.usernameTextBox = new System.Windows.Forms.TextBox();
+            this.inaraApiKeyTextBox = new System.Windows.Forms.TextBox();
+            this.testCredentialsButton = new System.Windows.Forms.Button();
+            this.credentialsStatusLabel = new System.Windows.Forms.Label();
+            this.SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(0, 0);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // usernameTextBox
             // 
-            usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            usernameTextBox.Location = new System.Drawing.Point(4, 4);
-            usernameTextBox.Name = "usernameTextBox";
-            usernameTextBox.Size = new System.Drawing.Size(252, 20);
-            usernameTextBox.TabIndex = 0;
-            usernameTextBox.Text = "Inara Commander";
-            usernameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.usernameTextBox.Location = new System.Drawing.Point(4, 4);
+            this.usernameTextBox.Name = "usernameTextBox";
+            this.usernameTextBox.Size = new System.Drawing.Size(252, 20);
+            this.usernameTextBox.TabIndex = 0;
+            this.usernameTextBox.Text = "Inara Commander";
+            this.usernameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // inaraApiKeyTextBox
             // 
-            inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            inaraApiKeyTextBox.Location = new System.Drawing.Point(4, 30);
-            inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
-            inaraApiKeyTextBox.PasswordChar = '*';
-            inaraApiKeyTextBox.Size = new System.Drawing.Size(252, 20);
-            inaraApiKeyTextBox.TabIndex = 1;
-            inaraApiKeyTextBox.Text = "Inara API Key";
-            inaraApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inaraApiKeyTextBox.Location = new System.Drawing.Point(4, 30);
+            this.inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
+            this.inaraApiKeyTextBox.Size = new System.Drawing.Size(252, 20);
+            this.inaraApiKeyTextBox.TabIndex = 1;
+            this.inaraApiKeyTextBox.Text = "Inara API Key";
+            this.inaraApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // testCredentialsButton
             // 
-            testCredentialsButton.Location = new System.Drawing.Point(4, 57);
-            testCredentialsButton.Name = "testCredentialsButton";
-            testCredentialsButton.Size = new System.Drawing.Size(122, 23);
-            testCredentialsButton.TabIndex = 2;
-            testCredentialsButton.Text = "Save && Test";
-            testCredentialsButton.UseVisualStyleBackColor = true;
-            testCredentialsButton.Click += new System.EventHandler(testCredentialsButton_Click);
+            this.testCredentialsButton.Location = new System.Drawing.Point(4, 57);
+            this.testCredentialsButton.Name = "testCredentialsButton";
+            this.testCredentialsButton.Size = new System.Drawing.Size(122, 23);
+            this.testCredentialsButton.TabIndex = 2;
+            this.testCredentialsButton.Text = "Test (get cmdr ID)";
+            this.testCredentialsButton.UseVisualStyleBackColor = true;
+            this.testCredentialsButton.Click += new System.EventHandler(this.testCredentialsButton_Click);
             // 
             // credentialsStatusLabel
             // 
-            credentialsStatusLabel.AutoSize = true;
-            credentialsStatusLabel.Location = new System.Drawing.Point(132, 62);
-            credentialsStatusLabel.Name = "credentialsStatusLabel";
-            credentialsStatusLabel.Size = new System.Drawing.Size(51, 13);
-            credentialsStatusLabel.TabIndex = 3;
-            credentialsStatusLabel.Text = "unknown";
+            this.credentialsStatusLabel.AutoSize = true;
+            this.credentialsStatusLabel.Location = new System.Drawing.Point(132, 62);
+            this.credentialsStatusLabel.Name = "credentialsStatusLabel";
+            this.credentialsStatusLabel.Size = new System.Drawing.Size(51, 13);
+            this.credentialsStatusLabel.TabIndex = 3;
+            this.credentialsStatusLabel.Text = "unknown";
             // 
             // InaraSettingsControl
             // 
-            Controls.Add(credentialsStatusLabel);
-            Controls.Add(testCredentialsButton);
-            Controls.Add(inaraApiKeyTextBox);
-            Controls.Add(usernameTextBox);
-            Name = "InaraSettingsControl";
-            Size = new System.Drawing.Size(259, 191);
-            ResumeLayout(false);
-            PerformLayout();
+            this.Controls.Add(this.credentialsStatusLabel);
+            this.Controls.Add(this.testCredentialsButton);
+            this.Controls.Add(this.inaraApiKeyTextBox);
+            this.Controls.Add(this.usernameTextBox);
+            this.Name = "InaraSettingsControl";
+            this.Size = new System.Drawing.Size(259, 191);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
-        private async void testCredentialsButton_Click(object sender, System.EventArgs e)
+        private async void testCredentialsButton_Click(object sender, EventArgs e)
         {
-            var cmdrName = usernameTextBox.Text;
-            var apiKey = inaraApiKeyTextBox.Text;
-            var apiFacade = new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"), apiKey, cmdrName);
-            var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
-            var result = await apiFacade.ApiCall(@event);
+            try
+            {
+                testCredentialsButton.Enabled = false;
+                var cmdrName = usernameTextBox.Text;
+                var apiKey = inaraApiKeyTextBox.Text;
+                var apiFacade = new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"), apiKey, cmdrName);
+                var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
+                var result = await apiFacade.ApiCall(@event);
+                credentialsStatusLabel.Text = (result.EventData as JObject)["userID"]?.ToString();
+            }
+            catch (Exception ex)
+            {
+                credentialsStatusLabel.Text = ex.Message;
+            }
+            finally
+            {
+                testCredentialsButton.Enabled = true;
+            }
         }
     }
 }

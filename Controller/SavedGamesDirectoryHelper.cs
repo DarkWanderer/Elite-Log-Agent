@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Controller
 {
-    public class SavedGamesDirectoryHelper
+    public class SavedGamesDirectoryHelper : ILogDirectoryNameProvider
     {
-        public static string Directory
+        public string Directory => SDirectory;
+
+        private static string SDirectory
         {
             get
             {

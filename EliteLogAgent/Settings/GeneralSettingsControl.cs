@@ -9,9 +9,9 @@ namespace Interfaces.Settings
 {
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
-        internal AsyncMessageBroker MessageBroker { get; set; }
+        internal IMessageBroker MessageBroker { get; set; }
 
-        public override JObject Settings { get { throw new NotImplementedException(); } set => throw new NotImplementedException(); }
+        public override JObject Settings { get => new JObject(); set { } }
 
         public GeneralSettingsControl()
         {
@@ -37,7 +37,7 @@ namespace Interfaces.Settings
 
         private void UploadLatestData()
         {
-            var logEventSource = new LogBurstPlayer(SavedGamesDirectoryHelper.Directory);
+            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 200);
             var logCounter = new LogEventTypeCounter();
             using (logEventSource.Subscribe(logCounter))
             using (logEventSource.Subscribe(MessageBroker))

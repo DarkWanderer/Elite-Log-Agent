@@ -1,5 +1,4 @@
-﻿using Controller;
-using Interfaces;
+﻿using Interfaces;
 using Interfaces.Settings;
 using Newtonsoft.Json.Linq;
 using System;
@@ -14,7 +13,7 @@ namespace EliteLogAgent
     public partial class SettingsForm : Form
     {
         internal ISettingsProvider Provider { get; set; }
-        internal AsyncMessageBroker MessageBroker { get; set; }
+        internal IMessageBroker MessageBroker { get; set; }
         internal List<IPlugin> Plugins { get; set; }
 
         private IDictionary<string, AbstractSettingsControl> SettingsCategories = new Dictionary<string, AbstractSettingsControl>();

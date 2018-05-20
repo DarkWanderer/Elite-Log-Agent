@@ -12,8 +12,7 @@ namespace Utility.Extensions
             builder.AppendLine(ex.Message);
             offset += 2;
 
-            var aex = ex as AggregateException;
-            if (aex != null)
+            if (ex is AggregateException aex)
             {
                 aex = aex.Flatten();
                 foreach (var ce in aex.InnerExceptions)

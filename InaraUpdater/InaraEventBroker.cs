@@ -1,21 +1,44 @@
 ﻿using InaraUpdater.Model;
 using MoreLinq;
 using Newtonsoft.Json.Linq;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace InaraUpdater
 {
     public class InaraEventBroker : IObserver<JObject>
     {
         private readonly ApiFacade apiFacade;
+        private readonly ILogger Log;
         private readonly List<ApiEvent> eventQueue = new List<ApiEvent>();
 
         private void Queue(ApiEvent e)
         {
-            if (e!= null)
-                eventQueue.Add(e);
+            bool shouldFlush = false;
+            lock (eventQueue)
+            {
+                if (e != null)
+                    eventQueue.Add(e);
+                shouldFlush = eventQueue.Count >= 1;
+            }
+            if (shouldFlush)
+                Task.Factory.StartNew(FlushQueue);
+        }
+
+        private void FlushQueue()
+        {
+            List<ApiEvent> apiEvents;
+            lock (eventQueue)
+            {
+                apiEvents = Compact(eventQueue)
+                   .Where(e => e.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month
+                   .ToList();
+                eventQueue.Clear();
+            }
+            apiFacade.ApiCall(apiEvents).Wait();
         }
 
         private static readonly string[] compactableEvents = new[] {
@@ -23,17 +46,15 @@ namespace InaraUpdater
             "setCommanderGameStatistics"
         };
 
-        public InaraEventBroker(ApiFacade apiFacade)
+        public InaraEventBroker(ApiFacade apiFacade, ILogger logger)
         {
             this.apiFacade = apiFacade ?? throw new ArgumentNullException(nameof(apiFacade));
+            Log = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void OnCompleted()
         {
-            var apiEvents = Compact(eventQueue)
-                .Where(e => e.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month
-                .ToList();
-            apiFacade.ApiCall(apiEvents).Wait();
+            FlushQueue();
         }
 
         private static IEnumerable<ApiEvent> Compact(IEnumerable<ApiEvent> events)
@@ -79,8 +100,9 @@ namespace InaraUpdater
                         //Queue(ToPvpKillEvent(@event)); break; 
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error(e, "Error in OnNext");
             }
         }
 
@@ -116,7 +138,7 @@ namespace InaraUpdater
                 EventData = new Dictionary<string, object> {
                     { "starsystemName", @event["StarSystem"]?.ToString() },
                     { "opponentName", (@event["Interdicted"] ?? @event["Interdictor"] ?? "Unknown").ToString() },
-                    { "isPlayer", @event["IsPlayer"]?.ToObject<Int64>() },
+                    { "isPlayer", @event["IsPlayer"]?.ToObject<long>() },
                     { "isSuccess", @event["Success"]?.ToObject<bool>() }
                 },
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
@@ -139,7 +161,7 @@ namespace InaraUpdater
                 EventData = new Dictionary<string, object> {
                     { "starsystemName", @event["StarSystem"].ToString() },
                     { "stationName", @event["StationName"].ToString()},
-                    { "marketID", @event["MarketID"]?.ToObject<Int64>() }
+                    { "marketID", @event["MarketID"]?.ToObject<long>() }
                 },
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
@@ -177,8 +199,8 @@ namespace InaraUpdater
             return new ApiEvent("setCommanderCredits")
             {
                 EventData = new Dictionary<string, object> {
-                    { "commanderCredits", @event["Credits"]?.ToObject<Int64>() },
-                    { "commanderLoan", @event["Loan"]?.ToObject<Int64>() }
+                    { "commanderCredits", @event["Credits"]?.ToObject<long>() },
+                    { "commanderLoan", @event["Loan"]?.ToObject<long>() }
                 },
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };

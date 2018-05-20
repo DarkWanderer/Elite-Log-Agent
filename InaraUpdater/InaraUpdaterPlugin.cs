@@ -6,18 +6,19 @@ using NLog;
 
 namespace InaraUpdater
 {
-    public class InaraUpdaterPlugin : IPlugin
+    public class InaraUpdaterPlugin : IInaraSettingsProvider, IPlugin
     {
         public string SettingsLabel => "INARA settings";
         public string PluginId => "InaraUploader";
         private InaraEventBroker eventBroker;
         private ISettingsProvider settingsProvider;
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private readonly ILogger Log;
         private static readonly IRestClient restClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
 
-        public InaraUpdaterPlugin(ISettingsProvider settingsProvider)
+        public InaraUpdaterPlugin(ISettingsProvider settingsProvider, ILogger logger)
         {
             this.settingsProvider = settingsProvider;
+            Log = logger;
             ReloadSettings();
         }
 
@@ -26,26 +27,31 @@ namespace InaraUpdater
             return eventBroker;
         }
 
-        private InaraSettings GetSettingsFromProvider()
+        internal InaraSettings Settings
         {
-            try
+            get
             {
-                return settingsProvider.GetPluginSettings(PluginId)?.ToObject<InaraSettings>()
-                    ?? new InaraSettings();
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-                return new InaraSettings();
+                try
+                {
+                    return settingsProvider.GetPluginSettings(SettingsLabel)?.ToObject<InaraSettings>()
+                        ?? new InaraSettings();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                    return new InaraSettings();
+                }
             }
         }
+
+        InaraSettings IInaraSettingsProvider.Settings => Settings;
 
         private void ReloadSettings()
         {
-            var settings = GetSettingsFromProvider();
-            eventBroker = new InaraEventBroker(new ApiFacade(restClient, settings.ApiKey, settings.CommanderName));
+            var settings = Settings;
+            eventBroker = new InaraEventBroker(new ApiFacade(restClient, settings.ApiKey, settings.CommanderName), Log);
         }
 
-        public AbstractSettingsControl GetPluginSettingsControl() => new InaraSettingsControl();
+        public AbstractSettingsControl GetPluginSettingsControl() => new InaraSettingsControl() { ActualSettings = Settings };
     }
 }

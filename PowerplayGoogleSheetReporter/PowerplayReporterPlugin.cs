@@ -12,6 +12,8 @@ namespace PowerplayGoogleSheetReporter
 
         public string SettingsLabel => "Powerplay Sheet Settings";
 
+        public string PluginId => "PowerPlaySheets";
+
         public IObserver<JObject> GetLogObserver() => new DummyObserver();
 
         public AbstractSettingsControl GetPluginSettingsControl() => new SettingsControl();

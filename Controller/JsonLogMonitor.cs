@@ -3,36 +3,38 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using Utility.Observable;
+using Interfaces;
+using NLog;
+using System.Linq;
 
 namespace Controller
 {
     /// <summary>
     /// This class runs a background thread to monitor and notify consumers (observers) of new log lines
     /// </summary>
-    public class JsonLogMonitor : AbstractObservable<JObject>
+    public class JsonLogMonitor : AbstractObservable<JObject>, ILogRealTimeDataSource
     {
-        private FileSystemWatcher fileWatcher;
-        private readonly string CurrentFile;
+        private readonly FileSystemWatcher fileWatcher;
+        private string CurrentFile;
         private readonly string LogDirectory;
+        private readonly ILogger Log;
         private long filePosition;
         private object @lock = new object();
 
-        public JsonLogMonitor(string logDirectory)
+        public JsonLogMonitor(ILogDirectoryNameProvider logDirectoryProvider, ILogger log)
         {
-            LogDirectory = logDirectory;
+            LogDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(LogDirectory);
 
             fileWatcher.Changed += FileWatcher_Changed;
             fileWatcher.Created += FileWatcher_Created;
-            fileWatcher.NotifyFilter = NotifyFilters.Attributes |
-                                        NotifyFilters.CreationTime |
-                                        NotifyFilters.FileName |
-                                        NotifyFilters.LastAccess |
-                                        NotifyFilters.LastWrite |
-                                        NotifyFilters.Size |
-                                        NotifyFilters.Security;
+            fileWatcher.NotifyFilter = NotifyFilters.CreationTime |
+                                       NotifyFilters.FileName |
+                                       NotifyFilters.LastWrite |
+                                       NotifyFilters.Size;
 
             CurrentFile = LogEnumerator.GetLogFiles(LogDirectory)[0];
+            Log = log;
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
             fileWatcher.EnableRaisingEvents = true;
@@ -56,8 +58,18 @@ namespace Controller
         {
             try
             {
-                var file = CurrentFile;
-                filePosition = ReadFileFromPosition(file, filePosition);
+                filePosition = ReadFileFromPosition(CurrentFile, filePosition);
+                if (checkOtherFiles)
+                {
+                    var filesToScan = LogEnumerator.GetLogFiles(LogDirectory)
+                        .Take(10) // max 10 'missed' files to upload
+                        .TakeWhile(f => f != CurrentFile) // only until we meet our file
+                        .Reverse() // back to chronological order
+                        .ToArray();
+                    foreach (var file in filesToScan)
+                        filePosition = ReadFileFromPosition(file, filePosition);
+                    CurrentFile = filesToScan.Last();
+                }
             }
             catch (Exception e)
             {
@@ -78,10 +90,49 @@ namespace Controller
                     {
                         var @object = (JObject)serializer.Deserialize(jsonReader);
                         OnNext(@object);
+                        Log.Debug("Received event: {0}", @object.ToString());
                     }
                     return fileReader.Position;
                 }
             }
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    fileWatcher.EnableRaisingEvents = false;
+                    fileWatcher.Changed -= FileWatcher_Changed;
+                    fileWatcher.Created -= FileWatcher_Created;
+                    fileWatcher.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~JsonLogMonitor() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
