@@ -49,10 +49,10 @@ deploy:
   on:
     branch: master
   artifact: clickonce-files
-  storage_account_name: dwapps
-  container: app-distrib
+  storage_account_name: elitelogagent
+  container: elite-log-agent
   unzip: true
   storage_access_key:
-    secure: RahMT0WmdO8rhPNnVMtKIkvOZrESRzG+TEDBLmjKQxD1GFEC3Ec6ir5njKMaJ9QnHsqsTczBt3/HGtnnC8wf0EIV+zJNK9WsjaaBDY9bLdTPBjF9DKphghG72CrdoEdd
+    secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
 
   

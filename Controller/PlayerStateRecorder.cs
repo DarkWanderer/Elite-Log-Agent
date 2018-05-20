@@ -13,7 +13,7 @@ namespace Controller
         private readonly ILogger Log;
 
         private readonly SortedList<DateTime, string> playerLocations = new SortedList<DateTime, string>();
-        private readonly SortedList<DateTime, long> playerShipReferences = new SortedList<DateTime, long>();
+        private readonly SortedList<DateTime, ShipRecord> playerShipReferences = new SortedList<DateTime, ShipRecord>();
 
         public PlayerStateRecorder(ILogger log)
         {
@@ -37,11 +37,23 @@ namespace Controller
                     .Where(l => l.Key < atTime)
                     .DefaultIfEmpty()
                     .MaxBy(l => l.Key)
-                    .Value;
+                    .Value.ShipID;
             }
             catch { return null; }
         }
 
+        public string GetPlayerShipType(DateTime atTime)
+        {
+            try
+            {
+                return playerShipReferences
+                    .Where(l => l.Key < atTime)
+                    .DefaultIfEmpty()
+                    .MaxBy(l => l.Key)
+                    .Value.ShipType;
+            }
+            catch { return null; }
+        }
 
         public void OnCompleted() { }
         public void OnError(Exception error) { }
@@ -69,17 +81,25 @@ namespace Controller
             try
             {
                 var shipId = @event["ShipID"].ToObject<long>();
+                var shipType = (@event["Ship"] ?? @event["ShipType"]).ToString();
                 var timestamp = DateTime.Parse(@event["timestamp"].ToString());
 
                 lock (playerShipReferences)
                     if (!playerShipReferences.ContainsKey(timestamp))
                         if (GetPlayerShipId(timestamp) != shipId)
-                            playerShipReferences.Add(timestamp, shipId);
+                            playerShipReferences.Add(timestamp, new ShipRecord {ShipID = shipId, ShipType = shipType });
             }
             catch (Exception e)
             {
                 Log.Error(e, "Error decoding used ship reference");
             }
+        }
+
+        private struct ShipRecord
+        {
+            public long ShipID;
+            public string ShipType;
+            public override string ToString() => $"{ShipType}-{ShipID}";
         }
     }
 }

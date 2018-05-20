@@ -43,6 +43,7 @@ namespace Controller
                         OnNext(@object);
                     }
                 }
+            OnCompleted();
         }
     }
 }

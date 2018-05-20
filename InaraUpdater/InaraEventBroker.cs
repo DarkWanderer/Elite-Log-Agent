@@ -12,6 +12,7 @@ namespace InaraUpdater
     public class InaraEventBroker : IObserver<JObject>
     {
         private readonly ApiFacade apiFacade;
+        private readonly Interfaces.IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly ILogger Log;
         private readonly List<ApiEvent> eventQueue = new List<ApiEvent>();
 
@@ -35,10 +36,12 @@ namespace InaraUpdater
             {
                 apiEvents = Compact(eventQueue)
                    .Where(e => e.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month
+                   //.Where(e => e.EventName == "addCommanderTravelDock" || e.EventName == "addCommanderTravelFSDJump") // DEBUG
                    .ToList();
                 eventQueue.Clear();
             }
-            apiFacade.ApiCall(apiEvents).Wait();
+            if (apiEvents.Count > 0)
+                apiFacade.ApiCall(apiEvents).Wait();
         }
 
         private static readonly string[] compactableEvents = new[] {
@@ -46,9 +49,10 @@ namespace InaraUpdater
             "setCommanderGameStatistics"
         };
 
-        public InaraEventBroker(ApiFacade apiFacade, ILogger logger)
+        public InaraEventBroker(ApiFacade apiFacade, Interfaces.IPlayerStateHistoryRecorder playerStateRecorder, ILogger logger)
         {
             this.apiFacade = apiFacade ?? throw new ArgumentNullException(nameof(apiFacade));
+            this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
             Log = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -156,14 +160,32 @@ namespace InaraUpdater
 
         private ApiEvent ToDockedEvent(JObject @event)
         {
+            var timestamp = DateTime.Parse(@event["timestamp"].ToString());
             return new ApiEvent("addCommanderTravelDock")
             {
                 EventData = new Dictionary<string, object> {
                     { "starsystemName", @event["StarSystem"].ToString() },
                     { "stationName", @event["StationName"].ToString()},
-                    { "marketID", @event["MarketID"]?.ToObject<long>() }
+                    { "marketID", @event["MarketID"]?.ToObject<long>() },
+                    { "shipGameID", playerStateRecorder.GetPlayerShipId(timestamp) },
+                    { "shipType", playerStateRecorder.GetPlayerShipType(timestamp) }
                 },
-                Timestamp = DateTime.Parse(@event["timestamp"].ToString())
+                Timestamp = timestamp
+            };
+        }
+
+        private ApiEvent ToFsdJumpEvent(JObject @event)
+        {
+            var timestamp = DateTime.Parse(@event["timestamp"].ToString());
+            return new ApiEvent("addCommanderTravelFSDJump")
+            {
+                EventData = new Dictionary<string, object> {
+                    { "starsystemName", @event["StarSystem"].ToString() },
+                    { "jumpDistance", @event["JumpDist"].ToObject<double>() },
+                    { "shipGameID", playerStateRecorder.GetPlayerShipId(timestamp) },
+                    { "shipType", playerStateRecorder.GetPlayerShipType(timestamp) }
+                },
+                Timestamp = timestamp
             };
         }
 
@@ -178,18 +200,6 @@ namespace InaraUpdater
             return new ApiEvent("setCommanderInventoryMaterials")
             {
                 EventData = materialCounts.Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value }).ToArray(),
-                Timestamp = DateTime.Parse(@event["timestamp"].ToString())
-            };
-        }
-
-        private ApiEvent ToFsdJumpEvent(JObject @event)
-        {
-            return new ApiEvent("addCommanderTravelFSDJump")
-            {
-                EventData = new Dictionary<string, object> {
-                    { "starsystemName", @event["StarSystem"].ToString() },
-                    { "jumpDistance", @event["JumpDist"].ToObject<double>() }
-                },
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
         }

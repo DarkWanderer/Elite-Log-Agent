@@ -11,12 +11,14 @@ namespace InaraUpdater
         public string SettingsLabel => "INARA settings";
         public string PluginId => "InaraUploader";
         private InaraEventBroker eventBroker;
+        private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private ISettingsProvider settingsProvider;
         private readonly ILogger Log;
         private static readonly IRestClient restClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
 
-        public InaraUpdaterPlugin(ISettingsProvider settingsProvider, ILogger logger)
+        public InaraUpdaterPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, ILogger logger)
         {
+            this.playerStateRecorder = playerStateRecorder;
             this.settingsProvider = settingsProvider;
             Log = logger;
             ReloadSettings();
@@ -49,7 +51,7 @@ namespace InaraUpdater
         private void ReloadSettings()
         {
             var settings = Settings;
-            eventBroker = new InaraEventBroker(new ApiFacade(restClient, settings.ApiKey, settings.CommanderName), Log);
+            eventBroker = new InaraEventBroker(new ApiFacade(restClient, settings.ApiKey, settings.CommanderName), playerStateRecorder, Log);
         }
 
         public AbstractSettingsControl GetPluginSettingsControl() => new InaraSettingsControl() { ActualSettings = Settings };

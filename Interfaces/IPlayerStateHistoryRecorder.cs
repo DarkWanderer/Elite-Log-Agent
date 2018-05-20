@@ -6,6 +6,7 @@ namespace Interfaces
     public interface IPlayerStateHistoryRecorder : IObserver<JObject>
     {
         long? GetPlayerShipId(DateTime atTime);
+        string GetPlayerShipType(DateTime atTime);
         string GetPlayerLocation(DateTime atTime);
     }
 }

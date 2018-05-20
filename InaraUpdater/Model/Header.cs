@@ -8,7 +8,6 @@ namespace InaraUpdater.Model
         {
             CommanderName = commander;
             ApiKey = apiKey;
-            EventStatus = 200;
         }
 
         // Input fields
@@ -25,7 +24,7 @@ namespace InaraUpdater.Model
 
         // Output fields
         [JsonProperty("eventStatus")]
-        public int EventStatus { get; internal set; }
+        public int? EventStatus { get; internal set; }
         [JsonProperty("eventStatusText")]
         public string EventStatusText { get; internal set; }
 
