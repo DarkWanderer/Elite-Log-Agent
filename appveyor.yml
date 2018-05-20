@@ -50,7 +50,7 @@ deploy:
     branch: master
   artifact: clickonce-files
   storage_account_name: elitelogagent
-  container: elite-log-agent
+  container: clickonce
   unzip: true
   storage_access_key:
     secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
