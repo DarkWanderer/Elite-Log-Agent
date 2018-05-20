@@ -26,7 +26,9 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
-- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -Password "$env:PFX_PASSWORD"
+- ps: >-
+	$password = ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force
+	Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -Password $password
 
 after_build:
 - cmd: msbuild Elite-Log-Agent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
