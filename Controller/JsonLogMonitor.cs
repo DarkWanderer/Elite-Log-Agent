@@ -38,6 +38,7 @@ namespace Controller
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
             fileWatcher.EnableRaisingEvents = true;
+            Log.Debug("Started monitoring on folder {0}", LogDirectory);
         }
 
         private void FileWatcher_Created(object sender, FileSystemEventArgs e)
@@ -56,6 +57,7 @@ namespace Controller
 
         private void Update(bool checkOtherFiles)
         {
+            Log.Trace("Starting update");
             try
             {
                 filePosition = ReadFileFromPosition(CurrentFile, filePosition);

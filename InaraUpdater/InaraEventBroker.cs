@@ -22,8 +22,11 @@ namespace InaraUpdater
         {
             lock (eventQueue)
             {
-                if (e != null && e?.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month
+                if (e != null && e?.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month 
+                {
                     eventQueue.Add(e);
+                    Log.Trace("Queued event {0}", e);
+                }
             }
         }
 
