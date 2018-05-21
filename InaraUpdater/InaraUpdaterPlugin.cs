@@ -51,7 +51,7 @@ namespace InaraUpdater
         private void ReloadSettings()
         {
             var settings = Settings;
-            eventBroker = new InaraEventBroker(new ApiFacade(restClient, settings.ApiKey, settings.CommanderName), playerStateRecorder, Log);
+            eventBroker = new InaraEventBroker(new ApiFacade(restClient, settings.ApiKey, settings.CommanderName, Log), playerStateRecorder, Log);
         }
 
         public AbstractSettingsControl GetPluginSettingsControl() => new InaraSettingsControl() { ActualSettings = Settings };

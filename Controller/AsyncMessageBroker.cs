@@ -21,47 +21,29 @@ namespace Controller
 
         protected override void OnCompleted()
         {
-            try
-            {
-                lock (Observers)
-                    Observers.AsParallel().ForAll(o => o.OnCompleted());
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, "Error caught in Async Broker");
-            }
+            lock (Observers)
+                Observers.AsParallel().ForAll(o => {
+                    try { o.OnCompleted(); } catch (Exception e) { Log.Error(e, "Error caught in Async Broker"); }
+                });
         }
 
         protected override void OnError(Exception exception)
         {
-            try
-            {
-                lock (Observers)
-                    Observers.AsParallel().ForAll(o => o.OnError(exception));
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, "Error caught in Async Broker");
-            }
+            lock (Observers)
+                Observers.AsParallel().ForAll(o => {
+                    try { o.OnError(exception); } catch (Exception e) { Log.Error(e, "Error caught in Async Broker"); }
+                });
         }
 
         protected override void OnNext(JObject next)
         {
-            try
-            {
-                lock (Observers)
-                    Observers.AsParallel().ForAll(o => o.OnNext(next));
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, "Error caught in Async Broker");
-            }
+            lock (Observers)
+                Observers.AsParallel().ForAll(o => {
+                    try { o.OnNext(next); } catch (Exception e) { Log.Error(e, "Error caught in Async Broker"); }
+                });
         }
 
-        void IObserver<JObject>.OnCompleted()
-        {
-            OnCompleted();
-        }
+        void IObserver<JObject>.OnCompleted() => OnCompleted();
 
         void IObserver<JObject>.OnError(Exception error) => OnError(error);
 

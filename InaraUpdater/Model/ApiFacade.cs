@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,14 @@ namespace InaraUpdater.Model
         private readonly IRestClient client;
         private readonly string apiKey;
         private readonly string commanderName;
+        private readonly ILogger logger;
 
-        public ApiFacade(IRestClient client, string apiKey, string commanderName)
+        public ApiFacade(IRestClient client, string apiKey, string commanderName, ILogger logger)
         {
             this.client = client;
             this.apiKey = apiKey;
             this.commanderName = commanderName;
+            this.logger = logger;
         }
 
         private struct ApiInputOutput
@@ -61,8 +64,8 @@ namespace InaraUpdater.Model
                     }
                 }
 
-                if (exceptions.Any())
-                    throw new AggregateException("Errors returned on some events from API", exceptions);
+                foreach (var e in exceptions)
+                    logger.Error(e, "Error returned from Inara API");
             }
 
             if (outputData.Header.EventStatus != 200)

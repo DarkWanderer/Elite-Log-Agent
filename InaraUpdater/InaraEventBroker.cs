@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace InaraUpdater
 {
@@ -15,33 +16,29 @@ namespace InaraUpdater
         private readonly Interfaces.IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly ILogger Log;
         private readonly List<ApiEvent> eventQueue = new List<ApiEvent>();
+        private readonly Timer logFlushTimer = new Timer();
 
         private void Queue(ApiEvent e)
         {
-            bool shouldFlush = false;
             lock (eventQueue)
             {
-                if (e != null)
+                if (e != null && e?.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month
                     eventQueue.Add(e);
-                shouldFlush = eventQueue.Count >= 1;
             }
-            if (shouldFlush)
-                Task.Factory.StartNew(FlushQueue);
         }
 
-        private void FlushQueue()
+        private async void FlushQueue()
         {
             List<ApiEvent> apiEvents;
             lock (eventQueue)
             {
                 apiEvents = Compact(eventQueue)
-                   .Where(e => e.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month
                    //.Where(e => e.EventName == "addCommanderTravelDock" || e.EventName == "addCommanderTravelFSDJump") // DEBUG
                    .ToList();
                 eventQueue.Clear();
             }
             if (apiEvents.Count > 0)
-                apiFacade.ApiCall(apiEvents).Wait();
+                await apiFacade.ApiCall(apiEvents);
         }
 
         private static readonly string[] compactableEvents = new[] {
@@ -54,6 +51,9 @@ namespace InaraUpdater
             this.apiFacade = apiFacade ?? throw new ArgumentNullException(nameof(apiFacade));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
             Log = logger ?? throw new ArgumentNullException(nameof(logger));
+            logFlushTimer.AutoReset = true;
+            logFlushTimer.Interval = 10000; // send data every n seconds
+            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(FlushQueue);
         }
 
         public void OnCompleted()

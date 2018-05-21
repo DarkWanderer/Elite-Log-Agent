@@ -1,6 +1,7 @@
 ﻿using InaraUpdater.Model;
 using Interfaces;
 using Newtonsoft.Json.Linq;
+using NLog;
 using System;
 using System.Windows.Forms;
 
@@ -13,6 +14,7 @@ namespace InaraUpdater
         private Button testCredentialsButton;
         private Label credentialsStatusLabel;
         private Button button1;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public InaraSettingsControl() => InitializeComponent();
 
@@ -118,7 +120,7 @@ namespace InaraUpdater
                 testCredentialsButton.Enabled = false;
                 var cmdrName = usernameTextBox.Text;
                 var apiKey = inaraApiKeyTextBox.Text;
-                var apiFacade = new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"), apiKey, cmdrName);
+                var apiFacade = new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"), apiKey, cmdrName, logger);
                 var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
                 var result = await apiFacade.ApiCall(@event);
                 credentialsStatusLabel.Text = (result.EventData as JObject)["userID"]?.ToString();
