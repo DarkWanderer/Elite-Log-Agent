@@ -1,4 +1,4 @@
-version: 0.2.0.{build}
+version: 0.3.0.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
@@ -26,7 +26,7 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
-- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
+- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
 after_build:
 - cmd: msbuild Elite-Log-Agent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
