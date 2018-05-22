@@ -1,5 +1,7 @@
 # Elite-Log-Agent
-A tiny Windows utility which scans Elite: Dangerous logs and updates various sites data. For now, Inara support is planned
+A tiny Windows utility which scans Elite: Dangerous logs and updates various sites data. 
+
+Plugin support is in development. Inara plugin is bundled.
 
 [![appveyor build status][image]][project]
 
