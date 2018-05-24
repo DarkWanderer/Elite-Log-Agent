@@ -30,7 +30,7 @@
     <PublisherName>CMDR John Kozak</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationVersion>0.1.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -186,6 +186,10 @@
     <ProjectReference Include="..\Controller\Controller.csproj">
       <Project>{14c53350-191b-4367-bec4-7b749e7b1eeb}</Project>
       <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ELA.Plugin.EDSM\ELA.Plugin.EDSM.csproj">
+      <Project>{cf1a7347-ad57-49b2-ba8e-7390b195a4e8}</Project>
+      <Name>ELA.Plugin.EDSM</Name>
     </ProjectReference>
     <ProjectReference Include="..\InaraUpdater\InaraUpdater.csproj">
       <Project>{6f64b299-6a1d-4f4a-9bd6-911634a9f02f}</Project>

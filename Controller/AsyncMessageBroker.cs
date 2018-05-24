@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.Linq;
+using Utility;
 using Utility.Observable;
 
 namespace Controller
@@ -12,35 +13,45 @@ namespace Controller
     /// </summary>
     public class AsyncMessageBroker : AbstractObservable<JObject>, IMessageBroker, IObserver<JObject>, IObservable<JObject>
     {
-        private readonly ILogger Log;
-
-        public AsyncMessageBroker(ILogger log)
-        {
-            Log = log;
-        }
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         protected override void OnCompleted()
         {
-            lock (Observers)
-                Observers.AsParallel().ForAll(o => {
-                    try { o.OnCompleted(); } catch (Exception e) { Log.Error(e, "Error caught in Async Broker"); }
-                });
+            try
+            {
+                lock (Observers)
+                    Observers.AsParallel().ExecuteManyWithAggregateException(i => i.OnCompleted());
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error caught in Async Broker");
+            }
         }
 
         protected override void OnError(Exception exception)
         {
-            lock (Observers)
-                Observers.AsParallel().ForAll(o => {
-                    try { o.OnError(exception); } catch (Exception e) { Log.Error(e, "Error caught in Async Broker"); }
-                });
+            try
+            {
+                lock (Observers)
+                    Observers.AsParallel().ExecuteManyWithAggregateException(i => i.OnError(exception));
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error caught in Async Broker");
+            }
         }
 
         protected override void OnNext(JObject next)
         {
-            lock (Observers)
-                Observers.AsParallel().ForAll(o => {
-                    try { o.OnNext(next); } catch (Exception e) { Log.Error(e, "Error caught in Async Broker"); }
-                });
+            try
+            {
+                lock (Observers)
+                    Observers.AsParallel().ExecuteManyWithAggregateException(i => i.OnNext(next));
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error caught in Async Broker");
+            }
         }
 
         void IObserver<JObject>.OnCompleted() => OnCompleted();
@@ -57,7 +68,7 @@ namespace Controller
             if (!disposedValue)
             {
                 if (disposing)
-                    lock(Observers)
+                    lock (Observers)
                         Observers.Clear();
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.

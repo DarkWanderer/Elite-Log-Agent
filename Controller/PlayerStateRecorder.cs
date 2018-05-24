@@ -10,21 +10,20 @@ namespace Controller
 {
     public class PlayerStateRecorder : IPlayerStateHistoryRecorder
     {
-        private readonly ILogger Log;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         private readonly SortedList<DateTime, string> playerLocations = new SortedList<DateTime, string>();
         private readonly SortedList<DateTime, ShipRecord> playerShipReferences = new SortedList<DateTime, ShipRecord>();
 
-        public PlayerStateRecorder(ILogger log)
-        {
-            Log = log;
-        }
-
-        public string GetPlayerLocation(DateTime atTime)
+        public string GetPlayerSystem(DateTime atTime)
         {
             try
             {
-                return playerLocations.Where(l => l.Key < atTime).MaxBy(l => l.Key).Value;
+                lock (playerLocations)
+                    return playerLocations
+                            .Where(l => l.Key < atTime)
+                            .DefaultIfEmpty()
+                            .MaxBy(l => l.Key).Value;
             }
             catch { return null; }
         }
@@ -33,26 +32,28 @@ namespace Controller
         {
             try
             {
-                return playerShipReferences
-                    .Where(l => l.Key < atTime)
-                    .DefaultIfEmpty()
-                    .MaxBy(l => l.Key)
-                    .Value.ShipID;
+                lock (playerShipReferences)
+                    return playerShipReferences
+                        .Where(l => l.Key < atTime)
+                        .DefaultIfEmpty()
+                        .MaxBy(l => l.Key)
+                        .Value.ShipID;
             }
             catch { return null; }
         }
 
         public string GetPlayerShipType(DateTime atTime)
         {
-            try
-            {
-                return playerShipReferences
-                    .Where(l => l.Key < atTime)
-                    .DefaultIfEmpty()
-                    .MaxBy(l => l.Key)
-                    .Value.ShipType;
-            }
-            catch { return null; }
+            lock (playerLocations)
+                try
+                {
+                    return playerShipReferences
+                        .Where(l => l.Key < atTime)
+                        .DefaultIfEmpty()
+                        .MaxBy(l => l.Key)
+                        .Value.ShipType;
+                }
+                catch { return null; }
         }
 
         public void OnCompleted() { }
@@ -66,13 +67,43 @@ namespace Controller
                 {
                     // Generic
                     case "ShipyardSwap":
+                    //case "ShipyardBuy":
                     case "LoadGame":
-                        ProcessShipIDEvent(@event); break;
+                    case "Loadout":
+                        ProcessShipIDEvent(@event);
+                        break;
+
+                    case "Location":
+                    case "FSDJump":
+                    case "Docked":
+                        ProcessShipLocationEvent(@event);
+                        break;
                 }
             }
             catch (Exception e)
             {
-                Log.Error(e, "Error in OnNext");
+                logger.Error(e, "Error in OnNext");
+            }
+        }
+
+        private void ProcessShipLocationEvent(JObject @event)
+        {
+            {
+                try
+                {
+                    var starSystem = @event["StarSystem"].ToString();
+                    var timestamp = DateTime.Parse(@event["timestamp"].ToString());
+
+
+                    lock (playerLocations)
+                        if (!playerLocations.ContainsKey(timestamp))
+                            if (GetPlayerSystem(timestamp) != starSystem)
+                                playerLocations.Add(timestamp, starSystem);
+                }
+                catch (Exception e)
+                {
+                    logger.Error(e, "Error decoding used ship location");
+                }
             }
         }
 
@@ -87,11 +118,11 @@ namespace Controller
                 lock (playerShipReferences)
                     if (!playerShipReferences.ContainsKey(timestamp))
                         if (GetPlayerShipId(timestamp) != shipId)
-                            playerShipReferences.Add(timestamp, new ShipRecord {ShipID = shipId, ShipType = shipType });
+                            playerShipReferences.Add(timestamp, new ShipRecord { ShipID = shipId, ShipType = shipType });
             }
             catch (Exception e)
             {
-                Log.Error(e, "Error decoding used ship reference");
+                logger.Error(e, "Error decoding used ship reference");
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Utility;
 
 namespace InaraUpdater.Model
 {
@@ -12,9 +13,9 @@ namespace InaraUpdater.Model
 
         // Input fields
         [JsonProperty("appName")]
-        public const string AppName = "EliteLogAgent";
+        public readonly string AppName = AppInfo.Name;
         [JsonProperty("appVersion")]
-        public const string AppVersion = "0.1";
+        public readonly string AppVersion = AppInfo.Version;
         [JsonProperty("isDeveloped")]
         public const bool IsDeveloped = true;
         [JsonProperty("APIkey")]

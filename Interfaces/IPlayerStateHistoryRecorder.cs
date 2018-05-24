@@ -7,6 +7,6 @@ namespace Interfaces
     {
         long? GetPlayerShipId(DateTime atTime);
         string GetPlayerShipType(DateTime atTime);
-        string GetPlayerLocation(DateTime atTime);
+        string GetPlayerSystem(DateTime atTime);
     }
 }

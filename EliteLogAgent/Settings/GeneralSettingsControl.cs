@@ -11,13 +11,17 @@ namespace Interfaces.Settings
     {
         internal IMessageBroker MessageBroker { get; set; }
 
-        public override JObject Settings { get => new JObject(); set { } }
+        public override JObject Settings
+        {
+            get => new JObject() { ["commanderName"] = commanderNameTextBox.Text };
+            set => commanderNameTextBox.Text = value?["commanderName"]?.ToString() ?? "Unknown";
+        }
 
         public GeneralSettingsControl()
         {
             InitializeComponent();
         }
-        
+
         private async void uploadLatestDataButton_Click(object sender, EventArgs e)
         {
             try
@@ -37,7 +41,7 @@ namespace Interfaces.Settings
 
         private void UploadLatestData()
         {
-            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 10);
+            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 2);
             var logCounter = new LogEventTypeCounter();
             using (logEventSource.Subscribe(logCounter))
             using (logEventSource.Subscribe(MessageBroker))

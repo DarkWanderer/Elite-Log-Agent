@@ -5,13 +5,12 @@ namespace Controller
 {
     public class NLogSettingsManager : ILogSettingsBootstrapper
     {
-        private readonly ILogger Log;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
 
-        public NLogSettingsManager(ISettingsProvider settingsProvider, ILogger log)
+        public NLogSettingsManager(ISettingsProvider settingsProvider)
         {
             this.settingsProvider = settingsProvider ?? throw new System.ArgumentNullException(nameof(settingsProvider));
-            Log = log;
         }
 
         public void Setup()
@@ -28,7 +27,7 @@ namespace Controller
             config.LoggingRules.Clear();
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, new NLog.Targets.DebuggerTarget()));
             LogManager.Configuration = config;
-            Log.Info("Enabled logging with level {0}", logLevel);
+            logger.Info("Enabled logging with level {0}", logLevel);
         }
     }
 }

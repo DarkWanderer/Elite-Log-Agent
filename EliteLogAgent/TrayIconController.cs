@@ -47,16 +47,31 @@ namespace EliteLogAgent
             return menuStrip;
         }
 
+        private SettingsForm form;
+
         private void OpenSettings(object o, EventArgs e)
         {
-            using (var form = new SettingsForm()
+            if (form != null)
             {
-                Plugins = pluginManager.LoadedPlugins.ToList(),
-                Provider = settingsProvider,
-                MessageBroker = messageBroker
-            })
+                form.BringToFront();
+                return;
+            }
+
+            try
             {
-                form.ShowDialog();
+                using (form = new SettingsForm()
+                {
+                    Plugins = pluginManager.LoadedPlugins.ToList(),
+                    Provider = settingsProvider,
+                    MessageBroker = messageBroker
+                })
+                {
+                    form.ShowDialog();
+                }
+            }
+            finally
+            {
+                form = null;
             }
         }
 

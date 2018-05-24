@@ -62,15 +62,14 @@
     <Compile Include="IInaraSettingsProvider.cs" />
     <Compile Include="InaraApiException.cs" />
     <Compile Include="InaraEventBroker.cs" />
-    <Compile Include="Settings\InaraSettings.cs" />
-    <Compile Include="Settings\InaraSettingsControl.cs">
+    <Compile Include="InaraSettings.cs" />
+    <Compile Include="InaraSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="InaraUpdaterPlugin.cs" />
-    <Compile Include="Model\ApiFacade.cs" />
-    <Compile Include="ThrottlingRestClient.cs" />
     <Compile Include="Model\ApiEvent.cs" />
     <Compile Include="Model\Header.cs" />
+    <Compile Include="Model\InaraApiFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +86,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Settings\InaraSettingsControl.resx">
+    <EmbeddedResource Include="InaraSettingsControl.resx">
       <DependentUpon>InaraSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

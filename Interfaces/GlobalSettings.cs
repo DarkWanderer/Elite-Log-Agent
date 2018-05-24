@@ -15,6 +15,9 @@ namespace Interfaces.Settings
         public IDictionary<string, JObject> PluginSettings { get; set; }
 
         [JsonIgnore]
+        public string CommanderName => PluginSettings?["General"]?["commanderName"]?.ToString() ?? "Unknown";
+
+        [JsonIgnore]
         public string LogLevel { get; set; }
     }
 }

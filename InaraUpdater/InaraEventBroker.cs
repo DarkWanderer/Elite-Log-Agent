@@ -1,4 +1,5 @@
 ﻿using InaraUpdater.Model;
+using Interfaces;
 using MoreLinq;
 using Newtonsoft.Json.Linq;
 using NLog;
@@ -12,9 +13,9 @@ namespace InaraUpdater
 {
     public class InaraEventBroker : IObserver<JObject>
     {
-        private readonly ApiFacade apiFacade;
-        private readonly Interfaces.IPlayerStateHistoryRecorder playerStateRecorder;
-        private readonly ILogger Log;
+        private readonly InaraApiFacade apiFacade;
+        private readonly IPlayerStateHistoryRecorder playerStateRecorder;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly List<ApiEvent> eventQueue = new List<ApiEvent>();
         private readonly Timer logFlushTimer = new Timer();
 
@@ -25,7 +26,7 @@ namespace InaraUpdater
                 if (e != null && e?.Timestamp > DateTime.UtcNow.AddDays(-30)) // INARA API only accepts events for last month 
                 {
                     eventQueue.Add(e);
-                    Log.Trace("Queued event {0}", e);
+                    logger.Trace("Queued event {0}", e);
                 }
             }
         }
@@ -49,14 +50,14 @@ namespace InaraUpdater
             "setCommanderGameStatistics"
         };
 
-        public InaraEventBroker(ApiFacade apiFacade, Interfaces.IPlayerStateHistoryRecorder playerStateRecorder, ILogger logger)
+        public InaraEventBroker(InaraApiFacade apiFacade, IPlayerStateHistoryRecorder playerStateRecorder)
         {
             this.apiFacade = apiFacade ?? throw new ArgumentNullException(nameof(apiFacade));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
-            Log = logger ?? throw new ArgumentNullException(nameof(logger));
             logFlushTimer.AutoReset = true;
             logFlushTimer.Interval = 10000; // send data every n seconds
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(FlushQueue);
+            logFlushTimer.Enabled = true;
         }
 
         public void OnCompleted()
@@ -109,7 +110,7 @@ namespace InaraUpdater
             }
             catch (Exception e)
             {
-                Log.Error(e, "Error in OnNext");
+                logger.Error(e, "Error in OnNext");
             }
         }
 

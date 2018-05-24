@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using Utility;
 
 namespace EliteLogAgent
 {
@@ -22,9 +23,7 @@ namespace EliteLogAgent
         {
             InitializeComponent();
 
-            var assembly = Assembly.GetExecutingAssembly();
-            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-            var versionLabel = "Version: " + fileVersionInfo.FileVersion;
+            var versionLabel = "Version: " + AppInfo.Version;
             Text += ". " + versionLabel;
             Load += SettingsForm_Load;
         }
@@ -35,6 +34,8 @@ namespace EliteLogAgent
             foreach (var plugin in Plugins)
             {
                 var control = plugin.GetPluginSettingsControl();
+                if (control == null)
+                    continue;
                 control.Dock = DockStyle.Fill;
                 control.PerformLayout();
                 SettingsCategories.Add(plugin.SettingsLabel, control);

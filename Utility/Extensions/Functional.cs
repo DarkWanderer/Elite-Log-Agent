@@ -32,10 +32,20 @@ namespace Utility
             }
         }
 
-        public static void ExecuteManyWithAggregateException<T>(IEnumerable<T> items, Action<T> function)
+        public static void ExecuteManyWithAggregateException<T>(this IEnumerable<T> items, Action<T> function)
         {
             var exceptions = items
                 .Select(i => ExecuteAndCatch(function,i))
+                .Where(e => e != null)
+                .ToList();
+            if (exceptions.Any())
+                throw new AggregateException(exceptions);
+        }
+
+        public static void ExecuteManyWithAggregateException<T>(this ParallelQuery<T> items, Action<T> function)
+        {
+            var exceptions = items
+                .Select(i => ExecuteAndCatch(function, i))
                 .Where(e => e != null)
                 .ToList();
             if (exceptions.Any())

@@ -17,11 +17,11 @@ namespace Controller
         private readonly FileSystemWatcher fileWatcher;
         private string CurrentFile;
         private readonly string LogDirectory;
-        private readonly ILogger Log;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private long filePosition;
         private object @lock = new object();
 
-        public JsonLogMonitor(ILogDirectoryNameProvider logDirectoryProvider, ILogger log)
+        public JsonLogMonitor(ILogDirectoryNameProvider logDirectoryProvider)
         {
             LogDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(LogDirectory);
@@ -34,11 +34,10 @@ namespace Controller
                                        NotifyFilters.Size;
 
             CurrentFile = LogEnumerator.GetLogFiles(LogDirectory)[0];
-            Log = log;
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
             fileWatcher.EnableRaisingEvents = true;
-            Log.Debug("Started monitoring on folder {0}", LogDirectory);
+            logger.Debug("Started monitoring on folder {0}", LogDirectory);
         }
 
         private void FileWatcher_Created(object sender, FileSystemEventArgs e)
@@ -57,7 +56,7 @@ namespace Controller
 
         private void Update(bool checkOtherFiles)
         {
-            Log.Trace("Starting update");
+            logger.Trace("Starting update");
             try
             {
                 filePosition = ReadFileFromPosition(CurrentFile, filePosition);
@@ -92,7 +91,7 @@ namespace Controller
                     {
                         var @object = (JObject)serializer.Deserialize(jsonReader);
                         OnNext(@object);
-                        Log.Debug("Received event: {0}", @object.ToString());
+                        logger.Debug("Received event: {0}", @object.ToString());
                     }
                     return fileReader.Position;
                 }

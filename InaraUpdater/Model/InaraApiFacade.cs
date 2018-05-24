@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Interfaces;
+using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -7,19 +8,18 @@ using System.Threading.Tasks;
 
 namespace InaraUpdater.Model
 {
-    public class ApiFacade
+    public class InaraApiFacade
     {
         private readonly IRestClient client;
         private readonly string apiKey;
         private readonly string commanderName;
-        private readonly ILogger logger;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-        public ApiFacade(IRestClient client, string apiKey, string commanderName, ILogger logger)
+        public InaraApiFacade(IRestClient client, string apiKey, string commanderName)
         {
             this.client = client;
             this.apiKey = apiKey;
             this.commanderName = commanderName;
-            this.logger = logger;
         }
 
         private struct ApiInputOutput
