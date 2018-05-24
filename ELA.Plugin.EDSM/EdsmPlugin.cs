@@ -34,6 +34,8 @@ namespace ELA.Plugin.EDSM
             ignoredEvents =
                  RestClient.GetAsync("discard")
                     .ContinueWith((t) => new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
+
+            ReloadSettings();
         }
 
         private void ReloadSettings()
@@ -69,7 +71,11 @@ namespace ELA.Plugin.EDSM
             @event = (JObject)@event.DeepClone(); // have to clone the object here as we'll have to make modifications to it
             EnrichEvent(@event);
             lock (eventQueue)
+            {
                 eventQueue.Add(@event);
+                if (eventQueue.Count > 1000)
+                    Task.Factory.StartNew(FlushQueue);
+            }
             logger.Trace("Queued event {0}", @event);
         }
 

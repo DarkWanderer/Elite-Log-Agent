@@ -55,7 +55,7 @@ namespace InaraUpdater
             this.apiFacade = apiFacade ?? throw new ArgumentNullException(nameof(apiFacade));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
             logFlushTimer.AutoReset = true;
-            logFlushTimer.Interval = 10000; // send data every n seconds
+            logFlushTimer.Interval = 5000; // send data every n seconds
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(FlushQueue);
             logFlushTimer.Enabled = true;
         }
@@ -104,8 +104,8 @@ namespace InaraUpdater
                     case "Interdiction":
                     case "EscapeInterdiction":
                         Queue(ToInterdictionEvent(@event)); break;
-                    //case "PVPKill":
-                        //Queue(ToPvpKillEvent(@event)); break; 
+                    case "PVPKill":
+                        Queue(ToPvpKillEvent(@event)); break; 
                 }
             }
             catch (Exception e)
@@ -116,14 +116,14 @@ namespace InaraUpdater
 
         private ApiEvent ToPvpKillEvent(JObject @event)
         {
-            // TODO: where do I take star system from?
+            var timestamp = DateTime.Parse(@event["timestamp"].ToString());
             return new ApiEvent("addCommanderCombatKill")
             {
                 EventData = new Dictionary<string, object> {
-                    { "starsystemName", @event["StarSystem"].ToString() },
+                    { "starsystemName", playerStateRecorder.GetPlayerSystem(timestamp) },
                     { "opponentName", @event["Victim"].ToString() },
                 },
-                Timestamp = DateTime.Parse(@event["timestamp"].ToString())
+                Timestamp = timestamp
             };
         }
 

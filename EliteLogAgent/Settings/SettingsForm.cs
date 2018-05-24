@@ -3,9 +3,7 @@ using Interfaces.Settings;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using Utility;
 
@@ -31,6 +29,8 @@ namespace EliteLogAgent
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             SettingsCategories.Add("General", new GeneralSettingsControl() { MessageBroker = MessageBroker });
+            settingsCategorySelector.Items.Add("General");
+
             foreach (var plugin in Plugins)
             {
                 var control = plugin.GetPluginSettingsControl();
@@ -41,8 +41,9 @@ namespace EliteLogAgent
                 SettingsCategories.Add(plugin.SettingsLabel, control);
             }
 
-            foreach (var category in SettingsCategories.Keys)
-                settingsCategorySelector.Items.Add(category);
+            foreach (var category in SettingsCategories.Keys.OrderBy(x => x))
+                if (category != "General")
+                    settingsCategorySelector.Items.Add(category);
 
             Settings = Provider.Settings;
         }
@@ -82,7 +83,8 @@ namespace EliteLogAgent
             set
             {
                 var newSettings = value;
-                foreach (var category in SettingsCategories) {
+                foreach (var category in SettingsCategories)
+                {
                     if (newSettings.PluginSettings.TryGetValue(category.Key, out JObject settings))
                         category.Value.Settings = settings;
                 }

@@ -111,14 +111,15 @@ namespace Controller
         {
             try
             {
-                var shipId = @event["ShipID"].ToObject<long>();
-                var shipType = (@event["Ship"] ?? @event["ShipType"]).ToString();
+                var shipId = @event["ShipID"]?.ToObject<long>();
+                var shipType = (@event["Ship"] ?? @event["ShipType"])?.ToString();
                 var timestamp = DateTime.Parse(@event["timestamp"].ToString());
 
-                lock (playerShipReferences)
-                    if (!playerShipReferences.ContainsKey(timestamp))
-                        if (GetPlayerShipId(timestamp) != shipId)
-                            playerShipReferences.Add(timestamp, new ShipRecord { ShipID = shipId, ShipType = shipType });
+                if (shipId != null && shipType != null)
+                    lock (playerShipReferences)
+                        if (!playerShipReferences.ContainsKey(timestamp))
+                            if (GetPlayerShipId(timestamp) != shipId)
+                                playerShipReferences.Add(timestamp, new ShipRecord { ShipID = shipId.Value, ShipType = shipType });
             }
             catch (Exception e)
             {
