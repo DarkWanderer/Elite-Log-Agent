@@ -62,7 +62,6 @@ namespace Controller
 
         private void Update(bool checkOtherFiles)
         {
-            logger.Trace("Starting update");
             lock (@lock)
                 try
                 {
