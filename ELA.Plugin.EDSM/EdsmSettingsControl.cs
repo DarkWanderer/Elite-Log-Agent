@@ -91,7 +91,7 @@ namespace ELA.Plugin.EDSM
             this.credentialsStatusLabel.Name = "credentialsStatusLabel";
             this.credentialsStatusLabel.Size = new System.Drawing.Size(87, 13);
             this.credentialsStatusLabel.TabIndex = 3;
-            this.credentialsStatusLabel.Text = "Status: unknown";
+            this.credentialsStatusLabel.Text = "Not checked";
             // 
             // apiKeyValidatedCheckbox
             // 

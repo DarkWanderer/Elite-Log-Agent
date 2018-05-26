@@ -30,6 +30,7 @@
         {
             this.uploadLatestDataButton = new System.Windows.Forms.Button();
             this.commanderNameTextBox = new System.Windows.Forms.TextBox();
+            this.cmdrNameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uploadLatestDataButton
@@ -46,17 +47,27 @@
             // 
             this.commanderNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.commanderNameTextBox.Location = new System.Drawing.Point(4, 4);
+            this.commanderNameTextBox.Location = new System.Drawing.Point(79, 4);
             this.commanderNameTextBox.Name = "commanderNameTextBox";
-            this.commanderNameTextBox.Size = new System.Drawing.Size(293, 20);
+            this.commanderNameTextBox.Size = new System.Drawing.Size(218, 20);
             this.commanderNameTextBox.TabIndex = 1;
             this.commanderNameTextBox.Text = "Commander Name";
             this.commanderNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cmdrNameLabel
+            // 
+            this.cmdrNameLabel.AutoSize = true;
+            this.cmdrNameLabel.Location = new System.Drawing.Point(3, 7);
+            this.cmdrNameLabel.Name = "cmdrNameLabel";
+            this.cmdrNameLabel.Size = new System.Drawing.Size(70, 13);
+            this.cmdrNameLabel.TabIndex = 2;
+            this.cmdrNameLabel.Text = "CMDR Name";
             // 
             // GeneralSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmdrNameLabel);
             this.Controls.Add(this.commanderNameTextBox);
             this.Controls.Add(this.uploadLatestDataButton);
             this.Name = "GeneralSettingsControl";
@@ -70,5 +81,6 @@
 
         private System.Windows.Forms.Button uploadLatestDataButton;
         private System.Windows.Forms.TextBox commanderNameTextBox;
+        private System.Windows.Forms.Label cmdrNameLabel;
     }
 }
