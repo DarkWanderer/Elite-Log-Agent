@@ -26,18 +26,34 @@ Currently in alpha stage
 * ClickOnce application installer [here](https://elitelogagent.blob.core.windows.net/clickonce/EliteLogAgent.application)
 * Latest (pre-)release merged .exe [here](https://github.com/DarkWanderer/Elite-Log-Agent/releases)
 
+## Plugin development
+
+The code base has not yet reached maturity, so any (even ostensibly public) APIs might change. Hence, at this time, I see the best way of plugin support as incorporating them into this codebase. This will most likely change once a stable version is reached
+
 ## Contributions
 
 You're welcome to contribute by
 
-## Build status
+1. Raising [issues](https://github.com/DarkWanderer/Elite-Log-Agent/issues) on GitHub
+2. Using the application!
+3. Proposing pull request with changes and/or new functionality, including plugins
 
-[![appveyor build status][image]][project]
+## SDLC
+
+Builds are done in AppVeyor. `master` branch is the primary integration branch ('potentially releasable').
+GitHub pre-releases are published from `master`
+Releasing to ClickOnce installer is done via merging to `prod` branch
+
+| Branch        | Build status  |
+| ------------- | ------------: |
+| master        | [![appveyor build status][buildstatus-master]][project] |
+| prod          | [![appveyor build status][buildstatus-prod]][project]   |
 
 ## Links
 
 * [Elite: Dangerous in official store](https://www.frontierstore.net/games/elite-dangerous-cat.html)
 * [INARA](https://inara.cz)
 
-[image]: https://ci.appveyor.com/api/projects/status/6n52i9wkthtwtb34/branch/master
+[buildstatus-master]: https://ci.appveyor.com/api/projects/status/6n52i9wkthtwtb34/branch/master
+[buildstatus-prod]: https://ci.appveyor.com/api/projects/status/6n52i9wkthtwtb34/branch/prod
 [project]: https://ci.appveyor.com/project/DarkWanderer/Elite-Log-Agent
