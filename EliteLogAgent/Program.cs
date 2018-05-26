@@ -23,6 +23,8 @@ namespace EliteLogAgent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            AppDomain.CurrentDomain.UnhandledException += (o, e) => rootLogger.Fatal(e.ExceptionObject as Exception, "Unhandled exception");
+
             using (var container = new WindsorContainer())
             {
                 // Initalize infrastructure classes - NLog, Windsor
@@ -32,7 +34,7 @@ namespace EliteLogAgent
                     Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
                     Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),
                     Component.For<IWindsorContainer>().Instance(container)
-                    //Component.For<ILogger>().UsingFactoryMethod((kernel, context) => LogManager.GetLogger(context.Handler.ComponentModel.Name))
+
                 );
                 container.Resolve<ILogSettingsBootstrapper>().Setup();
 
@@ -67,6 +69,8 @@ namespace EliteLogAgent
                 }
             }
         }
+
+        private static readonly ILogger rootLogger = LogManager.GetCurrentClassLogger();
 
     }
 }
