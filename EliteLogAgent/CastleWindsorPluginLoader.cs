@@ -26,17 +26,24 @@ namespace EliteLogAgent
 
         public void LoadPlugin(string pluginAssemblyName)
         {
-            var assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (string.IsNullOrEmpty(Path.GetExtension(pluginAssemblyName)))
-                pluginAssemblyName = Path.ChangeExtension(pluginAssemblyName, ".dll");
+            try
+            {
+                var assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                if (!pluginAssemblyName.EndsWith(".dll"))
+                    pluginAssemblyName += ".dll";
 
-            //var assembly = Assembly.LoadFile(pluginAssemblyName);
-            container.Register(Classes
-                .FromAssemblyNamed(Path.Combine(assemblyDirectory, pluginAssemblyName))
-                .BasedOn<IPlugin>()
-                .WithService
-                .FromInterface()
-                .LifestyleSingleton());
+                //var assembly = Assembly.LoadFile(pluginAssemblyName);
+                container.Register(Classes
+                    .FromAssemblyNamed(Path.Combine(assemblyDirectory, pluginAssemblyName))
+                    .BasedOn<IPlugin>()
+                    .WithService
+                    .FromInterface()
+                    .LifestyleSingleton());
+            }
+            catch
+            {
+                // TODO: fix
+            }
         }
     }
 }

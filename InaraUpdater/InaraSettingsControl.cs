@@ -4,16 +4,18 @@ using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.Windows.Forms;
+using Utility;
 
 namespace InaraUpdater
 {
     internal class InaraSettingsControl : AbstractSettingsControl
     {
-        private TextBox usernameTextBox;
         private TextBox inaraApiKeyTextBox;
         private Button testCredentialsButton;
         private Label credentialsStatusLabel;
         private Button button1;
+        private Label label1;
+        private CheckBox apiKeyValidatedCheckbox;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public InaraSettingsControl() => InitializeComponent();
@@ -25,13 +27,13 @@ namespace InaraUpdater
                 return new InaraSettings()
                 {
                     ApiKey = inaraApiKeyTextBox.Text,
-                    CommanderName = usernameTextBox.Text
+                    Verified = apiKeyValidatedCheckbox.Checked
                 };
             }
             set
             {
                 inaraApiKeyTextBox.Text = value.ApiKey;
-                usernameTextBox.Text = value.CommanderName;
+                apiKeyValidatedCheckbox.Checked = value.Verified;
             }
         }
 
@@ -41,13 +43,16 @@ namespace InaraUpdater
             set => ActualSettings = value.ToObject<InaraSettings>();
         }
 
+        internal InaraUpdaterPlugin Plugin;
+
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.inaraApiKeyTextBox = new System.Windows.Forms.TextBox();
             this.testCredentialsButton = new System.Windows.Forms.Button();
             this.credentialsStatusLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -59,55 +64,65 @@ namespace InaraUpdater
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // usernameTextBox
-            // 
-            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.usernameTextBox.Location = new System.Drawing.Point(4, 4);
-            this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(252, 20);
-            this.usernameTextBox.TabIndex = 0;
-            this.usernameTextBox.Text = "Inara Commander";
-            this.usernameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // inaraApiKeyTextBox
             // 
-            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.inaraApiKeyTextBox.Location = new System.Drawing.Point(4, 30);
+            this.inaraApiKeyTextBox.Location = new System.Drawing.Point(52, 3);
             this.inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
-            this.inaraApiKeyTextBox.Size = new System.Drawing.Size(252, 20);
+            this.inaraApiKeyTextBox.Size = new System.Drawing.Size(349, 20);
             this.inaraApiKeyTextBox.TabIndex = 1;
             this.inaraApiKeyTextBox.Text = "Inara API Key";
             this.inaraApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // testCredentialsButton
             // 
-            this.testCredentialsButton.Location = new System.Drawing.Point(4, 57);
+            this.testCredentialsButton.Location = new System.Drawing.Point(3, 27);
             this.testCredentialsButton.Name = "testCredentialsButton";
             this.testCredentialsButton.Size = new System.Drawing.Size(122, 23);
             this.testCredentialsButton.TabIndex = 2;
-            this.testCredentialsButton.Text = "Test (get cmdr ID)";
+            this.testCredentialsButton.Text = "Validate";
             this.testCredentialsButton.UseVisualStyleBackColor = true;
             this.testCredentialsButton.Click += new System.EventHandler(this.testCredentialsButton_Click);
             // 
             // credentialsStatusLabel
             // 
             this.credentialsStatusLabel.AutoSize = true;
-            this.credentialsStatusLabel.Location = new System.Drawing.Point(132, 62);
+            this.credentialsStatusLabel.Location = new System.Drawing.Point(3, 55);
             this.credentialsStatusLabel.Name = "credentialsStatusLabel";
             this.credentialsStatusLabel.Size = new System.Drawing.Size(51, 13);
             this.credentialsStatusLabel.TabIndex = 3;
             this.credentialsStatusLabel.Text = "unknown";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Api Key";
+            // 
+            // apiKeyValidatedCheckbox
+            // 
+            this.apiKeyValidatedCheckbox.AutoSize = true;
+            this.apiKeyValidatedCheckbox.Enabled = false;
+            this.apiKeyValidatedCheckbox.Location = new System.Drawing.Point(131, 31);
+            this.apiKeyValidatedCheckbox.Name = "apiKeyValidatedCheckbox";
+            this.apiKeyValidatedCheckbox.Size = new System.Drawing.Size(184, 17);
+            this.apiKeyValidatedCheckbox.TabIndex = 7;
+            this.apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
+            this.apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
+            // 
             // InaraSettingsControl
             // 
+            this.Controls.Add(this.apiKeyValidatedCheckbox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.credentialsStatusLabel);
             this.Controls.Add(this.testCredentialsButton);
             this.Controls.Add(this.inaraApiKeyTextBox);
-            this.Controls.Add(this.usernameTextBox);
             this.Name = "InaraSettingsControl";
-            this.Size = new System.Drawing.Size(259, 191);
+            this.Size = new System.Drawing.Size(404, 276);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,15 +133,17 @@ namespace InaraUpdater
             try
             {
                 testCredentialsButton.Enabled = false;
-                var cmdrName = usernameTextBox.Text;
                 var apiKey = inaraApiKeyTextBox.Text;
-                var apiFacade = new ApiFacade(new ThrottlingRestClient("https://inara.cz/inapi/v1/"), apiKey, cmdrName, logger);
+                var cmdrName = Plugin.GlobalSettings.CommanderName;
+                var apiFacade = new InaraApiFacade(InaraUpdaterPlugin.RestClient, apiKey, cmdrName);
                 var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
                 var result = await apiFacade.ApiCall(@event);
-                credentialsStatusLabel.Text = (result.EventData as JObject)["userID"]?.ToString();
+                credentialsStatusLabel.Text = "Success, inara ID: " + (result.EventData as JObject)["userID"]?.ToString();
+                apiKeyValidatedCheckbox.Checked = true;
             }
             catch (Exception ex)
             {
+                apiKeyValidatedCheckbox.Checked = false;
                 credentialsStatusLabel.Text = ex.Message;
             }
             finally

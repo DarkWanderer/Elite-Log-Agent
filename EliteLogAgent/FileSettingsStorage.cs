@@ -10,7 +10,7 @@ namespace EliteLogAgent
 {
     public class FileSettingsStorage : ISettingsProvider
     {
-        private readonly ILogger Log;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public GlobalSettings Settings
         {
@@ -23,7 +23,7 @@ namespace EliteLogAgent
                 }
                 catch (Exception e)
                 {
-                    Log.Warn(e, "Exception while reading settings, using defaults");
+                    logger.Warn(e, "Exception while reading settings, using defaults");
                 }
                 return new GlobalSettings();
             }
@@ -49,11 +49,6 @@ namespace EliteLogAgent
         }
 
         private string SettingsFileDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");
-
-        public FileSettingsStorage(ILogger log)
-        {
-            Log = log;
-        }
 
         private string SettingsFilePath => Path.Combine(SettingsFileDirectory, "Settings.json");
     }

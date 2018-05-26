@@ -14,15 +14,6 @@ assembly_info:
   assembly_file_version: $(appveyor_build_version)
   assembly_informational_version: $(appveyor_build_version)
 
-dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: $(appveyor_build_version)
-  package_version: $(appveyor_build_version)
-  assembly_version: $(appveyor_build_version)
-  file_version: $(appveyor_build_version)
-  informational_version: $(appveyor_build_version)
-
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
@@ -41,13 +32,14 @@ artifacts:
 deploy:
 - provider: GitHub
   on:
-    branch: master
+    branch: develop
   tag: release-$(appveyor_build_version)
   release: $(appveyor_build_version)
   auth_token:
     secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
   artifact: single-executable
   draft: true
+  prerelease: true
   force_update: true
 
 - provider: AzureBlob

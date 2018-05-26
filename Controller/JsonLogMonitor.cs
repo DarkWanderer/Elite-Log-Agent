@@ -6,6 +6,8 @@ using Utility.Observable;
 using Interfaces;
 using NLog;
 using System.Linq;
+using System.Timers;
+using System.Threading.Tasks;
 
 namespace Controller
 {
@@ -17,11 +19,12 @@ namespace Controller
         private readonly FileSystemWatcher fileWatcher;
         private string CurrentFile;
         private readonly string LogDirectory;
-        private readonly ILogger Log;
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private long filePosition;
         private object @lock = new object();
+        private readonly Timer logFlushTimer = new Timer();
 
-        public JsonLogMonitor(ILogDirectoryNameProvider logDirectoryProvider, ILogger log)
+        public JsonLogMonitor(ILogDirectoryNameProvider logDirectoryProvider)
         {
             LogDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(LogDirectory);
@@ -33,50 +36,53 @@ namespace Controller
                                        NotifyFilters.LastWrite |
                                        NotifyFilters.Size;
 
+            logFlushTimer.AutoReset = true;
+            logFlushTimer.Interval = 5000; // sometimes the filesystem event does not trigger
+            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => Update(false));
+            logFlushTimer.Enabled = true;
+
             CurrentFile = LogEnumerator.GetLogFiles(LogDirectory)[0];
-            Log = log;
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
             fileWatcher.EnableRaisingEvents = true;
-            Log.Debug("Started monitoring on folder {0}", LogDirectory);
+            logger.Debug("Started monitoring on folder {0}", LogDirectory);
         }
 
         private void FileWatcher_Created(object sender, FileSystemEventArgs e)
         {
-            lock (@lock)
-                Update(checkOtherFiles: true);
+            Update(checkOtherFiles: true);
         }
 
         private void FileWatcher_Changed(object sender, FileSystemEventArgs e)
         {
             if (Path.GetExtension(e.FullPath) != ".log")
                 return;
-            lock (@lock)
-                Update(checkOtherFiles: e.FullPath != CurrentFile);
+            Update(checkOtherFiles: e.FullPath != CurrentFile);
         }
 
         private void Update(bool checkOtherFiles)
         {
-            Log.Trace("Starting update");
-            try
-            {
-                filePosition = ReadFileFromPosition(CurrentFile, filePosition);
-                if (checkOtherFiles)
+            logger.Trace("Starting update");
+            lock (@lock)
+                try
                 {
-                    var filesToScan = LogEnumerator.GetLogFiles(LogDirectory)
-                        .Take(10) // max 10 'missed' files to upload
-                        .TakeWhile(f => f != CurrentFile) // only until we meet our file
-                        .Reverse() // back to chronological order
-                        .ToArray();
-                    foreach (var file in filesToScan)
-                        filePosition = ReadFileFromPosition(file, filePosition);
-                    CurrentFile = filesToScan.Last();
+                    filePosition = ReadFileFromPosition(CurrentFile, filePosition);
+                    if (checkOtherFiles)
+                    {
+                        var filesToScan = LogEnumerator.GetLogFiles(LogDirectory)
+                            .Take(10) // max 10 'missed' files to upload
+                            .TakeWhile(f => f != CurrentFile) // only until we meet our file
+                            .Reverse() // back to chronological order
+                            .ToArray();
+                        foreach (var file in filesToScan)
+                            filePosition = ReadFileFromPosition(file, filePosition);
+                        CurrentFile = filesToScan.Last();
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                OnError(e);
-            }
+                catch (Exception e)
+                {
+                    logger.Warn(e, "Error while reading log file");
+                }
         }
 
         private long ReadFileFromPosition(string file, long filePosition)
@@ -92,7 +98,7 @@ namespace Controller
                     {
                         var @object = (JObject)serializer.Deserialize(jsonReader);
                         OnNext(@object);
-                        Log.Debug("Received event: {0}", @object.ToString());
+                        logger.Debug("Received event: {0}", @object.ToString());
                     }
                     return fileReader.Position;
                 }

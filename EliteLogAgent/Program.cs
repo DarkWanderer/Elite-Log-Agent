@@ -23,6 +23,8 @@ namespace EliteLogAgent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            AppDomain.CurrentDomain.UnhandledException += (o, e) => rootLogger.Fatal(e.ExceptionObject as Exception, "Unhandled exception");
+
             using (var container = new WindsorContainer())
             {
                 // Initalize infrastructure classes - NLog, Windsor
@@ -31,8 +33,8 @@ namespace EliteLogAgent
                     Component.For<ISettingsProvider>().ImplementedBy<FileSettingsStorage>().LifestyleSingleton(),
                     Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
                     Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),
-                    Component.For<IWindsorContainer>().Instance(container),
-                    Component.For<ILogger>().UsingFactoryMethod((kernel, context) => LogManager.GetLogger(context.Handler.ComponentModel.Name))
+                    Component.For<IWindsorContainer>().Instance(container)
+
                 );
                 container.Resolve<ILogSettingsBootstrapper>().Setup();
 
@@ -51,7 +53,8 @@ namespace EliteLogAgent
                 // TODO: add dynamic plugin loader
                 var pluginManager = container.Resolve<IPluginManager>();
                 pluginManager.LoadPlugin("InaraUpdater");
-                pluginManager.LoadPlugin("PowerplayGoogleSheetReporter");
+                //pluginManager.LoadPlugin("PowerplayGoogleSheetReporter");
+                pluginManager.LoadPlugin("ELA.Plugin.EDSM");
 
                 var broker = container.Resolve<IMessageBroker>();
                 var logMonitor = container.Resolve<ILogRealTimeDataSource>();
@@ -66,6 +69,8 @@ namespace EliteLogAgent
                 }
             }
         }
+
+        private static readonly ILogger rootLogger = LogManager.GetCurrentClassLogger();
 
     }
 }
