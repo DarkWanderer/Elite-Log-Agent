@@ -38,7 +38,7 @@
             this.uploadLatestDataButton.Name = "uploadLatestDataButton";
             this.uploadLatestDataButton.Size = new System.Drawing.Size(293, 23);
             this.uploadLatestDataButton.TabIndex = 0;
-            this.uploadLatestDataButton.Text = "Repopulate data for 10 days";
+            this.uploadLatestDataButton.Text = "Upload last 5 files for all providers";
             this.uploadLatestDataButton.UseVisualStyleBackColor = true;
             this.uploadLatestDataButton.Click += new System.EventHandler(this.uploadLatestDataButton_Click);
             // 

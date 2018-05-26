@@ -41,7 +41,7 @@ namespace Interfaces.Settings
 
         private void UploadLatestData()
         {
-            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 50000);
+            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
             var logCounter = new LogEventTypeCounter();
             using (logEventSource.Subscribe(logCounter))
             using (logEventSource.Subscribe(MessageBroker))
