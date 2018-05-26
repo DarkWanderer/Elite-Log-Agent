@@ -34,7 +34,7 @@ namespace InaraUpdater.Model
 
         public async Task<ApiEvent> ApiCall(ApiEvent @event) => (await ApiCall(new[] { @event })).Single();
 
-        public async Task<ICollection<ApiEvent>> ApiCall(IList<ApiEvent> events)
+        public async Task<ICollection<ApiEvent>> ApiCall(params ApiEvent[] events)
         {
             var inputData = new ApiInputOutput()
             {
@@ -54,7 +54,7 @@ namespace InaraUpdater.Model
             if (outputData.Events != null)
             {
                 var exceptions = new List<InaraApiException>();
-                for (int i = 0; i < events.Count; i++) {
+                for (int i = 0; i < events.Length; i++) {
                     if (outputData.Events[i].EventStatus != 200)
                     {
                         exceptions.Add(new InaraApiException(

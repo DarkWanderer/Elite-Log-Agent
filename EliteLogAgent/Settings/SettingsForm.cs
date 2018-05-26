@@ -11,6 +11,7 @@ namespace EliteLogAgent
 {
     public partial class SettingsForm : Form
     {
+        // These fields have to be properties because Form designer does not allow arguments in constructor
         internal ISettingsProvider Provider { get; set; }
         internal IMessageBroker MessageBroker { get; set; }
         internal List<IPlugin> Plugins { get; set; }

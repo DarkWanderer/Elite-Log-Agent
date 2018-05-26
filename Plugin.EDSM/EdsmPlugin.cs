@@ -35,6 +35,7 @@ namespace ELA.Plugin.EDSM
                  RestClient.GetAsync("discard")
                     .ContinueWith((t) => new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
 
+            settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
 
@@ -65,6 +66,9 @@ namespace ELA.Plugin.EDSM
         public void OnError(Exception error) { }
         public void OnNext(JObject @event)
         {
+            if (!Settings.Verified)
+                return;
+
             var eventName = @event["event"].ToString();
             if (ignoredEvents.Result.Contains(eventName))
                 return;

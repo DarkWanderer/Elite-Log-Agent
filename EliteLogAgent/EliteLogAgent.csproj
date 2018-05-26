@@ -187,14 +187,6 @@
       <Project>{14c53350-191b-4367-bec4-7b749e7b1eeb}</Project>
       <Name>Controller</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ELA.Plugin.EDSM\ELA.Plugin.EDSM.csproj">
-      <Project>{cf1a7347-ad57-49b2-ba8e-7390b195a4e8}</Project>
-      <Name>ELA.Plugin.EDSM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InaraUpdater\InaraUpdater.csproj">
-      <Project>{6f64b299-6a1d-4f4a-9bd6-911634a9f02f}</Project>
-      <Name>InaraUpdater</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{fd518ed2-7a6e-42f7-8c90-603235c1fee6}</Project>
       <Name>Interfaces</Name>
@@ -202,10 +194,6 @@
     <ProjectReference Include="..\LogModel\LogModel.csproj">
       <Project>{6fcca2a4-9d3e-4e91-bb46-3f75ea0f989e}</Project>
       <Name>LogModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PowerplayGoogleSheetReporter\PowerplayGoogleSheetReporter.csproj">
-      <Project>{eeef1770-9a60-4e12-87dd-dfd43ea19c29}</Project>
-      <Name>PowerplayGoogleSheetReporter</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{93DCDB11-335D-400C-BD87-554A0C1E2CEE}</Project>

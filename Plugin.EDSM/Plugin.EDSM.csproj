@@ -7,8 +7,8 @@
     <ProjectGuid>{CF1A7347-AD57-49B2-BA8E-7390B195A4E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ELA.Plugin.EDSM</RootNamespace>
-    <AssemblyName>ELA.Plugin.EDSM</AssemblyName>
+    <RootNamespace>Plugin.EDSM</RootNamespace>
+    <AssemblyName>Plugin.EDSM</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

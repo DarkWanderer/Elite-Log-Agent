@@ -47,12 +47,12 @@ namespace InaraUpdater
 
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.inaraApiKeyTextBox = new System.Windows.Forms.TextBox();
-            this.testCredentialsButton = new System.Windows.Forms.Button();
-            this.credentialsStatusLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
+            this.button1 = new Button();
+            this.inaraApiKeyTextBox = new TextBox();
+            this.testCredentialsButton = new Button();
+            this.credentialsStatusLabel = new Label();
+            this.label1 = new Label();
+            this.apiKeyValidatedCheckbox = new CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -66,14 +66,14 @@ namespace InaraUpdater
             // 
             // inaraApiKeyTextBox
             // 
-            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.inaraApiKeyTextBox.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | AnchorStyles.Right);
             this.inaraApiKeyTextBox.Location = new System.Drawing.Point(52, 3);
             this.inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
             this.inaraApiKeyTextBox.Size = new System.Drawing.Size(349, 20);
             this.inaraApiKeyTextBox.TabIndex = 1;
             this.inaraApiKeyTextBox.Text = "Inara API Key";
-            this.inaraApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inaraApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // testCredentialsButton
             // 

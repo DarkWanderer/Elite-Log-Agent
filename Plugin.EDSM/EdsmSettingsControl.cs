@@ -46,9 +46,9 @@ namespace ELA.Plugin.EDSM
 
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new Button();
             this.edsmApiKeyTextBox = new System.Windows.Forms.TextBox();
-            this.testCredentialsButton = new System.Windows.Forms.Button();
+            this.testCredentialsButton = new Button();
             this.credentialsStatusLabel = new System.Windows.Forms.Label();
             this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
             this.apiKeyLabel = new System.Windows.Forms.Label();

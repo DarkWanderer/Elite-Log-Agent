@@ -31,17 +31,17 @@ namespace InaraUpdater
             }
         }
 
-        private async void FlushQueue()
+        public async void FlushQueue()
         {
-            List<ApiEvent> apiEvents;
+            ApiEvent[] apiEvents;
             lock (eventQueue)
             {
                 apiEvents = Compact(eventQueue)
                    //.Where(e => e.EventName == "addCommanderTravelDock" || e.EventName == "addCommanderTravelFSDJump") // DEBUG
-                   .ToList();
+                   .ToArray();
                 eventQueue.Clear();
             }
-            if (apiEvents.Count > 0)
+            if (apiEvents.Any())
                 await apiFacade.ApiCall(apiEvents);
         }
 
@@ -60,10 +60,7 @@ namespace InaraUpdater
             logFlushTimer.Enabled = true;
         }
 
-        public void OnCompleted()
-        {
-            FlushQueue();
-        }
+        public void OnCompleted() => FlushQueue();
 
         private static IEnumerable<ApiEvent> Compact(IEnumerable<ApiEvent> events)
         {

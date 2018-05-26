@@ -11,6 +11,8 @@ namespace EliteLogAgent
     public class FileSettingsStorage : ISettingsProvider
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private readonly object settingsCacheLock = new object();
+        private GlobalSettings settingsCache;
 
         public GlobalSettings Settings
         {
@@ -18,6 +20,10 @@ namespace EliteLogAgent
             {
                 try
                 {
+                    lock (settingsCacheLock)
+                        if (settingsCache != null)
+                            return settingsCache;
+
                     if (File.Exists(SettingsFilePath))
                         return JsonConvert.DeserializeObject<GlobalSettings>(File.ReadAllText(SettingsFilePath));
                 }
@@ -29,16 +35,18 @@ namespace EliteLogAgent
             }
             set
             {
-                Directory.CreateDirectory(SettingsFileDirectory);
+                lock (settingsCacheLock)
+                    settingsCache = null;
 
-                using (FileStream fileStream = File.Open(SettingsFilePath, FileMode.Create))
+                using (var fileStream = File.Open(SettingsFilePath, FileMode.Create))
                 using (var streamWriter = new StreamWriter(fileStream))
-                using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
+                using (var jsonWriter = new JsonTextWriter(streamWriter))
                 {
                     jsonWriter.Formatting = Formatting.Indented;
                     var serializer = new JsonSerializer();
                     serializer.Serialize(jsonWriter, value);
                 }
+                SettingsChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -49,6 +57,8 @@ namespace EliteLogAgent
         }
 
         private string SettingsFileDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");
+
+        public event EventHandler SettingsChanged;
 
         private string SettingsFilePath => Path.Combine(SettingsFileDirectory, "Settings.json");
     }
