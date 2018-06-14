@@ -8,7 +8,7 @@ using Utility;
 
 namespace InaraUpdater
 {
-    public class InaraUpdaterPlugin : IInaraSettingsProvider, IPlugin
+    public class InaraPlugin : IInaraSettingsProvider, IPlugin
     {
         public string SettingsLabel => "INARA settings";
         public string PluginId => "InaraUploader";
@@ -18,7 +18,7 @@ namespace InaraUpdater
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public static readonly IRestClient RestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
 
-        public InaraUpdaterPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider)
+        public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider)
         {
             this.playerStateRecorder = playerStateRecorder;
             this.settingsProvider = settingsProvider;
@@ -30,28 +30,13 @@ namespace InaraUpdater
             return eventBroker;
         }
 
-        internal InaraSettings Settings
-        {
-            get
-            {
-                try
-                {
-                    return settingsProvider.GetPluginSettings(SettingsLabel)?.ToObject<InaraSettings>()
-                        ?? new InaraSettings();
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e);
-                    return new InaraSettings();
-                }
-            }
-        }
-
+        internal InaraSettings Settings { get; private set; }
         InaraSettings IInaraSettingsProvider.Settings => Settings;
         internal GlobalSettings GlobalSettings => settingsProvider.Settings;
 
         private void ReloadSettings()
         {
+            Settings = settingsProvider.GetPluginSettings(PluginId)?.ToObject<InaraSettings>() ?? new InaraSettings();
             var settings = Settings;
             eventBroker = new InaraEventBroker(new InaraApiFacade(RestClient, settings.ApiKey, GlobalSettings.CommanderName), playerStateRecorder);
         }

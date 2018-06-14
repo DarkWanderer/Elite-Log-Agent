@@ -53,7 +53,7 @@ namespace ELA.Plugin.EDSM
                 eventQueue.Clear();
             }
             if (apiEvents.Length > 0)
-                await apiFacade.PostLogEvents(apiEvents);
+                await apiFacade?.PostLogEvents(apiEvents);
         }
 
         public string SettingsLabel => "EDSM Upload";
@@ -96,7 +96,7 @@ namespace ELA.Plugin.EDSM
             {
                 try
                 {
-                    return settingsProvider.GetPluginSettings(SettingsLabel)?.ToObject<EdsmSettings>()
+                    return settingsProvider.GetPluginSettings(PluginId)?.ToObject<EdsmSettings>()
                         ?? new EdsmSettings();
                 }
                 catch (Exception e)

@@ -66,6 +66,7 @@ namespace InaraUpdater.Model
 
                 foreach (var e in exceptions)
                     logger.Error(e, "Error returned from Inara API");
+
             }
 
             if (outputData.Header.EventStatus != 200)

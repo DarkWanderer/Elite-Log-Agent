@@ -46,9 +46,9 @@ namespace ELA.Plugin.EDSM
 
         private void InitializeComponent()
         {
-            this.button1 = new Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.edsmApiKeyTextBox = new System.Windows.Forms.TextBox();
-            this.testCredentialsButton = new Button();
+            this.testCredentialsButton = new System.Windows.Forms.Button();
             this.credentialsStatusLabel = new System.Windows.Forms.Label();
             this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
             this.apiKeyLabel = new System.Windows.Forms.Label();
@@ -69,7 +69,7 @@ namespace ELA.Plugin.EDSM
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edsmApiKeyTextBox.Location = new System.Drawing.Point(52, 3);
             this.edsmApiKeyTextBox.Name = "edsmApiKeyTextBox";
-            this.edsmApiKeyTextBox.Size = new System.Drawing.Size(309, 20);
+            this.edsmApiKeyTextBox.Size = new System.Drawing.Size(264, 20);
             this.edsmApiKeyTextBox.TabIndex = 1;
             this.edsmApiKeyTextBox.Text = "EDSM API Key";
             this.edsmApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -89,7 +89,7 @@ namespace ELA.Plugin.EDSM
             this.credentialsStatusLabel.AutoSize = true;
             this.credentialsStatusLabel.Location = new System.Drawing.Point(3, 55);
             this.credentialsStatusLabel.Name = "credentialsStatusLabel";
-            this.credentialsStatusLabel.Size = new System.Drawing.Size(87, 13);
+            this.credentialsStatusLabel.Size = new System.Drawing.Size(69, 13);
             this.credentialsStatusLabel.TabIndex = 3;
             this.credentialsStatusLabel.Text = "Not checked";
             // 
@@ -121,7 +121,7 @@ namespace ELA.Plugin.EDSM
             this.Controls.Add(this.testCredentialsButton);
             this.Controls.Add(this.edsmApiKeyTextBox);
             this.Name = "EdsmSettingsControl";
-            this.Size = new System.Drawing.Size(364, 226);
+            this.Size = new System.Drawing.Size(319, 148);
             this.ResumeLayout(false);
             this.PerformLayout();
 

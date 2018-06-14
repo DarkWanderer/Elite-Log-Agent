@@ -62,11 +62,11 @@
     <Compile Include="IInaraSettingsProvider.cs" />
     <Compile Include="InaraApiException.cs" />
     <Compile Include="InaraEventBroker.cs" />
+    <Compile Include="InaraPlugin.cs" />
     <Compile Include="InaraSettings.cs" />
     <Compile Include="InaraSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InaraUpdaterPlugin.cs" />
     <Compile Include="Model\ApiEvent.cs" />
     <Compile Include="Model\Header.cs" />
     <Compile Include="Model\InaraApiFacade.cs" />

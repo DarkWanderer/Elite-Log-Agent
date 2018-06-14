@@ -14,10 +14,13 @@ namespace Interfaces.Settings
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; }
 
-        [JsonIgnore]
-        public string CommanderName => PluginSettings?["General"]?["commanderName"]?.ToString() ?? "Unknown";
+        [JsonProperty("commanderName")]
+        public string CommanderName { get; set; } = "Unknown Commander";
 
-        [JsonIgnore]
-        public string LogLevel { get; set; }
+        [JsonProperty("logLevel")]
+        public string LogLevel { get; set; } = "Info";
+
+        [JsonProperty("setupWizardDone")]
+        public bool InitialSetupDone { get; set; } = false;
     }
 }

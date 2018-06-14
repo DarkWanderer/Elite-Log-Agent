@@ -26,13 +26,10 @@ namespace EliteLogAgent
                 Text = "Elite Log Agent",
                 Visible = true,
             };
-            notifyIcon.BalloonTipClicked += NotifyIcon_BalloonTipClicked;
-            notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
+            notifyIcon.BalloonTipClicked += (o, e) => OpenSettings();
+            notifyIcon.DoubleClick += (o,e) => OpenSettings();
             return notifyIcon;
         }
-
-        private void NotifyIcon_DoubleClick(object sender, EventArgs e) => OpenSettings(sender, e);
-        private static void NotifyIcon_BalloonTipClicked(object sender, EventArgs e) => Process.Start("https://inara.cz/cmdr/");
 
         private ContextMenuStrip CreateMenuStrip()
         {
@@ -40,7 +37,7 @@ namespace EliteLogAgent
             //menuStrip.Items.Add("Upload latest log", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(1, false));
             //menuStrip.Items.Add("Upload 5 latest logs", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(5, false));
             menuStrip.Items.Add(ToolStripSeparatorLeft);
-            menuStrip.Items.Add("Settings", SystemIcons.Shield.ToBitmap(), OpenSettings);
+            menuStrip.Items.Add("Settings", SystemIcons.Shield.ToBitmap(), (o,e) => OpenSettings());
             //menuStrip.Items.Add("About", SystemIcons.Information.ToBitmap(), (o, e) => { using (var form = new AboutForm()) { form.ShowDialog(); } });
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Exit", SystemIcons.Error.ToBitmap(), (o, e) => Application.Exit());
@@ -49,7 +46,7 @@ namespace EliteLogAgent
 
         private SettingsForm form;
 
-        private void OpenSettings(object o, EventArgs e)
+        public void OpenSettings()
         {
             if (form != null)
             {

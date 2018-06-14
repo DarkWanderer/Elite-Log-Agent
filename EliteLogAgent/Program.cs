@@ -52,9 +52,8 @@ namespace EliteLogAgent
                 // Load plugins
                 // TODO: add dynamic plugin loader
                 var pluginManager = container.Resolve<IPluginManager>();
-                pluginManager.LoadPlugin("InaraUpdater");
-                //pluginManager.LoadPlugin("PowerplayGoogleSheetReporter");
-                pluginManager.LoadPlugin("ELA.Plugin.EDSM");
+                pluginManager.LoadPlugin("Plugin.Inara");
+                pluginManager.LoadPlugin("Plugin.EDSM");
 
                 var broker = container.Resolve<IMessageBroker>();
                 var logMonitor = container.Resolve<ILogRealTimeDataSource>();

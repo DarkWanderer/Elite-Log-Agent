@@ -19,7 +19,7 @@ namespace Controller
 
         public void Setup()
         {
-            LogLevel logLevel = LogLevel.Trace;
+            var logLevel = LogLevel.Info;
             try
             {
                 if (!String.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
@@ -30,18 +30,20 @@ namespace Controller
             var config = LogManager.Configuration ?? new NLog.Config.LoggingConfiguration();
             config.LoggingRules.Clear();
 
-            var fileTarget = new FileTarget();
-            fileTarget.FileName = Path.Combine(LogDirectory, "EliteLogAgent.log");
-            fileTarget.ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{#####}.log");
-            fileTarget.ArchiveNumbering = ArchiveNumberingMode.Date;
-            fileTarget.ArchiveEvery = FileArchivePeriod.Day;
-            fileTarget.MaxArchiveFiles = 30;
-            fileTarget.ConcurrentWrites = true;
-            fileTarget.ReplaceFileContentsOnEachWrite = false;
-            fileTarget.Encoding = Encoding.UTF8;
+            var fileTarget = new FileTarget
+            {
+                FileName = Path.Combine(LogDirectory, "EliteLogAgent.log"),
+                ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{#####}.log"),
+                ArchiveNumbering = ArchiveNumberingMode.Date,
+                ArchiveEvery = FileArchivePeriod.Day,
+                MaxArchiveFiles = 30,
+                ConcurrentWrites = true,
+                ReplaceFileContentsOnEachWrite = false,
+                Encoding = Encoding.UTF8
+            };
 
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
-            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, new DebuggerTarget()));
+            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Trace, new DebuggerTarget()));
             LogManager.Configuration = config;
             logger.Info("Enabled logging with level {0}", logLevel);
         }

@@ -43,16 +43,16 @@ namespace InaraUpdater
             set => ActualSettings = value.ToObject<InaraSettings>();
         }
 
-        internal InaraUpdaterPlugin Plugin;
+        internal InaraPlugin Plugin;
 
         private void InitializeComponent()
         {
-            this.button1 = new Button();
-            this.inaraApiKeyTextBox = new TextBox();
-            this.testCredentialsButton = new Button();
-            this.credentialsStatusLabel = new Label();
-            this.label1 = new Label();
-            this.apiKeyValidatedCheckbox = new CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.inaraApiKeyTextBox = new System.Windows.Forms.TextBox();
+            this.testCredentialsButton = new System.Windows.Forms.Button();
+            this.credentialsStatusLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -66,14 +66,14 @@ namespace InaraUpdater
             // 
             // inaraApiKeyTextBox
             // 
-            this.inaraApiKeyTextBox.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
-            | AnchorStyles.Right);
+            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.inaraApiKeyTextBox.Location = new System.Drawing.Point(52, 3);
             this.inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
-            this.inaraApiKeyTextBox.Size = new System.Drawing.Size(349, 20);
+            this.inaraApiKeyTextBox.Size = new System.Drawing.Size(263, 20);
             this.inaraApiKeyTextBox.TabIndex = 1;
             this.inaraApiKeyTextBox.Text = "Inara API Key";
-            this.inaraApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
+            this.inaraApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // testCredentialsButton
             // 
@@ -90,7 +90,7 @@ namespace InaraUpdater
             this.credentialsStatusLabel.AutoSize = true;
             this.credentialsStatusLabel.Location = new System.Drawing.Point(3, 55);
             this.credentialsStatusLabel.Name = "credentialsStatusLabel";
-            this.credentialsStatusLabel.Size = new System.Drawing.Size(51, 13);
+            this.credentialsStatusLabel.Size = new System.Drawing.Size(69, 13);
             this.credentialsStatusLabel.TabIndex = 3;
             this.credentialsStatusLabel.Text = "Not checked";
             // 
@@ -122,7 +122,7 @@ namespace InaraUpdater
             this.Controls.Add(this.testCredentialsButton);
             this.Controls.Add(this.inaraApiKeyTextBox);
             this.Name = "InaraSettingsControl";
-            this.Size = new System.Drawing.Size(404, 276);
+            this.Size = new System.Drawing.Size(318, 148);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,7 +135,7 @@ namespace InaraUpdater
                 testCredentialsButton.Enabled = false;
                 var apiKey = inaraApiKeyTextBox.Text;
                 var cmdrName = Plugin.GlobalSettings.CommanderName;
-                var apiFacade = new InaraApiFacade(InaraUpdaterPlugin.RestClient, apiKey, cmdrName);
+                var apiFacade = new InaraApiFacade(InaraPlugin.RestClient, apiKey, cmdrName);
                 var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
                 var result = await apiFacade.ApiCall(@event);
                 credentialsStatusLabel.Text = "Success, inara ID: " + (result.EventData as JObject)["userID"]?.ToString();

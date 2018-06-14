@@ -1,4 +1,4 @@
-﻿namespace Interfaces.Settings
+﻿namespace EliteLogAgent.Settings
 {
     partial class GeneralSettingsControl
     {
@@ -28,40 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.uploadLatestDataButton = new System.Windows.Forms.Button();
-            this.commanderNameTextBox = new System.Windows.Forms.TextBox();
             this.cmdrNameLabel = new System.Windows.Forms.Label();
+            this.commanderNameTextBox = new System.Windows.Forms.TextBox();
+            this.uploadLatestDataButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // uploadLatestDataButton
+            // cmdrNameLabel
             // 
-            this.uploadLatestDataButton.Location = new System.Drawing.Point(4, 30);
-            this.uploadLatestDataButton.Name = "uploadLatestDataButton";
-            this.uploadLatestDataButton.Size = new System.Drawing.Size(293, 23);
-            this.uploadLatestDataButton.TabIndex = 0;
-            this.uploadLatestDataButton.Text = "Upload last 5 files for all providers";
-            this.uploadLatestDataButton.UseVisualStyleBackColor = true;
-            this.uploadLatestDataButton.Click += new System.EventHandler(this.uploadLatestDataButton_Click);
+            this.cmdrNameLabel.AutoSize = true;
+            this.cmdrNameLabel.Location = new System.Drawing.Point(16, 6);
+            this.cmdrNameLabel.Name = "cmdrNameLabel";
+            this.cmdrNameLabel.Size = new System.Drawing.Size(73, 13);
+            this.cmdrNameLabel.TabIndex = 5;
+            this.cmdrNameLabel.Text = "CMDR Name:";
             // 
             // commanderNameTextBox
             // 
             this.commanderNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.commanderNameTextBox.Location = new System.Drawing.Point(79, 4);
+            this.commanderNameTextBox.Location = new System.Drawing.Point(95, 3);
             this.commanderNameTextBox.Name = "commanderNameTextBox";
-            this.commanderNameTextBox.Size = new System.Drawing.Size(218, 20);
-            this.commanderNameTextBox.TabIndex = 1;
+            this.commanderNameTextBox.Size = new System.Drawing.Size(170, 20);
+            this.commanderNameTextBox.TabIndex = 4;
             this.commanderNameTextBox.Text = "Commander Name";
             this.commanderNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // cmdrNameLabel
+            // uploadLatestDataButton
             // 
-            this.cmdrNameLabel.AutoSize = true;
-            this.cmdrNameLabel.Location = new System.Drawing.Point(3, 7);
-            this.cmdrNameLabel.Name = "cmdrNameLabel";
-            this.cmdrNameLabel.Size = new System.Drawing.Size(70, 13);
-            this.cmdrNameLabel.TabIndex = 2;
-            this.cmdrNameLabel.Text = "CMDR Name";
+            this.uploadLatestDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uploadLatestDataButton.Location = new System.Drawing.Point(3, 29);
+            this.uploadLatestDataButton.Name = "uploadLatestDataButton";
+            this.uploadLatestDataButton.Size = new System.Drawing.Size(262, 23);
+            this.uploadLatestDataButton.TabIndex = 3;
+            this.uploadLatestDataButton.Text = "Upload last 5 files for all providers";
+            this.uploadLatestDataButton.UseVisualStyleBackColor = true;
+            this.uploadLatestDataButton.Click += new System.EventHandler(this.uploadLatestDataButton_Click);
             // 
             // GeneralSettingsControl
             // 
@@ -71,7 +73,7 @@
             this.Controls.Add(this.commanderNameTextBox);
             this.Controls.Add(this.uploadLatestDataButton);
             this.Name = "GeneralSettingsControl";
-            this.Size = new System.Drawing.Size(300, 250);
+            this.Size = new System.Drawing.Size(268, 148);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -79,8 +81,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button uploadLatestDataButton;
-        private System.Windows.Forms.TextBox commanderNameTextBox;
         private System.Windows.Forms.Label cmdrNameLabel;
+        private System.Windows.Forms.TextBox commanderNameTextBox;
+        private System.Windows.Forms.Button uploadLatestDataButton;
     }
 }

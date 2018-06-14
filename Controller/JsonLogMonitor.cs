@@ -95,7 +95,9 @@ namespace Controller
                     JsonSerializer serializer = new JsonSerializer();
                     while (jsonReader.Read())
                     {
-                        var @object = (JObject)serializer.Deserialize(jsonReader);
+                        var record = serializer.Deserialize(jsonReader);
+                        // Sometimes serializer gives out the json as string instead of JObject
+                        var @object = record as JObject ?? JObject.Parse(record as string);
                         OnNext(@object);
                         logger.Debug("Received event: {0}", @object.ToString());
                     }

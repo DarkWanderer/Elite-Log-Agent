@@ -1,26 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Controller;
+using Interfaces;
 using Utility.Extensions;
-using Newtonsoft.Json.Linq;
+using Controller;
 
-namespace Interfaces.Settings
+namespace EliteLogAgent.Settings
 {
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
-        internal IMessageBroker MessageBroker { get; set; }
-
-        public override JObject Settings
-        {
-            get => new JObject() { ["commanderName"] = commanderNameTextBox.Text };
-            set => commanderNameTextBox.Text = value?["commanderName"]?.ToString() ?? "Unknown";
-        }
-
         public GeneralSettingsControl()
         {
             InitializeComponent();
         }
+
+        public IMessageBroker MessageBroker { get; internal set; }
 
         private async void uploadLatestDataButton_Click(object sender, EventArgs e)
         {
