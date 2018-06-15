@@ -59,7 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IInaraSettingsProvider.cs" />
     <Compile Include="InaraApiException.cs" />
     <Compile Include="InaraEventBroker.cs" />
     <Compile Include="InaraPlugin.cs" />

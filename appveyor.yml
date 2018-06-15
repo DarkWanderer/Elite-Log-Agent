@@ -19,6 +19,9 @@ before_build:
 - cmd: nuget install -ExcludeVersion ILMerge
 - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
+build:
+  publish_azure: true
+
 after_build:
 - cmd: msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 - cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll

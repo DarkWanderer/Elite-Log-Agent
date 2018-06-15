@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Interfaces.Settings;
+using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 
 namespace Interfaces
@@ -9,10 +10,11 @@ namespace Interfaces
         {
             MinimumSize = new System.Drawing.Size(200, 150);
             BorderStyle = BorderStyle.FixedSingle;
-            //Size = new System.Drawing.Size(200, 150);
-            //AutoSizeMode = AutoSizeMode.GrowOnly;
         }
 
-        public virtual JObject Settings { get; set; }
+        /// <summary>
+        /// Provides reference to temporary instance of Settings existing in settings form
+        /// </summary>
+        public GlobalSettings Settings { get; set; }
     }
 }

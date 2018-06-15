@@ -56,11 +56,11 @@ namespace ELA.Plugin.EDSM
                 await apiFacade?.PostLogEvents(apiEvents);
         }
 
-        public string SettingsLabel => "EDSM Upload";
+        public string PluginName => "EDSM Upload";
         public string PluginId => "EdsmUploader";
 
         public IObserver<JObject> GetLogObserver() => this;
-        public AbstractSettingsControl GetPluginSettingsControl() => new EdsmSettingsControl() { Plugin = this, ActualSettings = Settings };
+        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { Plugin = this, ActualSettings = Settings };
 
         public void OnCompleted() { FlushQueue(); }
         public void OnError(Exception error) { }

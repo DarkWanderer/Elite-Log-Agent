@@ -1,6 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Interfaces;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace EliteLogAgent
     internal class CastleWindsorPluginLoader : IPluginManager
     {
         private readonly IWindsorContainer container;
+        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
         public CastleWindsorPluginLoader(IWindsorContainer container)
         {
@@ -40,9 +43,9 @@ namespace EliteLogAgent
                     .FromInterface()
                     .LifestyleSingleton());
             }
-            catch
+            catch (Exception e)
             {
-                // TODO: fix
+                Logger.Error(e, "Error while loading plugin " + pluginAssemblyName);
             }
         }
     }

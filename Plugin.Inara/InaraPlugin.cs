@@ -8,9 +8,9 @@ using Utility;
 
 namespace InaraUpdater
 {
-    public class InaraPlugin : IInaraSettingsProvider, IPlugin
+    public class InaraPlugin : IPlugin
     {
-        public string SettingsLabel => "INARA settings";
+        public string PluginName => "INARA settings";
         public string PluginId => "InaraUploader";
         private InaraEventBroker eventBroker;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
@@ -30,17 +30,13 @@ namespace InaraUpdater
             return eventBroker;
         }
 
-        internal InaraSettings Settings { get; private set; }
-        InaraSettings IInaraSettingsProvider.Settings => Settings;
         internal GlobalSettings GlobalSettings => settingsProvider.Settings;
 
         private void ReloadSettings()
         {
-            Settings = settingsProvider.GetPluginSettings(PluginId)?.ToObject<InaraSettings>() ?? new InaraSettings();
-            var settings = Settings;
-            eventBroker = new InaraEventBroker(new InaraApiFacade(RestClient, settings.ApiKey, GlobalSettings.CommanderName), playerStateRecorder);
+            //eventBroker = new InaraEventBroker(new InaraApiFacade(restClient, settings.ApiKey, GlobalSettings.CommanderName), playerStateRecorder);
         }
 
-        public AbstractSettingsControl GetPluginSettingsControl() => new InaraSettingsControl() { ActualSettings = Settings, Plugin = this };
+        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { Settings = settings, Plugin = this };
     }
 }

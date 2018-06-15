@@ -38,12 +38,6 @@ namespace ELA.Plugin.EDSM
 
         internal EdsmPlugin Plugin;
 
-        public override JObject Settings
-        {
-            get => JObject.FromObject(ActualSettings);
-            set => ActualSettings = value.ToObject<EdsmSettings>();
-        }
-
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();

@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="wwwroot\" />
+    <Compile Remove="Model\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="Model\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="Model\**" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>

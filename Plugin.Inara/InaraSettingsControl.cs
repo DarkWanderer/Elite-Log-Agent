@@ -20,29 +20,6 @@ namespace InaraUpdater
 
         public InaraSettingsControl() => InitializeComponent();
 
-        internal InaraSettings ActualSettings
-        {
-            get
-            {
-                return new InaraSettings()
-                {
-                    ApiKey = inaraApiKeyTextBox.Text,
-                    Verified = apiKeyValidatedCheckbox.Checked
-                };
-            }
-            set
-            {
-                inaraApiKeyTextBox.Text = value.ApiKey;
-                apiKeyValidatedCheckbox.Checked = value.Verified;
-            }
-        }
-
-        public override JObject Settings
-        {
-            get => JObject.FromObject(ActualSettings);
-            set => ActualSettings = value.ToObject<InaraSettings>();
-        }
-
         internal InaraPlugin Plugin;
 
         private void InitializeComponent()

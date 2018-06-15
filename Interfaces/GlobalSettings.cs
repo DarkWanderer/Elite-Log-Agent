@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 
 namespace Interfaces.Settings
 {
-    public class GlobalSettings
+    public class GlobalSettings : ICloneable
     {
         public GlobalSettings()
         {
@@ -22,5 +23,12 @@ namespace Interfaces.Settings
 
         [JsonProperty("setupWizardDone")]
         public bool InitialSetupDone { get; set; } = false;
+
+        object ICloneable.Clone() => Clone();
+
+        public GlobalSettings Clone() {
+            var jsonSerializer = new JsonSerializer();
+            return JsonConvert.DeserializeObject<GlobalSettings>(JsonConvert.SerializeObject(this));
+        }
     }
 }

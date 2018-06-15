@@ -17,12 +17,13 @@ namespace EliteLogAgent
         internal IMessageBroker MessageBroker { get; set; }
         internal List<IPlugin> Plugins { get; set; }
 
+        private GlobalSettings currentSettings;
+
         private IDictionary<string, AbstractSettingsControl> SettingsControls = new Dictionary<string, AbstractSettingsControl>();
 
         public SettingsForm()
         {
             InitializeComponent();
-
             var versionLabel = "Version: " + AppInfo.Version;
             Text += ". " + versionLabel;
             Load += SettingsForm_Load;
@@ -30,6 +31,8 @@ namespace EliteLogAgent
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            currentSettings = Provider.Settings;
+
             var generalSettingsControl = new GeneralSettingsControl() { MessageBroker = MessageBroker };
             generalSettingsControl.Dock = DockStyle.Fill;
             generalSettingsControl.PerformLayout();
@@ -39,7 +42,7 @@ namespace EliteLogAgent
 
             foreach (var plugin in Plugins)
             {
-                var control = plugin.GetPluginSettingsControl();
+                var control = plugin.GetPluginSettingsControl(currentSettings);
                 if (control == null)
                     continue;
 
@@ -50,7 +53,6 @@ namespace EliteLogAgent
                 flowLayoutPanel1.Controls.Add(control);
             }
             PerformLayout();
-            Settings = Provider.Settings;
         }
 
         private void PlaceControlGroup(string name, Control control)
@@ -72,29 +74,9 @@ namespace EliteLogAgent
 
         private void ApplyButton_Click(object sender, EventArgs e) => ApplySettings();
 
-        private void ApplySettings() => Provider.Settings = Settings;
+        private void ApplySettings() => Provider.Settings = currentSettings;
 
         private void CancelButton_Click(object sender, EventArgs e) => Close();
 
-        GlobalSettings Settings
-        {
-            get
-            {
-                var newSettings = new GlobalSettings
-                {
-                    PluginSettings = SettingsControls.ToDictionary(c => c.Key, c => c.Value.Settings)
-                };
-                return newSettings;
-            }
-            set
-            {
-                var newSettings = value;
-                foreach (var category in SettingsControls)
-                {
-                    if (newSettings.PluginSettings.TryGetValue(category.Key, out JObject settings))
-                        category.Value.Settings = settings;
-                }
-            }
-        }
     }
 }
