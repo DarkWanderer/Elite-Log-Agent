@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6FCCA2A4-9D3E-4E91-BB46-3F75EA0F989E}</ProjectGuid>
+    <ProjectGuid>{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogModel</RootNamespace>
-    <AssemblyName>LogModel</AssemblyName>
+    <RootNamespace>DW.ELA.Interfaces</RootNamespace>
+    <AssemblyName>DW.ELA.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,8 +34,9 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ErrorRecord.cs" />
+    <Compile Include="GlobalSettings.cs" />
+    <Compile Include="ILogDirectoryNameProvider.cs" />
+    <Compile Include="ILogHistoricDataSource.cs" />
+    <Compile Include="ILogRealTimeDataSource.cs" />
+    <Compile Include="ILogSettingsBootstrapper.cs" />
+    <Compile Include="IMessageBroker.cs" />
+    <Compile Include="IPlayerStateHistoryRecorder.cs" />
+    <Compile Include="IPlugin.cs" />
+    <Compile Include="IPluginManager.cs" />
+    <Compile Include="IRestClient.cs" />
+    <Compile Include="ISettingsProvider.cs" />
+    <Compile Include="ITrayIconController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
