@@ -36,7 +36,8 @@ build_script:
 - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
-- .\ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- cmd: mkdir merged-executable
+- .\ILMerge\tools\ilmerge.exe /wildcards /out:merged-executable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -output:"coverage.xml"
@@ -48,8 +49,8 @@ after_test:
       bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
 
 artifacts: 
-- path: EliteLogAgent.exe
-  name: single-executable
+- path: merged-executable
+  name: merged-executable
 - path: EliteLogAgent\bin\Release\app.publish
   name: clickonce-files
 
@@ -61,7 +62,7 @@ deploy:
   release: $(appveyor_build_version)
   auth_token:
     secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-  artifact: single-executable
+  artifact: merged-executable
   draft: true
   prerelease: true
   force_update: true
