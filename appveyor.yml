@@ -32,7 +32,7 @@ for:
 - branches:
     only:
       - prod
-- init:
+  init:
   - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
 build:
