@@ -1,4 +1,5 @@
 ﻿using DW.ELA.Interfaces.Settings;
+using EliteLogAgent.Properties;
 using EliteLogAgent.Settings;
 using Interfaces;
 using System;
@@ -22,6 +23,7 @@ namespace EliteLogAgent
         public SettingsForm()
         {
             InitializeComponent();
+            Icon = Resources.EliteIcon;
             var versionLabel = "Version: " + AppInfo.Version;
             Text += ". " + versionLabel;
             Load += SettingsForm_Load;
