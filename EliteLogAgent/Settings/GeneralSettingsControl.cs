@@ -8,6 +8,7 @@ using DW.ELA.Interfaces.Settings;
 using NLog;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using EliteLogAgent.Autorun;
 
 namespace EliteLogAgent.Settings
 {
@@ -97,6 +98,11 @@ namespace EliteLogAgent.Settings
                 lock (this)
                     CmdrName = value["Name"]?.ToString() ?? CmdrName;
             }
+        }
+
+        private void checkboxAutostartApplication_CheckedChanged(object sender, EventArgs e)
+        {
+            AutorunManager.AutorunEnabled = checkboxAutostartApplication.Checked;
         }
     }
 }

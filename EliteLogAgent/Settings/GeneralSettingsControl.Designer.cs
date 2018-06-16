@@ -91,6 +91,7 @@
             this.checkboxAutostartApplication.TabIndex = 7;
             this.checkboxAutostartApplication.Text = "Autorun program";
             this.checkboxAutostartApplication.UseVisualStyleBackColor = true;
+            this.checkboxAutostartApplication.CheckedChanged += new System.EventHandler(this.checkboxAutostartApplication_CheckedChanged);
             // 
             // reportErrorsCheckbox
             // 
