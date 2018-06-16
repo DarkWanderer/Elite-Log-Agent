@@ -188,6 +188,10 @@
       <Project>{14c53350-191b-4367-bec4-7b749e7b1eeb}</Project>
       <Name>DW.ELA.Controller</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DW.ELA.Utility\DW.ELA.Utility.csproj">
+      <Project>{93dcdb11-335d-400c-bd87-554a0c1e2cee}</Project>
+      <Name>DW.ELA.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">
       <Project>{fd518ed2-7a6e-42f7-8c90-603235c1fee6}</Project>
       <Name>DW.ELA.Interfaces</Name>
@@ -203,10 +207,6 @@
     <ProjectReference Include="..\Plugin.Inara\DW.ELA.Plugin.Inara.csproj">
       <Project>{6f64b299-6a1d-4f4a-9bd6-911634a9f02f}</Project>
       <Name>DW.ELA.Plugin.Inara</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\DW.ELA.Utility.csproj">
-      <Project>{93DCDB11-335D-400C-BD87-554A0C1E2CEE}</Project>
-      <Name>DW.ELA.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

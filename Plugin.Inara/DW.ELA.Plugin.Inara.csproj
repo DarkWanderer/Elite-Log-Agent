@@ -76,13 +76,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DW.ELA.Utility\DW.ELA.Utility.csproj">
+      <Project>{93dcdb11-335d-400c-bd87-554a0c1e2cee}</Project>
+      <Name>DW.ELA.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">
       <Project>{fd518ed2-7a6e-42f7-8c90-603235c1fee6}</Project>
       <Name>DW.ELA.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\DW.ELA.Utility.csproj">
-      <Project>{93DCDB11-335D-400C-BD87-554A0C1E2CEE}</Project>
-      <Name>DW.ELA.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

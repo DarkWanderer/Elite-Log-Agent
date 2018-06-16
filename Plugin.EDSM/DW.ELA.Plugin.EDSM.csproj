@@ -63,13 +63,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DW.ELA.Utility\DW.ELA.Utility.csproj">
+      <Project>{93dcdb11-335d-400c-bd87-554a0c1e2cee}</Project>
+      <Name>DW.ELA.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">
       <Project>{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}</Project>
       <Name>DW.ELA.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\DW.ELA.Utility.csproj">
-      <Project>{93DCDB11-335D-400C-BD87-554A0C1E2CEE}</Project>
-      <Name>DW.ELA.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
