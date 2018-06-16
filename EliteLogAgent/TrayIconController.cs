@@ -1,8 +1,6 @@
 ﻿using EliteLogAgent.Properties;
 using Interfaces;
-using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;

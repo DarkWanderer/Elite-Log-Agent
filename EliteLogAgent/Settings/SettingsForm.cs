@@ -1,10 +1,8 @@
-﻿using EliteLogAgent.Settings;
+﻿using DW.ELA.Interfaces.Settings;
+using EliteLogAgent.Settings;
 using Interfaces;
-using Interfaces.Settings;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Utility;
 
@@ -36,6 +34,7 @@ namespace EliteLogAgent
             var generalSettingsControl = new GeneralSettingsControl() { MessageBroker = MessageBroker };
             generalSettingsControl.Dock = DockStyle.Fill;
             generalSettingsControl.PerformLayout();
+            generalSettingsControl.GlobalSettings = currentSettings;
             SettingsControls.Add("General", generalSettingsControl );
             //PlaceControlGroup("General", generalSettingsControl);
             flowLayoutPanel1.Controls.Add(generalSettingsControl);

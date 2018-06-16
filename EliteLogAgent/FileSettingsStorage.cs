@@ -1,7 +1,6 @@
-﻿using Interfaces;
-using Interfaces.Settings;
+﻿using DW.ELA.Interfaces.Settings;
+using Interfaces;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.IO;
@@ -31,7 +30,7 @@ namespace EliteLogAgent
                 {
                     logger.Warn(e, "Exception while reading settings, using defaults");
                 }
-                return new GlobalSettings();
+                return GlobalSettings.Defaults;
             }
             set
             {
@@ -48,12 +47,6 @@ namespace EliteLogAgent
                 }
                 SettingsChanged?.Invoke(this, new EventArgs());
             }
-        }
-
-        public JObject GetPluginSettings(string plugin)
-        {
-            Settings.PluginSettings.TryGetValue(plugin, out var result);
-            return result;
         }
 
         private string SettingsFileDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");

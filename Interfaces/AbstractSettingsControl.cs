@@ -1,5 +1,4 @@
-﻿using Interfaces.Settings;
-using Newtonsoft.Json.Linq;
+﻿using DW.ELA.Interfaces.Settings;
 using System.Windows.Forms;
 
 namespace Interfaces
@@ -15,6 +14,6 @@ namespace Interfaces
         /// <summary>
         /// Provides reference to temporary instance of Settings existing in settings form
         /// </summary>
-        public GlobalSettings Settings { get; set; }
+        public GlobalSettings GlobalSettings { get; set; }
     }
 }

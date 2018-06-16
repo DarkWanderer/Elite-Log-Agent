@@ -1,10 +1,10 @@
-﻿using InaraUpdater.Model;
+﻿using DW.ELA.Interfaces;
+using InaraUpdater.Model;
 using Interfaces;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.Windows.Forms;
-using Utility;
 
 namespace InaraUpdater
 {
@@ -18,9 +18,25 @@ namespace InaraUpdater
         private CheckBox apiKeyValidatedCheckbox;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-        public InaraSettingsControl() => InitializeComponent();
+        public InaraSettingsControl()
+        {
+            Load += InaraSettingsControl_Load;
+            InitializeComponent();
+        }
 
-        internal InaraPlugin Plugin;
+        private void InaraSettingsControl_Load(object sender, EventArgs e) => ReloadSettings();
+
+        private void ReloadSettings()
+        {
+            inaraApiKeyTextBox.Text = Settings.ApiKey;
+            apiKeyValidatedCheckbox.Checked = Settings.Verified;
+        }
+
+        internal InaraSettings Settings
+        {
+            get => new PluginSettingsFacade<InaraSettings>(InaraPlugin.CPluginId, GlobalSettings).Settings;
+            set => new PluginSettingsFacade<InaraSettings>(InaraPlugin.CPluginId, GlobalSettings).Settings = value;
+        }
 
         private void InitializeComponent()
         {
@@ -43,7 +59,7 @@ namespace InaraUpdater
             // 
             // inaraApiKeyTextBox
             // 
-            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.inaraApiKeyTextBox.Location = new System.Drawing.Point(52, 3);
             this.inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
@@ -51,6 +67,7 @@ namespace InaraUpdater
             this.inaraApiKeyTextBox.TabIndex = 1;
             this.inaraApiKeyTextBox.Text = "Inara API Key";
             this.inaraApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inaraApiKeyTextBox.TextChanged += new System.EventHandler(this.inaraApiKeyTextBox_TextChanged);
             // 
             // testCredentialsButton
             // 
@@ -90,6 +107,7 @@ namespace InaraUpdater
             this.apiKeyValidatedCheckbox.TabIndex = 7;
             this.apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
             this.apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
+            this.apiKeyValidatedCheckbox.CheckedChanged += new System.EventHandler(this.apiKeyValidatedCheckbox_CheckedChanged);
             // 
             // InaraSettingsControl
             // 
@@ -111,7 +129,7 @@ namespace InaraUpdater
             {
                 testCredentialsButton.Enabled = false;
                 var apiKey = inaraApiKeyTextBox.Text;
-                var cmdrName = Plugin.GlobalSettings.CommanderName;
+                var cmdrName = GlobalSettings.CommanderName;
                 var apiFacade = new InaraApiFacade(InaraPlugin.RestClient, apiKey, cmdrName);
                 var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
                 var result = await apiFacade.ApiCall(@event);
@@ -127,6 +145,16 @@ namespace InaraUpdater
             {
                 testCredentialsButton.Enabled = true;
             }
+        }
+
+        private void inaraApiKeyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Settings.ApiKey = inaraApiKeyTextBox.Text;
+        }
+
+        private void apiKeyValidatedCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Verified = apiKeyValidatedCheckbox.Checked;
         }
     }
 }

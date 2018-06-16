@@ -3,17 +3,12 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
-namespace Interfaces.Settings
+namespace DW.ELA.Interfaces.Settings
 {
     public class GlobalSettings : ICloneable
     {
-        public GlobalSettings()
-        {
-            PluginSettings = new Dictionary<string, JObject>();
-        }
-
         [JsonProperty("pluginSettings")]
-        public IDictionary<string, JObject> PluginSettings { get; set; }
+        public IDictionary<string, JObject> PluginSettings { get; set; } = new Dictionary<string, JObject>();
 
         [JsonProperty("commanderName")]
         public string CommanderName { get; set; } = "Unknown Commander";
@@ -23,6 +18,11 @@ namespace Interfaces.Settings
 
         [JsonProperty("setupWizardDone")]
         public bool InitialSetupDone { get; set; } = false;
+
+        [JsonProperty("reportErrorsToCloud")]
+        public bool ReportErrorsToCloud { get; set; }
+
+        public static GlobalSettings Defaults => new GlobalSettings();
 
         object ICloneable.Clone() => Clone();
 

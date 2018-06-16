@@ -1,5 +1,5 @@
-﻿using Interfaces;
-using Newtonsoft.Json.Linq;
+﻿using DW.ELA.Interfaces;
+using Interfaces;
 using NLog;
 using System;
 using System.Windows.Forms;
@@ -17,7 +17,25 @@ namespace ELA.Plugin.EDSM
         private Label apiKeyLabel;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-        public EdsmSettingsControl() => InitializeComponent();
+        public EdsmSettingsControl()
+        {
+            Load += EdsmSettingsControl_Load;
+            InitializeComponent();
+        }
+
+        private void EdsmSettingsControl_Load(object sender, EventArgs e) => ReloadSettings();
+
+        private void ReloadSettings()
+        {
+            edsmApiKeyTextBox.Text = Settings.ApiKey;
+            apiKeyValidatedCheckbox.Checked = Settings.Verified;
+        }
+
+        internal EdsmSettings Settings
+        {
+            get => new PluginSettingsFacade<EdsmSettings>(EdsmPlugin.CPluginId, GlobalSettings).Settings;
+            set => new PluginSettingsFacade<EdsmSettings>(EdsmPlugin.CPluginId, GlobalSettings).Settings = value;
+        }
 
         internal EdsmSettings ActualSettings
         {
@@ -36,88 +54,85 @@ namespace ELA.Plugin.EDSM
             }
         }
 
-        internal EdsmPlugin Plugin;
-
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.edsmApiKeyTextBox = new System.Windows.Forms.TextBox();
-            this.testCredentialsButton = new System.Windows.Forms.Button();
-            this.credentialsStatusLabel = new System.Windows.Forms.Label();
-            this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
-            this.apiKeyLabel = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            button1 = new Button();
+            edsmApiKeyTextBox = new TextBox();
+            testCredentialsButton = new Button();
+            credentialsStatusLabel = new Label();
+            apiKeyValidatedCheckbox = new CheckBox();
+            apiKeyLabel = new Label();
+            SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Location = new System.Drawing.Point(0, 0);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(75, 23);
+            button1.TabIndex = 0;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
             // 
             // edsmApiKeyTextBox
             // 
-            this.edsmApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.edsmApiKeyTextBox.Location = new System.Drawing.Point(52, 3);
-            this.edsmApiKeyTextBox.Name = "edsmApiKeyTextBox";
-            this.edsmApiKeyTextBox.Size = new System.Drawing.Size(264, 20);
-            this.edsmApiKeyTextBox.TabIndex = 1;
-            this.edsmApiKeyTextBox.Text = "EDSM API Key";
-            this.edsmApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            edsmApiKeyTextBox.Anchor = ((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right);
+            edsmApiKeyTextBox.Location = new System.Drawing.Point(52, 3);
+            edsmApiKeyTextBox.Name = "edsmApiKeyTextBox";
+            edsmApiKeyTextBox.Size = new System.Drawing.Size(264, 20);
+            edsmApiKeyTextBox.TabIndex = 1;
+            edsmApiKeyTextBox.Text = "EDSM API Key";
+            edsmApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // testCredentialsButton
             // 
-            this.testCredentialsButton.Location = new System.Drawing.Point(3, 27);
-            this.testCredentialsButton.Name = "testCredentialsButton";
-            this.testCredentialsButton.Size = new System.Drawing.Size(125, 23);
-            this.testCredentialsButton.TabIndex = 2;
-            this.testCredentialsButton.Text = "Validate";
-            this.testCredentialsButton.UseVisualStyleBackColor = true;
-            this.testCredentialsButton.Click += new System.EventHandler(this.testCredentialsButton_Click);
+            testCredentialsButton.Location = new System.Drawing.Point(3, 27);
+            testCredentialsButton.Name = "testCredentialsButton";
+            testCredentialsButton.Size = new System.Drawing.Size(125, 23);
+            testCredentialsButton.TabIndex = 2;
+            testCredentialsButton.Text = "Validate";
+            testCredentialsButton.UseVisualStyleBackColor = true;
+            testCredentialsButton.Click += new System.EventHandler(testCredentialsButton_Click);
             // 
             // credentialsStatusLabel
             // 
-            this.credentialsStatusLabel.AutoSize = true;
-            this.credentialsStatusLabel.Location = new System.Drawing.Point(3, 55);
-            this.credentialsStatusLabel.Name = "credentialsStatusLabel";
-            this.credentialsStatusLabel.Size = new System.Drawing.Size(69, 13);
-            this.credentialsStatusLabel.TabIndex = 3;
-            this.credentialsStatusLabel.Text = "Not checked";
+            credentialsStatusLabel.AutoSize = true;
+            credentialsStatusLabel.Location = new System.Drawing.Point(3, 55);
+            credentialsStatusLabel.Name = "credentialsStatusLabel";
+            credentialsStatusLabel.Size = new System.Drawing.Size(69, 13);
+            credentialsStatusLabel.TabIndex = 3;
+            credentialsStatusLabel.Text = "Not checked";
             // 
             // apiKeyValidatedCheckbox
             // 
-            this.apiKeyValidatedCheckbox.AutoSize = true;
-            this.apiKeyValidatedCheckbox.Enabled = false;
-            this.apiKeyValidatedCheckbox.Location = new System.Drawing.Point(134, 31);
-            this.apiKeyValidatedCheckbox.Name = "apiKeyValidatedCheckbox";
-            this.apiKeyValidatedCheckbox.Size = new System.Drawing.Size(184, 17);
-            this.apiKeyValidatedCheckbox.TabIndex = 4;
-            this.apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
-            this.apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
+            apiKeyValidatedCheckbox.AutoSize = true;
+            apiKeyValidatedCheckbox.Enabled = false;
+            apiKeyValidatedCheckbox.Location = new System.Drawing.Point(134, 31);
+            apiKeyValidatedCheckbox.Name = "apiKeyValidatedCheckbox";
+            apiKeyValidatedCheckbox.Size = new System.Drawing.Size(184, 17);
+            apiKeyValidatedCheckbox.TabIndex = 4;
+            apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
+            apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
             // 
             // apiKeyLabel
             // 
-            this.apiKeyLabel.AutoSize = true;
-            this.apiKeyLabel.Location = new System.Drawing.Point(3, 6);
-            this.apiKeyLabel.Name = "apiKeyLabel";
-            this.apiKeyLabel.Size = new System.Drawing.Size(43, 13);
-            this.apiKeyLabel.TabIndex = 5;
-            this.apiKeyLabel.Text = "Api Key";
+            apiKeyLabel.AutoSize = true;
+            apiKeyLabel.Location = new System.Drawing.Point(3, 6);
+            apiKeyLabel.Name = "apiKeyLabel";
+            apiKeyLabel.Size = new System.Drawing.Size(43, 13);
+            apiKeyLabel.TabIndex = 5;
+            apiKeyLabel.Text = "Api Key";
             // 
             // EdsmSettingsControl
             // 
-            this.Controls.Add(this.apiKeyLabel);
-            this.Controls.Add(this.apiKeyValidatedCheckbox);
-            this.Controls.Add(this.credentialsStatusLabel);
-            this.Controls.Add(this.testCredentialsButton);
-            this.Controls.Add(this.edsmApiKeyTextBox);
-            this.Name = "EdsmSettingsControl";
-            this.Size = new System.Drawing.Size(319, 148);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            Controls.Add(apiKeyLabel);
+            Controls.Add(apiKeyValidatedCheckbox);
+            Controls.Add(credentialsStatusLabel);
+            Controls.Add(testCredentialsButton);
+            Controls.Add(edsmApiKeyTextBox);
+            Name = "EdsmSettingsControl";
+            Size = new System.Drawing.Size(319, 148);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -127,7 +142,7 @@ namespace ELA.Plugin.EDSM
             {
                 testCredentialsButton.Enabled = false;
                 var apiKey = edsmApiKeyTextBox.Text;
-                var apiFacade = new EdsmApiFacade(new ThrottlingRestClient("https://www.edsm.net/api-commander-v1/get-ranks"), Plugin?.GlobalSettings.CommanderName, apiKey);
+                var apiFacade = new EdsmApiFacade(new ThrottlingRestClient("https://www.edsm.net/api-commander-v1/get-ranks"), GlobalSettings.CommanderName, apiKey);
                 var result = await apiFacade.GetCommanderRanks();
                 credentialsStatusLabel.Text = "Success, combat rank: " + result["ranksVerbose"]["Combat"]?.ToString();
                 apiKeyValidatedCheckbox.Checked = true;

@@ -1,27 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure; // Namespace for CloudConfigurationManager
 using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
-using Newtonsoft.Json;
 
 namespace DW.ELA.ErrorReportingApi.Controllers
 {
     [Route("api/[controller]")]
     public class ErrorsController : Controller
     {
-        private readonly CloudStorageAccount storageAccount;
-
-        public ErrorsController()
-        {
-            storageAccount = CloudStorageAccount.Parse("");
-        }
-
-
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -40,6 +25,7 @@ namespace DW.ELA.ErrorReportingApi.Controllers
         [HttpPost]
         public void Post([FromBody]string value)
         {
+            var storageAccount = CloudStorageAccount.Parse("");
             // Create the table client.
             var tableClient = storageAccount.CreateCloudTableClient();
 

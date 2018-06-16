@@ -1,5 +1,6 @@
-﻿using Interfaces;
-using Interfaces.Settings;
+﻿using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Settings;
+using Interfaces;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
@@ -56,11 +57,12 @@ namespace ELA.Plugin.EDSM
                 await apiFacade?.PostLogEvents(apiEvents);
         }
 
+        public const string CPluginId = "EdsmUploader";
         public string PluginName => "EDSM Upload";
-        public string PluginId => "EdsmUploader";
+        public string PluginId => CPluginId;
 
         public IObserver<JObject> GetLogObserver() => this;
-        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { Plugin = this, ActualSettings = Settings };
+        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings };
 
         public void OnCompleted() { FlushQueue(); }
         public void OnError(Exception error) { }
@@ -90,23 +92,13 @@ namespace ELA.Plugin.EDSM
             @event["_shipId"] = playerStateRecorder.GetPlayerShipId(timestamp);
         }
 
-        internal EdsmSettings Settings
-        {
-            get
-            {
-                try
-                {
-                    return settingsProvider.GetPluginSettings(PluginId)?.ToObject<EdsmSettings>()
-                        ?? new EdsmSettings();
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e);
-                    return new EdsmSettings();
-                }
-            }
-        }
 
         internal GlobalSettings GlobalSettings => settingsProvider.Settings;
+
+        internal EdsmSettings Settings
+        {
+            get => new PluginSettingsFacade<EdsmSettings>(PluginId, GlobalSettings).Settings;
+            set => new PluginSettingsFacade<EdsmSettings>(PluginId, GlobalSettings).Settings = value;
+        }
     }
 }

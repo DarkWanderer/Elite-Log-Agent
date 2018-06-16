@@ -1,5 +1,4 @@
-﻿using Interfaces.Settings;
-using Newtonsoft.Json.Linq;
+﻿using DW.ELA.Interfaces.Settings;
 using System;
 
 namespace Interfaces
@@ -7,7 +6,6 @@ namespace Interfaces
     public interface ISettingsProvider
     {
         GlobalSettings Settings { get; set; }
-        JObject GetPluginSettings(string plugin);
         event EventHandler SettingsChanged;
     }
 }

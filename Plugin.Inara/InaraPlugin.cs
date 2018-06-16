@@ -1,7 +1,8 @@
 ﻿using System;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Settings;
 using InaraUpdater.Model;
 using Interfaces;
-using Interfaces.Settings;
 using Newtonsoft.Json.Linq;
 using NLog;
 using Utility;
@@ -10,13 +11,18 @@ namespace InaraUpdater
 {
     public class InaraPlugin : IPlugin
     {
-        public string PluginName => "INARA settings";
-        public string PluginId => "InaraUploader";
+        public string PluginName => CPluginName;
+        public string PluginId => CPluginId;
+
+        public const string CPluginName = "INARA settings";
+        public const string CPluginId = "InaraUploader";
+        public static readonly IRestClient RestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
+
         private InaraEventBroker eventBroker;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private ISettingsProvider settingsProvider;
+
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-        public static readonly IRestClient RestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
 
         public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider)
         {
@@ -32,11 +38,17 @@ namespace InaraUpdater
 
         internal GlobalSettings GlobalSettings => settingsProvider.Settings;
 
-        private void ReloadSettings()
+        internal InaraSettings Settings
         {
-            //eventBroker = new InaraEventBroker(new InaraApiFacade(restClient, settings.ApiKey, GlobalSettings.CommanderName), playerStateRecorder);
+            get => new PluginSettingsFacade<InaraSettings>(PluginId, GlobalSettings).Settings;
+            set => new PluginSettingsFacade<InaraSettings>(PluginId, GlobalSettings).Settings = value;
         }
 
-        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { Settings = settings, Plugin = this };
+        private void ReloadSettings()
+        {
+            eventBroker = new InaraEventBroker(new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName), playerStateRecorder);
+        }
+
+        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
     }
 }

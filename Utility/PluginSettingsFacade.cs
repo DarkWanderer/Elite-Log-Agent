@@ -1,0 +1,55 @@
+﻿using DW.ELA.Interfaces.Settings;
+using Newtonsoft.Json.Linq;
+using System;
+
+// TODO: move to Utility
+namespace DW.ELA.Interfaces
+{
+    public class PluginSettingsFacade<T> where T : class, new()
+    {
+        private readonly string pluginId;
+        private readonly GlobalSettings globalSettings;
+
+        public PluginSettingsFacade(string pluginId, GlobalSettings globalSettings)
+        {
+            this.pluginId = pluginId;
+            this.globalSettings = globalSettings;
+        }
+
+        private JObject GetPluginSettings()
+        {
+            if (globalSettings.PluginSettings.ContainsKey(pluginId))
+                return globalSettings.PluginSettings[pluginId];
+            else
+                return null;
+        }
+        //private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
+        //JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
+
+        private void SetPluginSettings(JObject value)
+        {
+            if (!globalSettings.PluginSettings.ContainsKey(pluginId))
+                globalSettings.PluginSettings.Add(pluginId, value);
+            else
+                globalSettings.PluginSettings[pluginId] = value;
+        }
+
+        public T Settings
+        {
+            get
+            {
+                try
+                {
+                    return GetPluginSettings().ToObject<T>() ?? new T();
+                }
+                catch (Exception e)
+                {
+                    //logger.Error(e);
+                    return new T();
+                }
+            }
+            set => SetPluginSettings(JObject.FromObject(value));
+        }
+    }
+}

@@ -1,4 +1,4 @@
-﻿using Interfaces.Settings;
+﻿using DW.ELA.Interfaces.Settings;
 using Newtonsoft.Json.Linq;
 using System;
 
