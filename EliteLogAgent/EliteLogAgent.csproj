@@ -188,6 +188,10 @@
       <Project>{14c53350-191b-4367-bec4-7b749e7b1eeb}</Project>
       <Name>DW.ELA.Controller</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DW.ELA.Plugin.EDDN\DW.ELA.Plugin.EDDN.csproj">
+      <Project>{a9e8be2a-1256-4933-ac2c-c2ce7ab26900}</Project>
+      <Name>DW.ELA.Plugin.EDDN</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DW.ELA.Utility\DW.ELA.Utility.csproj">
       <Project>{93dcdb11-335d-400c-bd87-554a0c1e2cee}</Project>
       <Name>DW.ELA.Utility</Name>

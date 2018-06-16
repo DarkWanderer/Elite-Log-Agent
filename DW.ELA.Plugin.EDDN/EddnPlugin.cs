@@ -15,8 +15,7 @@ namespace ELA.Plugin.EDDN
 {
     public class EddnPlugin : IPlugin, IObserver<JObject>
     {
-        private static readonly IRestClient RestClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
-        private Task<HashSet<string>> ignoredEvents;
+        private static readonly IRestClient RestClient = new ThrottlingRestClient("https://eddn.edcd.io:4430/upload/");
         private readonly ISettingsProvider settingsProvider;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
@@ -32,11 +31,6 @@ namespace ELA.Plugin.EDDN
             logFlushTimer.Interval = 5000; // send data every n seconds
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(FlushQueue);
             logFlushTimer.Enabled = true;
-
-            ignoredEvents =
-                 RestClient.GetAsync("discard")
-                    .ContinueWith((t) => new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
-
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
@@ -55,12 +49,12 @@ namespace ELA.Plugin.EDDN
                 apiEvents = eventQueue.ToArray();
                 eventQueue.Clear();
             }
-            if (apiEvents.Length > 0)
-                await apiFacade?.PostLogEvents(apiEvents);
+            //if (apiEvents.Length > 0)
+            //    await apiFacade?.PostLogEvents(apiEvents);
         }
 
-        public const string CPluginId = "EdsmUploader";
-        public string PluginName => "EDSM Upload";
+        public const string CPluginId = "EddnUploader";
+        public string PluginName => "EDDN Upload";
         public string PluginId => CPluginId;
 
         public IObserver<JObject> GetLogObserver() => this;
@@ -72,28 +66,8 @@ namespace ELA.Plugin.EDDN
 
         public void OnNext(JObject @event)
         {
-
-            var eventName = @event["event"].ToString();
-            if (ignoredEvents.Result.Contains(eventName))
-                return;
-            @event = (JObject)@event.DeepClone(); // have to clone the object here as we'll have to make modifications to it
-            EnrichEvent(@event);
-            lock (eventQueue)
-            {
-                eventQueue.Add(@event);
-                if (eventQueue.Count > 1000)
-                    Task.Factory.StartNew(FlushQueue);
-            }
-            logger.Trace("Queued event {0}", @event);
+            return;
         }
-
-        private void EnrichEvent(JObject @event)
-        {
-            var timestamp = DateTime.Parse(@event["timestamp"].ToString());
-            @event["_systemName"] = playerStateRecorder.GetPlayerSystem(timestamp);
-            @event["_shipId"] = playerStateRecorder.GetPlayerShipId(timestamp);
-        }
-
 
         internal GlobalSettings GlobalSettings => settingsProvider.Settings;
 

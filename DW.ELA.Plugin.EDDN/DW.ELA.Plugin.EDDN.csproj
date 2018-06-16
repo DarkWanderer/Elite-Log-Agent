@@ -60,6 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Schemas\blackmarket.json" />
+    <EmbeddedResource Include="Schemas\commodity.json" />
+    <EmbeddedResource Include="Schemas\journal.json" />
+    <EmbeddedResource Include="Schemas\outfitting.json" />
+    <EmbeddedResource Include="Schemas\shipyard.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">

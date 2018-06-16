@@ -1,8 +1,12 @@
 ﻿using Interfaces;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility;
+using Newtonsoft.Json.Schema;
+using System.Reflection;
+using System.IO;
 
 namespace ELA.Plugin.EDDN
 {
@@ -10,6 +14,7 @@ namespace ELA.Plugin.EDDN
     {
         private readonly IRestClient restClient;
         private readonly string commanderName;
+        private readonly Task<IDictionary<string, string>> schemasAsync;
 
         public EddnApiFacade(IRestClient restClient, string commanderName)
         {
@@ -17,13 +22,24 @@ namespace ELA.Plugin.EDDN
                 throw new System.ArgumentException(nameof(commanderName));
             this.restClient = restClient ?? throw new System.ArgumentNullException(nameof(restClient));
             this.commanderName = commanderName;
-
         }
 
-        public async Task PostLogEvents(JObject[] events)
+        //private JSchema GetSchema(EddnSchemaType type)
+        //{
+        //    var resourceName = "DW.ELA.Plugin.EDDN.Schemas." + type.ToString().ToLowerInvariant() + ".json";
+        //    var names = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+        //    using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+        //    using (var reader = new StreamReader(stream))
+        //    {
+        //        string result = reader.ReadToEnd();
+        //        return JSchema.Parse(result);
+        //    }
+        //}
+
+        public async Task PostMessage(EddnSchemaType schemaType, JObject message)
         {
             var input = CreateHeader();
-            input["message"] = new JArray(events).ToString();
+            input["message"] = message.ToString();
             var result = await restClient.PostAsync(input);
         }
 
@@ -36,5 +52,14 @@ namespace ELA.Plugin.EDDN
                 ["softwareVersion"] = AppInfo.Version
             };
         }
+    }
+
+    public enum EddnSchemaType
+    {
+        Blackmarket,
+        Commodity,
+        Journal,
+        Outfitting,
+        Shipyard
     }
 }

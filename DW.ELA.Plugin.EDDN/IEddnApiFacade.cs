@@ -5,6 +5,5 @@ namespace ELA.Plugin.EDDN
 {
     public interface IEddnApiFacade
     {
-        Task PostLogEvents(JObject[] apiEvents);
     }
 }
