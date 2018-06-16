@@ -3,10 +3,10 @@ using NUnit.Framework;
 
 namespace DW.ELA.UnitTests
 {
-    class AutorunManagerTests
+    public class AutorunManagerTests
     {
         [Test]
-        void ShouldEnableThenDisableAutorun()
+        public void ShouldEnableThenDisableAutorun()
         {
             Assert.IsFalse(AutorunManager.AutorunEnabled);
             AutorunManager.AutorunEnabled = true;
