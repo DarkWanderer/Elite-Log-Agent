@@ -46,9 +46,11 @@ namespace InaraUpdater
 
         private void ReloadSettings()
         {
+            eventBroker?.FlushQueue();
             eventBroker = new InaraEventBroker(new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName), playerStateRecorder);
         }
 
         public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
+        public void OnSettingsChanged(object o,EventArgs e) => ReloadSettings();
     }
 }

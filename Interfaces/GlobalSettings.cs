@@ -14,13 +14,13 @@ namespace DW.ELA.Interfaces.Settings
         public string CommanderName { get; set; } = "Unknown Commander";
 
         [JsonProperty("logLevel")]
-        public string LogLevel { get; set; } = "Info";
+        public string LogLevel { get; set; } = "Debug";
 
         [JsonProperty("setupWizardDone")]
         public bool InitialSetupDone { get; set; } = false;
 
         [JsonProperty("reportErrorsToCloud")]
-        public bool ReportErrorsToCloud { get; set; }
+        public bool ReportErrorsToCloud { get; set; } = true;
 
         public static GlobalSettings Defaults => new GlobalSettings();
 

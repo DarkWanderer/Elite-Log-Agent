@@ -23,5 +23,10 @@ namespace Interfaces
         /// <param name="settings"></param>
         /// <returns>Plugin settings control</returns>
         AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings);
+
+        /// <summary>
+        /// Callback to signal settings have changed and it's time to update
+        /// </summary>
+        void OnSettingsChanged(object sender, EventArgs e);
     }
 }
