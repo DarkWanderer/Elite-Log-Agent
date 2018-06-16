@@ -34,7 +34,7 @@ build:
   publish_azure: true
 
 build_script:
-- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
 - .\ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
