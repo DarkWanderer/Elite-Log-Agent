@@ -3,6 +3,8 @@
 A windows utility written in C#, presenting Json events from Elite: Dangerous log as data source. 
 Allows updating external sites (and possibly do other actions) in near-real-time as the log gets updated
 
+**Does not require Elite login/password - only the target sites API keys**
+
 Currently in alpha stage
 
 ## Quickstart: how to install/use
@@ -20,6 +22,7 @@ Currently in alpha stage
 
 ## Planned features
 
+* **Support for EDDB/EDDN data feeds**
 * Support for [Canonn API v2](https://github.com/derrickmehaffy/CAPI-V2)
 * Google sheets for Powerplay/BGS
 
