@@ -5,6 +5,14 @@ Allows updating external sites (and possibly do other actions) in near-real-time
 
 Currently in alpha stage
 
+## Quickstart: how to install/use
+
+* Download latest version (links below)
+* Input commander name, Inara and EDSM API keys, click 'verify' to check info is correct
+* Save settings (apply and/or OK)
+* (optional) Upload last 5 logs using relevant button
+* launch the game.
+
 ## Current Features
 
 * EDSM support (most log events)
@@ -14,12 +22,6 @@ Currently in alpha stage
 
 * Support for [Canonn API v2](https://github.com/derrickmehaffy/CAPI-V2)
 * Google sheets for Powerplay/BGS
-
-## How to install/use
-
-* Download latest version (links below)
-* Input commander name, Inara and EDSM API keys
-* Save settings, launch the game.
 
 ## Get latest version
 
