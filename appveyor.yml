@@ -25,7 +25,7 @@ dotnet_csproj:
   informational_version: $(appveyor_build_version)
 
 install:
-- cmd: echo Targets: %targets%
+- cmd: echo Targets %targets%
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
 - cmd: nuget install -ExcludeVersion OpenCover
