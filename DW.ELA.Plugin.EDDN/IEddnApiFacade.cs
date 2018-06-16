@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace ELA.Plugin.EDSM
+namespace ELA.Plugin.EDDN
 {
     public interface IEddnApiFacade
     {
+        Task PostLogEvents(JObject[] apiEvents);
     }
 }

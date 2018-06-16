@@ -1,5 +1,6 @@
 ﻿using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
+using ELA.Plugin.EDDN;
 using Interfaces;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 using System.Timers;
 using Utility;
 
-namespace ELA.Plugin.EDSM
+namespace ELA.Plugin.EDDN
 {
-    public class EdsmPlugin : IPlugin, IObserver<JObject>
+    public class EddnPlugin : IPlugin, IObserver<JObject>
     {
         private static readonly IRestClient RestClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
         private Task<HashSet<string>> ignoredEvents;
@@ -21,9 +22,9 @@ namespace ELA.Plugin.EDSM
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly List<JObject> eventQueue = new List<JObject>();
         private readonly Timer logFlushTimer = new Timer();
-        private IEdsmApiFacade apiFacade;
+        private IEddnApiFacade apiFacade;
         
-        public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
+        public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
@@ -43,7 +44,7 @@ namespace ELA.Plugin.EDSM
         private void ReloadSettings()
         {
             FlushQueue();
-            apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
+            apiFacade = new EddnApiFacade(RestClient, GlobalSettings.CommanderName);
         }
 
         private async void FlushQueue()
@@ -63,7 +64,7 @@ namespace ELA.Plugin.EDSM
         public string PluginId => CPluginId;
 
         public IObserver<JObject> GetLogObserver() => this;
-        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings };
+        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
 
         public void OnCompleted() => FlushQueue();
         public void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
@@ -71,8 +72,6 @@ namespace ELA.Plugin.EDSM
 
         public void OnNext(JObject @event)
         {
-            if (!Settings.Verified)
-                return;
 
             var eventName = @event["event"].ToString();
             if (ignoredEvents.Result.Contains(eventName))
@@ -98,10 +97,10 @@ namespace ELA.Plugin.EDSM
 
         internal GlobalSettings GlobalSettings => settingsProvider.Settings;
 
-        internal EdsmSettings Settings
+        internal EddnSettings Settings
         {
-            get => new PluginSettingsFacade<EdsmSettings>(PluginId, GlobalSettings).Settings;
-            set => new PluginSettingsFacade<EdsmSettings>(PluginId, GlobalSettings).Settings = value;
+            get => new PluginSettingsFacade<EddnSettings>(PluginId, GlobalSettings).Settings;
+            set => new PluginSettingsFacade<EddnSettings>(PluginId, GlobalSettings).Settings = value;
         }
     }
 }

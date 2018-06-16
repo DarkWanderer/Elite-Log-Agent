@@ -26,7 +26,7 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
-- cmd: nuget install -ExcludeVersion NUnit
+- cmd: nuget install -ExcludeVersion NUnit.Consolerunner
 - cmd: nuget install -ExcludeVersion OpenCover
 - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
@@ -40,7 +40,7 @@ after_build:
 - .\ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 test_script:
-- .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"NUnit\tools\NUnit.console.x64.exe" -targetargs:"DW.ELA.UnitTests -noshadow" -output:"coverage.xml"
+- .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"NUnit.Consolerunner\tools\nunit3-console.exe" -targetargs:"/nologo /noshadow DW.ELA.UnitTests" -output:"coverage.xml"
 
 after_test:
   - ps: |

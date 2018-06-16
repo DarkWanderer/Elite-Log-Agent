@@ -1,5 +1,4 @@
-﻿using ELA.Plugin.EDSM;
-using Interfaces;
+﻿using Interfaces;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
