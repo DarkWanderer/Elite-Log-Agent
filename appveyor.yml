@@ -34,13 +34,13 @@ build:
   publish_azure: true
 
 build_script:
-- msbuild EliteLogAgent.sln /verbosity:quiet /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
 - .\ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 test_script:
-- .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"NUnit.Consolerunner\tools\nunit3-console.exe" -targetargs:"/nologo /noshadow DW.ELA.UnitTests" -output:"coverage.xml"
+- .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"NUnit.Consolerunner\tools\nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -output:"coverage.xml"
 
 after_test:
   - ps: |
