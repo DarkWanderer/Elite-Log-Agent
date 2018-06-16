@@ -26,14 +26,27 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
+- cmd: nuget install -ExcludeVersion NUnit
+- cmd: nuget install -ExcludeVersion OpenCover
 - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
 build:
   publish_azure: true
 
+build_script:
+- msbuild EliteLogAgent.sln /verbosity:quiet /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+
 after_build:
-- cmd: msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
-- cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- .\ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+
+test_script:
+- .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"NUnit\tools\NUnit.console.x64.exe" -targetargs:"DW.ELA.UnitTests -noshadow" -output:"coverage.xml"
+
+after_test:
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
 
 artifacts: 
 - path: EliteLogAgent.exe
