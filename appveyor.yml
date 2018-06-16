@@ -6,7 +6,7 @@ platform: Any CPU
 environment:
   PFX_PASSWORD:
     secure: wB19redOwiER/t000/oJpCZEu41oxfSlcBuVUNaILO0=
-  TARGETS: Rebuild
+  targets: Rebuild
 
 assembly_info:
   patch: true
@@ -25,6 +25,7 @@ dotnet_csproj:
   informational_version: $(appveyor_build_version)
 
 install:
+- cmd: echo Targets: %targets%
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
 - cmd: nuget install -ExcludeVersion OpenCover
@@ -33,10 +34,11 @@ build:
   publish_azure: true
 
 build_script:
-- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:%TARGETS% /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:$targets /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
-- .\ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- cmd: mkdir merged-executable
+- .\ILMerge\tools\ilmerge.exe /wildcards /out:merged-executable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -output:"coverage.xml"
@@ -48,8 +50,8 @@ after_test:
       bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
 
 artifacts: 
-- path: EliteLogAgent.exe
-  name: single-executable
+- path: merged-executable
+  name: merged-executable
 
 for:
 - branches:
@@ -61,7 +63,7 @@ for:
   - path: EliteLogAgent\bin\Release\app.publish
     name: clickonce-files
   environment:
-    TARGETS: Rebuild;Publish
+    targets: Rebuild;Publish
   deploy:
   - provider: AzureBlob
     artifact: clickonce-files
@@ -79,7 +81,7 @@ deploy:
   release: $(appveyor_build_version)
   auth_token:
     secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-  artifact: single-executable
+  artifact: merged-executable
   draft: false
   prerelease: true
   force_update: true
