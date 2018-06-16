@@ -27,7 +27,13 @@ before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
 - cmd: nuget install -ExcludeVersion OpenCover
-- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
+
+for:
+- branches:
+    only:
+      - prod
+- init:
+  - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
 build:
   publish_azure: true

@@ -1,20 +1,21 @@
 ![ELA logo](EliteLogAgent/Resources/elite-dangerous-icon.ico)
 
-# Elite-Log-Agent
+# Elite Log Agent
 
-A windows utility written in C#, presenting Json events from Elite: Dangerous log as data source. 
-Allows updating external sites (and possibly do other actions) in near-real-time as the log gets updated
+A windows utility written in C#, parsing Elite: Dangerous log and feeding it to various sites
+Allows updating data on external sites (like Inara or EDSM) in near-real-time as the log gets updated
 
-**Does not require Elite login/password - only the target sites API keys**
+**Does not require Elite login/password - only the 3rd party API keys**
 
 Currently in beta stage
 
 ## Quickstart: how to use
 
 * Download [latest version][clickonce]
-* Input commander name, Inara and EDSM API keys, click 'verify' to check info is correct
+* Input commander name, Inara and EDSM API keys
+* Click 'verify' under each key to check info is correct
 * Save settings (apply and/or OK)
-* (optional) Upload last 5 logs using relevant button
+* (optional) Upload last 5 logs using corresponding button
 * launch the game.
 
 ## Current Features
