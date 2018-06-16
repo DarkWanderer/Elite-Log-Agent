@@ -8,7 +8,7 @@ namespace EliteLogAgent.Autorun
         private const string autorunRegistryKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         private const string eliteLogAgentKey = @"EliteLogAgent";
 
-        private static string ExecutablePath => Assembly.GetEntryAssembly().Location;
+        private static string ExecutablePath => (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location;
 
         public static bool AutorunEnabled
         {
