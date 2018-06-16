@@ -42,6 +42,7 @@ namespace ELA.Plugin.EDSM
 
         private void ReloadSettings()
         {
+            FlushQueue();
             apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
         }
 
@@ -64,8 +65,10 @@ namespace ELA.Plugin.EDSM
         public IObserver<JObject> GetLogObserver() => this;
         public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings };
 
-        public void OnCompleted() { FlushQueue(); }
+        public void OnCompleted() => FlushQueue();
+        public void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
         public void OnError(Exception error) { }
+
         public void OnNext(JObject @event)
         {
             if (!Settings.Verified)

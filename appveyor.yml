@@ -16,7 +16,7 @@ assembly_info:
   
 dotnet_csproj:
   patch: true
-  file: '**\*.csproj'
+  file: 'DW.ELA.ErrorReportingApi\DW.ELA.ErrorReportingApi.csproj'
   version: $(appveyor_build_version)
   package_version: $(appveyor_build_version)
   assembly_version: $(appveyor_build_version)
