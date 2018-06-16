@@ -6,6 +6,7 @@ platform: Any CPU
 environment:
   PFX_PASSWORD:
     secure: wB19redOwiER/t000/oJpCZEu41oxfSlcBuVUNaILO0=
+  targets: Rebuild
 
 assembly_info:
   patch: true
@@ -23,20 +24,21 @@ dotnet_csproj:
   file_version: $(appveyor_build_version)
   informational_version: $(appveyor_build_version)
 
-before_build:
+install:
+- cmd: echo Targets %targets%
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
 - cmd: nuget install -ExcludeVersion OpenCover
-- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
 build:
   publish_azure: true
 
 build_script:
-- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:%targets% /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
-- .\ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- cmd: mkdir merged-executable
+- .\ILMerge\tools\ilmerge.exe /wildcards /out:merged-executable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -output:"coverage.xml"
@@ -48,30 +50,38 @@ after_test:
       bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
 
 artifacts: 
-- path: EliteLogAgent.exe
-  name: single-executable
-- path: EliteLogAgent\bin\Release\app.publish
-  name: clickonce-files
+- path: merged-executable
+  name: merged-executable
+
+for:
+- branches:
+    only:
+      - prod|master
+  before_build:
+  - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
+  artifacts:
+  - path: EliteLogAgent\bin\Release\app.publish
+    name: clickonce-files
+  environment:
+    targets: Rebuild;Publish
+  deploy:
+  - provider: AzureBlob
+    artifact: clickonce-files
+    storage_account_name: elitelogagent
+    container: clickonce
+    unzip: true
+    storage_access_key:
+      secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
 
 deploy:
 - provider: GitHub
   on:
-    branch: master
+    branch: prod
   tag: release-$(appveyor_build_version)
   release: $(appveyor_build_version)
   auth_token:
     secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-  artifact: single-executable
-  draft: true
+  artifact: merged-executable
+  draft: false
   prerelease: true
   force_update: true
-
-- provider: AzureBlob
-  on:
-    branch: prod
-  artifact: clickonce-files
-  storage_account_name: elitelogagent
-  container: clickonce
-  unzip: true
-  storage_access_key:
-    secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
