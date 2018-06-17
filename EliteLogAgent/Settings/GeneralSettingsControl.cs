@@ -27,6 +27,7 @@ namespace EliteLogAgent.Settings
 
         private void ReloadSettings()
         {
+            checkboxAutostartApplication.Checked = AutorunManager.AutorunEnabled;
             cmdrNameTextBox.Text = GlobalSettings.CommanderName;
             logLevelComboBox.SelectedItem = logLevelComboBox.Items.OfType<LogLevel>().SingleOrDefault(t => t.Name == Settings.LogLevel) ?? LogLevel.Info;
         }

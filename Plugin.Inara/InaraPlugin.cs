@@ -28,6 +28,7 @@ namespace InaraUpdater
         {
             this.playerStateRecorder = playerStateRecorder;
             this.settingsProvider = settingsProvider;
+            settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
 

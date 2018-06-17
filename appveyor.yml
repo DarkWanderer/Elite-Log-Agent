@@ -1,4 +1,4 @@
-version: 0.3.0.{build}
+version: 0.5.0.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
@@ -26,18 +26,31 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
+- cmd: nuget install -ExcludeVersion OpenCover
 - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
 build:
   publish_azure: true
 
+build_script:
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+
 after_build:
-- cmd: msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /property:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
-- cmd: ILMerge\tools\ilmerge.exe /wildcards /out:EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- cmd: mkdir merged-executable
+- .\ILMerge\tools\ilmerge.exe /wildcards /out:merged-executable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+
+test_script:
+- .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -output:"coverage.xml"
+
+after_test:
+  - ps: |
+      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
 
 artifacts: 
-- path: EliteLogAgent.exe
-  name: single-executable
+- path: merged-executable
+  name: merged-executable
 - path: EliteLogAgent\bin\Release\app.publish
   name: clickonce-files
 
@@ -49,7 +62,7 @@ deploy:
   release: $(appveyor_build_version)
   auth_token:
     secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-  artifact: single-executable
+  artifact: merged-executable
   draft: true
   prerelease: true
   force_update: true

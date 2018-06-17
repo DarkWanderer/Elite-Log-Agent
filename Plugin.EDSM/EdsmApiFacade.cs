@@ -15,9 +15,9 @@ namespace ELA.Plugin.EDSM
         public EdsmApiFacade(IRestClient restClient, string commanderName, string apiKey)
         {
             if (System.String.IsNullOrWhiteSpace(commanderName))
-                throw new System.ArgumentException("message", nameof(commanderName));
+                throw new System.ArgumentException(nameof(commanderName));
             if (System.String.IsNullOrWhiteSpace(apiKey))
-                throw new System.ArgumentException("message", nameof(apiKey));
+                throw new System.ArgumentException(nameof(apiKey));
             this.restClient = restClient ?? throw new System.ArgumentNullException(nameof(restClient));
             this.commanderName = commanderName;
             this.apiKey = apiKey;

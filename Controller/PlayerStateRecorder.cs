@@ -78,6 +78,11 @@ namespace Controller
                     case "Docked":
                         ProcessShipLocationEvent(@event);
                         break;
+
+                    case "JoinACrew":
+                    case "QuitACrew":
+                        ProcessCrewEvent(@event);
+                        break;
                 }
             }
             catch (Exception e)
@@ -86,24 +91,32 @@ namespace Controller
             }
         }
 
-        private void ProcessShipLocationEvent(JObject @event)
+        private void ProcessCrewEvent(JObject @event)
         {
+            try
             {
-                try
-                {
-                    var starSystem = @event["StarSystem"].ToString();
-                    var timestamp = DateTime.Parse(@event["timestamp"].ToString());
+                
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error decoding used ship location");
+            }
+        }
+            private void ProcessShipLocationEvent(JObject @event)
+        {
+            try
+            {
+                var starSystem = @event["StarSystem"].ToString();
+                var timestamp = DateTime.Parse(@event["timestamp"].ToString());
 
-
-                    lock (playerLocations)
-                        if (!playerLocations.ContainsKey(timestamp))
-                            if (GetPlayerSystem(timestamp) != starSystem)
-                                playerLocations.Add(timestamp, starSystem);
-                }
-                catch (Exception e)
-                {
-                    logger.Error(e, "Error decoding used ship location");
-                }
+                lock (playerLocations)
+                    if (!playerLocations.ContainsKey(timestamp))
+                        if (GetPlayerSystem(timestamp) != starSystem)
+                            playerLocations.Add(timestamp, starSystem);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error decoding used ship location");
             }
         }
 

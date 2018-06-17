@@ -1,10 +1,5 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EliteLogAgent.Autorun
 {
@@ -13,7 +8,7 @@ namespace EliteLogAgent.Autorun
         private const string autorunRegistryKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         private const string eliteLogAgentKey = @"EliteLogAgent";
 
-        private static string ExecutablePath => Assembly.GetEntryAssembly().Location;
+        private static string ExecutablePath => (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location;
 
         public static bool AutorunEnabled
         {
