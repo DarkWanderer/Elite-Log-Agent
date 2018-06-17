@@ -72,10 +72,15 @@ namespace EliteLogAgent
 
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            var message = e.IsTerminating ? "Unhandled fatal exception" : "Unhandled exception";
+            var senderString = sender?.GetType()?.ToString() ?? "null";
+            var exceptionTypeString = e.ExceptionObject?.GetType()?.ToString() ?? "null";
+            var exceptionObjectString = e.ExceptionObject?.ToString() ?? "null";
+
             if (e.ExceptionObject is Exception)
-                rootLogger.Fatal(e.ExceptionObject as Exception, "Unhandled exception from {0}", sender?.GetType()?.ToString() ?? "null");
+                rootLogger.Fatal(e.ExceptionObject as Exception, message + " from {0}", senderString);
             else
-                rootLogger.Fatal("Unhandled exception of unknown type: {0} {1}", e.ExceptionObject?.GetType()?.ToString() ?? "null", e.ExceptionObject?.ToString() ?? "null");
+                rootLogger.Fatal(message + " of unknown type: {0} {1}", exceptionTypeString, exceptionObjectString);
         }
 
         private static readonly ILogger rootLogger = LogManager.GetCurrentClassLogger();

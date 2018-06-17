@@ -14,6 +14,8 @@ namespace EliteLogAgent.Settings
 {
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
+        private static ILogger Logger = LogManager.GetCurrentClassLogger();
+
         public GeneralSettingsControl()
         {
             InitializeComponent();
@@ -44,6 +46,7 @@ namespace EliteLogAgent.Settings
             catch (Exception ex)
             {
                 MessageBox.Show("Error processing update:\n" + ex.GetStackedErrorMessages(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.Error(ex, "Error while uploading data");
             }
             finally
             {
@@ -76,13 +79,22 @@ namespace EliteLogAgent.Settings
         {
             try
             {
+                autodetectCmdrNameButton.Enabled = false;
                 var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
                 var eventFilter = new CommanderNameFilter();
                 using (logEventSource.Subscribe(eventFilter))
                     logEventSource.Play();
                 cmdrNameTextBox.Text = eventFilter.CmdrName ?? cmdrNameTextBox.Text;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error detecting cmdr name:\n" + ex.GetStackedErrorMessages(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.Error(ex, "Error while detecting cmdr name");
+            }
+            finally
+            {
+                autodetectCmdrNameButton.Enabled = true;
+            }
         }
 
         private class CommanderNameFilter : IObserver<JObject>

@@ -34,18 +34,38 @@ namespace Controller
             {
                 FileName = Path.Combine(LogDirectory, "EliteLogAgent.log"),
                 ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{#####}.log"),
-                ArchiveNumbering = ArchiveNumberingMode.Date,
+                ArchiveNumbering = ArchiveNumberingMode.DateAndSequence,
                 ArchiveEvery = FileArchivePeriod.Day,
                 MaxArchiveFiles = 30,
                 ConcurrentWrites = true,
                 ReplaceFileContentsOnEachWrite = false,
-                Encoding = Encoding.UTF8
+                Encoding = Encoding.UTF8,
+                Layout = "${longdate}|${level}|${logger}|${message} ${exception:format=ShortType,Message,StackTrace:innerFormat=ShortType,Message,StackTrace:maxInnerExceptionLevel=10}"
             };
 
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Trace, new DebuggerTarget()));
             LogManager.Configuration = config;
+            TestExceptionLogging();
             logger.Info("Enabled logging with level {0}", logLevel);
+        }
+
+        private void TestExceptionLogging()
+        {
+            try
+            {
+                try {
+                    throw new Exception("Test inner exception");
+                }
+                catch (Exception e1)
+                {
+                    throw new ApplicationException("Test outer exception", e1);
+                }
+            }
+            catch (Exception e2)
+            {
+                logger.Debug(e2, "Exception format test");
+            }
         }
 
         private static string LogDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"EliteLogAgent\Log");

@@ -30,6 +30,5 @@ namespace InaraUpdater.Model
         public string EventStatusText { get; internal set; }
 
         public override string ToString() => JsonConvert.SerializeObject(this);
-
     }
 }
