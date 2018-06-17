@@ -23,7 +23,7 @@ namespace EliteLogAgent
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            AppDomain.CurrentDomain.UnhandledException += (o, e) => rootLogger.Fatal(e.ExceptionObject as Exception, "Unhandled exception");
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
             using (var container = new WindsorContainer())
             {
@@ -68,6 +68,14 @@ namespace EliteLogAgent
                     Application.Run();
                 }
             }
+        }
+
+        private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception)
+                rootLogger.Fatal(e.ExceptionObject as Exception, "Unhandled exception from {0}", sender?.GetType()?.ToString() ?? "null");
+            else
+                rootLogger.Fatal("Unhandled exception of unknown type: {0} {1}", e.ExceptionObject?.GetType()?.ToString() ?? "null", e.ExceptionObject?.ToString() ?? "null");
         }
 
         private static readonly ILogger rootLogger = LogManager.GetCurrentClassLogger();
