@@ -25,7 +25,7 @@ Currently in beta stage
 ## Planned features
 
 * **Support for EDDB/EDDN data feeds**
-* Support for [Canonn API v2](https://github.com/derrickmehaffy/CAPI-V2)
+* Support for [Canonn API v2](https://github.com/canonn-science/CAPIv2-Strapi)
 * Google sheets for Powerplay/BGS
 
 ## Get latest version
