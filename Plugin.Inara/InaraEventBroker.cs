@@ -199,7 +199,10 @@ namespace InaraUpdater
 
         private ApiEvent ToMaterialsInventoryEvent(JObject @event)
         {
-            var materialCounts = @event["Raw"]
+            var materialCounts =
+                @event["Raw"].AsEnumerable()
+                .Concat(@event["Manufactured"].AsEnumerable())
+                .Concat(@event["Encoded"].AsEnumerable())
                 .ToDictionary(
                     arrayItem => arrayItem["Name"].ToString(),
                     arrayItem => (object)Int32.Parse(arrayItem["Count"].ToString())
@@ -207,7 +210,10 @@ namespace InaraUpdater
 
             return new ApiEvent("setCommanderInventoryMaterials")
             {
-                EventData = materialCounts.Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value }).ToArray(),
+                EventData = materialCounts
+                    .Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value })
+                    .OrderBy(x => x.itemName)
+                    .ToArray(),
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
         }

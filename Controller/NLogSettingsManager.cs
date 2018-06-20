@@ -46,7 +46,7 @@ namespace Controller
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Trace, new DebuggerTarget()));
             LogManager.Configuration = config;
-            TestExceptionLogging();
+            //TestExceptionLogging();
             logger.Info("Enabled logging with level {0}", logLevel);
         }
 
