@@ -33,16 +33,23 @@ namespace InaraUpdater
 
         public async void FlushQueue()
         {
-            ApiEvent[] apiEvents;
-            lock (eventQueue)
+            try
             {
-                apiEvents = Compact(eventQueue)
-                   //.Where(e => e.EventName == "addCommanderTravelDock" || e.EventName == "addCommanderTravelFSDJump") // DEBUG
-                   .ToArray();
-                eventQueue.Clear();
+                ApiEvent[] apiEvents;
+                lock (eventQueue)
+                {
+                    apiEvents = Compact(eventQueue)
+                       //.Where(e => e.EventName == "addCommanderTravelDock" || e.EventName == "addCommanderTravelFSDJump") // DEBUG
+                       .ToArray();
+                    eventQueue.Clear();
+                }
+                if (apiEvents.Any())
+                    await apiFacade.ApiCall(apiEvents);
             }
-            if (apiEvents.Any())
-                await apiFacade.ApiCall(apiEvents);
+            catch (Exception e)
+            {
+                logger.Error(e, "Error while flushing event queue");
+            }
         }
 
         private static readonly string[] compactableEvents = new[] {

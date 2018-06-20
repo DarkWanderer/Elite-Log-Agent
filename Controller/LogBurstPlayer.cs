@@ -33,10 +33,11 @@ namespace Controller
                 .ToList();
 
             foreach (var file in files)
-                using (var textReader = File.OpenText(file))
+                using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var textReader = new StreamReader(fileReader))
                 using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true })
                 {
-                    JsonSerializer serializer = new JsonSerializer();
+                    var serializer = new JsonSerializer();
                     while (jsonReader.Read())
                     {
                         var @object = (JObject)serializer.Deserialize(jsonReader);
