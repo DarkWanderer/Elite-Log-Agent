@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DW.ELA.LogModel;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Controller
     /// <summary>
     /// This class replays N last log files to observers - to fill up historic data
     /// </summary>
-    public class LogBurstPlayer : AbstractObservable<JObject>
+    public class LogBurstPlayer : AbstractObservable<LogEvent>
     {
         private readonly string LogDirectory;
         private readonly int filesNumber;
@@ -41,7 +42,7 @@ namespace Controller
                     while (jsonReader.Read())
                     {
                         var @object = (JObject)serializer.Deserialize(jsonReader);
-                        OnNext(@object);
+                        OnNext(LogEventConverter.Convert(@object));
                     }
                 }
             OnCompleted();

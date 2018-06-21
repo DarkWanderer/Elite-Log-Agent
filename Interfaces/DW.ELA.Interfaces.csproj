@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,19 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ErrorRecord.cs" />
+    <Compile Include="Events\Commander.cs" />
+    <Compile Include="Events\Docked.cs" />
+    <Compile Include="Events\EngineerProgress.cs" />
+    <Compile Include="Events\FsdJump.cs" />
+    <Compile Include="Events\JoinACrew.cs" />
+    <Compile Include="Events\LoadGame.cs" />
+    <Compile Include="Events\Loadout.cs" />
+    <Compile Include="Events\Location.cs" />
+    <Compile Include="Events\Materials.cs" />
+    <Compile Include="Events\PvpKill.cs" />
+    <Compile Include="Events\ShipyardSwap.cs" />
+    <Compile Include="Events\Statistics.cs" />
+    <Compile Include="Events\SupercruiseEntry.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="ILogDirectoryNameProvider.cs" />
     <Compile Include="ILogHistoricDataSource.cs" />
@@ -60,6 +74,7 @@
     <Compile Include="IPluginManager.cs" />
     <Compile Include="ISettingsProvider.cs" />
     <Compile Include="ITrayIconController.cs" />
+    <Compile Include="LogEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

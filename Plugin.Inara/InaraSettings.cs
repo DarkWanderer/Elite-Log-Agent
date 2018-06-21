@@ -2,7 +2,7 @@
 
 namespace InaraUpdater
 {
-    internal class InaraSettings
+    public class InaraSettings
     {
         [JsonProperty("apiKey")]
         public string ApiKey { get; internal set; } = "INARA API key not set";

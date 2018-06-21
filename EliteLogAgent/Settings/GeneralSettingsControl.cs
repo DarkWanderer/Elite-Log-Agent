@@ -9,6 +9,8 @@ using NLog;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using EliteLogAgent.Autorun;
+using DW.ELA.LogModel;
+using DW.ELA.LogModel.Events;
 
 namespace EliteLogAgent.Settings
 {
@@ -97,19 +99,16 @@ namespace EliteLogAgent.Settings
             }
         }
 
-        private class CommanderNameFilter : IObserver<JObject>
+        private class CommanderNameFilter : IObserver<LogEvent>
         {
             public string CmdrName { get; private set; }
 
             public void OnCompleted() { }
             public void OnError(Exception error) { }
-            public void OnNext(JObject value)
+            public void OnNext(LogEvent @event)
             {
-                //"event":"Commander", "Name":"John Doe"
-                if (value["event"]?.ToString() != "Commander")
-                    return;
-                lock (this)
-                    CmdrName = value["Name"]?.ToString() ?? CmdrName;
+                if (@event is Commander c)
+                    CmdrName = c.Name;
             }
         }
 

@@ -24,6 +24,8 @@ namespace EliteLogAgent
             Application.SetCompatibleTextRenderingDefault(false);
 
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            if (SingleLaunch.IsRunning)
+                return; // only one instance should be running
 
             using (var container = new WindsorContainer())
             {

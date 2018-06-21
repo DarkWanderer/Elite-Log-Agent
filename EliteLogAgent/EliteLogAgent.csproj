@@ -86,13 +86,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Facilities.Logging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.LoggingFacility.4.1.0\lib\net45\Castle.Facilities.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Services.Logging.NLogIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core-NLog.4.3.0\lib\net45\Castle.Services.Logging.NLogIntegration.dll</HintPath>
+      <HintPath>..\packages\Castle.Core-NLog.4.3.1\lib\net45\Castle.Services.Logging.NLogIntegration.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autorun\AutorunManager.cs" />
+    <Compile Include="Autorun\SingleLaunch.cs" />
     <Compile Include="CastleWindsorPluginLoader.cs" />
     <Compile Include="FileSettingsStorage.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -201,10 +202,6 @@
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">
       <Project>{fd518ed2-7a6e-42f7-8c90-603235c1fee6}</Project>
       <Name>DW.ELA.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogModel\DW.ELA.LogModel.csproj">
-      <Project>{6fcca2a4-9d3e-4e91-bb46-3f75ea0f989e}</Project>
-      <Name>DW.ELA.LogModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plugin.EDSM\DW.ELA.Plugin.EDSM.csproj">
       <Project>{cf1a7347-ad57-49b2-ba8e-7390b195a4e8}</Project>

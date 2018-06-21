@@ -1,4 +1,6 @@
-﻿using Interfaces;
+﻿using DW.ELA.Utility;
+using DW.ELA.Utility.Json;
+using Interfaces;
 using Newtonsoft.Json;
 using NLog;
 using System;
@@ -36,17 +38,15 @@ namespace InaraUpdater.Model
 
         public async Task<ICollection<ApiEvent>> ApiCall(params ApiEvent[] events)
         {
+            if (events.Length == 0)
+                return new ApiEvent[0];
+
             var inputData = new ApiInputOutput()
             {
                 Header = new Header(commanderName, apiKey),
                 Events = events
             };
-            var inputJson = JsonConvert.SerializeObject(inputData, Formatting.Indented,
-                            new JsonSerializerSettings
-                            {
-                                DateFormatString = "u",
-                                NullValueHandling = NullValueHandling.Ignore
-                            });
+            var inputJson = inputData.ToJson();
             var outputJson = await client.PostAsync(inputJson);
             var outputData = JsonConvert.DeserializeObject<ApiInputOutput>(outputJson);
 

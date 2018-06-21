@@ -1,0 +1,46 @@
+﻿using DW.ELA.LogModel.Events;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+
+namespace DW.ELA.LogModel
+{
+    public static class LogEventConverter
+    {
+        private static readonly IReadOnlyDictionary<string, Type> eventTypes;
+
+        static LogEventConverter()
+        {
+            var baseType = typeof(LogEvent);
+            var exampleType = typeof(LoadGame);
+
+            eventTypes = baseType
+               .Assembly
+               .GetTypes()
+               .Where(t => t.Namespace == exampleType.Namespace)
+               .Where(t => t.BaseType == baseType)
+               .ToDictionary(t => t.Name, t => t);
+            Debug.Assert(eventTypes.Count > 0);
+            Debug.Assert(eventTypes.Values.Contains(exampleType));
+        }
+
+        public static LogEvent Convert(JObject jObject)
+        {
+            var eventName = jObject["event"]?.ToString();
+            LogEvent result = null;
+            if (string.IsNullOrWhiteSpace(eventName))
+                throw new ArgumentException("Empty event name", nameof(jObject));
+
+            if (eventTypes.ContainsKey(eventName))
+                result = (LogEvent)jObject.ToObject(eventTypes[eventName]);
+            else
+                result = jObject.ToObject<LogEvent>();
+
+            result.Raw = jObject;
+            return result;
+        }
+    }
+}

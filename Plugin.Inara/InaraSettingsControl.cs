@@ -1,4 +1,5 @@
 ﻿using DW.ELA.Interfaces;
+using DW.ELA.Utility;
 using InaraUpdater.Model;
 using Interfaces;
 using Newtonsoft.Json.Linq;
@@ -135,11 +136,13 @@ namespace InaraUpdater
                 var result = await apiFacade.ApiCall(@event);
                 credentialsStatusLabel.Text = "Success, inara ID: " + (result.EventData as JObject)["userID"]?.ToString();
                 apiKeyValidatedCheckbox.Checked = true;
+                Settings.Verified = true;
             }
             catch (Exception ex)
             {
                 apiKeyValidatedCheckbox.Checked = false;
                 credentialsStatusLabel.Text = ex.Message;
+                Settings.Verified = false;
             }
             finally
             {
@@ -154,7 +157,6 @@ namespace InaraUpdater
 
         private void apiKeyValidatedCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Verified = apiKeyValidatedCheckbox.Checked;
         }
     }
 }

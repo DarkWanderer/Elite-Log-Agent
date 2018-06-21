@@ -33,8 +33,16 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.6\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,16 +52,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppInfo.cs" />
-    <Compile Include="CompositeDisposable.cs" />
+    <Compile Include="App\AppInfo.cs" />
+    <Compile Include="Disposable\CompositeDisposable.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\Functional.cs" />
-    <Compile Include="IRestClient.cs" />
+    <Compile Include="Rest\IRestClient.cs" />
+    <Compile Include="Json\Converter.cs" />
     <Compile Include="Observable\AbstractObservable.cs" />
     <Compile Include="PluginSettingsFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThrottlingRestClient.cs" />
+    <Compile Include="Json\Serialize.cs" />
+    <Compile Include="Rest\ThrottlingRestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">

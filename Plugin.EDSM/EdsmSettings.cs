@@ -2,7 +2,7 @@
 
 namespace ELA.Plugin.EDSM
 {
-    internal class EdsmSettings
+    public class EdsmSettings
     {
         [JsonProperty("apiKey")]
         public string ApiKey { get; internal set; } = "EDSM API Key not set";

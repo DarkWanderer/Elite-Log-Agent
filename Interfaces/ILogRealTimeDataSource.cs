@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DW.ELA.LogModel;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace Interfaces
 {
-    public interface ILogRealTimeDataSource : IObservable<JObject>, IDisposable
+    public interface ILogRealTimeDataSource : IObservable<LogEvent>, IDisposable
     {
     }
 }
