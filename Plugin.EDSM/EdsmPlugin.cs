@@ -48,14 +48,21 @@ namespace ELA.Plugin.EDSM
 
         private async void FlushQueue()
         {
-            JObject[] apiEvents;
-            lock (eventQueue)
+            try
             {
-                apiEvents = eventQueue.ToArray();
-                eventQueue.Clear();
+                JObject[] apiEvents;
+                lock (eventQueue)
+                {
+                    apiEvents = eventQueue.ToArray();
+                    eventQueue.Clear();
+                }
+                if (apiEvents.Length > 0)
+                    await apiFacade?.PostLogEvents(apiEvents);
             }
-            if (apiEvents.Length > 0)
-                await apiFacade?.PostLogEvents(apiEvents);
+            catch (Exception e)
+            {
+                logger.Error(e, "Error while flushing event queue");
+            }
         }
 
         public const string CPluginId = "EdsmUploader";

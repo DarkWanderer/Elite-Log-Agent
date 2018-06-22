@@ -33,16 +33,23 @@ namespace InaraUpdater
 
         public async void FlushQueue()
         {
-            ApiEvent[] apiEvents;
-            lock (eventQueue)
+            try
             {
-                apiEvents = Compact(eventQueue)
-                   //.Where(e => e.EventName == "addCommanderTravelDock" || e.EventName == "addCommanderTravelFSDJump") // DEBUG
-                   .ToArray();
-                eventQueue.Clear();
+                ApiEvent[] apiEvents;
+                lock (eventQueue)
+                {
+                    apiEvents = Compact(eventQueue)
+                       //.Where(e => e.EventName == "addCommanderTravelDock" || e.EventName == "addCommanderTravelFSDJump") // DEBUG
+                       .ToArray();
+                    eventQueue.Clear();
+                }
+                if (apiEvents.Any())
+                    await apiFacade.ApiCall(apiEvents);
             }
-            if (apiEvents.Any())
-                await apiFacade.ApiCall(apiEvents);
+            catch (Exception e)
+            {
+                logger.Error(e, "Error while flushing event queue");
+            }
         }
 
         private static readonly string[] compactableEvents = new[] {
@@ -192,7 +199,10 @@ namespace InaraUpdater
 
         private ApiEvent ToMaterialsInventoryEvent(JObject @event)
         {
-            var materialCounts = @event["Raw"]
+            var materialCounts =
+                @event["Raw"].AsEnumerable()
+                .Concat(@event["Manufactured"].AsEnumerable())
+                .Concat(@event["Encoded"].AsEnumerable())
                 .ToDictionary(
                     arrayItem => arrayItem["Name"].ToString(),
                     arrayItem => (object)Int32.Parse(arrayItem["Count"].ToString())
@@ -200,7 +210,10 @@ namespace InaraUpdater
 
             return new ApiEvent("setCommanderInventoryMaterials")
             {
-                EventData = materialCounts.Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value }).ToArray(),
+                EventData = materialCounts
+                    .Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value })
+                    .OrderBy(x => x.itemName)
+                    .ToArray(),
                 Timestamp = DateTime.Parse(@event["timestamp"].ToString())
             };
         }
