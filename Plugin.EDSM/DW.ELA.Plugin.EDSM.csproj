@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiException.cs" />
+    <Compile Include="EdsmApiException.cs" />
     <Compile Include="EdsmApiFacade.cs" />
     <Compile Include="EdsmPlugin.cs" />
     <Compile Include="EdsmSettings.cs" />

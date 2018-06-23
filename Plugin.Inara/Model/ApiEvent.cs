@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace InaraUpdater.Model
+namespace DW.ELA.Plugin.Inara.Model
 {
     public sealed class ApiEvent
     {

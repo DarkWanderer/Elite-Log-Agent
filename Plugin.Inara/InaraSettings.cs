@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace InaraUpdater
+namespace DW.ELA.Plugin.Inara
 {
     public class InaraSettings
     {

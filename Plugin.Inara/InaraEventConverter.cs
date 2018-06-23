@@ -1,6 +1,6 @@
 ﻿using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
-using InaraUpdater.Model;
+using DW.ELA.Plugin.Inara.Model;
 using Interfaces;
 using MoreLinq;
 using Newtonsoft.Json.Linq;
@@ -8,10 +8,8 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Timers;
 
-namespace InaraUpdater
+namespace DW.ELA.Plugin.Inara
 {
     public class InaraEventConverter
     {

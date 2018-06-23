@@ -42,7 +42,7 @@ namespace ELA.Plugin.EDSM
             var returnCode = jResult["msgnum"]?.ToObject<int>();
             var msg = jResult["msg"]?.ToString();
             if (returnCode != 100)
-                throw new ApiException(msg);
+                throw new EdsmApiException(msg);
             return result;
         }
 

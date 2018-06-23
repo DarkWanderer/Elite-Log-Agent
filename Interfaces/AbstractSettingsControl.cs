@@ -15,5 +15,7 @@ namespace Interfaces
         /// Provides reference to temporary instance of Settings existing in settings form
         /// </summary>
         public GlobalSettings GlobalSettings { get; set; }
+
+        public virtual void SaveSettings() { }
     }
 }

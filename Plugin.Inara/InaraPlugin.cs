@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DW.ELA.Controller;
-using DW.ELA.Interfaces;
+﻿using DW.ELA.Controller;
 using DW.ELA.Interfaces.Settings;
 using DW.ELA.LogModel;
-using InaraUpdater.Model;
+using DW.ELA.Plugin.Inara.Model;
 using Interfaces;
 using MoreLinq;
-using Newtonsoft.Json.Linq;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Utility;
 
-namespace InaraUpdater
+namespace DW.ELA.Plugin.Inara
 {
     public class InaraPlugin : AbstractPlugin<InaraSettings>
     {
