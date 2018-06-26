@@ -38,12 +38,12 @@ namespace DW.ELA.Plugin.Inara
                     case Docked e: return Convert(e);
 
                     // Engineers
-                    case EngineerProgress e: return Convert(e) ;
+                    case EngineerProgress e: return Convert(e);
 
                     // Combat
-                    //case "Interdicted":
-                    //case "Interdiction":
-                    //case "EscapeInterdiction":
+                    case Interdicted e: return Convert(e);
+                    case Interdiction e: return Convert(e);
+                    case EscapeInterdiction e: return Convert(e);
                     //    Queue(ToInterdictionEvent(@event)); break;
                     case PvpKill e: return Convert(e);
                 }
@@ -53,6 +53,46 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return null;
+        }
+
+        private ApiEvent Convert(EscapeInterdiction e)
+        {
+            return new ApiEvent("addCommanderCombatInterdictionEscape")
+            {
+                EventData = new Dictionary<string, object> {
+                    { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    { "opponentName", e.Interdictor },
+                    { "isPlayer", e.IsPlayer }
+                },
+                Timestamp = e.Timestamp
+            };
+        }
+
+        private ApiEvent Convert(Interdiction e)
+        {
+            return new ApiEvent("addCommanderCombatInterdiction")
+            {
+                EventData = new Dictionary<string, object> {
+                    { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    { "opponentName", e.Interdicted },
+                    { "isPlayer", e.IsPlayer }
+                },
+                Timestamp = e.Timestamp
+            };
+        }
+
+        private ApiEvent Convert(Interdicted e)
+        {
+            return new ApiEvent("addCommanderCombatInterdicted")
+            {
+                EventData = new Dictionary<string, object> {
+                    { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    { "opponentName", e.Interdictor },
+                    { "isPlayer", e.IsPlayer },
+                    { "isSubmit", e.Submitted }
+                },
+                Timestamp = e.Timestamp
+            };
         }
 
         private ApiEvent Convert(PvpKill @event)
@@ -65,32 +105,6 @@ namespace DW.ELA.Plugin.Inara
                     { "opponentName", @event.Victim },
                 },
                 Timestamp = timestamp
-            };
-        }
-
-        private ApiEvent ToInterdictionEvent(JObject @event)
-        {
-            string eventType;
-            switch (@event["event"].ToString())
-            {
-                case "Interdicted": eventType = "addCommanderCombatInterdicted"; break;
-                case "Interdiction": eventType = "addCommanderCombatInterdiction"; break;
-                case "EscapeInterdiction": eventType = "addCommanderCombatInterdictionEscape"; break;
-                default: throw new ArgumentOutOfRangeException(nameof(@eventType));
-            }
-
-            if (@event["StarSystem"] == null)
-                return null;
-
-            return new ApiEvent(eventType)
-            {
-                EventData = new Dictionary<string, object> {
-                    { "starsystemName", @event["StarSystem"]?.ToString() },
-                    { "opponentName", (@event["Interdicted"] ?? @event["Interdictor"] ?? "Unknown").ToString() },
-                    { "isPlayer", @event["IsPlayer"]?.ToObject<long>() },
-                    { "isSuccess", @event["Success"]?.ToObject<bool>() }
-                },
-                Timestamp = @event["Timestamp"].ToObject<DateTime>()
             };
         }
 

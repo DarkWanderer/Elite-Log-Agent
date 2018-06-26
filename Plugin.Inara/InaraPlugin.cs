@@ -40,7 +40,7 @@ namespace DW.ELA.Plugin.Inara
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 
-        public override void ProcessEvents(LogEvent[] events)
+        public override async void ProcessEvents(LogEvent[] events)
         {
             if (!Settings.Verified)
                 return;
@@ -48,7 +48,12 @@ namespace DW.ELA.Plugin.Inara
             {
                 var facade = new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName);
                 var apiEvents = Compact(events.Select(eventConverter.Convert).Where(e => e != null)).ToArray();
-                facade.ApiCall(apiEvents).Wait();
+                if (apiEvents.Length > 0)
+                {
+                    var results = await facade.ApiCall(apiEvents);
+                    foreach (var er in results.Where(e => e.EventStatus != 200))
+                        logger.Warn("Error returned from API: {0} ({1})", er.EventStatusText, er.EventStatus);
+                }
             }
             catch (Exception e)
             {

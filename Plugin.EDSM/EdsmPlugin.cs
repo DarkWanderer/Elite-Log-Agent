@@ -38,7 +38,7 @@ namespace ELA.Plugin.EDSM
             apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
         }
 
-        public override void ProcessEvents(LogEvent[] events)
+        public override async void ProcessEvents(LogEvent[] events)
         {
             if (!Settings.Verified)
                 return;
@@ -46,7 +46,7 @@ namespace ELA.Plugin.EDSM
             {
                 var apiEvents = events.Select(e => e.Raw).Select(Enrich).ToArray();
                 if (apiEvents.Length > 0)
-                    apiFacade?.PostLogEvents(apiEvents).Wait();
+                    await apiFacade?.PostLogEvents(apiEvents);
             }
             catch (Exception e)
             {

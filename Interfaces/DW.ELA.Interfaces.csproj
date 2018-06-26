@@ -53,7 +53,10 @@
     <Compile Include="Events\Commander.cs" />
     <Compile Include="Events\Docked.cs" />
     <Compile Include="Events\EngineerProgress.cs" />
+    <Compile Include="Events\EscapeInterdiction.cs" />
     <Compile Include="Events\FsdJump.cs" />
+    <Compile Include="Events\Interdicted.cs" />
+    <Compile Include="Events\Interdiction.cs" />
     <Compile Include="Events\JoinACrew.cs" />
     <Compile Include="Events\LoadGame.cs" />
     <Compile Include="Events\Loadout.cs" />

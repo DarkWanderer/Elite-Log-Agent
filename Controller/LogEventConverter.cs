@@ -22,14 +22,14 @@ namespace DW.ELA.LogModel
                .GetTypes()
                .Where(t => t.Namespace == exampleType.Namespace)
                .Where(t => t.BaseType == baseType)
-               .ToDictionary(t => t.Name, t => t);
+               .ToDictionary(t => t.Name.ToLowerInvariant(), t => t);
             Debug.Assert(eventTypes.Count > 0);
             Debug.Assert(eventTypes.Values.Contains(exampleType));
         }
 
         public static LogEvent Convert(JObject jObject)
         {
-            var eventName = jObject["event"]?.ToString();
+            var eventName = jObject["event"]?.ToString().ToLowerInvariant();
             LogEvent result = null;
             if (string.IsNullOrWhiteSpace(eventName))
                 throw new ArgumentException("Empty event name", nameof(jObject));
