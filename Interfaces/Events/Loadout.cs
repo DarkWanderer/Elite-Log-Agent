@@ -18,13 +18,13 @@
         public string ShipIdent { get; set; }
 
         [JsonProperty("HullValue")]
-        public long HullValue { get; set; }
+        public long? HullValue { get; set; }
 
         [JsonProperty("ModulesValue")]
-        public long ModulesValue { get; set; }
+        public long? ModulesValue { get; set; }
 
         [JsonProperty("Rebuy")]
-        public long Rebuy { get; set; }
+        public long? Rebuy { get; set; }
 
         [JsonProperty("Modules")]
         public Module[] Modules { get; set; }

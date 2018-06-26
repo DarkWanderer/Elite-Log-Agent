@@ -47,7 +47,7 @@ namespace DW.ELA.Plugin.Inara
             try
             {
                 var facade = new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName);
-                var apiEvents = Compact(events.Select(eventConverter.Convert).Where(e => e != null)).ToArray();
+                var apiEvents = Compact(events.SelectMany(eventConverter.Convert).Where(e => e != null)).ToArray();
                 if (apiEvents.Length > 0)
                 {
                     var results = await facade.ApiCall(apiEvents);
