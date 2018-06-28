@@ -23,17 +23,16 @@ dotnet_csproj:
   file_version: $(appveyor_build_version)
   informational_version: $(appveyor_build_version)
 
-before_build:
+install:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge
 - cmd: nuget install -ExcludeVersion OpenCover
-- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
 
 build:
   publish_azure: true
 
 build_script:
-- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
 - cmd: mkdir merged-executable
@@ -51,8 +50,6 @@ after_test:
 artifacts: 
 - path: merged-executable
   name: merged-executable
-- path: EliteLogAgent\bin\Release\app.publish
-  name: clickonce-files
 
 deploy:
 - provider: GitHub
@@ -67,12 +64,24 @@ deploy:
   prerelease: true
   force_update: true
 
-- provider: AzureBlob
-  on:
-    branch: prod
-  artifact: clickonce-files
-  storage_account_name: elitelogagent
-  container: clickonce
-  unzip: true
-  storage_access_key:
-    secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
+for:
+- branches:
+    only: 
+    - prod
+  before_build:
+  - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
+  build_script:
+  - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+  artifacts: 
+  - path: merged-executable
+    name: merged-executable
+  - path: EliteLogAgent\bin\Release\app.publish
+    name: clickonce-files
+  deploy:
+  - provider: AzureBlob
+    artifact: clickonce-files
+    storage_account_name: elitelogagent
+    container: clickonce
+    unzip: true
+    storage_access_key:
+      secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
