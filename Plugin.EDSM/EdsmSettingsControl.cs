@@ -1,4 +1,4 @@
-﻿using DW.ELA.Interfaces;
+﻿using DW.ELA.Utility;
 using Interfaces;
 using NLog;
 using System;
@@ -81,7 +81,7 @@ namespace ELA.Plugin.EDSM
             edsmApiKeyTextBox.Size = new System.Drawing.Size(264, 20);
             edsmApiKeyTextBox.TabIndex = 1;
             edsmApiKeyTextBox.Text = "EDSM API Key";
-            edsmApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            edsmApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // testCredentialsButton
             // 
@@ -91,7 +91,7 @@ namespace ELA.Plugin.EDSM
             testCredentialsButton.TabIndex = 2;
             testCredentialsButton.Text = "Validate";
             testCredentialsButton.UseVisualStyleBackColor = true;
-            testCredentialsButton.Click += new System.EventHandler(testCredentialsButton_Click);
+            testCredentialsButton.Click += new EventHandler(testCredentialsButton_Click);
             // 
             // credentialsStatusLabel
             // 
@@ -157,5 +157,7 @@ namespace ELA.Plugin.EDSM
                 testCredentialsButton.Enabled = true;
             }
         }
+
+        public override void SaveSettings() => Settings = new EdsmSettings() { ApiKey = edsmApiKeyTextBox.Text, Verified = apiKeyValidatedCheckbox.Checked };
     }
 }

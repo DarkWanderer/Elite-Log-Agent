@@ -8,13 +8,14 @@ using NLog;
 using System.Linq;
 using System.Timers;
 using System.Threading.Tasks;
+using DW.ELA.LogModel;
 
 namespace Controller
 {
     /// <summary>
     /// This class runs a background thread to monitor and notify consumers (observers) of new log lines
     /// </summary>
-    public class JsonLogMonitor : AbstractObservable<JObject>, ILogRealTimeDataSource
+    public class JsonLogMonitor : AbstractObservable<LogEvent>, ILogRealTimeDataSource
     {
         private readonly FileSystemWatcher fileWatcher;
         private string CurrentFile;
@@ -98,7 +99,7 @@ namespace Controller
                         var record = serializer.Deserialize(jsonReader);
                         // Sometimes serializer gives out the json as string instead of JObject
                         var @object = record as JObject ?? JObject.Parse(record as string);
-                        OnNext(@object);
+                        OnNext(LogEventConverter.Convert(@object));
                         logger.Debug("Received event: {0}", @object.ToString());
                     }
                     return fileReader.Position;

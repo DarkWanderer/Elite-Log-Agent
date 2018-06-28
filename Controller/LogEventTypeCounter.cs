@@ -1,41 +1,30 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DW.ELA.LogModel;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Controller
 {
-    public class LogEventTypeCounter : IObserver<JObject>
+    public class LogEventTypeCounter : IObserver<LogEvent>
     {
-        private IDictionary<string, int> eventTypeCounters = new Dictionary<string,int>();
+        private ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
 
-        public void OnCompleted()
-        {
+        public void OnCompleted() { }
 
-        }
+        public void OnError(Exception error) { }
 
-        public void OnError(Exception error)
-        {
-
-        }
-
-        public IReadOnlyCollection<string> EventTypes => 
+        public IReadOnlyCollection<string> EventTypes =>
             eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();
 
-        public void OnNext(JObject value)
+        public void OnNext(LogEvent value)
         {
             try
             {
-                var name = value["event"].ToString();
-
-                if (!eventTypeCounters.ContainsKey(name))
-                    eventTypeCounters.Add(name, 1);
-                else
-                    eventTypeCounters[name]++;
+                eventTypeCounters.AddOrUpdate(value.Event, key => 1, (key, count) => count++);
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 }

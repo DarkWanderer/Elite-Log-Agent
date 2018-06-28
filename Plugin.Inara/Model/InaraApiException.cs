@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InaraUpdater
+namespace DW.ELA.Plugin.Inara.Model
 {
     internal class InaraApiException : Exception
     {

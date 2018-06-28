@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using DW.ELA.LogModel;
+using Interfaces;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
@@ -11,7 +12,7 @@ namespace Controller
     /// <summary>
     /// Forwards events from one IObservables to multiple IObservers in parallel fashion
     /// </summary>
-    public class AsyncMessageBroker : AbstractObservable<JObject>, IMessageBroker, IObserver<JObject>, IObservable<JObject>
+    public class AsyncMessageBroker : AbstractObservable<LogEvent>, IMessageBroker, IObserver<LogEvent>, IObservable<LogEvent>
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
@@ -41,7 +42,7 @@ namespace Controller
             }
         }
 
-        protected override void OnNext(JObject next)
+        protected override void OnNext(LogEvent next)
         {
             try
             {
@@ -54,11 +55,11 @@ namespace Controller
             }
         }
 
-        void IObserver<JObject>.OnCompleted() => OnCompleted();
+        void IObserver<LogEvent>.OnCompleted() => OnCompleted();
 
-        void IObserver<JObject>.OnError(Exception error) => OnError(error);
+        void IObserver<LogEvent>.OnError(Exception error) => OnError(error);
 
-        void IObserver<JObject>.OnNext(JObject value) => OnNext(value);
+        void IObserver<LogEvent>.OnNext(LogEvent value) => OnNext(value);
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

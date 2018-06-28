@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace InaraUpdater
+namespace DW.ELA.Plugin.Inara
 {
-    internal class InaraSettings
+    public class InaraSettings
     {
         [JsonProperty("apiKey")]
         public string ApiKey { get; internal set; } = "INARA API key not set";

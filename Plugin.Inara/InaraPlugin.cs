@@ -1,57 +1,80 @@
-﻿using System;
-using DW.ELA.Interfaces;
+﻿using DW.ELA.Controller;
 using DW.ELA.Interfaces.Settings;
-using InaraUpdater.Model;
+using DW.ELA.LogModel;
+using DW.ELA.Plugin.Inara.Model;
 using Interfaces;
-using Newtonsoft.Json.Linq;
+using MoreLinq;
 using NLog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Utility;
 
-namespace InaraUpdater
+namespace DW.ELA.Plugin.Inara
 {
-    public class InaraPlugin : IPlugin
+    public class InaraPlugin : AbstractPlugin<InaraSettings>
     {
-        public string PluginName => CPluginName;
-        public string PluginId => CPluginId;
+        public override string PluginName => CPluginName;
+        public override string PluginId => CPluginId;
 
         public const string CPluginName = "INARA settings";
         public const string CPluginId = "InaraUploader";
         public static readonly IRestClient RestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
 
-        private InaraEventBroker eventBroker;
+        private readonly InaraEventConverter eventConverter;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private ISettingsProvider settingsProvider;
 
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-        public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider)
+        public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider) : base(settingsProvider)
         {
             this.playerStateRecorder = playerStateRecorder;
+            eventConverter = new InaraEventConverter(this.playerStateRecorder);
             this.settingsProvider = settingsProvider;
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
 
-        public IObserver<JObject> GetLogObserver()
+        public override void ReloadSettings() => FlushQueue();
+        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
+        public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
+
+        public override async void ProcessEvents(LogEvent[] events)
         {
-            return eventBroker;
+            if (!Settings.Verified)
+                return;
+            try
+            {
+                var facade = new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName);
+                var apiEvents = Compact(events.SelectMany(eventConverter.Convert).Where(e => e != null)).ToArray();
+                if (apiEvents.Length > 0)
+                {
+                    var results = await facade.ApiCall(apiEvents);
+                    foreach (var er in results.Where(e => e.EventStatus != 200))
+                        logger.Warn("Error returned from API: {0} ({1})", er.EventStatusText, er.EventStatus);
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error while processing events");
+            }
         }
 
-        internal GlobalSettings GlobalSettings => settingsProvider.Settings;
+        private static readonly string[] compactableEvents = new[] {
+            "setCommanderInventoryMaterials",
+            "setCommanderGameStatistics"
+        };
 
-        internal InaraSettings Settings
+        private static IEnumerable<ApiEvent> Compact(IEnumerable<ApiEvent> events)
         {
-            get => new PluginSettingsFacade<InaraSettings>(PluginId, GlobalSettings).Settings;
-            set => new PluginSettingsFacade<InaraSettings>(PluginId, GlobalSettings).Settings = value;
-        }
+            var eventsByType = events
+                .GroupBy(e => e.EventName, e => e)
+                .ToDictionary(g => g.Key, g => g.ToArray());
+            foreach (var type in compactableEvents.Intersect(eventsByType.Keys))
+                eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp) };
 
-        private void ReloadSettings()
-        {
-            eventBroker?.FlushQueue();
-            eventBroker = new InaraEventBroker(new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName), playerStateRecorder);
+            return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
         }
-
-        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
-        public void OnSettingsChanged(object o,EventArgs e) => ReloadSettings();
     }
 }

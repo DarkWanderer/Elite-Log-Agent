@@ -1,9 +1,10 @@
 ﻿using DW.ELA.Interfaces.Settings;
+using DW.ELA.Utility.Extensions;
 using Newtonsoft.Json.Linq;
+using NLog;
 using System;
 
-// TODO: move to Utility
-namespace DW.ELA.Interfaces
+namespace DW.ELA.Utility
 {
     public class PluginSettingsFacade<T> where T : class, new()
     {
@@ -23,9 +24,9 @@ namespace DW.ELA.Interfaces
             else
                 return null;
         }
-        //private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-        //JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
+        JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
 
         private void SetPluginSettings(JObject value)
         {
@@ -45,7 +46,7 @@ namespace DW.ELA.Interfaces
                 }
                 catch (Exception e)
                 {
-                    //logger.Error(e);
+                    logger.Error(e);
                     return new T();
                 }
             }

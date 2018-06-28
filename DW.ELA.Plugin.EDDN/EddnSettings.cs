@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace ELA.Plugin.EDDN
+namespace DW.ELA.Plugin.EDDN
 {
-    internal class EddnSettings
+    public class EddnSettings
     {
         [JsonProperty("enabled")]
         public bool Enabled { get; set; }

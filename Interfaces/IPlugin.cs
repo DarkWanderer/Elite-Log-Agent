@@ -1,10 +1,10 @@
 ﻿using DW.ELA.Interfaces.Settings;
-using Newtonsoft.Json.Linq;
+using DW.ELA.LogModel;
 using System;
 
 namespace Interfaces
 {
-    public interface IPlugin
+    public interface IPlugin : IObserver<LogEvent>
     {
         string PluginName { get; }
         string PluginId { get; }
@@ -13,7 +13,7 @@ namespace Interfaces
         /// Get an observer for the logs event stream
         /// </summary>
         /// <returns>log event observer</returns>
-        IObserver<JObject> GetLogObserver();
+        IObserver<LogEvent> GetLogObserver();
 
         /// <summary>
         /// Gets a control which changes plugin settings

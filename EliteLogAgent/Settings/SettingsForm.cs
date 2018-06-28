@@ -73,9 +73,17 @@ namespace EliteLogAgent
             Close();
         }
 
-        private void ApplyButton_Click(object sender, EventArgs e) => ApplySettings();
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+            ApplySettings();
+        }
 
-        private void ApplySettings() => Provider.Settings = currentSettings;
+        private void ApplySettings()
+        {
+            foreach (var control in SettingsControls.Values)
+                control.SaveSettings();
+            Provider.Settings = currentSettings;
+        }
 
         private void CancelButton_Click(object sender, EventArgs e) => Close();
 

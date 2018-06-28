@@ -8,20 +8,15 @@ using Newtonsoft.Json.Schema;
 using System.Reflection;
 using System.IO;
 
-namespace ELA.Plugin.EDDN
+namespace DW.ELA.Plugin.EDDN
 {
     public class EddnApiFacade : IEddnApiFacade
     {
         private readonly IRestClient restClient;
-        private readonly string commanderName;
-        private readonly Task<IDictionary<string, string>> schemasAsync;
 
-        public EddnApiFacade(IRestClient restClient, string commanderName)
+        public EddnApiFacade(IRestClient restClient)
         {
-            if (System.String.IsNullOrWhiteSpace(commanderName))
-                throw new System.ArgumentException(nameof(commanderName));
             this.restClient = restClient ?? throw new System.ArgumentNullException(nameof(restClient));
-            this.commanderName = commanderName;
         }
 
         //private JSchema GetSchema(EddnSchemaType type)
@@ -47,19 +42,10 @@ namespace ELA.Plugin.EDDN
         {
             return new Dictionary<string, string>
             {
-                ["uploaderID"] = commanderName,
+                //["uploaderID"] = commanderName,
                 ["softwareName"] = AppInfo.Name,
                 ["softwareVersion"] = AppInfo.Version
             };
         }
-    }
-
-    public enum EddnSchemaType
-    {
-        Blackmarket,
-        Commodity,
-        Journal,
-        Outfitting,
-        Shipyard
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Utility;
 
-namespace InaraUpdater.Model
+namespace DW.ELA.Plugin.Inara.Model
 {
     public class Header
     {

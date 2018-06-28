@@ -13,6 +13,9 @@ namespace DW.ELA.Interfaces.Settings
         [JsonProperty("commanderName")]
         public string CommanderName { get; set; } = "Unknown Commander";
 
+        [JsonProperty("autorunEnabled")]
+        public bool AutorunEnabled { get; set; } = false;
+
         [JsonProperty("logLevel")]
         public string LogLevel { get; set; } = "Debug";
 
