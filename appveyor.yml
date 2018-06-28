@@ -1,4 +1,4 @@
-version: 0.5.0.{build}
+version: 0.5.1.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
@@ -32,7 +32,7 @@ build:
   publish_azure: true
 
 build_script:
-- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION% /p:SignManifests=true
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
 - cmd: mkdir merged-executable
@@ -71,7 +71,7 @@ for:
   before_build:
   - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
   build_script:
-  - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+  - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:SignManifests=true /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
   artifacts: 
   - path: merged-executable
     name: merged-executable
