@@ -68,12 +68,10 @@ for:
 - branches:
     only: 
     - prod
-  before_deploy:
+  after_build:
   - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
   - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:SignManifests=true /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
-  artifacts: 
-  - path: merged-executable
-    name: merged-executable
+  artifacts:
   - path: EliteLogAgent\bin\Release\app.publish
     name: clickonce-files
   deploy:
