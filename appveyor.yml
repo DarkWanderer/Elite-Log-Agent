@@ -32,7 +32,7 @@ build:
   publish_azure: true
 
 build_script:
-- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION% /p:SignManifests=true
 
 after_build:
 - cmd: mkdir merged-executable
