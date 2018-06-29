@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using EliteLogAgent.Autorun;
 using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces;
 
 namespace EliteLogAgent.Settings
 {

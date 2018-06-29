@@ -1,4 +1,5 @@
-﻿using DW.ELA.LogModel;
+﻿using DW.ELA.Interfaces;
+using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
 using DW.ELA.Plugin.Inara.Model;
 using Interfaces;
@@ -11,7 +12,7 @@ using System.Linq;
 
 namespace DW.ELA.Plugin.Inara
 {
-    public class InaraEventConverter
+    public class InaraEventConverter : IEventConverter<ApiEvent>
     {
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();

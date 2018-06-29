@@ -7,6 +7,7 @@ using MoreLinq;
 using NLog;
 using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces;
 
 namespace Controller
 {

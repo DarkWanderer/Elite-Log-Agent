@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace DW.ELA.LogModel
+namespace DW.ELA.Interfaces
 {
     public class LogEvent
     {

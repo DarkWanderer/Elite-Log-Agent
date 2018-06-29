@@ -64,10 +64,12 @@
     <Compile Include="Events\MaterialCollected.cs" />
     <Compile Include="Events\Materials.cs" />
     <Compile Include="Events\PvpKill.cs" />
+    <Compile Include="Events\Scan.cs" />
     <Compile Include="Events\ShipyardSwap.cs" />
     <Compile Include="Events\Statistics.cs" />
     <Compile Include="Events\SupercruiseEntry.cs" />
     <Compile Include="GlobalSettings.cs" />
+    <Compile Include="IEventConverter.cs" />
     <Compile Include="ILogDirectoryNameProvider.cs" />
     <Compile Include="ILogHistoricDataSource.cs" />
     <Compile Include="ILogRealTimeDataSource.cs" />
