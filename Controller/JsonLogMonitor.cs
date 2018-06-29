@@ -120,6 +120,7 @@ namespace Controller
                     fileWatcher.Changed -= FileWatcher_Changed;
                     fileWatcher.Created -= FileWatcher_Created;
                     fileWatcher.Dispose();
+                    logFlushTimer.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

@@ -61,9 +61,14 @@ namespace DW.ELA.Plugin.Inara
             }
         }
 
-        private static readonly string[] compactableEvents = new[] {
+        private static readonly string[] latestOnlyEvents = new[] {
             "setCommanderInventoryMaterials",
             "setCommanderGameStatistics"
+        };
+
+        private static readonly IReadOnlyDictionary<string, string[]> supersedesEvents = new Dictionary<string, string[]>
+        {
+            { "setCommanderInventoryMaterials", new[]{"addCommanderInventoryMaterialsItem" } }
         };
 
         private static IEnumerable<ApiEvent> Compact(IEnumerable<ApiEvent> events)
@@ -71,7 +76,7 @@ namespace DW.ELA.Plugin.Inara
             var eventsByType = events
                 .GroupBy(e => e.EventName, e => e)
                 .ToDictionary(g => g.Key, g => g.ToArray());
-            foreach (var type in compactableEvents.Intersect(eventsByType.Keys))
+            foreach (var type in latestOnlyEvents.Intersect(eventsByType.Keys))
                 eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp) };
 
             return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
