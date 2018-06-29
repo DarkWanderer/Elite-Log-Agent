@@ -63,6 +63,7 @@ for:
   artifacts:
   - path: EliteLogAgent\bin\Release\app.publish
     name: clickonce-files
+  deploy:
   - provider: AzureBlob
     artifact: clickonce-files
     storage_account_name: elitelogagent
