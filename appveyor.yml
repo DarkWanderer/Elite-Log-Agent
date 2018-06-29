@@ -52,17 +52,6 @@ artifacts:
   name: merged-executable
 
 deploy:
-- provider: GitHub
-  on:
-    branch: master
-  tag: release-$(appveyor_build_version)
-  release: $(appveyor_build_version)
-  auth_token:
-    secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-  artifact: merged-executable
-  draft: true
-  prerelease: true
-  force_update: true
 
 for:
 - branches:
@@ -70,7 +59,7 @@ for:
     - prod
   build_script:
   - ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
-  - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:SignManifests=true /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+  - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild;Publish /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:SignManifests=true /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION% /p:MinimumRequiredVersion=%APPVEYOR_BUILD_VERSION%
   artifacts:
   - path: EliteLogAgent\bin\Release\app.publish
     name: clickonce-files

@@ -30,8 +30,11 @@ namespace DW.ELA.Plugin.Inara
                 {
                     // Generic
                     case LoadGame e: return ConvertEvent(e);
-                    case Materials e: return ConvertEvent(e);
                     case Statistics e: return ConvertEvent(e);
+
+                    // Inventory
+                    case Materials e: return ConvertEvent(e);
+                    case MaterialCollected e: return ConvertEvent(e);
 
                     // Travel
                     case FsdJump e: return ConvertEvent(e);
@@ -56,6 +59,21 @@ namespace DW.ELA.Plugin.Inara
             }
             return Enumerable.Empty<ApiEvent>();
         }
+
+        private IEnumerable<ApiEvent> ConvertEvent(MaterialCollected e)
+        {
+            var @event = new ApiEvent("addCommanderInventoryMaterialsItem")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    { "itemName", e.Name},
+                    {"itemCount", e.Count }
+                }
+            };
+            yield return @event;
+        }
+
 
         private IEnumerable<ApiEvent> ConvertEvent(Loadout e)
         {
@@ -124,7 +142,7 @@ namespace DW.ELA.Plugin.Inara
                 ["modifiers"] = new JArray(eng.Modifiers.Select(ConvertModifier).ToArray())
             };
             return item;
-            
+
         }
 
         private JObject ConvertModifier(Modifier mod)

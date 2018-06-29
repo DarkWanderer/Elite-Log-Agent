@@ -61,6 +61,7 @@
     <Compile Include="Events\LoadGame.cs" />
     <Compile Include="Events\Loadout.cs" />
     <Compile Include="Events\Location.cs" />
+    <Compile Include="Events\MaterialCollected.cs" />
     <Compile Include="Events\Materials.cs" />
     <Compile Include="Events\PvpKill.cs" />
     <Compile Include="Events\ShipyardSwap.cs" />

@@ -2,6 +2,7 @@
 
 namespace DW.ELA.Plugin.Inara.Model
 {
+    [Serializable]
     internal class InaraApiException : Exception
     {
         public string InputJson { get; }

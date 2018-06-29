@@ -12,7 +12,7 @@ namespace Controller
         {
             get
             {
-                int result = SHGetKnownFolderPath(new Guid("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4"), 0, new IntPtr(0), out IntPtr path);
+                int result = UnsafeNativeMethods.SHGetKnownFolderPath(new Guid("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4"), 0, new IntPtr(0), out IntPtr path);
                 if (result >= 0)
                 {
                     return Marshal.PtrToStringUni(path) + @"\Frontier Developments\Elite Dangerous";
@@ -24,7 +24,10 @@ namespace Controller
             }
         }
 
-        [DllImport("Shell32.dll")]
-        private static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)]Guid rfid, uint dwFlags, IntPtr hToken, out IntPtr ppszPath);
+        private static class UnsafeNativeMethods
+        {
+            [DllImport("Shell32.dll")]
+            public static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)]Guid rfid, uint dwFlags, IntPtr hToken, out IntPtr ppszPath);
+        }
     }
 }
