@@ -120,6 +120,7 @@ namespace Controller
                             .Where(l => l.Key <= atTime)
                             .DefaultIfEmpty()
                             .MaxBy(l => l.Key)
+                            .FirstOrDefault()
                             .Value;
                 }
                 catch (Exception e)

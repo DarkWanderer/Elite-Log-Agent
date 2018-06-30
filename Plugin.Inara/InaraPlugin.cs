@@ -79,7 +79,7 @@ namespace DW.ELA.Plugin.Inara
                 .GroupBy(e => e.EventName, e => e)
                 .ToDictionary(g => g.Key, g => g.ToArray());
             foreach (var type in latestOnlyEvents.Intersect(eventsByType.Keys))
-                eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp) };
+                eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp).FirstOrDefault() };
 
             return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
         }

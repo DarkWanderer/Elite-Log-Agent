@@ -39,7 +39,8 @@ namespace Utility
 
         public ThrottlingRestClient(string url)
         {
-            this.baseUrl = url;
+            baseUrl = url;
+            client.DefaultRequestHeaders.Add("X-Requested-With", "EliteLogAgent");
         }
 
         public async Task<string> PostAsync(string input)

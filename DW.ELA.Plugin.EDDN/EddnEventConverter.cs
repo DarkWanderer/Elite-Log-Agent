@@ -9,10 +9,9 @@ using Utility;
 
 namespace DW.ELA.Plugin.EDDN
 {
-    internal class EddnEventConverter : IEventConverter<EddnEvent>
+    public class EddnEventConverter : IEventConverter<EddnEvent>
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-        private readonly EventSchemaValidator schemaManager;
         public string UploaderID = "Unknown";
 
         private IDictionary<string, string> CreateHeader()
