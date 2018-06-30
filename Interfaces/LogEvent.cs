@@ -14,5 +14,7 @@ namespace DW.ELA.Interfaces
 
         [JsonIgnore]
         public JObject Raw { get; set; }
+
+        public override string ToString() => Event;
     }
 }
