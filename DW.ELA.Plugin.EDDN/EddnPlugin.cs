@@ -6,6 +6,7 @@ using Interfaces;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
+using System.Linq;
 using Utility;
 
 namespace DW.ELA.Plugin.EDDN
@@ -19,7 +20,7 @@ namespace DW.ELA.Plugin.EDDN
 
         private readonly IEddnApiFacade apiFacade = new EddnApiFacade(RestClient);
         private readonly EddnEventConverter eventConverter;
-        private readonly SchemaManager schemaManager = new SchemaManager();
+        private readonly EventSchemaValidator schemaManager = new EventSchemaValidator(RestClient);
 
         protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
 
@@ -27,7 +28,7 @@ namespace DW.ELA.Plugin.EDDN
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
-            eventConverter = new EddnEventConverter(schemaManager) { UploaderID = settingsProvider.Settings.CommanderName };
+            eventConverter = new EddnEventConverter() { UploaderID = settingsProvider.Settings.CommanderName };
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
@@ -37,7 +38,7 @@ namespace DW.ELA.Plugin.EDDN
 
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
-        public override async void FlushEvents(EddnEvent[] events) => await apiFacade.PostEventsAsync(events);
+        public override async void FlushEvents(EddnEvent[] events) => await apiFacade.PostEventsAsync(events.Where(schemaManager.ValidateSchema).ToArray());
         public override void ReloadSettings()
         {
             eventConverter.UploaderID = settingsProvider.Settings.CommanderName;

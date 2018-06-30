@@ -12,13 +12,8 @@ namespace DW.ELA.Plugin.EDDN
     internal class EddnEventConverter : IEventConverter<EddnEvent>
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-        private readonly SchemaManager schemaManager;
+        private readonly EventSchemaValidator schemaManager;
         public string UploaderID = "Unknown";
-
-        public EddnEventConverter(SchemaManager schemaManager)
-        {
-            this.schemaManager = schemaManager;
-        }
 
         private IDictionary<string, string> CreateHeader()
         {
