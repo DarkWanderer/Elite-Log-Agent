@@ -134,7 +134,6 @@
     <Compile Include="Autorun\SingleLaunch.cs" />
     <Compile Include="CastleWindsorPluginLoader.cs" />
     <Compile Include="FileSettingsStorage.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Settings\GeneralSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
