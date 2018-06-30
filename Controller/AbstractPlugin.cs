@@ -3,7 +3,6 @@ using DW.ELA.Interfaces.Settings;
 using DW.ELA.LogModel;
 using DW.ELA.Utility;
 using Interfaces;
-using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -81,13 +80,5 @@ namespace DW.ELA.Controller
         }
 
         public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
-
-        protected class EventRawJsonExtractor : IEventConverter<JObject>
-        {
-            public IEnumerable<JObject> Convert(LogEvent @event)
-            {
-                yield return @event.Raw;
-            }
-        }
     }
 }

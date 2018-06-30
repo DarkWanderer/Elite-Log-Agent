@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="AutorunManagerTests.cs" />
     <Compile Include="EddnEventConverterTests.cs" />
+    <Compile Include="InaraEventConverterTests.cs" />
     <Compile Include="LogEventConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEventSource.cs" />
@@ -92,6 +93,10 @@
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">
       <Project>{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}</Project>
       <Name>DW.ELA.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin.Inara\DW.ELA.Plugin.Inara.csproj">
+      <Project>{6F64B299-6A1D-4F4A-9BD6-911634A9F02F}</Project>
+      <Name>DW.ELA.Plugin.Inara</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

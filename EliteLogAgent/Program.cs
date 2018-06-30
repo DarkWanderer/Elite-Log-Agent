@@ -54,9 +54,9 @@ namespace EliteLogAgent
                 // Load plugins
                 // TODO: add dynamic plugin loader
                 var pluginManager = container.Resolve<IPluginManager>();
-                //pluginManager.LoadPlugin("DW.ELA.Plugin.Inara");
+                pluginManager.LoadPlugin("DW.ELA.Plugin.Inara");
                 pluginManager.LoadPlugin("DW.ELA.Plugin.EDDN");
-                //pluginManager.LoadPlugin("DW.ELA.Plugin.EDSM");
+                pluginManager.LoadPlugin("DW.ELA.Plugin.EDSM");
 
                 var broker = container.Resolve<IMessageBroker>();
                 var logMonitor = container.Resolve<ILogRealTimeDataSource>();
