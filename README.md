@@ -9,29 +9,31 @@ Allows updating external sites (and possibly do other actions) in near-real-time
 
 Currently in beta stage
 
-## Quickstart: how to use
+## Quickstart
 
 * Download [latest version][clickonce]
-* Input commander name, Inara and EDSM API keys, click 'verify' to check info is correct
+* Input commander name, Inara and/or EDSM API keys, click 'verify' to check info is correct
 * Save settings (apply and/or OK)
-* (optional) Upload last 5 logs using relevant button
+* (optional) Upload logs from last few sessions
 * launch the game.
 
 ## Current Features
 
-* EDSM (practically all log events)
-* Inara (balance, travel, materials, engineer progress)
+* Inara: most of events provided by API (except CG)
+* EDSM: full journal support
+* EDDN: journal events (WIP)
 
 ## Planned features
 
-* **Support for EDDB/EDDN data feeds**
+* More beautiful UI
+* "Cloud" error reporting
+* Support for [EDDN](https://github.com/EDSM-NET/EDDN/wiki) data feed
 * Support for [Canonn API v2](https://github.com/canonn-science/CAPIv2-Strapi)
 * Google sheets for Powerplay/BGS
 
 ## Get latest version
 
 * ClickOnce application installer [here][clickonce]
-* Latest (pre-)release merged .exe [here][releases]
 
 ## Plugin development
 
@@ -44,7 +46,7 @@ You're welcome to contribute by:
 
 1. Using the application!
 2. Raising [issues](https://github.com/DarkWanderer/Elite-Log-Agent/issues) on GitHub
-4. Proposing pull request with changes and/or new functionality, including plugins
+3. Proposing pull request with changes and/or new functionality, including plugins
 
 ## SDLC
 
@@ -61,6 +63,7 @@ Releasing to ClickOnce installer is done via merging to `prod` branch
 
 * [Elite: Dangerous in official store](https://www.frontierstore.net/games/elite-dangerous-cat.html)
 * [INARA](https://inara.cz)
+* [EDSM](https://edsm.net)
 
 [buildstatus-master]: https://ci.appveyor.com/api/projects/status/6n52i9wkthtwtb34/branch/master
 [buildstatus-prod]: https://ci.appveyor.com/api/projects/status/6n52i9wkthtwtb34/branch/prod

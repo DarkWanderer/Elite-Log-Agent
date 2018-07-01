@@ -1,5 +1,7 @@
-﻿using DW.ELA.LogModel;
+﻿using DW.ELA.Interfaces;
+using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
@@ -12,7 +14,7 @@ namespace DW.ELA.UnitTests
 {
     public class LogEventConverterTests
     {
-        [Test]
+        [Test(Description = "Checks conversion of basic event")]
         public void ShouldConvertFsdJumpEvent()
         {
             string eventString = @"{""timestamp"":""2018-06-25T18:10:30Z"", ""event"":""FSDJump"", ""StarSystem"":""Shinrarta Dezhra"", 
@@ -25,7 +27,18 @@ namespace DW.ELA.UnitTests
 
             var @event = (FsdJump)LogEventConverter.Convert(JObject.Parse(eventString));
             Assert.AreEqual(new DateTime(2018, 06, 25, 18, 10, 30, DateTimeKind.Utc), @event.Timestamp);
-            
+        }
+
+
+        [Test(Description = "Checks that events do not lose data or get assigned non-existing")]
+        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
+        public void EventsTransformationShouldNotSpoilData(LogEvent e)
+        {
+            if (e.GetType() == typeof(LogEvent))
+                Assert.Pass();
+
+            var serialized = JObject.FromObject(e, new JsonSerializer { NullValueHandling = NullValueHandling.Ignore });
+            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized));
         }
     }
 }
