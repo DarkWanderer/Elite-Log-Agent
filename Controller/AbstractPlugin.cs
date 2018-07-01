@@ -10,11 +10,14 @@ using System.Timers;
 
 namespace DW.ELA.Controller
 {
-    public abstract class AbstractPlugin<TSettings> : IPlugin where TSettings : class, new()
+    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin
+        where TSettings : class, new()
+        where TEvent : class
     {
-        protected readonly List<LogEvent> EventQueue = new List<LogEvent>();
+        protected readonly List<TEvent> EventQueue = new List<TEvent>();
         protected readonly ISettingsProvider SettingsProvider;
         private readonly Timer flushTimer = new Timer();
+
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         protected AbstractPlugin(ISettingsProvider settingsProvider)
@@ -29,17 +32,22 @@ namespace DW.ELA.Controller
         public abstract string PluginName { get; }
         public abstract string PluginId { get; }
 
+        protected abstract IEventConverter<TEvent> EventConverter { get; }
+        public abstract AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings);
+        public abstract void FlushEvents(TEvent[] events);
+        public abstract void ReloadSettings();
+
         protected void FlushQueue()
         {
             try
             {
-                LogEvent[] events;
+                TEvent[] events;
                 lock (EventQueue)
                 {
                     events = EventQueue.ToArray();
                     EventQueue.Clear();
                 }
-                ProcessEvents(events);
+                FlushEvents(events);
             }
             catch (Exception e)
             {
@@ -47,11 +55,10 @@ namespace DW.ELA.Controller
             }
         }
 
-
         public void OnNext(LogEvent @event)
         {
             lock (EventQueue)
-                EventQueue.Add(@event);
+                EventQueue.AddRange(EventConverter.Convert(@event));
         }
 
         public virtual void OnCompleted() => FlushQueue();
@@ -59,9 +66,6 @@ namespace DW.ELA.Controller
         public virtual void OnError(Exception error) { }
 
         public IObserver<LogEvent> GetLogObserver() => this;
-        public abstract AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings);
-        public abstract void ProcessEvents(LogEvent[] events);
-        public abstract void ReloadSettings();
 
         protected GlobalSettings GlobalSettings
         {
@@ -72,7 +76,7 @@ namespace DW.ELA.Controller
         protected TSettings Settings
         {
             get => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings;
-            set => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings = value;
+            //set => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings = value;
         }
 
         public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);

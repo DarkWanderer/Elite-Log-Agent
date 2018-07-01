@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DW.ELA.Interfaces;
+using Newtonsoft.Json;
 
 namespace DW.ELA.LogModel.Events
 {
@@ -23,7 +24,7 @@ namespace DW.ELA.LogModel.Events
         public long SystemAddress { get; set; }
 
         [JsonProperty("StarPos")]
-        public long[] StarPos { get; set; }
+        public double[] StarPos { get; set; }
 
         [JsonProperty("SystemAllegiance")]
         public string SystemAllegiance { get; set; }

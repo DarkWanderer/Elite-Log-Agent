@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DW.ELA.Interfaces;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 

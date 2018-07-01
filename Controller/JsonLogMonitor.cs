@@ -9,6 +9,7 @@ using System.Linq;
 using System.Timers;
 using System.Threading.Tasks;
 using DW.ELA.LogModel;
+using DW.ELA.Interfaces;
 
 namespace Controller
 {

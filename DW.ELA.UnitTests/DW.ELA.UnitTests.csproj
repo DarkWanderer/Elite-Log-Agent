@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MoreLinq, Version=3.0.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.0.0\lib\net451\MoreLinq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -42,17 +45,29 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.4.0.0\lib\net46\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutorunManagerTests.cs" />
+    <Compile Include="EddnEventConverterTests.cs" />
+    <Compile Include="InaraEventConverterTests.cs" />
     <Compile Include="LogEventConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestEventSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -63,6 +78,14 @@
       <Project>{14C53350-191B-4367-BEC4-7B749E7B1EEB}</Project>
       <Name>DW.ELA.Controller</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DW.ELA.Plugin.EDDN\DW.ELA.Plugin.EDDN.csproj">
+      <Project>{A9E8BE2A-1256-4933-AC2C-C2CE7AB26900}</Project>
+      <Name>DW.ELA.Plugin.EDDN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DW.ELA.Utility\DW.ELA.Utility.csproj">
+      <Project>{93DCDB11-335D-400C-BD87-554A0C1E2CEE}</Project>
+      <Name>DW.ELA.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EliteLogAgent\EliteLogAgent.csproj">
       <Project>{49BDB0D0-0C0A-4E83-AF13-A92DC6D2D608}</Project>
       <Name>EliteLogAgent</Name>
@@ -71,6 +94,13 @@
       <Project>{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}</Project>
       <Name>DW.ELA.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugin.Inara\DW.ELA.Plugin.Inara.csproj">
+      <Project>{6F64B299-6A1D-4F4A-9BD6-911634A9F02F}</Project>
+      <Name>DW.ELA.Plugin.Inara</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CannedEvents.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

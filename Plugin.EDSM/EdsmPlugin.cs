@@ -1,4 +1,5 @@
 ﻿using DW.ELA.Controller;
+using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
 using DW.ELA.LogModel;
 using Interfaces;
@@ -12,13 +13,15 @@ using Utility;
 
 namespace ELA.Plugin.EDSM
 {
-    public class EdsmPlugin : AbstractPlugin<EdsmSettings>
+    public class EdsmPlugin : AbstractPlugin<JObject,EdsmSettings>
     {
         private readonly IRestClient RestClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
         private Task<HashSet<string>> ignoredEvents;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private IEdsmApiFacade apiFacade;
+        private readonly IEventConverter<JObject> eventConverter = new EventRawJsonExtractor();
+        protected override IEventConverter<JObject> EventConverter => eventConverter;
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder) : base (settingsProvider)
         {
@@ -38,13 +41,13 @@ namespace ELA.Plugin.EDSM
             apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
         }
 
-        public override async void ProcessEvents(LogEvent[] events)
+        public override async void FlushEvents(JObject[] events)
         {
             if (!Settings.Verified)
                 return;
             try
             {
-                var apiEvents = events.Select(e => e.Raw).Select(Enrich).ToArray();
+                var apiEvents = events.Select(Enrich).ToArray();
                 if (apiEvents.Length > 0)
                     await apiFacade?.PostLogEvents(apiEvents);
             }

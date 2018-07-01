@@ -9,7 +9,7 @@ namespace Utility
         {
             get
             {
-                var assembly = Assembly.GetEntryAssembly();
+                var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly() ?? typeof(AppInfo).Assembly;
                 var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
                 return fileVersionInfo.FileVersion;
             }

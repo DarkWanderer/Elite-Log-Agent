@@ -1,4 +1,5 @@
 ﻿using DW.ELA.Controller;
+using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
 using DW.ELA.LogModel;
 using DW.ELA.Plugin.Inara.Model;
@@ -12,7 +13,7 @@ using Utility;
 
 namespace DW.ELA.Plugin.Inara
 {
-    public class InaraPlugin : AbstractPlugin<InaraSettings>
+    public class InaraPlugin : AbstractPlugin<ApiEvent,InaraSettings>
     {
         public override string PluginName => CPluginName;
         public override string PluginId => CPluginId;
@@ -24,6 +25,7 @@ namespace DW.ELA.Plugin.Inara
         private readonly InaraEventConverter eventConverter;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private ISettingsProvider settingsProvider;
+        protected override IEventConverter<ApiEvent> EventConverter => eventConverter;
 
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
@@ -40,14 +42,14 @@ namespace DW.ELA.Plugin.Inara
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 
-        public override async void ProcessEvents(LogEvent[] events)
+        public override async void FlushEvents(ApiEvent[] events)
         {
             if (!Settings.Verified)
                 return;
             try
             {
                 var facade = new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName);
-                var apiEvents = Compact(events.SelectMany(eventConverter.Convert).Where(e => e != null)).ToArray();
+                var apiEvents = Compact(events).ToArray();
                 if (apiEvents.Length > 0)
                 {
                     var results = await facade.ApiCall(apiEvents);
@@ -77,7 +79,7 @@ namespace DW.ELA.Plugin.Inara
                 .GroupBy(e => e.EventName, e => e)
                 .ToDictionary(g => g.Key, g => g.ToArray());
             foreach (var type in latestOnlyEvents.Intersect(eventsByType.Keys))
-                eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp) };
+                eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp).FirstOrDefault() };
 
             return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
         }

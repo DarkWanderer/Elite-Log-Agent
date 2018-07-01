@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DW.ELA.Interfaces;
+using Newtonsoft.Json;
 
 namespace DW.ELA.LogModel.Events
 {

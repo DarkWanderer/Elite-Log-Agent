@@ -7,6 +7,7 @@ using MoreLinq;
 using NLog;
 using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces;
 
 namespace Controller
 {
@@ -119,6 +120,7 @@ namespace Controller
                             .Where(l => l.Key <= atTime)
                             .DefaultIfEmpty()
                             .MaxBy(l => l.Key)
+                            .FirstOrDefault()
                             .Value;
                 }
                 catch (Exception e)

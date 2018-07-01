@@ -1,6 +1,7 @@
 ﻿namespace DW.ELA.LogModel.Events
 {
     using System;
+    using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
     public class Loadout : LogEvent
