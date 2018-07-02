@@ -42,7 +42,7 @@ namespace DW.ELA.UnitTests.Utility
                     case JArray a: return Compare(tokenName, t1 as JArray, t2 as JArray);
                     case JObject o: return Compare(tokenName, t1 as JObject, t2 as JObject);
                     default:
-                        if (!JToken.DeepEquals(t1, t2))
+                        if (t1.ToString() != t2.ToString())
                             return new[] { $"{tokenName}: expected {t1}, got {t2}" };
                         break;
                 }

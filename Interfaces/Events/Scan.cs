@@ -30,7 +30,7 @@ namespace DW.ELA.LogModel.Events
         public double MassEm { get; set; }
 
         [JsonProperty("Radius")]
-        public long Radius { get; set; }
+        public double Radius { get; set; }
 
         [JsonProperty("SurfaceGravity")]
         public double SurfaceGravity { get; set; }
@@ -61,6 +61,9 @@ namespace DW.ELA.LogModel.Events
 
         [JsonProperty("RotationPeriod")]
         public double RotationPeriod { get; set; }
+
+        [JsonProperty("AxialTilt")]
+        public double AxialTilt { get; set; }
 
         [JsonProperty("Rings")]
         public Ring[] Rings { get; set; }

@@ -66,6 +66,9 @@ namespace DW.ELA.LogModel.Events
 
         [JsonProperty("SystemFaction")]
         public string SystemFaction { get; set; }
+
+        [JsonProperty("FactionState")]
+        public FactionState? FactionState { get; set; }
     }
 
     public class Faction

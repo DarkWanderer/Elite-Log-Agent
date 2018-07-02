@@ -33,7 +33,7 @@ namespace DW.ELA.UnitTests
             if (e.GetType() == typeof(LogEvent))
                 Assert.Pass();
 
-            var serialized = JObject.FromObject(e, new JsonSerializer { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate });
+            var serialized = JObject.FromObject(e, new JsonSerializer { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Populate });
             Assert.IsEmpty(JsonComparer.Compare(e.Event, e.Raw, serialized));
             // This assert should never trigger - if it triggers means there's an error in comparison code
             Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized)); 
