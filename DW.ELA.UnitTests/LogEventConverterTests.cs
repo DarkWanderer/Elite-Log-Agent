@@ -1,14 +1,11 @@
 ﻿using DW.ELA.Interfaces;
 using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
+using DW.ELA.UnitTests.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DW.ELA.UnitTests
 {
@@ -28,8 +25,7 @@ namespace DW.ELA.UnitTests
             var @event = (FsdJump)LogEventConverter.Convert(JObject.Parse(eventString));
             Assert.AreEqual(new DateTime(2018, 06, 25, 18, 10, 30, DateTimeKind.Utc), @event.Timestamp);
         }
-
-
+        
         [Test(Description = "Checks that events do not lose data or get assigned non-existing")]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
         public void EventsTransformationShouldNotSpoilData(LogEvent e)
@@ -37,8 +33,10 @@ namespace DW.ELA.UnitTests
             if (e.GetType() == typeof(LogEvent))
                 Assert.Pass();
 
-            var serialized = JObject.FromObject(e, new JsonSerializer { NullValueHandling = NullValueHandling.Ignore });
-            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized));
+            var serialized = JObject.FromObject(e, new JsonSerializer { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate });
+            Assert.IsEmpty(JsonComparer.Compare(e.Event, e.Raw, serialized));
+            // This assert should never trigger - if it triggers means there's an error in comparison code
+            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized)); 
         }
     }
 }

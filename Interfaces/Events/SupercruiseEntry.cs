@@ -7,5 +7,8 @@ namespace DW.ELA.LogModel.Events
     {
         [JsonProperty("StarSystem")]
         public string StarSystem { get; set; }
+
+        [JsonProperty("SystemAddress")]
+        public long SystemAddress { get; set; }
     }
 }

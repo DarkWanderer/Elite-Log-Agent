@@ -13,5 +13,8 @@ namespace DW.ELA.LogModel.Events
 
         [JsonProperty("Rank")]
         public long Rank { get; set; }
+
+        [JsonProperty("EngineerID")]
+        public long? EngineerId { get; set; }
     }
 }

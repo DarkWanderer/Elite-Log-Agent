@@ -1,143 +1,2023 @@
 ﻿{
-	"timestamp": "2018-06-28T19:58:23Z",
-	"event": "Shutdown"
+  "timestamp": "2017-03-10T20:27:44Z",
+  "event": "MiningRefined",
+  "Type": "$palladium_name;",
+  "Type_Localised": "Palladium"
 }
 {
-  "timestamp": "2018-06-28T19:58:20Z",
-  "event": "Music"
+  "timestamp": "2017-07-18T20:37:20Z",
+  "event": "PowerplayVote",
+  "Power": "Felicia Winters",
+  "Votes": 5,
+  "VoteToConsolidate": 1
 }
 {
-  "timestamp": "2018-06-28T19:56:32Z",
-  "event": "ModuleInfo"
+  "timestamp": "2017-07-30T12:46:51Z",
+  "event": "DockingTimeout",
+  "StationName": "Wheeler Market"
 }
 {
+  "timestamp": "2017-08-10T18:45:16Z",
+  "event": "ScientificResearch",
+  "Name": "unknowntechnologycomponents",
   "Category": "Manufactured",
-  "Name": "guardian_powercell",
-  "Name_Localised": "Guardian Power Cell",
-  "Count": 3,
-  "timestamp": "2018-06-28T19:56:20Z",
-  "event": "MaterialCollected"
+  "Count": 9
 }
 {
-  "timestamp": "2018-06-28T19:55:40Z",
-  "event": "HullDamage"
+  "timestamp": "2017-08-18T20:58:24Z",
+  "event": "CommunityGoalReward",
+  "Name": "Alliance Research Initiative – Trade",
+  "System": "Kaushpoos",
+  "Reward": 10542720
 }
 {
-  "timestamp": "2018-06-28T19:53:40Z",
-  "event": "UnderAttack"
+  "timestamp": "2017-09-10T12:16:29Z",
+  "event": "BuyTradeData",
+  "System": "Wongkamala",
+  "Cost": 100
 }
 {
-  "timestamp": "2018-06-28T19:53:40Z",
-  "event": "Bounty"
+  "timestamp": "2017-10-01T10:28:59Z",
+  "event": "RepairDrone",
+  "HullRepaired": 202.500427,
+  "CockpitRepaired": 6.480001
 }
 {
-  "timestamp": "2018-06-28T19:45:52Z",
-  "event": "Friends"
+  "timestamp": "2017-10-06T20:54:20Z",
+  "event": "CommunityGoalDiscard",
+  "Name": "Second Aegis Initiative",
+  "System": "Wolf 397"
 }
 {
-  "timestamp": "2018-06-28T19:45:45Z",
-  "event": "Liftoff"
+  "timestamp": "2017-11-05T18:40:58Z",
+  "event": "PowerplayFastTrack",
+  "Power": "Li Yong-Rui",
+  "Cost": 100000
 }
 {
-  "timestamp": "2018-06-28T19:45:13Z",
-  "event": "LaunchSRV"
+  "timestamp": "2017-11-05T18:41:03Z",
+  "event": "PowerplayCollect",
+  "Power": "Li Yong-Rui",
+  "Type": "$siriusindustrialequipment_name;",
+  "Type_Localised": "Sirius Industrial Equipment",
+  "Count": 10
 }
 {
-  "timestamp": "2018-06-28T19:45:11Z",
-  "event": "Touchdown"
+  "timestamp": "2017-12-02T12:17:16Z",
+  "event": "PowerplayLeave",
+  "Power": "Li Yong-Rui"
 }
 {
-  "timestamp": "2018-06-28T19:42:48Z",
-  "event": "SupercruiseExit"
+  "timestamp": "2017-12-27T11:28:34Z",
+  "event": "SelfDestruct"
 }
 {
-  "timestamp": "2018-06-28T19:42:45Z",
-  "event": "ApproachSettlement"
+  "timestamp": "2018-01-02T14:12:47Z",
+  "event": "CockpitBreached"
 }
 {
-  "timestamp": "2018-06-28T19:42:10Z",
-  "event": "ApproachBody"
+  "timestamp": "2018-01-04T19:34:58Z",
+  "event": "CapShipBond",
+  "Reward": 150000,
+  "AwardingFaction": "Eravarenth Alliance",
+  "VictimFaction": "Bunda Focus"
 }
 {
-  "timestamp": "2018-06-28T19:39:30Z",
-  "event": "FuelScoop"
+  "timestamp": "2018-01-20T10:54:26Z",
+  "event": "ShipyardSell",
+  "ShipType": "asp_scout",
+  "SellShipID": 43,
+  "ShipPrice": 3144204
 }
 {
-  "StarSystem": "Col 173 Sector QU-O d6-25",
-  "SystemAddress": 869655333211,
-  "StarPos": [
-    878.84375,
-    -205.5625,
-    -156.59375
+  "timestamp": "2018-02-02T19:41:44Z",
+  "event": "PayLegacyFines",
+  "Amount": 545
+}
+{
+  "timestamp": "2018-02-02T19:46:26Z",
+  "event": "PowerplayJoin",
+  "Power": "Felicia Winters"
+}
+{
+  "timestamp": "2018-02-10T14:06:00Z",
+  "event": "CommunityGoalJoin",
+  "Name": "Ram Tah's Last Hurrah",
+  "System": "Meene"
+}
+{
+  "timestamp": "2018-02-11T18:55:00Z",
+  "event": "Died"
+}
+{
+  "timestamp": "2018-02-11T18:55:53Z",
+  "event": "Resurrect",
+  "Option": "rebuy",
+  "Cost": 478493,
+  "Bankrupt": false
+}
+{
+  "timestamp": "2018-02-17T11:26:54Z",
+  "event": "MaterialDiscarded",
+  "Category": "Raw",
+  "Name": "nickel",
+  "Count": 3
+}
+{
+  "timestamp": "2018-02-17T20:51:51Z",
+  "event": "EngineerApply",
+  "Engineer": "Didi Vatermann",
+  "Blueprint": "ShieldGenerator_Reinforced",
+  "Level": 3
+}
+{
+  "timestamp": "2018-03-01T20:27:05Z",
+  "event": "CommunityGoal",
+  "CurrentGoals": [
+    {
+      "CGID": 466,
+      "Title": "Ram Tah's Last Hurrah",
+      "SystemName": "Meene",
+      "MarketName": "Felice Dock",
+      "Expiry": "2018-02-15T15:00:00Z",
+      "IsComplete": true,
+      "CurrentTotal": 154169,
+      "PlayerContribution": 23,
+      "NumContributors": 2273,
+      "TopTier": {
+        "Name": "Tier 8",
+        "Bonus": ""
+      },
+      "TopRankSize": 10,
+      "PlayerInTopRank": false,
+      "TierReached": "Tier 2",
+      "PlayerPercentileBand": 75,
+      "Bonus": 400000
+    }
+  ]
+}
+{
+  "timestamp": "2018-03-04T09:23:32Z",
+  "event": "DataScanned",
+  "Type": "ANCIENTCODEX"
+}
+{
+  "timestamp": "2018-03-17T18:00:25Z",
+  "event": "KickCrewMember",
+  "Crew": "Supermadboy",
+  "OnCrime": false
+}
+{
+  "timestamp": "2018-04-07T07:53:15Z",
+  "event": "Promotion",
+  "Combat": 7
+}
+{
+  "timestamp": "2018-04-26T15:42:37Z",
+  "event": "CrewHire",
+  "Name": "Mckenna Mcfarland",
+  "CrewID": 90943840,
+  "Faction": "HIP 58317 Silver Electronics Org",
+  "Cost": 15000,
+  "CombatRank": 0
+}
+{
+  "timestamp": "2018-04-26T15:42:46Z",
+  "event": "CrewFire",
+  "Name": "Denisse Ewing",
+  "CrewID": 87591298
+}
+{
+  "timestamp": "2018-05-02T18:41:17Z",
+  "event": "PVPKill",
+  "Victim": "Reakktor",
+  "CombatRank": 3
+}
+{
+  "timestamp": "2018-05-10T14:54:42Z",
+  "event": "BuyExplorationData",
+  "System": "Gorramacor",
+  "Cost": 80
+}
+{
+  "timestamp": "2018-05-11T15:26:30Z",
+  "event": "EngineerContribution",
+  "Engineer": "Zacariah Nemo",
+  "EngineerID": 300050,
+  "Type": "Commodity",
+  "Commodity": "xihecompanions",
+  "Commodity_Localised": "Xihe Biomorphic Companions",
+  "Quantity": 5,
+  "TotalQuantity": 25
+}
+{
+  "timestamp": "2018-05-11T15:29:19Z",
+  "event": "EngineerProgress",
+  "Engineer": "Zacariah Nemo",
+  "EngineerID": 300050,
+  "Rank": 5
+}
+{
+  "timestamp": "2018-05-11T17:33:58Z",
+  "event": "Interdiction",
+  "Success": true,
+  "IsPlayer": true,
+  "Interdicted": "Ysharia",
+  "CombatRank": 7
+}
+{
+  "timestamp": "2018-05-18T20:34:27Z",
+  "event": "FetchRemoteModule",
+  "StorageSlot": 115,
+  "StoredItem": "$hpt_guardian_gausscannon_fixed_medium_name;",
+  "StoredItem_Localised": "Gauss Cannon",
+  "ServerId": 128833687,
+  "TransferCost": 4491,
+  "TransferTime": 1762,
+  "Ship": "federation_dropship",
+  "ShipID": 36
+}
+{
+  "timestamp": "2018-05-18T21:07:19Z",
+  "event": "MaterialDiscovered",
+  "Category": "Manufactured",
+  "Name": "tg_propulsionelement",
+  "Name_Localised": "Propulsion Elements",
+  "DiscoveryNumber": 61
+}
+{
+  "timestamp": "2018-05-19T08:22:21Z",
+  "event": "SystemsShutdown"
+}
+{
+  "timestamp": "2018-05-19T08:31:00Z",
+  "event": "AfmuRepairs",
+  "Module": "$federation_dropship_cockpit_name;",
+  "Module_Localised": "Cockpit",
+  "FullyRepaired": true,
+  "Health": 1.0
+}
+{
+  "timestamp": "2018-05-20T10:15:41Z",
+  "event": "MissionFailed",
+  "Name": "Mission_PassengerVIP_name",
+  "MissionID": 381964748
+}
+{
+  "timestamp": "2018-05-20T15:42:07Z",
+  "event": "Passengers",
+  "Manifest": [
+    {
+      "MissionID": 382128944,
+      "Type": "Soldier",
+      "VIP": true,
+      "Wanted": false,
+      "Count": 2
+    },
+    {
+      "MissionID": 382128722,
+      "Type": "Soldier",
+      "VIP": true,
+      "Wanted": false,
+      "Count": 6
+    },
+    {
+      "MissionID": 382128451,
+      "Type": "Tourist",
+      "VIP": true,
+      "Wanted": false,
+      "Count": 4
+    },
+    {
+      "MissionID": 382128313,
+      "Type": "Tourist",
+      "VIP": true,
+      "Wanted": false,
+      "Count": 3
+    },
+    {
+      "MissionID": 382128617,
+      "Type": "Soldier",
+      "VIP": true,
+      "Wanted": false,
+      "Count": 5
+    }
+  ]
+}
+{
+  "timestamp": "2018-05-20T16:23:19Z",
+  "event": "EscapeInterdiction",
+  "Interdictor": "Mortimer VanCleef",
+  "IsPlayer": false
+}
+{
+  "timestamp": "2018-05-20T16:45:40Z",
+  "event": "DockingCancelled",
+  "MarketID": 128666762,
+  "StationName": "Jameson Memorial",
+  "StationType": "Orbis"
+}
+{
+  "timestamp": "2018-05-23T19:19:18Z",
+  "event": "WingInvite",
+  "Name": "Brantford"
+}
+{
+  "timestamp": "2018-06-03T08:29:18Z",
+  "event": "CrewLaunchFighter",
+  "Crew": "the reckoning"
+}
+{
+  "timestamp": "2018-06-03T08:31:58Z",
+  "event": "NpcCrewRank",
+  "NpcCrewName": "Mckenna Mcfarland",
+  "NpcCrewId": 90943840,
+  "RankCombat": 4
+}
+{
+  "timestamp": "2018-06-05T20:03:59Z",
+  "event": "ShieldState",
+  "ShieldsUp": false
+}
+{
+  "timestamp": "2018-06-08T19:39:35Z",
+  "event": "DatalinkVoucher",
+  "Reward": 5731,
+  "VictimFaction": "Empire",
+  "PayeeFaction": "Alliance"
+}
+{
+  "timestamp": "2018-06-08T19:39:35Z",
+  "event": "DatalinkScan",
+  "Message": "$DATAPOINT_GAMEPLAY_complete;",
+  "Message_Localised": "Alert: All Data Point telemetry links established, Intel package created."
+}
+{
+  "timestamp": "2018-06-10T12:30:36Z",
+  "event": "SearchAndRescue",
+  "MarketID": 128016384,
+  "Name": "wreckagecomponents",
+  "Name_Localised": "Wreckage Components",
+  "Count": 5,
+  "Reward": 22377
+}
+{
+  "timestamp": "2018-06-10T12:41:09Z",
+  "event": "VehicleSwitch"
+}
+{
+  "timestamp": "2018-06-10T12:43:48Z",
+  "event": "JoinACrew",
+  "Captain": "Vincent Valamore"
+}
+{
+  "timestamp": "2018-06-10T12:53:46Z",
+  "event": "ChangeCrewRole",
+  "Role": "FireCon"
+}
+{
+  "timestamp": "2018-06-10T12:56:05Z",
+  "event": "QuitACrew",
+  "Captain": "Vincent Valamore"
+}
+{
+  "timestamp": "2018-06-13T14:43:28Z",
+  "event": "MissionAbandoned",
+  "Name": "Mission_AssassinateWing_name",
+  "MissionID": 390554915
+}
+{
+  "timestamp": "2018-06-15T12:00:35Z",
+  "event": "ModuleSwap",
+  "MarketID": 128016384,
+  "FromSlot": "MediumHardpoint3",
+  "ToSlot": "MediumHardpoint2",
+  "FromItem": "$hpt_pulselaser_gimbal_medium_name;",
+  "FromItem_Localised": "Pulse Laser",
+  "ToItem": "$hpt_plasmashockcannon_fixed_medium_name;",
+  "ToItem_Localised": "Shock Cannon",
+  "Ship": "empire_courier",
+  "ShipID": 12
+}
+{
+  "timestamp": "2018-06-15T12:40:39Z",
+  "event": "PowerplayVoucher",
+  "Power": "Archon Delaine",
+  "Systems": [
+    "Sigma Pegasi"
+  ]
+}
+{
+  "timestamp": "2018-06-17T09:17:31Z",
+  "event": "RebootRepair",
+  "Modules": []
+}
+{
+  "timestamp": "2018-06-17T19:19:43Z",
+  "event": "DockFighter"
+}
+{
+  "timestamp": "2018-06-18T19:36:46Z",
+  "event": "CrewMemberRoleChange",
+  "Crew": "Aubric",
+  "Role": "Idle"
+}
+{
+  "timestamp": "2018-06-18T19:36:46Z",
+  "event": "CrewMemberJoins",
+  "Crew": "Aubric"
+}
+{
+  "timestamp": "2018-06-18T19:37:58Z",
+  "event": "CrewMemberQuits",
+  "Crew": "Aubric"
+}
+{
+  "timestamp": "2018-06-18T19:38:01Z",
+  "event": "EndCrewSession",
+  "OnCrime": false
+}
+{
+  "timestamp": "2018-06-18T20:08:38Z",
+  "event": "WingJoin",
+  "Others": []
+}
+{
+  "timestamp": "2018-06-18T20:19:53Z",
+  "event": "MissionAccepted",
+  "Faction": "Sol Workers' Party",
+  "Name": "Mission_AssassinateWing",
+  "LocalisedName": "Assassinate Terrorist Leader: Alexios Chouchoulas",
+  "TargetType": "$MissionUtil_FactionTag_TerroristLeader;",
+  "TargetType_Localised": "Terrorist Leader",
+  "TargetFaction": "Barnard's Star Crimson Society",
+  "DestinationSystem": "Barnard's Star",
+  "DestinationStation": "Boston Base",
+  "Target": "Alexios Chouchoulas",
+  "Expiry": "2018-06-19T20:15:21Z",
+  "Wing": true,
+  "Influence": "Med",
+  "Reputation": "Med",
+  "Reward": 3581424,
+  "MissionID": 392200364
+}
+{
+  "timestamp": "2018-06-18T20:31:01Z",
+  "event": "CargoDepot",
+  "MissionID": 392008226,
+  "UpdateType": "WingUpdate",
+  "StartMarketID": 0,
+  "EndMarketID": 3228208128,
+  "ItemsCollected": 0,
+  "ItemsDelivered": 980,
+  "TotalItemsToDeliver": 980,
+  "Progress": 0.0
+}
+{
+  "timestamp": "2018-06-18T20:34:22Z",
+  "event": "WingAdd",
+  "Name": "Yaichniy"
+}
+{
+  "timestamp": "2018-06-18T20:38:57Z",
+  "event": "WingLeave"
+}
+{
+  "timestamp": "2018-06-18T20:43:42Z",
+  "event": "LaunchFighter",
+  "Loadout": "three",
+  "PlayerControlled": false
+}
+{
+  "timestamp": "2018-06-18T20:44:44Z",
+  "event": "FighterDestroyed"
+}
+{
+  "timestamp": "2018-06-18T20:46:14Z",
+  "event": "FighterRebuilt",
+  "Loadout": "three"
+}
+{
+  "timestamp": "2018-06-18T20:47:02Z",
+  "event": "MissionRedirected",
+  "MissionID": 392200364,
+  "Name": "Mission_AssassinateWing_name",
+  "NewDestinationStation": "Daedalus",
+  "NewDestinationSystem": "Sol",
+  "OldDestinationStation": "",
+  "OldDestinationSystem": "Barnard's Star"
+}
+{
+  "timestamp": "2018-06-18T20:51:42Z",
+  "event": "RestockVehicle",
+  "Type": "federation_fighter",
+  "Loadout": "three",
+  "Cost": 2060,
+  "Count": 2
+}
+{
+  "timestamp": "2018-06-18T20:51:42Z",
+  "event": "RestockVehicle",
+  "Type": "federation_fighter",
+  "Loadout": "one",
+  "Cost": 1030,
+  "Count": 1
+}
+{
+  "timestamp": "2018-06-18T20:51:58Z",
+  "event": "MissionCompleted",
+  "Faction": "Sol Workers' Party",
+  "Name": "Mission_AssassinateWing_name",
+  "MissionID": 392200364,
+  "TargetType": "$MissionUtil_FactionTag_TerroristLeader;",
+  "TargetType_Localised": "Terrorist Leader",
+  "TargetFaction": "Barnard's Star Crimson Society",
+  "DestinationSystem": "Barnard's Star",
+  "DestinationStation": "Boston Base",
+  "Target": "Alexios Chouchoulas",
+  "Reward": 3581424,
+  "FactionEffects": [
+    {
+      "Faction": "Sol Workers' Party",
+      "Effects": [
+        {
+          "Effect": "$MISSIONUTIL_Interaction_Summary_lockdown_down;",
+          "Effect_Localised": "$#MinorFaction; have less signs of imposing a security lockdown.",
+          "Trend": "DownGood"
+        }
+      ],
+      "Influence": [
+        {
+          "SystemAddress": 10477373803,
+          "Trend": "UpGood"
+        }
+      ],
+      "Reputation": "UpGood"
+    },
+    {
+      "Faction": "",
+      "Effects": [
+        {
+          "Effect": "$MISSIONUTIL_Interaction_Summary_lockdown_up;",
+          "Effect_Localised": "Further terrorist actions could see the $#MinorFaction; considering a security lockdown ",
+          "Trend": "UpBad"
+        }
+      ],
+      "Influence": [
+        {
+          "SystemAddress": 18263140541865,
+          "Trend": "DownBad"
+        }
+      ],
+      "Reputation": "DownBad"
+    }
+  ]
+}
+{
+  "timestamp": "2018-06-20T17:31:50Z",
+  "event": "SellDrones",
+  "Type": "Drones",
+  "Count": 18,
+  "SellPrice": 100,
+  "TotalSale": 1800
+}
+{
+  "timestamp": "2018-06-20T17:45:04Z",
+  "event": "Screenshot",
+  "Filename": "\\ED_Pictures\\Screenshot_0117.bmp",
+  "Width": 3440,
+  "Height": 1440,
+  "System": "Wyrd",
+  "Body": "Wyrd A 2"
+}
+{
+  "timestamp": "2018-06-20T18:10:22Z",
+  "event": "PayBounties",
+  "Amount": 100,
+  "Faction": "$faction_Federation;",
+  "Faction_Localised": "Federation",
+  "ShipID": 40,
+  "BrokerPercentage": 25.0
+}
+{
+  "timestamp": "2018-06-23T09:13:59Z",
+  "event": "RedeemVoucher",
+  "Type": "bounty",
+  "Amount": 57282,
+  "Factions": [
+    {
+      "Faction": "",
+      "Amount": 38967
+    },
+    {
+      "Faction": "",
+      "Amount": 18315
+    }
   ],
-  "SystemAllegiance": "Guardian",
-  "SystemEconomy": "$economy_None;",
-  "SystemEconomy_Localised": "None",
-  "SystemSecondEconomy": "$economy_None;",
-  "SystemSecondEconomy_Localised": "None",
-  "SystemGovernment": "$government_None;",
-  "SystemGovernment_Localised": "None",
-  "SystemSecurity": "$GAlAXY_MAP_INFO_state_anarchy;",
-  "SystemSecurity_Localised": "Anarchy",
-  "Population": 0,
-  "JumpDist": 30.201,
-  "FuelUsed": 3.556967,
-  "FuelLevel": 15.751255,
-  "timestamp": "2018-06-28T19:39:22Z",
-  "event": "FSDJump"
+  "BrokerPercentage": 25.0
 }
 {
-  "timestamp": "2018-06-28T19:39:04Z",
-  "event": "StartJump"
+  "timestamp": "2018-06-23T09:18:08Z",
+  "event": "Repair",
+  "Item": "Wear",
+  "Cost": 74
 }
 {
-  "timestamp": "2018-06-28T19:38:43Z",
-  "event": "DiscoveryScan"
+  "timestamp": "2018-06-23T09:23:38Z",
+  "event": "NavBeaconScan",
+  "SystemAddress": 58140435172200,
+  "NumBodies": 34
 }
 {
+  "timestamp": "2018-06-23T09:36:50Z",
+  "event": "FactionKillBond",
+  "Reward": 9200,
+  "AwardingFaction": "Ross 769 Group",
+  "VictimFaction": "Jarnae Crimson Brotherhood"
+}
+{
+  "timestamp": "2018-06-24T15:55:42Z",
+  "event": "CommitCrime",
+  "CrimeType": "collidedAtSpeedInNoFireZone_hulldamage",
+  "Faction": "Mother Gaia",
+  "Fine": 200
+}
+{
+  "timestamp": "2018-06-24T15:56:17Z",
+  "event": "PayFines",
+  "Amount": 200,
+  "AllFines": false,
+  "Faction": "Mother Gaia",
+  "ShipID": 40
+}
+{
+  "timestamp": "2018-06-24T15:56:40Z",
+  "event": "MarketSell",
+  "MarketID": 128016384,
+  "Type": "usscargotradedata",
+  "Type_Localised": "Trade Data",
+  "Count": 1,
+  "SellPrice": 1576,
+  "TotalSale": 1576,
+  "AvgPricePaid": 0,
+  "IllegalGoods": true,
+  "BlackMarket": true
+}
+{
+  "timestamp": "2018-06-24T15:57:34Z",
+  "event": "SellExplorationData",
+  "Systems": [
+    "AU Microscopii",
+    "Wolf 1329",
+    "Jarnae"
+  ],
+  "Discovered": [],
+  "BaseValue": 36797,
+  "Bonus": 0,
+  "TotalEarnings": 34590
+}
+{
+  "timestamp": "2018-06-25T18:22:33Z",
+  "event": "HeatDamage"
+}
+{
+  "timestamp": "2018-06-25T18:27:25Z",
+  "event": "CrewAssign",
+  "Name": "Mckenna Mcfarland",
+  "CrewID": 90943840,
+  "Role": "Active"
+}
+{
+  "timestamp": "2018-06-25T18:28:10Z",
+  "event": "ShipyardTransfer",
+  "ShipType": "Asp",
+  "ShipType_Localised": "Asp Explorer",
+  "ShipID": 40,
+  "System": "Sol",
+  "ShipMarketID": 128016384,
+  "Distance": 64.432762,
+  "TransferPrice": 181276,
+  "TransferTime": 944,
+  "MarketID": 128666762
+}
+{
+  "timestamp": "2018-06-25T19:14:43Z",
+  "event": "SendText",
+  "To": "Dinkstr",
+  "Message": "Goodluck"
+}
+{
+  "timestamp": "2018-06-25T19:24:08Z",
+  "event": "Interdicted",
+  "Submitted": true,
+  "Interdictor": "Olivier Turquais",
+  "IsPlayer": false,
+  "Faction": "63 chi Leonis Crimson Camorra"
+}
+{
+  "timestamp": "2018-06-28T19:37:43Z",
+  "event": "Scan",
+  "ScanType": "Basic",
   "BodyName": "Synuefe TP-F b44-0 AB 4",
+  "BodyID": 10,
+  "Parents": [
+    {
+      "Null": 1
+    },
+    {
+      "Null": 0
+    }
+  ],
   "DistanceFromArrivalLS": 57.912472,
-  "TidalLock": false,
   "PlanetClass": "High metal content body",
   "MassEM": 0.010162,
-  "Radius": 1417731,
+  "Radius": 1417731.25,
   "SurfaceGravity": 2.015106,
-  "SurfaceTemperature": 0.0,
-  "SurfacePressure": 0,
-  "Landable": false,
-  "SemiMajorAxis": 16928640000,
+  "SemiMajorAxis": 16928640000.0,
   "Eccentricity": 0.000764,
   "OrbitalInclination": -0.293698,
   "Periapsis": 231.406052,
-  "OrbitalPeriod": 1792185,
+  "OrbitalPeriod": 1792185.0,
   "RotationPeriod": -1792185.5,
-  "timestamp": "2018-06-28T19:37:43Z",
-  "event": "Scan"
+  "AxialTilt": -2.402555
 }
 {
-  "timestamp": "2018-06-28T19:33:41Z",
-  "event": "Powerplay"
+  "timestamp": "2018-06-30T17:01:29Z",
+  "event": "Synthesis",
+  "Name": "Repair Basic",
+  "Materials": [
+    {
+      "Name": "iron",
+      "Count": 2
+    },
+    {
+      "Name": "nickel",
+      "Count": 1
+    }
+  ]
 }
 {
-  "timestamp": "2018-06-28T19:30:24Z",
+  "timestamp": "2018-06-30T17:15:17Z",
+  "event": "HullDamage",
+  "Health": 0.585427,
+  "PlayerPilot": true
+}
+{
+  "timestamp": "2018-06-30T17:30:50Z",
+  "event": "LaunchSRV",
+  "Loadout": "starter",
+  "PlayerControlled": true
+}
+{
+  "timestamp": "2018-06-30T17:41:15Z",
+  "event": "Touchdown",
+  "PlayerControlled": false
+}
+{
+  "timestamp": "2018-06-30T17:43:09Z",
+  "event": "DockSRV"
+}
+{
+  "timestamp": "2018-06-30T17:43:49Z",
+  "event": "Liftoff",
+  "PlayerControlled": true,
+  "Latitude": -56.672775,
+  "Longitude": 91.45607
+}
+{
+  "timestamp": "2018-06-30T18:06:25Z",
   "event": "HeatWarning"
 }
 {
-  "timestamp": "2018-06-28T19:13:17Z",
-  "event": "Cargo"
+  "timestamp": "2018-06-30T18:10:18Z",
+  "event": "ApproachBody",
+  "StarSystem": "Mati",
+  "SystemAddress": 11668217800113,
+  "Body": "Mati 1",
+  "BodyID": 5
 }
 {
-  "timestamp": "2018-06-28T19:13:17Z",
-  "event": "Missions"
+  "timestamp": "2018-06-30T18:10:29Z",
+  "event": "LeaveBody",
+  "StarSystem": "Mati",
+  "SystemAddress": 11668217800113,
+  "Body": "Mati 1",
+  "BodyID": 5
 }
 {
+  "timestamp": "2018-06-30T18:11:33Z",
+  "event": "Market",
+  "MarketID": 3224542464,
+  "StationName": "Bickel Dock",
+  "StarSystem": "Mati"
+}
+{
+  "timestamp": "2018-06-30T18:11:43Z",
+  "event": "MarketBuy",
+  "MarketID": 3224542464,
+  "Type": "hnshockmount",
+  "Type_Localised": "HN Shock Mount",
+  "Count": 8,
+  "BuyPrice": 1957,
+  "TotalCost": 15656
+}
+{
+  "timestamp": "2018-06-30T18:17:20Z",
+  "event": "ApproachSettlement",
+  "Name": "Abbott Vision",
+  "MarketID": 3517576960
+}
+{
+  "timestamp": "2018-06-30T18:17:20Z",
+  "event": "ApproachSettlement",
+  "Name": "Medupe Legacy",
+  "MarketID": 3517577216
+}
+{
+  "timestamp": "2018-06-30T18:18:45Z",
+  "event": "TechnologyBroker",
+  "BrokerType": "guardian",
+  "MarketID": 3225091328,
+  "ItemsUnlocked": [
+    {
+      "Name": "Int_GuardianFSDBooster_Size1",
+      "Name_Localised": "Guardian FSD Booster"
+    },
+    {
+      "Name": "Int_GuardianFSDBooster_Size2",
+      "Name_Localised": "$Int_GuardianFSDBooster_Size1_Name;"
+    },
+    {
+      "Name": "Int_GuardianFSDBooster_Size3",
+      "Name_Localised": "$Int_GuardianFSDBooster_Size1_Name;"
+    },
+    {
+      "Name": "Int_GuardianFSDBooster_Size4",
+      "Name_Localised": "$Int_GuardianFSDBooster_Size1_Name;"
+    },
+    {
+      "Name": "Int_GuardianFSDBooster_Size5",
+      "Name_Localised": "$Int_GuardianFSDBooster_Size1_Name;"
+    }
+  ],
+  "Commodities": [
+    {
+      "Name": "hnshockmount",
+      "Name_Localised": "HN Shock Mount",
+      "Count": 8
+    }
+  ],
+  "Materials": [
+    {
+      "Name": "guardian_moduleblueprint",
+      "Name_Localised": "Guardian Module Blueprint Segment",
+      "Count": 1,
+      "Category": "Encoded"
+    },
+    {
+      "Name": "guardian_powercell",
+      "Name_Localised": "Guardian Power Cell",
+      "Count": 21,
+      "Category": "Manufactured"
+    },
+    {
+      "Name": "focuscrystals",
+      "Name_Localised": "Focus Crystals",
+      "Count": 24,
+      "Category": "Manufactured"
+    },
+    {
+      "Name": "guardian_techcomponent",
+      "Name_Localised": "Guardian Technology Component",
+      "Count": 21,
+      "Category": "Manufactured"
+    }
+  ]
+}
+{
+  "timestamp": "2018-06-30T18:25:40Z",
+  "event": "MaterialTrade",
+  "MarketID": 3225091328,
+  "TraderType": "encoded",
+  "Paid": {
+    "Material": "embeddedfirmware",
+    "Material_Localised": "Modified Embedded Firmware",
+    "Category": "$MICRORESOURCE_CATEGORY_Encoded;",
+    "Category_Localised": "Encoded",
+    "Quantity": 2
+  },
+  "Received": {
+    "Material": "securityfirmware",
+    "Material_Localised": "Security Firmware Patch",
+    "Category": "$MICRORESOURCE_CATEGORY_Encoded;",
+    "Category_Localised": "Encoded",
+    "Quantity": 6
+  }
+}
+{
+  "timestamp": "2018-06-30T18:31:37Z",
+  "event": "DiscoveryScan",
+  "SystemAddress": 2870782928313,
+  "Bodies": 1
+}
+{
+  "timestamp": "2018-06-30T18:31:53Z",
+  "event": "JetConeBoost",
+  "BoostValue": 1.5
+}
+{
+  "timestamp": "2018-06-30T18:36:52Z",
+  "event": "RepairAll",
+  "Cost": 289
+}
+{
+  "timestamp": "2018-06-30T18:40:24Z",
+  "event": "ShipyardBuy",
+  "ShipType": "krait_mkii",
+  "ShipType_Localised": "Krait MkII",
+  "ShipPrice": 41232785,
+  "StoreOldShip": "Federation_Corvette",
+  "StoreShipID": 3,
+  "MarketID": 128666762
+}
+{
+  "timestamp": "2018-06-30T18:40:25Z",
+  "event": "ShipyardNew",
+  "ShipType": "krait_mkii",
+  "ShipType_Localised": "Krait MkII",
+  "NewShipID": 51
+}
+{
+  "timestamp": "2018-06-30T18:42:21Z",
+  "event": "MassModuleStore",
+  "MarketID": 128666762,
+  "Ship": "python",
+  "ShipID": 32,
+  "Items": [
+    {
+      "Slot": "LargeHardpoint1",
+      "Name": "$hpt_slugshot_gimbal_large_name;",
+      "Name_Localised": "Frag Cannon",
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 2,
+      "Quality": 0.0
+    },
+    {
+      "Slot": "LargeHardpoint2",
+      "Name": "$hpt_slugshot_gimbal_large_name;",
+      "Name_Localised": "Frag Cannon",
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 3,
+      "Quality": 0.9517
+    },
+    {
+      "Slot": "LargeHardpoint3",
+      "Name": "$hpt_plasmaaccelerator_fixed_large_name;",
+      "Name_Localised": "Plasma Acc",
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 1,
+      "Quality": 1.0
+    },
+    {
+      "Slot": "MediumHardpoint1",
+      "Name": "$hpt_railgun_fixed_medium_name;",
+      "Name_Localised": "Rail Gun",
+      "Hot": false,
+      "EngineerModifications": "Weapon_LongRange",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Slot": "MediumHardpoint2",
+      "Name": "$hpt_basicmissilerack_fixed_medium_name;",
+      "Name_Localised": "Seeker Missile Rack",
+      "Hot": false,
+      "EngineerModifications": "Weapon_HighCapacity",
+      "Level": 4,
+      "Quality": 0.0
+    },
+    {
+      "Slot": "PowerPlant",
+      "Name": "$int_powerplant_size7_class5_name;",
+      "Name_Localised": "Power Plant",
+      "Hot": false,
+      "EngineerModifications": "PowerPlant_Boosted",
+      "Level": 1,
+      "Quality": 1.0
+    },
+    {
+      "Slot": "FrameShiftDrive",
+      "Name": "$int_hyperdrive_size5_class5_name;",
+      "Name_Localised": "FSD",
+      "Hot": false,
+      "EngineerModifications": "FSD_LongRange",
+      "Level": 5,
+      "Quality": 0.804
+    },
+    {
+      "Slot": "PowerDistributor",
+      "Name": "$int_powerdistributor_size7_class5_name;",
+      "Name_Localised": "Power Distributor",
+      "Hot": false,
+      "EngineerModifications": "PowerDistributor_HighFrequency",
+      "Level": 5,
+      "Quality": 0.4433
+    },
+    {
+      "Slot": "Radar",
+      "Name": "$int_sensors_size6_class2_name;",
+      "Name_Localised": "Sensors",
+      "Hot": false,
+      "EngineerModifications": "Sensor_LongRange",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Slot": "Slot01_Size6",
+      "Name": "$int_shieldgenerator_size6_class3_fast_name;",
+      "Name_Localised": "Bi-Weave Shield",
+      "Hot": false,
+      "EngineerModifications": "ShieldGenerator_Reinforced",
+      "Level": 2,
+      "Quality": 1.0
+    },
+    {
+      "Slot": "Slot02_Size6",
+      "Name": "$int_cargorack_size6_class1_name;",
+      "Name_Localised": "Cargo Rack",
+      "Hot": false
+    },
+    {
+      "Slot": "Slot04_Size5",
+      "Name": "$int_fuelscoop_size5_class5_name;",
+      "Name_Localised": "Fuel Scoop",
+      "Hot": false
+    },
+    {
+      "Slot": "Slot05_Size5",
+      "Name": "$int_hullreinforcement_size5_class2_name;",
+      "Name_Localised": "Hull Reinforcement",
+      "Hot": false,
+      "EngineerModifications": "HullReinforcement_HeavyDuty",
+      "Level": 4,
+      "Quality": 0.915
+    },
+    {
+      "Slot": "Slot06_Size4",
+      "Name": "$int_shieldcellbank_size4_class5_name;",
+      "Name_Localised": "Shield Cell Bank",
+      "Hot": false,
+      "EngineerModifications": "ShieldCellBank_Rapid",
+      "Level": 3,
+      "Quality": 1.0
+    }
+  ]
+}
+{
+  "timestamp": "2018-06-30T18:44:51Z",
+  "event": "ModuleSellRemote",
+  "StorageSlot": 100,
+  "SellItem": "$int_engine_size6_class1_name;",
+  "SellItem_Localised": "Thrusters",
+  "ServerId": 128064088,
+  "SellPrice": 179772,
+  "Ship": "krait_mkii",
+  "ShipID": 51
+}
+{
+  "timestamp": "2018-06-30T18:49:34Z",
+  "event": "ModuleStore",
+  "MarketID": 128666762,
+  "Slot": "TinyHardpoint3",
+  "StoredItem": "$hpt_cloudscanner_size0_class3_name;",
+  "StoredItem_Localised": "Wake Scanner",
+  "Ship": "krait_mkii",
+  "ShipID": 51,
+  "Hot": false,
+  "EngineerModifications": "Sensor_LongRange",
+  "Level": 5,
+  "Quality": 1.0
+}
+{
+  "timestamp": "2018-06-30T18:52:35Z",
+  "event": "ModuleSell",
+  "MarketID": 128666762,
+  "Slot": "MediumHardpoint2",
+  "SellItem": "$hpt_pulselaser_fixed_small_name;",
+  "SellItem_Localised": "Pulse Laser",
+  "SellPrice": 1980,
+  "Ship": "krait_mkii",
+  "ShipID": 51
+}
+{
+  "timestamp": "2018-06-30T18:54:58Z",
+  "event": "ModuleRetrieve",
+  "MarketID": 128666762,
+  "Slot": "MediumHardpoint2",
+  "RetrievedItem": "$hpt_railgun_fixed_medium_name;",
+  "RetrievedItem_Localised": "Rail Gun",
+  "Ship": "krait_mkii",
+  "ShipID": 51,
+  "Hot": false,
+  "EngineerModifications": "Weapon_LongRange",
+  "Level": 3,
+  "Quality": 1.0
+}
+{
+  "timestamp": "2018-07-01T06:27:25Z",
+  "event": "Friends",
+  "Status": "Online",
+  "Name": "Icarus Smith"
+}
+{
+  "timestamp": "2018-07-01T06:28:00Z",
+  "event": "EngineerCraft",
+  "Slot": "FrameShiftDrive",
+  "Module": "int_hyperdrive_size5_class5",
+  "Ingredients": [
+    {
+      "Name": "arsenic",
+      "Count": 1
+    },
+    {
+      "Name": "chemicalmanipulators",
+      "Name_Localised": "Chemical Manipulators",
+      "Count": 1
+    },
+    {
+      "Name": "dataminedwake",
+      "Name_Localised": "Datamined Wake Exceptions",
+      "Count": 1
+    }
+  ],
+  "Engineer": "Felicity Farseer",
+  "EngineerID": 300100,
+  "BlueprintID": 128673694,
+  "BlueprintName": "FSD_LongRange",
+  "Level": 5,
+  "Quality": 0.939,
+  "Modifiers": [
+    {
+      "Label": "Mass",
+      "Value": 26.0,
+      "OriginalValue": 20.0,
+      "LessIsGood": 1
+    },
+    {
+      "Label": "Integrity",
+      "Value": 102.0,
+      "OriginalValue": 120.0,
+      "LessIsGood": 0
+    },
+    {
+      "Label": "PowerDraw",
+      "Value": 0.69,
+      "OriginalValue": 0.6,
+      "LessIsGood": 1
+    },
+    {
+      "Label": "FSDOptimalMass",
+      "Value": 1621.094971,
+      "OriginalValue": 1050.0,
+      "LessIsGood": 0
+    }
+  ]
+}
+{
+  "timestamp": "2018-07-01T06:31:42Z",
+  "event": "SetUserShipName",
+  "Ship": "krait_mkii",
+  "ShipID": 51,
+  "UserShipName": "Dragonborn",
+  "UserShipId": "FLC-DB"
+}
+{
+  "timestamp": "2018-07-01T06:34:23Z",
+  "event": "ModuleBuy",
+  "Slot": "Slot06_Size3",
+  "SellItem": "$int_fsdinterdictor_size3_class2_name;",
+  "SellItem_Localised": "FSD Interdictor",
+  "SellPrice": 254016,
+  "BuyItem": "$int_guardianfsdbooster_size3_name;",
+  "BuyItem_Localised": "Guardian FSD Booster",
+  "MarketID": 128666762,
+  "BuyPrice": 1458387,
+  "Ship": "krait_mkii",
+  "ShipID": 51
+}
+{
+  "timestamp": "2018-07-01T06:37:40Z",
+  "event": "BuyDrones",
+  "Type": "Drones",
+  "Count": 32,
+  "BuyPrice": 91,
+  "TotalCost": 2912
+}
+{
+  "timestamp": "2018-07-01T06:38:28Z",
+  "event": "PowerplaySalary",
+  "Power": "Felicia Winters",
+  "Amount": 50000
+}
+{
+  "timestamp": "2018-07-01T06:51:19Z",
+  "event": "USSDrop",
+  "USSType": "$USS_Type_WeaponsFire;",
+  "USSType_Localised": "Weapons fire detected",
+  "USSThreat": 2
+}
+{
+  "timestamp": "2018-07-01T07:29:11Z",
+  "event": "SupercruiseEntry",
+  "StarSystem": "Sokoji",
+  "SystemAddress": 7268829701553
+}
+{
+  "timestamp": "2018-07-01T07:36:44Z",
+  "event": "DockingDenied",
+  "Reason": "Distance",
+  "MarketID": 128666762,
+  "StationName": "Jameson Memorial",
+  "StationType": "Orbis"
+}
+{
+  "timestamp": "2018-07-01T07:36:58Z",
+  "event": "DockingRequested",
+  "MarketID": 128666762,
+  "StationName": "Jameson Memorial",
+  "StationType": "Orbis"
+}
+{
+  "timestamp": "2018-07-01T07:37:01Z",
+  "event": "DockingGranted",
+  "LandingPad": 38,
+  "MarketID": 128666762,
+  "StationName": "Jameson Memorial",
+  "StationType": "Orbis"
+}
+{
+  "timestamp": "2018-07-01T07:37:52Z",
+  "event": "NpcCrewPaidWage",
+  "NpcCrewName": "Mckenna Mcfarland",
+  "NpcCrewId": 90943840,
+  "Amount": 0
+}
+{
+  "timestamp": "2018-07-01T07:38:41Z",
+  "event": "Fileheader",
+  "part": 1,
+  "language": "English\\UK",
+  "gameversion": "3.1.0.201 EDH",
+  "build": "r174118/r0 "
+}
+{
+  "timestamp": "2018-07-01T07:39:12Z",
+  "event": "Reputation",
+  "Empire": 75.0,
+  "Federation": 83.183601,
+  "Alliance": 75.0
+}
+{
+  "timestamp": "2018-07-01T07:39:12Z",
+  "event": "Progress",
+  "Combat": 14,
+  "Trade": 51,
+  "Explore": 50,
+  "Empire": 68,
+  "Federation": 81,
+  "CQC": 0
+}
+{
+  "timestamp": "2018-07-01T07:39:12Z",
+  "event": "Rank",
+  "Combat": 7,
+  "Trade": 7,
+  "Explore": 6,
+  "Empire": 4,
+  "Federation": 12,
+  "CQC": 0
+}
+{
+  "timestamp": "2018-07-01T07:39:12Z",
+  "event": "LoadGame",
+  "Commander": "John Kozak",
+  "Horizons": true,
+  "Ship": "Krait_MkII",
+  "Ship_Localised": "Krait MkII",
+  "ShipID": 51,
+  "ShipName": "Dragonborn",
+  "ShipIdent": "FLC-DB",
+  "FuelLevel": 26.86816,
+  "FuelCapacity": 32.0,
+  "GameMode": "Solo",
+  "Credits": 173848530,
+  "Loan": 0
+}
+{
+  "timestamp": "2018-07-01T07:39:12Z",
+  "event": "Materials",
+  "Raw": [
+    {
+      "Name": "zinc",
+      "Count": 59
+    },
+    {
+      "Name": "mercury",
+      "Count": 7
+    },
+    {
+      "Name": "molybdenum",
+      "Count": 62
+    },
+    {
+      "Name": "ruthenium",
+      "Count": 16
+    },
+    {
+      "Name": "tin",
+      "Count": 44
+    },
+    {
+      "Name": "vanadium",
+      "Count": 47
+    },
+    {
+      "Name": "technetium",
+      "Count": 2
+    },
+    {
+      "Name": "cadmium",
+      "Count": 27
+    },
+    {
+      "Name": "zirconium",
+      "Count": 62
+    },
+    {
+      "Name": "sulphur",
+      "Count": 59
+    },
+    {
+      "Name": "nickel",
+      "Count": 237
+    },
+    {
+      "Name": "carbon",
+      "Count": 47
+    },
+    {
+      "Name": "iron",
+      "Count": 270
+    },
+    {
+      "Name": "niobium",
+      "Count": 7
+    },
+    {
+      "Name": "phosphorus",
+      "Count": 11
+    },
+    {
+      "Name": "arsenic",
+      "Count": 70
+    },
+    {
+      "Name": "selenium",
+      "Count": 3
+    },
+    {
+      "Name": "antimony",
+      "Count": 2
+    },
+    {
+      "Name": "germanium",
+      "Count": 20
+    },
+    {
+      "Name": "manganese",
+      "Count": 133
+    },
+    {
+      "Name": "chromium",
+      "Count": 33
+    },
+    {
+      "Name": "yttrium",
+      "Count": 16
+    }
+  ],
+  "Manufactured": [
+    {
+      "Name": "refinedfocuscrystals",
+      "Name_Localised": "Refined Focus Crystals",
+      "Count": 47
+    },
+    {
+      "Name": "protolightalloys",
+      "Name_Localised": "Proto Light Alloys",
+      "Count": 112
+    },
+    {
+      "Name": "fedproprietarycomposites",
+      "Name_Localised": "Proprietary Composites",
+      "Count": 51
+    },
+    {
+      "Name": "fedcorecomposites",
+      "Name_Localised": "Core Dynamics Composites",
+      "Count": 9
+    },
+    {
+      "Name": "heatvanes",
+      "Name_Localised": "Heat Vanes",
+      "Count": 8
+    },
+    {
+      "Name": "compoundshielding",
+      "Name_Localised": "Compound Shielding",
+      "Count": 136
+    },
+    {
+      "Name": "configurablecomponents",
+      "Name_Localised": "Configurable Components",
+      "Count": 3
+    },
+    {
+      "Name": "chemicalmanipulators",
+      "Name_Localised": "Chemical Manipulators",
+      "Count": 10
+    },
+    {
+      "Name": "thermicalloys",
+      "Name_Localised": "Thermic Alloys",
+      "Count": 74
+    },
+    {
+      "Name": "heatresistantceramics",
+      "Name_Localised": "Heat Resistant Ceramics",
+      "Count": 23
+    },
+    {
+      "Name": "galvanisingalloys",
+      "Name_Localised": "Galvanising Alloys",
+      "Count": 216
+    },
+    {
+      "Name": "biotechconductors",
+      "Name_Localised": "Biotech Conductors",
+      "Count": 19
+    },
+    {
+      "Name": "conductivepolymers",
+      "Name_Localised": "Conductive Polymers",
+      "Count": 13
+    },
+    {
+      "Name": "protoheatradiators",
+      "Name_Localised": "Proto Heat Radiators",
+      "Count": 23
+    },
+    {
+      "Name": "unknowncarapace",
+      "Name_Localised": "Thargoid Carapace",
+      "Count": 20
+    },
+    {
+      "Name": "unknownenergysource",
+      "Name_Localised": "Sensor Fragment",
+      "Count": 14
+    },
+    {
+      "Name": "unknownenergycell",
+      "Name_Localised": "Thargoid Energy Cell",
+      "Count": 21
+    },
+    {
+      "Name": "heatexchangers",
+      "Name_Localised": "Heat Exchangers",
+      "Count": 10
+    },
+    {
+      "Name": "imperialshielding",
+      "Name_Localised": "Imperial Shielding",
+      "Count": 2
+    },
+    {
+      "Name": "gridresistors",
+      "Name_Localised": "Grid Resistors",
+      "Count": 75
+    },
+    {
+      "Name": "unknownorganiccircuitry",
+      "Name_Localised": "Thargoid Organic Circuitry",
+      "Count": 9
+    },
+    {
+      "Name": "unknowntechnologycomponents",
+      "Name_Localised": "Thargoid Technological Components",
+      "Count": 6
+    },
+    {
+      "Name": "hybridcapacitors",
+      "Name_Localised": "Hybrid Capacitors",
+      "Count": 78
+    },
+    {
+      "Name": "highdensitycomposites",
+      "Name_Localised": "High Density Composites",
+      "Count": 91
+    },
+    {
+      "Name": "electrochemicalarrays",
+      "Name_Localised": "Electrochemical Arrays",
+      "Count": 91
+    },
+    {
+      "Name": "shieldingsensors",
+      "Name_Localised": "Shielding Sensors",
+      "Count": 152
+    },
+    {
+      "Name": "conductivecomponents",
+      "Name_Localised": "Conductive Components",
+      "Count": 48
+    },
+    {
+      "Name": "focuscrystals",
+      "Name_Localised": "Focus Crystals",
+      "Count": 169
+    },
+    {
+      "Name": "protoradiolicalloys",
+      "Name_Localised": "Proto Radiolic Alloys",
+      "Count": 11
+    },
+    {
+      "Name": "conductiveceramics",
+      "Name_Localised": "Conductive Ceramics",
+      "Count": 7
+    },
+    {
+      "Name": "chemicalprocessors",
+      "Name_Localised": "Chemical Processors",
+      "Count": 118
+    },
+    {
+      "Name": "chemicaldistillery",
+      "Name_Localised": "Chemical Distillery",
+      "Count": 41
+    },
+    {
+      "Name": "shieldemitters",
+      "Name_Localised": "Shield Emitters",
+      "Count": 250
+    },
+    {
+      "Name": "salvagedalloys",
+      "Name_Localised": "Salvaged Alloys",
+      "Count": 117
+    },
+    {
+      "Name": "wornshieldemitters",
+      "Name_Localised": "Worn Shield Emitters",
+      "Count": 227
+    },
+    {
+      "Name": "mechanicalcomponents",
+      "Name_Localised": "Mechanical Components",
+      "Count": 2
+    },
+    {
+      "Name": "heatconductionwiring",
+      "Name_Localised": "Heat Conduction Wiring",
+      "Count": 106
+    },
+    {
+      "Name": "heatdispersionplate",
+      "Name_Localised": "Heat Dispersion Plate",
+      "Count": 54
+    },
+    {
+      "Name": "phasealloys",
+      "Name_Localised": "Phase Alloys",
+      "Count": 200
+    },
+    {
+      "Name": "precipitatedalloys",
+      "Name_Localised": "Precipitated Alloys",
+      "Count": 95
+    },
+    {
+      "Name": "uncutfocuscrystals",
+      "Name_Localised": "Flawed Focus Crystals",
+      "Count": 159
+    },
+    {
+      "Name": "mechanicalscrap",
+      "Name_Localised": "Mechanical Scrap",
+      "Count": 6
+    },
+    {
+      "Name": "mechanicalequipment",
+      "Name_Localised": "Mechanical Equipment",
+      "Count": 3
+    },
+    {
+      "Name": "crystalshards",
+      "Name_Localised": "Crystal Shards",
+      "Count": 37
+    },
+    {
+      "Name": "basicconductors",
+      "Name_Localised": "Basic Conductors",
+      "Count": 27
+    },
+    {
+      "Name": "temperedalloys",
+      "Name_Localised": "Tempered Alloys",
+      "Count": 12
+    },
+    {
+      "Name": "militarygradealloys",
+      "Name_Localised": "Military Grade Alloys",
+      "Count": 10
+    },
+    {
+      "Name": "guardian_powerconduit",
+      "Name_Localised": "Guardian Power Conduit",
+      "Count": 114
+    },
+    {
+      "Name": "guardian_powercell",
+      "Name_Localised": "Guardian Power Cell",
+      "Count": 72
+    },
+    {
+      "Name": "guardian_sentinel_weaponparts",
+      "Name_Localised": "Guardian Sentinel Weapon Parts",
+      "Count": 36
+    },
+    {
+      "Name": "guardian_sentinel_wreckagecomponents",
+      "Name_Localised": "Guardian Sentinel Wreckage Components",
+      "Count": 18
+    },
+    {
+      "Name": "chemicalstorageunits",
+      "Name_Localised": "Chemical Storage Units",
+      "Count": 5
+    },
+    {
+      "Name": "compactcomposites",
+      "Name_Localised": "Compact Composites",
+      "Count": 41
+    },
+    {
+      "Name": "filamentcomposites",
+      "Name_Localised": "Filament Composites",
+      "Count": 83
+    },
+    {
+      "Name": "tg_biomechanicalconduits",
+      "Name_Localised": "Bio-Mechanical Conduits",
+      "Count": 3
+    },
+    {
+      "Name": "tg_propulsionelement",
+      "Name_Localised": "Propulsion Elements",
+      "Count": 3
+    }
+  ],
+  "Encoded": [
+    {
+      "Name": "decodedemissiondata",
+      "Name_Localised": "Decoded Emission Data",
+      "Count": 38
+    },
+    {
+      "Name": "shielddensityreports",
+      "Name_Localised": "Untypical Shield Scans ",
+      "Count": 22
+    },
+    {
+      "Name": "shieldpatternanalysis",
+      "Name_Localised": "Aberrant Shield Pattern Analysis",
+      "Count": 32
+    },
+    {
+      "Name": "encryptionarchives",
+      "Name_Localised": "Atypical Encryption Archives",
+      "Count": 38
+    },
+    {
+      "Name": "symmetrickeys",
+      "Name_Localised": "Open Symmetric Keys",
+      "Count": 13
+    },
+    {
+      "Name": "shieldfrequencydata",
+      "Name_Localised": "Peculiar Shield Frequency Data",
+      "Count": 9
+    },
+    {
+      "Name": "tg_compositiondata",
+      "Name_Localised": "Thargoid Material Composition Data",
+      "Count": 25
+    },
+    {
+      "Name": "emissiondata",
+      "Name_Localised": "Unexpected Emission Data",
+      "Count": 25
+    },
+    {
+      "Name": "classifiedscandata",
+      "Name_Localised": "Classified Scan Fragment",
+      "Count": 20
+    },
+    {
+      "Name": "shieldsoakanalysis",
+      "Name_Localised": "Inconsistent Shield Soak Analysis",
+      "Count": 81
+    },
+    {
+      "Name": "wakesolutions",
+      "Name_Localised": "Strange Wake Solutions",
+      "Count": 21
+    },
+    {
+      "Name": "tg_shipsystemsdata",
+      "Name_Localised": "Ship Systems Data",
+      "Count": 6
+    },
+    {
+      "Name": "unknownshipsignature",
+      "Name_Localised": "Thargoid Ship Signature",
+      "Count": 9
+    },
+    {
+      "Name": "adaptiveencryptors",
+      "Name_Localised": "Adaptive Encryptors Capture",
+      "Count": 20
+    },
+    {
+      "Name": "tg_shipflightdata",
+      "Name_Localised": "Ship Flight Data",
+      "Count": 3
+    },
+    {
+      "Name": "encryptioncodes",
+      "Name_Localised": "Tagged Encryption Codes",
+      "Count": 24
+    },
+    {
+      "Name": "tg_residuedata",
+      "Name_Localised": "Thargoid Residue Data",
+      "Count": 20
+    },
+    {
+      "Name": "tg_structuraldata",
+      "Name_Localised": "Thargoid Structural Data",
+      "Count": 20
+    },
+    {
+      "Name": "embeddedfirmware",
+      "Name_Localised": "Modified Embedded Firmware",
+      "Count": 10
+    },
+    {
+      "Name": "encodedscandata",
+      "Name_Localised": "Divergent Scan Data",
+      "Count": 26
+    },
+    {
+      "Name": "shieldcyclerecordings",
+      "Name_Localised": "Distorted Shield Cycle Recordings",
+      "Count": 61
+    },
+    {
+      "Name": "scandatabanks",
+      "Name_Localised": "Classified Scan Databanks",
+      "Count": 24
+    },
+    {
+      "Name": "scanarchives",
+      "Name_Localised": "Unidentified Scan Archives",
+      "Count": 27
+    },
+    {
+      "Name": "ancientlanguagedata",
+      "Name_Localised": "Pattern Delta Obelisk Data",
+      "Count": 6
+    },
+    {
+      "Name": "ancienttechnologicaldata",
+      "Name_Localised": "Pattern Epsilon Obelisk Data",
+      "Count": 12
+    },
+    {
+      "Name": "ancientbiologicaldata",
+      "Name_Localised": "Pattern Alpha Obelisk Data",
+      "Count": 21
+    },
+    {
+      "Name": "ancientculturaldata",
+      "Name_Localised": "Pattern Beta Obelisk Data",
+      "Count": 6
+    },
+    {
+      "Name": "fsdtelemetry",
+      "Name_Localised": "Anomalous FSD Telemetry",
+      "Count": 33
+    },
+    {
+      "Name": "legacyfirmware",
+      "Name_Localised": "Specialised Legacy Firmware",
+      "Count": 60
+    },
+    {
+      "Name": "archivedemissiondata",
+      "Name_Localised": "Irregular Emission Data",
+      "Count": 24
+    },
+    {
+      "Name": "bulkscandata",
+      "Name_Localised": "Anomalous Bulk Scan Data",
+      "Count": 97
+    },
+    {
+      "Name": "scrambledemissiondata",
+      "Name_Localised": "Exceptional Scrambled Emission Data",
+      "Count": 42
+    },
+    {
+      "Name": "hyperspacetrajectories",
+      "Name_Localised": "Eccentric Hyperspace Trajectories",
+      "Count": 6
+    },
+    {
+      "Name": "industrialfirmware",
+      "Name_Localised": "Cracked Industrial Firmware",
+      "Count": 15
+    },
+    {
+      "Name": "encryptedfiles",
+      "Name_Localised": "Unusual Encrypted Files",
+      "Count": 81
+    },
+    {
+      "Name": "dataminedwake",
+      "Name_Localised": "Datamined Wake Exceptions",
+      "Count": 1
+    },
+    {
+      "Name": "disruptedwakeechoes",
+      "Name_Localised": "Atypical Disrupted Wake Echoes",
+      "Count": 34
+    },
+    {
+      "Name": "consumerfirmware",
+      "Name_Localised": "Modified Consumer Firmware",
+      "Count": 7
+    },
+    {
+      "Name": "ancienthistoricaldata",
+      "Name_Localised": "Pattern Gamma Obelisk Data",
+      "Count": 15
+    },
+    {
+      "Name": "guardian_weaponblueprint",
+      "Name_Localised": "Guardian Weapon Blueprint Segment",
+      "Count": 6
+    },
+    {
+      "Name": "guardian_moduleblueprint",
+      "Name_Localised": "Guardian Module Blueprint Segment",
+      "Count": 2
+    }
+  ]
+}
+{
+  "timestamp": "2018-07-01T07:39:12Z",
+  "event": "Commander",
+  "Name": "John Kozak"
+}
+{
+  "timestamp": "2018-07-01T07:39:21Z",
+  "event": "Location",
+  "Docked": true,
+  "MarketID": 128666762,
+  "StationName": "Jameson Memorial",
+  "StationType": "Orbis",
+  "StarSystem": "Shinrarta Dezhra",
+  "SystemAddress": 3932277478106,
+  "StarPos": [
+    55.71875,
+    17.59375,
+    27.15625
+  ],
+  "SystemAllegiance": "PilotsFederation",
+  "SystemEconomy": "$economy_HighTech;",
+  "SystemEconomy_Localised": "High Tech",
+  "SystemSecondEconomy": "$economy_Industrial;",
+  "SystemSecondEconomy_Localised": "Industrial",
+  "SystemGovernment": "$government_Democracy;",
+  "SystemGovernment_Localised": "Democracy",
+  "SystemSecurity": "$SYSTEM_SECURITY_high;",
+  "SystemSecurity_Localised": "High Security",
+  "Population": 85206935,
+  "Body": "Jameson Memorial",
+  "BodyID": 69,
+  "BodyType": "Station",
+  "Factions": [
+    {
+      "Name": "Lori Jameson",
+      "FactionState": "None",
+      "Government": "Engineer",
+      "Influence": 0.0,
+      "Allegiance": "Independent"
+    },
+    {
+      "Name": "LTT 4487 Industry",
+      "FactionState": "None",
+      "Government": "Corporate",
+      "Influence": 0.315,
+      "Allegiance": "Federation",
+      "RecoveringStates": [
+        {
+          "State": "Boom",
+          "Trend": 1
+        }
+      ]
+    },
+    {
+      "Name": "Pilots Federation Local Branch",
+      "FactionState": "None",
+      "Government": "Democracy",
+      "Influence": 0.0,
+      "Allegiance": "PilotsFederation"
+    },
+    {
+      "Name": "Future of Arro Naga",
+      "FactionState": "Boom",
+      "Government": "Democracy",
+      "Influence": 0.292,
+      "Allegiance": "Federation"
+    },
+    {
+      "Name": "The Dark Wheel",
+      "FactionState": "Boom",
+      "Government": "Democracy",
+      "Influence": 0.343,
+      "Allegiance": "Independent"
+    },
+    {
+      "Name": "Los Chupacabras",
+      "FactionState": "None",
+      "Government": "PrisonColony",
+      "Influence": 0.05,
+      "Allegiance": "Independent",
+      "PendingStates": [
+        {
+          "State": "Boom",
+          "Trend": 0
+        }
+      ]
+    }
+  ],
+  "SystemFaction": "Pilots Federation Local Branch"
+}
+{
+  "timestamp": "2018-07-01T07:39:22Z",
+  "event": "Cargo",
+  "Inventory": [
+    {
+      "Name": "drones",
+      "Name_Localised": "Limpet",
+      "Count": 28,
+      "Stolen": 0
+    }
+  ]
+}
+{
+  "timestamp": "2018-07-01T07:39:22Z",
+  "event": "Missions",
+  "Active": [],
+  "Failed": [],
+  "Complete": []
+}
+{
+  "timestamp": "2018-07-01T07:39:22Z",
+  "event": "Statistics",
   "Bank_Account": {
-    "Current_Wealth": 1507737130,
-    "Spent_On_Ships": 689226400,
-    "Spent_On_Outfitting": 3170201560,
-    "Spent_On_Repairs": 13143509,
-    "Spent_On_Fuel": 388174,
-    "Spent_On_Ammo_Consumables": 6187395,
+    "Current_Wealth": 1507717263,
+    "Spent_On_Ships": 730459185,
+    "Spent_On_Outfitting": 3217261478,
+    "Spent_On_Repairs": 13163308,
+    "Spent_On_Fuel": 389057,
+    "Spent_On_Ammo_Consumables": 6188331,
     "Insurance_Claims": 23,
     "Spent_On_Insurance": 36754592
   },
@@ -163,7 +2043,7 @@
     "Black_Markets_Traded_With": 13,
     "Black_Markets_Profits": 2293297,
     "Resources_Smuggled": 65,
-    "Average_Profit": 61981.0,
+    "Average_Profit": 61981,
     "Highest_Single_Transaction": 752711
   },
   "Trading": {
@@ -176,18 +2056,18 @@
   "Mining": {
     "Mining_Profits": 8995280,
     "Quantity_Mined": 661,
-    "Materials_Collected": 15286
+    "Materials_Collected": 15466
   },
   "Exploration": {
-    "Systems_Visited": 3005,
+    "Systems_Visited": 3059,
     "Exploration_Profits": 44289755,
     "Planets_Scanned_To_Level_2": 1680,
     "Planets_Scanned_To_Level_3": 147,
     "Highest_Payout": 1513147,
-    "Total_Hyperspace_Distance": 91005,
-    "Total_Hyperspace_Jumps": 5075,
+    "Total_Hyperspace_Distance": 92874,
+    "Total_Hyperspace_Jumps": 5134,
     "Greatest_Distance_From_Start": 6206.8315803316,
-    "Time_Played": 3113700
+    "Time_Played": 3131400
   },
   "Passengers": {
     "Passengers_Missions_Accepted": 141,
@@ -212,12 +2092,12 @@
   },
   "Crafting": {
     "Count_Of_Used_Engineers": 19,
-    "Recipes_Generated": 2231,
-    "Recipes_Generated_Rank_1": 539,
-    "Recipes_Generated_Rank_2": 314,
-    "Recipes_Generated_Rank_3": 531,
-    "Recipes_Generated_Rank_4": 282,
-    "Recipes_Generated_Rank_5": 565
+    "Recipes_Generated": 2246,
+    "Recipes_Generated_Rank_1": 540,
+    "Recipes_Generated_Rank_2": 316,
+    "Recipes_Generated_Rank_3": 535,
+    "Recipes_Generated_Rank_4": 288,
+    "Recipes_Generated_Rank_5": 567
   },
   "Crew": {
     "NpcCrew_TotalWages": 101006578,
@@ -232,266 +2112,323 @@
     "Multicrew_Fines_Total": 157542
   },
   "Material_Trader_Stats": {
-    "Trades_Completed": 63,
-    "Materials_Traded": 1661
+    "Trades_Completed": 64,
+    "Materials_Traded": 1669,
+    "Encoded_Materials_Traded": 658,
+    "Raw_Materials_Traded": 554,
+    "Grade_1_Materials_Traded": 681,
+    "Grade_2_Materials_Traded": 364,
+    "Grade_3_Materials_Traded": 359,
+    "Grade_4_Materials_Traded": 205,
+    "Grade_5_Materials_Traded": 60
   },
   "CQC": {
     "CQC_Time_Played": 0,
     "CQC_KD": 0,
     "CQC_Kills": 0,
     "CQC_WL": 0
-  },
-  "timestamp": "2018-06-28T19:13:17Z",
-  "event": "Statistics"
+  }
 }
 {
-  "Docked": false,
-  "MarketID": 0,
-  "StarSystem": "Wonggaibuh",
-  "SystemAddress": 5071148623265,
-  "StarPos": [
-    162.1875,
-    41.21875,
-    -8.90625
-  ],
-  "SystemAllegiance": "Federation",
-  "SystemEconomy": "$economy_Refinery;",
-  "SystemEconomy_Localised": "Refinery",
-  "SystemSecondEconomy": "$economy_None;",
-  "SystemSecondEconomy_Localised": "None",
-  "SystemGovernment": "$government_Corporate;",
-  "SystemGovernment_Localised": "Corporate",
-  "SystemSecurity": "$SYSTEM_SECURITY_low;",
-  "SystemSecurity_Localised": "Low Security",
-  "Population": 28041,
-  "Body": "Wonggaibuh",
-  "BodyID": 0,
-  "BodyType": "Star",
-  "Factions": [
+  "timestamp": "2018-07-01T07:39:30Z",
+  "event": "RefuelAll",
+  "Cost": 269,
+  "Amount": 5.362596
+}
+{
+  "timestamp": "2018-07-01T07:39:31Z",
+  "event": "BuyAmmo",
+  "Cost": 6950
+}
+{
+  "timestamp": "2018-07-01T07:39:33Z",
+  "event": "StoredShips",
+  "StationName": "Jameson Memorial",
+  "MarketID": 128666762,
+  "StarSystem": "Shinrarta Dezhra",
+  "ShipsHere": [
     {
-      "Name": "HIP 47919 Bridge Ltd",
-      "FactionState": "None",
-      "Government": "Corporate",
-      "Influence": 0.065,
-      "Allegiance": "Independent"
+      "ShipID": 37,
+      "ShipType": "federation_dropship_mkii",
+      "ShipType_Localised": "Federal Assault Ship",
+      "Value": 12581030,
+      "Hot": false
     },
     {
-      "Name": "Pilots Federation Local Branch",
-      "FactionState": "None",
-      "Government": "Democracy",
-      "Influence": 0.0,
-      "Allegiance": "PilotsFederation"
+      "ShipID": 42,
+      "ShipType": "typex",
+      "ShipType_Localised": "Alliance Chieftain",
+      "Name": "Exquisite",
+      "Value": 15234709,
+      "Hot": false
     },
     {
-      "Name": "Ajabog Independents",
-      "FactionState": "None",
-      "Government": "Democracy",
-      "Influence": 0.113,
-      "Allegiance": "Federation"
+      "ShipID": 38,
+      "ShipType": "federation_gunship",
+      "ShipType_Localised": "Federal Gunship",
+      "Name": "Magnanimous",
+      "Value": 22557033,
+      "Hot": false
     },
     {
-      "Name": "Wonggaibuh Crimson Vision Ind",
-      "FactionState": "None",
-      "Government": "Corporate",
-      "Influence": 0.569,
-      "Allegiance": "Federation",
-      "PendingStates": [
-        {
-          "State": "Boom",
-          "Trend": 0
-        }
-      ]
+      "ShipID": 40,
+      "ShipType": "asp",
+      "ShipType_Localised": "Asp Explorer",
+      "Name": "Sophisticate",
+      "Value": 41859447,
+      "Hot": false
     },
     {
-      "Name": "Wonggaibuh Coordinated",
-      "FactionState": "None",
-      "Government": "Cooperative",
-      "Influence": 0.167,
-      "Allegiance": "Independent"
+      "ShipID": 36,
+      "ShipType": "federation_dropship",
+      "ShipType_Localised": "Federal Dropship",
+      "Name": "FAX First Imperative",
+      "Value": 62529819,
+      "Hot": false
     },
     {
-      "Name": "Raiders of Wonggaibuh",
-      "FactionState": "None",
-      "Government": "Anarchy",
-      "Influence": 0.086,
-      "Allegiance": "Independent"
+      "ShipID": 32,
+      "ShipType": "python",
+      "Name": "Determinant",
+      "Value": 100183851,
+      "Hot": false
+    },
+    {
+      "ShipID": 50,
+      "ShipType": "belugaliner",
+      "ShipType_Localised": "Beluga Liner",
+      "Name": "Gulfstream",
+      "Value": 137588692,
+      "Hot": false
+    },
+    {
+      "ShipID": 3,
+      "ShipType": "federation_corvette",
+      "ShipType_Localised": "Federal Corvette",
+      "Name": "equilibrium",
+      "Value": 586923256,
+      "Hot": false
     }
   ],
-  "SystemFaction": "Wonggaibuh Crimson Vision Ind",
-  "timestamp": "2018-06-28T19:13:17Z",
-  "event": "Location"
+  "ShipsRemote": [
+    {
+      "ShipID": 12,
+      "ShipType": "Empire_Courier",
+      "ShipType_Localised": "Imperial Courier",
+      "Name": "black arrow",
+      "StarSystem": "Sol",
+      "ShipMarketID": 128016384,
+      "TransferPrice": 41152,
+      "TransferTime": 944,
+      "Value": 9875296,
+      "Hot": true
+    },
+    {
+      "ShipID": 25,
+      "ShipType": "DiamondBackXL",
+      "ShipType_Localised": "Diamondback Explorer",
+      "Name": "Tacit Specter",
+      "StarSystem": "Sol",
+      "ShipMarketID": 128016384,
+      "TransferPrice": 60913,
+      "TransferTime": 944,
+      "Value": 14735319,
+      "Hot": false
+    }
+  ]
 }
 {
-  "Ship": "Asp",
-  "ShipID": 40,
-  "ShipName": "Sophisticate",
-  "ShipIdent": "FLC-SO",
-  "HullValue": 5521649,
-  "ModulesValue": 40988848,
-  "Rebuy": 2325525,
+  "timestamp": "2018-07-01T07:39:33Z",
+  "event": "Shipyard",
+  "MarketID": 128666762,
+  "StationName": "Jameson Memorial",
+  "StarSystem": "Shinrarta Dezhra"
+}
+{
+  "timestamp": "2018-07-01T07:39:38Z",
+  "event": "ShipyardSwap",
+  "ShipType": "federation_corvette",
+  "ShipType_Localised": "Federal Corvette",
+  "ShipID": 3,
+  "StoreOldShip": "Krait_MkII",
+  "StoreShipID": 51,
+  "MarketID": 128666762
+}
+{
+  "timestamp": "2018-07-01T07:39:41Z",
+  "event": "Loadout",
+  "Ship": "Federation_Corvette",
+  "ShipID": 3,
+  "ShipName": "equilibrium",
+  "ShipIdent": "FLC-EQ",
+  "HullValue": 164330160,
+  "ModulesValue": 487806792,
+  "Rebuy": 32606850,
   "Modules": [
     {
-      "Slot": "SmallHardpoint1",
-      "Item": "Hpt_PulseLaser_Gimbal_Small",
+      "Slot": "HugeHardpoint1",
+      "Item": "Hpt_PlasmaAccelerator_Fixed_Huge",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 5940,
+      "AmmoInClip": 5,
+      "Health": 1.0,
+      "Value": 12414240,
       "Engineering": {
-        "Engineer": "Broo Tarquin",
-        "EngineerID": 300030,
-        "BlueprintID": 128673567,
-        "BlueprintName": "Weapon_Focused",
-        "Level": 3,
+        "Engineer": "Bill Turner",
+        "EngineerID": 300010,
+        "BlueprintID": 128673524,
+        "BlueprintName": "Weapon_Efficient",
+        "Level": 5,
         "Quality": 1.0,
+        "ExperimentalEffect": "special_plasma_slug",
+        "ExperimentalEffect_Localised": "Plasma Slug",
         "Modifiers": [
           {
-            "Label": "ThermalLoad",
-            "Value": 0.3193,
-            "OriginalValue": 0.31,
+            "Label": "PowerDraw",
+            "Value": 1.3676,
+            "OriginalValue": 2.63,
             "LessIsGood": 1
           },
           {
-            "Label": "ArmourPenetration",
-            "Value": 36.0,
-            "OriginalValue": 20.0,
+            "Label": "DamagePerSecond",
+            "Value": 34.944748,
+            "OriginalValue": 31.3125,
             "LessIsGood": 0
           },
           {
-            "Label": "MaximumRange",
-            "Value": 5040.0,
-            "OriginalValue": 3000.0,
+            "Label": "Damage",
+            "Value": 139.778992,
+            "OriginalValue": 125.25,
             "LessIsGood": 0
           },
           {
-            "Label": "DamageFalloffRange",
-            "Value": 840.000061,
-            "OriginalValue": 500.0,
+            "Label": "DistributorDraw",
+            "Value": 11.572001,
+            "OriginalValue": 21.040001,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ThermalLoad",
+            "Value": 11.783998,
+            "OriginalValue": 29.459999,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "AmmoMaximum",
+            "Value": 0.0,
+            "OriginalValue": 100.0,
             "LessIsGood": 0
           }
         ]
       }
     },
     {
-      "Slot": "SmallHardpoint2",
-      "Item": "Hpt_PulseLaser_Gimbal_Small",
+      "Slot": "HugeHardpoint2",
+      "Item": "Hpt_PlasmaAccelerator_Fixed_Huge",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 5940,
+      "AmmoInClip": 5,
+      "Health": 1.0,
+      "Value": 12414240,
       "Engineering": {
-        "Engineer": "Broo Tarquin",
-        "EngineerID": 300030,
-        "BlueprintID": 128673567,
-        "BlueprintName": "Weapon_Focused",
-        "Level": 3,
+        "Engineer": "Bill Turner",
+        "EngineerID": 300010,
+        "BlueprintID": 128673524,
+        "BlueprintName": "Weapon_Efficient",
+        "Level": 5,
         "Quality": 1.0,
+        "ExperimentalEffect": "special_plasma_slug",
+        "ExperimentalEffect_Localised": "Plasma Slug",
         "Modifiers": [
           {
-            "Label": "ThermalLoad",
-            "Value": 0.3193,
-            "OriginalValue": 0.31,
+            "Label": "PowerDraw",
+            "Value": 1.3676,
+            "OriginalValue": 2.63,
             "LessIsGood": 1
           },
           {
-            "Label": "ArmourPenetration",
-            "Value": 36.0,
-            "OriginalValue": 20.0,
+            "Label": "DamagePerSecond",
+            "Value": 34.944748,
+            "OriginalValue": 31.3125,
             "LessIsGood": 0
           },
           {
-            "Label": "MaximumRange",
-            "Value": 5040.0,
-            "OriginalValue": 3000.0,
+            "Label": "Damage",
+            "Value": 139.778992,
+            "OriginalValue": 125.25,
             "LessIsGood": 0
           },
           {
-            "Label": "DamageFalloffRange",
-            "Value": 840.000061,
-            "OriginalValue": 500.0,
+            "Label": "DistributorDraw",
+            "Value": 11.572001,
+            "OriginalValue": 21.040001,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ThermalLoad",
+            "Value": 11.783998,
+            "OriginalValue": 29.459999,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "AmmoMaximum",
+            "Value": 0.0,
+            "OriginalValue": 100.0,
             "LessIsGood": 0
           }
         ]
       }
     },
     {
-      "Slot": "SmallHardpoint3",
-      "Item": "Hpt_PulseLaser_Gimbal_Small",
+      "Slot": "LargeHardpoint1",
+      "Item": "Hpt_PulseLaser_Gimbal_Large",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 5940,
+      "Health": 1.0,
+      "Value": 126540,
       "Engineering": {
         "Engineer": "Broo Tarquin",
         "EngineerID": 300030,
-        "BlueprintID": 128673567,
+        "BlueprintID": 128673569,
         "BlueprintName": "Weapon_Focused",
-        "Level": 3,
-        "Quality": 1.0,
+        "Level": 5,
+        "Quality": 0.964,
+        "ExperimentalEffect": "special_phasing_sequence",
+        "ExperimentalEffect_Localised": "Phasing Sequence",
         "Modifiers": [
           {
+            "Label": "DamagePerSecond",
+            "Value": 13.296774,
+            "OriginalValue": 14.774194,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "Damage",
+            "Value": 4.122,
+            "OriginalValue": 4.58,
+            "LessIsGood": 0
+          },
+          {
             "Label": "ThermalLoad",
-            "Value": 0.3193,
-            "OriginalValue": 0.31,
+            "Value": 0.966,
+            "OriginalValue": 0.92,
             "LessIsGood": 1
           },
           {
             "Label": "ArmourPenetration",
-            "Value": 36.0,
-            "OriginalValue": 20.0,
+            "Value": 114.025604,
+            "OriginalValue": 52.0,
             "LessIsGood": 0
           },
           {
             "Label": "MaximumRange",
-            "Value": 5040.0,
+            "Value": 5991.899902,
             "OriginalValue": 3000.0,
             "LessIsGood": 0
           },
           {
             "Label": "DamageFalloffRange",
-            "Value": 840.000061,
-            "OriginalValue": 500.0,
-            "LessIsGood": 0
-          }
-        ]
-      }
-    },
-    {
-      "Slot": "SmallHardpoint4",
-      "Item": "Hpt_PulseLaser_Gimbal_Small",
-      "On": true,
-      "Priority": 1,
-      "Health": 1,
-      "Value": 5940,
-      "Engineering": {
-        "Engineer": "Broo Tarquin",
-        "EngineerID": 300030,
-        "BlueprintID": 128673567,
-        "BlueprintName": "Weapon_Focused",
-        "Level": 3,
-        "Quality": 1.0,
-        "Modifiers": [
-          {
-            "Label": "ThermalLoad",
-            "Value": 0.3193,
-            "OriginalValue": 0.31,
-            "LessIsGood": 1
-          },
-          {
-            "Label": "ArmourPenetration",
-            "Value": 36.0,
-            "OriginalValue": 20.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "MaximumRange",
-            "Value": 5040.0,
-            "OriginalValue": 3000.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "DamageFalloffRange",
-            "Value": 840.000061,
+            "Value": 998.650024,
             "OriginalValue": 500.0,
             "LessIsGood": 0
           }
@@ -500,138 +2437,250 @@
     },
     {
       "Slot": "MediumHardpoint1",
-      "Item": "Hpt_Slugshot_Gimbal_Medium",
+      "Item": "Hpt_PulseLaser_Gimbal_Medium",
       "On": true,
-      "Priority": 0,
-      "Health": 1,
-      "Value": 393984,
+      "Priority": 1,
+      "Health": 1.0,
+      "Value": 31860,
       "Engineering": {
-        "Engineer": "Tod 'The Blaster' McQuinn",
-        "EngineerID": 300260,
-        "BlueprintID": 128673437,
-        "BlueprintName": "Weapon_DoubleShot",
-        "Level": 3,
-        "Quality": 0.9815,
+        "Engineer": "Broo Tarquin",
+        "EngineerID": 300030,
+        "BlueprintID": 128673569,
+        "BlueprintName": "Weapon_Focused",
+        "Level": 5,
+        "Quality": 0.985,
+        "ExperimentalEffect": "special_phasing_sequence",
+        "ExperimentalEffect_Localised": "Phasing Sequence",
         "Modifiers": [
           {
             "Label": "DamagePerSecond",
-            "Value": 187.951767,
-            "OriginalValue": 143.621048,
+            "Value": 8.614285,
+            "OriginalValue": 9.571428,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "Damage",
+            "Value": 2.412,
+            "OriginalValue": 2.68,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermalLoad",
+            "Value": 0.567,
+            "OriginalValue": 0.54,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ArmourPenetration",
+            "Value": 76.919502,
+            "OriginalValue": 35.0,
             "LessIsGood": 0
           },
           {
             "Label": "MaximumRange",
-            "Value": 1880.0,
-            "OriginalValue": 2000.0,
+            "Value": 5992.800293,
+            "OriginalValue": 3000.0,
             "LessIsGood": 0
           },
           {
-            "Label": "RateOfFire",
-            "Value": 6.887708,
-            "OriginalValue": 5.263158,
+            "Label": "DamageFalloffRange",
+            "Value": 998.800049,
+            "OriginalValue": 500.0,
             "LessIsGood": 0
-          },
-          {
-            "Label": "BurstRateOfFire",
-            "Value": 9.9629,
-            "OriginalValue": -1.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "BurstSize",
-            "Value": 2.0,
-            "OriginalValue": 1.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "AmmoClipSize",
-            "Value": 4.0,
-            "OriginalValue": 3.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "ReloadTime",
-            "Value": 2.5,
-            "OriginalValue": 5.0,
-            "LessIsGood": 1
           }
-        ],
-        "ExperimentalEffect": "special_screening_shell",
-        "ExperimentalEffect_Localised": "Screening Shell"
-      },
-      "AmmoInClip": 4,
-      "AmmoInHopper": 148
+        ]
+      }
     },
     {
       "Slot": "MediumHardpoint2",
-      "Item": "Hpt_Slugshot_Gimbal_Medium",
+      "Item": "Hpt_PulseLaser_Gimbal_Medium",
       "On": true,
       "Priority": 0,
-      "Health": 1,
-      "Value": 393984,
+      "Health": 1.0,
+      "Value": 31860,
       "Engineering": {
-        "Engineer": "Tod 'The Blaster' McQuinn",
-        "EngineerID": 300260,
-        "BlueprintID": 128673437,
-        "BlueprintName": "Weapon_DoubleShot",
-        "Level": 3,
-        "Quality": 0.9831,
+        "Engineer": "Broo Tarquin",
+        "EngineerID": 300030,
+        "BlueprintID": 128673569,
+        "BlueprintName": "Weapon_Focused",
+        "Level": 5,
+        "Quality": 0.9613,
+        "ExperimentalEffect": "special_phasing_sequence",
+        "ExperimentalEffect_Localised": "Phasing Sequence",
         "Modifiers": [
           {
             "Label": "DamagePerSecond",
-            "Value": 187.973267,
-            "OriginalValue": 143.621048,
+            "Value": 8.614285,
+            "OriginalValue": 9.571428,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "Damage",
+            "Value": 2.412,
+            "OriginalValue": 2.68,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermalLoad",
+            "Value": 0.567,
+            "OriginalValue": 0.54,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ArmourPenetration",
+            "Value": 76.901993,
+            "OriginalValue": 35.0,
             "LessIsGood": 0
           },
           {
             "Label": "MaximumRange",
-            "Value": 1880.0,
-            "OriginalValue": 2000.0,
+            "Value": 5981.399902,
+            "OriginalValue": 3000.0,
             "LessIsGood": 0
           },
           {
-            "Label": "RateOfFire",
-            "Value": 6.888496,
-            "OriginalValue": 5.263158,
+            "Label": "DamageFalloffRange",
+            "Value": 996.899963,
+            "OriginalValue": 500.0,
             "LessIsGood": 0
-          },
-          {
-            "Label": "BurstRateOfFire",
-            "Value": 9.9662,
-            "OriginalValue": -1.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "BurstSize",
-            "Value": 2.0,
-            "OriginalValue": 1.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "AmmoClipSize",
-            "Value": 4.0,
-            "OriginalValue": 3.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "ReloadTime",
-            "Value": 2.5,
-            "OriginalValue": 5.0,
-            "LessIsGood": 1
           }
-        ],
-        "ExperimentalEffect": "special_screening_shell",
-        "ExperimentalEffect_Localised": "Screening Shell"
-      },
-      "AmmoInClip": 4,
-      "AmmoInHopper": 148
+        ]
+      }
+    },
+    {
+      "Slot": "SmallHardpoint1",
+      "Item": "Hpt_Railgun_Fixed_Small",
+      "On": true,
+      "Priority": 1,
+      "AmmoInClip": 1,
+      "AmmoInHopper": 80,
+      "Health": 1.0,
+      "Value": 51600,
+      "Engineering": {
+        "Engineer": "Tod 'The Blaster' McQuinn",
+        "EngineerID": 300260,
+        "BlueprintID": 128673612,
+        "BlueprintName": "Weapon_LongRange",
+        "Level": 3,
+        "Quality": 1.0,
+        "ExperimentalEffect": "special_feedback_cascade_cooled",
+        "ExperimentalEffect_Localised": "$special_feedback_cascade_name;",
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 2.4,
+            "OriginalValue": 2.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "PowerDraw",
+            "Value": 1.2535,
+            "OriginalValue": 1.15,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "DamagePerSecond",
+            "Value": 29.638098,
+            "OriginalValue": 37.047619,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "Damage",
+            "Value": 18.672001,
+            "OriginalValue": 23.34,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermalLoad",
+            "Value": 7.2,
+            "OriginalValue": 12.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "MaximumRange",
+            "Value": 4800.0,
+            "OriginalValue": 3000.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "DamageFalloffRange",
+            "Value": 4800.0,
+            "OriginalValue": 1000.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "SmallHardpoint2",
+      "Item": "Hpt_Railgun_Fixed_Small",
+      "On": true,
+      "Priority": 1,
+      "AmmoInClip": 1,
+      "AmmoInHopper": 80,
+      "Health": 1.0,
+      "Value": 46440,
+      "Engineering": {
+        "Engineer": "Tod 'The Blaster' McQuinn",
+        "EngineerID": 300260,
+        "BlueprintID": 128673612,
+        "BlueprintName": "Weapon_LongRange",
+        "Level": 3,
+        "Quality": 1.0,
+        "ExperimentalEffect": "special_feedback_cascade_cooled",
+        "ExperimentalEffect_Localised": "$special_feedback_cascade_name;",
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 2.4,
+            "OriginalValue": 2.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "PowerDraw",
+            "Value": 1.2535,
+            "OriginalValue": 1.15,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "DamagePerSecond",
+            "Value": 29.638098,
+            "OriginalValue": 37.047619,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "Damage",
+            "Value": 18.672001,
+            "OriginalValue": 23.34,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermalLoad",
+            "Value": 7.2,
+            "OriginalValue": 12.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "MaximumRange",
+            "Value": 4800.0,
+            "OriginalValue": 3000.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "DamageFalloffRange",
+            "Value": 4800.0,
+            "OriginalValue": 1000.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
     },
     {
       "Slot": "TinyHardpoint1",
       "Item": "Hpt_ShieldBooster_Size0_Class5",
       "On": true,
       "Priority": 3,
-      "Health": 1,
+      "Health": 1.0,
       "Value": 281000,
       "Engineering": {
         "Engineer": "Didi Vatermann",
@@ -639,7 +2688,9 @@
         "BlueprintID": 128673784,
         "BlueprintName": "ShieldBooster_HeavyDuty",
         "Level": 5,
-        "Quality": 0.9333,
+        "Quality": 0.9414,
+        "ExperimentalEffect": "special_shieldbooster_chunky",
+        "ExperimentalEffect_Localised": "Super Capacitors",
         "Modifiers": [
           {
             "Label": "Mass",
@@ -649,7 +2700,7 @@
           },
           {
             "Label": "Integrity",
-            "Value": 55.104,
+            "Value": 55.1712,
             "OriginalValue": 48.0,
             "LessIsGood": 0
           },
@@ -661,7 +2712,7 @@
           },
           {
             "Label": "DefenceModifierShieldMultiplier",
-            "Value": 73.64061,
+            "Value": 73.363411,
             "OriginalValue": 20.000004,
             "LessIsGood": 0
           },
@@ -683,9 +2734,7 @@
             "OriginalValue": 0.0,
             "LessIsGood": 0
           }
-        ],
-        "ExperimentalEffect": "special_shieldbooster_chunky",
-        "ExperimentalEffect_Localised": "Super Capacitors"
+        ]
       }
     },
     {
@@ -693,7 +2742,7 @@
       "Item": "Hpt_ShieldBooster_Size0_Class5",
       "On": true,
       "Priority": 3,
-      "Health": 1,
+      "Health": 1.0,
       "Value": 252900,
       "Engineering": {
         "Engineer": "Didi Vatermann",
@@ -701,69 +2750,9 @@
         "BlueprintID": 128673784,
         "BlueprintName": "ShieldBooster_HeavyDuty",
         "Level": 5,
-        "Quality": 0.84,
-        "Modifiers": [
-          {
-            "Label": "Mass",
-            "Value": 14.0,
-            "OriginalValue": 3.5,
-            "LessIsGood": 1
-          },
-          {
-            "Label": "Integrity",
-            "Value": 54.969601,
-            "OriginalValue": 48.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "PowerDraw",
-            "Value": 1.5,
-            "OriginalValue": 1.2,
-            "LessIsGood": 1
-          },
-          {
-            "Label": "DefenceModifierShieldMultiplier",
-            "Value": 73.124001,
-            "OriginalValue": 20.000004,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "KineticResistance",
-            "Value": -1.999998,
-            "OriginalValue": 0.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "ThermicResistance",
-            "Value": -1.999998,
-            "OriginalValue": 0.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "ExplosiveResistance",
-            "Value": -1.999998,
-            "OriginalValue": 0.0,
-            "LessIsGood": 0
-          }
-        ],
+        "Quality": 0.8714,
         "ExperimentalEffect": "special_shieldbooster_chunky",
-        "ExperimentalEffect_Localised": "Super Capacitors"
-      }
-    },
-    {
-      "Slot": "TinyHardpoint3",
-      "Item": "Hpt_ShieldBooster_Size0_Class5",
-      "On": true,
-      "Priority": 3,
-      "Health": 1,
-      "Value": 281000,
-      "Engineering": {
-        "Engineer": "Didi Vatermann",
-        "EngineerID": 300000,
-        "BlueprintID": 128673784,
-        "BlueprintName": "ShieldBooster_HeavyDuty",
-        "Level": 5,
-        "Quality": 0.9533,
+        "ExperimentalEffect_Localised": "Super Capacitors",
         "Modifiers": [
           {
             "Label": "Mass",
@@ -785,8 +2774,88 @@
           },
           {
             "Label": "DefenceModifierShieldMultiplier",
-            "Value": 65.420006,
+            "Value": 72.746002,
             "OriginalValue": 20.000004,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "KineticResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "TinyHardpoint3",
+      "Item": "Hpt_ShieldBooster_Size0_Class5",
+      "On": true,
+      "Priority": 3,
+      "Health": 1.0,
+      "Value": 252900,
+      "Engineering": {
+        "Engineer": "Didi Vatermann",
+        "EngineerID": 300000,
+        "BlueprintID": 128673784,
+        "BlueprintName": "ShieldBooster_HeavyDuty",
+        "Level": 5,
+        "Quality": 0.9029,
+        "ExperimentalEffect": "special_shieldbooster_chunky",
+        "ExperimentalEffect_Localised": "Super Capacitors",
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 14.0,
+            "OriginalValue": 3.5,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "Integrity",
+            "Value": 55.0704,
+            "OriginalValue": 48.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "PowerDraw",
+            "Value": 1.5,
+            "OriginalValue": 1.2,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "DefenceModifierShieldMultiplier",
+            "Value": 73.023201,
+            "OriginalValue": 20.000004,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "KineticResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
             "LessIsGood": 0
           }
         ]
@@ -794,35 +2863,271 @@
     },
     {
       "Slot": "TinyHardpoint4",
-      "Item": "Hpt_CloudScanner_Size0_Class5",
+      "Item": "Hpt_ShieldBooster_Size0_Class5",
       "On": true,
-      "Priority": 4,
-      "Health": 1,
-      "Value": 987386,
+      "Priority": 3,
+      "Health": 1.0,
+      "Value": 281000,
       "Engineering": {
-        "Engineer": "Tiana Fortune",
-        "EngineerID": 300270,
-        "BlueprintID": 128740096,
-        "BlueprintName": "Sensor_LongRange",
+        "Engineer": "Didi Vatermann",
+        "EngineerID": 300000,
+        "BlueprintID": 128673784,
+        "BlueprintName": "ShieldBooster_HeavyDuty",
         "Level": 5,
-        "Quality": 0.9871,
+        "Quality": 0.97,
+        "ExperimentalEffect": "special_shieldbooster_chunky",
+        "ExperimentalEffect_Localised": "Super Capacitors",
         "Modifiers": [
           {
-            "Label": "PowerDraw",
-            "Value": 4.8,
-            "OriginalValue": 3.2,
+            "Label": "Mass",
+            "Value": 14.0,
+            "OriginalValue": 3.5,
             "LessIsGood": 1
           },
           {
-            "Label": "ScannerRange",
-            "Value": 8787.599609,
-            "OriginalValue": 4000.0,
+            "Label": "Integrity",
+            "Value": 55.156803,
+            "OriginalValue": 48.0,
             "LessIsGood": 0
           },
           {
-            "Label": "MaxAngle",
-            "Value": 10.5,
-            "OriginalValue": 15.0,
+            "Label": "PowerDraw",
+            "Value": 1.5,
+            "OriginalValue": 1.2,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "DefenceModifierShieldMultiplier",
+            "Value": 73.728798,
+            "OriginalValue": 20.000004,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "KineticResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": -1.999998,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "TinyHardpoint5",
+      "Item": "Hpt_ShieldBooster_Size0_Class5",
+      "On": true,
+      "Priority": 3,
+      "Health": 1.0,
+      "Value": 252900,
+      "Engineering": {
+        "Engineer": "Didi Vatermann",
+        "EngineerID": 300000,
+        "BlueprintID": 128673798,
+        "BlueprintName": "ShieldBooster_Thermic",
+        "Level": 4,
+        "Quality": 0.542,
+        "Modifiers": [
+          {
+            "Label": "KineticResistance",
+            "Value": -3.250003,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": 19.709999,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": -3.250003,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "TinyHardpoint6",
+      "Item": "Hpt_ShieldBooster_Size0_Class5",
+      "On": true,
+      "Priority": 3,
+      "Health": 1.0,
+      "Value": 252900,
+      "Engineering": {
+        "Engineer": "Didi Vatermann",
+        "EngineerID": 300000,
+        "BlueprintID": 128673794,
+        "BlueprintName": "ShieldBooster_Resistive",
+        "Level": 5,
+        "Quality": 0.7433,
+        "Modifiers": [
+          {
+            "Label": "Integrity",
+            "Value": 42.239998,
+            "OriginalValue": 48.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "PowerDraw",
+            "Value": 1.5,
+            "OriginalValue": 1.2,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "KineticResistance",
+            "Value": 16.23,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": 16.23,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": 16.23,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "TinyHardpoint7",
+      "Item": "Hpt_HeatSinkLauncher_Turret_Tiny",
+      "On": true,
+      "Priority": 2,
+      "AmmoInClip": 1,
+      "AmmoInHopper": 3,
+      "Health": 1.0,
+      "Value": 3500,
+      "Engineering": {
+        "Engineer": "Ram Tah",
+        "EngineerID": 300110,
+        "BlueprintID": 128731666,
+        "BlueprintName": "HeatSinkLauncher_HeatSinkCapacity",
+        "Level": 3,
+        "Quality": 0.0,
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 3.776721,
+            "OriginalValue": 1.3,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "AmmoMaximum",
+            "Value": 3.0,
+            "OriginalValue": 2.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ReloadTime",
+            "Value": 19.135954,
+            "OriginalValue": 10.0,
+            "LessIsGood": 1
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "TinyHardpoint8",
+      "Item": "Hpt_HeatSinkLauncher_Turret_Tiny",
+      "On": true,
+      "Priority": 2,
+      "AmmoInClip": 1,
+      "AmmoInHopper": 3,
+      "Health": 1.0,
+      "Value": 3500,
+      "Engineering": {
+        "Engineer": "Ram Tah",
+        "EngineerID": 300110,
+        "BlueprintID": 128731666,
+        "BlueprintName": "HeatSinkLauncher_HeatSinkCapacity",
+        "Level": 3,
+        "Quality": 0.0,
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 3.1336,
+            "OriginalValue": 1.3,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "AmmoMaximum",
+            "Value": 3.0,
+            "OriginalValue": 2.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ReloadTime",
+            "Value": 17.098194,
+            "OriginalValue": 10.0,
+            "LessIsGood": 1
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "Armour",
+      "Item": "Federation_Corvette_Armour_Grade3",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0,
+      "Value": 152255255,
+      "Engineering": {
+        "Engineer": "Selene Jean",
+        "EngineerID": 300210,
+        "BlueprintID": 128673644,
+        "BlueprintName": "Armour_HeavyDuty",
+        "Level": 5,
+        "Quality": 0.99,
+        "ExperimentalEffect": "special_armour_chunky",
+        "ExperimentalEffect_Localised": "Deep Plating",
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 78.0,
+            "OriginalValue": 60.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "DefenceModifierHealthMultiplier",
+            "Value": 398.960022,
+            "OriginalValue": 250.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "KineticResistance",
+            "Value": -17.432356,
+            "OriginalValue": -20.000004,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": 2.139699,
+            "OriginalValue": 0.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": -37.00441,
+            "OriginalValue": -39.999996,
             "LessIsGood": 0
           }
         ]
@@ -830,91 +3135,43 @@
     },
     {
       "Slot": "PaintJob",
-      "Item": "PaintJob_Asp_BlackFriday_01",
+      "Item": "PaintJob_Federation_Corvette_BlackFriday_01",
       "On": true,
       "Priority": 1,
-      "Health": 1
-    },
-    {
-      "Slot": "Armour",
-      "Item": "Asp_Armour_Grade3",
-      "On": true,
-      "Priority": 1,
-      "Health": 1,
-      "Value": 5395535,
-      "Engineering": {
-        "Engineer": "Selene Jean",
-        "EngineerID": 300210,
-        "BlueprintID": 128673643,
-        "BlueprintName": "Armour_HeavyDuty",
-        "Level": 4,
-        "Quality": 0.96,
-        "Modifiers": [
-          {
-            "Label": "Mass",
-            "Value": 52.5,
-            "OriginalValue": 42.0,
-            "LessIsGood": 1
-          },
-          {
-            "Label": "DefenceModifierHealthMultiplier",
-            "Value": 379.757599,
-            "OriginalValue": 250.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "KineticResistance",
-            "Value": -18.705441,
-            "OriginalValue": -20.000004,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "ThermicResistance",
-            "Value": 1.078802,
-            "OriginalValue": 0.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "ExplosiveResistance",
-            "Value": -38.489662,
-            "OriginalValue": -39.999996,
-            "LessIsGood": 0
-          }
-        ],
-        "ExperimentalEffect": "special_armour_chunky",
-        "ExperimentalEffect_Localised": "Deep Plating"
-      }
+      "Health": 1.0
     },
     {
       "Slot": "PowerPlant",
-      "Item": "Int_Powerplant_Size5_Class5",
+      "Item": "Int_Powerplant_Size8_Class5",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 4593558,
+      "Health": 1.0,
+      "Value": 138198514,
       "Engineering": {
         "Engineer": "Marco Qwent",
         "EngineerID": 300200,
-        "BlueprintID": 128673766,
+        "BlueprintID": 128673767,
         "BlueprintName": "PowerPlant_Boosted",
-        "Level": 2,
-        "Quality": 1.0,
+        "Level": 3,
+        "Quality": 0.9886,
+        "ExperimentalEffect": "special_powerplant_cooled",
+        "ExperimentalEffect_Localised": "Thermal Spread",
         "Modifiers": [
           {
             "Label": "Integrity",
-            "Value": 95.399994,
-            "OriginalValue": 106.0,
+            "Value": 140.25,
+            "OriginalValue": 165.0,
             "LessIsGood": 0
           },
           {
             "Label": "PowerCapacity",
-            "Value": 24.276001,
-            "OriginalValue": 20.4,
+            "Value": 45.3312,
+            "OriginalValue": 36.0,
             "LessIsGood": 0
           },
           {
             "Label": "HeatEfficiency",
-            "Value": 0.44,
+            "Value": 0.414,
             "OriginalValue": 0.4,
             "LessIsGood": 1
           }
@@ -923,46 +3180,48 @@
     },
     {
       "Slot": "MainEngines",
-      "Item": "Int_Engine_Size5_Class5",
+      "Item": "Int_Engine_Size7_Class5",
       "On": true,
       "Priority": 0,
-      "Health": 1,
-      "Value": 4593558,
+      "Health": 1.0,
+      "Value": 46160201,
       "Engineering": {
-        "Engineer": "Felicity Farseer",
-        "EngineerID": 300100,
-        "BlueprintID": 128673657,
+        "Engineer": "Professor Palin",
+        "EngineerID": 300220,
+        "BlueprintID": 128673659,
         "BlueprintName": "Engine_Dirty",
-        "Level": 3,
-        "Quality": 0.0,
+        "Level": 5,
+        "Quality": 1.0,
+        "ExperimentalEffect": "special_engine_overloaded",
+        "ExperimentalEffect_Localised": "Drag Drives",
         "Modifiers": [
           {
             "Label": "Integrity",
-            "Value": 83.456871,
-            "OriginalValue": 106.0,
+            "Value": 122.400002,
+            "OriginalValue": 144.0,
             "LessIsGood": 0
           },
           {
             "Label": "PowerDraw",
-            "Value": 6.741759,
-            "OriginalValue": 6.12,
+            "Value": 10.2144,
+            "OriginalValue": 9.12,
             "LessIsGood": 1
           },
           {
             "Label": "EngineOptimalMass",
-            "Value": 767.716431,
-            "OriginalValue": 840.0,
+            "Value": 1890.0,
+            "OriginalValue": 2160.0,
             "LessIsGood": 0
           },
           {
             "Label": "EngineOptPerformance",
-            "Value": 122.573944,
+            "Value": 145.600006,
             "OriginalValue": 100.0,
             "LessIsGood": 0
           },
           {
             "Label": "EngineHeatRate",
-            "Value": 2.172883,
+            "Value": 2.288,
             "OriginalValue": 1.3,
             "LessIsGood": 1
           }
@@ -971,131 +3230,153 @@
     },
     {
       "Slot": "FrameShiftDrive",
-      "Item": "Int_Hyperdrive_Size5_Class5",
+      "Item": "Int_Hyperdrive_Size6_Class5",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 4593558,
+      "Health": 1.0,
+      "Value": 16179531,
       "Engineering": {
         "Engineer": "Felicity Farseer",
         "EngineerID": 300100,
         "BlueprintID": 128673694,
         "BlueprintName": "FSD_LongRange",
         "Level": 5,
-        "Quality": 0.663,
+        "Quality": 1.0,
+        "ExperimentalEffect": "special_fsd_heavy",
+        "ExperimentalEffect_Localised": "Mass Manager",
         "Modifiers": [
           {
             "Label": "Mass",
-            "Value": 26.0,
+            "Value": 52.0,
+            "OriginalValue": 40.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "Integrity",
+            "Value": 110.262009,
+            "OriginalValue": 141.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "PowerDraw",
+            "Value": 0.8625,
+            "OriginalValue": 0.75,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "FSDOptimalMass",
+            "Value": 2901.599854,
+            "OriginalValue": 1800.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "LifeSupport",
+      "Item": "Int_LifeSupport_Size5_Class5",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0,
+      "Value": 1117186,
+      "Engineering": {
+        "Engineer": "Lori Jameson",
+        "EngineerID": 300230,
+        "BlueprintID": 128731494,
+        "BlueprintName": "Misc_LightWeight",
+        "Level": 4,
+        "Quality": 1.0,
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 5.0,
             "OriginalValue": 20.0,
             "LessIsGood": 1
           },
           {
             "Label": "Integrity",
-            "Value": 93.840004,
-            "OriginalValue": 120.0,
-            "LessIsGood": 0
-          },
-          {
-            "Label": "PowerDraw",
-            "Value": 0.69,
-            "OriginalValue": 0.6,
-            "LessIsGood": 1
-          },
-          {
-            "Label": "FSDOptimalMass",
-            "Value": 1655.799561,
-            "OriginalValue": 1050.0,
+            "Value": 69.0,
+            "OriginalValue": 115.0,
             "LessIsGood": 0
           }
-        ],
-        "ExperimentalEffect": "special_fsd_heavy",
-        "ExperimentalEffect_Localised": "Mass Manager"
+        ]
       }
     },
     {
-      "Slot": "LifeSupport",
-      "Item": "Int_LifeSupport_Size4_Class5",
-      "On": true,
-      "Priority": 1,
-      "Health": 1,
-      "Value": 398996
-    },
-    {
       "Slot": "PowerDistributor",
-      "Item": "Int_PowerDistributor_Size4_Class5",
+      "Item": "Int_PowerDistributor_Size8_Class5",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 398996,
+      "Health": 1.0,
+      "Value": 24524452,
       "Engineering": {
         "Engineer": "The Dweller",
         "EngineerID": 300180,
         "BlueprintID": 128673739,
         "BlueprintName": "PowerDistributor_HighFrequency",
         "Level": 5,
-        "Quality": 0.7778,
+        "Quality": 1.0,
+        "ExperimentalEffect": "special_powerdistributor_fast",
+        "ExperimentalEffect_Localised": "Super Conduits",
         "Modifiers": [
           {
             "Label": "WeaponsCapacity",
-            "Value": 32.832001,
-            "OriginalValue": 32.0,
+            "Value": 65.664001,
+            "OriginalValue": 72.0,
             "LessIsGood": 0
           },
           {
             "Label": "WeaponsRecharge",
-            "Value": 4.9049,
-            "OriginalValue": 3.5,
+            "Value": 10.8576,
+            "OriginalValue": 7.2,
             "LessIsGood": 0
           },
           {
             "Label": "EnginesCapacity",
-            "Value": 23.598001,
-            "OriginalValue": 23.0,
+            "Value": 43.775997,
+            "OriginalValue": 48.0,
             "LessIsGood": 0
           },
           {
             "Label": "EnginesRecharge",
-            "Value": 2.66266,
-            "OriginalValue": 1.9,
+            "Value": 7.2384,
+            "OriginalValue": 4.8,
             "LessIsGood": 0
           },
           {
             "Label": "SystemsCapacity",
-            "Value": 23.598001,
-            "OriginalValue": 23.0,
+            "Value": 43.775997,
+            "OriginalValue": 48.0,
             "LessIsGood": 0
           },
           {
             "Label": "SystemsRecharge",
-            "Value": 2.66266,
-            "OriginalValue": 1.9,
+            "Value": 7.2384,
+            "OriginalValue": 4.8,
             "LessIsGood": 0
           }
-        ],
-        "ExperimentalEffect": "special_powerdistributor_capacity",
-        "ExperimentalEffect_Localised": "Cluster Capacitors"
+        ]
       }
     },
     {
       "Slot": "Radar",
-      "Item": "Int_Sensors_Size5_Class2",
+      "Item": "Int_Sensors_Size8_Class2",
       "On": true,
       "Priority": 0,
-      "Health": 1,
-      "Value": 71500,
+      "Health": 1.0,
+      "Value": 1569565,
       "Engineering": {
         "Engineer": "Juri Ishmaak",
         "EngineerID": 300250,
         "BlueprintID": 128740136,
         "BlueprintName": "Sensor_LongRange",
         "Level": 5,
-        "Quality": 0.9153,
+        "Quality": 1.0,
         "Modifiers": [
           {
             "Label": "Mass",
-            "Value": 16.0,
-            "OriginalValue": 8.0,
+            "Value": 128.0,
+            "OriginalValue": 64.0,
             "LessIsGood": 1
           },
           {
@@ -1106,8 +3387,8 @@
           },
           {
             "Label": "Range",
-            "Value": 9068.706055,
-            "OriginalValue": 5220.0,
+            "Value": 10080.0,
+            "OriginalValue": 5760.0,
             "LessIsGood": 0
           }
         ]
@@ -1118,78 +3399,65 @@
       "Item": "Int_FuelTank_Size5_Class3",
       "On": true,
       "Priority": 1,
-      "Health": 1,
+      "Health": 1.0,
       "Value": 87978
     },
     {
-      "Slot": "Decal1",
-      "Item": "Decal_Cannon",
-      "On": true,
-      "Priority": 1,
-      "Health": 1
-    },
-    {
-      "Slot": "ShipName0",
-      "Item": "Nameplate_Federation01_White",
-      "On": true,
-      "Priority": 1,
-      "Health": 1
-    },
-    {
-      "Slot": "ShipName1",
-      "Item": "Nameplate_Federation01_White",
-      "On": true,
-      "Priority": 1,
-      "Health": 1
-    },
-    {
-      "Slot": "Slot01_Size6",
-      "Item": "Int_ShieldGenerator_Size6_Class5",
+      "Slot": "Slot01_Size7",
+      "Item": "Int_ShieldGenerator_Size7_Class5",
       "On": true,
       "Priority": 2,
-      "Health": 1,
-      "Value": 14561578,
+      "Health": 1.0,
+      "Value": 46160201,
       "Engineering": {
         "Engineer": "Lei Cheung",
         "EngineerID": 300120,
-        "BlueprintID": 128673838,
+        "BlueprintID": 128673839,
         "BlueprintName": "ShieldGenerator_Reinforced",
-        "Level": 4,
-        "Quality": 0.81,
+        "Level": 5,
+        "Quality": 0.8567,
+        "ExperimentalEffect": "special_shield_health",
+        "ExperimentalEffect_Localised": "Hi-Cap",
         "Modifiers": [
           {
+            "Label": "PowerDraw",
+            "Value": 5.39,
+            "OriginalValue": 4.9,
+            "LessIsGood": 1
+          },
+          {
             "Label": "ShieldGenStrength",
-            "Value": 157.619995,
+            "Value": 174.442078,
             "OriginalValue": 120.000008,
             "LessIsGood": 0
           },
           {
             "Label": "BrokenRegenRate",
-            "Value": 4.797,
-            "OriginalValue": 5.33,
+            "Value": 6.597,
+            "OriginalValue": 7.33,
             "LessIsGood": 0
           },
           {
             "Label": "EnergyPerRegen",
-            "Value": 0.66,
+            "Value": 0.84,
             "OriginalValue": 0.6,
             "LessIsGood": 1
           },
           {
             "Label": "KineticResistance",
-            "Value": 47.757996,
+            "Value": 49.768002,
             "OriginalValue": 39.999996,
             "LessIsGood": 0
           },
           {
             "Label": "ThermicResistance",
-            "Value": -4.48401,
+            "Value": -0.463998,
             "OriginalValue": -20.000004,
             "LessIsGood": 0
           },
           {
             "Label": "ExplosiveResistance",
-            "Value": 56.465,
+            "Value": 58.140003,
             "OriginalValue": 50.0,
             "LessIsGood": 0
           }
@@ -1197,1214 +3465,1347 @@
       }
     },
     {
-      "Slot": "Slot02_Size5",
-      "Item": "Int_FuelScoop_Size5_Class4",
+      "Slot": "Slot02_Size7",
+      "Item": "Int_ShieldCellBank_Size7_Class5",
       "On": true,
-      "Priority": 4,
-      "Health": 1,
-      "Value": 2041582
+      "Priority": 2,
+      "AmmoInClip": 1,
+      "AmmoInHopper": 4,
+      "Health": 1.0,
+      "Value": 8758733,
+      "Engineering": {
+        "Engineer": "Lori Jameson",
+        "EngineerID": 300230,
+        "BlueprintID": 128673807,
+        "BlueprintName": "ShieldCellBank_Rapid",
+        "Level": 3,
+        "Quality": 1.0,
+        "ExperimentalEffect": "special_shieldcell_gradual",
+        "ExperimentalEffect_Localised": "Recycling Cell",
+        "Modifiers": [
+          {
+            "Label": "BootTime",
+            "Value": 30.000002,
+            "OriginalValue": 25.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ShieldBankSpinUp",
+            "Value": 3.5,
+            "OriginalValue": 5.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ShieldBankDuration",
+            "Value": 10.2828,
+            "OriginalValue": 11.4,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ShieldBankReinforcement",
+            "Value": 62.272495,
+            "OriginalValue": 57.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
     },
     {
-      "Slot": "Slot03_Size3",
-      "Item": "Int_ShieldCellBank_Size3_Class5",
+      "Slot": "Slot03_Size7",
+      "Item": "Int_ShieldCellBank_Size7_Class5",
+      "On": true,
+      "Priority": 2,
+      "AmmoInClip": 1,
+      "AmmoInHopper": 4,
+      "Health": 1.0,
+      "Value": 8758733,
+      "Engineering": {
+        "Engineer": "Lori Jameson",
+        "EngineerID": 300230,
+        "BlueprintID": 128673807,
+        "BlueprintName": "ShieldCellBank_Rapid",
+        "Level": 3,
+        "Quality": 1.0,
+        "ExperimentalEffect": "special_shieldcell_gradual",
+        "ExperimentalEffect_Localised": "Recycling Cell",
+        "Modifiers": [
+          {
+            "Label": "BootTime",
+            "Value": 30.000002,
+            "OriginalValue": 25.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ShieldBankSpinUp",
+            "Value": 3.5,
+            "OriginalValue": 5.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "ShieldBankDuration",
+            "Value": 10.2828,
+            "OriginalValue": 11.4,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ShieldBankReinforcement",
+            "Value": 62.272495,
+            "OriginalValue": 57.0,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "Slot04_Size6",
+      "Item": "Int_FighterBay_Size6_Class1",
       "On": true,
       "Priority": 3,
-      "Health": 1,
-      "Value": 142498,
-      "AmmoInClip": 1,
-      "AmmoInHopper": 3
+      "Health": 1.0,
+      "Value": 1682406
     },
     {
-      "Slot": "Slot04_Size3",
-      "Item": "Int_CargoRack_Size3_Class1",
+      "Slot": "Slot05_Size6",
+      "Item": "Int_CargoRack_Size6_Class1",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 9507
+      "Health": 1.0,
+      "Value": 326332
     },
     {
-      "Slot": "Slot05_Size3",
-      "Item": "Int_ModuleReinforcement_Size3_Class2",
-      "On": true,
-      "Priority": 1,
-      "Health": 1,
-      "Value": 75600
-    },
-    {
-      "Slot": "Slot06_Size2",
-      "Item": "Int_BuggyBay_Size2_Class2",
+      "Slot": "Slot06_Size5",
+      "Item": "Int_FuelScoop_Size5_Class5",
       "On": true,
       "Priority": 4,
-      "Health": 1,
-      "Value": 19440
+      "Health": 1.0,
+      "Value": 8166325
     },
     {
-      "Slot": "Slot07_Size2",
-      "Item": "Int_StellarBodyDiscoveryScanner_Advanced",
+      "Slot": "Slot07_Size5",
+      "Item": "Int_GuardianFSDBooster_Size5",
+      "On": true,
+      "Priority": 4,
+      "Health": 1.0,
+      "Value": 5834790
+    },
+    {
+      "Slot": "Slot08_Size4",
+      "Item": "Int_ModuleReinforcement_Size4_Class2",
       "On": true,
       "Priority": 1,
-      "Health": 1,
-      "Value": 1390500
+      "Health": 1.0,
+      "Value": 175500
+    },
+    {
+      "Slot": "Slot09_Size4",
+      "Item": "Int_ModuleReinforcement_Size4_Class2",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0,
+      "Value": 175500
+    },
+    {
+      "Slot": "Slot10_Size3",
+      "Item": "Int_DroneControl_Collection_Size3_Class5",
+      "On": true,
+      "Priority": 4,
+      "Health": 1.0,
+      "Value": 77760
+    },
+    {
+      "Slot": "Military01",
+      "Item": "Int_HullReinforcement_Size5_Class2",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0,
+      "Value": 450000,
+      "Engineering": {
+        "Engineer": "Selene Jean",
+        "EngineerID": 300210,
+        "BlueprintID": 128673719,
+        "BlueprintName": "HullReinforcement_HeavyDuty",
+        "Level": 5,
+        "Quality": 0.9667,
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 22.4,
+            "OriginalValue": 16.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "DefenceModifierHealthAddition",
+            "Value": 669.825012,
+            "OriginalValue": 390.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "KineticResistance",
+            "Value": 17.027496,
+            "OriginalValue": 2.499998,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": 17.027496,
+            "OriginalValue": 2.499998,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": 17.027496,
+            "OriginalValue": 2.499998,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "Military02",
+      "Item": "Int_HullReinforcement_Size5_Class2",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0,
+      "Value": 450000,
+      "Engineering": {
+        "Engineer": "Selene Jean",
+        "EngineerID": 300210,
+        "BlueprintID": 128673719,
+        "BlueprintName": "HullReinforcement_HeavyDuty",
+        "Level": 5,
+        "Quality": 0.9517,
+        "Modifiers": [
+          {
+            "Label": "Mass",
+            "Value": 22.4,
+            "OriginalValue": 16.0,
+            "LessIsGood": 1
+          },
+          {
+            "Label": "DefenceModifierHealthAddition",
+            "Value": 668.538025,
+            "OriginalValue": 390.0,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "KineticResistance",
+            "Value": 17.037249,
+            "OriginalValue": 2.499998,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ThermicResistance",
+            "Value": 17.037249,
+            "OriginalValue": 2.499998,
+            "LessIsGood": 0
+          },
+          {
+            "Label": "ExplosiveResistance",
+            "Value": 17.037249,
+            "OriginalValue": 2.499998,
+            "LessIsGood": 0
+          }
+        ]
+      }
+    },
+    {
+      "Slot": "Decal1",
+      "Item": "Decal_Combat_Dangerous",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
+    },
+    {
+      "Slot": "Decal2",
+      "Item": "Decal_PowerPlay_Halsey",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
+    },
+    {
+      "Slot": "Decal3",
+      "Item": "Decal_PowerPlay_Halsey",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
+    },
+    {
+      "Slot": "ShipName0",
+      "Item": "Nameplate_Federation01_White",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
+    },
+    {
+      "Slot": "ShipName1",
+      "Item": "Nameplate_Federation01_White",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
+    },
+    {
+      "Slot": "ShipID0",
+      "Item": "Nameplate_ShipID_White",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
+    },
+    {
+      "Slot": "ShipID1",
+      "Item": "Nameplate_ShipID_White",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
     },
     {
       "Slot": "PlanetaryApproachSuite",
       "Item": "Int_PlanetApproachSuite",
       "On": true,
       "Priority": 1,
-      "Health": 1,
+      "Health": 1.0,
       "Value": 450
     },
     {
-      "Slot": "ShipKitSpoiler",
-      "Item": "Asp_Shipkit1_Spoiler1",
+      "Slot": "ShipKitTail",
+      "Item": "Federation_Corvette_Shipkit1_Tail4",
       "On": true,
       "Priority": 1,
-      "Health": 1
+      "Health": 1.0
+    },
+    {
+      "Slot": "ShipKitSpoiler",
+      "Item": "Federation_Corvette_Shipkit1_Spoiler4",
+      "On": true,
+      "Priority": 1,
+      "Health": 1.0
     },
     {
       "Slot": "ShipKitWings",
-      "Item": "Asp_Shipkit1_Wings3",
+      "Item": "Federation_Corvette_Shipkit1_Wings4",
       "On": true,
       "Priority": 1,
-      "Health": 1
-    },
-    {
-      "Slot": "ShipKitBumper",
-      "Item": "Asp_Shipkit1_Bumper1",
-      "On": true,
-      "Priority": 1,
-      "Health": 1
+      "Health": 1.0
     },
     {
       "Slot": "WeaponColour",
       "Item": "WeaponCustomisation_White",
       "On": true,
       "Priority": 1,
-      "Health": 1
+      "Health": 1.0
     },
     {
       "Slot": "EngineColour",
       "Item": "EngineCustomisation_White",
       "On": true,
       "Priority": 1,
-      "Health": 1
+      "Health": 1.0
     },
     {
       "Slot": "VesselVoice",
       "Item": "VoicePack_Victor",
       "On": true,
       "Priority": 1,
-      "Health": 1
+      "Health": 1.0
     },
     {
       "Slot": "ShipCockpit",
-      "Item": "Asp_Cockpit",
+      "Item": "Federation_Corvette_Cockpit",
       "On": true,
       "Priority": 1,
-      "Health": 1
+      "Health": 1.0
     },
     {
       "Slot": "CargoHatch",
       "Item": "ModularCargoBayDoor",
       "On": true,
       "Priority": 4,
-      "Health": 1
+      "Health": 1.0
     }
-  ],
-  "timestamp": "2018-06-28T19:13:07Z",
-  "event": "Loadout"
+  ]
 }
 {
-  "timestamp": "2018-06-28T19:13:00Z",
-  "event": "Reputation"
-}
-{
-  "timestamp": "2018-06-28T19:13:00Z",
-  "event": "Progress"
-}
-{
-  "timestamp": "2018-06-28T19:13:00Z",
-  "event": "Rank"
-}
-{
-  "Commander": "John Kozak",
-  "Horizons": true,
-  "Ship": "Asp",
-  "Ship_Localised": "Asp Explorer",
-  "ShipID": 40,
-  "ShipName": "Sophisticate",
-  "ShipIdent": "FLC-SO",
-  "FuelLevel": 24.895954,
-  "FuelCapacity": 32.0,
-  "GameMode": "Open",
-  "Credits": 244763396,
-  "Loan": 0,
-  "timestamp": "2018-06-28T19:13:00Z",
-  "event": "LoadGame"
-}
-{
-  "Raw": [
-    {
-      "Name": "zinc",
-      "Count": 59
-    },
-    {
-      "Name": "mercury",
-      "Count": 7
-    },
-    {
-      "Name": "molybdenum",
-      "Count": 62
-    },
-    {
-      "Name": "ruthenium",
-      "Count": 16
-    },
-    {
-      "Name": "tin",
-      "Count": 44
-    },
-    {
-      "Name": "vanadium",
-      "Count": 53
-    },
-    {
-      "Name": "technetium",
-      "Count": 2
-    },
-    {
-      "Name": "cadmium",
-      "Count": 24
-    },
-    {
-      "Name": "zirconium",
-      "Count": 62
-    },
-    {
-      "Name": "sulphur",
-      "Count": 56
-    },
-    {
-      "Name": "nickel",
-      "Count": 238
-    },
-    {
-      "Name": "carbon",
-      "Count": 47
-    },
-    {
-      "Name": "iron",
-      "Count": 263
-    },
-    {
-      "Name": "niobium",
-      "Count": 4
-    },
-    {
-      "Name": "phosphorus",
-      "Count": 13
-    },
-    {
-      "Name": "arsenic",
-      "Count": 72
-    },
-    {
-      "Name": "antimony",
-      "Count": 2
-    },
-    {
-      "Name": "germanium",
-      "Count": 20
-    },
-    {
-      "Name": "manganese",
-      "Count": 124
-    },
-    {
-      "Name": "chromium",
-      "Count": 23
-    },
-    {
-      "Name": "yttrium",
-      "Count": 16
-    }
-  ],
-  "Manufactured": [
-    {
-      "Name": "refinedfocuscrystals",
-      "Count": 44
-    },
-    {
-      "Name": "protolightalloys",
-      "Count": 112
-    },
-    {
-      "Name": "fedproprietarycomposites",
-      "Count": 48
-    },
-    {
-      "Name": "fedcorecomposites",
-      "Count": 9
-    },
-    {
-      "Name": "heatvanes",
-      "Count": 8
-    },
-    {
-      "Name": "compoundshielding",
-      "Count": 130
-    },
-    {
-      "Name": "chemicalmanipulators",
-      "Count": 9
-    },
-    {
-      "Name": "thermicalloys",
-      "Count": 74
-    },
-    {
-      "Name": "heatresistantceramics",
-      "Count": 23
-    },
-    {
-      "Name": "galvanisingalloys",
-      "Count": 216
-    },
-    {
-      "Name": "biotechconductors",
-      "Count": 19
-    },
-    {
-      "Name": "conductivepolymers",
-      "Count": 13
-    },
-    {
-      "Name": "protoheatradiators",
-      "Count": 23
-    },
-    {
-      "Name": "unknowncarapace",
-      "Count": 20
-    },
-    {
-      "Name": "unknownenergysource",
-      "Count": 14
-    },
-    {
-      "Name": "unknownenergycell",
-      "Count": 21
-    },
-    {
-      "Name": "heatexchangers",
-      "Count": 10
-    },
-    {
-      "Name": "imperialshielding",
-      "Count": 2
-    },
-    {
-      "Name": "gridresistors",
-      "Count": 75
-    },
-    {
-      "Name": "unknownorganiccircuitry",
-      "Count": 9
-    },
-    {
-      "Name": "unknowntechnologycomponents",
-      "Count": 6
-    },
-    {
-      "Name": "hybridcapacitors",
-      "Count": 78
-    },
-    {
-      "Name": "highdensitycomposites",
-      "Count": 91
-    },
-    {
-      "Name": "electrochemicalarrays",
-      "Count": 91
-    },
-    {
-      "Name": "shieldingsensors",
-      "Count": 152
-    },
-    {
-      "Name": "conductivecomponents",
-      "Count": 41
-    },
-    {
-      "Name": "focuscrystals",
-      "Count": 190
-    },
-    {
-      "Name": "protoradiolicalloys",
-      "Count": 11
-    },
-    {
-      "Name": "conductiveceramics",
-      "Count": 4
-    },
-    {
-      "Name": "chemicalprocessors",
-      "Count": 115
-    },
-    {
-      "Name": "chemicaldistillery",
-      "Count": 38
-    },
-    {
-      "Name": "shieldemitters",
-      "Count": 247
-    },
-    {
-      "Name": "salvagedalloys",
-      "Count": 117
-    },
-    {
-      "Name": "wornshieldemitters",
-      "Count": 227
-    },
-    {
-      "Name": "mechanicalcomponents",
-      "Count": 12
-    },
-    {
-      "Name": "heatconductionwiring",
-      "Count": 103
-    },
-    {
-      "Name": "heatdispersionplate",
-      "Count": 51
-    },
-    {
-      "Name": "phasealloys",
-      "Count": 200
-    },
-    {
-      "Name": "precipitatedalloys",
-      "Count": 92
-    },
-    {
-      "Name": "uncutfocuscrystals",
-      "Count": 159
-    },
-    {
-      "Name": "mechanicalscrap",
-      "Count": 3
-    },
-    {
-      "Name": "mechanicalequipment",
-      "Count": 5
-    },
-    {
-      "Name": "crystalshards",
-      "Count": 37
-    },
-    {
-      "Name": "basicconductors",
-      "Count": 27
-    },
-    {
-      "Name": "temperedalloys",
-      "Count": 12
-    },
-    {
-      "Name": "militarygradealloys",
-      "Count": 10
-    },
-    {
-      "Name": "guardian_powerconduit",
-      "Count": 75
-    },
-    {
-      "Name": "guardian_techcomponent",
-      "Count": 3
-    },
-    {
-      "Name": "guardian_powercell",
-      "Count": 45
-    },
-    {
-      "Name": "guardian_sentinel_weaponparts",
-      "Count": 21
-    },
-    {
-      "Name": "guardian_sentinel_wreckagecomponents",
-      "Count": 12
-    },
-    {
-      "Name": "chemicalstorageunits",
-      "Count": 5
-    },
-    {
-      "Name": "compactcomposites",
-      "Count": 41
-    },
-    {
-      "Name": "filamentcomposites",
-      "Count": 83
-    },
-    {
-      "Name": "tg_biomechanicalconduits",
-      "Count": 3
-    },
-    {
-      "Name": "tg_propulsionelement",
-      "Count": 3
-    }
-  ],
-  "Encoded": [
-    {
-      "Name": "decodedemissiondata",
-      "Count": 38
-    },
-    {
-      "Name": "shielddensityreports",
-      "Count": 22
-    },
-    {
-      "Name": "shieldpatternanalysis",
-      "Count": 32
-    },
-    {
-      "Name": "encryptionarchives",
-      "Count": 38
-    },
-    {
-      "Name": "symmetrickeys",
-      "Count": 13
-    },
-    {
-      "Name": "shieldfrequencydata",
-      "Count": 9
-    },
-    {
-      "Name": "tg_compositiondata",
-      "Count": 25
-    },
-    {
-      "Name": "emissiondata",
-      "Count": 25
-    },
-    {
-      "Name": "classifiedscandata",
-      "Count": 20
-    },
-    {
-      "Name": "shieldsoakanalysis",
-      "Count": 81
-    },
-    {
-      "Name": "wakesolutions",
-      "Count": 21
-    },
-    {
-      "Name": "tg_shipsystemsdata",
-      "Count": 6
-    },
-    {
-      "Name": "unknownshipsignature",
-      "Count": 9
-    },
-    {
-      "Name": "adaptiveencryptors",
-      "Count": 20
-    },
-    {
-      "Name": "tg_shipflightdata",
-      "Count": 3
-    },
-    {
-      "Name": "encryptioncodes",
-      "Count": 24
-    },
-    {
-      "Name": "tg_residuedata",
-      "Count": 20
-    },
-    {
-      "Name": "tg_structuraldata",
-      "Count": 20
-    },
-    {
-      "Name": "embeddedfirmware",
-      "Count": 12
-    },
-    {
-      "Name": "encodedscandata",
-      "Count": 26
-    },
-    {
-      "Name": "shieldcyclerecordings",
-      "Count": 61
-    },
-    {
-      "Name": "scandatabanks",
-      "Count": 24
-    },
-    {
-      "Name": "scanarchives",
-      "Count": 27
-    },
-    {
-      "Name": "ancientlanguagedata",
-      "Count": 6
-    },
-    {
-      "Name": "ancienttechnologicaldata",
-      "Count": 12
-    },
-    {
-      "Name": "ancientbiologicaldata",
-      "Count": 21
-    },
-    {
-      "Name": "ancientculturaldata",
-      "Count": 6
-    },
-    {
-      "Name": "fsdtelemetry",
-      "Count": 33
-    },
-    {
-      "Name": "legacyfirmware",
-      "Count": 65
-    },
-    {
-      "Name": "archivedemissiondata",
-      "Count": 24
-    },
-    {
-      "Name": "bulkscandata",
-      "Count": 97
-    },
-    {
-      "Name": "scrambledemissiondata",
-      "Count": 42
-    },
-    {
-      "Name": "hyperspacetrajectories",
-      "Count": 6
-    },
-    {
-      "Name": "industrialfirmware",
-      "Count": 15
-    },
-    {
-      "Name": "encryptedfiles",
-      "Count": 81
-    },
-    {
-      "Name": "dataminedwake",
-      "Count": 3
-    },
-    {
-      "Name": "disruptedwakeechoes",
-      "Count": 34
-    },
-    {
-      "Name": "consumerfirmware",
-      "Count": 7
-    },
-    {
-      "Name": "ancienthistoricaldata",
-      "Count": 15
-    },
-    {
-      "Name": "guardian_weaponblueprint",
-      "Count": 6
-    },
-    {
-      "Name": "guardian_moduleblueprint",
-      "Count": 3
-    }
-  ],
-  "timestamp": "2018-06-28T19:13:00Z",
-  "event": "Materials"
-}
-{
-  "Name": "John Kozak",
-  "timestamp": "2018-06-28T19:13:00Z",
-  "event": "Commander"
-}
-{
-  "timestamp": "2018-06-28T18:15:33Z",
-  "event": "Fileheader"
-}
-{
-  "timestamp": "2018-06-25T19:37:18Z",
-  "event": "ShipTargeted"
-}
-{
-  "timestamp": "2018-06-25T19:32:45Z",
-  "event": "USSDrop"
-}
-{
-  "timestamp": "2018-06-25T19:32:10Z",
-  "event": "LeaveBody"
-}
-{
-  "StarSystem": "Wolf 397",
-  "timestamp": "2018-06-25T19:31:34Z",
-  "event": "SupercruiseEntry"
-}
-{
-  "timestamp": "2018-06-25T19:30:06Z",
-  "event": "ReceiveText"
-}
-{
-  "timestamp": "2018-06-25T19:29:36Z",
-  "event": "Undocked"
-}
-{
-  "timestamp": "2018-06-25T19:29:19Z",
-  "event": "EngineerCraft"
-}
-{
-  "timestamp": "2018-06-25T19:29:18Z",
-  "event": "NpcCrewPaidWage"
-}
-{
-  "timestamp": "2018-06-25T19:28:02Z",
-  "event": "BuyAmmo"
-}
-{
-  "timestamp": "2018-06-25T19:28:01Z",
-  "event": "RefuelAll"
-}
-{
-  "StationName": "Trophy Camp",
-  "StationType": "SurfaceStation",
-  "StarSystem": "Wolf 397",
-  "SystemAddress": 3107576681170,
-  "MarketID": 128680583,
-  "StationFaction": "Tod 'The Blaster' McQuinn",
-  "StationGovernment": "$government_Engineer;",
-  "StationGovernment_Localised": "Workshop",
-  "StationAllegiance": "Alliance",
+  "timestamp": "2018-07-01T07:39:49Z",
+  "event": "Docked",
+  "StationName": "Jameson Memorial",
+  "StationType": "Orbis",
+  "StarSystem": "Shinrarta Dezhra",
+  "SystemAddress": 3932277478106,
+  "MarketID": 128666762,
+  "StationFaction": "Pilots Federation Local Branch",
+  "StationGovernment": "$government_Democracy;",
+  "StationGovernment_Localised": "Democracy",
+  "StationAllegiance": "PilotsFederation",
   "StationServices": [
     "Dock",
     "Autodock",
+    "Commodities",
     "Contacts",
+    "Exploration",
+    "Missions",
     "Outfitting",
+    "CrewLounge",
     "Rearm",
     "Refuel",
     "Repair",
+    "Shipyard",
     "Tuning",
     "Workshop",
+    "MissionsGenerated",
     "FlightController",
     "StationOperations",
-    "Powerplay"
+    "Powerplay",
+    "SearchAndRescue",
+    "TechBroker"
   ],
-  "StationEconomy": "$economy_Colony;",
-  "StationEconomy_Localised": "Colony",
+  "StationEconomy": "$economy_HighTech;",
+  "StationEconomy_Localised": "High Tech",
   "StationEconomies": [
     {
-      "Name": "$economy_Colony;",
-      "Name_Localised": "Colony",
-      "Proportion": 1
+      "Name": "$economy_HighTech;",
+      "Name_Localised": "High Tech",
+      "Proportion": 0.67
+    },
+    {
+      "Name": "$economy_Industrial;",
+      "Name_Localised": "Industrial",
+      "Proportion": 0.33
     }
   ],
-  "DistFromStarLS": 133.250702,
-  "timestamp": "2018-06-25T19:27:54Z",
-  "event": "Docked"
+  "DistFromStarLS": 341.846405
 }
 {
-  "timestamp": "2018-06-25T19:27:09Z",
-  "event": "DockingGranted"
-}
-{
-  "timestamp": "2018-06-25T19:27:07Z",
-  "event": "DockingRequested"
-}
-{
-  "Submitted": true,
-  "Interdictor": "Olivier Turquais",
-  "IsPlayer": false,
-  "Faction": "63 chi Leonis Crimson Camorra",
-  "timestamp": "2018-06-25T19:24:08Z",
-  "event": "Interdicted"
-}
-{
-  "timestamp": "2018-06-25T19:14:43Z",
-  "event": "SendText"
-}
-{
-  "timestamp": "2018-06-25T19:05:45Z",
-  "event": "ModuleBuy"
-}
-{
-  "timestamp": "2018-06-25T19:05:17Z",
-  "event": "StoredModules"
-}
-{
-  "timestamp": "2018-06-25T19:05:17Z",
-  "event": "Outfitting"
-}
-{
-  "timestamp": "2018-06-25T18:59:51Z",
-  "event": "EjectCargo"
-}
-{
-  "ShipType": "asp",
-  "ShipType_Localised": "Asp Explorer",
-  "ShipID": 40,
-  "StoreOldShip": "Federation_Corvette",
-  "StoreShipID": 3,
+  "timestamp": "2018-07-01T07:45:41Z",
+  "event": "StoredModules",
   "MarketID": 128666762,
-  "timestamp": "2018-06-25T18:44:00Z",
-  "event": "ShipyardSwap"
-}
-{
-  "timestamp": "2018-06-25T18:43:49Z",
-  "event": "StoredShips"
-}
-{
-  "timestamp": "2018-06-25T18:43:49Z",
-  "event": "Shipyard"
-}
-{
-  "timestamp": "2018-06-25T18:28:10Z",
-  "event": "ShipyardTransfer"
-}
-{
-  "timestamp": "2018-06-25T18:27:25Z",
-  "event": "CrewAssign"
-}
-{
-  "timestamp": "2018-06-25T18:27:10Z",
-  "event": "RepairAll"
-}
-{
-  "timestamp": "2018-06-25T18:22:33Z",
-  "event": "HeatDamage"
-}
-{
-  "timestamp": "2018-06-25T18:08:59Z",
-  "event": "JetConeBoost"
-}
-{
-  "timestamp": "2018-06-24T15:57:34Z",
-  "event": "SellExplorationData"
-}
-{
-  "timestamp": "2018-06-24T15:56:40Z",
-  "event": "MarketSell"
-}
-{
-  "timestamp": "2018-06-24T15:56:17Z",
-  "event": "PayFines"
-}
-{
-  "timestamp": "2018-06-24T15:55:42Z",
-  "event": "CommitCrime"
-}
-{
-  "timestamp": "2018-06-23T09:54:31Z",
-  "event": "LaunchDrone"
-}
-{
-  "timestamp": "2018-06-23T09:52:31Z",
-  "event": "CollectCargo"
-}
-{
-  "timestamp": "2018-06-23T09:36:50Z",
-  "event": "FactionKillBond"
-}
-{
-  "timestamp": "2018-06-23T09:26:05Z",
-  "event": "Scanned"
-}
-{
-  "timestamp": "2018-06-23T09:23:38Z",
-  "event": "NavBeaconScan"
-}
-{
-  "timestamp": "2018-06-23T09:18:08Z",
-  "event": "Repair"
-}
-{
-  "timestamp": "2018-06-23T09:18:04Z",
-  "event": "BuyDrones"
-}
-{
-  "timestamp": "2018-06-23T09:14:12Z",
-  "event": "PowerplaySalary"
-}
-{
-  "timestamp": "2018-06-23T09:13:59Z",
-  "event": "RedeemVoucher"
-}
-{
-  "timestamp": "2018-06-20T18:10:22Z",
-  "event": "PayBounties"
-}
-{
-  "timestamp": "2018-06-20T17:45:04Z",
-  "event": "Screenshot"
-}
-{
-  "timestamp": "2018-06-20T17:31:50Z",
-  "event": "SellDrones"
-}
-{
-  "timestamp": "2018-06-18T20:51:58Z",
-  "event": "MissionCompleted"
-}
-{
-  "timestamp": "2018-06-18T20:51:42Z",
-  "event": "RestockVehicle"
-}
-{
-  "timestamp": "2018-06-18T20:47:02Z",
-  "event": "MissionRedirected"
-}
-{
-  "timestamp": "2018-06-18T20:46:14Z",
-  "event": "FighterRebuilt"
-}
-{
-  "timestamp": "2018-06-18T20:44:44Z",
-  "event": "FighterDestroyed"
-}
-{
-  "timestamp": "2018-06-18T20:43:42Z",
-  "event": "LaunchFighter"
-}
-{
-  "timestamp": "2018-06-18T20:38:57Z",
-  "event": "WingLeave"
-}
-{
-  "timestamp": "2018-06-18T20:34:22Z",
-  "event": "WingAdd"
-}
-{
-  "timestamp": "2018-06-18T20:31:01Z",
-  "event": "CargoDepot"
-}
-{
-  "timestamp": "2018-06-18T20:19:53Z",
-  "event": "MissionAccepted"
-}
-{
-  "timestamp": "2018-06-18T20:15:51Z",
-  "event": "DockingDenied"
-}
-{
-  "timestamp": "2018-06-18T20:08:38Z",
-  "event": "WingJoin"
-}
-{
-  "timestamp": "2018-06-18T19:38:01Z",
-  "event": "EndCrewSession"
-}
-{
-  "timestamp": "2018-06-18T19:37:58Z",
-  "event": "CrewMemberQuits"
-}
-{
-  "timestamp": "2018-06-18T19:36:46Z",
-  "event": "CrewMemberRoleChange"
-}
-{
-  "timestamp": "2018-06-18T19:36:46Z",
-  "event": "CrewMemberJoins"
-}
-{
-  "timestamp": "2018-06-17T19:19:43Z",
-  "event": "DockFighter"
-}
-{
-  "timestamp": "2018-06-17T18:47:47Z",
-  "event": "Market"
-}
-{
-  "timestamp": "2018-06-17T18:39:39Z",
-  "event": "Synthesis"
-}
-{
-  "timestamp": "2018-06-17T09:17:31Z",
-  "event": "RebootRepair"
-}
-{
-  "timestamp": "2018-06-15T12:40:39Z",
-  "event": "PowerplayVoucher"
-}
-{
-  "timestamp": "2018-06-15T12:00:35Z",
-  "event": "ModuleSwap"
-}
-{
-  "timestamp": "2018-06-15T12:00:26Z",
-  "event": "ModuleSellRemote"
-}
-{
-  "timestamp": "2018-06-15T12:00:14Z",
-  "event": "ModuleRetrieve"
-}
-{
-  "timestamp": "2018-06-14T21:16:01Z",
-  "event": "MassModuleStore"
-}
-{
-  "timestamp": "2018-06-14T21:01:49Z",
-  "event": "TechnologyBroker"
-}
-{
-  "timestamp": "2018-06-14T20:54:39Z",
-  "event": "MarketBuy"
-}
-{
-  "timestamp": "2018-06-14T20:44:36Z",
-  "event": "MaterialTrade"
-}
-{
-  "timestamp": "2018-06-14T20:34:41Z",
-  "event": "DockSRV"
-}
-{
-  "timestamp": "2018-06-13T14:43:28Z",
-  "event": "MissionAbandoned"
-}
-{
-  "timestamp": "2018-06-10T12:57:49Z",
-  "event": "ModuleStore"
-}
-{
-  "Captain": "Vincent Valamore",
-  "timestamp": "2018-06-10T12:56:05Z",
-  "event": "QuitACrew"
-}
-{
-  "timestamp": "2018-06-10T12:53:46Z",
-  "event": "ChangeCrewRole"
-}
-{
-  "Captain": "Vincent Valamore",
-  "timestamp": "2018-06-10T12:43:48Z",
-  "event": "JoinACrew"
-}
-{
-  "timestamp": "2018-06-10T12:41:09Z",
-  "event": "VehicleSwitch"
-}
-{
-  "timestamp": "2018-06-10T12:30:36Z",
-  "event": "SearchAndRescue"
-}
-{
-  "timestamp": "2018-06-08T19:39:35Z",
-  "event": "DatalinkVoucher"
-}
-{
-  "timestamp": "2018-06-08T19:39:35Z",
-  "event": "DatalinkScan"
-}
-{
-  "timestamp": "2018-06-05T20:03:59Z",
-  "event": "ShieldState"
-}
-{
-  "timestamp": "2018-06-03T08:31:58Z",
-  "event": "NpcCrewRank"
-}
-{
-  "timestamp": "2018-06-03T08:29:18Z",
-  "event": "CrewLaunchFighter"
-}
-{
-  "timestamp": "2018-05-23T19:19:18Z",
-  "event": "WingInvite"
-}
-{
-  "timestamp": "2018-05-20T17:00:51Z",
-  "event": "ModuleSell"
-}
-{
-  "timestamp": "2018-05-20T16:45:40Z",
-  "event": "DockingCancelled"
-}
-{
-  "Interdictor": "Mortimer VanCleef",
-  "IsPlayer": false,
-  "timestamp": "2018-05-20T16:23:19Z",
-  "event": "EscapeInterdiction"
-}
-{
-  "timestamp": "2018-05-20T15:42:07Z",
-  "event": "Passengers"
-}
-{
-  "timestamp": "2018-05-20T10:15:41Z",
-  "event": "MissionFailed"
-}
-{
-  "timestamp": "2018-05-19T13:39:56Z",
-  "event": "SetUserShipName"
-}
-{
-  "timestamp": "2018-05-19T13:38:06Z",
-  "event": "ShipyardNew"
-}
-{
-  "timestamp": "2018-05-19T13:38:05Z",
-  "event": "ShipyardBuy"
-}
-{
-  "timestamp": "2018-05-19T08:31:00Z",
-  "event": "AfmuRepairs"
-}
-{
-  "timestamp": "2018-05-19T08:22:21Z",
-  "event": "SystemsShutdown"
-}
-{
-  "timestamp": "2018-05-18T21:07:19Z",
-  "event": "MaterialDiscovered"
-}
-{
-  "timestamp": "2018-05-18T20:34:27Z",
-  "event": "FetchRemoteModule"
-}
-{
-  "Success": true,
-  "IsPlayer": true,
-  "Interdicted": "Ysharia",
-  "timestamp": "2018-05-11T17:33:58Z",
-  "event": "Interdiction"
-}
-{
-  "Engineer": "Zacariah Nemo",
-  "Rank": 5,
-  "timestamp": "2018-05-11T15:29:19Z",
-  "event": "EngineerProgress"
-}
-{
-  "timestamp": "2018-05-11T15:26:30Z",
-  "event": "EngineerContribution"
-}
-{
-  "timestamp": "2018-05-10T14:54:42Z",
-  "event": "BuyExplorationData"
-}
-{
-  "Victim": "Reakktor",
-  "CombatRank": 3,
-  "timestamp": "2018-05-02T18:41:17Z",
-  "event": "PVPKill"
-}
-{
-  "timestamp": "2018-04-26T15:42:46Z",
-  "event": "CrewFire"
-}
-{
-  "timestamp": "2018-04-26T15:42:37Z",
-  "event": "CrewHire"
-}
-{
-  "timestamp": "2018-04-07T07:53:15Z",
-  "event": "Promotion"
-}
-{
-  "timestamp": "2018-03-17T18:00:25Z",
-  "event": "KickCrewMember"
-}
-{
-  "timestamp": "2018-03-04T09:23:32Z",
-  "event": "DataScanned"
-}
-{
-  "timestamp": "2018-03-01T20:27:05Z",
-  "event": "CommunityGoal"
-}
-{
-  "timestamp": "2018-02-17T20:51:51Z",
-  "event": "EngineerApply"
-}
-{
-  "timestamp": "2018-02-17T11:26:54Z",
-  "event": "MaterialDiscarded"
-}
-{
-  "timestamp": "2018-02-11T18:55:53Z",
-  "event": "Resurrect"
-}
-{
-  "timestamp": "2018-02-11T18:55:00Z",
-  "event": "Died"
-}
-{
-  "timestamp": "2018-02-10T14:06:00Z",
-  "event": "CommunityGoalJoin"
-}
-{
-  "timestamp": "2018-02-02T19:46:26Z",
-  "event": "PowerplayJoin"
-}
-{
-  "timestamp": "2018-02-02T19:41:44Z",
-  "event": "PayLegacyFines"
-}
-{
-  "timestamp": "2018-01-20T10:54:26Z",
-  "event": "ShipyardSell"
-}
-{
-  "timestamp": "2018-01-04T19:34:58Z",
-  "event": "CapShipBond"
-}
-{
-  "timestamp": "2018-01-02T14:12:47Z",
-  "event": "CockpitBreached"
-}
-{
-  "timestamp": "2017-12-27T11:28:34Z",
-  "event": "SelfDestruct"
-}
-{
-  "timestamp": "2017-12-02T12:17:16Z",
-  "event": "PowerplayLeave"
-}
-{
-  "timestamp": "2017-11-05T18:41:03Z",
-  "event": "PowerplayCollect"
-}
-{
-  "timestamp": "2017-11-05T18:40:58Z",
-  "event": "PowerplayFastTrack"
-}
-{
-  "timestamp": "2017-10-06T20:54:20Z",
-  "event": "CommunityGoalDiscard"
-}
-{
-  "timestamp": "2017-10-01T10:28:59Z",
-  "event": "RepairDrone"
-}
-{
-  "timestamp": "2017-09-10T12:16:29Z",
-  "event": "BuyTradeData"
-}
-{
-  "timestamp": "2017-08-18T20:58:24Z",
-  "event": "CommunityGoalReward"
-}
-{
-  "timestamp": "2017-08-10T18:45:16Z",
-  "event": "ScientificResearch"
-}
-{
-  "timestamp": "2017-07-30T12:46:51Z",
-  "event": "DockingTimeout"
-}
-{
-  "timestamp": "2017-07-18T20:37:20Z",
-  "event": "PowerplayVote"
-}
-{
-  "timestamp": "2017-03-10T20:27:44Z",
-  "event": "MiningRefined"
+  "StationName": "Jameson Memorial",
+  "StarSystem": "Shinrarta Dezhra",
+  "Items": [
+    {
+      "Name": "$int_shieldgenerator_size5_class5_name;",
+      "Name_Localised": "Shield Generator",
+      "StorageSlot": 120,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 4593558,
+      "Hot": false,
+      "EngineerModifications": "ShieldGenerator_Reinforced",
+      "Level": 3,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$int_engine_size5_class5_name;",
+      "Name_Localised": "Thrusters",
+      "StorageSlot": 5,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 4593558,
+      "Hot": false,
+      "EngineerModifications": "Engine_Tuned",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$int_fuelscoop_size5_class4_name;",
+      "Name_Localised": "Fuel Scoop",
+      "StorageSlot": 112,
+      "StarSystem": "CD-77 45",
+      "MarketID": 128044544,
+      "TransferCost": 16185,
+      "TransferTime": 1579,
+      "BuyPrice": 2041582,
+      "Hot": false
+    },
+    {
+      "Name": "$int_hullreinforcement_size5_class2_name;",
+      "Name_Localised": "Hull Reinforcement",
+      "StorageSlot": 105,
+      "StarSystem": "Lalande 4141",
+      "MarketID": 128062218,
+      "TransferCost": 3733,
+      "TransferTime": 1762,
+      "BuyPrice": 405000,
+      "Hot": false,
+      "EngineerModifications": "HullReinforcement_HeavyDuty",
+      "Level": 5,
+      "Quality": 0.1967
+    },
+    {
+      "Name": "$int_sensors_size5_class2_name;",
+      "Name_Localised": "Sensors",
+      "StorageSlot": 7,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 71500,
+      "Hot": false,
+      "EngineerModifications": "Sensor_Sensor_LightWeight",
+      "Level": 3,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_beamlaser_gimbal_huge_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 55,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 8746160,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_beamlaser_gimbal_huge_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 54,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 8746160,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 5,
+      "Quality": 0.9853
+    },
+    {
+      "Name": "$hpt_beamlaser_gimbal_huge_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 45,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 8746160,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 5,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_multicannon_gimbal_huge_name;",
+      "Name_Localised": "Multi-Cannon",
+      "StorageSlot": 53,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 5420960,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Overcharged",
+      "Level": 5,
+      "Quality": 0.969
+    },
+    {
+      "Name": "$hpt_multicannon_gimbal_huge_name;",
+      "Name_Localised": "Multi-Cannon",
+      "StorageSlot": 40,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 5420960,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Overcharged",
+      "Level": 5,
+      "Quality": 0.981
+    },
+    {
+      "Name": "$hpt_beamlaser_fixed_huge_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 44,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 2156544,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 5,
+      "Quality": 0.5653
+    },
+    {
+      "Name": "$hpt_beamlaser_fixed_huge_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 35,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 2156544,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 5,
+      "Quality": 0.509
+    },
+    {
+      "Name": "$int_hyperdrive_size4_class5_name;",
+      "Name_Localised": "FSD",
+      "StorageSlot": 1,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 1449072,
+      "Hot": false,
+      "EngineerModifications": "FSD_LongRange",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_multicannon_fixed_huge_name;",
+      "Name_Localised": "Multi-Cannon",
+      "StorageSlot": 59,
+      "StarSystem": "Wolf 397",
+      "MarketID": 128680583,
+      "TransferCost": 5554,
+      "TransferTime": 1038,
+      "BuyPrice": 1177600,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Overcharged",
+      "Level": 4,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_multicannon_fixed_huge_name;",
+      "Name_Localised": "Multi-Cannon",
+      "StorageSlot": 52,
+      "StarSystem": "Wolf 397",
+      "MarketID": 128680583,
+      "TransferCost": 5554,
+      "TransferTime": 1038,
+      "BuyPrice": 1177600,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Overcharged",
+      "Level": 4,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_pulselaser_gimbal_huge_name;",
+      "Name_Localised": "Pulse Laser",
+      "StorageSlot": 47,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 789840,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LongRange",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_pulselaser_gimbal_huge_name;",
+      "Name_Localised": "Pulse Laser",
+      "StorageSlot": 36,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 789840,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LongRange",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$int_lifesupport_size4_class5_name;",
+      "Name_Localised": "Life Support",
+      "StorageSlot": 117,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 398996,
+      "Hot": false,
+      "EngineerModifications": "Misc_LightWeight",
+      "Level": 1,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$int_shieldcellbank_size4_class5_name;",
+      "Name_Localised": "Shield Cell Bank",
+      "StorageSlot": 23,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 398996,
+      "Hot": false,
+      "EngineerModifications": "ShieldCellBank_Rapid",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$int_shieldgenerator_size4_class3_fast_name;",
+      "Name_Localised": "Bi-Weave Shield",
+      "StorageSlot": 49,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 268347,
+      "Hot": false,
+      "EngineerModifications": "ShieldGenerator_Thermic",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$int_dronecontrol_collection_size3_class5_name;",
+      "Name_Localised": "Collector",
+      "StorageSlot": 116,
+      "StarSystem": "LP 726-6",
+      "MarketID": 3228550400,
+      "TransferCost": 456,
+      "TransferTime": 955,
+      "BuyPrice": 86400,
+      "Hot": false,
+      "EngineerModifications": "Misc_LightWeight",
+      "Level": 4,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_slugshot_gimbal_large_name;",
+      "Name_Localised": "Frag Cannon",
+      "StorageSlot": 122,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 1575936,
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 2,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_slugshot_gimbal_large_name;",
+      "Name_Localised": "Frag Cannon",
+      "StorageSlot": 121,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 1575936,
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 3,
+      "Quality": 0.9517
+    },
+    {
+      "Name": "$hpt_beamlaser_turret_large_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 114,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 17459640,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 5,
+      "Quality": 0.7575
+    },
+    {
+      "Name": "$hpt_slugshot_fixed_medium_name;",
+      "Name_Localised": "Frag Cannon",
+      "StorageSlot": 99,
+      "StarSystem": "Yoru",
+      "MarketID": 128675207,
+      "TransferCost": 2234,
+      "TransferTime": 1485,
+      "BuyPrice": 291840,
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 4,
+      "Quality": 0.8477
+    },
+    {
+      "Name": "$hpt_slugshot_fixed_medium_name;",
+      "Name_Localised": "Frag Cannon",
+      "StorageSlot": 98,
+      "StarSystem": "Yoru",
+      "MarketID": 128675207,
+      "TransferCost": 2234,
+      "TransferTime": 1485,
+      "BuyPrice": 291840,
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 4,
+      "Quality": 0.7167
+    },
+    {
+      "Name": "$hpt_plasmaaccelerator_fixed_medium_name;",
+      "Name_Localised": "Plasma Acc",
+      "StorageSlot": 118,
+      "StarSystem": "Sol",
+      "MarketID": 128016384,
+      "TransferCost": 3152,
+      "TransferTime": 944,
+      "BuyPrice": 750780,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_beamlaser_gimbal_medium_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 9,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 450540,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_beamlaser_gimbal_medium_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 4,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 450540,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_slugshot_gimbal_medium_name;",
+      "Name_Localised": "Frag Cannon",
+      "StorageSlot": 104,
+      "StarSystem": "Yoru",
+      "MarketID": 128675207,
+      "TransferCost": 2982,
+      "TransferTime": 1485,
+      "BuyPrice": 393984,
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 2,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_slugshot_gimbal_medium_name;",
+      "Name_Localised": "Frag Cannon",
+      "StorageSlot": 46,
+      "StarSystem": "Yoru",
+      "MarketID": 128675207,
+      "TransferCost": 2982,
+      "TransferTime": 1485,
+      "BuyPrice": 393984,
+      "Hot": false,
+      "EngineerModifications": "Weapon_DoubleShot",
+      "Level": 2,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_cannon_gimbal_medium_name;",
+      "Name_Localised": "Cannon",
+      "StorageSlot": 115,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 337600,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Overcharged",
+      "Level": 4,
+      "Quality": 0.206
+    },
+    {
+      "Name": "$hpt_cannon_gimbal_medium_name;",
+      "Name_Localised": "Cannon",
+      "StorageSlot": 111,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 337600,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Overcharged",
+      "Level": 4,
+      "Quality": 0.813
+    },
+    {
+      "Name": "$int_hullreinforcement_size2_class2_name;",
+      "Name_Localised": "Hull Reinforcement",
+      "StorageSlot": 108,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 32400,
+      "Hot": false,
+      "EngineerModifications": "HullReinforcement_HeavyDuty",
+      "Level": 1,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$int_sensors_size2_class2_name;",
+      "Name_Localised": "Sensors",
+      "StorageSlot": 58,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 3258,
+      "Hot": false,
+      "EngineerModifications": "Sensor_Sensor_LightWeight",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_multicannon_fixed_medium_name;",
+      "Name_Localised": "Multi-Cannon",
+      "StorageSlot": 11,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 38000,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Overcharged",
+      "Level": 4,
+      "Quality": 0.494
+    },
+    {
+      "Name": "$hpt_pulselaserburst_turret_medium_name;",
+      "Name_Localised": "Burst Laser",
+      "StorageSlot": 119,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 130240,
+      "Hot": false,
+      "EngineerModifications": "Weapon_RapidFire",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_pulselaserburst_turret_medium_name;",
+      "Name_Localised": "Burst Laser",
+      "StorageSlot": 113,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 130240,
+      "Hot": false,
+      "EngineerModifications": "Weapon_RapidFire",
+      "Level": 3,
+      "Quality": 0.935
+    },
+    {
+      "Name": "$hpt_minelauncher_fixed_medium_name;",
+      "Name_Localised": "Mine Launcher",
+      "StorageSlot": 37,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 294080,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LightWeight",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_minelauncher_fixed_medium_name;",
+      "Name_Localised": "Mine Launcher",
+      "StorageSlot": 32,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 294080,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LightWeight",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_advancedtorppylon_fixed_medium_name;",
+      "Name_Localised": "Torpedo Pylon",
+      "StorageSlot": 107,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 38080,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LightWeight",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_advancedtorppylon_fixed_medium_name;",
+      "Name_Localised": "Torpedo Pylon",
+      "StorageSlot": 106,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 38080,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LightWeight",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_railgun_fixed_small_name;",
+      "Name_Localised": "Rail Gun",
+      "StorageSlot": 101,
+      "StarSystem": "Xihe",
+      "MarketID": 3224133120,
+      "TransferCost": 396,
+      "TransferTime": 1225,
+      "BuyPrice": 51600,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LongRange",
+      "Level": 3,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_beamlaser_turret_small_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 109,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 500000,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 4,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_beamlaser_turret_small_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 43,
+      "StarSystem": "Muang",
+      "MarketID": 128674695,
+      "TransferCost": 6099,
+      "TransferTime": 2266,
+      "BuyPrice": 500000,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LongRange",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_beamlaser_turret_small_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 42,
+      "StarSystem": "Muang",
+      "MarketID": 128674695,
+      "TransferCost": 6099,
+      "TransferTime": 2266,
+      "BuyPrice": 500000,
+      "Hot": false,
+      "EngineerModifications": "Weapon_LongRange",
+      "Level": 5,
+      "Quality": 0.0
+    },
+    {
+      "Name": "$hpt_beamlaser_turret_small_name;",
+      "Name_Localised": "Beam Laser",
+      "StorageSlot": 29,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 500000,
+      "Hot": false,
+      "EngineerModifications": "Weapon_Efficient",
+      "Level": 4,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_multicannon_turret_small_name;",
+      "Name_Localised": "Multi-Cannon",
+      "StorageSlot": 103,
+      "StarSystem": "Wolf 397",
+      "MarketID": 128680583,
+      "TransferCost": 421,
+      "TransferTime": 1038,
+      "BuyPrice": 69360,
+      "Hot": false,
+      "EngineerModifications": "Weapon_HighCapacity",
+      "Level": 5,
+      "Quality": 1.0
+    },
+    {
+      "Name": "$hpt_multicannon_turret_small_name;",
+      "Name_Localised": "Multi-Cannon",
+      "StorageSlot": 102,
+      "StarSystem": "Wolf 397",
+      "MarketID": 128680583,
+      "TransferCost": 421,
+      "TransferTime": 1038,
+      "BuyPrice": 69360,
+      "Hot": false,
+      "EngineerModifications": "Weapon_HighCapacity",
+      "Level": 5,
+      "Quality": 0.33
+    },
+    {
+      "Name": "$hpt_crimescanner_size0_class4_name;",
+      "Name_Localised": "K-Warrant Scanner",
+      "StorageSlot": 48,
+      "StarSystem": "Shinrarta Dezhra",
+      "MarketID": 128666762,
+      "TransferCost": 0,
+      "TransferTime": 0,
+      "BuyPrice": 365698,
+      "Hot": false,
+      "EngineerModifications": "Sensor_KillWarrantScanner_LongRange",
+      "Level": 5,
+      "Quality": 0.0
+    }
+  ]
+}
+{
+  "timestamp": "2018-07-01T07:45:41Z",
+  "event": "Outfitting",
+  "MarketID": 128666762,
+  "StationName": "Jameson Memorial",
+  "StarSystem": "Shinrarta Dezhra"
+}
+{
+  "timestamp": "2018-07-01T07:49:45Z",
+  "event": "Undocked",
+  "StationName": "Jameson Memorial",
+  "StationType": "Orbis",
+  "MarketID": 128666762
+}
+{
+  "timestamp": "2018-07-01T07:50:49Z",
+  "event": "Powerplay",
+  "Power": "Felicia Winters",
+  "Rank": 0,
+  "Merits": 45,
+  "Votes": 0,
+  "TimePledged": 12830663
+}
+{
+  "timestamp": "2018-07-01T07:52:09Z",
+  "event": "StartJump",
+  "JumpType": "Hyperspace",
+  "StarSystem": "Rhea",
+  "SystemAddress": 1694121331043,
+  "StarClass": "G"
+}
+{
+  "timestamp": "2018-07-01T07:52:28Z",
+  "event": "FSDJump",
+  "StarSystem": "Rhea",
+  "SystemAddress": 1694121331043,
+  "StarPos": [
+    58.125,
+    22.59375,
+    -28.59375
+  ],
+  "SystemAllegiance": "Federation",
+  "SystemEconomy": "$economy_Agri;",
+  "SystemEconomy_Localised": "Agriculture",
+  "SystemSecondEconomy": "$economy_Tourism;",
+  "SystemSecondEconomy_Localised": "Tourism",
+  "SystemGovernment": "$government_Corporate;",
+  "SystemGovernment_Localised": "Corporate",
+  "SystemSecurity": "$SYSTEM_SECURITY_high;",
+  "SystemSecurity_Localised": "High Security",
+  "Population": 12958896160,
+  "Powers": [
+    "Felicia Winters"
+  ],
+  "PowerplayState": "HomeSystem",
+  "JumpDist": 10.641,
+  "FuelUsed": 0.640216,
+  "FuelLevel": 24.905811,
+  "Factions": [
+    {
+      "Name": "LP 726-6 Free",
+      "FactionState": "None",
+      "Government": "Democracy",
+      "Influence": 0.10989,
+      "Allegiance": "Federation",
+      "RecoveringStates": [
+        {
+          "State": "Boom",
+          "Trend": 0
+        }
+      ]
+    },
+    {
+      "Name": "Labour of Rhea",
+      "FactionState": "Boom",
+      "Government": "Democracy",
+      "Influence": 0.108891,
+      "Allegiance": "Federation"
+    },
+    {
+      "Name": "Pilots Federation Local Branch",
+      "FactionState": "None",
+      "Government": "Democracy",
+      "Influence": 0.0,
+      "Allegiance": "PilotsFederation"
+    },
+    {
+      "Name": "Rhea Travel Industry",
+      "FactionState": "Boom",
+      "Government": "Corporate",
+      "Influence": 0.180819,
+      "Allegiance": "Federation"
+    },
+    {
+      "Name": "Traditional Rhea Front",
+      "FactionState": "Boom",
+      "Government": "Dictatorship",
+      "Influence": 0.068931,
+      "Allegiance": "Independent"
+    },
+    {
+      "Name": "Rhea Travel Interstellar",
+      "FactionState": "None",
+      "Government": "Corporate",
+      "Influence": 0.121878,
+      "Allegiance": "Federation",
+      "RecoveringStates": [
+        {
+          "State": "Boom",
+          "Trend": -1
+        }
+      ]
+    },
+    {
+      "Name": "Rhea Crimson Drug Empire",
+      "FactionState": "Boom",
+      "Government": "Anarchy",
+      "Influence": 0.066933,
+      "Allegiance": "Independent"
+    },
+    {
+      "Name": "East Galaxy Company",
+      "FactionState": "Boom",
+      "Government": "Corporate",
+      "Influence": 0.342657,
+      "Allegiance": "Federation"
+    }
+  ],
+  "SystemFaction": "East Galaxy Company",
+  "FactionState": "Boom"
+}
+{
+  "timestamp": "2018-07-01T07:52:45Z",
+  "event": "FuelScoop",
+  "Scooped": 2.499792,
+  "Total": 27.405605
+}
+{
+  "timestamp": "2018-07-01T07:55:39Z",
+  "event": "SupercruiseExit",
+  "StarSystem": "Rhea",
+  "SystemAddress": 1694121331043,
+  "Body": "Rhea 6 B Ring",
+  "BodyID": 19,
+  "BodyType": "PlanetaryRing"
+}
+{
+  "timestamp": "2018-07-01T08:03:20Z",
+  "event": "LaunchDrone",
+  "Type": "Collection"
+}
+{
+  "timestamp": "2018-07-01T08:04:24Z",
+  "event": "ModuleInfo"
+}
+{
+  "timestamp": "2018-07-01T08:04:36Z",
+  "event": "CollectCargo",
+  "Type": "coffee",
+  "Stolen": true
+}
+{
+  "timestamp": "2018-07-01T08:04:41Z",
+  "event": "EjectCargo",
+  "Type": "coffee",
+  "Count": 1,
+  "Abandoned": false
+}
+{
+  "timestamp": "2018-07-01T08:05:10Z",
+  "event": "Scanned",
+  "ScanType": "Cargo"
+}
+{
+  "timestamp": "2018-07-01T08:05:53Z",
+  "event": "MaterialCollected",
+  "Category": "Encoded",
+  "Name": "decodedemissiondata",
+  "Name_Localised": "Decoded Emission Data",
+  "Count": 3
+}
+{
+  "timestamp": "2018-07-01T08:05:53Z",
+  "event": "MaterialCollected",
+  "Category": "Encoded",
+  "Name": "decodedemissiondata",
+  "Name_Localised": "Decoded Emission Data",
+  "Count": 3
+}
+{
+  "timestamp": "2018-07-01T08:06:11Z",
+  "event": "UnderAttack",
+  "Target": "You"
+}
+{
+  "timestamp": "2018-07-01T08:06:30Z",
+  "event": "ReceiveText",
+  "From": "$npc_name_decorate:#name=Pilgrim Beart;",
+  "From_Localised": "Pilgrim Beart",
+  "Message": "$Pirate_OnStartScanCargo05;",
+  "Message_Localised": "What treats do you carry?",
+  "Channel": "npc"
+}
+{
+  "timestamp": "2018-07-01T08:06:31Z",
+  "event": "ShipTargeted",
+  "TargetLocked": false
+}
+{
+  "timestamp": "2018-07-01T08:06:31Z",
+  "event": "Bounty",
+  "Rewards": [
+    {
+      "Faction": "East Galaxy Company",
+      "Reward": 145515
+    }
+  ],
+  "Target": "empire_trader",
+  "TotalReward": 145515,
+  "VictimFaction": "Rhea Crimson Drug Empire"
+}
+{
+  "timestamp": "2018-07-01T08:06:46Z",
+  "event": "Music",
+  "MusicTrack": "Exploration"
+}
+{
+  "timestamp": "2018-07-01T08:06:54Z",
+  "event": "Shutdown"
 }

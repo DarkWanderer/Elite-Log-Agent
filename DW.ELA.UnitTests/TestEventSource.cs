@@ -12,6 +12,7 @@ using System.IO;
 using Newtonsoft.Json;
 using DW.ELA.LogModel;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace DW.ELA.UnitTests
 {
@@ -41,7 +42,9 @@ namespace DW.ELA.UnitTests
         /// Utility method for developer to get canned events from own logs
         /// </summary>
         /// <returns></returns>
-        public static string PrepareCannedEvents()
+        [Test]
+        [Explicit]
+        public static void PrepareCannedEvents()
         {
             var logEventPlayer = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 10000);
             var events = new ConcurrentBag<LogEvent>();
@@ -51,12 +54,14 @@ namespace DW.ELA.UnitTests
             var eventExamples = events
                 .ToList()
                 .GroupBy(e => e.Event)
-                .Select(g => g.MaxBy(e => e.Timestamp).FirstOrDefault())
+                .SelectMany(g => g.MaxBy(e => e.Timestamp).Take(10))
+                .OrderBy(e => e.Timestamp)
+                .Select(e => e.Raw)
                 .Select(Serialize.ToJson)
                 .ToList();
 
             var eventsString = string.Join("\n", eventExamples.ToArray());
-            return eventsString;
+            Assert.IsNotEmpty(eventsString);
         }
     }
 }

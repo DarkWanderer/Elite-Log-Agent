@@ -57,6 +57,6 @@ namespace DW.ELA.LogModel.Events
         public string NameLocalised { get; set; }
 
         [JsonProperty("Proportion")]
-        public long Proportion { get; set; }
+        public double Proportion { get; set; }
     }
 }
