@@ -27,11 +27,11 @@ namespace DW.ELA.UnitTests
         }
         
         [Test(Description = "Checks that events do not lose data or get assigned non-existing")]
-        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
+        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.TypedLogEvents))]
         public void EventsTransformationShouldNotSpoilData(LogEvent e)
         {
             if (e.GetType() == typeof(LogEvent))
-                Assert.Pass();
+                Assert.Fail("This test only supports typed events");
 
             var serialized = JObject.FromObject(e, new JsonSerializer {
                 NullValueHandling = NullValueHandling.Ignore,

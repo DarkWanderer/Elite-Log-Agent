@@ -19,13 +19,14 @@ namespace DW.ELA.UnitTests
     public static class TestEventSource
     {
         public static IEnumerable<LogEvent> LogEvents => GetLogEvents();
+        public static IEnumerable<LogEvent> TypedLogEvents => GetLogEvents().Where(e => e.GetType() != typeof(LogEvent));
 
         private static IEnumerable<LogEvent> GetLogEvents()
         {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "DW.ELA.UnitTests.CannedEvents.json";
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var textReader = new StreamReader(stream))
             using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true })
             {
@@ -54,7 +55,7 @@ namespace DW.ELA.UnitTests
             var eventExamples = events
                 .ToList()
                 .GroupBy(e => e.Event)
-                .SelectMany(g => g.MaxBy(e => e.Timestamp).TakeLast(30))
+                .SelectMany(g => g.MaxBy(e => e.Timestamp).TakeLast(100))
                 .OrderBy(e => e.Timestamp)
                 .Select(e => e.Raw)
                 .Select(Serialize.ToJson)
