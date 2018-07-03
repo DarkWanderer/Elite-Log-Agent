@@ -42,7 +42,7 @@ namespace DW.ELA.Utility
             {
                 try
                 {
-                    return GetPluginSettings().ToObject<T>() ?? new T();
+                    return GetPluginSettings()?.ToObject<T>() ?? new T();
                 }
                 catch (Exception e)
                 {
