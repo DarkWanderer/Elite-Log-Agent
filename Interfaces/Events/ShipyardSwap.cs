@@ -22,6 +22,6 @@ namespace DW.ELA.LogModel.Events
         public long StoreShipId { get; set; }
 
         [JsonProperty("MarketID")]
-        public long MarketId { get; set; }
+        public long? MarketId { get; set; }
     }
 }

@@ -12,19 +12,21 @@ using System.IO;
 using Newtonsoft.Json;
 using DW.ELA.LogModel;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace DW.ELA.UnitTests
 {
     public static class TestEventSource
     {
         public static IEnumerable<LogEvent> LogEvents => GetLogEvents();
+        public static IEnumerable<LogEvent> TypedLogEvents => GetLogEvents().Where(e => e.GetType() != typeof(LogEvent));
 
         private static IEnumerable<LogEvent> GetLogEvents()
         {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "DW.ELA.UnitTests.CannedEvents.json";
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var textReader = new StreamReader(stream))
             using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true })
             {
@@ -41,22 +43,27 @@ namespace DW.ELA.UnitTests
         /// Utility method for developer to get canned events from own logs
         /// </summary>
         /// <returns></returns>
-        public static string PrepareCannedEvents()
+        [Test]
+        [Explicit]
+        public static void PrepareCannedEvents()
         {
             var logEventPlayer = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 10000);
-            var events = new ConcurrentBag<LogEvent>();
-            logEventPlayer.Subscribe(e => events.Add(e));
-            logEventPlayer.Play();
+            var events = new ConcurrentStack<LogEvent>();
+            using (logEventPlayer.Subscribe(e => events.Push(e)))
+                logEventPlayer.Play();
 
             var eventExamples = events
-                .ToList()
                 .GroupBy(e => e.Event)
-                .Select(g => g.MaxBy(e => e.Timestamp).FirstOrDefault())
+                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).Take(5))
+                .OrderBy(e => e.Event).ThenBy(e => e.Timestamp)
+                .Select(e => e.Raw)
                 .Select(Serialize.ToJson)
                 .ToList();
 
+            events.Clear();
+
             var eventsString = string.Join("\n", eventExamples.ToArray());
-            return eventsString;
+            Assert.IsNotEmpty(eventsString);
         }
     }
 }

@@ -46,7 +46,7 @@
         public long Priority { get; set; }
 
         [JsonProperty("Health")]
-        public long Health { get; set; }
+        public double Health { get; set; }
 
         [JsonProperty("Value")]
         public long? Value { get; set; }

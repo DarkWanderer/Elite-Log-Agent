@@ -15,13 +15,16 @@ namespace DW.ELA.LogModel.Events
         public string StarSystem { get; set; }
 
         [JsonProperty("SystemAddress")]
-        public long SystemAddress { get; set; }
+        public long? SystemAddress { get; set; }
 
         [JsonProperty("MarketID")]
         public long MarketId { get; set; }
 
         [JsonProperty("StationFaction")]
         public string StationFaction { get; set; }
+
+        [JsonProperty("FactionState")]
+        public FactionState? FactionState { get; set; }
 
         [JsonProperty("StationGovernment")]
         public string StationGovernment { get; set; }
@@ -57,6 +60,6 @@ namespace DW.ELA.LogModel.Events
         public string NameLocalised { get; set; }
 
         [JsonProperty("Proportion")]
-        public long Proportion { get; set; }
+        public double Proportion { get; set; }
     }
 }
