@@ -1,5 +1,7 @@
 ﻿using DW.ELA.Interfaces;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace DW.ELA.LogModel.Events
 {
@@ -8,11 +10,14 @@ namespace DW.ELA.LogModel.Events
         [JsonProperty("BodyName")]
         public string BodyName { get; set; }
 
+        [JsonProperty("BodyID")]
+        public long? BodyID { get; set; }
+
         [JsonProperty("DistanceFromArrivalLS")]
         public double DistanceFromArrivalLs { get; set; }
 
         [JsonProperty("TidalLock")]
-        public bool TidalLock { get; set; }
+        public bool? TidalLock { get; set; }
 
         [JsonProperty("TerraformState")]
         public string TerraformState { get; set; }
@@ -33,19 +38,19 @@ namespace DW.ELA.LogModel.Events
         public double Radius { get; set; }
 
         [JsonProperty("SurfaceGravity")]
-        public double SurfaceGravity { get; set; }
+        public double? SurfaceGravity { get; set; }
 
         [JsonProperty("SurfaceTemperature")]
-        public double SurfaceTemperature { get; set; }
+        public double? SurfaceTemperature { get; set; }
 
         [JsonProperty("SurfacePressure")]
-        public long SurfacePressure { get; set; }
+        public double? SurfacePressure { get; set; }
 
         [JsonProperty("Landable")]
-        public bool Landable { get; set; }
+        public bool? Landable { get; set; }
 
         [JsonProperty("SemiMajorAxis")]
-        public long SemiMajorAxis { get; set; }
+        public double SemiMajorAxis { get; set; }
 
         [JsonProperty("Eccentricity")]
         public double Eccentricity { get; set; }
@@ -57,13 +62,16 @@ namespace DW.ELA.LogModel.Events
         public double Periapsis { get; set; }
 
         [JsonProperty("OrbitalPeriod")]
-        public long OrbitalPeriod { get; set; }
+        public double OrbitalPeriod { get; set; }
 
         [JsonProperty("RotationPeriod")]
         public double RotationPeriod { get; set; }
 
         [JsonProperty("AxialTilt")]
         public double AxialTilt { get; set; }
+
+        [JsonProperty("ScanType")]
+        public string ScanType { get; set; }
 
         [JsonProperty("Rings")]
         public Ring[] Rings { get; set; }
