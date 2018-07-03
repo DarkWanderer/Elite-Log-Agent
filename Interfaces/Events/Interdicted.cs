@@ -19,5 +19,8 @@ namespace DW.ELA.LogModel.Events
 
         [JsonProperty("Faction")]
         public string Faction { get; set; }
+
+        [JsonProperty("CombatRank")]
+        public short? CombatRank { get; set; }
     }
 }

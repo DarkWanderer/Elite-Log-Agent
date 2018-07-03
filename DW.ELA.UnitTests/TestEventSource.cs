@@ -54,8 +54,8 @@ namespace DW.ELA.UnitTests
 
             var eventExamples = events
                 .GroupBy(e => e.Event)
-                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).TakeLast(20))
-                .OrderBy(e => e.Timestamp)
+                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).Take(20))
+                .OrderBy(e => e.Event).ThenBy(e => e.Timestamp)
                 .Select(e => e.Raw)
                 .Select(Serialize.ToJson)
                 .ToList();

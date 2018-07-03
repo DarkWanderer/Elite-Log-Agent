@@ -9,7 +9,7 @@ namespace DW.ELA.LogModel.Events
         public bool Docked { get; set; }
 
         [JsonProperty("MarketID")]
-        public long MarketId { get; set; }
+        public long? MarketId { get; set; }
 
         [JsonProperty("StationName")]
         public string StationName { get; set; }
@@ -76,6 +76,9 @@ namespace DW.ELA.LogModel.Events
 
         [JsonProperty("SystemFaction")]
         public string SystemFaction { get; set; }
+
+        [JsonProperty("FactionState")]
+        public FactionState? FactionState { get; set; }
     }
 
 }

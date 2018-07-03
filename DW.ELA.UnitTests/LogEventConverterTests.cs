@@ -43,7 +43,7 @@ namespace DW.ELA.UnitTests
 
             Assert.IsEmpty(JsonComparer.Compare(e.Event, e.Raw, serialized));
             // This assert should never trigger - if it triggers means there's an error in comparison code
-            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized)); 
+            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized), "Json objects before/after serialization should be 'DeepEqual'"); 
         }
     }
 }
