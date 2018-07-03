@@ -48,17 +48,19 @@ namespace DW.ELA.UnitTests
         public static void PrepareCannedEvents()
         {
             var logEventPlayer = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 10000);
-            var events = new ConcurrentBag<LogEvent>();
-            logEventPlayer.Subscribe(e => events.Add(e));
-            logEventPlayer.Play();
+            var events = new ConcurrentStack<LogEvent>();
+            using (logEventPlayer.Subscribe(e => events.Push(e)))
+                logEventPlayer.Play();
 
             var eventExamples = events
                 .GroupBy(e => e.Event)
-                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).Take(20))
+                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).Take(5))
                 .OrderBy(e => e.Event).ThenBy(e => e.Timestamp)
                 .Select(e => e.Raw)
                 .Select(Serialize.ToJson)
                 .ToList();
+
+            events.Clear();
 
             var eventsString = string.Join("\n", eventExamples.ToArray());
             Assert.IsNotEmpty(eventsString);
