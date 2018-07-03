@@ -15,7 +15,7 @@ namespace DW.ELA.LogModel.Events
         public string StarSystem { get; set; }
 
         [JsonProperty("SystemAddress")]
-        public long SystemAddress { get; set; }
+        public long? SystemAddress { get; set; }
 
         [JsonProperty("MarketID")]
         public long MarketId { get; set; }

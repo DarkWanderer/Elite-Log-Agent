@@ -21,8 +21,8 @@ namespace DW.ELA.UnitTests.Utility
             var diffs = new List<string>();
             var srcPropertyNames = source.Properties().Select(p => p.Name).ToList();
             var tgtPropertyNames = target.Properties().Select(p => p.Name).ToList();
-            diffs.AddRange(srcPropertyNames.Except(tgtPropertyNames).Select(p => "Missing on left side: " + p));
-            diffs.AddRange(tgtPropertyNames.Except(srcPropertyNames).Select(p => "Missing on right side: " + p));
+            diffs.AddRange(srcPropertyNames.Except(tgtPropertyNames).Select(p => tokenName + ": missing on right side: " + p));
+            diffs.AddRange(tgtPropertyNames.Except(srcPropertyNames).Select(p => tokenName + ": missing on left side: " + p));
 
             foreach (var property in srcPropertyNames.Intersect(tgtPropertyNames))
                 diffs.AddRange(Compare($"{tokenName}.{property}", source[property], target[property]));
@@ -43,7 +43,7 @@ namespace DW.ELA.UnitTests.Utility
                     case JObject o: return Compare(tokenName, t1 as JObject, t2 as JObject);
                     default:
                         //if (t1.ToString() != t2.ToString())
-                        if (!JToken.DeepEquals(t1,t2))
+                        if (!JToken.DeepEquals(t1, t2))
                             return new[] { $"{tokenName}: expected {t1}, got {t2}" };
                         break;
                 }

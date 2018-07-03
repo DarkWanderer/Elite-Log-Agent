@@ -9,7 +9,7 @@ namespace DW.ELA.LogModel.Events
         public string Commander { get; set; }
 
         [JsonProperty("Horizons")]
-        public bool Horizons { get; set; }
+        public bool? Horizons { get; set; }
 
         [JsonProperty("Ship")]
         public string Ship { get; set; }
@@ -27,10 +27,10 @@ namespace DW.ELA.LogModel.Events
         public string ShipIdent { get; set; }
 
         [JsonProperty("FuelLevel")]
-        public double FuelLevel { get; set; }
+        public double? FuelLevel { get; set; }
 
         [JsonProperty("FuelCapacity")]
-        public double FuelCapacity { get; set; }
+        public double? FuelCapacity { get; set; }
 
         [JsonProperty("GameMode")]
         public string GameMode { get; set; }
@@ -40,5 +40,8 @@ namespace DW.ELA.LogModel.Events
 
         [JsonProperty("Loan")]
         public long Loan { get; set; }
+
+        [JsonProperty]
+        public string Group { get; set; }
     }
 }

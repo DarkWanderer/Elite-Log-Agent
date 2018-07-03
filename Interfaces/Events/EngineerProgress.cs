@@ -12,7 +12,7 @@ namespace DW.ELA.LogModel.Events
         public string Progress { get; set; }
 
         [JsonProperty("Rank")]
-        public long Rank { get; set; }
+        public long? Rank { get; set; }
 
         [JsonProperty("EngineerID")]
         public long? EngineerId { get; set; }

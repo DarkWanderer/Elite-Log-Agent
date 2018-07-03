@@ -11,7 +11,7 @@ namespace DW.ELA.LogModel.Events
         public string StarSystem { get; set; }
 
         [JsonProperty("SystemAddress")]
-        public long SystemAddress { get; set; }
+        public long? SystemAddress { get; set; }
 
         [JsonProperty("StarPos")]
         public double[] StarPos { get; set; }

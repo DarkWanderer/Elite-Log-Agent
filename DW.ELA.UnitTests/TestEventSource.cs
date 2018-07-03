@@ -53,9 +53,8 @@ namespace DW.ELA.UnitTests
             logEventPlayer.Play();
 
             var eventExamples = events
-                .ToList()
                 .GroupBy(e => e.Event)
-                .SelectMany(g => g.MaxBy(e => e.Timestamp).TakeLast(100))
+                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).TakeLast(20))
                 .OrderBy(e => e.Timestamp)
                 .Select(e => e.Raw)
                 .Select(Serialize.ToJson)
