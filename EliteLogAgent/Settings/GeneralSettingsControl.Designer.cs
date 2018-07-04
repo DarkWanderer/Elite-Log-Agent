@@ -57,6 +57,7 @@
             this.cmdrNameTextBox.TabIndex = 4;
             this.cmdrNameTextBox.Text = "Commander Name";
             this.cmdrNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.cmdrNameTextBox.TextChanged += new System.EventHandler(this.cmdrNameTextBox_TextChanged);
             // 
             // uploadLatestDataButton
             // 

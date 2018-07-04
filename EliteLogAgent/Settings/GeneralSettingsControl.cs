@@ -35,6 +35,7 @@ namespace EliteLogAgent.Settings
             checkboxAutostartApplication.Checked = AutorunManager.AutorunEnabled;
             cmdrNameTextBox.Text = GlobalSettings.CommanderName;
             logLevelComboBox.SelectedItem = logLevelComboBox.Items.OfType<LogLevel>().SingleOrDefault(t => t.Name == Settings.LogLevel) ?? LogLevel.Info;
+            reportErrorsCheckbox.Enabled = GlobalSettings.ReportErrorsToCloud;
         }
 
         public IMessageBroker MessageBroker { get; internal set; }
@@ -116,6 +117,11 @@ namespace EliteLogAgent.Settings
         private void checkboxAutostartApplication_CheckedChanged(object sender, EventArgs e)
         {
             AutorunManager.AutorunEnabled = checkboxAutostartApplication.Checked;
+        }
+
+        private void cmdrNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            Settings.CommanderName = cmdrNameTextBox.Text;
         }
     }
 }
