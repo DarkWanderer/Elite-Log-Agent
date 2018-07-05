@@ -16,7 +16,13 @@ namespace DW.ELA.UnitTests
         private readonly EddnEventConverter eventConverter = new EddnEventConverter();
 
         [Test]
-        [TestCaseSource(typeof(TestEventSource),nameof(TestEventSource.LogEvents))]
-        public void ShouldNotFailOnEvents(LogEvent e) => eventConverter.Convert(e);
+        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
+        public void ShouldNotFailOnEvents(LogEvent e)
+        {
+            var result = eventConverter.Convert(e);
+            Assert.NotNull(result);
+            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(EddnEvent));
+        }
+
     }
 }

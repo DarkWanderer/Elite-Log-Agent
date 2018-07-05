@@ -1,7 +1,7 @@
 ﻿using Controller;
-using DW.ELA.Controller;
 using DW.ELA.Interfaces;
 using DW.ELA.Plugin.Inara;
+using DW.ELA.Plugin.Inara.Model;
 using Interfaces;
 using NUnit.Framework;
 
@@ -17,16 +17,11 @@ namespace DW.ELA.UnitTests
 
         [Test]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
-        public void ShouldNotFailOnEvents(LogEvent e) => eventConverter.Convert(e);
-    }
-
-    [TestFixture]
-    public class EventRawJsonExtractorTests
-    {
-        private readonly EventRawJsonExtractor eventConverter = new EventRawJsonExtractor();
-
-        [Test]
-        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
-        public void ShouldNotFailOnEvents(LogEvent e) => eventConverter.Convert(e);
+        public void ShouldNotFailOnEvents(LogEvent e)
+        {
+            var result = eventConverter.Convert(e);
+            Assert.NotNull(result);
+            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(ApiEvent));
+        }
     }
 }

@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="AutorunManagerTests.cs" />
     <Compile Include="EddnEventConverterTests.cs" />
+    <Compile Include="EventRawJsonExtractorTests.cs" />
     <Compile Include="InaraEventConverterTests.cs" />
     <Compile Include="LogEventConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
