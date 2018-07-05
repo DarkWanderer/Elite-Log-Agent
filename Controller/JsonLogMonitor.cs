@@ -43,7 +43,7 @@ namespace Controller
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => Update(false));
             logFlushTimer.Enabled = true;
 
-            CurrentFile = LogEnumerator.GetLogFiles(LogDirectory)[0];
+            CurrentFile = LogEnumerator.GetLogFiles(LogDirectory).First();
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
             fileWatcher.EnableRaisingEvents = true;
@@ -68,21 +68,19 @@ namespace Controller
                 try
                 {
                     filePosition = ReadFileFromPosition(CurrentFile, filePosition);
-                    if (checkOtherFiles)
-                    {
-                        var filesToScan = LogEnumerator.GetLogFiles(LogDirectory)
-                            .Take(10) // max 10 'missed' files to upload
-                            .TakeWhile(f => f != CurrentFile) // only until we meet our file
-                            .Reverse() // back to chronological order
-                            .ToArray();
-                        foreach (var file in filesToScan)
-                            filePosition = ReadFileFromPosition(file, filePosition);
-                        CurrentFile = filesToScan.Last();
+                    if (checkOtherFiles) {
+                        var latestFile = LogEnumerator.GetLogFiles(LogDirectory).First();
+                        if (latestFile != CurrentFile)
+                        {
+                            CurrentFile = latestFile;
+                            filePosition = ReadFileFromPosition(CurrentFile, 0);
+                        }
                     }
                 }
                 catch (Exception e)
                 {
-                    logger.Warn(e, "Error while reading log file");
+                    logger.Error(e, "Error while reading log file, skipping");
+                    filePosition = new FileInfo(CurrentFile).Length; // Skipping the 'poisoned' data
                 }
         }
 
