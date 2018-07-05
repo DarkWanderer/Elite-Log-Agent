@@ -52,13 +52,14 @@ namespace DW.ELA.Plugin.EDDN
         {
             raw = (JObject)raw.DeepClone();
             var attributesToRemove = new List<string>() {
-            "CockpitBreach",
-            "BoostUsed",
-            "FuelLevel",
-            "FuelUsed",
-            "JumpDist",
-            "Latitude",
-            "Longitude"};
+                "CockpitBreach",
+                "BoostUsed",
+                "FuelLevel",
+                "FuelUsed",
+                "JumpDist",
+                "Latitude",
+                "Longitude"
+            };
 
             foreach (var attribute in raw)
                 if (attribute.Key.EndsWith("_Localised"))

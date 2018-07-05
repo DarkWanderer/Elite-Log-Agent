@@ -60,7 +60,7 @@
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="AsyncMessageBroker.cs" />
     <Compile Include="EventRawJsonExtractor.cs" />
-    <Compile Include="JsonLogMonitor.cs" />
+    <Compile Include="JournalMonitor.cs" />
     <Compile Include="LogBurstPlayer.cs" />
     <Compile Include="LogEnumerator.cs" />
     <Compile Include="LogEventConverter.cs" />

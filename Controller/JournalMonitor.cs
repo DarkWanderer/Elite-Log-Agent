@@ -16,7 +16,7 @@ namespace Controller
     /// <summary>
     /// This class runs a background thread to monitor and notify consumers (observers) of new log lines
     /// </summary>
-    public class JsonLogMonitor : AbstractObservable<LogEvent>, ILogRealTimeDataSource
+    public class JournalMonitor : AbstractObservable<LogEvent>, ILogRealTimeDataSource
     {
         private readonly FileSystemWatcher fileWatcher;
         private string CurrentFile;
@@ -26,7 +26,7 @@ namespace Controller
         private object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
 
-        public JsonLogMonitor(ILogDirectoryNameProvider logDirectoryProvider)
+        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider)
         {
             LogDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(LogDirectory);
