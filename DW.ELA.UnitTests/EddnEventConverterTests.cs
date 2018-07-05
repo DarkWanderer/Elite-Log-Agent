@@ -19,10 +19,12 @@ namespace DW.ELA.UnitTests
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {
-            var result = eventConverter.Convert(e);
+            var result = eventConverter.Convert(e).ToList();
             Assert.NotNull(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(EddnEvent));
+            var validator = new EventSchemaValidator();
+            foreach (var @event in result)
+                Assert.IsTrue(validator.ValidateSchema(@event), "Event {0} should have validated", e.Event);
         }
-
     }
 }
