@@ -65,6 +65,7 @@
     <Compile Include="Events\Materials.cs" />
     <Compile Include="Events\PvpKill.cs" />
     <Compile Include="Events\Scan.cs" />
+    <Compile Include="Events\Shipyard.cs" />
     <Compile Include="Events\ShipyardSwap.cs" />
     <Compile Include="Events\Statistics.cs" />
     <Compile Include="Events\SupercruiseEntry.cs" />

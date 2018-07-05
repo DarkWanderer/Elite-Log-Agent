@@ -26,7 +26,14 @@ namespace Controller
         private object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
 
-        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider)
+        public TimeSpan LogFlushInterval { set => logFlushTimer.Interval = value.TotalMilliseconds; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logDirectoryProvider">Log directory name provider</param>
+        /// <param name="checkInterval">Check interval in milliseconds</param>
+        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 5000)
         {
             LogDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(LogDirectory);
@@ -39,7 +46,7 @@ namespace Controller
                                        NotifyFilters.Size;
 
             logFlushTimer.AutoReset = true;
-            logFlushTimer.Interval = 5000; // sometimes the filesystem event does not trigger
+            logFlushTimer.Interval = checkInterval; // sometimes the filesystem event does not trigger
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => Update(false));
             logFlushTimer.Enabled = true;
 
