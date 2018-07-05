@@ -14,7 +14,7 @@ using DW.ELA.Interfaces;
 namespace Controller
 {
     /// <summary>
-    /// This class runs a background thread to monitor and notify consumers (observers) of new log lines
+    /// This class runs in background to monitor and notify consumers (observers) of new log lines
     /// </summary>
     public class JournalMonitor : AbstractObservable<LogEvent>, ILogRealTimeDataSource
     {

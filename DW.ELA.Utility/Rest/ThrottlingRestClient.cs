@@ -48,7 +48,14 @@ namespace Utility
             ThrowIfQuotaExceeded();
             var httpContent = new StringContent(input, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(baseUrl, httpContent);
-            return await response.Content.ReadAsStringAsync();
+            return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+        }
+
+        private HttpResponseMessage ThrowIfErrorCode(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+                throw new HttpException(Convert.ToInt32(response.StatusCode), response.ReasonPhrase);
+            return response;
         }
 
         public async Task<string> PostAsync(IDictionary<string,string> values)
@@ -59,7 +66,7 @@ namespace Utility
 
             var httpContent = new StringContent(encodedPost, Encoding.UTF8, "application/x-www-form-urlencoded");
             var response = await client.PostAsync(baseUrl, httpContent);
-            return await response.Content.ReadAsStringAsync();
+            return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
         }
 
         public async Task<string> GetAsync(string url)
@@ -68,7 +75,7 @@ namespace Utility
             if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
                 url = baseUrl + url;
             var response = await client.GetAsync(url);
-            return await response.Content.ReadAsStringAsync();
+            return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
         }
     }
 }

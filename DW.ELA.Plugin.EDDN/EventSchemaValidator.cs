@@ -44,12 +44,23 @@ namespace DW.ELA.Plugin.EDDN
 
         public bool ValidateSchema(EddnEvent @event)
         {
-            var schema = schemaCache[@event.SchemaRef];
-            var validationErrors = schema.Validate(JObject.FromObject(@event));
-            foreach (var error in validationErrors)
-                logger.Error(error.ToString());
+            try
+            {
+                if (!schemaCache.ContainsKey(@event.SchemaRef))
+                    return false;
 
-            return validationErrors.Count == 0;
+                var schema = schemaCache[@event.SchemaRef];
+                var validationErrors = schema.Validate(JObject.FromObject(@event));
+                foreach (var error in validationErrors)
+                    logger.Error(error.ToString());
+
+                return validationErrors.Count == 0;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error validating event");
+                return false;
+            }
         }
     }
 }

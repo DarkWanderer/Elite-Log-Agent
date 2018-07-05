@@ -39,9 +39,6 @@ namespace DW.ELA.Plugin.EDDN
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
         public override async void FlushEvents(EddnEvent[] events) => await apiFacade.PostEventsAsync(events.Where(schemaManager.ValidateSchema).ToArray());
-        public override void ReloadSettings()
-        {
-            eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
-        }
+        public override void ReloadSettings() => eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
     }
 }

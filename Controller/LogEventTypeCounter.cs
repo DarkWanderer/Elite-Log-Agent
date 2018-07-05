@@ -19,6 +19,8 @@ namespace Controller
         public IReadOnlyCollection<string> EventTypes =>
             eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();
 
+        public IReadOnlyDictionary<string,int> EventCounts => eventTypeCounters;
+
         public void OnNext(LogEvent value)
         {
             try

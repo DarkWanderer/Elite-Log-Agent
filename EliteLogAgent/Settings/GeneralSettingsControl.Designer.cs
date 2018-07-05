@@ -57,7 +57,7 @@
             this.cmdrNameTextBox.TabIndex = 4;
             this.cmdrNameTextBox.Text = "Commander Name";
             this.cmdrNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.cmdrNameTextBox.TextChanged += new System.EventHandler(this.cmdrNameTextBox_TextChanged);
+            this.cmdrNameTextBox.TextChanged += new System.EventHandler(this.CmdrNameTextBox_TextChanged);
             // 
             // uploadLatestDataButton
             // 
@@ -67,9 +67,9 @@
             this.uploadLatestDataButton.Name = "uploadLatestDataButton";
             this.uploadLatestDataButton.Size = new System.Drawing.Size(262, 23);
             this.uploadLatestDataButton.TabIndex = 3;
-            this.uploadLatestDataButton.Text = "Upload last 5 files via all plugins";
+            this.uploadLatestDataButton.Text = "Upload last 3 files via all plugins";
             this.uploadLatestDataButton.UseVisualStyleBackColor = true;
-            this.uploadLatestDataButton.Click += new System.EventHandler(this.uploadLatestDataButton_Click);
+            this.uploadLatestDataButton.Click += new System.EventHandler(this.UploadLatestDataButton_Click);
             // 
             // autodetectCmdrNameButton
             // 
@@ -81,7 +81,7 @@
             this.autodetectCmdrNameButton.TabIndex = 6;
             this.autodetectCmdrNameButton.Text = "Autodetect CMDR Name";
             this.autodetectCmdrNameButton.UseVisualStyleBackColor = true;
-            this.autodetectCmdrNameButton.Click += new System.EventHandler(this.autodetectCmdrNameButton_Click);
+            this.autodetectCmdrNameButton.Click += new System.EventHandler(this.AutodetectCmdrNameButton_Click);
             // 
             // checkboxAutostartApplication
             // 
@@ -92,7 +92,7 @@
             this.checkboxAutostartApplication.TabIndex = 7;
             this.checkboxAutostartApplication.Text = "Autorun program";
             this.checkboxAutostartApplication.UseVisualStyleBackColor = true;
-            this.checkboxAutostartApplication.CheckedChanged += new System.EventHandler(this.checkboxAutostartApplication_CheckedChanged);
+            this.checkboxAutostartApplication.CheckedChanged += new System.EventHandler(this.CheckboxAutostartApplication_CheckedChanged);
             // 
             // reportErrorsCheckbox
             // 
@@ -103,7 +103,7 @@
             this.reportErrorsCheckbox.TabIndex = 8;
             this.reportErrorsCheckbox.Text = "Report errors to Cloud";
             this.reportErrorsCheckbox.UseVisualStyleBackColor = true;
-            this.reportErrorsCheckbox.CheckedChanged += new System.EventHandler(this.reportErrorsCheckbox_CheckedChanged);
+            this.reportErrorsCheckbox.CheckedChanged += new System.EventHandler(this.ReportErrorsCheckbox_CheckedChanged);
             // 
             // logLevelLabel
             // 
@@ -121,7 +121,7 @@
             this.logLevelComboBox.Name = "logLevelComboBox";
             this.logLevelComboBox.Size = new System.Drawing.Size(206, 21);
             this.logLevelComboBox.TabIndex = 10;
-            this.logLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.logLevelComboBox_SelectedIndexChanged);
+            this.logLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.LogLevelComboBox_SelectedIndexChanged);
             // 
             // GeneralSettingsControl
             // 

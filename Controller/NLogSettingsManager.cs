@@ -1,9 +1,11 @@
-﻿using Interfaces;
+﻿using DW.ELA.Utility;
+using Interfaces;
 using NLog;
 using NLog.Targets;
 using System;
 using System.IO;
 using System.Text;
+using Utility;
 
 namespace Controller
 {
@@ -12,10 +14,14 @@ namespace Controller
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
 
+        static NLogSettingsManager() => AppDomain.CurrentDomain.DomainUnload += (o, e) => LogManager.Flush();
+
         public NLogSettingsManager(ISettingsProvider settingsProvider)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
         }
+
+        private readonly IRestClient restClient= new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
 
         public void Setup()
         {
@@ -30,7 +36,23 @@ namespace Controller
             var config = LogManager.Configuration ?? new NLog.Config.LoggingConfiguration();
             config.LoggingRules.Clear();
 
-            var fileTarget = new FileTarget
+            var fileTarget = CreateFileTarget();
+
+            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
+            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget()));
+
+            //if (settingsProvider.Settings.ReportErrorsToCloud)
+            //    config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error, new CloudApiLogTarget(restClient)));
+
+            LogManager.Configuration = config;
+            TestExceptionLogging();
+            logger.Info("Enabled logging with level {0}", logLevel);
+            LogManager.Flush();
+        }
+
+        private Target CreateFileTarget()
+        {
+            return new FileTarget
             {
                 FileName = Path.Combine(LogDirectory, "EliteLogAgent.log"),
                 ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{#####}.log"),
@@ -42,12 +64,6 @@ namespace Controller
                 Encoding = Encoding.UTF8,
                 Layout = "${longdate}|${level}|${logger}|${message} ${exception:format=ShortType,Message,StackTrace:innerFormat=ShortType,Message,StackTrace:maxInnerExceptionLevel=10}"
             };
-
-            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
-            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Trace, new DebuggerTarget()));
-            LogManager.Configuration = config;
-            //TestExceptionLogging();
-            logger.Info("Enabled logging with level {0}", logLevel);
         }
 
         private void TestExceptionLogging()
@@ -55,7 +71,7 @@ namespace Controller
             try
             {
                 try {
-                    throw new Exception("Test inner exception");
+                    throw new ApplicationException("Test inner exception");
                 }
                 catch (Exception e1)
                 {
@@ -64,7 +80,7 @@ namespace Controller
             }
             catch (Exception e2)
             {
-                logger.Debug(e2, "Exception format test");
+                logger.Error(e2, "Exception format test");
             }
         }
 

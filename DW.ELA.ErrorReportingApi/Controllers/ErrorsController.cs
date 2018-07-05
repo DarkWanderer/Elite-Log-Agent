@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
@@ -25,82 +24,47 @@ namespace DW.ELA.ErrorReportingApi.Controllers
             this.configuration = configuration;
 
             //storageAccount = CloudStorageAccount.DevelopmentStorageAccount;
-            storageAccount = CloudStorageAccount.Parse(configuration.GetConnectionString("elitelogagentdb_AzureStorageConnectionString"));
-        }
-
-        // GET api/values
-        [HttpGet]
-        public async Task<int> Get()
-        {
-            var tableClient = storageAccount.CreateCloudTableClient();
-            var table = tableClient.GetTableReference("Errors");
-            await table.CreateIfNotExistsAsync();
-            TableContinuationToken token = null;
-
-            var entities = new List<ExceptionTableRecord>();
-            do
-            {
-                var queryResult = await table.ExecuteQuerySegmentedAsync(new TableQuery<ExceptionTableRecord>(), token);
-                entities.AddRange(queryResult.Results);
-                token = queryResult.ContinuationToken;
-            } while (token != null);
-
-            return entities.Count;
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            logger.LogDebug("Received get: {0}", id);
-            return "value" + id;
+            storageAccount = CloudStorageAccount.Parse(configuration["database-key-1"]);
+            //storageAccount = CloudStorageAccount.Parse(configuration.GetConnectionString("elitelogagentdb_AzureStorageConnectionString"));
         }
 
         // POST api/values
         [HttpPost]
         public async void Post([FromBody]string value)
         {
-            logger.LogDebug("Received event: {0}", value);
-
+            logger.LogTrace("Received event: {0}", value);
 
             var serializer = new JsonSerializer();
-            var e = JObject.Parse(value).ToObject<ExceptionTableRecord>();
+            var records = JArray.Parse(value)
+                .Children<JObject>()
+                .Select(jo => jo.ToObject<ExceptionTableRecord>())
+                .ToArray();
 
             var tableClient = storageAccount.CreateCloudTableClient();
             var table = tableClient.GetTableReference("Errors");
             await table.CreateIfNotExistsAsync();
-            var insertOperation = TableOperation.Insert(e);
+            foreach (var rec in records)
+            {
+                var insertOperation = TableOperation.InsertOrReplace(rec);
+                await table.ExecuteAsync(insertOperation);
+            }
 
-            // Execute the insert operation.
-            await table.ExecuteAsync(insertOperation);
-
-            //return new HttpStatusCodeResult(HttpStatusCode.OK);
+            //Execute the insert operation.
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
-        private class ExceptionRecord
+        public class ExceptionRecord
         {
             [JsonProperty("message")]
             public string Message { get; set; }
+
             [JsonProperty("exceptionType")]
             public string ExceptionType { get; set; }
+
             [JsonProperty("callStack")]
             public string CallStack { get; set; }
+
             [JsonProperty("version")]
             public string SoftwareVersion { get; set; }
-            [JsonProperty("timestamp")]
-            public DateTime ExceptionTimestamp { get; set; }
         }
 
         private class ExceptionTableRecord : ExceptionRecord, ITableEntity
@@ -120,17 +84,33 @@ namespace DW.ELA.ErrorReportingApi.Controllers
             }
 
             [JsonIgnore]
-            public DateTimeOffset Timestamp
-            {
-                get => ExceptionTimestamp;
-                set => ExceptionTimestamp = value.UtcDateTime;
-            }
-
-            [JsonIgnore]
             public string ETag { get; set; }
 
-            public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext) => throw new NotImplementedException();
-            public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext) => throw new NotImplementedException();
+            [JsonIgnore]
+            public DateTimeOffset Timestamp { get; set; }
+
+            public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
+            {
+                if (properties.TryGetValue(nameof(Message), out var pe1))
+                    Message = pe1.StringValue;
+                if (properties.TryGetValue(nameof(ExceptionType), out var pe2))
+                    ExceptionType = pe2.StringValue;
+                if (properties.TryGetValue(nameof(CallStack), out var pe3))
+                    CallStack = pe3.StringValue;
+                if (properties.TryGetValue(nameof(SoftwareVersion), out var pe4))
+                    SoftwareVersion = pe4.StringValue;
+            }
+
+            public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext)
+            {
+                return new Dictionary<string, EntityProperty>
+                {
+                    { nameof (Message), new EntityProperty(Message) },
+                    { nameof (ExceptionType), new EntityProperty(ExceptionType) },
+                    { nameof (CallStack), new EntityProperty(CallStack) },
+                    { nameof (SoftwareVersion), new EntityProperty(SoftwareVersion) }
+                };
+            }
         }
     }
 }
