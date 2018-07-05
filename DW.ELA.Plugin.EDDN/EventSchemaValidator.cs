@@ -18,6 +18,7 @@ namespace DW.ELA.Plugin.EDDN
 
         public EventSchemaValidator()
         {
+            logger.Debug("Loading schemas");
             LoadSchemas().Wait();
         }
 
@@ -37,6 +38,7 @@ namespace DW.ELA.Plugin.EDDN
                     var json = await reader.ReadToEndAsync();
                     var schema = await JsonSchema4.FromJsonAsync(json);
                     schemas.Add(schema.Id.TrimEnd('#'), schema);
+                    logger.Trace("Loaded schema {0}", schema.Id);
                 }
             }
             schemaCache = schemas;
@@ -47,7 +49,10 @@ namespace DW.ELA.Plugin.EDDN
             try
             {
                 if (!schemaCache.ContainsKey(@event.SchemaRef))
+                {
+                    logger.Error("Schema {0} not found", @event.SchemaRef);
                     return false;
+                }
 
                 var schema = schemaCache[@event.SchemaRef];
                 var validationErrors = schema.Validate(JObject.FromObject(@event));
