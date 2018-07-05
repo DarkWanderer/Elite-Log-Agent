@@ -68,6 +68,11 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Schemas\blackmarket-v1.0.json" />
+    <EmbeddedResource Include="Schemas\commodity-v3.0.json" />
+    <EmbeddedResource Include="Schemas\journal-v1.0.json" />
+    <EmbeddedResource Include="Schemas\outfitting-v2.0.json" />
+    <EmbeddedResource Include="Schemas\shipyard-v2.0.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controller\DW.ELA.Controller.csproj">

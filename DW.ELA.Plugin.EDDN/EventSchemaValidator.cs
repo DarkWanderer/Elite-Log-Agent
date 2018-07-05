@@ -4,37 +4,52 @@ using NJsonSchema;
 using NLog;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DW.ELA.Plugin.EDDN
 {
     public class EventSchemaValidator
     {
-        private readonly ConcurrentDictionary<string, Task<JsonSchema4>> schemaCache = new ConcurrentDictionary<string, Task<JsonSchema4>>();
-        private readonly IRestClient restClient;
+        private IReadOnlyDictionary<string, JsonSchema4> schemaCache;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-        public EventSchemaValidator(IRestClient restClient)
+        public EventSchemaValidator()
         {
-            this.restClient = restClient ?? throw new ArgumentNullException(nameof(restClient));
+            LoadSchemas().Wait();
         }
 
-        public bool ValidateSchema(EddnEvent @event) => ValidateSchemaAsync(@event).Result;
-
-        public async Task<bool> ValidateSchemaAsync(EddnEvent @event) // TODO: accept JObject actually
+        private async Task LoadSchemas()
         {
-            var schema = await schemaCache.GetOrAdd(@event.SchemaRef, LoadSchemaAsync);
+            var assembly = typeof(EventSchemaValidator).Assembly;
+            var resources = assembly.GetManifestResourceNames().Where(r => r.Contains("DW.ELA.Plugin.EDDN.Schemas"));
+            if (!resources.Any())
+                throw new ApplicationException("Unable to load any schemas");
+
+            var schemas = new Dictionary<string, JsonSchema4>();
+            foreach (var resource in resources)
+            {
+                using (var stream = assembly.GetManifestResourceStream(resource))
+                using (var reader = new StreamReader(stream))
+                {
+                    var json = await reader.ReadToEndAsync();
+                    var schema = await JsonSchema4.FromJsonAsync(json);
+                    schemas.Add(schema.Id.TrimEnd('#'), schema);
+                }
+            }
+            schemaCache = schemas;
+        }
+
+        public bool ValidateSchema(EddnEvent @event)
+        {
+            var schema = schemaCache[@event.SchemaRef];
             var validationErrors = schema.Validate(JObject.FromObject(@event));
             foreach (var error in validationErrors)
                 logger.Error(error.ToString());
 
             return validationErrors.Count == 0;
-        }
-
-        private async Task<JsonSchema4> LoadSchemaAsync(string schemaUrl)
-        {
-            var schemaJson = await restClient.GetAsync(schemaUrl);
-            return await JsonSchema4.FromJsonAsync(schemaJson);
         }
     }
 }

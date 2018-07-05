@@ -20,7 +20,7 @@ namespace DW.ELA.Plugin.EDDN
 
         private readonly IEddnApiFacade apiFacade = new EddnApiFacade(RestClient);
         private readonly EddnEventConverter eventConverter;
-        private readonly EventSchemaValidator schemaManager = new EventSchemaValidator(RestClient);
+        private readonly EventSchemaValidator schemaManager = new EventSchemaValidator();
 
         protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
 
