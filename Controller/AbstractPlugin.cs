@@ -10,7 +10,7 @@ using System.Timers;
 
 namespace DW.ELA.Controller
 {
-    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin
+    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin, IDisposable
         where TSettings : class, new()
         where TEvent : class
     {
@@ -22,7 +22,7 @@ namespace DW.ELA.Controller
 
         protected AbstractPlugin(ISettingsProvider settingsProvider)
         {
-            SettingsProvider = settingsProvider;
+            SettingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             flushTimer.AutoReset = false;
             flushTimer.Interval = FlushInterval.TotalMilliseconds;
             flushTimer.Start();
@@ -69,6 +69,7 @@ namespace DW.ELA.Controller
         public virtual void OnError(Exception error) { }
 
         public IObserver<LogEvent> GetLogObserver() => this;
+        public void Dispose() => flushTimer.Dispose();
 
         protected GlobalSettings GlobalSettings
         {
