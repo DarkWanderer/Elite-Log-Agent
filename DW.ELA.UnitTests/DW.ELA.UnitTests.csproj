@@ -88,6 +88,7 @@
     <Compile Include="JournalMonitorTests.cs" />
     <Compile Include="LogBurstPlayerTests.cs" />
     <Compile Include="LogEventConverterTests.cs" />
+    <Compile Include="PlayerStateRecorderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\TestEventSource.cs" />
     <Compile Include="Utility\JsonComparer.cs" />

@@ -10,5 +10,6 @@ namespace Interfaces
         long? GetPlayerShipId(DateTime atTime);
         string GetPlayerShipType(DateTime atTime);
         string GetPlayerSystem(DateTime atTime);
+        bool GetPlayerCrewStatus(DateTime atTime);
     }
 }
