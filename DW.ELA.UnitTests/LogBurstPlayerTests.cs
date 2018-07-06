@@ -8,17 +8,15 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DW.ELA.UnitTests
 {
     [TestFixture]
-    public class JournalMonitorTests
+    public class LogBurstPlayerTests
     {
-
         [Test]
-        public async Task ShouldPickUpEvents()
+        public void ShouldPlayEvents()
         {
             var directoryProvider = new TestDirectoryProvider();
             Directory.Delete(directoryProvider.Directory, true);
@@ -29,25 +27,19 @@ namespace DW.ELA.UnitTests
             string testFile2 = Path.Combine(directoryProvider.Directory, "testFile2.log");
 
             File.WriteAllText(testFile1, EventsAsJson.Skip(5).First());
-            var journalMonitor = new JournalMonitor(directoryProvider, 5);
-            journalMonitor.Subscribe(events.Add);
+            File.WriteAllText(testFile2, EventsAsJson.Skip(5).First());
 
-            File.AppendAllText(testFile1, EventsAsJson.Skip(8).First());
-            await Task.Delay(20);
+            var burstPlayer1 = new LogBurstPlayer(directoryProvider.Directory, 1);
+            burstPlayer1.Subscribe(events.Add);
+            burstPlayer1.Play();
             CollectionAssert.IsNotEmpty(events);
+            Assert.AreEqual(1, events.Count);
 
-            while (events.Count > 0)
-                events.TryTake(out var e);
-
-            File.WriteAllText(testFile2, EventsAsJson.Skip(9).First());
-            await Task.Delay(20);
+            var burstPlayer2 = new LogBurstPlayer(directoryProvider.Directory, 100);
+            burstPlayer2.Subscribe(events.Add);
+            burstPlayer2.Play();
             CollectionAssert.IsNotEmpty(events);
-
-            while (events.Count > 0)
-                events.TryTake(out var e);
-
-            await Task.Delay(20);
-            CollectionAssert.IsEmpty(events);
+            Assert.AreEqual(3, events.Count);
         }
 
         private static IEnumerable<string> EventsAsJson => TestEventSource.LogEvents.Select(Serialize.ToJson);
@@ -58,11 +50,12 @@ namespace DW.ELA.UnitTests
             {
                 get
                 {
-                    var dir = Path.Combine(Path.GetTempPath(), "ELA-TEST");
+                    var dir = Path.Combine(Path.GetTempPath(), "ELA-TEST1");
                     System.IO.Directory.CreateDirectory(dir);
                     return dir;
                 }
             }
         }
     }
+
 }
