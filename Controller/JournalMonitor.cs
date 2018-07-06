@@ -26,8 +26,6 @@ namespace Controller
         private object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
 
-        public TimeSpan LogFlushInterval { set => logFlushTimer.Interval = value.TotalMilliseconds; }
-
         /// <summary>
         /// 
         /// </summary>
@@ -54,7 +52,7 @@ namespace Controller
             filePosition = new FileInfo(CurrentFile).Length;
             Update(false);
             fileWatcher.EnableRaisingEvents = true;
-            logger.Debug("Started monitoring on folder {0}", LogDirectory);
+            logger.Info("Started monitoring on folder {0}", LogDirectory);
         }
 
         private void FileWatcher_Created(object sender, FileSystemEventArgs e)
@@ -74,6 +72,9 @@ namespace Controller
             lock (@lock)
                 try
                 {
+                    // We are not checking file size to make decision about whether
+                    // we should read the file. Reason being - the log write operations
+                    // are often buffered, so we need to open the file to flush buffers
                     filePosition = ReadFileFromPosition(CurrentFile, filePosition);
                     if (checkOtherFiles) {
                         var latestFile = LogEnumerator.GetLogFiles(LogDirectory).First();

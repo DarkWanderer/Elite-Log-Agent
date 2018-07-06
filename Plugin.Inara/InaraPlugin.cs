@@ -42,7 +42,7 @@ namespace DW.ELA.Plugin.Inara
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 
-        public override async void FlushEvents(ApiEvent[] events)
+        public override async void FlushEvents(ICollection<ApiEvent> events)
         {
             if (!Settings.Verified)
                 return;

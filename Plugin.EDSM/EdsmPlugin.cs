@@ -41,7 +41,7 @@ namespace ELA.Plugin.EDSM
             apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
         }
 
-        public override async void FlushEvents(JObject[] events)
+        public override async void FlushEvents(ICollection<JObject> events)
         {
             if (!Settings.Verified)
                 return;

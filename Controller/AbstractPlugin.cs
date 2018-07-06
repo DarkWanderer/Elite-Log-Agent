@@ -4,6 +4,7 @@ using DW.ELA.Utility;
 using Interfaces;
 using NLog;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Timers;
 
@@ -13,8 +14,8 @@ namespace DW.ELA.Controller
         where TSettings : class, new()
         where TEvent : class
     {
-        protected readonly List<TEvent> EventQueue = new List<TEvent>();
         protected readonly ISettingsProvider SettingsProvider;
+        private readonly ConcurrentQueue<TEvent> EventQueue = new ConcurrentQueue<TEvent>();
         private readonly Timer flushTimer = new Timer();
 
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
@@ -22,42 +23,45 @@ namespace DW.ELA.Controller
         protected AbstractPlugin(ISettingsProvider settingsProvider)
         {
             SettingsProvider = settingsProvider;
-            flushTimer.AutoReset = true;
+            flushTimer.AutoReset = false;
             flushTimer.Interval = FlushInterval.TotalMilliseconds;
             flushTimer.Start();
             flushTimer.Elapsed += (o, e) => FlushQueue();
         }
+
+        public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
 
         public abstract string PluginName { get; }
         public abstract string PluginId { get; }
 
         protected abstract IEventConverter<TEvent> EventConverter { get; }
         public abstract AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings);
-        public abstract void FlushEvents(TEvent[] events);
+        public abstract void FlushEvents(ICollection<TEvent> events);
         public abstract void ReloadSettings();
 
         protected void FlushQueue()
         {
             try
             {
-                TEvent[] events;
-                lock (EventQueue)
-                {
-                    events = EventQueue.ToArray();
-                    EventQueue.Clear();
-                }
+                var events = new List<TEvent>();
+                while (EventQueue.TryDequeue(out var @event))
+                    events.Add(@event);
                 FlushEvents(events);
             }
             catch (Exception e)
             {
                 logger.Error(e, "Error while processing events");
             }
+            finally
+            {
+                flushTimer.Start();
+            }
         }
 
         public void OnNext(LogEvent @event)
         {
-            lock (EventQueue)
-                EventQueue.AddRange(EventConverter.Convert(@event));
+            foreach (var e in EventConverter.Convert(@event))
+                EventQueue.Enqueue(e);
         }
 
         public virtual void OnCompleted() => FlushQueue();
@@ -72,12 +76,6 @@ namespace DW.ELA.Controller
             set => SettingsProvider.Settings = value;
         }
 
-        protected TSettings Settings
-        {
-            get => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings;
-            //set => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings = value;
-        }
-
-        public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
+        protected TSettings Settings => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings;
     }
 }
