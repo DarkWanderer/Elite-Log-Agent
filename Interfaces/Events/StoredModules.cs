@@ -51,9 +51,9 @@ namespace DW.ELA.LogModel.Events
         public string EngineerModifications { get; set; }
 
         [JsonProperty("Level")]
-        public long? Level { get; set; }
+        public short? Level { get; set; }
 
         [JsonProperty("Quality")]
-        public long? Quality { get; set; }
+        public double? Quality { get; set; }
     }
 }

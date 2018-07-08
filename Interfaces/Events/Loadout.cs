@@ -76,7 +76,7 @@
         public string BlueprintName { get; set; }
 
         [JsonProperty("Level")]
-        public long Level { get; set; }
+        public short Level { get; set; }
 
         [JsonProperty("Quality")]
         public double Quality { get; set; }

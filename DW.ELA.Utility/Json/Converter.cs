@@ -14,7 +14,8 @@ namespace DW.ELA.Utility.Json
             NullValueHandling = NullValueHandling.Ignore,
             DateFormatString = "u",
             Converters = {
-                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
+                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
+                new StringEnumConverter()
             },
         };
     }

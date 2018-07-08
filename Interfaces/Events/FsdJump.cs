@@ -109,8 +109,10 @@ namespace DW.ELA.LogModel.Events
     public enum FactionState
     {
         None,
-        [EnumMember(Value = "Civil Unrest")] CivilUnrest,
-        [EnumMember(Value = "Civil War")] CivilWar,
+        //[EnumMember(Value = "Civil Unrest")]
+        CivilUnrest,
+        [EnumMember(Value = "Civil War")]
+        CivilWar,
         Boom,
         Bust,
         Election,
