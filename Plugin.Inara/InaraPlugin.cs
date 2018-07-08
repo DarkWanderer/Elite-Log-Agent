@@ -83,7 +83,7 @@ namespace DW.ELA.Plugin.Inara
             foreach (var type in supersedesEvents.Keys.Intersect(eventsByType.Keys))
             {
                 var cutoffTimestamp = eventsByType[type].Max(e => e.Timestamp);
-                foreach (var supersededType in supersedesEvents[type])
+                foreach (var supersededType in supersedesEvents[type].Intersect(eventsByType.Keys))
                     eventsByType[supersededType] = eventsByType[supersededType]
                         .Where(e => e.Timestamp > cutoffTimestamp)
                         .ToArray();

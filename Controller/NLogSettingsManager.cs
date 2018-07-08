@@ -1,6 +1,7 @@
 ﻿using DW.ELA.Utility;
 using Interfaces;
 using NLog;
+using NLog.Layouts;
 using NLog.Targets;
 using System;
 using System.IO;
@@ -22,6 +23,7 @@ namespace Controller
         }
 
         private readonly IRestClient restClient= new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
+        private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ShortType,Message,StackTrace:innerFormat=ShortType,Message,StackTrace:maxInnerExceptionLevel=10}";
 
         public void Setup()
         {
@@ -39,7 +41,7 @@ namespace Controller
             var fileTarget = CreateFileTarget();
 
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
-            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget()));
+            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
 
             //if (settingsProvider.Settings.ReportErrorsToCloud)
             //    config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error, new CloudApiLogTarget(restClient)));
@@ -62,7 +64,7 @@ namespace Controller
                 ConcurrentWrites = true,
                 ReplaceFileContentsOnEachWrite = false,
                 Encoding = Encoding.UTF8,
-                Layout = "${longdate}|${level}|${logger}|${message} ${exception:format=ShortType,Message,StackTrace:innerFormat=ShortType,Message,StackTrace:maxInnerExceptionLevel=10}"
+                Layout = DefaultLayout
             };
         }
 
