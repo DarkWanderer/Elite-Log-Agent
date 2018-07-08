@@ -39,7 +39,7 @@ after_build:
 - .\ILMerge\tools\ilmerge.exe /wildcards /out:merged-executable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 test_script:
-- .\OpenCover\tools\OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -output:"coverage.xml"
+- .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -output:"coverage.xml"
 
 after_test:
   - ps: |
