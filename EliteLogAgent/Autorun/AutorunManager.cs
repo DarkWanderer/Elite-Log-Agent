@@ -13,13 +13,8 @@ namespace EliteLogAgent.Autorun
         private static string ExecutablePath {
             get
             {
-                //if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
-                {
-                    var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
-                    return Path.Combine(baseDir, @"CMDR John Kozak\EliteLogAgent.appref-ms");
-                }
-                //else
-                    return (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location;
+                var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
+                return Path.Combine(baseDir, @"CMDR John Kozak\EliteLogAgent.appref-ms");
             }
         }
 
