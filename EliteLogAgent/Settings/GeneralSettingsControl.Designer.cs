@@ -67,7 +67,7 @@
             this.uploadLatestDataButton.Name = "uploadLatestDataButton";
             this.uploadLatestDataButton.Size = new System.Drawing.Size(262, 23);
             this.uploadLatestDataButton.TabIndex = 3;
-            this.uploadLatestDataButton.Text = "Upload last 3 files via all plugins";
+            this.uploadLatestDataButton.Text = "Upload last 5 files via all plugins";
             this.uploadLatestDataButton.UseVisualStyleBackColor = true;
             this.uploadLatestDataButton.Click += new System.EventHandler(this.UploadLatestDataButton_Click);
             // 

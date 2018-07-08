@@ -16,7 +16,7 @@ namespace EliteLogAgent.Settings
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
         private static ILogger Logger = LogManager.GetCurrentClassLogger();
-        private const int uploadFileCount = 3;
+        private const int uploadFileCount = 5;
 
         public GeneralSettingsControl()
         {

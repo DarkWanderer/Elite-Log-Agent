@@ -62,7 +62,8 @@ namespace DW.ELA.Plugin.Inara
 
         private static readonly string[] latestOnlyEvents = new[] {
             "setCommanderInventoryMaterials",
-            "setCommanderGameStatistics"
+            "setCommanderGameStatistics",
+            "setCommanderStorageModules"
         };
 
         private static readonly IReadOnlyDictionary<string, string[]> supersedesEvents = new Dictionary<string, string[]>

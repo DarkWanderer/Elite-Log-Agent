@@ -37,6 +37,7 @@ namespace DW.ELA.Plugin.Inara
                     // Inventory
                     case Materials e: return ConvertEvent(e);
                     case MaterialCollected e: return ConvertEvent(e);
+                    case StoredModules e: return ConvertEvent(e);
 
                     // Travel
                     case FsdJump e: return ConvertEvent(e);
@@ -68,9 +69,40 @@ namespace DW.ELA.Plugin.Inara
             return Enumerable.Empty<ApiEvent>();
         }
 
+        private IEnumerable<ApiEvent> ConvertEvent(StoredModules e)
+        {
+            var @event = new ApiEvent("setCommanderStorageModules")
+            {
+                Timestamp = e.Timestamp,
+                EventData = e.Items.Select(ConvertStoredItem).ToArray()
+            };
+            yield return @event;
+        }
+
+        private Dictionary<string,object> ConvertStoredItem(Item item)
+        {
+            var result = new Dictionary<string, object>()
+            {
+                { "itemName", item.Name},
+                { "itemValue", item.BuyPrice},
+                { "isHot", item.Hot},
+                { "starsystemName", item.StarSystem},
+                { "marketID", item.MarketId},
+            };
+            if (!string.IsNullOrEmpty(item.EngineerModifications))
+                result.Add("engineering", new Dictionary<string, object>()
+                {
+                    {"blueprintName", item.EngineerModifications },
+                    {"blueprintLevel", item.Level },
+                    {"blueprintQuality", item.Quality },
+
+                });
+            return result;
+        }
+
         private IEnumerable<ApiEvent> ConvertEvent(MissionFailed e)
         {
-            var @event = new ApiEvent("addCommanderMission")
+            var @event = new ApiEvent("setCommanderMissionFailed")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -83,7 +115,7 @@ namespace DW.ELA.Plugin.Inara
 
         private IEnumerable<ApiEvent> ConvertEvent(MissionAbandoned e)
         {
-            var @event = new ApiEvent("addCommanderMission")
+            var @event = new ApiEvent("setCommanderMissionAbandoned")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -126,6 +158,7 @@ namespace DW.ELA.Plugin.Inara
                     {"reputationGain", e.Reputation },
                     {"starsystemNameTarget", e.DestinationSystem },
                     {"stationNameTarget", e.DestinationStation },
+                    {"missionExpiry", e.Expiry }
                 }
             };
             yield return @event;
@@ -138,7 +171,7 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    { "itemName", e.Name},
+                    {"itemName", e.Name},
                     {"itemCount", e.Count }
                 }
             };
