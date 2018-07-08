@@ -25,17 +25,26 @@ namespace DW.ELA.LogModel.Events
         [JsonProperty("PlanetClass")]
         public string PlanetClass { get; set; }
 
+        [JsonProperty("Composition")]
+        public Composition Composition { get; set; }
+
         [JsonProperty("Atmosphere")]
         public string Atmosphere { get; set; }
+
+        [JsonProperty("AtmosphereType")]
+        public string AtmosphereType { get; set; }
+
+        [JsonProperty("AtmosphereComposition")]
+        public AtmosphereComposition[] AtmosphereComposition { get; set; }
 
         [JsonProperty("Volcanism")]
         public string Volcanism { get; set; }
 
         [JsonProperty("MassEM")]
-        public double MassEm { get; set; }
+        public double? MassEm { get; set; }
 
         [JsonProperty("Radius")]
-        public double Radius { get; set; }
+        public double? Radius { get; set; }
 
         [JsonProperty("SurfaceGravity")]
         public double? SurfaceGravity { get; set; }
@@ -50,25 +59,25 @@ namespace DW.ELA.LogModel.Events
         public bool? Landable { get; set; }
 
         [JsonProperty("SemiMajorAxis")]
-        public double SemiMajorAxis { get; set; }
+        public double? SemiMajorAxis { get; set; }
 
         [JsonProperty("Eccentricity")]
-        public double Eccentricity { get; set; }
+        public double? Eccentricity { get; set; }
 
         [JsonProperty("OrbitalInclination")]
-        public double OrbitalInclination { get; set; }
+        public double? OrbitalInclination { get; set; }
 
         [JsonProperty("Periapsis")]
-        public double Periapsis { get; set; }
+        public double? Periapsis { get; set; }
 
         [JsonProperty("OrbitalPeriod")]
-        public double OrbitalPeriod { get; set; }
+        public double? OrbitalPeriod { get; set; }
 
         [JsonProperty("RotationPeriod")]
-        public double RotationPeriod { get; set; }
+        public double? RotationPeriod { get; set; }
 
         [JsonProperty("AxialTilt")]
-        public double AxialTilt { get; set; }
+        public double? AxialTilt { get; set; }
 
         [JsonProperty("ScanType")]
         public string ScanType { get; set; }
@@ -76,7 +85,28 @@ namespace DW.ELA.LogModel.Events
         [JsonProperty("Rings")]
         public Ring[] Rings { get; set; }
     }
-    
+
+    public class AtmosphereComposition
+    {
+        [JsonProperty("Name")]
+        public string Name { get; set; }
+
+        [JsonProperty("Percent")]
+        public double Percent { get; set; }
+    }
+
+    public class Composition
+    {
+        [JsonProperty("Ice")]
+        public double Ice { get; set; }
+
+        [JsonProperty("Rock")]
+        public double Rock { get; set; }
+
+        [JsonProperty("Metal")]
+        public double Metal { get; set; }
+    }
+
     public class Ring
     {
         [JsonProperty("Name")]

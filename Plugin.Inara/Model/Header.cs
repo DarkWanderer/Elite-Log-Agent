@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DW.ELA.Utility.Json;
+using Newtonsoft.Json;
 using Utility;
 
 namespace DW.ELA.Plugin.Inara.Model
@@ -29,6 +30,6 @@ namespace DW.ELA.Plugin.Inara.Model
         [JsonProperty("eventStatusText")]
         public string EventStatusText { get; internal set; }
 
-        public override string ToString() => JsonConvert.SerializeObject(this);
+        public override string ToString() => Serialize.ToJson(this);
     }
 }

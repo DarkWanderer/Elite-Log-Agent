@@ -4,6 +4,7 @@ using Interfaces;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DW.ELA.Plugin.Inara
@@ -131,7 +132,7 @@ namespace DW.ELA.Plugin.Inara
                 var apiFacade = new InaraApiFacade(InaraPlugin.RestClient, apiKey, cmdrName);
                 var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
                 var result = await apiFacade.ApiCall(@event);
-                credentialsStatusLabel.Text = "Success, inara ID: " + (result.EventData as JObject)["userID"]?.ToString();
+                credentialsStatusLabel.Text = "Success, inara ID: " + (result.Single().EventData as JObject)["userID"]?.ToString();
                 apiKeyValidatedCheckbox.Checked = true;
                 Settings.Verified = true;
             }

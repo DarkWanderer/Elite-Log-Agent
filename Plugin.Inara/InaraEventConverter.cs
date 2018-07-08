@@ -2,6 +2,7 @@
 using DW.ELA.LogModel;
 using DW.ELA.LogModel.Events;
 using DW.ELA.Plugin.Inara.Model;
+using DW.ELA.Utility.Json;
 using Interfaces;
 using MoreLinq;
 using Newtonsoft.Json.Linq;
@@ -52,6 +53,12 @@ namespace DW.ELA.Plugin.Inara
 
                     // Loadout
                     case Loadout e: return ConvertEvent(e);
+
+                    // Missions
+                    case MissionAccepted e: return ConvertEvent(e);
+                    case MissionCompleted e: return ConvertEvent(e);
+                    case MissionAbandoned e: return ConvertEvent(e);
+                    case MissionFailed e: return ConvertEvent(e);
                 }
             }
             catch (Exception e)
@@ -59,6 +66,69 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(MissionFailed e)
+        {
+            var @event = new ApiEvent("addCommanderMission")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"missionGameID", e.MissionId },
+                }
+            };
+            yield return @event;
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(MissionAbandoned e)
+        {
+            var @event = new ApiEvent("addCommanderMission")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"missionGameID", e.MissionId },
+                }
+            };
+            yield return @event;
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(MissionCompleted e)
+        {
+            var @event = new ApiEvent("setCommanderMissionCompleted")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"missionGameID", e.MissionId },
+                    {"missionName", e.Name },
+                    {"donationCredits", e.Donation },
+                    {"rewardCredits", e.Reward },
+                }
+            };
+            yield return @event;
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(MissionAccepted e)
+        {
+            var @event = new ApiEvent("addCommanderMission")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"missionName", e.Name },
+                    {"missionGameID", e.MissionId },
+                    {"starsystemNameOrigin", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    {"minorfactionNameOrigin", e.Faction },
+                    {"minorfactionNameTarget", e.TargetFaction },
+                    {"influenceGain", e.Influence },
+                    {"reputationGain", e.Reputation },
+                    {"starsystemNameTarget", e.DestinationSystem },
+                    {"stationNameTarget", e.DestinationStation },
+                }
+            };
+            yield return @event;
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(MaterialCollected e)
@@ -119,14 +189,15 @@ namespace DW.ELA.Plugin.Inara
             {
                 ["slotName"] = module.Slot,
                 ["itemName"] = module.Item,
-                ["itemValue"] = module.Value,
                 ["itemHealth"] = module.Health,
                 ["isOn"] = module.On,
                 ["isHot"] = false, // TODO!
                 ["itemPriority"] = module.Priority,
-                ["itemAmmoClip"] = module.AmmoInClip,
-                ["itemAmmoHopper"] = module.AmmoInHopper
+
             };
+            item.AddIfNotNull("itemAmmoClip", module.AmmoInClip);
+            item.AddIfNotNull("itemAmmoHopper", module.AmmoInHopper);
+            item.AddIfNotNull("itemValue", module.Value);
             if (module.Engineering != null)
                 item["engineering"] = ConvertEngineering(module.Engineering);
             return item;
@@ -139,11 +210,10 @@ namespace DW.ELA.Plugin.Inara
                 ["blueprintName"] = eng.BlueprintName,
                 ["blueprintLevel"] = eng.Level,
                 ["blueprintQuality"] = eng.Quality,
-                ["experimentalEffect"] = eng.ExperimentalEffect,
                 ["modifiers"] = new JArray(eng.Modifiers.Select(ConvertModifier).ToArray())
             };
+            item.AddIfNotNull("experimentalEffect", eng.ExperimentalEffect);
             return item;
-
         }
 
         private JObject ConvertModifier(Modifier mod)

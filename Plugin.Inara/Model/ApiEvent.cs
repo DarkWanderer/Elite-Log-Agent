@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DW.ELA.Utility.Json;
+using Newtonsoft.Json;
 using System;
 
 namespace DW.ELA.Plugin.Inara.Model
@@ -23,7 +24,7 @@ namespace DW.ELA.Plugin.Inara.Model
         [JsonProperty("eventData")]
         public object EventData { get; internal set; }
 
-        public override string ToString() => JsonConvert.SerializeObject(this);
+        public override string ToString() => Serialize.ToJson(this);
 
         /// <summary>
         /// Denotes status of event processing as returned by API

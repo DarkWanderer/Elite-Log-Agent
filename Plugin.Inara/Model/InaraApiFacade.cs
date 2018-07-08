@@ -31,10 +31,8 @@ namespace DW.ELA.Plugin.Inara.Model
             [JsonProperty("events")]
             public IList<ApiEvent> Events;
 
-            public override string ToString() => JsonConvert.SerializeObject(this);
+            public override string ToString() => Serialize.ToJson(this);
         }
-
-        public async Task<ApiEvent> ApiCall(ApiEvent @event) => (await ApiCall(new[] { @event })).Single();
 
         public async Task<ICollection<ApiEvent>> ApiCall(params ApiEvent[] events)
         {
@@ -50,26 +48,24 @@ namespace DW.ELA.Plugin.Inara.Model
             var outputJson = await client.PostAsync(inputJson);
             var outputData = JsonConvert.DeserializeObject<ApiInputOutput>(outputJson);
 
+            var exceptions = new List<InaraApiException>();
             // Verify output
             if (outputData.Events != null)
             {
-                var exceptions = new List<InaraApiException>();
                 for (int i = 0; i < events.Length; i++) {
                     if (outputData.Events[i].EventStatus != 200)
                     {
-                        exceptions.Add(new InaraApiException(
+                        var ex = new InaraApiException(
                                         outputData.Events[i].EventStatusText ?? "Unknown Error",
-                                        events[i].ToString()
-                                        ));
+                                        events[i].ToString());
+                        exceptions.Add(ex);
+                        logger.Error(ex, "Error returned from Inara API");
                     }
                 }
             }
 
             if (outputData.Header.EventStatus != 200)
-            {
-                throw new ApplicationException($"Error from API: {outputData.Header.EventStatusText}");
-            }
-
+                throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
 
             return outputData.Events;
         }

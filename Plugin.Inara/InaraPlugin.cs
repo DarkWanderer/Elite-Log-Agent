@@ -3,6 +3,7 @@ using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
 using DW.ELA.LogModel;
 using DW.ELA.Plugin.Inara.Model;
+using DW.ELA.Utility.Extensions;
 using Interfaces;
 using MoreLinq;
 using NLog;
@@ -51,11 +52,7 @@ namespace DW.ELA.Plugin.Inara
                 var facade = new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName);
                 var apiEvents = Compact(events).ToArray();
                 if (apiEvents.Length > 0)
-                {
-                    var results = await facade.ApiCall(apiEvents);
-                    foreach (var er in results.Where(e => e.EventStatus != 200))
-                        logger.Warn("Error returned from API: {0} ({1})", er.EventStatusText, er.EventStatus);
-                }
+                    await facade.ApiCall(apiEvents);
             }
             catch (Exception e)
             {
@@ -80,6 +77,16 @@ namespace DW.ELA.Plugin.Inara
                 .ToDictionary(g => g.Key, g => g.ToArray());
             foreach (var type in latestOnlyEvents.Intersect(eventsByType.Keys))
                 eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp).FirstOrDefault() };
+
+            // It does not make sense to e.g. add inventory materials if we already have a newer inventory snapshot
+            foreach (var type in supersedesEvents.Keys.Intersect(eventsByType.Keys))
+            {
+                var cutoffTimestamp = eventsByType[type].Max(e => e.Timestamp);
+                foreach (var supersededType in supersedesEvents[type])
+                    eventsByType[supersededType] = eventsByType[supersededType]
+                        .Where(e => e.Timestamp > cutoffTimestamp)
+                        .ToArray();
+            }
 
             return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
         }
