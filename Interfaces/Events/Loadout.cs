@@ -1,4 +1,4 @@
-﻿namespace DW.ELA.LogModel.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
     using System;
     using DW.ELA.Interfaces;

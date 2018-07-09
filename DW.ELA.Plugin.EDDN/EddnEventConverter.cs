@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DW.ELA.Interfaces;
-using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces.Events;
 using Newtonsoft.Json.Linq;
 using NLog;
 using Utility;
@@ -30,10 +30,15 @@ namespace DW.ELA.Plugin.EDDN
             {
                 switch (@event)
                 {
-                    //case Docked e: return MakeJournalEvent(e);
-                    case FsdJump e: return MakeJournalEvent(e);
-                    //case Scan e: return MakeJournalEvent(e);
-                    case Location e: return MakeJournalEvent(e);
+                    // Travel events
+                    //case Docked d:
+                    case FsdJump f: 
+                    //case Scan s:
+                    case Location l:
+                        return MakeJournalEvent(@event);
+
+                    // Market events
+                    case Market e: return ConvertMarketEvent(e);
                 }
             }
             catch (Exception e)
@@ -43,10 +48,47 @@ namespace DW.ELA.Plugin.EDDN
             return Enumerable.Empty<EddnEvent>();
         }
 
-        private IEnumerable<EddnEvent> MakeJournalEvent(Location e) { yield return new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) }; }
-        private IEnumerable<EddnEvent> MakeJournalEvent(Scan e) { yield return new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) }; }
-        private IEnumerable<EddnEvent> MakeJournalEvent(FsdJump e) { yield return new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) }; }
-        private IEnumerable<EddnEvent> MakeJournalEvent(Docked e) { yield return new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) }; }
+        private IEnumerable<EddnEvent> ConvertMarketEvent(Market e)
+        {
+            if (e.Items == null)
+                yield break;
+
+            var commodities = e.Items
+                .Where(i => i.Category != "NonMarketable")
+                .Where(i => string.IsNullOrEmpty(i.Legality))
+                .ToArray();
+
+            var @event = new CommodityEvent()
+            {
+                Header = CreateHeader(),
+                Message = new CommodityMessage()
+                {
+                    Timestamp = e.Timestamp,
+                    MarketId = e.MarketId,
+                    StationName = e.StationName,
+                    SystemName = e.StarSystem,
+                    Commodities = commodities.Select(ConvertCommodity).ToArray()
+                }
+            };
+            yield return @event;
+        }
+
+        private Commodity ConvertCommodity(MarketItem arg)
+        {
+            return new Commodity()
+            {
+                BuyPrice = arg.BuyPrice,
+                Demand = arg.Demand,
+                DemandBracket = arg.DemandBracket,
+                MeanPrice = arg.MeanPrice,
+                Name = arg.Name,
+                SellPrice = arg.SellPrice,
+                Stock = arg.Stock,
+                StockBracket = arg.StockBracket
+            };
+        }
+
+        private IEnumerable<EddnEvent> MakeJournalEvent(LogEvent e) { yield return new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) }; }
 
         private JObject Strip(JObject raw)
         {

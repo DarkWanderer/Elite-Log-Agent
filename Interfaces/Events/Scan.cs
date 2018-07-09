@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace DW.ELA.LogModel.Events
+namespace DW.ELA.Interfaces.Events
 {
     public class Scan : LogEvent
     {

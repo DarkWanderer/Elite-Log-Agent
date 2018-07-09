@@ -8,7 +8,7 @@ using DW.ELA.Interfaces.Settings;
 using NLog;
 using System.Linq;
 using EliteLogAgent.Autorun;
-using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces.Events;
 using DW.ELA.Interfaces;
 
 namespace EliteLogAgent.Settings

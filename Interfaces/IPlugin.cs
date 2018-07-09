@@ -1,6 +1,5 @@
 ﻿using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
-using DW.ELA.LogModel;
 using System;
 
 namespace Interfaces

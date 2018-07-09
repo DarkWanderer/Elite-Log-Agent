@@ -1,7 +1,7 @@
 ﻿using DW.ELA.Interfaces;
 using Newtonsoft.Json;
 
-namespace DW.ELA.LogModel.Events
+namespace DW.ELA.Interfaces.Events
 {
     public class EscapeInterdiction : LogEvent
     {

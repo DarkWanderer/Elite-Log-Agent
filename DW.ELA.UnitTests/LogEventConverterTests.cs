@@ -1,6 +1,6 @@
 ﻿using DW.ELA.Interfaces;
 using DW.ELA.LogModel;
-using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces.Events;
 using DW.ELA.UnitTests.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

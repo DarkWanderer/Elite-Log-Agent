@@ -6,7 +6,7 @@ using System.Linq;
 using MoreLinq;
 using NLog;
 using DW.ELA.LogModel;
-using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces.Events;
 using DW.ELA.Interfaces;
 
 namespace Controller
@@ -72,7 +72,7 @@ namespace Controller
         {
             try
             {
-                if (shipId == null || shipType == null)
+                if (shipId == null || shipType == null || shipType?.ToLower() == "testbuggy")
                     return;
 
                 ShipRecorder.RecordState(new ShipRecord { ShipID = shipId.Value, ShipType = shipType }, timestamp);

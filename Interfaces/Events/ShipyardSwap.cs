@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace DW.ELA.LogModel.Events
+namespace DW.ELA.Interfaces.Events
 {
     public class ShipyardSwap : LogEvent
     {

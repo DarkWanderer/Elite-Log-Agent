@@ -8,11 +8,10 @@ namespace DW.ELA.UnitTests
         [Test]
         public void ShouldEnableThenDisableAutorun()
         {
+            AutorunManager.AutorunEnabled = false;
             Assert.IsFalse(AutorunManager.AutorunEnabled);
             AutorunManager.AutorunEnabled = true;
             Assert.IsTrue(AutorunManager.AutorunEnabled);
-            AutorunManager.AutorunEnabled = false;
-            Assert.IsFalse(AutorunManager.AutorunEnabled);
         }
     }
 }

@@ -45,29 +45,52 @@ namespace Controller
 
             logFlushTimer.AutoReset = true;
             logFlushTimer.Interval = checkInterval; // sometimes the filesystem event does not trigger
-            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => Update(false));
+            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => UpdateLog(false));
             logFlushTimer.Enabled = true;
 
             CurrentFile = LogEnumerator.GetLogFiles(LogDirectory).First();
             filePosition = new FileInfo(CurrentFile).Length;
-            Update(false);
+            UpdateLog(false);
             fileWatcher.EnableRaisingEvents = true;
             logger.Info("Started monitoring on folder {0}", LogDirectory);
         }
 
         private void FileWatcher_Created(object sender, FileSystemEventArgs e)
         {
-            Update(checkOtherFiles: true);
+            if (Path.GetExtension(e.FullPath) == ".log")
+                UpdateLog(checkOtherFiles: true);
+            else if (Path.GetFileName(e.FullPath) == "Outfitting.json" || Path.GetFileName(e.FullPath) == "Market.json")
+                UpdateJson(e.FullPath);
         }
 
         private void FileWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            if (Path.GetExtension(e.FullPath) != ".log")
-                return;
-            Update(checkOtherFiles: e.FullPath != CurrentFile);
+            if (Path.GetExtension(e.FullPath) == ".log")
+                UpdateLog(checkOtherFiles: e.FullPath != CurrentFile);
+            else if (Path.GetExtension(e.FullPath) == ".json")
+                UpdateJson(e.FullPath);
         }
 
-        private void Update(bool checkOtherFiles)
+        private void UpdateJson(string file)
+        {
+            var timestamp = new FileInfo(file).LastWriteTime;
+            using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var textReader = new StreamReader(fileReader))
+            using (var jsonReader = new JsonTextReader(textReader))
+            {
+                var serializer = new JsonSerializer();
+                while (jsonReader.Read())
+                {
+                    var record = serializer.Deserialize(jsonReader);
+                    // Sometimes serializer gives out the json as string instead of JObject
+                    var @object = record as JObject ?? JObject.Parse(record as string);
+                    OnNext(LogEventConverter.Convert(@object));
+                    logger.Debug("Received event: {0}", @object.ToString());
+                }
+            }
+        }
+
+        private void UpdateLog(bool checkOtherFiles)
         {
             lock (@lock)
                 try
@@ -76,7 +99,8 @@ namespace Controller
                     // we should read the file. Reason being - the log write operations
                     // are often buffered, so we need to open the file to flush buffers
                     filePosition = ReadFileFromPosition(CurrentFile, filePosition);
-                    if (checkOtherFiles) {
+                    if (checkOtherFiles)
+                    {
                         var latestFile = LogEnumerator.GetLogFiles(LogDirectory).First();
                         if (latestFile != CurrentFile)
                         {
@@ -87,11 +111,17 @@ namespace Controller
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e, "Error while reading log file, skipping");
+                    logger.Error(e, "Error while reading journal file {0}", CurrentFile);
                     filePosition = new FileInfo(CurrentFile).Length; // Skipping the 'poisoned' data
                 }
         }
 
+        /// <summary>
+        /// Reads the given Journal file from specified position and generates the events
+        /// </summary>
+        /// <param name="file">Journal file</param>
+        /// <param name="filePosition">starting position</param>
+        /// <returns></returns>
         private long ReadFileFromPosition(string file, long filePosition)
         {
             using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -100,7 +130,7 @@ namespace Controller
                 using (var textReader = new StreamReader(fileReader))
                 using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true })
                 {
-                    JsonSerializer serializer = new JsonSerializer();
+                    var serializer = new JsonSerializer();
                     while (jsonReader.Read())
                     {
                         var record = serializer.Deserialize(jsonReader);

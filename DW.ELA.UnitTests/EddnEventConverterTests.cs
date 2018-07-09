@@ -1,5 +1,5 @@
 ﻿using DW.ELA.Interfaces;
-using DW.ELA.LogModel.Events;
+using DW.ELA.Interfaces.Events;
 using DW.ELA.Plugin.EDDN;
 using NUnit.Framework;
 using System;

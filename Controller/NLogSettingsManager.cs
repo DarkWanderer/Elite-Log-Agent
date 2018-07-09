@@ -4,6 +4,7 @@ using NLog;
 using NLog.Layouts;
 using NLog.Targets;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Utility;
@@ -23,7 +24,7 @@ namespace Controller
         }
 
         private readonly IRestClient restClient= new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
-        private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ShortType,Message,StackTrace:innerFormat=ShortType,Message,StackTrace:maxInnerExceptionLevel=10}";
+        private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ToString,StackTrace:innerFormat=ToString,StackTrace:maxInnerExceptionLevel=10}";
 
         public void Setup()
         {
@@ -47,9 +48,10 @@ namespace Controller
             //    config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error, new CloudApiLogTarget(restClient)));
 
             LogManager.Configuration = config;
-            TestExceptionLogging();
             logger.Info("Enabled logging with level {0}", logLevel);
-            LogManager.Flush();
+
+            //if (Debugger.IsAttached)
+            //    TestExceptionLogging();
         }
 
         private Target CreateFileTarget()

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
-namespace DW.ELA.LogModel.Events
+namespace DW.ELA.Interfaces.Events
 {
     public class FsdJump : LogEvent
     {
