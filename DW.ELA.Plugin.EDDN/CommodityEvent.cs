@@ -8,7 +8,7 @@ namespace DW.ELA.Plugin.EDDN
         [JsonProperty("message")]
         public CommodityMessage Message { get; set; }
 
-        public override string SchemaRef => "https://eddn.edcd.io/schemas/commodity/3/test";
+        public override string SchemaRef => "https://eddn.edcd.io/schemas/commodity/3";
     }
 
     public class CommodityMessage
