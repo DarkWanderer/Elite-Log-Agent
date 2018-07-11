@@ -48,13 +48,14 @@ namespace DW.ELA.Plugin.EDDN
         {
             try
             {
-                if (!schemaCache.ContainsKey(@event.SchemaRef))
+                var schemaRef = @event.SchemaRef.Replace("/test","");
+                if (!schemaCache.ContainsKey(schemaRef))
                 {
-                    logger.Error("Schema {0} not found", @event.SchemaRef);
+                    logger.Error("Schema {0} not found", schemaRef);
                     return false;
                 }
 
-                var schema = schemaCache[@event.SchemaRef];
+                var schema = schemaCache[schemaRef];
                 var validationErrors = schema.Validate(JObject.FromObject(@event));
                 foreach (var error in validationErrors)
                     logger.Error(error.ToString());
