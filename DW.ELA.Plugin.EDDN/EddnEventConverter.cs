@@ -81,7 +81,7 @@ namespace DW.ELA.Plugin.EDDN
                 Demand = arg.Demand,
                 DemandBracket = arg.DemandBracket,
                 MeanPrice = arg.MeanPrice,
-                Name = arg.Name,
+                Name = arg.Name.Replace("$","").Replace("_name",""),
                 SellPrice = arg.SellPrice,
                 Stock = arg.Stock,
                 StockBracket = arg.StockBracket
