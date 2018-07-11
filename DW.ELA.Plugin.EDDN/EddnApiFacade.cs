@@ -18,8 +18,8 @@ namespace DW.ELA.Plugin.EDDN
 
         public async Task PostEventsAsync(params EddnEvent[] events)
         {
-            var tasks = events.Select(PostAsync).ToArray();
-            await Task.WhenAll(tasks);
+            foreach (var @event in events)
+                await PostAsync(@event);
         }
 
         private async Task PostAsync(EddnEvent e)
