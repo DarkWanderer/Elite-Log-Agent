@@ -69,5 +69,24 @@ namespace EliteLogAgent.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon GitHub {
+            get {
+                object obj = ResourceManager.GetObject("GitHub", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/DarkWanderer/Elite-Log-Agent/issues/new.
+        /// </summary>
+        internal static string GitHubReportIssueLink {
+            get {
+                return ResourceManager.GetString("GitHubReportIssueLink", resourceCulture);
+            }
+        }
     }
 }

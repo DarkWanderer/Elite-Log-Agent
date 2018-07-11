@@ -1,6 +1,8 @@
 ﻿using EliteLogAgent.Properties;
 using Interfaces;
+using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -35,12 +37,15 @@ namespace EliteLogAgent
             //menuStrip.Items.Add("Upload latest log", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(1, false));
             //menuStrip.Items.Add("Upload 5 latest logs", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(5, false));
             menuStrip.Items.Add(ToolStripSeparatorLeft);
-            menuStrip.Items.Add("Settings", SystemIcons.Shield.ToBitmap(), (o,e) => OpenSettings());
+            menuStrip.Items.Add("Settings", Resources.EliteIcon.ToBitmap(), (o,e) => OpenSettings());
+            menuStrip.Items.Add("Report issue", Resources.GitHub.ToBitmap(), (o, e) => OpenReportIssueLink());
             //menuStrip.Items.Add("About", SystemIcons.Information.ToBitmap(), (o, e) => { using (var form = new AboutForm()) { form.ShowDialog(); } });
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Exit", SystemIcons.Error.ToBitmap(), (o, e) => Application.Exit());
             return menuStrip;
         }
+
+        private void OpenReportIssueLink() => Process.Start(Resources.GitHubReportIssueLink);
 
         private SettingsForm form;
 

@@ -12,7 +12,7 @@ namespace Utility
     public class ThrottlingRestClient : IRestClient
     {
         private readonly string baseUrl;
-        private static HttpClient client = new HttpClient();
+        private readonly HttpClient client = new HttpClient();
 
         private DateTime lastRequestTimestamp = DateTime.MinValue;
         private int requestCounter;
