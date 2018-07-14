@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DW.ELA.Utility.Json;
 using NLog;
+using DW.ELA.Plugin.EDDN.Model;
 
 namespace DW.ELA.Plugin.EDDN
 {

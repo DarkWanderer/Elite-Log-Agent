@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace DW.ELA.Plugin.EDDN
+namespace DW.ELA.Plugin.EDDN.Model
 {
     public class EddnEvent
     {

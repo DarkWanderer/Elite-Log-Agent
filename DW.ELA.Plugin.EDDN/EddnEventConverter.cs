@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Events;
+using DW.ELA.Plugin.EDDN.Model;
 using Newtonsoft.Json.Linq;
 using NLog;
 using Utility;
@@ -30,15 +31,16 @@ namespace DW.ELA.Plugin.EDDN
             {
                 switch (@event)
                 {
-                    // Travel events
+                    // Travel events TODO: fix other 2 types
                     //case Docked d:
-                    case FsdJump f: 
+                    case FsdJump f:
                     //case Scan s:
                     case Location l:
                         return MakeJournalEvent(@event);
 
-                    // Market events
+                    // Market events TODO: make a pull request to EDDN for case validation
                     case Market e: return ConvertMarketEvent(e);
+                    case Outfitting e: return ConvertOutfittingEvent(e); 
                 }
             }
             catch (Exception e)
@@ -46,6 +48,31 @@ namespace DW.ELA.Plugin.EDDN
                 logger.Error(e, "Error converting message");
             }
             return Enumerable.Empty<EddnEvent>();
+        }
+
+        private IEnumerable<EddnEvent> ConvertOutfittingEvent(Outfitting e)
+        {
+            if (e.Items == null)
+                yield break;
+
+            var items = e.Items
+                .Select(i => i.Name)
+                .Select(i => i.Replace("hpt_", "Hpt_").Replace("int_", "Int_").Replace("armour_", "Armour_"))
+                .ToArray();
+
+            var @event = new OutfittingEvent()
+            {
+                Header = CreateHeader(),
+                Message = new OutfittingMessage()
+                {
+                    MarketId = e.MarketId,
+                    Timestamp = e.Timestamp,
+                    StationName = e.StationName,
+                    SystemName = e.StarSystem,
+                    Modules = items
+                }
+            };
+            yield return @event;
         }
 
         private IEnumerable<EddnEvent> ConvertMarketEvent(Market e)
@@ -81,7 +108,7 @@ namespace DW.ELA.Plugin.EDDN
                 Demand = arg.Demand,
                 DemandBracket = arg.DemandBracket,
                 MeanPrice = arg.MeanPrice,
-                Name = arg.Name.Replace("$","").Replace("_name;",""),
+                Name = arg.Name.Replace("$", "").Replace("_name;", ""),
                 SellPrice = arg.SellPrice,
                 Stock = arg.Stock,
                 StockBracket = arg.StockBracket

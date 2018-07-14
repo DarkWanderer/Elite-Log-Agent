@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using DW.ELA.Plugin.EDDN.Model;
+using Interfaces;
 using Newtonsoft.Json.Linq;
 using NJsonSchema;
 using NLog;

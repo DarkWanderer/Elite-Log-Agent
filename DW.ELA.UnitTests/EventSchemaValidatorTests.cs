@@ -1,10 +1,6 @@
 ﻿using DW.ELA.Plugin.EDDN;
+using DW.ELA.Plugin.EDDN.Model;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DW.ELA.UnitTests
 {

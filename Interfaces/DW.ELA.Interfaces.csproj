@@ -68,6 +68,7 @@
     <Compile Include="Events\MissionAccepted.cs" />
     <Compile Include="Events\MissionCompleted.cs" />
     <Compile Include="Events\MissionFailed.cs" />
+    <Compile Include="Events\Outfitting.cs" />
     <Compile Include="Events\PvpKill.cs" />
     <Compile Include="Events\Scan.cs" />
     <Compile Include="Events\Shipyard.cs" />

@@ -56,15 +56,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommodityEvent.cs" />
+    <Compile Include="Model\CommodityEvent.cs" />
     <Compile Include="EddnApiFacade.cs" />
-    <Compile Include="EddnEvent.cs" />
+    <Compile Include="Model\EddnEvent.cs" />
     <Compile Include="EddnEventConverter.cs" />
     <Compile Include="EddnPlugin.cs" />
     <Compile Include="EddnSettings.cs" />
     <Compile Include="EventSchemaValidator.cs" />
     <Compile Include="IEddnApiFacade.cs" />
     <Compile Include="JournalEvent.cs" />
+    <Compile Include="Model\EddnOutfittingMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

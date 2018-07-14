@@ -1,6 +1,7 @@
 ﻿using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Events;
 using DW.ELA.Plugin.EDDN;
+using DW.ELA.Plugin.EDDN.Model;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace DW.ELA.Plugin.EDDN
+namespace DW.ELA.Plugin.EDDN.Model
 {
     public class CommodityEvent : EddnEvent
     {
