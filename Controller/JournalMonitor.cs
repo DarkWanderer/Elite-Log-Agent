@@ -73,7 +73,8 @@ namespace Controller
 
         private void UpdateJson(string file)
         {
-            var timestamp = new FileInfo(file).LastWriteTime;
+            if (!file.Contains("Shipyard") || !file.Contains("Outfitting"))
+                return;
             using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var textReader = new StreamReader(fileReader))
             using (var jsonReader = new JsonTextReader(textReader))
