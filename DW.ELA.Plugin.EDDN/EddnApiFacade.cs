@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DW.ELA.Utility.Json;
 using NLog;
 using DW.ELA.Plugin.EDDN.Model;
+using System;
 
 namespace DW.ELA.Plugin.EDDN
 {
@@ -20,7 +21,14 @@ namespace DW.ELA.Plugin.EDDN
         public async Task PostEventsAsync(params EddnEvent[] events)
         {
             foreach (var @event in events)
-                await PostAsync(@event);
+                try
+                {
+                    await PostAsync(@event);
+                }
+                catch (Exception e)
+                {
+                    logger.Error(e, "Error pushing event");
+                }
         }
 
         private async Task PostAsync(EddnEvent e)
