@@ -73,7 +73,7 @@ namespace Controller
 
         private void UpdateJson(string file)
         {
-            if (!file.Contains("Shipyard") && !file.Contains("Outfitting"))
+            if (!file.Contains("Market") && !file.Contains("Outfitting") && !file.Contains("Shipyard"))
                 return;
             using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var textReader = new StreamReader(fileReader))

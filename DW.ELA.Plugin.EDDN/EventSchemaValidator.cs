@@ -52,7 +52,7 @@ namespace DW.ELA.Plugin.EDDN
                 var schemaRef = @event.SchemaRef.Replace("/test","");
                 if (!schemaCache.ContainsKey(schemaRef))
                 {
-                    logger.Error("Schema {0} not found", schemaRef);
+                    logger.Error("Schema not found: {0}", schemaRef);
                     return false;
                 }
 
