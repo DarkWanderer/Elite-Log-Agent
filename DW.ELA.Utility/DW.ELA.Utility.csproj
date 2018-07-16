@@ -54,6 +54,7 @@
     <Compile Include="Extensions\Functional.cs" />
     <Compile Include="Json\JObjectExtensions.cs" />
     <Compile Include="Json\ParseStringConverter.cs" />
+    <Compile Include="Logging\LoggingTimer.cs" />
     <Compile Include="Rest\IRestClient.cs" />
     <Compile Include="Json\Converter.cs" />
     <Compile Include="Observable\AbstractObservable.cs" />

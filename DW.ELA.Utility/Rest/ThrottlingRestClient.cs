@@ -1,4 +1,5 @@
 ﻿using DW.ELA.Interfaces;
+using DW.ELA.Utility.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,8 @@ namespace Utility
             ThrowIfQuotaExceeded();
             var httpContent = new StringContent(input, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(baseUrl, httpContent);
-            return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+            using (new LoggingTimer("Making request to " + baseUrl))
+                return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
         }
 
         private HttpResponseMessage ThrowIfErrorCode(HttpResponseMessage response)
@@ -66,7 +68,8 @@ namespace Utility
 
             var httpContent = new StringContent(encodedPost, Encoding.UTF8, "application/x-www-form-urlencoded");
             var response = await client.PostAsync(baseUrl, httpContent);
-            return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+            using (new LoggingTimer("Making request to " + baseUrl))
+                return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
         }
 
         public async Task<string> GetAsync(string url)
@@ -75,7 +78,8 @@ namespace Utility
             if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
                 url = baseUrl + url;
             var response = await client.GetAsync(url);
-            return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+            using (new LoggingTimer("Making request to " + url))
+                return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
         }
     }
 }

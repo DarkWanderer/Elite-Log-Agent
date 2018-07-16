@@ -19,7 +19,7 @@ namespace DW.ELA.Interfaces.Events
         public string StarSystem { get; set; }
 
         [JsonProperty("Horizons")]
-        public bool Horizons { get; set; }
+        public bool? Horizons { get; set; }
 
         [JsonProperty("Items")]
         public OutfittingItem[] Items { get; set; }
