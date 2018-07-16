@@ -1,7 +1,7 @@
 ﻿using DW.ELA.Interfaces.Settings;
 using EliteLogAgent.Properties;
 using EliteLogAgent.Settings;
-using Interfaces;
+using DW.ELA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

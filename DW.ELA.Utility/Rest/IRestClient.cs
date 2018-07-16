@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Interfaces
+namespace DW.ELA.Interfaces
 {
     public interface IRestClient
     {

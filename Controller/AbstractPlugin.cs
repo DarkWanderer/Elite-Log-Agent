@@ -1,7 +1,6 @@
 ﻿using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
 using DW.ELA.Utility;
-using Interfaces;
 using NLog;
 using System;
 using System.Collections.Concurrent;

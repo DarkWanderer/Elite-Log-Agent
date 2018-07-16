@@ -1,13 +1,10 @@
-﻿using Interfaces;
-using Newtonsoft.Json.Linq;
+﻿using DW.ELA.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using MoreLinq;
 using NLog;
-using DW.ELA.LogModel;
 using DW.ELA.Interfaces.Events;
-using DW.ELA.Interfaces;
 
 namespace Controller
 {

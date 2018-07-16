@@ -1,5 +1,5 @@
 ﻿using EliteLogAgent.Properties;
-using Interfaces;
+using DW.ELA.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;

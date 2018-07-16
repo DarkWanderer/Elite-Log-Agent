@@ -1,6 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Interfaces;
+using DW.ELA.Interfaces;
 using NLog;
 using System;
 using System.Collections.Generic;

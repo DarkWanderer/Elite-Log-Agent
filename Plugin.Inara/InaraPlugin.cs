@@ -1,10 +1,7 @@
 ﻿using DW.ELA.Controller;
 using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
-using DW.ELA.LogModel;
 using DW.ELA.Plugin.Inara.Model;
-using DW.ELA.Utility.Extensions;
-using Interfaces;
 using MoreLinq;
 using NLog;
 using System;

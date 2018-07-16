@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace Interfaces
+namespace DW.ELA.Interfaces
 {
     public interface ILogRealTimeDataSource : IObservable<LogEvent>, IDisposable
     {

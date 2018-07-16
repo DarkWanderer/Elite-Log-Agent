@@ -1,7 +1,7 @@
 ﻿using DW.ELA.Interfaces.Settings;
 using System.Windows.Forms;
 
-namespace Interfaces
+namespace DW.ELA.Interfaces
 {
     public class AbstractSettingsControl : UserControl
     {

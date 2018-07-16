@@ -1,7 +1,7 @@
 ﻿using DW.ELA.Interfaces.Settings;
 using System;
 
-namespace Interfaces
+namespace DW.ELA.Interfaces
 {
     public interface ISettingsProvider
     {

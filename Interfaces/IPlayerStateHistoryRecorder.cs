@@ -1,7 +1,7 @@
 ﻿using DW.ELA.Interfaces;
 using System;
 
-namespace Interfaces
+namespace DW.ELA.Interfaces
 {
     public interface IPlayerStateHistoryRecorder : IObserver<LogEvent>
     {

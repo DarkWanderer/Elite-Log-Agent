@@ -1,8 +1,6 @@
 ﻿using DW.ELA.Controller;
 using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
-using DW.ELA.LogModel;
-using Interfaces;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;

@@ -1,6 +1,6 @@
 ﻿using DW.ELA.Plugin.Inara.Model;
 using DW.ELA.Utility;
-using Interfaces;
+using DW.ELA.Interfaces;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;

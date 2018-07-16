@@ -1,9 +1,7 @@
 ﻿using DW.ELA.Interfaces;
-using DW.ELA.LogModel;
 using DW.ELA.Interfaces.Events;
 using DW.ELA.Plugin.Inara.Model;
 using DW.ELA.Utility.Json;
-using Interfaces;
 using MoreLinq;
 using Newtonsoft.Json.Linq;
 using NLog;

@@ -1,5 +1,5 @@
 ﻿using DW.ELA.Utility.Json;
-using Interfaces;
+using DW.ELA.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
@@ -56,12 +56,15 @@ namespace DW.ELA.Utility
         }
 
         protected override void Write(IList<AsyncLogEventInfo> logEvents) => EnqueueEvents(logEvents);
-        protected override void Write(AsyncLogEventInfo[] logEvents) => EnqueueEvents(logEvents);
         protected override void Write(AsyncLogEventInfo logEvent) => EnqueueEvents(logEvent);
 
         protected override void WriteAsyncThreadSafe(IList<AsyncLogEventInfo> logEvents) => EnqueueEvents(logEvents);
-        protected override void WriteAsyncThreadSafe(AsyncLogEventInfo[] logEvents) => EnqueueEvents(logEvents);
         protected override void WriteAsyncThreadSafe(AsyncLogEventInfo logEvent) => EnqueueEvents(logEvent);
+
+        [Obsolete]
+        protected override void Write(AsyncLogEventInfo[] logEvents) => EnqueueEvents(logEvents);
+        [Obsolete]
+        protected override void WriteAsyncThreadSafe(AsyncLogEventInfo[] logEvents) => EnqueueEvents(logEvents);
 
         protected override async void FlushAsync(AsyncContinuation asyncContinuation)
         {
