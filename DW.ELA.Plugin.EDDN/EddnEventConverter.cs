@@ -27,8 +27,6 @@ namespace DW.ELA.Plugin.EDDN
 
         public IEnumerable<EddnEvent> Convert(LogEvent @event)
         {
-            if (@event.Timestamp.AddHours(2) < DateTime.UtcNow)
-                return Enumerable.Empty<EddnEvent>();
             try
             {
                 switch (@event)

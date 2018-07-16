@@ -49,7 +49,7 @@ namespace EliteLogAgent
             }
         }
 
-        private string SettingsFileDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");
+        public string SettingsFileDirectory { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");
 
         public event EventHandler SettingsChanged;
 
