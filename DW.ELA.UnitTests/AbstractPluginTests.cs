@@ -31,7 +31,7 @@ namespace DW.ELA.UnitTests
             {
                 foreach (var @event in TestEventSource.TypedLogEvents.Skip(10).Take(10))
                     plugin.OnNext(@event);
-                Task.Delay(20).Wait();
+                plugin.FlushQueue();
                 CollectionAssert.IsNotEmpty(plugin.Flushed);
                 Assert.AreEqual(10, plugin.Flushed.Count);
             }
@@ -57,7 +57,8 @@ namespace DW.ELA.UnitTests
 
             public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
             public override void ReloadSettings() { }
-            public override TimeSpan FlushInterval => TimeSpan.FromMilliseconds(10);
+            public override TimeSpan FlushInterval => TimeSpan.FromHours(10);
+            public new void FlushQueue() => base.FlushQueue();
         }
 
         private class IdentityLogConverter : IEventConverter<LogEvent>
