@@ -7,8 +7,6 @@ namespace DW.ELA.Interfaces
     {
         public AbstractSettingsControl()
         {
-            MinimumSize = new System.Drawing.Size(200, 150);
-            BorderStyle = BorderStyle.FixedSingle;
         }
 
         /// <summary>

@@ -56,7 +56,7 @@ namespace ELA.Plugin.EDSM
         }
 
         public const string CPluginId = "EdsmUploader";
-        public override string PluginName => "EDSM Upload";
+        public override string PluginName => "EDSM";
         public override string PluginId => CPluginId;
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings };

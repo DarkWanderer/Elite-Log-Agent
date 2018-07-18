@@ -113,9 +113,6 @@
     <Compile Include="Settings\GeneralSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Settings\GeneralSettingsControl.Designer.cs">
-      <DependentUpon>GeneralSettingsControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>

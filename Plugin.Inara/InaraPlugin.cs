@@ -16,7 +16,7 @@ namespace DW.ELA.Plugin.Inara
         public override string PluginName => CPluginName;
         public override string PluginId => CPluginId;
 
-        public const string CPluginName = "INARA settings";
+        public const string CPluginName = "INARA";
         public const string CPluginId = "InaraUploader";
         public static readonly IRestClient RestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
 

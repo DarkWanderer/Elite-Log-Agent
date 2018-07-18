@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Utility;
+using System.Linq;
 
 namespace EliteLogAgent
 {
@@ -31,40 +32,36 @@ namespace EliteLogAgent
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            currentSettings = Provider.Settings;
-
-            var generalSettingsControl = new GeneralSettingsControl() { MessageBroker = MessageBroker };
-            generalSettingsControl.Dock = DockStyle.Fill;
-            generalSettingsControl.PerformLayout();
-            generalSettingsControl.GlobalSettings = currentSettings;
-            SettingsControls.Add("General", generalSettingsControl );
-            //PlaceControlGroup("General", generalSettingsControl);
-            flowLayoutPanel1.Controls.Add(generalSettingsControl);
+            currentSettings = Provider.Settings.Clone();
+            SettingsControls.Add("General", new GeneralSettingsControl() { MessageBroker = MessageBroker, GlobalSettings = currentSettings, Dock = DockStyle.Fill });
+            settingsCategoriesListView.Items.Add("General");
 
             foreach (var plugin in Plugins)
             {
                 var control = plugin.GetPluginSettingsControl(currentSettings);
                 if (control == null)
                     continue;
-
-                control.PerformLayout();
                 control.Dock = DockStyle.Fill;
-                SettingsControls.Add(plugin.PluginId, control);
-                //PlaceControlGroup(plugin.SettingsLabel, control);
-                flowLayoutPanel1.Controls.Add(control);
+                control.PerformLayout();
+                SettingsControls.Add(plugin.PluginName, control);
             }
-            PerformLayout();
+
+            foreach (var category in SettingsControls.Keys.OrderBy(x => x))
+                if (category != "General")
+                    settingsCategoriesListView.Items.Add(category);
+            settingsCategoriesListView.SelectedIndices.Add(0);
         }
 
-        private void PlaceControlGroup(string name, Control control)
+        private void settingsCategoriesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var groupBox = new GroupBox() { Text = name };
-            groupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-            groupBox.Controls.Add(control);
-            // groupBox.AutoSize = true;
-            groupBox.Size = control.MinimumSize;
-            flowLayoutPanel1.Controls.Add(groupBox);
-            groupBox.PerformLayout();
+            if (settingsCategoriesListView.SelectedIndices.Count > 0)
+            {
+                var selectedIndex = settingsCategoriesListView.SelectedIndices.Cast<int>().Single();
+                settingsControlContainer.Controls.OfType<AbstractSettingsControl>().SingleOrDefault()?.SaveSettings();
+                settingsControlContainer.Controls.Clear();
+                settingsControlContainer.Controls.Add(SettingsControls[settingsCategoriesListView.Items[selectedIndex].Text]);
+                settingsControlContainer.PerformLayout();
+            }
         }
 
         private void OkButton_Click(object sender, EventArgs e)
@@ -80,12 +77,10 @@ namespace EliteLogAgent
 
         private void ApplySettings()
         {
-            foreach (var control in SettingsControls.Values)
-                control.SaveSettings();
+            settingsControlContainer.Controls.OfType<AbstractSettingsControl>().SingleOrDefault()?.SaveSettings();
             Provider.Settings = currentSettings;
         }
 
         private void CancelButton_Click(object sender, EventArgs e) => Close();
-
     }
 }

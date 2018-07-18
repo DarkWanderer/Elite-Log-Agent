@@ -32,7 +32,7 @@ namespace DW.ELA.Plugin.EDDN
             ReloadSettings();
         }
 
-        public override string PluginName => "EDDN Upload";
+        public override string PluginName => "EDDN";
         public override string PluginId => "EDDN";
 
 

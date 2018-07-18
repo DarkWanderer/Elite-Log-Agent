@@ -63,6 +63,7 @@
     <Compile Include="LoggingTimerTests.cs" />
     <Compile Include="PlayerStateRecorderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SavedGamesDirectoryHelperTests.cs" />
     <Compile Include="SingleLaunchTests.cs" />
     <Compile Include="Utility\TestEventSource.cs" />
     <Compile Include="Utility\JsonComparer.cs" />
