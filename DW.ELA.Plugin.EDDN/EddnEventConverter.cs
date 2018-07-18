@@ -14,6 +14,7 @@ namespace DW.ELA.Plugin.EDDN
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public string UploaderID = "Unknown";
+        public TimeSpan MaxAge = TimeSpan.FromHours(6);
 
         private IDictionary<string, string> CreateHeader()
         {
@@ -27,6 +28,8 @@ namespace DW.ELA.Plugin.EDDN
 
         public IEnumerable<EddnEvent> Convert(LogEvent @event)
         {
+            if (@event.Timestamp.Add(MaxAge) < DateTime.UtcNow)
+                return Enumerable.Empty<EddnEvent>();
             try
             {
                 switch (@event)

@@ -14,7 +14,7 @@ namespace DW.ELA.UnitTests
     [TestFixture]
     public class EddnEventConverterTests
     {
-        private readonly EddnEventConverter eventConverter = new EddnEventConverter();
+        private readonly EddnEventConverter eventConverter = new EddnEventConverter() { MaxAge = TimeSpan.FromDays(5000) };
 
         [Test]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
