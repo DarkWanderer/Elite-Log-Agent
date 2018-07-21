@@ -72,6 +72,7 @@
     <Compile Include="Events\PvpKill.cs" />
     <Compile Include="Events\Scan.cs" />
     <Compile Include="Events\Shipyard.cs" />
+    <Compile Include="Events\ShipyardSell.cs" />
     <Compile Include="Events\ShipyardSwap.cs" />
     <Compile Include="Events\Statistics.cs" />
     <Compile Include="Events\StoredModules.cs" />

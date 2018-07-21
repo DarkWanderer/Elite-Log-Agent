@@ -11,6 +11,6 @@ namespace DW.ELA.UnitTests
     public class SingleLaunchTests
     {
         [Test]
-        public void ShouldBeFalse() => Assert.IsFalse(SingleLaunch.IsRunning, "Application may be running");
+        public void AppShouldNotBeLaunched() => Assert.IsFalse(SingleLaunch.IsRunning, "Application may be running");
     }
 }

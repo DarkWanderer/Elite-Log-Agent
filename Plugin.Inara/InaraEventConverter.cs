@@ -36,6 +36,7 @@ namespace DW.ELA.Plugin.Inara
                     case Materials e: return ConvertEvent(e);
                     case MaterialCollected e: return ConvertEvent(e);
                     case StoredModules e: return ConvertEvent(e);
+                    case ShipyardSell e: return ConvertEvent(e);
 
                     // Travel
                     case FsdJump e: return ConvertEvent(e);
@@ -65,6 +66,20 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(ShipyardSell e)
+        {
+            var @event = new ApiEvent("delCommanderShip")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"shipType", e.ShipType},
+                    {"shipGameID", e.SellShipId },
+                }
+            };
+            yield return @event;
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(StoredModules e)

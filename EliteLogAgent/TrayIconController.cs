@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Utility;
 
 namespace EliteLogAgent
 {
@@ -34,6 +35,7 @@ namespace EliteLogAgent
         private ContextMenuStrip CreateMenuStrip()
         {
             var menuStrip = new ContextMenuStrip();
+            menuStrip.Items.Add(new ToolStripLabel($"Version: {AppInfo.Version}") { ForeColor = SystemColors.ControlDark });
             //menuStrip.Items.Add("Upload latest log", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(1, false));
             //menuStrip.Items.Add("Upload 5 latest logs", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(5, false));
             menuStrip.Items.Add(ToolStripSeparatorLeft);
