@@ -162,7 +162,7 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"missionName", e.Name },
+                    {"missionName", e.LocalisedName },
                     {"missionGameID", e.MissionId },
                     {"starsystemNameOrigin", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
                     {"minorfactionNameOrigin", e.Faction },
