@@ -13,10 +13,12 @@ namespace Controller
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         private readonly StateRecorder<ShipRecord> ShipRecorder = new StateRecorder<ShipRecord>();
-        private readonly StateRecorder<string> LocationRecorder = new StateRecorder<string>();
+        private readonly StateRecorder<string> StarSystemRecorder = new StateRecorder<string>();
+        private readonly StateRecorder<string> StationRecorder = new StateRecorder<string>();
         private readonly StateRecorder<bool> CrewRecorder = new StateRecorder<bool>();
 
-        public string GetPlayerSystem(DateTime atTime) => LocationRecorder.GetStateAt(atTime);
+        public string GetPlayerSystem(DateTime atTime) => StarSystemRecorder.GetStateAt(atTime);
+        public string GetPlayerStation(DateTime atTime) => StationRecorder.GetStateAt(atTime);
         public string GetPlayerShipType(DateTime atTime) => ShipRecorder.GetStateAt(atTime)?.ShipType;
         public long? GetPlayerShipId(DateTime atTime) => ShipRecorder.GetStateAt(atTime)?.ShipID;
         public bool GetPlayerCrewStatus(DateTime atTime) => CrewRecorder.GetStateAt(atTime);
@@ -41,10 +43,12 @@ namespace Controller
                     case FsdJump e: Process(e); break;
                     case Docked e: Process(e); break;
                     case SupercruiseEntry e: Process(e); break;
+                    case Undocked e: Process(e); break;
 
                     // Crew status change events
                     case JoinACrew e: Process(e); break;
                     case QuitACrew e: Process(e); break;
+
                 }
             }
             catch (Exception e)
@@ -53,14 +57,20 @@ namespace Controller
             }
         }
 
+        private void Process(Undocked e) => StationRecorder.RecordState(null, e.Timestamp);
         private void Process(Loadout e) => ProcessShipIDEvent(e.ShipId, e.Ship, e.Timestamp);
         private void Process(LoadGame e) => ProcessShipIDEvent(e.ShipId, e.Ship, e.Timestamp);
         private void Process(ShipyardSwap e) => ProcessShipIDEvent(e.ShipId, e.ShipType, e.Timestamp);
 
-        private void Process(Location e) => LocationRecorder.RecordState(e.StarSystem, e.Timestamp);
-        private void Process(FsdJump e) => LocationRecorder.RecordState(e.StarSystem, e.Timestamp);
-        private void Process(Docked e) => LocationRecorder.RecordState(e.StarSystem, e.Timestamp);
-        private void Process(SupercruiseEntry e) => LocationRecorder.RecordState(e.StarSystem, e.Timestamp);
+        private void Process(Location e) => StarSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
+        private void Process(FsdJump e) => StarSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
+        private void Process(Docked e)
+        {
+            StarSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
+            StationRecorder.RecordState(e.StationName, e.Timestamp);
+        }
+
+        private void Process(SupercruiseEntry e) => StarSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
 
         private void Process(QuitACrew e) => CrewRecorder.RecordState(false, e.Timestamp);
         private void Process(JoinACrew e) => CrewRecorder.RecordState(true, e.Timestamp);

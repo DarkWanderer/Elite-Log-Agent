@@ -8,6 +8,7 @@ namespace DW.ELA.Interfaces
         long? GetPlayerShipId(DateTime atTime);
         string GetPlayerShipType(DateTime atTime);
         string GetPlayerSystem(DateTime atTime);
+        string GetPlayerStation(DateTime timestamp);
         bool GetPlayerCrewStatus(DateTime atTime);
     }
 }

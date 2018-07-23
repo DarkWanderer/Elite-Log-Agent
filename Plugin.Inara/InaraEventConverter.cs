@@ -51,8 +51,9 @@ namespace DW.ELA.Plugin.Inara
                     case EscapeInterdiction e: return ConvertEvent(e);
                     case PvpKill e: return ConvertEvent(e);
 
-                    // Loadout
+                    // Ship events
                     case Loadout e: return ConvertEvent(e);
+                    case ShipyardSwap e: return ConvertEvent(e);
 
                     // Missions
                     case MissionAccepted e: return ConvertEvent(e);
@@ -66,6 +67,40 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(ShipyardSwap e)
+        {
+            // Send event for old ship indicating it's location
+            var @event = new ApiEvent("setCommanderShip")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"shipType", e.StoreOldShip},
+                    {"shipGameID", e.StoreShipId },
+                    {"marketID", e.MarketId },
+                    {"starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp)},
+                    {"stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
+                    { "isCurrentShip", false}
+                }
+            };
+            yield return @event;
+            // and for new, indicating that it's now current
+            @event = new ApiEvent("setCommanderShip")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"shipType", e.ShipType},
+                    {"shipGameID", e.ShipId },
+                    {"marketID", e.MarketId },
+                    {"starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp)},
+                    {"stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
+                    { "isCurrentShip", true}
+                }
+            };
+            yield return @event;
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(ShipyardSell e)
@@ -92,7 +127,7 @@ namespace DW.ELA.Plugin.Inara
             yield return @event;
         }
 
-        private Dictionary<string,object> ConvertStoredItem(Item item)
+        private Dictionary<string, object> ConvertStoredItem(Item item)
         {
             var result = new Dictionary<string, object>()
             {

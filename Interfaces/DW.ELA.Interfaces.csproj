@@ -77,6 +77,7 @@
     <Compile Include="Events\Statistics.cs" />
     <Compile Include="Events\StoredModules.cs" />
     <Compile Include="Events\SupercruiseEntry.cs" />
+    <Compile Include="Events\Undocked.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="IEventConverter.cs" />
     <Compile Include="ILogDirectoryNameProvider.cs" />
