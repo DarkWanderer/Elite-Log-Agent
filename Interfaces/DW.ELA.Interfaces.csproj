@@ -70,6 +70,7 @@
     <Compile Include="Events\MissionFailed.cs" />
     <Compile Include="Events\Outfitting.cs" />
     <Compile Include="Events\PvpKill.cs" />
+    <Compile Include="Events\Reputation.cs" />
     <Compile Include="Events\Scan.cs" />
     <Compile Include="Events\Shipyard.cs" />
     <Compile Include="Events\ShipyardSell.cs" />

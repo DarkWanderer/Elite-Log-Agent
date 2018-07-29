@@ -42,8 +42,9 @@ namespace DW.ELA.Plugin.Inara
                     case FsdJump e: return ConvertEvent(e);
                     case Docked e: return ConvertEvent(e);
 
-                    // Engineers
+                    // Ranks/reputation
                     case EngineerProgress e: return ConvertEvent(e);
+                    case Reputation e: return ConvertEvent(e);
 
                     // Combat
                     case Interdicted e: return ConvertEvent(e);
@@ -67,6 +68,37 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(Reputation e)
+        {
+            yield return new ApiEvent("setCommanderReputationMajorFaction")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"majorfactionName", nameof(e.Empire)},
+                    {"majorfactionReputation", e.Empire },
+                }
+            };
+            yield return new ApiEvent("setCommanderReputationMajorFaction")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"majorfactionName", nameof(e.Alliance)},
+                    {"majorfactionReputation", e.Alliance },
+                }
+            };
+            yield return new ApiEvent("setCommanderReputationMajorFaction")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"majorfactionName", nameof(e.Federation)},
+                    {"majorfactionReputation", e.Federation },
+                }
+            };
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(ShipyardSwap e)
