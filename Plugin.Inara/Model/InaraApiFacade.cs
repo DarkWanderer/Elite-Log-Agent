@@ -55,6 +55,8 @@ namespace DW.ELA.Plugin.Inara.Model
                 for (int i = 0; i < events.Length; i++) {
                     if (outputData.Events[i].EventStatus != 200)
                     {
+                        if (outputData.Events[i].EventStatusText.StartsWith("Some errors in the loadout appeared"))
+                            continue; // Skip the errors related to data missing on Inara side
                         var ex = new InaraApiException(
                                         outputData.Events[i].EventStatusText ?? "Unknown Error",
                                         events[i].ToString());
