@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW.ELA.UnitTests", "DW.ELA.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW.ELA.Utility", "DW.ELA.Utility\DW.ELA.Utility.csproj", "{93DCDB11-335D-400C-BD87-554A0C1E2CEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW.ELA.Plugin.Canonn", "DW.ELA.Plugin.Canonn\DW.ELA.Plugin.Canonn.csproj", "{B79FAF85-E844-4D8E-85FC-A0B727E0D296}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{93DCDB11-335D-400C-BD87-554A0C1E2CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93DCDB11-335D-400C-BD87-554A0C1E2CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93DCDB11-335D-400C-BD87-554A0C1E2CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B79FAF85-E844-4D8E-85FC-A0B727E0D296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79FAF85-E844-4D8E-85FC-A0B727E0D296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79FAF85-E844-4D8E-85FC-A0B727E0D296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79FAF85-E844-4D8E-85FC-A0B727E0D296}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
