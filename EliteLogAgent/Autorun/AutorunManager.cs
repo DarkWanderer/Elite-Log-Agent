@@ -14,7 +14,7 @@ namespace EliteLogAgent.Autorun
             get
             {
                 var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
-                return Path.Combine(baseDir, @"CMDR John Kozak\Elite Log Agent.appref-ms");
+                return Path.Combine(baseDir, @"Elite Log Agent\Elite Log Agent.appref-ms");
             }
         }
 

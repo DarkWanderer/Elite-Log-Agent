@@ -27,7 +27,6 @@
     <ErrorReportUrl>https://github.com/DarkWanderer/Elite-Log-Agent/issues</ErrorReportUrl>
     <TargetCulture>en-US</TargetCulture>
     <ProductName>Elite Log Agent</ProductName>
-    <PublisherName>CMDR John Kozak</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>0.1.0.0</ApplicationVersion>
