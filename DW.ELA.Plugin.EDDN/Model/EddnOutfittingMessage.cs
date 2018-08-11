@@ -12,7 +12,7 @@ namespace DW.ELA.Plugin.EDDN.Model
         [JsonProperty("message")]
         public OutfittingMessage Message { get; set; }
 
-        public override string SchemaRef => "https://eddn.edcd.io/schemas/outfitting/2/test";
+        public override string SchemaRef => "https://eddn.edcd.io/schemas/outfitting/2";
     }
 
     public partial class OutfittingMessage
