@@ -61,6 +61,9 @@ namespace DW.ELA.Plugin.Inara
                     case MissionCompleted e: return ConvertEvent(e);
                     case MissionAbandoned e: return ConvertEvent(e);
                     case MissionFailed e: return ConvertEvent(e);
+
+                    // Community goals
+                    case CommunityGoal e: return ConvertEvent(e);
                 }
             }
             catch (Exception e)
@@ -68,6 +71,44 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(CommunityGoal e)
+        {
+            foreach (var goal in e.CurrentGoals)
+            {
+                yield return new ApiEvent("setCommunityGoal")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        {"communitygoalGameID", goal.Cgid},
+                        {"communitygoalName", goal.Title},
+                        {"starsystemName", goal.SystemName},
+                        {"stationName", goal.MarketName},
+                        {"goalExpiry", goal.Expiry},
+                        {"tierReached", goal.TierReached},
+                        {"tierMax", goal.TopTier?.Name},
+                        {"topRankSize", goal.TopRankSize},
+                        {"isCompleted", goal.IsComplete},
+                        {"contributorsNum", goal.NumContributors},
+                        {"contributionsTotal", goal.CurrentTotal},
+                        {"completionBonus", goal.TopTier?.Bonus},
+                    }
+                };
+                yield return new ApiEvent("setCommanderCommunityGoalProgress")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        {"communitygoalGameID", goal.Cgid},
+                        {"contribution", goal.PlayerContribution},
+                        {"percentileBand", goal.PlayerPercentileBand},
+                        {"percentileBandReward", goal.Bonus},
+                        {"isTopRank", goal.PlayerInTopRank}
+                    }
+                };
+            };
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(Reputation e)

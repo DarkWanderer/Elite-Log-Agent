@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="ErrorRecord.cs" />
     <Compile Include="Events\Commander.cs" />
+    <Compile Include="Events\CommunityGoal.cs" />
     <Compile Include="Events\Docked.cs" />
     <Compile Include="Events\EngineerProgress.cs" />
     <Compile Include="Events\EscapeInterdiction.cs" />
