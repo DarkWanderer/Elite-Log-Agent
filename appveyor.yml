@@ -72,7 +72,6 @@ for:
     storage_access_key:
       secure: QG+FUaRxa8VX+7XDNhCX/XLHv+G/2PyACt8POHWNVOKm9jgT4/1WCYNfsTHdsXMrZyDh77uDw68ulHtz7i/AREoNxu1y9Z5ZD+nrDL6/R8TwCDljhq9S+EUusNk3CCMZ
   - provider: GitHub
-    on:
     tag: release-$(appveyor_build_version)
     release: $(appveyor_build_version)
     auth_token:
