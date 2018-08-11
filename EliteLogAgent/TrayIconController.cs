@@ -28,7 +28,7 @@ namespace EliteLogAgent
                 Visible = true,
             };
             notifyIcon.BalloonTipClicked += (o, e) => OpenSettings();
-            notifyIcon.DoubleClick += (o,e) => OpenSettings();
+            notifyIcon.DoubleClick += (o, e) => OpenSettings();
             return notifyIcon;
         }
 
@@ -39,17 +39,40 @@ namespace EliteLogAgent
             //menuStrip.Items.Add("Upload latest log", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(1, false));
             //menuStrip.Items.Add("Upload 5 latest logs", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(5, false));
             menuStrip.Items.Add(ToolStripSeparatorLeft);
-            menuStrip.Items.Add("Settings", Resources.EliteIcon.ToBitmap(), (o,e) => OpenSettings());
+            menuStrip.Items.Add("Settings", Resources.EliteIcon.ToBitmap(), (o, e) => OpenSettings());
             menuStrip.Items.Add("Report issue", Resources.GitHub.ToBitmap(), (o, e) => OpenReportIssueLink());
             //menuStrip.Items.Add("About", SystemIcons.Information.ToBitmap(), (o, e) => { using (var form = new AboutForm()) { form.ShowDialog(); } });
+            menuStrip.Items.Add(ToolStripSeparatorLeft);
+            menuStrip.Items.Add("About", SystemIcons.Information.ToBitmap(), (o, e) => OpenAboutForm());
+            menuStrip.Items.Add("Changelog", Resources.GitHub.ToBitmap(), (o, e) => OpenChangelog());
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Exit", SystemIcons.Error.ToBitmap(), (o, e) => Application.Exit());
             return menuStrip;
         }
 
-        private void OpenReportIssueLink() => Process.Start(Resources.GitHubReportIssueLink);
+        private void OpenChangelog() => Process.Start(Resources.GitHubChangelogLink);
 
-        private SettingsForm form;
+        static Form form;
+        private void OpenAboutForm()
+        {
+            if (form != null)
+            {
+                form.BringToFront();
+                return;
+            }
+
+            try
+            {
+                using (form = new About())
+                    form.ShowDialog();
+            }
+            finally
+            {
+                form = null;
+            }
+        }
+
+        private void OpenReportIssueLink() => Process.Start(Resources.GitHubReportIssueLink);
 
         public void OpenSettings()
         {

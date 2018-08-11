@@ -81,6 +81,15 @@ namespace EliteLogAgent.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://github.com/DarkWanderer/Elite-Log-Agent/wiki/Changelog.
+        /// </summary>
+        internal static string GitHubChangelogLink {
+            get {
+                return ResourceManager.GetString("GitHubChangelogLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://github.com/DarkWanderer/Elite-Log-Agent/issues/new.
         /// </summary>
         internal static string GitHubReportIssueLink {
