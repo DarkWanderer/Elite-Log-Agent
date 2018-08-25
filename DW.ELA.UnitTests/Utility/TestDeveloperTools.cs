@@ -21,10 +21,7 @@ namespace DW.ELA.UnitTests.Utility
         private static IEnumerable<LogEvent> GetLocalLogEvents()
         {
             var logEventPlayer = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 30);
-            var events = new ConcurrentStack<LogEvent>();
-            using (logEventPlayer.Subscribe(e => events.Push(e)))
-                logEventPlayer.Play();
-            return events;
+            return logEventPlayer.Events.ToList();
         }
 
         /// <summary>
@@ -55,7 +52,6 @@ namespace DW.ELA.UnitTests.Utility
                 .Where(e => e.GetType() == typeof(LogEvent))
                 .GroupBy(e => e.Event)
                 .Select(g => GenerateCsharpDescription(g.ToList()))
-                .Select(Serialize.ToJson)
                 .ToList();
         }
 

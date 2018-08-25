@@ -84,11 +84,9 @@ namespace EliteLogAgent.Settings
             {
                 autodetectCmdrNameButton.Enabled = false;
                 var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
-                var eventFilter = new CommanderNameFilter();
-                using (logEventSource.Subscribe(eventFilter))
-                    logEventSource.Play();
-                cmdrNameTextBox.Text = eventFilter.CmdrName ?? cmdrNameTextBox.Text;
-                Logger.Info("Detected commander name as {0}", eventFilter.CmdrName);
+                var cmdrEvent = logEventSource.Events.OfType<Commander>().FirstOrDefault();
+                cmdrNameTextBox.Text = cmdrEvent?.Name ?? cmdrNameTextBox.Text;
+                Logger.Info("Detected commander name as {0}", cmdrEvent?.Name);
             }
             catch (Exception ex)
             {
@@ -98,19 +96,6 @@ namespace EliteLogAgent.Settings
             finally
             {
                 autodetectCmdrNameButton.Enabled = true;
-            }
-        }
-
-        private class CommanderNameFilter : IObserver<LogEvent>
-        {
-            public string CmdrName { get; private set; }
-
-            public void OnCompleted() { }
-            public void OnError(Exception error) { }
-            public void OnNext(LogEvent @event)
-            {
-                if (@event is Commander c)
-                    CmdrName = c.Name;
             }
         }
 

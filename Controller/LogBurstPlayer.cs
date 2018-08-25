@@ -4,6 +4,7 @@ using DW.ELA.Utility.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Utility.Observable;
@@ -29,20 +30,34 @@ namespace Controller
             this.filesNumber = filesNumber;
         }
 
+        public IEnumerable<LogEvent> Events
+        {
+            get
+            {
+                var reader = new LogReader();
+
+                var files = LogEnumerator.GetLogFiles(LogDirectory)
+                    .Take(filesNumber)
+                    .OrderBy(x => x) // from oldest to freshest
+                    .ToList();
+
+                // Read journal events
+                var events = files.SelectMany(f => reader.ReadEventsFromJournal(f));
+                foreach (var @event in events)
+                    yield return @event;
+
+                // Read Market.json, Outfitting.json etc.
+                files = LogEnumerator.GetJsonEventFiles(LogDirectory).ToList();
+                events = files.Select(f => reader.ReadFileEvent(f));
+                foreach (var @event in events)
+                    yield return @event;
+            }
+        }
+
         public void Play()
         {
-            var reader = new LogReader();
-
-            var files = LogEnumerator.GetLogFiles(LogDirectory)
-                .Take(filesNumber)
-                .OrderBy(x => x) // from oldest to freshest
-                .ToList();
-
-            var events = files.SelectMany(f => reader.ReadEventsFromJournal(f));
-
-            foreach (var @event in events)
+            foreach (var @event in Events)
                 OnNext(@event);
-
             OnCompleted();
         }
     }
