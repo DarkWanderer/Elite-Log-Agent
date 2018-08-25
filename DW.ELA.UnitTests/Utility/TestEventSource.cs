@@ -28,14 +28,10 @@ namespace DW.ELA.UnitTests
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var textReader = new StreamReader(stream))
-            using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true })
             {
-                var serializer = new JsonSerializer();
-                while (jsonReader.Read())
-                {
-                    var @object = (JObject)serializer.Deserialize(jsonReader);
-                    yield return LogEventConverter.Convert(@object);
-                }
+                var reader = new LogReader();
+                foreach (var @event in reader.ReadEventsFromStream(textReader))
+                    yield return @event;
             }
         }
     }

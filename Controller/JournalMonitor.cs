@@ -1,29 +1,27 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.IO;
-using Utility.Observable;
 using DW.ELA.Interfaces;
 using NLog;
 using System.Linq;
 using System.Timers;
 using System.Threading.Tasks;
-using DW.ELA.LogModel;
+using Utility.Observable;
 
 namespace Controller
 {
     /// <summary>
-    /// This class runs in background to monitor and notify consumers (observers) of new log lines
+    /// This class runs in background to monitor and notify consumers (observers) of new log events
     /// </summary>
-    public class JournalMonitor : AbstractObservable<LogEvent>, ILogRealTimeDataSource
+    public class JournalMonitor : LogReader, ILogRealTimeDataSource
     {
         private readonly FileSystemWatcher fileWatcher;
         private string CurrentFile;
         private readonly string LogDirectory;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private long filePosition;
-        private object @lock = new object();
+        private readonly object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
+        private readonly BasicObservable<LogEvent> basicObservable = new BasicObservable<LogEvent>();
 
         /// <summary>
         /// 
@@ -35,8 +33,8 @@ namespace Controller
             LogDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(LogDirectory);
 
-            fileWatcher.Changed += FileWatcher_Changed;
-            fileWatcher.Created += FileWatcher_Created;
+            fileWatcher.Changed += FileWatcher_Event;
+            fileWatcher.Created += FileWatcher_Event;
             fileWatcher.NotifyFilter = NotifyFilters.CreationTime |
                                        NotifyFilters.FileName |
                                        NotifyFilters.LastWrite |
@@ -44,53 +42,39 @@ namespace Controller
 
             logFlushTimer.AutoReset = true;
             logFlushTimer.Interval = checkInterval; // sometimes the filesystem event does not trigger
-            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => UpdateLog(false));
+            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => SendEventsFromJournal(false));
             logFlushTimer.Enabled = true;
 
             CurrentFile = LogEnumerator.GetLogFiles(LogDirectory).First();
             filePosition = new FileInfo(CurrentFile).Length;
-            UpdateLog(false);
+            SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
             logger.Info("Started monitoring on folder {0}", LogDirectory);
         }
 
-        private void FileWatcher_Created(object sender, FileSystemEventArgs e)
+        private void FileWatcher_Event(object sender, FileSystemEventArgs e)
         {
             if (Path.GetExtension(e.FullPath) == ".log")
-                UpdateLog(checkOtherFiles: true);
+                SendEventsFromJournal(checkOtherFiles: e.FullPath != CurrentFile);
             else if (Path.GetFileName(e.FullPath) == "Outfitting.json" || Path.GetFileName(e.FullPath) == "Market.json")
-                UpdateJson(e.FullPath);
+                SendEventFromFile(e.FullPath);
         }
 
-        private void FileWatcher_Changed(object sender, FileSystemEventArgs e)
+        private void SendEventFromFile(string fullPath)
         {
-            if (Path.GetExtension(e.FullPath) == ".log")
-                UpdateLog(checkOtherFiles: e.FullPath != CurrentFile);
-            else if (Path.GetExtension(e.FullPath) == ".json")
-                UpdateJson(e.FullPath);
-        }
-
-        private void UpdateJson(string file)
-        {
-            if (!file.Contains("Market") && !file.Contains("Outfitting") && !file.Contains("Shipyard"))
-                return;
-            using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (var textReader = new StreamReader(fileReader))
-            using (var jsonReader = new JsonTextReader(textReader))
+            try
             {
-                var serializer = new JsonSerializer();
-                while (jsonReader.Read())
-                {
-                    var record = serializer.Deserialize(jsonReader);
-                    // Sometimes serializer gives out the json as string instead of JObject
-                    var @object = record as JObject ?? JObject.Parse(record as string);
-                    OnNext(LogEventConverter.Convert(@object));
-                    logger.Debug("Received event: {0}", @object.ToString());
-                }
+                var @event = ReadFileEvent(fullPath);
+                if (@event != null)
+                    basicObservable.OnNext(@event);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Error while reading event file {0}", fullPath);
             }
         }
 
-        private void UpdateLog(bool checkOtherFiles)
+        private void SendEventsFromJournal(bool checkOtherFiles)
         {
             lock (@lock)
                 try
@@ -116,29 +100,16 @@ namespace Controller
                 }
         }
 
-        /// <summary>
-        /// Reads the given Journal file from specified position and generates the events
-        /// </summary>
-        /// <param name="file">Journal file</param>
-        /// <param name="filePosition">starting position</param>
-        /// <returns></returns>
         private long ReadFileFromPosition(string file, long filePosition)
         {
             using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                fileReader.Position = filePosition;
                 using (var textReader = new StreamReader(fileReader))
-                using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true })
                 {
-                    var serializer = new JsonSerializer();
-                    while (jsonReader.Read())
-                    {
-                        var record = serializer.Deserialize(jsonReader);
-                        // Sometimes serializer gives out the json as string instead of JObject
-                        var @object = record as JObject ?? JObject.Parse(record as string);
-                        OnNext(LogEventConverter.Convert(@object));
-                        logger.Debug("Received event: {0}", @object.ToString());
-                    }
+                    fileReader.Position = filePosition;
+                    var events = ReadEventsFromStream(textReader);
+                    foreach (var @event in events)
+                        basicObservable.OnNext(@event);
                     return fileReader.Position;
                 }
             }
@@ -154,14 +125,12 @@ namespace Controller
                 if (disposing)
                 {
                     fileWatcher.EnableRaisingEvents = false;
-                    fileWatcher.Changed -= FileWatcher_Changed;
-                    fileWatcher.Created -= FileWatcher_Created;
+                    fileWatcher.Changed -= FileWatcher_Event;
+                    fileWatcher.Created -= FileWatcher_Event;
                     fileWatcher.Dispose();
                     logFlushTimer.Dispose();
+                    basicObservable.OnCompleted();
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
 
                 disposedValue = true;
             }
@@ -182,5 +151,7 @@ namespace Controller
             // GC.SuppressFinalize(this);
         }
         #endregion
+
+        public IDisposable Subscribe(IObserver<LogEvent> observer) => basicObservable.Subscribe(observer);
     }
 }

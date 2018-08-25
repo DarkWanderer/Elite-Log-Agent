@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
+using DW.ELA.Utility.Json;
 
 namespace DW.ELA.UnitTests
 {
@@ -33,10 +34,7 @@ namespace DW.ELA.UnitTests
             if (e.GetType() == typeof(LogEvent))
                 Assert.Fail("This test only supports typed events");
 
-            var serialized = JObject.FromObject(e, new JsonSerializer {
-                NullValueHandling = NullValueHandling.Ignore,
-                DefaultValueHandling = DefaultValueHandling.Populate
-            });
+            var serialized = JObject.FromObject(e,  Converter.Serializer);
 
             if (e is Scan)
                 e.Raw.Remove("Parents"); // TODO: find a way to serialize that structure

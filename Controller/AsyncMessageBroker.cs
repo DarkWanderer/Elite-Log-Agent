@@ -10,11 +10,11 @@ namespace Controller
     /// <summary>
     /// Forwards events from one IObservables to multiple IObservers in parallel fashion
     /// </summary>
-    public class AsyncMessageBroker : AbstractObservable<LogEvent>, IMessageBroker, IObserver<LogEvent>, IObservable<LogEvent>
+    public class AsyncMessageBroker : BasicObservable<LogEvent>, IMessageBroker, IObserver<LogEvent>, IObservable<LogEvent>
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
-        protected override void OnCompleted()
+        public override void OnCompleted()
         {
             try
             {
@@ -27,7 +27,7 @@ namespace Controller
             }
         }
 
-        protected override void OnError(Exception exception)
+        public override void OnError(Exception exception)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Controller
             }
         }
 
-        protected override void OnNext(LogEvent next)
+        public override void OnNext(LogEvent next)
         {
             try
             {

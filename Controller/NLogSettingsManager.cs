@@ -62,7 +62,7 @@ namespace Controller
                 ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{#####}.log"),
                 ArchiveNumbering = ArchiveNumberingMode.DateAndSequence,
                 ArchiveEvery = FileArchivePeriod.Day,
-                MaxArchiveFiles = 30,
+                MaxArchiveFiles = 10,
                 ConcurrentWrites = true,
                 ReplaceFileContentsOnEachWrite = false,
                 Encoding = Encoding.UTF8,

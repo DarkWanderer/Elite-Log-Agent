@@ -31,24 +31,26 @@ namespace DW.ELA.UnitTests
             journalMonitor.Subscribe(events.Add);
 
             File.AppendAllText(testFile1, EventsAsJson.Skip(8).First());
-            await Task.Delay(20);
+            await Delay;
             CollectionAssert.IsNotEmpty(events);
 
             while (events.Count > 0)
                 events.TryTake(out var e);
 
             File.WriteAllText(testFile2, EventsAsJson.Skip(9).First());
-            await Task.Delay(20);
+            await Delay;
             CollectionAssert.IsNotEmpty(events);
 
             while (events.Count > 0)
                 events.TryTake(out var e);
 
-            await Task.Delay(20);
+            await Delay;
             CollectionAssert.IsEmpty(events);
         }
 
         private static IEnumerable<string> EventsAsJson => TestEventSource.LogEvents.Select(Serialize.ToJson);
+
+        private Task Delay => Task.Delay(50);
 
         private class TestDirectoryProvider : ILogDirectoryNameProvider
         {
@@ -56,7 +58,7 @@ namespace DW.ELA.UnitTests
             {
                 get
                 {
-                    var dir = Path.Combine(Path.GetTempPath(), "ELA-TEST");
+                    string dir = Path.Combine(Path.GetTempPath(), "ELA-TEST");
                     System.IO.Directory.CreateDirectory(dir);
                     return dir;
                 }

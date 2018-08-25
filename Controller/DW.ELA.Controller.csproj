@@ -65,6 +65,7 @@
     <Compile Include="LogEnumerator.cs" />
     <Compile Include="LogEventConverter.cs" />
     <Compile Include="LogEventTypeCounter.cs" />
+    <Compile Include="LogReader.cs" />
     <Compile Include="NLogSettingsManager.cs" />
     <Compile Include="PlayerStateRecorder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using NLog;
 using System;
 using System.IO;
+using DW.ELA.Utility.Json;
 
 namespace EliteLogAgent
 {
@@ -41,9 +42,7 @@ namespace EliteLogAgent
                 using (var streamWriter = new StreamWriter(fileStream))
                 using (var jsonWriter = new JsonTextWriter(streamWriter))
                 {
-                    jsonWriter.Formatting = Formatting.Indented;
-                    var serializer = new JsonSerializer();
-                    serializer.Serialize(jsonWriter, value);
+                    Converter.Serializer.Serialize(jsonWriter, value);
                 }
                 SettingsChanged?.Invoke(this, new EventArgs());
             }

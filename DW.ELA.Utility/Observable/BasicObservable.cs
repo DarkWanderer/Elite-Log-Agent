@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Utility.Observable
 {
-    public abstract class AbstractObservable<T> : IObservable<T>
+    public class BasicObservable<T> : IObservable<T>
     {
         protected readonly List<IObserver<T>> Observers = new List<IObserver<T>>();
 
@@ -22,7 +22,7 @@ namespace Utility.Observable
 
         private class Unsubscriber : IDisposable
         {
-            private List<IObserver<T>> observers;
+            private readonly List<IObserver<T>> observers;
             private readonly IObserver<T> observer;
 
             public Unsubscriber(List<IObserver<T>> observers, IObserver<T> observer)
@@ -41,19 +41,19 @@ namespace Utility.Observable
             }
         }
 
-        protected virtual void OnError(Exception exception)
+        public virtual void OnError(Exception exception)
         {
             lock (Observers)
                 Functional.ExecuteManyWithAggregateException(Observers, i => i.OnError(exception));
         }
 
-        protected virtual void OnNext(T next)
+        public virtual void OnNext(T next)
         {
             lock (Observers)
                 Functional.ExecuteManyWithAggregateException(Observers, i => i.OnNext(next));
         }
 
-        protected virtual void OnCompleted()
+        public virtual void OnCompleted()
         {
             lock (Observers)
                 Functional.ExecuteManyWithAggregateException(Observers, i => i.OnCompleted());
