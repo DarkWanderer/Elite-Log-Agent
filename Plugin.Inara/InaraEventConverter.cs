@@ -401,7 +401,7 @@ namespace DW.ELA.Plugin.Inara
             {
                 EventData = new Dictionary<string, object> {
                     { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
-                    { "opponentName", e.Interdicted },
+                    { "opponentName", e.Interdicted ?? e.Faction },
                     { "isPlayer", e.IsPlayer }
                 },
                 Timestamp = e.Timestamp
