@@ -81,7 +81,7 @@ namespace EliteLogAgent.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/DarkWanderer/Elite-Log-Agent/wiki/Changelog.
+        ///   Looks up a localized string similar to https://github.com/DarkWanderer/Elite-Log-Agent/releases.
         /// </summary>
         internal static string GitHubChangelogLink {
             get {
