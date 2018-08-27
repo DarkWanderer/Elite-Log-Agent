@@ -28,7 +28,17 @@ namespace Controller
                 while (jsonReader.Read())
                 {
                     var @object = Converter.Serializer.Deserialize<JObject>(jsonReader);
-                    yield return LogEventConverter.Convert(@object);
+                    LogEvent @event = null;
+                    try
+                    {
+                        @event = LogEventConverter.Convert(@object);
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Error(e, "Error deserializing event from journal");
+                    }
+                    if (@event != null)
+                        yield return @event;
                 }
             }
         }
