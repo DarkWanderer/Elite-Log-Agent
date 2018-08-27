@@ -28,7 +28,7 @@ namespace DW.ELA.Controller
             flushTimer.Elapsed += (o, e) => FlushQueue();
         }
 
-        public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
+        public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
 
         public abstract string PluginName { get; }
         public abstract string PluginId { get; }
