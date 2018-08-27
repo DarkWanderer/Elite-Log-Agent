@@ -19,17 +19,15 @@ Currently in beta stage
 
 ## Current Features
 
-* Inara: most of events provided by API (except CG)
-* EDSM: full journal support
-* EDDN: journal events (WIP)
+* Inara
+* EDSM
+* EDDN
 
 ## Planned features
 
-* More beautiful UI
 * "Cloud" error reporting
-* Support for [EDDN](https://github.com/EDSM-NET/EDDN/wiki) data feed
 * Support for [Canonn API v2](https://github.com/canonn-science/CAPIv2-Strapi)
-* Google sheets for Powerplay/BGS
+* Google sheets for Powerplay/BGS work
 
 ## Get latest version
 

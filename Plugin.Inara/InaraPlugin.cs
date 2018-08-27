@@ -35,6 +35,9 @@ namespace DW.ELA.Plugin.Inara
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
+        
+        // Explicitly set to 30 as Inara prefers batches of events
+        public override TimeSpan FlushInterval => TimeSpan.FromSeconds(30); 
 
         public override void ReloadSettings() => FlushQueue();
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
