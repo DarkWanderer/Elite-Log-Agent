@@ -43,7 +43,8 @@ namespace DW.ELA.Plugin.EDDN
 
                     // Market events TODO: make a pull request to EDDN for case validation
                     case Market e: return ConvertMarketEvent(e);
-                    case Outfitting e: return ConvertOutfittingEvent(e); 
+                    case Outfitting e: return ConvertOutfittingEvent(e);
+                    case Shipyard e: return ConvertShipyardEvent(e);
                 }
             }
             catch (Exception e)
@@ -51,6 +52,23 @@ namespace DW.ELA.Plugin.EDDN
                 logger.Error(e, "Error converting message");
             }
             return Enumerable.Empty<EddnEvent>();
+        }
+
+        private IEnumerable<EddnEvent> ConvertShipyardEvent(Shipyard e)
+        {
+            var @event = new ShipyardEvent
+            {
+                Header = CreateHeader(),
+                Message = new ShipyardMessage
+                {
+                    StationName = e.StationName,
+                    SystemName = e.StarSystem,
+                    MarketId = e.MarketId,
+                    Timestamp = e.Timestamp,
+                    Ships = e.Prices.Select(p => p.ShipType).ToArray()
+                }
+            };
+            yield return @event;
         }
 
         private IEnumerable<EddnEvent> ConvertOutfittingEvent(Outfitting e)
