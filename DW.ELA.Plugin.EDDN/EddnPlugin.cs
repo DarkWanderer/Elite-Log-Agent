@@ -34,7 +34,8 @@ namespace DW.ELA.Plugin.EDDN
 
         public override string PluginName => "EDDN";
         public override string PluginId => "EDDN";
-
+        // EDDN accepts events one-by-one, so no need to batch
+        public override TimeSpan FlushInterval => TimeSpan.FromSeconds(1); 
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
         public override async void FlushEvents(ICollection<EddnEvent> events)

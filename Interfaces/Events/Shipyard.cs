@@ -21,7 +21,7 @@ namespace DW.ELA.Interfaces.Events
         public bool? AllowCobraMkIv { get; set; }
 
         [JsonProperty("PriceList")]
-        public Price[] Price { get; set; }
+        public Price[] Prices { get; set; }
     }
 
     public class Price

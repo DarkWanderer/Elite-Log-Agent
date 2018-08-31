@@ -14,7 +14,6 @@ namespace DW.ELA.UnitTests
     [TestFixture]
     public class JournalMonitorTests
     {
-
         [Test]
         public async Task ShouldPickUpEvents()
         {

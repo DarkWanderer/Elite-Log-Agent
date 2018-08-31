@@ -20,6 +20,7 @@ namespace ELA.Plugin.EDSM
         private IEdsmApiFacade apiFacade;
         private readonly IEventConverter<JObject> eventConverter = new EventRawJsonExtractor();
         protected override IEventConverter<JObject> EventConverter => eventConverter;
+        public override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder) : base (settingsProvider)
         {

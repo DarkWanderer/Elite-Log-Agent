@@ -15,6 +15,8 @@ namespace Controller
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
+        private static readonly HashSet<string> skippedEvents = new HashSet<string>(new[] { "Outfitting", "Shipyard", "Market" });
+
         /// <summary>
         /// Reads the given Journal file from specified position and generates the events
         /// </summary>
@@ -28,7 +30,19 @@ namespace Controller
                 while (jsonReader.Read())
                 {
                     var @object = Converter.Serializer.Deserialize<JObject>(jsonReader);
-                    yield return LogEventConverter.Convert(@object);
+                    LogEvent @event = null;
+                    try
+                    {
+                        @event = LogEventConverter.Convert(@object);
+                        if (skippedEvents.Contains(@event.Event))
+                            continue;
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Error(e, "Error deserializing event from journal");
+                    }
+                    if (@event != null)
+                        yield return @event;
                 }
             }
         }

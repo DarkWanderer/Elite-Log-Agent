@@ -59,7 +59,6 @@
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\Functional.cs" />
     <Compile Include="Json\JObjectExtensions.cs" />
-    <Compile Include="Json\ParseStringConverter.cs" />
     <Compile Include="Logging\LoggingTimer.cs" />
     <Compile Include="Observable\BasicObservable.cs" />
     <Compile Include="Rest\IRestClient.cs" />

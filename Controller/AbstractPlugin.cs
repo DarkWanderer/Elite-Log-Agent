@@ -45,7 +45,8 @@ namespace DW.ELA.Controller
                 var events = new List<TEvent>();
                 while (EventQueue.TryDequeue(out var @event))
                     events.Add(@event);
-                FlushEvents(events);
+                if (events.Count > 0)
+                    FlushEvents(events);
             }
             catch (Exception e)
             {

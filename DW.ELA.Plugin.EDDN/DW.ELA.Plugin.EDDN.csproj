@@ -68,7 +68,8 @@
     <Compile Include="EventSchemaValidator.cs" />
     <Compile Include="IEddnApiFacade.cs" />
     <Compile Include="JournalEvent.cs" />
-    <Compile Include="Model\EddnOutfittingMessage.cs" />
+    <Compile Include="Model\OutfittingEvent.cs" />
+    <Compile Include="Model\ShipyardEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
