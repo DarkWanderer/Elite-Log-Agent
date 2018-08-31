@@ -48,7 +48,7 @@ namespace Controller
 
                 // Read Market.json, Outfitting.json etc.
                 files = LogEnumerator.GetJsonEventFiles(LogDirectory).ToList();
-                events = files.Select(f => reader.ReadFileEvent(f));
+                events = files.Select(f => reader.ReadFileEvent(f)).Where(e => e != null);
                 foreach (var @event in events)
                     yield return @event;
             }
