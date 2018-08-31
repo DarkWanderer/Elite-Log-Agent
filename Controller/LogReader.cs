@@ -15,6 +15,8 @@ namespace Controller
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
+        private static readonly HashSet<string> skippedEvents = new HashSet<string>(new[] { "Outfitting", "Shipyard", "Market" });
+
         /// <summary>
         /// Reads the given Journal file from specified position and generates the events
         /// </summary>
@@ -32,6 +34,8 @@ namespace Controller
                     try
                     {
                         @event = LogEventConverter.Convert(@object);
+                        if (skippedEvents.Contains(@event.Event))
+                            continue;
                     }
                     catch (Exception e)
                     {

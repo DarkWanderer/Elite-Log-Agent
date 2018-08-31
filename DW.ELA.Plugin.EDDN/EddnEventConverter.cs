@@ -56,6 +56,9 @@ namespace DW.ELA.Plugin.EDDN
 
         private IEnumerable<EddnEvent> ConvertShipyardEvent(Shipyard e)
         {
+            if (e.Prices == null || e.Prices.Length == 0)
+                yield break;
+
             var @event = new ShipyardEvent
             {
                 Header = CreateHeader(),

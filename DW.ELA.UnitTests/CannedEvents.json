@@ -8792,41 +8792,6 @@
   "SystemFaction": "Pilots Federation Local Branch"
 }
 {
-  "timestamp": "2018-06-10T13:08:01Z",
-  "event": "Market",
-  "MarketID": 3228841728,
-  "StationName": "Magnus Gateway",
-  "StarSystem": "EZ Aquarii"
-}
-{
-  "timestamp": "2018-06-14T20:53:56Z",
-  "event": "Market",
-  "MarketID": 3222017792,
-  "StationName": "Stevens Orbital",
-  "StarSystem": "HIP 18327"
-}
-{
-  "timestamp": "2018-06-14T21:16:30Z",
-  "event": "Market",
-  "MarketID": 128016384,
-  "StationName": "Daedalus",
-  "StarSystem": "Sol"
-}
-{
-  "timestamp": "2018-06-17T18:47:47Z",
-  "event": "Market",
-  "MarketID": 128679303,
-  "StationName": "Prospector's Rest",
-  "StarSystem": "Kuk"
-}
-{
-  "timestamp": "2018-06-30T18:11:33Z",
-  "event": "Market",
-  "MarketID": 3224542464,
-  "StationName": "Bickel Dock",
-  "StarSystem": "Mati"
-}
-{
   "timestamp": "2018-05-11T14:12:55Z",
   "event": "MarketBuy",
   "MarketID": 3224133120,
@@ -13356,41 +13321,6 @@
   "RankCombat": 4
 }
 {
-  "timestamp": "2018-07-01T06:28:17Z",
-  "event": "Outfitting",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-07-01T06:31:58Z",
-  "event": "Outfitting",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-07-01T07:42:16Z",
-  "event": "Outfitting",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-07-01T07:44:29Z",
-  "event": "Outfitting",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-07-01T07:45:41Z",
-  "event": "Outfitting",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
   "timestamp": "2018-05-20T09:26:42Z",
   "event": "Passengers",
   "Manifest": [
@@ -15035,41 +14965,6 @@
   "timestamp": "2018-07-01T08:06:31Z",
   "event": "ShipTargeted",
   "TargetLocked": false
-}
-{
-  "timestamp": "2018-06-30T18:42:34Z",
-  "event": "Shipyard",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-06-30T18:55:56Z",
-  "event": "Shipyard",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-06-30T18:56:31Z",
-  "event": "Shipyard",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-07-01T06:37:26Z",
-  "event": "Shipyard",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
-}
-{
-  "timestamp": "2018-07-01T07:39:33Z",
-  "event": "Shipyard",
-  "MarketID": 128666762,
-  "StationName": "Jameson Memorial",
-  "StarSystem": "Shinrarta Dezhra"
 }
 {
   "timestamp": "2018-01-08T17:31:50Z",
