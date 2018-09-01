@@ -34,8 +34,6 @@ namespace Controller
                     try
                     {
                         @event = LogEventConverter.Convert(@object);
-                        if (skippedEvents.Contains(@event.Event))
-                            continue;
                     }
                     catch (Exception e)
                     {
