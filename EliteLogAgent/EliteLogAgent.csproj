@@ -178,6 +178,10 @@
       <Project>{14c53350-191b-4367-bec4-7b749e7b1eeb}</Project>
       <Name>DW.ELA.Controller</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DW.ELA.Plugin.Canonn\DW.ELA.Plugin.Canonn.csproj">
+      <Project>{b79faf85-e844-4d8e-85fc-a0b727e0d296}</Project>
+      <Name>DW.ELA.Plugin.Canonn</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DW.ELA.Plugin.EDDN\DW.ELA.Plugin.EDDN.csproj">
       <Project>{a9e8be2a-1256-4933-ac2c-c2ce7ab26900}</Project>
       <Name>DW.ELA.Plugin.EDDN</Name>
