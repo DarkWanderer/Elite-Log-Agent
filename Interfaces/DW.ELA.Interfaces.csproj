@@ -65,6 +65,7 @@
     <Compile Include="Events\Market.cs" />
     <Compile Include="Events\MaterialCollected.cs" />
     <Compile Include="Events\Materials.cs" />
+    <Compile Include="Events\MaterialTrade.cs" />
     <Compile Include="Events\MissionAbandoned.cs" />
     <Compile Include="Events\MissionAccepted.cs" />
     <Compile Include="Events\MissionCompleted.cs" />

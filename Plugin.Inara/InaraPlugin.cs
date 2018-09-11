@@ -68,7 +68,7 @@ namespace DW.ELA.Plugin.Inara
 
         private static readonly IReadOnlyDictionary<string, string[]> supersedesEvents = new Dictionary<string, string[]>
         {
-            { "setCommanderInventoryMaterials", new[]{"addCommanderInventoryMaterialsItem" } }
+            { "setCommanderInventoryMaterials", new[]{"addCommanderInventoryMaterialsItem", "delCommanderInventoryMaterialsItem" } }
         };
 
         private static IEnumerable<ApiEvent> Compact(IEnumerable<ApiEvent> events)
