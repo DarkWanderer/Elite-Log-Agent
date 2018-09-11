@@ -128,8 +128,6 @@ namespace DW.ELA.Utility
             [JsonProperty("version")]
             public string SoftwareVersion { get; set; }
 
-            [JsonProperty("guid")]
-            public string Guid { get; set; }
         }
     }
 }
