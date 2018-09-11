@@ -299,6 +299,7 @@ namespace DW.ELA.Plugin.Inara
                     {"missionName", e.Name },
                     {"missionGameID", e.MissionId },
                     {"starsystemNameOrigin", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    {"stationNameOrigin", playerStateRecorder.GetPlayerStation(e.Timestamp) },
                     {"minorfactionNameOrigin", e.Faction },
                     {"minorfactionNameTarget", e.TargetFaction },
                     {"influenceGain", e.Influence },
