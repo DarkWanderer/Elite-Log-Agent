@@ -35,6 +35,7 @@ namespace DW.ELA.Plugin.Inara
                     // Inventory
                     case Materials e: return ConvertEvent(e);
                     case MaterialCollected e: return ConvertEvent(e);
+                    case MaterialTrade e: return ConvertEvent(e);
                     case StoredModules e: return ConvertEvent(e);
                     case ShipyardSell e: return ConvertEvent(e);
 
@@ -71,6 +72,31 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(MaterialTrade e)
+        {
+            var @event = new ApiEvent("addCommanderInventoryMaterialsItem")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"itemName", e.Received.Material},
+                    {"itemCount", e.Received.Quantity}
+                }
+            };
+            yield return @event;
+
+            @event = new ApiEvent("delCommanderInventoryMaterialsItem")
+            {
+                Timestamp = e.Timestamp,
+                EventData = new Dictionary<string, object>()
+                {
+                    {"itemName", e.Paid.Material},
+                    {"itemCount", e.Paid.Quantity}
+                }
+            };
+            yield return @event;
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(CommunityGoal e)
