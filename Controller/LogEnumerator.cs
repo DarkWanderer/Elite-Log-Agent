@@ -14,7 +14,7 @@ namespace Controller
         {
             var savedGamesDirectoryInfo = new DirectoryInfo(directory);
             return savedGamesDirectoryInfo
-                .GetFiles("*.log", SearchOption.TopDirectoryOnly)
+                .GetFiles("Journal.*.log", SearchOption.TopDirectoryOnly)
                 .OrderByDescending(f => f.Name)
                 .Select(f => f.FullName)
                 .ToArray();
