@@ -19,7 +19,7 @@ namespace Controller
         public IReadOnlyCollection<string> EventTypes =>
             eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();
 
-        public IReadOnlyDictionary<string,int> EventCounts => eventTypeCounters;
+        public IReadOnlyDictionary<string, int> EventCounts => eventTypeCounters;
 
         public void OnNext(LogEvent value)
         {
@@ -27,7 +27,13 @@ namespace Controller
             {
                 eventTypeCounters.AddOrUpdate(value.Event, key => 1, (key, count) => count++);
             }
-            catch { }
+            catch { /* do nothing */ }
+        }
+
+        public void FromEnumerable(IEnumerable<LogEvent> events)
+        {
+            foreach (var e in events)
+                OnNext(e);
         }
     }
 }
