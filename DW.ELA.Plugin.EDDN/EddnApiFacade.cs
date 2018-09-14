@@ -29,6 +29,7 @@ namespace DW.ELA.Plugin.EDDN
                 {
                     logger.Error(e, "Error pushing event");
                 }
+            logger.Info("Pushed {0} events", events.Length);
         }
 
         private async Task PostAsync(EddnEvent e)

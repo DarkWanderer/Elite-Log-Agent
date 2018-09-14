@@ -68,7 +68,7 @@ namespace DW.ELA.Plugin.Inara.Model
 
             if (outputData.Header.EventStatus != 200)
                 throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
-
+            logger.Info("Uploaded {0} INARA events", events.Length);
             return outputData.Events;
         }
     }

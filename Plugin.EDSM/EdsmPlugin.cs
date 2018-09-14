@@ -49,6 +49,7 @@ namespace ELA.Plugin.EDSM
                 var apiEvents = events.Select(Enrich).ToArray();
                 if (apiEvents.Length > 0)
                     await apiFacade?.PostLogEvents(apiEvents);
+                logger.Info("Pushed {0} events", events.Count);
             }
             catch (Exception e)
             {
