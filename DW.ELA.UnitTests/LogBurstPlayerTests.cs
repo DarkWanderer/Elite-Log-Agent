@@ -21,8 +21,8 @@ namespace DW.ELA.UnitTests
             var events = new ConcurrentBag<LogEvent>();
             CollectionAssert.IsEmpty(events);
 
-            string testFile1 = Path.Combine(directoryProvider.Directory, "testFile1.log");
-            string testFile2 = Path.Combine(directoryProvider.Directory, "testFile2.log");
+            string testFile1 = Path.Combine(directoryProvider.Directory, "Journal.1234.log");
+            string testFile2 = Path.Combine(directoryProvider.Directory, "Journal.2345.log");
 
             File.WriteAllText(testFile1, EventsAsJson.Skip(5).First());
             File.WriteAllText(testFile2, EventsAsJson.Skip(5).First());
