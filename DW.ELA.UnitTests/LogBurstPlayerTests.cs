@@ -1,5 +1,6 @@
 ﻿using Controller;
 using DW.ELA.Interfaces;
+using DW.ELA.UnitTests.Utility;
 using DW.ELA.Utility.Json;
 using NUnit.Framework;
 using System;
@@ -41,19 +42,6 @@ namespace DW.ELA.UnitTests
         }
 
         private static IEnumerable<string> EventsAsJson => TestEventSource.LogEvents.Select(Serialize.ToJson);
-
-        private class TestDirectoryProvider : ILogDirectoryNameProvider
-        {
-            public string Directory
-            {
-                get
-                {
-                    var dir = Path.Combine(Path.GetTempPath(), "ELA-TEST1");
-                    System.IO.Directory.CreateDirectory(dir);
-                    return dir;
-                }
-            }
-        }
     }
 
 }
