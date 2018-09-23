@@ -50,5 +50,14 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("MissionID")]
         public long MissionId { get; set; }
+
+        [JsonProperty("Commodity")]
+        public string Commodity { get; set; }
+
+        [JsonProperty("Commodity_Localised")]
+        public string CommodityLocalised { get; set; }
+
+        [JsonProperty("Count")]
+        public long? Count { get; set; }
     }
 }
