@@ -79,7 +79,10 @@ namespace Controller
         {
             try
             {
-                if (shipId == null || shipType == null || shipType?.ToLower() == "testbuggy")
+                if (shipId == null || 
+                    shipType == null || 
+                    shipType.ToLower() == "testbuggy" ||
+                    shipType.Contains("Fighter"))
                     return;
 
                 ShipRecorder.RecordState(new ShipRecord { ShipID = shipId.Value, ShipType = shipType }, timestamp);
