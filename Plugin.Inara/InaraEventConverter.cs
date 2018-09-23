@@ -330,6 +330,9 @@ namespace DW.ELA.Plugin.Inara
 
         private IEnumerable<ApiEvent> ConvertEvent(Loadout e)
         {
+            if (e.Ship == null || e.Ship.Contains("Fighter"))
+                yield break;
+
             var shipEvent = new ApiEvent("setCommanderShip")
             {
                 Timestamp = e.Timestamp,
