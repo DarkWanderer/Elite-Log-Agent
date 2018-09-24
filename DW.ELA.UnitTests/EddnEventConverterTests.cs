@@ -1,6 +1,8 @@
-﻿using DW.ELA.Interfaces;
+﻿using Controller;
+using DW.ELA.Interfaces;
 using DW.ELA.Plugin.EDDN;
 using DW.ELA.Plugin.EDDN.Model;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -10,12 +12,15 @@ namespace DW.ELA.UnitTests
     [TestFixture]
     public class EddnEventConverterTests
     {
-        private readonly EddnEventConverter eventConverter = new EddnEventConverter() { MaxAge = TimeSpan.FromDays(5000) };
-
         [Test]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {
+            var mockRecorder = new Mock<IPlayerStateHistoryRecorder>();
+            mockRecorder.Setup(r => r.GetStarPos(It.IsAny<string>())).Returns(new[] { 0.0, 1.1, 2.2 });
+            mockRecorder.Setup(r => r.GetPlayerSystem(It.IsAny<DateTime>())).Returns("SomeSystem");
+
+            var eventConverter = new EddnEventConverter(mockRecorder.Object) { MaxAge = TimeSpan.FromDays(5000) };
             var result = eventConverter.Convert(e).ToList();
             Assert.NotNull(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(EddnEvent));

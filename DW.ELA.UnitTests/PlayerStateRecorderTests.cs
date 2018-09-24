@@ -20,7 +20,7 @@ namespace DW.ELA.UnitTests
             eventConverter.GetPlayerSystem(DateTime.UtcNow);
             eventConverter.GetPlayerShipType(DateTime.UtcNow);
             eventConverter.GetPlayerShipId(DateTime.UtcNow);
-            eventConverter.GetPlayerCrewStatus(DateTime.UtcNow);
+            eventConverter.GetPlayerIsInCrew(DateTime.UtcNow);
         }
     }
 }

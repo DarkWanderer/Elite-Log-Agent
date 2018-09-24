@@ -9,6 +9,7 @@ namespace DW.ELA.Interfaces
         string GetPlayerShipType(DateTime atTime);
         string GetPlayerSystem(DateTime atTime);
         string GetPlayerStation(DateTime timestamp);
-        bool GetPlayerCrewStatus(DateTime atTime);
+        bool GetPlayerIsInCrew(DateTime atTime);
+        double[] GetStarPos(string systemName);
     }
 }

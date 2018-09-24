@@ -16,6 +16,13 @@ namespace DW.ELA.Plugin.EDDN
         public string UploaderID = "Unknown";
         public TimeSpan MaxAge = TimeSpan.FromHours(6);
 
+        private readonly IPlayerStateHistoryRecorder stateHistoryRecorder;
+
+        public EddnEventConverter(IPlayerStateHistoryRecorder stateHistoryRecorder)
+        {
+            this.stateHistoryRecorder = stateHistoryRecorder;
+        }
+
         private IDictionary<string, string> CreateHeader()
         {
             return new Dictionary<string, string>
@@ -35,9 +42,9 @@ namespace DW.ELA.Plugin.EDDN
                 switch (@event)
                 {
                     // Travel events TODO: fix other 2 types
-                    //case Docked d:
+                    case Docked d:
                     case FsdJump f:
-                    //case Scan s:
+                    case Scan s:
                     case Location l:
                         return MakeJournalEvent(@event);
 
@@ -139,7 +146,32 @@ namespace DW.ELA.Plugin.EDDN
             };
         }
 
-        private IEnumerable<EddnEvent> MakeJournalEvent(LogEvent e) { yield return new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) }; }
+        private IEnumerable<EddnEvent> MakeJournalEvent(LogEvent e)
+        {
+            var @event = new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) };
+
+            if (@event.Message["StarSystem"] == null)
+            {
+                var system = stateHistoryRecorder.GetPlayerSystem(e.Timestamp);
+                if (system != null)
+                    @event.Message.Add("StarSystem", system);
+                else // if we can't determine player's location, abort
+                {
+                    logger.Error("Unable to determine player location");
+                    yield break;
+                }
+            }
+
+            if (@event.Message["StarPos"] == null)
+            {
+                var starSystem = @event.Message["StarSystem"].ToObject<string>();
+                var starPos = stateHistoryRecorder.GetStarPos(starSystem);
+                if (starPos == null)
+                    yield break; // we don't know what the system coordinates are
+                @event.Message.Add("StarPos", new JArray(starPos));
+            }
+            yield return @event;
+        }
 
         private JObject Strip(JObject raw)
         {

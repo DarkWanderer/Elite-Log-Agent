@@ -5,6 +5,8 @@ using System.Linq;
 using MoreLinq;
 using NLog;
 using DW.ELA.Interfaces.Events;
+using System.Collections.Concurrent;
+using DW.ELA.Utility.Extensions;
 
 namespace Controller
 {
@@ -16,12 +18,14 @@ namespace Controller
         private readonly StateRecorder<string> StarSystemRecorder = new StateRecorder<string>();
         private readonly StateRecorder<string> StationRecorder = new StateRecorder<string>();
         private readonly StateRecorder<bool> CrewRecorder = new StateRecorder<bool>();
+        private readonly ConcurrentDictionary<string, double[]> SystemCoordinates = new ConcurrentDictionary<string, double[]>();
 
         public string GetPlayerSystem(DateTime atTime) => StarSystemRecorder.GetStateAt(atTime);
         public string GetPlayerStation(DateTime atTime) => StationRecorder.GetStateAt(atTime);
         public string GetPlayerShipType(DateTime atTime) => ShipRecorder.GetStateAt(atTime)?.ShipType;
         public long? GetPlayerShipId(DateTime atTime) => ShipRecorder.GetStateAt(atTime)?.ShipID;
-        public bool GetPlayerCrewStatus(DateTime atTime) => CrewRecorder.GetStateAt(atTime);
+        public bool GetPlayerIsInCrew(DateTime atTime) => CrewRecorder.GetStateAt(atTime);
+        public double[] GetStarPos(string systemName) => SystemCoordinates.GetValueOrDefault(systemName);
 
         public void OnCompleted() { }
         public void OnError(Exception error) { }
@@ -62,8 +66,8 @@ namespace Controller
         private void Process(LoadGame e) => ProcessShipIDEvent(e.ShipId, e.Ship, e.Timestamp);
         private void Process(ShipyardSwap e) => ProcessShipIDEvent(e.ShipId, e.ShipType, e.Timestamp);
 
-        private void Process(Location e) => StarSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
-        private void Process(FsdJump e) => StarSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
+        private void Process(Location e) => ProcessLocation(e.StarSystem, e.StarPos, e.Timestamp);
+        private void Process(FsdJump e) => ProcessLocation(e.StarSystem, e.StarPos, e.Timestamp);
         private void Process(Docked e)
         {
             StarSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
@@ -75,12 +79,21 @@ namespace Controller
         private void Process(QuitACrew e) => CrewRecorder.RecordState(false, e.Timestamp);
         private void Process(JoinACrew e) => CrewRecorder.RecordState(true, e.Timestamp);
 
+        private void ProcessLocation(string starSystem, double[] starPos, DateTime timestamp)
+        {
+            if (SystemCoordinates.TryAdd(starSystem, starPos))
+                logger.Trace("Recorded location for {0}", starSystem);
+            else
+                logger.Trace("Location for {0} already recorded", starSystem);
+            StarSystemRecorder.RecordState(starSystem, timestamp);
+        }
+
         private void ProcessShipIDEvent(long? shipId, string shipType, DateTime timestamp)
         {
             try
             {
-                if (shipId == null || 
-                    shipType == null || 
+                if (shipId == null ||
+                    shipType == null ||
                     shipType.ToLower() == "testbuggy" ||
                     shipType.Contains("Fighter"))
                     return;
