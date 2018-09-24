@@ -122,6 +122,10 @@ namespace DW.ELA.Plugin.Inara
                         {"completionBonus", goal.TopTier?.Bonus},
                     }
                 };
+
+                if (goal.PlayerContribution == 0)
+                    continue; // INARA rejects setCommanderCommunityGoalProgress with 0 contribution
+
                 yield return new ApiEvent("setCommanderCommunityGoalProgress")
                 {
                     Timestamp = e.Timestamp,
