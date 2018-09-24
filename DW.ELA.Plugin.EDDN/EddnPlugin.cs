@@ -29,7 +29,7 @@ namespace DW.ELA.Plugin.EDDN
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
-            eventConverter = new EddnEventConverter() { UploaderID = settingsProvider.Settings.CommanderName };
+            eventConverter = new EddnEventConverter(playerStateRecorder) { UploaderID = settingsProvider.Settings.CommanderName };
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
