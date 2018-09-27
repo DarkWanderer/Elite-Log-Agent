@@ -7,8 +7,6 @@ Allows updating external sites (and possibly do other actions) in near-real-time
 
 **Does not require Elite login/password - only the target sites API keys**
 
-Currently in beta stage
-
 ## Quickstart
 
 * Download [latest version][clickonce]
