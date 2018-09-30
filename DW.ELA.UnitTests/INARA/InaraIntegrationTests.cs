@@ -26,12 +26,22 @@ namespace DW.ELA.UnitTests.INARA
             var inaraConverter = new InaraEventConverter(stateRecorder);
             var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.ApiKey, TestCredentials.UserName);
 
+            // Populate the state recorder to avoid missing ships/starsystems data
+            foreach (var ev in logEventSource.Events)
+                stateRecorder.OnNext(ev); 
+
             var convertedEvents = logEventSource
                 .Events
                 .SelectMany(inaraConverter.Convert)
                 .ToArray();
 
             var results = await inaraApiFacade.ApiCall(convertedEvents);
+            results = results
+                .Where(e => e.EventStatus != 200)
+                .Where(e => e.EventStatusText != "There is a newer inventory state recorded already.")
+                .ToList();
+
+            CollectionAssert.IsEmpty(results);
         }
     }
 }
