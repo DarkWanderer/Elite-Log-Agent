@@ -45,6 +45,8 @@ namespace DW.ELA.Plugin.Inara
 
                     // Ranks/reputation
                     case EngineerProgress e: return ConvertEvent(e);
+                    case Rank e: return ConvertEvent(e);
+                    case Progress e: return ConvertEvent(e);
                     case Reputation e: return ConvertEvent(e);
 
                     // Combat
@@ -72,6 +74,60 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(Progress e)
+        {
+            var ranks = new Dictionary<string, float>()
+            {
+                { nameof(e.Combat), System.Convert.ToSingle(e.Combat) / 100.0f },
+                { nameof(e.Cqc), System.Convert.ToSingle(e.Cqc) / 100.0f },
+                { nameof(e.Empire), System.Convert.ToSingle(e.Empire) / 100.0f },
+                { nameof(e.Explore), System.Convert.ToSingle(e.Explore) / 100.0f },
+                { nameof(e.Federation), System.Convert.ToSingle(e.Federation) / 100.0f },
+                { nameof(e.Trade), System.Convert.ToSingle(e.Trade) / 100.0f }
+            };
+
+            foreach (var rank in ranks)
+            {
+                var @event = new ApiEvent("setCommanderRankPilot")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        { "rankName", rank.Key.ToLower() },
+                        { "rankProgress", rank.Value }
+                    }
+                };
+                yield return @event;
+            }
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(Rank e)
+        {
+            var ranks = new Dictionary<string, int>()
+            {
+                { nameof(e.Combat), e.Combat },
+                { nameof(e.Cqc), e.Cqc },
+                { nameof(e.Empire), e.Empire },
+                { nameof(e.Explore), e.Explore },
+                { nameof(e.Federation), e.Federation },
+                { nameof(e.Trade), e.Trade }
+            };
+
+            foreach (var rank in ranks)
+            {
+                var @event = new ApiEvent("setCommanderRankPilot")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        { "rankName", rank.Key.ToLower() },
+                        { "rankValue", rank.Value }
+                    }
+                };
+                yield return @event;
+            }
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(MaterialTrade e)
