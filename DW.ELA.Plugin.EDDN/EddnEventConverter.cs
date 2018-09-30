@@ -14,7 +14,7 @@ namespace DW.ELA.Plugin.EDDN
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         public string UploaderID = "Unknown";
-        public TimeSpan MaxAge = TimeSpan.FromHours(6);
+        public TimeSpan MaxAge = TimeSpan.FromMinutes(10); // TODO: should extract to separate class
 
         private readonly IPlayerStateHistoryRecorder stateHistoryRecorder;
 
