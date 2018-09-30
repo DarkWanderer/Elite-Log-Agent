@@ -28,5 +28,10 @@ namespace DW.ELA.Interfaces
         /// Callback to signal settings have changed and it's time to update
         /// </summary>
         void OnSettingsChanged(object sender, EventArgs e);
+
+        /// <summary>
+        /// Explicitly request to flush queue - on shutdown or data import
+        /// </summary>
+        void FlushQueue();
     }
 }

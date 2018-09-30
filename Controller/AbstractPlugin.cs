@@ -38,7 +38,7 @@ namespace DW.ELA.Controller
         public abstract void FlushEvents(ICollection<TEvent> events);
         public abstract void ReloadSettings();
 
-        protected void FlushQueue()
+        public void FlushQueue()
         {
             try
             {

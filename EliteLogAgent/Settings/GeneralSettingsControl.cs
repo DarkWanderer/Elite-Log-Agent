@@ -9,12 +9,14 @@ using NLog;
 using System.Linq;
 using EliteLogAgent.Autorun;
 using DW.ELA.Interfaces.Events;
+using System.Collections.Generic;
 
 namespace EliteLogAgent.Settings
 {
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
         private static ILogger Logger = LogManager.GetCurrentClassLogger();
+        private ProgressBar progressBarUploadLatest;
         private const int uploadFileCount = 5;
 
         public GeneralSettingsControl()
@@ -40,13 +42,21 @@ namespace EliteLogAgent.Settings
         }
 
         public IMessageBroker MessageBroker { get; internal set; }
+        public IReadOnlyCollection<IPlugin> Plugins { get; internal set; }
 
         private async void UploadLatestDataButton_Click(object sender, EventArgs e)
         {
             try
             {
                 uploadLatestDataButton.Enabled = false;
+                progressBarUploadLatest.Maximum = Plugins.Count + 1;
                 await Task.Factory.StartNew(UploadLatestData);
+                progressBarUploadLatest.Value += 1;
+                foreach (var plugin in Plugins)
+                {
+                    plugin.FlushQueue();
+                    progressBarUploadLatest.Value += 1;
+                }
             }
             catch (Exception ex)
             {
@@ -117,6 +127,7 @@ namespace EliteLogAgent.Settings
             this.reportErrorsCheckbox = new System.Windows.Forms.CheckBox();
             this.logLevelLabel = new System.Windows.Forms.Label();
             this.logLevelComboBox = new System.Windows.Forms.ComboBox();
+            this.progressBarUploadLatest = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // cmdrNameLabel
@@ -124,7 +135,7 @@ namespace EliteLogAgent.Settings
             this.cmdrNameLabel.AutoSize = true;
             this.cmdrNameLabel.Location = new System.Drawing.Point(3, 6);
             this.cmdrNameLabel.Name = "cmdrNameLabel";
-            this.cmdrNameLabel.Size = new System.Drawing.Size(73, 13);
+            this.cmdrNameLabel.Size = new System.Drawing.Size(93, 17);
             this.cmdrNameLabel.TabIndex = 5;
             this.cmdrNameLabel.Text = "CMDR Name:";
             // 
@@ -132,9 +143,9 @@ namespace EliteLogAgent.Settings
             // 
             this.cmdrNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdrNameTextBox.Location = new System.Drawing.Point(82, 3);
+            this.cmdrNameTextBox.Location = new System.Drawing.Point(102, 3);
             this.cmdrNameTextBox.Name = "cmdrNameTextBox";
-            this.cmdrNameTextBox.Size = new System.Drawing.Size(332, 20);
+            this.cmdrNameTextBox.Size = new System.Drawing.Size(312, 22);
             this.cmdrNameTextBox.TabIndex = 4;
             this.cmdrNameTextBox.Text = "Commander Name";
             this.cmdrNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -167,9 +178,9 @@ namespace EliteLogAgent.Settings
             // checkboxAutostartApplication
             // 
             this.checkboxAutostartApplication.AutoSize = true;
-            this.checkboxAutostartApplication.Location = new System.Drawing.Point(6, 87);
+            this.checkboxAutostartApplication.Location = new System.Drawing.Point(3, 104);
             this.checkboxAutostartApplication.Name = "checkboxAutostartApplication";
-            this.checkboxAutostartApplication.Size = new System.Drawing.Size(141, 17);
+            this.checkboxAutostartApplication.Size = new System.Drawing.Size(186, 21);
             this.checkboxAutostartApplication.TabIndex = 7;
             this.checkboxAutostartApplication.Text = "Autorun agent on sign-in";
             this.checkboxAutostartApplication.UseVisualStyleBackColor = true;
@@ -178,9 +189,9 @@ namespace EliteLogAgent.Settings
             // reportErrorsCheckbox
             // 
             this.reportErrorsCheckbox.AutoSize = true;
-            this.reportErrorsCheckbox.Location = new System.Drawing.Point(6, 110);
+            this.reportErrorsCheckbox.Location = new System.Drawing.Point(3, 125);
             this.reportErrorsCheckbox.Name = "reportErrorsCheckbox";
-            this.reportErrorsCheckbox.Size = new System.Drawing.Size(166, 17);
+            this.reportErrorsCheckbox.Size = new System.Drawing.Size(220, 21);
             this.reportErrorsCheckbox.TabIndex = 8;
             this.reportErrorsCheckbox.Text = "Report errors to Cloud service";
             this.reportErrorsCheckbox.UseVisualStyleBackColor = true;
@@ -189,9 +200,9 @@ namespace EliteLogAgent.Settings
             // logLevelLabel
             // 
             this.logLevelLabel.AutoSize = true;
-            this.logLevelLabel.Location = new System.Drawing.Point(3, 136);
+            this.logLevelLabel.Location = new System.Drawing.Point(3, 155);
             this.logLevelLabel.Name = "logLevelLabel";
-            this.logLevelLabel.Size = new System.Drawing.Size(50, 13);
+            this.logLevelLabel.Size = new System.Drawing.Size(65, 17);
             this.logLevelLabel.TabIndex = 9;
             this.logLevelLabel.Text = "Log level";
             // 
@@ -199,15 +210,26 @@ namespace EliteLogAgent.Settings
             // 
             this.logLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.logLevelComboBox.FormattingEnabled = true;
-            this.logLevelComboBox.Location = new System.Drawing.Point(59, 133);
+            this.logLevelComboBox.Location = new System.Drawing.Point(74, 152);
             this.logLevelComboBox.Name = "logLevelComboBox";
-            this.logLevelComboBox.Size = new System.Drawing.Size(113, 21);
+            this.logLevelComboBox.Size = new System.Drawing.Size(149, 24);
             this.logLevelComboBox.TabIndex = 10;
             this.logLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.LogLevelComboBox_SelectedIndexChanged);
+            // 
+            // progressBarUploadLatest
+            // 
+            this.progressBarUploadLatest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBarUploadLatest.Location = new System.Drawing.Point(3, 85);
+            this.progressBarUploadLatest.Name = "progressBarUploadLatest";
+            this.progressBarUploadLatest.Size = new System.Drawing.Size(411, 13);
+            this.progressBarUploadLatest.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBarUploadLatest.TabIndex = 11;
             // 
             // GeneralSettingsControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.Controls.Add(this.progressBarUploadLatest);
             this.Controls.Add(this.logLevelComboBox);
             this.Controls.Add(this.logLevelLabel);
             this.Controls.Add(this.reportErrorsCheckbox);

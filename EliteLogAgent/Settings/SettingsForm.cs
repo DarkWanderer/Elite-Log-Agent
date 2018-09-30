@@ -33,7 +33,12 @@ namespace EliteLogAgent
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             currentSettings = Provider.Settings.Clone();
-            SettingsControls.Add("General", new GeneralSettingsControl() { MessageBroker = MessageBroker, GlobalSettings = currentSettings, Dock = DockStyle.Fill });
+            SettingsControls.Add("General", new GeneralSettingsControl() {
+                MessageBroker = MessageBroker,
+                GlobalSettings = currentSettings,
+                Plugins = Plugins,
+                Dock = DockStyle.Fill
+            });
             settingsCategoriesListView.Items.Add("General");
 
             foreach (var plugin in Plugins)
