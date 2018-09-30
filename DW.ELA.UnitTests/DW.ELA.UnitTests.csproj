@@ -90,6 +90,8 @@
     <Compile Include="EventSchemaValidatorTests.cs" />
     <Compile Include="FileSettingsStorageTests.cs" />
     <Compile Include="InaraEventConverterTests.cs" />
+    <Compile Include="INARA\InaraIntegrationTests.cs" />
+    <Compile Include="INARA\TestCredentials.cs" />
     <Compile Include="JournalMonitorTests.cs" />
     <Compile Include="LogBurstPlayerTests.cs" />
     <Compile Include="LogEnumeratorTests.cs" />
