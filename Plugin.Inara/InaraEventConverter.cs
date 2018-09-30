@@ -205,7 +205,7 @@ namespace DW.ELA.Plugin.Inara
                 EventData = new Dictionary<string, object>()
                 {
                     {"majorfactionName", nameof(e.Empire)},
-                    {"majorfactionReputation", e.Empire },
+                    {"majorfactionReputation", System.Convert.ToSingle(e.Empire) / 100.0f },
                 }
             };
             yield return new ApiEvent("setCommanderReputationMajorFaction")
@@ -214,7 +214,7 @@ namespace DW.ELA.Plugin.Inara
                 EventData = new Dictionary<string, object>()
                 {
                     {"majorfactionName", nameof(e.Alliance)},
-                    {"majorfactionReputation", e.Alliance },
+                    {"majorfactionReputation", System.Convert.ToSingle(e.Alliance) / 100.0f },
                 }
             };
             yield return new ApiEvent("setCommanderReputationMajorFaction")
@@ -223,7 +223,7 @@ namespace DW.ELA.Plugin.Inara
                 EventData = new Dictionary<string, object>()
                 {
                     {"majorfactionName", nameof(e.Federation)},
-                    {"majorfactionReputation", e.Federation },
+                    {"majorfactionReputation", System.Convert.ToSingle(e.Federation) / 100.0f },
                 }
             };
         }
