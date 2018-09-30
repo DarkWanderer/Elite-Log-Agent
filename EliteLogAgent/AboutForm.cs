@@ -25,5 +25,10 @@ namespace EliteLogAgent
             logoBox.Image = Resources.EliteIcon.ToBitmap();
             titleLabel.Text = AppInfo.Name;
         }
+
+        private void About_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

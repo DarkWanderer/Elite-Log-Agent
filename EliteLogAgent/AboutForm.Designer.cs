@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
             this.logoBox = new System.Windows.Forms.PictureBox();
             this.titleLabel = new System.Windows.Forms.Label();
             this.aboutLabel = new System.Windows.Forms.Label();
@@ -36,9 +37,10 @@
             // 
             // logoBox
             // 
-            this.logoBox.Location = new System.Drawing.Point(12, 12);
+            this.logoBox.Location = new System.Drawing.Point(16, 15);
+            this.logoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logoBox.Name = "logoBox";
-            this.logoBox.Size = new System.Drawing.Size(48, 48);
+            this.logoBox.Size = new System.Drawing.Size(64, 59);
             this.logoBox.TabIndex = 0;
             this.logoBox.TabStop = false;
             // 
@@ -46,33 +48,38 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(65, 12);
+            this.titleLabel.Location = new System.Drawing.Point(87, 15);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(151, 24);
+            this.titleLabel.Size = new System.Drawing.Size(192, 29);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "Software Name";
             // 
             // aboutLabel
             // 
             this.aboutLabel.AutoSize = true;
-            this.aboutLabel.Location = new System.Drawing.Point(66, 36);
+            this.aboutLabel.Location = new System.Drawing.Point(88, 44);
+            this.aboutLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.aboutLabel.Name = "aboutLabel";
-            this.aboutLabel.Size = new System.Drawing.Size(252, 78);
+            this.aboutLabel.Size = new System.Drawing.Size(333, 102);
             this.aboutLabel.TabIndex = 2;
             this.aboutLabel.Text = "Elite: Dangerous log parser\r\n\r\nDeveloped by: CMDR John Kozak\r\n\r\nSpecial thanks to" +
     " CMDR Phelbore for huge amount \r\n  of advice and testing";
             // 
             // About
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 120);
+            this.ClientSize = new System.Drawing.Size(432, 148);
             this.Controls.Add(this.aboutLabel);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.logoBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "About";
-            this.Text = "AboutForm";
+            this.Text = "About";
+            this.Load += new System.EventHandler(this.About_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
