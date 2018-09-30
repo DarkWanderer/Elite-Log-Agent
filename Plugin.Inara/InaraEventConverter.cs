@@ -351,10 +351,7 @@ namespace DW.ELA.Plugin.Inara
 
         private IEnumerable<ApiEvent> ConvertEvent(MissionAccepted e)
         {
-            var @event = new ApiEvent("addCommanderMission")
-            {
-                Timestamp = e.Timestamp,
-                EventData = new Dictionary<string, object>()
+            var data = new Dictionary<string, object>()
                 {
                     {"missionName", e.Name },
                     {"missionGameID", e.MissionId },
@@ -367,8 +364,18 @@ namespace DW.ELA.Plugin.Inara
                     {"starsystemNameTarget", e.DestinationSystem },
                     {"minorfactionNameTarget", e.TargetFaction },
                     {"stationNameTarget", e.DestinationStation },
-                    {"commodityName", e.Commodity }
-                }
+                };
+
+            if (!string.IsNullOrWhiteSpace(e.Commodity))
+            {
+                data.Add("commodityName", e.Commodity);
+                data.Add("commodityCount", e.Count);
+            }
+
+            var @event = new ApiEvent("addCommanderMission")
+            {
+                Timestamp = e.Timestamp,
+                EventData = data
             };
             yield return @event;
         }

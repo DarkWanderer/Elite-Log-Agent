@@ -1,4 +1,5 @@
 ﻿using Controller;
+using DW.ELA.Interfaces.Events;
 using DW.ELA.Plugin.Inara;
 using DW.ELA.Plugin.Inara.Model;
 using NUnit.Framework;
