@@ -1,6 +1,7 @@
 ﻿using DW.ELA.Controller;
 using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Settings;
+using MoreLinq;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
@@ -46,9 +47,14 @@ namespace ELA.Plugin.EDSM
                 return;
             try
             {
-                var apiEvents = events.Select(Enrich).ToArray();
-                if (apiEvents.Length > 0)
-                    await apiFacade?.PostLogEvents(apiEvents);
+                var apiEventsBatches = events
+                    .TakeLast(2000) // Limit to last N events to avoid EDSM overload
+                    .Reverse()
+                    .Select(Enrich)
+                    .Batch(100) // EDSM API only accepts 100 events in single call
+                    .ToList();
+                foreach (var batch in apiEventsBatches)
+                    await apiFacade?.PostLogEvents(batch.ToArray());
                 logger.Info("Pushed {0} events", events.Count);
             }
             catch (Exception e)
