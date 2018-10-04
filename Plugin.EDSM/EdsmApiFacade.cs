@@ -28,6 +28,8 @@ namespace ELA.Plugin.EDSM
         {
             if (events.Length == 0)
                 return;
+            if (events.Length > 100)
+                throw new ArgumentException("EDSM cannot accept more than 100 events in single batch");
 
             var input = CreateHeader();
             input["message"] = new JArray(events).ToString();
