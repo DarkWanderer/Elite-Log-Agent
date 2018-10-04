@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Utility;
 using System.Linq;
+using NLog;
 
 namespace EliteLogAgent
 {
     public partial class SettingsForm : Form
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         // These fields have to be properties because Form designer does not allow arguments in constructor
         internal ISettingsProvider Provider { get; set; }
         internal IMessageBroker MessageBroker { get; set; }
@@ -43,12 +45,19 @@ namespace EliteLogAgent
 
             foreach (var plugin in Plugins)
             {
-                var control = plugin.GetPluginSettingsControl(currentSettings);
-                if (control == null)
-                    continue;
-                control.Dock = DockStyle.Fill;
-                control.PerformLayout();
-                SettingsControls.Add(plugin.PluginName, control);
+                try
+                {
+                    var control = plugin.GetPluginSettingsControl(currentSettings);
+                    if (control == null)
+                        continue;
+                    control.Dock = DockStyle.Fill;
+                    control.PerformLayout();
+                    SettingsControls.Add(plugin.PluginName, control);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, "Error loading plugin {0}", plugin.PluginId);
+                }
             }
 
             foreach (var category in SettingsControls.Keys.OrderBy(x => x))
