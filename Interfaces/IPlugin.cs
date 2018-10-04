@@ -4,7 +4,7 @@ using System;
 
 namespace DW.ELA.Interfaces
 {
-    public interface IPlugin : IObserver<LogEvent>
+    public interface IPlugin
     {
         string PluginName { get; }
         string PluginId { get; }
