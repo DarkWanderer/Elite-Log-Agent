@@ -9,7 +9,7 @@ using System.Timers;
 
 namespace DW.ELA.Controller
 {
-    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin, IDisposable
+    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin, IObserver<LogEvent>, IDisposable
         where TSettings : class, new()
         where TEvent : class
     {

@@ -7,6 +7,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Utility;
+using Controller;
+using DW.ELA.Utility;
+using DW.ELA.Utility.Json;
 
 namespace EliteLogAgent
 {
@@ -45,9 +48,30 @@ namespace EliteLogAgent
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("About", SystemIcons.Information.ToBitmap(), (o, e) => OpenAboutForm());
             menuStrip.Items.Add("Changelog", Resources.GitHub.ToBitmap(), (o, e) => OpenChangelog());
+            menuStrip.Items.Add("Test exception", SystemIcons.Error.ToBitmap(), (o, e) => PostException());
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Exit", SystemIcons.Error.ToBitmap(), (o, e) => Application.Exit());
             return menuStrip;
+        }
+
+        private void PostException()
+        {
+            try
+            {
+                var restClient = new ThrottlingRestClient(NLogSettingsManager.CloudErrorReportingUrl);
+                var record = new CloudApiLogTarget.ExceptionRecord()
+                {
+                    CallStack = " test at test:123",
+                    ExceptionType = "TestException",
+                    Message = "Test exception",
+                    SoftwareVersion = AppInfo.Version
+                };
+                restClient.PostAsync(Serialize.ToJson(record)).Wait();
+            }
+            catch
+            {
+                // do nothing 
+            }
         }
 
         private void OpenChangelog() => Process.Start(Resources.GitHubChangelogLink);

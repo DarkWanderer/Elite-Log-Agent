@@ -83,6 +83,7 @@
     <Compile Include="Events\StoredModules.cs" />
     <Compile Include="Events\SupercruiseEntry.cs" />
     <Compile Include="Events\Undocked.cs" />
+    <Compile Include="Events\USSDrop.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="IEventConverter.cs" />
     <Compile Include="ILogDirectoryNameProvider.cs" />
