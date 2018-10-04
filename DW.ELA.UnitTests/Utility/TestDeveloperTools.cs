@@ -15,6 +15,18 @@ namespace DW.ELA.UnitTests.Utility
             return logEventPlayer.Events.ToList();
         }
 
+        [Test]
+        [Explicit]
+        public static void GetEventTypes()
+        {
+            var events = GetLocalLogEvents()
+                .Select(e => e.Event)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+            CollectionAssert.IsNotEmpty(events);
+        }
+
         /// <summary>
         /// Utility method for developer to get canned events from own logs
         /// </summary>
