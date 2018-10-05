@@ -103,33 +103,29 @@ namespace DW.ELA.Utility
             if (exception is AggregateException ae)
                 exception = ae.Flatten();
 
-            var record = new ExceptionRecord
-            {
-                Message = logEvent.Message + " " + exception?.Message,
-                ExceptionType = exception?.GetType()?.ToString(),
-                CallStack = exception?.StackTrace,
-                SoftwareVersion = AppInfo.Version
-            };
-            yield return record;
+            if (exception != null)
+                yield return new ExceptionRecord(AppInfo.Version, "", Serialize.ToJson(exception));
         }
 
         [JsonObject("exceptionRecord")]
         public class ExceptionRecord
         {
-            [JsonProperty("message")]
-            public string Message { get; set; }
-
-            [JsonProperty("exceptionType")]
-            public string ExceptionType { get; set; }
-
-            [JsonProperty("callStack")]
-            public string CallStack { get; set; }
+            [JsonConstructor]
+            public ExceptionRecord(string softwareVersion, string cmdrNameHash, string exceptionString)
+            {
+                SoftwareVersion = softwareVersion;
+                CmdrNameHash = cmdrNameHash;
+                ExceptionString = exceptionString;
+            }
 
             [JsonProperty("version")]
-            public string SoftwareVersion { get; set; }
+            public string SoftwareVersion { get; }
 
-            [JsonProperty("guid")]
-            public string Guid { get; set; }
+            [JsonProperty("cmdrNameHash")]
+            public string CmdrNameHash { get;  }
+
+            [JsonProperty("exceptionString")]
+            public string ExceptionString { get; }
         }
     }
 }

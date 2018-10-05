@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="AbstractPluginTests.cs" />
     <Compile Include="AutorunManagerTests.cs" />
+    <Compile Include="CloudApiLogTargetTests.cs" />
     <Compile Include="EddnEventConverterTests.cs" />
     <Compile Include="EventRawJsonExtractorTests.cs" />
     <Compile Include="EventSchemaValidatorTests.cs" />
@@ -102,7 +103,8 @@
     <Compile Include="SavedGamesDirectoryHelperTests.cs" />
     <Compile Include="SingleLaunchTests.cs" />
     <Compile Include="UI\TrayIconControllerTests.cs" />
-    <Compile Include="Utility\TestDirectoryProvider.cs" />
+    <Compile Include="Utility\CryptoTests.cs" />
+	<Compile Include="Utility\TestDirectoryProvider.cs" />
     <Compile Include="Utility\TestDeveloperTools.cs" />
     <Compile Include="Utility\TestEventSource.cs" />
     <Compile Include="Utility\JsonComparer.cs" />

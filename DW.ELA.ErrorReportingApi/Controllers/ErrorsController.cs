@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.KeyVault;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
@@ -12,106 +18,103 @@ using Newtonsoft.Json.Linq;
 namespace DW.ELA.ErrorReportingApi.Controllers
 {
     [Route("api/[controller]")]
-    public class ErrorsController : Controller
+    public partial class ErrorsController : Controller
     {
         private readonly ILogger<ErrorsController> logger;
         private readonly IConfiguration configuration;
-        private readonly CloudStorageAccount storageAccount;
+        private readonly string baseDirectory;
 
-        public ErrorsController(ILogger<ErrorsController> logger, IConfiguration configuration)
+        public ErrorsController(ILogger<ErrorsController> logger, IConfiguration configuration, IHostingEnvironment env)
         {
             this.logger = logger;
             this.configuration = configuration;
-
-            //storageAccount = CloudStorageAccount.DevelopmentStorageAccount;
-            storageAccount = CloudStorageAccount.Parse(configuration["database-key-1"]);
-            //storageAccount = CloudStorageAccount.Parse(configuration.GetConnectionString("elitelogagentdb_AzureStorageConnectionString"));
+            baseDirectory = env.ContentRootPath;
         }
 
         // POST api/values
-        [HttpPost]
-        public async void Post([FromBody]string value)
+        [HttpGet]
+        public string Get()
         {
-            logger.LogTrace("Received event: {0}", value);
-
-            var serializer = new JsonSerializer();
-            var records = JArray.Parse(value)
-                .Children<JObject>()
-                .Select(jo => jo.ToObject<ExceptionTableRecord>())
-                .ToArray();
-
-            var tableClient = storageAccount.CreateCloudTableClient();
-            var table = tableClient.GetTableReference("Errors");
-            await table.CreateIfNotExistsAsync();
-            foreach (var rec in records)
-            {
-                var insertOperation = TableOperation.InsertOrReplace(rec);
-                await table.ExecuteAsync(insertOperation);
-            }
-
-            //Execute the insert operation.
+            return "OK";
         }
 
+        [HttpPost]
+        public ActionResult Post([FromBody]ExceptionRecord[] body)
+        {
+            try
+            {
+                foreach (var record in body)
+                {
+                    var directory = Path.Combine(baseDirectory, "errors", record.SoftwareVersion);
+                    if (!Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+                    var json = JsonConvert.SerializeObject(record, Formatting.Indented);
+                    var hash = Hash.Sha1(json);
+                    
+                    var fileName = Path.Combine(directory, hash + ".json");
+                    if (!System.IO.File.Exists(fileName))
+                        System.IO.File.WriteAllText(fileName, json);
+                }
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Error while processing Post request");
+                return StatusCode(500, e.Message);
+            }
+
+            return StatusCode(200);
+        }
+
+        [HttpDelete]
+        public void Delete()
+        {
+            var directory = Path.Combine(baseDirectory, "errors");
+            if (Directory.Exists(directory))
+                Directory.Delete(directory, true);
+        }
+
+        [JsonObject("exceptionRecord")]
         public class ExceptionRecord
         {
-            [JsonProperty("message")]
-            public string Message { get; set; }
-
-            [JsonProperty("exceptionType")]
-            public string ExceptionType { get; set; }
-
-            [JsonProperty("callStack")]
-            public string CallStack { get; set; }
+            [JsonConstructor]
+            public ExceptionRecord(string softwareVersion, string cmdrNameHash, string exceptionString)
+            {
+                SoftwareVersion = softwareVersion;
+                CmdrNameHash = cmdrNameHash;
+                ExceptionString = exceptionString;
+            }
 
             [JsonProperty("version")]
-            public string SoftwareVersion { get; set; }
+            public string SoftwareVersion { get; }
+
+            [JsonProperty("cmdrNameHash")]
+            public string CmdrNameHash { get; }
+
+            [JsonProperty("exceptionString")]
+            public string ExceptionString { get; }
         }
 
-        private class ExceptionTableRecord : ExceptionRecord, ITableEntity
+        private static class Hash
         {
-            [JsonIgnore]
-            public string PartitionKey
+            public static string Sha1(string str)
             {
-                get => SoftwareVersion;
-                set => SoftwareVersion = value;
+                using (var sha1 = new SHA1Managed())
+                    return ByteArrayToString(sha1.ComputeHash(Encoding.UTF8.GetBytes(str)));
             }
 
-            [JsonIgnore]
-            public string RowKey
+            private static string ByteArrayToString(byte[] bytes)
             {
-                get => Message;
-                set => Message = value;
-            }
-
-            [JsonIgnore]
-            public string ETag { get; set; }
-
-            [JsonIgnore]
-            public DateTimeOffset Timestamp { get; set; }
-
-            public void ReadEntity(IDictionary<string, EntityProperty> properties, OperationContext operationContext)
-            {
-                if (properties.TryGetValue(nameof(Message), out var pe1))
-                    Message = pe1.StringValue;
-                if (properties.TryGetValue(nameof(ExceptionType), out var pe2))
-                    ExceptionType = pe2.StringValue;
-                if (properties.TryGetValue(nameof(CallStack), out var pe3))
-                    CallStack = pe3.StringValue;
-                if (properties.TryGetValue(nameof(SoftwareVersion), out var pe4))
-                    SoftwareVersion = pe4.StringValue;
-            }
-
-            public IDictionary<string, EntityProperty> WriteEntity(OperationContext operationContext)
-            {
-                return new Dictionary<string, EntityProperty>
+                char[] c = new char[bytes.Length * 2];
+                int b;
+                for (int i = 0; i < bytes.Length; i++)
                 {
-                    { nameof (Message), new EntityProperty(Message) },
-                    { nameof (ExceptionType), new EntityProperty(ExceptionType) },
-                    { nameof (CallStack), new EntityProperty(CallStack) },
-                    { nameof (SoftwareVersion), new EntityProperty(SoftwareVersion) }
-                };
+                    b = bytes[i] >> 4;
+                    c[i * 2] = (char)(55 + b + (((b - 10) >> 31) & -7));
+                    b = bytes[i] & 0xF;
+                    c[i * 2 + 1] = (char)(55 + b + (((b - 10) >> 31) & -7));
+                }
+                return new string(c);
             }
         }
     }
 }
-
