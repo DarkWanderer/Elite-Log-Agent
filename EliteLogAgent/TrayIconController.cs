@@ -10,7 +10,7 @@ using Utility;
 
 namespace EliteLogAgent
 {
-    internal class TrayIconController : ITrayIconController
+    public class TrayIconController : ITrayIconController
     {
         private readonly NotifyIcon trayIcon;
         private readonly IPluginManager pluginManager;
