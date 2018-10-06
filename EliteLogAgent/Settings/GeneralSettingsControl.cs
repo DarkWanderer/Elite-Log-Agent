@@ -50,12 +50,14 @@ namespace EliteLogAgent.Settings
             {
                 uploadLatestDataButton.Enabled = false;
                 progressBarUploadLatest.Maximum = Plugins.Count + 1;
+                progressBarUploadLatest.Value = 0;
                 await Task.Factory.StartNew(UploadLatestData);
-                progressBarUploadLatest.Value += 1;
+                progressBarUploadLatest.Value = 1;
                 foreach (var plugin in Plugins)
                 {
                     plugin.FlushQueue();
                     progressBarUploadLatest.Value += 1;
+                    await Task.Delay(1); // yield to redraw UI
                 }
             }
             catch (Exception ex)
