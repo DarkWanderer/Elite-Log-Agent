@@ -40,9 +40,11 @@ namespace DW.ELA.UnitTests.INARA
             results = results
                 .Where(e => e.EventStatus != 200)
                 .Where(e => e.EventStatusText != "There is a newer inventory state recorded already.")
+                .Where(e => e.EventStatusText != "This ship was not found but was added automatically.")
                 .ToList();
 
             CollectionAssert.IsEmpty(results);
+            Assert.Pass("Uploaded {0} events", convertedEvents.Length);
         }
     }
 }

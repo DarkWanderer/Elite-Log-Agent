@@ -12,7 +12,7 @@ namespace DW.ELA.UnitTests
 {
     public class LogEventConverterTests
     {
-        [Test(Description = "Checks conversion of basic event")]
+        [Test]
         public void ShouldConvertFsdJumpEvent()
         {
             string eventString = @"{""timestamp"":""2018-06-25T18:10:30Z"", ""event"":""FSDJump"", ""StarSystem"":""Shinrarta Dezhra"", 
@@ -27,7 +27,7 @@ namespace DW.ELA.UnitTests
             Assert.AreEqual(new DateTime(2018, 06, 25, 18, 10, 30, DateTimeKind.Utc), @event.Timestamp);
         }
         
-        [Test(Description = "Checks that events do not lose data or get assigned non-existing")]
+        [Test]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.TypedLogEvents))]
         public void EventsTransformationShouldNotSpoilData(LogEvent e)
         {
