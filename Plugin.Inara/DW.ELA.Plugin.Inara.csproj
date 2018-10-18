@@ -59,7 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\InaraApiException.cs" />
     <Compile Include="InaraEventConverter.cs" />
     <Compile Include="InaraPlugin.cs" />
     <Compile Include="InaraSettings.cs" />

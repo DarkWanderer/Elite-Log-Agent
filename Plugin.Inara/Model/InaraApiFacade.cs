@@ -48,18 +48,23 @@ namespace DW.ELA.Plugin.Inara.Model
             var outputJson = await client.PostAsync(inputJson);
             var outputData = JsonConvert.DeserializeObject<ApiInputOutput>(outputJson);
 
-            var exceptions = new List<InaraApiException>();
+            var exceptions = new List<Exception>();
+
             // Verify output
             if (outputData.Events != null)
             {
                 for (int i = 0; i < events.Length; i++) {
                     if (outputData.Events[i].EventStatus != 200)
                     {
-                        if (outputData.Events[i].EventStatusText.StartsWith("Some errors in the loadout appeared"))
+                        var statusText = outputData.Events[i].EventStatusText;
+                        if (statusText.StartsWith("Some errors in the loadout appeared"))
                             continue; // Skip the errors related to data missing on Inara side
-                        var ex = new InaraApiException(
-                                        outputData.Events[i].EventStatusText ?? "Unknown Error",
-                                        events[i].ToString());
+                        if (statusText == "There is a newer inventory state recorded already.")
+                            continue; // Not really an error
+
+                        var ex = new ApplicationException(statusText ?? "Unknown Error");
+                        ex.Data.Add("input", inputData.Events[i].ToString());
+                        ex.Data.Add("output", outputData.Events[i].ToString());
                         exceptions.Add(ex);
                         logger.Error(ex, "Error returned from Inara API");
                     }
