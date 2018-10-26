@@ -41,6 +41,7 @@ namespace DW.ELA.Plugin.Inara
                     // Shipyard
                     case ShipyardSell e: return ConvertEvent(e);
                     case ShipyardTransfer e: return ConvertEvent(e);
+                    case StoredShips e: return ConvertEvent(e);
 
                     // Travel
                     case FsdJump e: return ConvertEvent(e);
@@ -77,6 +78,46 @@ namespace DW.ELA.Plugin.Inara
                 logger.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(StoredShips e)
+        {
+            foreach (var ship in e.ShipsHere)
+            {
+                var @event = new ApiEvent("setCommanderShip")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        {"shipType", ship.ShipType},
+                        {"shipGameID", ship.ShipId },
+                        {"marketID", e.MarketId },
+                        {"starsystemName", e.StarSystem},
+                        {"stationName", e.StationName },
+                        {"isCurrentShip", false },
+                        {"isHot", ship.Hot}
+                    }
+                };
+                yield return @event;
+            }
+
+            foreach (var ship in e.ShipsRemote)
+            {
+                var @event = new ApiEvent("setCommanderShip")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        {"shipType", ship.ShipType},
+                        {"shipGameID", ship.ShipId },
+                        {"marketID", ship.ShipMarketId },
+                        {"starsystemName", ship.StarSystem},
+                        {"isCurrentShip", false },
+                        {"isHot", ship.Hot},
+                    }
+                };
+                yield return @event;
+            }
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(ShipyardTransfer e)
@@ -262,7 +303,7 @@ namespace DW.ELA.Plugin.Inara
                     {"marketID", e.MarketId },
                     {"starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp)},
                     {"stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
-                    { "isCurrentShip", false}
+                    {"isCurrentShip", false}
                 }
             };
             yield return @event;
@@ -277,7 +318,7 @@ namespace DW.ELA.Plugin.Inara
                     {"marketID", e.MarketId },
                     {"starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp)},
                     {"stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
-                    { "isCurrentShip", true}
+                    {"isCurrentShip", true}
                 }
             };
             yield return @event;
