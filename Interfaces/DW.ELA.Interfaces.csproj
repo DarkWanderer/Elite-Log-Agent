@@ -82,6 +82,7 @@
     <Compile Include="Events\ShipyardTransfer.cs" />
     <Compile Include="Events\Statistics.cs" />
     <Compile Include="Events\StoredModules.cs" />
+    <Compile Include="Events\StoredShips.cs" />
     <Compile Include="Events\SupercruiseEntry.cs" />
     <Compile Include="Events\Undocked.cs" />
     <Compile Include="Events\USSDrop.cs" />
