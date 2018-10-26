@@ -56,11 +56,9 @@ namespace Controller
         {
             if (Path.GetExtension(e.FullPath) == ".log")
                 SendEventsFromJournal(checkOtherFiles: e.FullPath != CurrentFile);
-            else if (Path.GetFileNameWithoutExtension(e.FullPath) == "Outfitting"
-                  || Path.GetFileNameWithoutExtension(e.FullPath) == "Market"
-                  || Path.GetFileNameWithoutExtension(e.FullPath) == "Shipyard")
-                SendEventFromFile(e.FullPath);
         }
+
+        private string GetJsonFileFullPath(string fileName) => Path.Combine(LogDirectory, Path.ChangeExtension(fileName, ".json"));
 
         private void SendEventFromFile(string fullPath)
         {
@@ -84,14 +82,14 @@ namespace Controller
                     // We are not checking file size to make decision about whether
                     // we should read the file. Reason being - the log write operations
                     // are often buffered, so we need to open the file to flush buffers
-                    filePosition = ReadFileFromPosition(CurrentFile, filePosition);
+                    filePosition = ReadJournalFromPosition(CurrentFile, filePosition);
                     if (checkOtherFiles)
                     {
                         var latestFile = LogEnumerator.GetLogFiles(LogDirectory).First();
                         if (latestFile != CurrentFile)
                         {
                             CurrentFile = latestFile;
-                            filePosition = ReadFileFromPosition(CurrentFile, 0);
+                            filePosition = ReadJournalFromPosition(CurrentFile, 0);
                         }
                     }
                 }
@@ -102,7 +100,7 @@ namespace Controller
                 }
         }
 
-        private long ReadFileFromPosition(string file, long filePosition)
+        private long ReadJournalFromPosition(string file, long filePosition)
         {
             using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -111,7 +109,13 @@ namespace Controller
                     fileReader.Position = filePosition;
                     var events = ReadEventsFromStream(textReader);
                     foreach (var @event in events)
-                        basicObservable.OnNext(@event);
+                    {
+                        // Outfitting, market, etc. events are just indicators that data must be read from json
+                        if (@event.Event == "Outfitting" || @event.Event == "Market" || @event.Event == "Shipyard")
+                            SendEventFromFile(GetJsonFileFullPath(@event.Event));
+                        else
+                            basicObservable.OnNext(@event);
+                    }
                     return fileReader.Position;
                 }
             }
