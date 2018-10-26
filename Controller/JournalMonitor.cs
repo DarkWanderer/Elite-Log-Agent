@@ -56,7 +56,9 @@ namespace Controller
         {
             if (Path.GetExtension(e.FullPath) == ".log")
                 SendEventsFromJournal(checkOtherFiles: e.FullPath != CurrentFile);
-            else if (Path.GetFileName(e.FullPath) == "Outfitting.json" || Path.GetFileName(e.FullPath) == "Market.json")
+            else if (Path.GetFileNameWithoutExtension(e.FullPath) == "Outfitting"
+                  || Path.GetFileNameWithoutExtension(e.FullPath) == "Market"
+                  || Path.GetFileNameWithoutExtension(e.FullPath) == "Shipyard")
                 SendEventFromFile(e.FullPath);
         }
 
