@@ -23,7 +23,7 @@ namespace Controller
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
         }
 
-        private readonly IRestClient restClient= new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
+        private readonly IRestClient restClient = new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
         private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ToString,StackTrace:innerFormat=ToString,StackTrace:maxInnerExceptionLevel=10}";
 
         public void Setup()
@@ -50,16 +50,51 @@ namespace Controller
             LogManager.Configuration = config;
             logger.Info("Enabled logging with level {0}", logLevel);
 
-            //if (Debugger.IsAttached)
-            //    TestExceptionLogging();
+            if (Debugger.IsAttached)
+                TestExceptionLogging();
+        }
+
+        private Layout GetJsonLayout()
+        {
+            return new JsonLayout()
+            {
+                Attributes =
+                {
+                    new JsonAttribute("level", "${level:upperCase=true}"),
+                    new JsonAttribute("time", "${longdate}"),
+                    new JsonAttribute("message", "${message}"),
+                    new JsonAttribute("exception", new JsonLayout()
+                    {
+                        Attributes = {
+                            new JsonAttribute("type", "${exception:format=ShortType}"),
+                            new JsonAttribute("message", "${exception:format=Message}"),
+                            new JsonAttribute("data", "${exception:format=Data}"),
+                            new JsonAttribute("stackTrace", "${exception:format=StackTrace}"),
+                            new JsonAttribute("innerException", new JsonLayout()
+                            {
+                                Attributes = {
+                                    new JsonAttribute("type", "${exception:format=:innerFormat=ShortType:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                    new JsonAttribute("message", "${exception:format=:innerFormat=Message:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                    new JsonAttribute("data", "${exception:format=:innerFormat=Data:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                    new JsonAttribute("stackTrace", "${exception:format=:innerFormat=StackTrace:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                },
+                                RenderEmptyObject = false
+                            }, false)
+                        },
+                        RenderEmptyObject = false
+                    }, false)
+                },
+                RenderEmptyObject = false
+            };
         }
 
         private Target CreateFileTarget()
         {
+
             return new FileTarget
             {
                 FileName = Path.Combine(LogDirectory, "EliteLogAgent.log"),
-                ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{#####}.log"),
+                ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{###}.log"),
                 ArchiveNumbering = ArchiveNumberingMode.DateAndSequence,
                 ArchiveEvery = FileArchivePeriod.Day,
                 MaxArchiveFiles = 10,
@@ -74,7 +109,8 @@ namespace Controller
         {
             try
             {
-                try {
+                try
+                {
                     throw new ApplicationException("Test inner exception");
                 }
                 catch (Exception e1)
