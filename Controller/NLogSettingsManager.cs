@@ -1,5 +1,4 @@
-﻿using DW.ELA.Utility;
-using DW.ELA.Interfaces;
+﻿using DW.ELA.Interfaces;
 using NLog;
 using NLog.Layouts;
 using NLog.Targets;
@@ -54,15 +53,18 @@ namespace Controller
                 TestExceptionLogging();
         }
 
-        private Layout GetJsonLayout()
+        private Layout DefaultJsonLayout
         {
-            return new JsonLayout()
+            get
             {
-                Attributes =
+                return new JsonLayout()
+                {
+                    Attributes =
                 {
                     new JsonAttribute("level", "${level:upperCase=true}"),
                     new JsonAttribute("time", "${longdate}"),
                     new JsonAttribute("message", "${message}"),
+                    new JsonAttribute("duration", "${event-properties:item=duration}"),
                     new JsonAttribute("exception", new JsonLayout()
                     {
                         Attributes = {
@@ -84,8 +86,9 @@ namespace Controller
                         RenderEmptyObject = false
                     }, false)
                 },
-                RenderEmptyObject = false
-            };
+                    RenderEmptyObject = false
+                };
+            }
         }
 
         private Target CreateFileTarget()
@@ -93,15 +96,15 @@ namespace Controller
 
             return new FileTarget
             {
-                FileName = Path.Combine(LogDirectory, "EliteLogAgent.log"),
-                ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{###}.log"),
+                FileName = Path.Combine(LogDirectory, "EliteLogAgent.json"),
+                ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{###}.json"),
                 ArchiveNumbering = ArchiveNumberingMode.DateAndSequence,
                 ArchiveEvery = FileArchivePeriod.Day,
                 MaxArchiveFiles = 10,
                 ConcurrentWrites = true,
                 ReplaceFileContentsOnEachWrite = false,
                 Encoding = Encoding.UTF8,
-                Layout = DefaultLayout
+                Layout = DefaultJsonLayout
             };
         }
 
