@@ -19,7 +19,7 @@ namespace DW.ELA.Plugin.EDDN
 
         public EventSchemaValidator()
         {
-            logger.Debug("Loading schemas");
+            logger.Debug("Loading EDDN schemas");
             LoadSchemas().Wait();
         }
 

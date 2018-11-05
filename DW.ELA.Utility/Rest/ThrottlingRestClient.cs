@@ -48,9 +48,11 @@ namespace Utility
         {
             ThrowIfQuotaExceeded();
             var httpContent = new StringContent(input, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(baseUrl, httpContent);
             using (new LoggingTimer("Making request to " + baseUrl))
+            {
+                var response = await client.PostAsync(baseUrl, httpContent);
                 return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+            }
         }
 
         private HttpResponseMessage ThrowIfErrorCode(HttpResponseMessage response)
@@ -67,9 +69,12 @@ namespace Utility
             var encodedPost = string.Join("&", values.Select(kvp => kvp.Key + "=" + HttpUtility.UrlEncode(kvp.Value)));
 
             var httpContent = new StringContent(encodedPost, Encoding.UTF8, "application/x-www-form-urlencoded");
-            var response = await client.PostAsync(baseUrl, httpContent);
+
             using (new LoggingTimer("Making request to " + baseUrl))
+            {
+                var response = await client.PostAsync(baseUrl, httpContent);
                 return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+            }
         }
 
         public async Task<string> GetAsync(string url)
@@ -77,9 +82,11 @@ namespace Utility
             ThrowIfQuotaExceeded();
             if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
                 url = baseUrl + url;
-            var response = await client.GetAsync(url);
             using (new LoggingTimer("Making request to " + url))
+            {
+                var response = await client.GetAsync(url);
                 return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+            }
         }
     }
 }

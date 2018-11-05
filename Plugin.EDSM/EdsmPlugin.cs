@@ -55,7 +55,7 @@ namespace ELA.Plugin.EDSM
                     .ToList();
                 foreach (var batch in apiEventsBatches)
                     await apiFacade?.PostLogEvents(batch.ToArray());
-                logger.Info("Pushed {0} events", events.Count);
+                logger.Info("Uploaded {0} EDSM events", events.Count);
             }
             catch (Exception e)
             {
