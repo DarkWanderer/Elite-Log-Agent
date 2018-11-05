@@ -58,9 +58,10 @@ namespace Controller
                 {
                     Attributes =
                     {
-                        new JsonAttribute("level", "${level:upperCase=true}"),
+                        new JsonAttribute("level", "${level}"),
                         new JsonAttribute("time", "${longdate}"),
                         new JsonAttribute("message", "${message}"),
+                        new JsonAttribute("logger", "${logger}"),
                         new JsonAttribute("exception", new JsonLayout()
                         {
                             Attributes = {
