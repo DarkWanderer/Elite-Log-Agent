@@ -48,9 +48,6 @@ namespace Controller
 
             LogManager.Configuration = config;
             logger.Info("Enabled logging with level {0}", logLevel);
-
-            if (Debugger.IsAttached)
-                TestExceptionLogging();
         }
 
         private Layout DefaultJsonLayout
@@ -60,33 +57,34 @@ namespace Controller
                 return new JsonLayout()
                 {
                     Attributes =
-                {
-                    new JsonAttribute("level", "${level:upperCase=true}"),
-                    new JsonAttribute("time", "${longdate}"),
-                    new JsonAttribute("message", "${message}"),
-                    new JsonAttribute("duration", "${event-properties:item=duration}", false),
-                    new JsonAttribute("exception", new JsonLayout()
                     {
-                        Attributes = {
-                            new JsonAttribute("type", "${exception:format=ShortType}"),
-                            new JsonAttribute("message", "${exception:format=Message}"),
-                            new JsonAttribute("data", "${exception:format=Data}"),
-                            new JsonAttribute("stackTrace", "${exception:format=StackTrace}"),
-                            new JsonAttribute("innerException", new JsonLayout()
-                            {
-                                Attributes = {
-                                    new JsonAttribute("type", "${exception:format=:innerFormat=ShortType:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                    new JsonAttribute("message", "${exception:format=:innerFormat=Message:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                    new JsonAttribute("data", "${exception:format=:innerFormat=Data:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                    new JsonAttribute("stackTrace", "${exception:format=:innerFormat=StackTrace:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                },
-                                RenderEmptyObject = false
-                            }, false)
-                        },
-                        RenderEmptyObject = false
-                    }, false)
-                },
-                    RenderEmptyObject = false
+                        new JsonAttribute("level", "${level:upperCase=true}"),
+                        new JsonAttribute("time", "${longdate}"),
+                        new JsonAttribute("message", "${message}"),
+                        new JsonAttribute("exception", new JsonLayout()
+                        {
+                            Attributes = {
+                                new JsonAttribute("type", "${exception:format=ShortType}"),
+                                new JsonAttribute("message", "${exception:format=Message}"),
+                                new JsonAttribute("data", "${exception:format=Data}"),
+                                new JsonAttribute("stackTrace", "${exception:format=StackTrace}"),
+                                new JsonAttribute("innerException", new JsonLayout()
+                                {
+                                    Attributes = {
+                                        new JsonAttribute("type", "${exception:format=:innerFormat=ShortType:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                        new JsonAttribute("message", "${exception:format=:innerFormat=Message:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                        new JsonAttribute("data", "${exception:format=:innerFormat=Data:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                        new JsonAttribute("stackTrace", "${exception:format=:innerFormat=StackTrace:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                    },
+                                    RenderEmptyObject = false
+                                }, false)
+                            },
+                            RenderEmptyObject = false
+                        }, false)
+                    },
+                    RenderEmptyObject = false,
+                    IncludeAllProperties = true,
+                    ExcludeProperties = { "CallerFilePath", "CallerLineNumber", "CallerMemberName" }
                 };
             }
         }
