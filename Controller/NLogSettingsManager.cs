@@ -64,7 +64,7 @@ namespace Controller
                     new JsonAttribute("level", "${level:upperCase=true}"),
                     new JsonAttribute("time", "${longdate}"),
                     new JsonAttribute("message", "${message}"),
-                    new JsonAttribute("duration", "${event-properties:item=duration}"),
+                    new JsonAttribute("duration", "${event-properties:item=duration}", false),
                     new JsonAttribute("exception", new JsonLayout()
                     {
                         Attributes = {
