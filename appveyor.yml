@@ -15,15 +15,6 @@ assembly_info:
   assembly_version: $(appveyor_build_version)
   assembly_file_version: $(appveyor_build_version)
   assembly_informational_version: $(appveyor_build_version)
-  
-dotnet_csproj:
-  patch: true
-  file: 'DW.ELA.ErrorReportingApi\DW.ELA.ErrorReportingApi.csproj'
-  version: $(appveyor_build_version)
-  package_version: $(appveyor_build_version)
-  assembly_version: $(appveyor_build_version)
-  file_version: $(appveyor_build_version)
-  informational_version: $(appveyor_build_version)
 
 install:
 - cmd: nuget restore

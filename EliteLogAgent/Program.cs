@@ -36,7 +36,6 @@ namespace EliteLogAgent
                     Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
                     Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),
                     Component.For<IWindsorContainer>().Instance(container)
-
                 );
                 container.Resolve<ILogSettingsBootstrapper>().Setup();
 
