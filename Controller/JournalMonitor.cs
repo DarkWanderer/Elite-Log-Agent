@@ -2,6 +2,7 @@
 using System.IO;
 using DW.ELA.Interfaces;
 using NLog;
+using NLog.Fluent;
 using System.Linq;
 using System.Timers;
 using System.Threading.Tasks;
@@ -49,7 +50,7 @@ namespace Controller
             filePosition = new FileInfo(CurrentFile).Length;
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
-            logger.Info("Started monitoring on folder {0}", LogDirectory);
+            logger.Info("Started monitoring");
         }
 
         private void FileWatcher_Event(object sender, FileSystemEventArgs e)
@@ -70,7 +71,11 @@ namespace Controller
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error while reading event file {0}", fullPath);
+                logger.Error()
+                    .Message("Error while reading event file")
+                    .Exception(e)
+                    .Property("event-file", fullPath)
+                    .Write();
             }
         }
 
@@ -95,7 +100,11 @@ namespace Controller
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e, "Error while reading journal file {0}", CurrentFile);
+                    logger.Error()
+                        .Message("Error while reading journal file")
+                        .Exception(e)
+                        .Property("journal-file", CurrentFile)
+                        .Write();
                     filePosition = new FileInfo(CurrentFile).Length; // Skipping the 'poisoned' data
                 }
         }
