@@ -88,11 +88,23 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("Allegiance")]
         public string Allegiance { get; set; }
 
+        [JsonProperty("ActiveStates")]
+        public FactionStateTrend[] ActiveStates { get; set; }
+
         [JsonProperty("PendingStates")]
         public FactionStateTrend[] PendingStates { get; set; }
 
         [JsonProperty("RecoveringStates")]
         public FactionStateTrend[] RecoveringStates { get; set; }
+
+        [JsonProperty("Happiness")]
+        public string Happiness { get; set; }
+
+        [JsonProperty("Happiness_Localised")]
+        public string HappinessLocalised { get; set; }
+
+        [JsonProperty("MyReputation")]
+        public double? MyReputation { get; set; }
     }
 
     public partial class FactionStateTrend
@@ -102,7 +114,7 @@ namespace DW.ELA.Interfaces.Events
         public FactionState State { get; set; }
 
         [JsonProperty("Trend")]
-        public long Trend { get; set; }
+        public long? Trend { get; set; }
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
@@ -111,7 +123,7 @@ namespace DW.ELA.Interfaces.Events
         None,
         //[EnumMember(Value = "Civil Unrest")]
         CivilUnrest,
-        [EnumMember(Value = "Civil War")]
+        //[EnumMember(Value = "Civil War")]
         CivilWar,
         Boom,
         Bust,
@@ -122,6 +134,7 @@ namespace DW.ELA.Interfaces.Events
         Lockdown,
         Outbreak,
         Retreat,
-        War
+        War,
+        CivilLiberty
     };
 }

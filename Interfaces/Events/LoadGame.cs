@@ -43,5 +43,11 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty]
         public string Group { get; set; }
+
+        [JsonProperty("FID")]
+        public string FrontierId { get; set; }
+
+        [JsonProperty]
+        public bool? StartLanded { get; set; }
     }
 }

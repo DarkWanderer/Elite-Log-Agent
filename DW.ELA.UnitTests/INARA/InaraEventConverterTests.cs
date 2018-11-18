@@ -15,7 +15,7 @@ namespace DW.ELA.UnitTests
         public InaraEventConverterTests() => eventConverter = new InaraEventConverter(stateRecorder);
 
         [Test]
-        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
+        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {
             var result = eventConverter.Convert(e);

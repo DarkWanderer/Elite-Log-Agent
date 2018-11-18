@@ -30,10 +30,13 @@ namespace DW.ELA.Interfaces.Events
         public string DestinationStation { get; set; }
 
         [JsonProperty("Reward")]
-        public long Reward { get; set; }
+        public long? Reward { get; set; }
 
         [JsonProperty("Donation")]
-        public long? Donation { get; set; }
+        public string Donation { get; set; }
+
+        [JsonProperty("Donated")]
+        public long? Donated { get; set; }
 
         [JsonProperty("CommodityReward")]
         public CommodityReward[] CommodityReward { get; set; }
@@ -71,6 +74,9 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("Reputation")]
         public string Reputation { get; set; }
+
+        [JsonProperty("ReputationTrend")]
+        public string ReputationTrend { get; set; }
     }
 
     public class Effect
@@ -122,5 +128,8 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("Trend")]
         public string Trend { get; set; }
+
+        [JsonProperty("Influence")]
+        public string InfluenceValue { get; set; }
     }
 }

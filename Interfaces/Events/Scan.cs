@@ -26,7 +26,7 @@ namespace DW.ELA.Interfaces.Events
         public string PlanetClass { get; set; }
 
         [JsonProperty("Composition")]
-        public Composition Composition { get; set; }
+        public GeologicComposition Composition { get; set; }
 
         [JsonProperty("Atmosphere")]
         public string Atmosphere { get; set; }
@@ -35,7 +35,7 @@ namespace DW.ELA.Interfaces.Events
         public string AtmosphereType { get; set; }
 
         [JsonProperty("AtmosphereComposition")]
-        public AtmosphereComposition[] AtmosphereComposition { get; set; }
+        public Composition[] AtmosphereComposition { get; set; }
 
         [JsonProperty("Volcanism")]
         public string Volcanism { get; set; }
@@ -82,11 +82,29 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("ScanType")]
         public string ScanType { get; set; }
 
+        [JsonProperty("StarType")]
+        public string StarType { get; set; }
+
+        [JsonProperty("Age_MY")]
+        public long? AgeMegaYears { get; set; }
+
+        [JsonProperty("StellarMass")]
+        public double? StellarMass { get; set; }
+
+        [JsonProperty("AbsoluteMagnitude")]
+        public double? AbsoluteMagnitude { get; set; }
+
+        [JsonProperty("Luminosity")]
+        public double? Luminosity { get; set; }
+
         [JsonProperty("Rings")]
         public Ring[] Rings { get; set; }
+
+        [JsonProperty("Materials")]
+        public Composition[] Materials { get; set; }
     }
 
-    public class AtmosphereComposition
+    public class Composition
     {
         [JsonProperty("Name")]
         public string Name { get; set; }
@@ -95,7 +113,7 @@ namespace DW.ELA.Interfaces.Events
         public double Percent { get; set; }
     }
 
-    public class Composition
+    public class GeologicComposition
     {
         [JsonProperty("Ice")]
         public double Ice { get; set; }

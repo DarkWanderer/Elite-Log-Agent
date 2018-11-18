@@ -664,15 +664,17 @@ namespace DW.ELA.Plugin.Inara
 
         private IEnumerable<ApiEvent> ConvertEvent(EngineerProgress @event)
         {
-            yield return new ApiEvent("setCommanderRankEngineer")
-            {
-                EventData = new Dictionary<string, object> {
-                    { "engineerName", @event.Engineer },
-                    { "rankStage", @event.Progress },
-                    { "rankValue", @event.Rank }
-                },
-                Timestamp = @event.Timestamp
-            };
+            if (@event.Engineers != null)
+                foreach (var engineer in @event.Engineers)
+                    yield return new ApiEvent("setCommanderRankEngineer")
+                    {
+                        EventData = new Dictionary<string, object> {
+                            { "engineerName", engineer.EngineerName },
+                            { "rankStage", engineer.Progress },
+                            { "rankValue", engineer.RankProgress }
+                        },
+                        Timestamp = @event.Timestamp
+                    };
         }
     }
 }

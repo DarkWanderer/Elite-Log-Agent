@@ -18,5 +18,11 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("MarketID")]
         public long? MarketId { get; set; }
+
+        [JsonProperty("ShipMarketID")]
+        public long? ShipMarketId { get; set; }
+
+        [JsonProperty("System")]
+        public string System { get; set; }
     }
 }

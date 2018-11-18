@@ -13,7 +13,7 @@ namespace DW.ELA.UnitTests
     public class EddnEventConverterTests
     {
         [Test]
-        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
+        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {
             var mockRecorder = new Mock<IPlayerStateHistoryRecorder>();

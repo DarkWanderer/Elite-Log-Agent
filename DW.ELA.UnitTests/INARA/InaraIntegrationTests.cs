@@ -17,7 +17,7 @@ namespace DW.ELA.UnitTests.INARA
     {
         [Test]
         [Explicit]
-        public async Task IntegrationTestUploadLatestLogs()
+        public async Task IntegrationTestUploadToInara()
         {
             var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
             var logCounter = new LogEventTypeCounter();

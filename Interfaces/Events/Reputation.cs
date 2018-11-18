@@ -12,5 +12,8 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("Alliance")]
         public double Alliance { get; set; }
+
+        [JsonProperty("Independent")]
+        public double? Independent { get; set; }
     }
 }

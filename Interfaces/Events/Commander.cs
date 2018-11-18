@@ -9,5 +9,8 @@ namespace DW.ELA.Interfaces.Events
     {
         [JsonProperty("Name")]
         public string Name { get; set; }
+
+        [JsonProperty("FID")]
+        public string FrontierId { get; set; }
     }
 }

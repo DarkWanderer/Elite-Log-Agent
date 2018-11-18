@@ -46,7 +46,10 @@ namespace DW.ELA.Interfaces.Events
         public string Reputation { get; set; }
 
         [JsonProperty("Reward")]
-        public long Reward { get; set; }
+        public long? Reward { get; set; }
+
+        [JsonProperty("Donation")]
+        public string Donation { get; set; }
 
         [JsonProperty("MissionID")]
         public long MissionId { get; set; }
