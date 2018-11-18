@@ -1,7 +1,11 @@
 ﻿using Controller;
 using DW.ELA.Interfaces;
+using DW.ELA.LogModel;
 using DW.ELA.Utility.Json;
+using MoreLinq;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,22 +13,36 @@ namespace DW.ELA.UnitTests.Utility
 {
     public static class TestDeveloperTools
     {
-        private static IEnumerable<LogEvent> GetLocalLogEvents()
-        {
-            var logEventPlayer = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 30);
-            return logEventPlayer.Events.ToList();
-        }
-
         [Test]
         [Explicit]
-        public static void GetEventTypes()
+        public static void ToolGetUnmappedEvents()
         {
-            var events = GetLocalLogEvents()
+            var events = TestEventSource.LocalEvents
+                .Concat(TestEventSource.LocalBetaEvents)
+                .Where(e => e.GetType() == typeof(LogEvent))
                 .Select(e => e.Event)
                 .Distinct()
                 .OrderBy(x => x)
                 .ToList();
-            CollectionAssert.IsNotEmpty(events);
+            Assert.Pass(string.Join(", ", events));
+        }
+
+        private static JObject ReplaceTimestamp(JObject input)
+        {
+            var value = (JObject)input.DeepClone();
+            value["timestamp"] = new DateTime(2018, 08, 28);
+            return value;
+        }
+
+        private static IEnumerable<string> ExtractSamples(IEnumerable<LogEvent> events)
+        {
+            return events
+                .GroupBy(e => e.Event)
+                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).Take(5))
+                .OrderBy(e => e.Event).ThenBy(e => e.Timestamp)
+                .Select(e => e.Raw)
+                .Select(ReplaceTimestamp)
+                .Select(Serialize.ToJson);
         }
 
         /// <summary>
@@ -33,15 +51,11 @@ namespace DW.ELA.UnitTests.Utility
         /// <returns></returns>
         [Test]
         [Explicit]
-        public static void PrepareCannedEvents()
+        public static void ToolPrepareCannedEvents()
         {
-            var eventExamples = GetLocalLogEvents()
-                .GroupBy(e => e.Event)
-                .SelectMany(g => g.OrderByDescending(e => e.Timestamp).Take(5))
-                .OrderBy(e => e.Event).ThenBy(e => e.Timestamp)
-                .Select(e => e.Raw)
-                .Select(Serialize.ToJson)
-                .ToList();
+            var eventExamples = ExtractSamples(TestEventSource.LocalBetaEvents)
+                .Concat(ExtractSamples(TestEventSource.LocalEvents))
+                .ToHashSet();
 
             var eventsString = string.Join("\n", eventExamples.ToArray());
             Assert.IsNotEmpty(eventsString);

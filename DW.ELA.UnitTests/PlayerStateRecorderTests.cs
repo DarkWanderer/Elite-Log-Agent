@@ -12,7 +12,7 @@ namespace DW.ELA.UnitTests
         private readonly IPlayerStateHistoryRecorder eventConverter = new PlayerStateRecorder();
 
         [Test]
-        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
+        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {
             eventConverter.OnNext(e);

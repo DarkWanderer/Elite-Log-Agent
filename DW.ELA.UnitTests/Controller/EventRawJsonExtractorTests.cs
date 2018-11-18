@@ -11,7 +11,7 @@ namespace DW.ELA.UnitTests
         private readonly EventRawJsonExtractor eventConverter = new EventRawJsonExtractor();
 
         [Test]
-        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.LogEvents))]
+        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {
             var result = eventConverter.Convert(e);

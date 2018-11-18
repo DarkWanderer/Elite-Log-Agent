@@ -27,6 +27,12 @@
         [JsonProperty("Rebuy")]
         public long? Rebuy { get; set; }
 
+        [JsonProperty]
+        public bool? Hot { get; set; }
+
+        [JsonProperty]
+        public double? HullHealth { get; set; }
+
         [JsonProperty("Modules")]
         public Module[] Modules { get; set; }
     }
@@ -97,13 +103,19 @@
         public string Label { get; set; }
 
         [JsonProperty("Value")]
-        public double Value { get; set; }
+        public double? Value { get; set; }
+
+        [JsonProperty("ValueStr")]
+        public string ValueStr { get; set; }
+
+        [JsonProperty("ValueStr_Localised")]
+        public string ValueStrLocalised { get; set; }
 
         [JsonProperty("OriginalValue")]
-        public double OriginalValue { get; set; }
+        public double? OriginalValue { get; set; }
 
         [JsonProperty("LessIsGood")]
-        public long LessIsGood { get; set; }
+        public long? LessIsGood { get; set; }
     }
 
 }

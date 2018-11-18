@@ -79,6 +79,12 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("FactionState")]
         public FactionState? FactionState { get; set; }
+
+        [JsonProperty("Latitude")]
+        public double? Latitude { get; set; }
+
+        [JsonProperty("Longitude")]
+        public double? Longitude { get; set; }
     }
 
 }

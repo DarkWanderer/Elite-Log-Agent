@@ -8,14 +8,15 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DW.ELA.UnitTests
 {
     [TestFixture]
-    public class LogBurstPlayerTests
+    public class JournalMonitorTests
     {
         [Test]
-        public void ShouldPlayEvents()
+        public async Task ShouldPickUpEvents()
         {
             var directoryProvider = new TestDirectoryProvider();
             Directory.Delete(directoryProvider.Directory, true);
@@ -26,22 +27,29 @@ namespace DW.ELA.UnitTests
             string testFile2 = Path.Combine(directoryProvider.Directory, "Journal.2345.log");
 
             File.WriteAllText(testFile1, EventsAsJson.Skip(5).First());
-            File.WriteAllText(testFile2, EventsAsJson.Skip(5).First());
+            var journalMonitor = new JournalMonitor(directoryProvider, 5);
+            journalMonitor.Subscribe(events.Add);
 
-            var burstPlayer1 = new LogBurstPlayer(directoryProvider.Directory, 1);
-            burstPlayer1.Subscribe(events.Add);
-            burstPlayer1.Play();
+            File.AppendAllText(testFile1, EventsAsJson.Skip(8).First());
+            await Delay;
             CollectionAssert.IsNotEmpty(events);
-            Assert.AreEqual(1, events.Count);
 
-            var burstPlayer2 = new LogBurstPlayer(directoryProvider.Directory, 100);
-            burstPlayer2.Subscribe(events.Add);
-            burstPlayer2.Play();
+            while (events.Count > 0)
+                events.TryTake(out var e);
+
+            File.WriteAllText(testFile2, EventsAsJson.Skip(9).First());
+            await Delay;
             CollectionAssert.IsNotEmpty(events);
-            Assert.AreEqual(3, events.Count);
+
+            while (events.Count > 0)
+                events.TryTake(out var e);
+
+            await Delay;
+            CollectionAssert.IsEmpty(events);
         }
 
-        private static IEnumerable<string> EventsAsJson => TestEventSource.LogEvents.Select(Serialize.ToJson);
-    }
+        private static IEnumerable<string> EventsAsJson => TestEventSource.CannedEvents.Select(Serialize.ToJson);
 
+        private Task Delay => Task.Delay(50);
+    }
 }

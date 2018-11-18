@@ -58,7 +58,7 @@ namespace DW.ELA.Interfaces.Events
         public long BountiesClaimed { get; set; }
 
         [JsonProperty("Bounty_Hunting_Profit")]
-        public double BountyHuntingProfit { get; set; }
+        public long BountyHuntingProfit { get; set; }
 
         [JsonProperty("Combat_Bonds")]
         public long CombatBonds { get; set; }
@@ -113,6 +113,9 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("NpcCrew_Fired")]
         public long NpcCrewFired { get; set; }
+
+        [JsonProperty("NpcCrew_Died")]
+        public long? NpcCrewDied { get; set; }
     }
 
     public class Crime
@@ -150,6 +153,9 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("Planets_Scanned_To_Level_3")]
         public long PlanetsScannedToLevel3 { get; set; }
 
+        [JsonProperty("Efficient_Scans")]
+        public long? EfficientScans { get; set; }
+
         [JsonProperty("Highest_Payout")]
         public long HighestPayout { get; set; }
 
@@ -169,31 +175,31 @@ namespace DW.ELA.Interfaces.Events
     public class MaterialTraderStats
     {
         [JsonProperty("Trades_Completed")]
-        public long TradesCompleted { get; set; }
+        public long? TradesCompleted { get; set; }
 
         [JsonProperty("Materials_Traded")]
-        public long MaterialsTraded { get; set; }
+        public long? MaterialsTraded { get; set; }
 
         [JsonProperty("Encoded_Materials_Traded")]
-        public long EncodedMaterialsTraded { get; set; }
+        public long? EncodedMaterialsTraded { get; set; }
 
         [JsonProperty("Raw_Materials_Traded")]
-        public long RawMaterialsTraded { get; set; }
+        public long? RawMaterialsTraded { get; set; }
 
         [JsonProperty("Grade_1_Materials_Traded")]
-        public long Grade1_MaterialsTraded { get; set; }
+        public long? Grade1_MaterialsTraded { get; set; }
 
         [JsonProperty("Grade_2_Materials_Traded")]
-        public long Grade2_MaterialsTraded { get; set; }
+        public long? Grade2_MaterialsTraded { get; set; }
 
         [JsonProperty("Grade_3_Materials_Traded")]
-        public long Grade3_MaterialsTraded { get; set; }
+        public long? Grade3_MaterialsTraded { get; set; }
 
         [JsonProperty("Grade_4_Materials_Traded")]
-        public long Grade4_MaterialsTraded { get; set; }
+        public long? Grade4_MaterialsTraded { get; set; }
 
         [JsonProperty("Grade_5_Materials_Traded")]
-        public long Grade5_MaterialsTraded { get; set; }
+        public long? Grade5_MaterialsTraded { get; set; }
     }
 
     public class Mining
@@ -229,22 +235,22 @@ namespace DW.ELA.Interfaces.Events
     public class Passengers
     {
         [JsonProperty("Passengers_Missions_Accepted")]
-        public long PassengersMissionsAccepted { get; set; }
+        public long? PassengersMissionsAccepted { get; set; }
 
         [JsonProperty("Passengers_Missions_Disgruntled")]
-        public long PassengersMissionsDisgruntled { get; set; }
+        public long? PassengersMissionsDisgruntled { get; set; }
 
         [JsonProperty("Passengers_Missions_Bulk")]
-        public long PassengersMissionsBulk { get; set; }
+        public long? PassengersMissionsBulk { get; set; }
 
         [JsonProperty("Passengers_Missions_VIP")]
-        public long PassengersMissionsVip { get; set; }
+        public long? PassengersMissionsVip { get; set; }
 
         [JsonProperty("Passengers_Missions_Delivered")]
-        public long PassengersMissionsDelivered { get; set; }
+        public long? PassengersMissionsDelivered { get; set; }
 
         [JsonProperty("Passengers_Missions_Ejected")]
-        public long PassengersMissionsEjected { get; set; }
+        public long? PassengersMissionsEjected { get; set; }
     }
 
     public class SearchAndRescue
@@ -280,7 +286,7 @@ namespace DW.ELA.Interfaces.Events
     public class TgEncounters
     {
         [JsonProperty("TG_ENCOUNTER_IMPRINT")]
-        public long TgEncounterImprint { get; set; }
+        public long? TgEncounterImprint { get; set; }
 
         [JsonProperty("TG_ENCOUNTER_TOTAL")]
         public long TgEncounterTotal { get; set; }
