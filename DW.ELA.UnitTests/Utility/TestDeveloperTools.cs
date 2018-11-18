@@ -14,6 +14,7 @@ namespace DW.ELA.UnitTests.Utility
     public static class TestDeveloperTools
     {
         [Test]
+        [Explicit]
         public static void ToolGetUnmappedEvents()
         {
             var events = TestEventSource.LocalEvents
