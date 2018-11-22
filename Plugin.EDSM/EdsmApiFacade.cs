@@ -1,12 +1,12 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Utility;
-
-namespace ELA.Plugin.EDSM
+﻿namespace ELA.Plugin.EDSM
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility;
+    using Newtonsoft.Json.Linq;
+
     public class EdsmApiFacade : IEdsmApiFacade
     {
         private readonly IRestClient restClient;
@@ -15,9 +15,9 @@ namespace ELA.Plugin.EDSM
 
         public EdsmApiFacade(IRestClient restClient, string commanderName, string apiKey)
         {
-            if (String.IsNullOrWhiteSpace(commanderName))
+            if (string.IsNullOrWhiteSpace(commanderName))
                 throw new ArgumentException(nameof(commanderName));
-            if (String.IsNullOrWhiteSpace(apiKey))
+            if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ArgumentException(nameof(apiKey));
             this.restClient = restClient ?? throw new ArgumentNullException(nameof(restClient));
             this.commanderName = commanderName;

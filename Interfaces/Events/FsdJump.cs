@@ -1,10 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Runtime.Serialization;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
     public class FsdJump : LogEvent
     {
         [JsonProperty("StarSystem")]
@@ -136,5 +135,5 @@ namespace DW.ELA.Interfaces.Events
         Retreat,
         War,
         CivilLiberty
-    };
+    }
 }

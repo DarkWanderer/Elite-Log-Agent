@@ -1,15 +1,14 @@
-﻿using DW.ELA.Interfaces;
-using NLog;
-using NLog.Layouts;
-using NLog.Targets;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
-using Utility;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.IO;
+    using System.Text;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility;
+    using NLog;
+    using NLog.Layouts;
+    using NLog.Targets;
+
     public class NLogSettingsManager : ILogSettingsBootstrapper
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
@@ -30,10 +29,12 @@ namespace Controller
             var logLevel = LogLevel.Info;
             try
             {
-                if (!String.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
+                if (!string.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
                     logLevel = LogLevel.FromString(settingsProvider.Settings.LogLevel);
             }
-            catch { /* Do nothing, use default*/ }
+            catch
+            { /* Do nothing, use default*/
+            }
 
             var config = LogManager.Configuration ?? new NLog.Config.LoggingConfiguration();
             config.LoggingRules.Clear();

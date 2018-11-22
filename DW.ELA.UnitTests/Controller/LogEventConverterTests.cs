@@ -1,15 +1,14 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.LogModel;
-using DW.ELA.Interfaces.Events;
-using DW.ELA.UnitTests.Utility;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-using System;
-using DW.ELA.Utility.Json;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using DW.ELA.LogModel;
+    using DW.ELA.UnitTests.Utility;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json.Linq;
+    using NUnit.Framework;
+
     public class LogEventConverterTests
     {
         [Test]

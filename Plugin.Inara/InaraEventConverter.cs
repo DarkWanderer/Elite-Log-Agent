@@ -1,16 +1,16 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Events;
-using DW.ELA.Plugin.Inara.Model;
-using DW.ELA.Utility.Json;
-using MoreLinq;
-using Newtonsoft.Json.Linq;
-using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DW.ELA.Plugin.Inara
+﻿namespace DW.ELA.Plugin.Inara
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using DW.ELA.Plugin.Inara.Model;
+    using DW.ELA.Utility.Json;
+    using MoreLinq;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+
     public class InaraEventConverter : IEventConverter<ApiEvent>
     {
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
@@ -89,13 +89,13 @@ namespace DW.ELA.Plugin.Inara
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
                     {
-                        {"shipType", ship.ShipType},
-                        {"shipGameID", ship.ShipId },
-                        {"marketID", e.MarketId },
-                        {"starsystemName", e.StarSystem},
-                        {"stationName", e.StationName },
-                        {"isCurrentShip", false },
-                        {"isHot", ship.Hot}
+                        { "shipType", ship.ShipType },
+                        { "shipGameID", ship.ShipId },
+                        { "marketID", e.MarketId },
+                        { "starsystemName", e.StarSystem },
+                        { "stationName", e.StationName },
+                        { "isCurrentShip", false },
+                        { "isHot", ship.Hot }
                     }
                 };
                 yield return @event;
@@ -108,12 +108,12 @@ namespace DW.ELA.Plugin.Inara
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
                     {
-                        {"shipType", ship.ShipType},
-                        {"shipGameID", ship.ShipId },
-                        {"marketID", ship.ShipMarketId },
-                        {"starsystemName", ship.StarSystem},
-                        {"isCurrentShip", false },
-                        {"isHot", ship.Hot},
+                        { "shipType", ship.ShipType },
+                        { "shipGameID", ship.ShipId },
+                        { "marketID", ship.ShipMarketId },
+                        { "starsystemName", ship.StarSystem },
+                        { "isCurrentShip", false },
+                        { "isHot", ship.Hot },
                     }
                 };
                 yield return @event;
@@ -128,12 +128,12 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"shipType", e.ShipType},
-                    {"shipGameID", e.ShipId},
-                    {"starsystemName", e.System },
-                    {"stationName", playerStateRecorder.GetPlayerStation(e.Timestamp)},
-                    {"transferTime", e.TransferTime },
-                    {"marketID", e.MarketId}
+                    { "shipType", e.ShipType },
+                    { "shipGameID", e.ShipId },
+                    { "starsystemName", e.System },
+                    { "stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
+                    { "transferTime", e.TransferTime },
+                    { "marketID", e.MarketId }
                 }
             };
         }
@@ -199,8 +199,8 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"itemName", e.Received.Material},
-                    {"itemCount", e.Received.Quantity}
+                    { "itemName", e.Received.Material },
+                    { "itemCount", e.Received.Quantity }
                 }
             };
             yield return @event;
@@ -210,8 +210,8 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"itemName", e.Paid.Material},
-                    {"itemCount", e.Paid.Quantity}
+                    { "itemName", e.Paid.Material },
+                    { "itemCount", e.Paid.Quantity }
                 }
             };
             yield return @event;
@@ -226,18 +226,18 @@ namespace DW.ELA.Plugin.Inara
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
                     {
-                        {"communitygoalGameID", goal.Cgid},
-                        {"communitygoalName", goal.Title},
-                        {"starsystemName", goal.SystemName},
-                        {"stationName", goal.MarketName},
-                        {"goalExpiry", goal.Expiry},
-                        {"tierReached", goal.TierReached},
-                        {"tierMax", goal.TopTier?.Name},
-                        {"topRankSize", goal.TopRankSize},
-                        {"isCompleted", goal.IsComplete},
-                        {"contributorsNum", goal.NumContributors},
-                        {"contributionsTotal", goal.CurrentTotal},
-                        {"completionBonus", goal.TopTier?.Bonus},
+                        { "communitygoalGameID", goal.Cgid },
+                        { "communitygoalName", goal.Title },
+                        { "starsystemName", goal.SystemName },
+                        { "stationName", goal.MarketName },
+                        { "goalExpiry", goal.Expiry },
+                        { "tierReached", goal.TierReached },
+                        { "tierMax", goal.TopTier?.Name },
+                        { "topRankSize", goal.TopRankSize },
+                        { "isCompleted", goal.IsComplete },
+                        { "contributorsNum", goal.NumContributors },
+                        { "contributionsTotal", goal.CurrentTotal },
+                        { "completionBonus", goal.TopTier?.Bonus },
                     }
                 };
 
@@ -249,14 +249,14 @@ namespace DW.ELA.Plugin.Inara
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
                     {
-                        {"communitygoalGameID", goal.Cgid},
-                        {"contribution", goal.PlayerContribution},
-                        {"percentileBand", goal.PlayerPercentileBand},
-                        {"percentileBandReward", goal.Bonus},
-                        {"isTopRank", goal.PlayerInTopRank}
+                        { "communitygoalGameID", goal.Cgid },
+                        { "contribution", goal.PlayerContribution },
+                        { "percentileBand", goal.PlayerPercentileBand },
+                        { "percentileBandReward", goal.Bonus },
+                        { "isTopRank", goal.PlayerInTopRank }
                     }
                 };
-            };
+            }
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(Reputation e)
@@ -266,8 +266,8 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"majorfactionName", nameof(e.Empire)},
-                    {"majorfactionReputation", System.Convert.ToSingle(e.Empire) / 100.0f },
+                    { "majorfactionName", nameof(e.Empire) },
+                    { "majorfactionReputation", System.Convert.ToSingle(e.Empire) / 100.0f },
                 }
             };
             yield return new ApiEvent("setCommanderReputationMajorFaction")
@@ -275,8 +275,8 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"majorfactionName", nameof(e.Alliance)},
-                    {"majorfactionReputation", System.Convert.ToSingle(e.Alliance) / 100.0f },
+                    { "majorfactionName", nameof(e.Alliance) },
+                    { "majorfactionReputation", System.Convert.ToSingle(e.Alliance) / 100.0f },
                 }
             };
             yield return new ApiEvent("setCommanderReputationMajorFaction")
@@ -284,8 +284,8 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"majorfactionName", nameof(e.Federation)},
-                    {"majorfactionReputation", System.Convert.ToSingle(e.Federation) / 100.0f },
+                    { "majorfactionName", nameof(e.Federation) },
+                    { "majorfactionReputation", System.Convert.ToSingle(e.Federation) / 100.0f },
                 }
             };
         }
@@ -298,12 +298,12 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"shipType", e.StoreOldShip},
-                    {"shipGameID", e.StoreShipId },
-                    {"marketID", e.MarketId },
-                    {"starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp)},
-                    {"stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
-                    {"isCurrentShip", false}
+                    { "shipType", e.StoreOldShip },
+                    { "shipGameID", e.StoreShipId },
+                    { "marketID", e.MarketId },
+                    { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    { "stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
+                    { "isCurrentShip", false }
                 }
             };
             yield return @event;
@@ -313,12 +313,12 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"shipType", e.ShipType},
-                    {"shipGameID", e.ShipId },
-                    {"marketID", e.MarketId },
-                    {"starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp)},
-                    {"stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
-                    {"isCurrentShip", true}
+                    { "shipType", e.ShipType },
+                    { "shipGameID", e.ShipId },
+                    { "marketID", e.MarketId },
+                    { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    { "stationName", playerStateRecorder.GetPlayerStation(e.Timestamp) },
+                    { "isCurrentShip", true }
                 }
             };
             yield return @event;
@@ -331,8 +331,8 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"shipType", e.ShipType},
-                    {"shipGameID", e.SellShipId },
+                    { "shipType", e.ShipType },
+                    { "shipGameID", e.SellShipId },
                 }
             };
             yield return @event;
@@ -352,20 +352,23 @@ namespace DW.ELA.Plugin.Inara
         {
             var result = new Dictionary<string, object>()
             {
-                { "itemName", item.Name},
-                { "itemValue", item.BuyPrice},
-                { "isHot", item.Hot},
-                { "starsystemName", item.StarSystem},
-                { "marketID", item.MarketId},
+                { "itemName", item.Name },
+                { "itemValue", item.BuyPrice },
+                { "isHot", item.Hot },
+                { "starsystemName", item.StarSystem },
+                { "marketID", item.MarketId },
             };
             if (!string.IsNullOrEmpty(item.EngineerModifications))
-                result.Add("engineering", new Dictionary<string, object>()
+            {
+                var value = new Dictionary<string, object>()
                 {
-                    {"blueprintName", item.EngineerModifications },
-                    {"blueprintLevel", item.Level },
-                    {"blueprintQuality", item.Quality },
+                    { "blueprintName", item.EngineerModifications },
+                    { "blueprintLevel", item.Level },
+                    { "blueprintQuality", item.Quality },
+                };
+                result.Add("engineering", value);
+            }
 
-                });
             return result;
         }
 
@@ -376,7 +379,7 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"missionGameID", e.MissionId },
+                    { "missionGameID", e.MissionId },
                 }
             };
             yield return @event;
@@ -389,7 +392,7 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"missionGameID", e.MissionId },
+                    { "missionGameID", e.MissionId },
                 }
             };
             yield return @event;
@@ -402,10 +405,10 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"missionGameID", e.MissionId },
-                    {"missionName", e.Name },
-                    {"donationCredits", e.Donation },
-                    {"rewardCredits", e.Reward },
+                    { "missionGameID", e.MissionId },
+                    { "missionName", e.Name },
+                    { "donationCredits", e.Donation },
+                    { "rewardCredits", e.Reward },
                 }
             };
             yield return @event;
@@ -415,17 +418,17 @@ namespace DW.ELA.Plugin.Inara
         {
             var data = new Dictionary<string, object>()
                 {
-                    {"missionName", e.Name },
-                    {"missionGameID", e.MissionId },
-                    {"missionExpiry", e.Expiry },
-                    {"influenceGain", e.Influence },
-                    {"reputationGain", e.Reputation },
-                    {"starsystemNameOrigin", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
-                    {"stationNameOrigin", playerStateRecorder.GetPlayerStation(e.Timestamp) },
-                    {"minorfactionNameOrigin", e.Faction },
-                    {"starsystemNameTarget", e.DestinationSystem },
-                    {"minorfactionNameTarget", e.TargetFaction },
-                    {"stationNameTarget", e.DestinationStation },
+                    { "missionName", e.Name },
+                    { "missionGameID", e.MissionId },
+                    { "missionExpiry", e.Expiry },
+                    { "influenceGain", e.Influence },
+                    { "reputationGain", e.Reputation },
+                    { "starsystemNameOrigin", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
+                    { "stationNameOrigin", playerStateRecorder.GetPlayerStation(e.Timestamp) },
+                    { "minorfactionNameOrigin", e.Faction },
+                    { "starsystemNameTarget", e.DestinationSystem },
+                    { "minorfactionNameTarget", e.TargetFaction },
+                    { "stationNameTarget", e.DestinationStation },
                 };
 
             if (!string.IsNullOrWhiteSpace(e.Commodity))
@@ -449,13 +452,12 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    {"itemName", e.Name},
-                    {"itemCount", e.Count }
+                    { "itemName", e.Name },
+                    { "itemCount", e.Count }
                 }
             };
             yield return @event;
         }
-
 
         private IEnumerable<ApiEvent> ConvertEvent(Loadout e)
         {
@@ -467,17 +469,17 @@ namespace DW.ELA.Plugin.Inara
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    { "shipType" , e.Ship},
-                    { "shipGameID" , e.ShipId},
-                    { "shipName" , e.ShipName},
-                    { "shipIdent" , e.ShipIdent},
-                    { "isCurrentShip" , true},
-                    { "isMainShip" , false},
-                    { "isHot" , false}, // TODO
-                    { "shipHullValue" , e.HullValue},
-                    { "shipModulesValue" , e.ModulesValue},
-                    { "shipRebuyCost" , e.Rebuy},
-                    { "starsystemName" , playerStateRecorder.GetPlayerSystem(e.Timestamp)}
+                    { "shipType" , e.Ship },
+                    { "shipGameID" , e.ShipId },
+                    { "shipName" , e.ShipName },
+                    { "shipIdent" , e.ShipIdent },
+                    { "isCurrentShip" , true },
+                    { "isMainShip" , false },
+                    { "isHot" , false }, // TODO
+                    { "shipHullValue" , e.HullValue },
+                    { "shipModulesValue" , e.ModulesValue },
+                    { "shipRebuyCost" , e.Rebuy },
+                    { "starsystemName" , playerStateRecorder.GetPlayerSystem(e.Timestamp) }
                 }
             };
 
@@ -507,7 +509,6 @@ namespace DW.ELA.Plugin.Inara
                 ["isOn"] = module.On,
                 ["isHot"] = false, // TODO!
                 ["itemPriority"] = module.Priority,
-
             };
             item.AddIfNotNull("itemAmmoClip", module.AmmoInClip);
             item.AddIfNotNull("itemAmmoHopper", module.AmmoInHopper);
@@ -611,7 +612,7 @@ namespace DW.ELA.Plugin.Inara
             {
                 EventData = new Dictionary<string, object> {
                     { "starsystemName", @event.StarSystem },
-                    { "stationName", @event.StationName},
+                    { "stationName", @event.StationName },
                     { "marketID", @event.MarketId },
                     { "shipGameID", playerStateRecorder.GetPlayerShipId(timestamp) },
                     { "shipType", playerStateRecorder.GetPlayerShipType(timestamp) }
@@ -665,7 +666,9 @@ namespace DW.ELA.Plugin.Inara
         private IEnumerable<ApiEvent> ConvertEvent(EngineerProgress @event)
         {
             if (@event.Engineers != null)
+            {
                 foreach (var engineer in @event.Engineers)
+                {
                     yield return new ApiEvent("setCommanderRankEngineer")
                     {
                         EventData = new Dictionary<string, object> {
@@ -675,6 +678,8 @@ namespace DW.ELA.Plugin.Inara
                         },
                         Timestamp = @event.Timestamp
                     };
+                }
+            }
         }
     }
 }

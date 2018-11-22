@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace ELA.Plugin.EDSM
+﻿namespace ELA.Plugin.EDSM
 {
+    using Newtonsoft.Json;
+
     public class EdsmSettings
     {
         [JsonProperty("apiKey")]

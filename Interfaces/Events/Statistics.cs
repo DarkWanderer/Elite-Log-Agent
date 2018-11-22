@@ -1,9 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using System.Collections.Generic;
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class Statistics: LogEvent
     {
         [JsonProperty("Bank_Account")]
@@ -321,5 +321,4 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("Highest_Single_Transaction")]
         public long HighestSingleTransaction { get; set; }
     }
-
 }

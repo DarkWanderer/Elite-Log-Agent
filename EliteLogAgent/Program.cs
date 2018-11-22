@@ -1,17 +1,17 @@
-﻿using Controller;
-using DW.ELA.Interfaces;
-using System;
-using System.Windows.Forms;
-using Castle.Windsor;
-using Castle.MicroKernel.Registration;
-using Castle.Facilities.Logging;
-using Castle.Services.Logging.NLogIntegration;
-using NLog;
-using Utility;
-using System.Linq;
-
-namespace EliteLogAgent
+﻿namespace EliteLogAgent
 {
+    using System;
+    using System.Linq;
+    using System.Windows.Forms;
+    using Castle.Facilities.Logging;
+    using Castle.MicroKernel.Registration;
+    using Castle.Services.Logging.NLogIntegration;
+    using Castle.Windsor;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using NLog;
+    using DW.ELA.Utility;
+
     static partial class Program
     {
         /// <summary>
@@ -85,6 +85,5 @@ namespace EliteLogAgent
         }
 
         private static readonly ILogger rootLogger = LogManager.GetCurrentClassLogger();
-
     }
 }

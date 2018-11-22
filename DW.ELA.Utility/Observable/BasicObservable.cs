@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Utility.Observable
+﻿namespace DW.ELA.Utility.Observable
 {
+    using System;
+    using System.Collections.Generic;
+
     public class BasicObservable<T> : IObservable<T>
     {
         protected readonly List<IObserver<T>> Observers = new List<IObserver<T>>();

@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace DW.ELA.Interfaces
+﻿namespace DW.ELA.Interfaces
 {
+    using System;
+    using Newtonsoft.Json;
+
     public class ErrorRecord
     {
         [JsonProperty("hostname")]

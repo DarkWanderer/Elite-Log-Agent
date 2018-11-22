@@ -1,20 +1,19 @@
-﻿using DW.ELA.Utility.Json;
-using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NLog;
-using NLog.Common;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Timers;
-using Utility;
-
-namespace DW.ELA.Utility
+﻿namespace DW.ELA.Utility
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Timers;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+    using NLog.Common;
+
     public class CloudApiLogTarget : NLog.Targets.Target
     {
         private readonly IRestClient restClient;
@@ -44,7 +43,6 @@ namespace DW.ELA.Utility
                     foreach (var rec in Convert(@event.LogEvent))
                         recordQueue.Enqueue(rec);
                     @event.Continuation(null);
-
                 }
                 catch (Exception ex)
                 {
@@ -56,13 +54,16 @@ namespace DW.ELA.Utility
         }
 
         protected override void Write(IList<AsyncLogEventInfo> logEvents) => EnqueueEvents(logEvents);
+
         protected override void Write(AsyncLogEventInfo logEvent) => EnqueueEvents(logEvent);
 
         protected override void WriteAsyncThreadSafe(IList<AsyncLogEventInfo> logEvents) => EnqueueEvents(logEvents);
+
         protected override void WriteAsyncThreadSafe(AsyncLogEventInfo logEvent) => EnqueueEvents(logEvent);
 
         [Obsolete]
         protected override void Write(AsyncLogEventInfo[] logEvents) => EnqueueEvents(logEvents);
+
         [Obsolete]
         protected override void WriteAsyncThreadSafe(AsyncLogEventInfo[] logEvents) => EnqueueEvents(logEvents);
 
@@ -95,7 +96,7 @@ namespace DW.ELA.Utility
         {
             string message;
             if (logEvent.Parameters != null)
-                message = String.Format(logEvent.Message, logEvent.Parameters);
+                message = string.Format(logEvent.Message, logEvent.Parameters);
             else
                 message = logEvent.Message;
 

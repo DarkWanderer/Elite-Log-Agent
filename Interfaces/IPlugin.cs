@@ -1,12 +1,12 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Settings;
-using System;
-
-namespace DW.ELA.Interfaces
+﻿namespace DW.ELA.Interfaces
 {
+    using System;
+    using DW.ELA.Interfaces.Settings;
+
     public interface IPlugin
     {
         string PluginName { get; }
+
         string PluginId { get; }
 
         /// <summary>

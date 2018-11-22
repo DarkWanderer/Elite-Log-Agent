@@ -1,12 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.Plugin.EDDN.Model
+﻿namespace DW.ELA.Plugin.EDDN.Model
 {
+    using System;
+    using Newtonsoft.Json;
+
     class OutfittingEvent : EddnEvent
     {
         [JsonProperty("message")]

@@ -1,8 +1,8 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class Location : LogEvent
     {
         [JsonProperty("Docked")]
@@ -86,5 +86,4 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("Longitude")]
         public double? Longitude { get; set; }
     }
-
 }

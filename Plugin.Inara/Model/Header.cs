@@ -1,9 +1,8 @@
-﻿using DW.ELA.Utility.Json;
-using Newtonsoft.Json;
-using Utility;
-
-namespace DW.ELA.Plugin.Inara.Model
+﻿namespace DW.ELA.Plugin.Inara.Model
 {
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json;
+
     public class Header
     {
         public Header(string commander, string apiKey)
@@ -14,19 +13,22 @@ namespace DW.ELA.Plugin.Inara.Model
 
         // Input fields
         [JsonProperty("appName")]
-        public readonly string AppName = AppInfo.Name;
+        public readonly string AppName = Utility.AppInfo.Name;
         [JsonProperty("appVersion")]
-        public readonly string AppVersion = AppInfo.Version;
+        public readonly string AppVersion = Utility.AppInfo.Version;
         [JsonProperty("isDeveloped")]
         public readonly bool IsDeveloped = false;
+
         [JsonProperty("APIkey")]
         public string ApiKey { get; }
+
         [JsonProperty("commanderName")]
         public string CommanderName { get; }
 
         // Output fields
         [JsonProperty("eventStatus")]
         public int? EventStatus { get; internal set; }
+
         [JsonProperty("eventStatusText")]
         public string EventStatusText { get; internal set; }
 

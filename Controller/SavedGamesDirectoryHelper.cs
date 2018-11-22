@@ -1,9 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using System;
-using System.Runtime.InteropServices;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.Runtime.InteropServices;
+    using DW.ELA.Interfaces;
+
     public class SavedGamesDirectoryHelper : ILogDirectoryNameProvider
     {
         public string Directory => SDirectory;

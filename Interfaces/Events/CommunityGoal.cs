@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using System;
+    using Newtonsoft.Json;
+
     public class CommunityGoal : LogEvent
     {
         [JsonProperty("CurrentGoals")]

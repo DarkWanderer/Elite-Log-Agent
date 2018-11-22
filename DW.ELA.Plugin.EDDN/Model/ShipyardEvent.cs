@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace DW.ELA.Plugin.EDDN.Model
+﻿namespace DW.ELA.Plugin.EDDN.Model
 {
+    using System;
+    using Newtonsoft.Json;
+
     public partial class ShipyardEvent : EddnEvent
     {
         [JsonProperty("message")]

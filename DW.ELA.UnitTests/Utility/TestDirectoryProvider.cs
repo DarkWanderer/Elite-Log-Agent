@@ -1,9 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using System;
-using System.IO;
-
-namespace DW.ELA.UnitTests.Utility
+﻿namespace DW.ELA.UnitTests.Utility
 {
+    using System;
+    using System.IO;
+    using DW.ELA.Interfaces;
+
     public class TestDirectoryProvider : ILogDirectoryNameProvider
     {
         private static readonly Random random = new Random();

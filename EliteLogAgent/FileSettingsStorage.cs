@@ -1,13 +1,13 @@
-﻿using DW.ELA.Interfaces.Settings;
-using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using NLog;
-using System;
-using System.IO;
-using DW.ELA.Utility.Json;
-
-namespace EliteLogAgent
+﻿namespace EliteLogAgent
 {
+    using System;
+    using System.IO;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Settings;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json;
+    using NLog;
+
     public class FileSettingsStorage : ISettingsProvider
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
@@ -33,6 +33,7 @@ namespace EliteLogAgent
                 }
                 return GlobalSettings.Defaults;
             }
+
             set
             {
                 lock (settingsCacheLock)

@@ -1,9 +1,9 @@
-﻿using DW.ELA.Plugin.EDDN.Model;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-namespace DW.ELA.Plugin.EDDN
+﻿namespace DW.ELA.Plugin.EDDN
 {
+    using DW.ELA.Plugin.EDDN.Model;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public class JournalEvent : EddnEvent
     {
         [JsonProperty("message")]

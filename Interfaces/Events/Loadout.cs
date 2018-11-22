@@ -1,6 +1,5 @@
 ﻿namespace DW.ELA.Interfaces.Events
 {
-    using System;
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
@@ -117,5 +116,4 @@
         [JsonProperty("LessIsGood")]
         public long? LessIsGood { get; set; }
     }
-
 }

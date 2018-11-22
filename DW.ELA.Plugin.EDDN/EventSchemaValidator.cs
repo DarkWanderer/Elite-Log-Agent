@@ -1,17 +1,15 @@
-﻿using DW.ELA.Plugin.EDDN.Model;
-using DW.ELA.Interfaces;
-using Newtonsoft.Json.Linq;
-using NJsonSchema;
-using NLog;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DW.ELA.Plugin.EDDN
+﻿namespace DW.ELA.Plugin.EDDN
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using DW.ELA.Plugin.EDDN.Model;
+    using Newtonsoft.Json.Linq;
+    using NJsonSchema;
+    using NLog;
+
     public class EventSchemaValidator
     {
         private IReadOnlyDictionary<string, JsonSchema4> schemaCache;

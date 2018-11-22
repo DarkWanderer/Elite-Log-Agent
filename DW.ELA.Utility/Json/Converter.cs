@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Globalization;
-
-namespace DW.ELA.Utility.Json
+﻿namespace DW.ELA.Utility.Json
 {
+    using System.Globalization;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
     public static class Converter
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings

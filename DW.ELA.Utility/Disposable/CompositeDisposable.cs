@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Utility
+﻿namespace DW.ELA.Utility
 {
+    using System;
+    using System.Collections.Generic;
+
     // copy, modified from Rx Official
     // copied from UniRx (MIT license)
 
@@ -14,7 +14,7 @@ namespace Utility
         private const int SHRINK_THRESHOLD = 64;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class with no disposables contained by it initially.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class with no disposables contained by it initially.
         /// </summary>
         public CompositeDisposable()
         {
@@ -22,7 +22,7 @@ namespace Utility
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class with the specified number of disposables.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class with the specified number of disposables.
         /// </summary>
         /// <param name="capacity">The number of disposables that the new CompositeDisposable can initially store.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="capacity"/> is less than zero.</exception>
@@ -35,7 +35,7 @@ namespace Utility
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class from a group of disposables.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class from a group of disposables.
         /// </summary>
         /// <param name="disposables">Disposables that will be disposed together.</param>
         /// <exception cref="ArgumentNullException"><paramref name="disposables"/> is null.</exception>
@@ -49,7 +49,7 @@ namespace Utility
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class from a group of disposables.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class from a group of disposables.
         /// </summary>
         /// <param name="disposables">Disposables that will be disposed together.</param>
         /// <exception cref="ArgumentNullException"><paramref name="disposables"/> is null.</exception>
@@ -134,8 +134,10 @@ namespace Utility
                             _disposables = new List<IDisposable>(_disposables.Capacity / 2);
 
                             foreach (var d in old)
+                            {
                                 if (d != null)
                                     _disposables.Add(d);
+                            }
                         }
                     }
                 }
@@ -167,8 +169,10 @@ namespace Utility
             if (currentDisposables != null)
             {
                 foreach (var d in currentDisposables)
+                {
                     if (d != null)
                         d.Dispose();
+                }
             }
         }
 
@@ -186,8 +190,10 @@ namespace Utility
             }
 
             foreach (var d in currentDisposables)
+            {
                 if (d != null)
                     d.Dispose();
+            }
         }
 
         /// <summary>

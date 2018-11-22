@@ -1,8 +1,8 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class EngineerProgress : LogEvent
     {
         [JsonProperty("Engineers")]
@@ -11,7 +11,7 @@ namespace DW.ELA.Interfaces.Events
 
     public class EngineerProgressRecord
     {
-        public enum ProgressState { Invited, Known, Unlocked };
+        public enum ProgressState { Invited, Known, Unlocked }
 
         [JsonProperty("Engineer")]
         public string EngineerName { get; set; }
@@ -28,6 +28,4 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("Rank", NullValueHandling = NullValueHandling.Ignore)]
         public long? Rank { get; set; }
     }
-
-
 }

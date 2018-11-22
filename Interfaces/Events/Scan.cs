@@ -1,10 +1,8 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class Scan : LogEvent
     {
         [JsonProperty("BodyName")]

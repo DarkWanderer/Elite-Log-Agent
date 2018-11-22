@@ -1,23 +1,23 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DW.ELA.Interfaces;
-using Utility.Extensions;
-using Controller;
-using DW.ELA.Interfaces.Settings;
-using NLog;
-using System.Linq;
-using EliteLogAgent.Autorun;
-using DW.ELA.Interfaces.Events;
-using System.Collections.Generic;
-
-namespace EliteLogAgent.Settings
+﻿namespace EliteLogAgent.Settings
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Forms;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using DW.ELA.Interfaces.Settings;
+    using EliteLogAgent.Autorun;
+    using NLog;
+    using DW.ELA.Utility.Extensions;
+
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
-        private static ILogger Logger = LogManager.GetCurrentClassLogger();
+        private static ILogger logger = LogManager.GetCurrentClassLogger();
         private ProgressBar progressBarUploadLatest;
-        private const int uploadFileCount = 5;
+        private const int UploadFileCount = 5;
 
         public GeneralSettingsControl()
         {
@@ -42,6 +42,7 @@ namespace EliteLogAgent.Settings
         }
 
         public IMessageBroker MessageBroker { get; internal set; }
+
         public IReadOnlyCollection<IPlugin> Plugins { get; internal set; }
 
         private async void UploadLatestDataButton_Click(object sender, EventArgs e)
@@ -63,7 +64,7 @@ namespace EliteLogAgent.Settings
             catch (Exception ex)
             {
                 MessageBox.Show("Error processing update:\n" + ex.GetStackedErrorMessages(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.Error(ex, "Error while uploading data");
+                logger.Error(ex, "Error while uploading data");
             }
             finally
             {
@@ -73,8 +74,8 @@ namespace EliteLogAgent.Settings
 
         private void UploadLatestData()
         {
-            Logger.Info("Starting latest data upload");
-            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, uploadFileCount);
+            logger.Info("Starting latest data upload");
+            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, UploadFileCount);
             var logCounter = new LogEventTypeCounter();
 
             using (logEventSource.Subscribe(logCounter))
@@ -83,7 +84,7 @@ namespace EliteLogAgent.Settings
                 logEventSource.Play();
             }
 
-            Logger.Info("Uploaded {0} events", logCounter.EventCounts.Values.DefaultIfEmpty(0).Sum());
+            logger.Info("Uploaded {0} events", logCounter.EventCounts.Values.DefaultIfEmpty(0).Sum());
         }
 
         private void ReportErrorsCheckbox_CheckedChanged(object sender, EventArgs e) => Settings.ReportErrorsToCloud = reportErrorsCheckbox.Checked;
@@ -98,12 +99,12 @@ namespace EliteLogAgent.Settings
                 var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
                 var cmdrEvent = logEventSource.Events.OfType<Commander>().FirstOrDefault();
                 cmdrNameTextBox.Text = cmdrEvent?.Name ?? cmdrNameTextBox.Text;
-                Logger.Info("Detected commander name as {0}", cmdrEvent?.Name);
+                logger.Info("Detected commander name as {0}", cmdrEvent?.Name);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error detecting cmdr name:\n" + ex.GetStackedErrorMessages(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.Error(ex, "Error while detecting cmdr name");
+                logger.Error(ex, "Error while detecting cmdr name");
             }
             finally
             {
@@ -121,130 +122,129 @@ namespace EliteLogAgent.Settings
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmdrNameLabel = new System.Windows.Forms.Label();
-            this.cmdrNameTextBox = new System.Windows.Forms.TextBox();
-            this.uploadLatestDataButton = new System.Windows.Forms.Button();
-            this.autodetectCmdrNameButton = new System.Windows.Forms.Button();
-            this.checkboxAutostartApplication = new System.Windows.Forms.CheckBox();
-            this.reportErrorsCheckbox = new System.Windows.Forms.CheckBox();
-            this.logLevelLabel = new System.Windows.Forms.Label();
-            this.logLevelComboBox = new System.Windows.Forms.ComboBox();
-            this.progressBarUploadLatest = new System.Windows.Forms.ProgressBar();
-            this.SuspendLayout();
+            cmdrNameLabel = new System.Windows.Forms.Label();
+            cmdrNameTextBox = new System.Windows.Forms.TextBox();
+            uploadLatestDataButton = new System.Windows.Forms.Button();
+            autodetectCmdrNameButton = new System.Windows.Forms.Button();
+            checkboxAutostartApplication = new System.Windows.Forms.CheckBox();
+            reportErrorsCheckbox = new System.Windows.Forms.CheckBox();
+            logLevelLabel = new System.Windows.Forms.Label();
+            logLevelComboBox = new System.Windows.Forms.ComboBox();
+            progressBarUploadLatest = new System.Windows.Forms.ProgressBar();
+            SuspendLayout();
             // 
             // cmdrNameLabel
             // 
-            this.cmdrNameLabel.AutoSize = true;
-            this.cmdrNameLabel.Location = new System.Drawing.Point(3, 6);
-            this.cmdrNameLabel.Name = "cmdrNameLabel";
-            this.cmdrNameLabel.Size = new System.Drawing.Size(93, 17);
-            this.cmdrNameLabel.TabIndex = 5;
-            this.cmdrNameLabel.Text = "CMDR Name:";
+            cmdrNameLabel.AutoSize = true;
+            cmdrNameLabel.Location = new System.Drawing.Point(3, 6);
+            cmdrNameLabel.Name = "cmdrNameLabel";
+            cmdrNameLabel.Size = new System.Drawing.Size(93, 17);
+            cmdrNameLabel.TabIndex = 5;
+            cmdrNameLabel.Text = "CMDR Name:";
             // 
             // cmdrNameTextBox
             // 
-            this.cmdrNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdrNameTextBox.Location = new System.Drawing.Point(102, 3);
-            this.cmdrNameTextBox.Name = "cmdrNameTextBox";
-            this.cmdrNameTextBox.Size = new System.Drawing.Size(312, 22);
-            this.cmdrNameTextBox.TabIndex = 4;
-            this.cmdrNameTextBox.Text = "Commander Name";
-            this.cmdrNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.cmdrNameTextBox.TextChanged += new System.EventHandler(this.CmdrNameTextBox_TextChanged);
+            cmdrNameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left
+            | AnchorStyles.Right;
+            cmdrNameTextBox.Location = new System.Drawing.Point(102, 3);
+            cmdrNameTextBox.Name = "cmdrNameTextBox";
+            cmdrNameTextBox.Size = new System.Drawing.Size(312, 22);
+            cmdrNameTextBox.TabIndex = 4;
+            cmdrNameTextBox.Text = "Commander Name";
+            cmdrNameTextBox.TextAlign = HorizontalAlignment.Center;
+            cmdrNameTextBox.TextChanged += new System.EventHandler(CmdrNameTextBox_TextChanged);
             // 
             // uploadLatestDataButton
             // 
-            this.uploadLatestDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.uploadLatestDataButton.Location = new System.Drawing.Point(3, 58);
-            this.uploadLatestDataButton.Name = "uploadLatestDataButton";
-            this.uploadLatestDataButton.Size = new System.Drawing.Size(411, 23);
-            this.uploadLatestDataButton.TabIndex = 3;
-            this.uploadLatestDataButton.Text = "Upload last 5 files via all plugins";
-            this.uploadLatestDataButton.UseVisualStyleBackColor = true;
-            this.uploadLatestDataButton.Click += new System.EventHandler(this.UploadLatestDataButton_Click);
+            uploadLatestDataButton.Anchor = AnchorStyles.Top | AnchorStyles.Left
+            | AnchorStyles.Right;
+            uploadLatestDataButton.Location = new System.Drawing.Point(3, 58);
+            uploadLatestDataButton.Name = "uploadLatestDataButton";
+            uploadLatestDataButton.Size = new System.Drawing.Size(411, 23);
+            uploadLatestDataButton.TabIndex = 3;
+            uploadLatestDataButton.Text = "Upload last 5 files via all plugins";
+            uploadLatestDataButton.UseVisualStyleBackColor = true;
+            uploadLatestDataButton.Click += new System.EventHandler(UploadLatestDataButton_Click);
             // 
             // autodetectCmdrNameButton
             // 
-            this.autodetectCmdrNameButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.autodetectCmdrNameButton.Location = new System.Drawing.Point(3, 29);
-            this.autodetectCmdrNameButton.Name = "autodetectCmdrNameButton";
-            this.autodetectCmdrNameButton.Size = new System.Drawing.Size(411, 23);
-            this.autodetectCmdrNameButton.TabIndex = 6;
-            this.autodetectCmdrNameButton.Text = "Autodetect CMDR Name";
-            this.autodetectCmdrNameButton.UseVisualStyleBackColor = true;
-            this.autodetectCmdrNameButton.Click += new System.EventHandler(this.AutodetectCmdrNameButton_Click);
+            autodetectCmdrNameButton.Anchor = AnchorStyles.Top | AnchorStyles.Left
+            | AnchorStyles.Right;
+            autodetectCmdrNameButton.Location = new System.Drawing.Point(3, 29);
+            autodetectCmdrNameButton.Name = "autodetectCmdrNameButton";
+            autodetectCmdrNameButton.Size = new System.Drawing.Size(411, 23);
+            autodetectCmdrNameButton.TabIndex = 6;
+            autodetectCmdrNameButton.Text = "Autodetect CMDR Name";
+            autodetectCmdrNameButton.UseVisualStyleBackColor = true;
+            autodetectCmdrNameButton.Click += new System.EventHandler(AutodetectCmdrNameButton_Click);
             // 
             // checkboxAutostartApplication
             // 
-            this.checkboxAutostartApplication.AutoSize = true;
-            this.checkboxAutostartApplication.Location = new System.Drawing.Point(3, 104);
-            this.checkboxAutostartApplication.Name = "checkboxAutostartApplication";
-            this.checkboxAutostartApplication.Size = new System.Drawing.Size(186, 21);
-            this.checkboxAutostartApplication.TabIndex = 7;
-            this.checkboxAutostartApplication.Text = "Autorun agent on sign-in";
-            this.checkboxAutostartApplication.UseVisualStyleBackColor = true;
-            this.checkboxAutostartApplication.CheckedChanged += new System.EventHandler(this.CheckboxAutostartApplication_CheckedChanged);
+            checkboxAutostartApplication.AutoSize = true;
+            checkboxAutostartApplication.Location = new System.Drawing.Point(3, 104);
+            checkboxAutostartApplication.Name = "checkboxAutostartApplication";
+            checkboxAutostartApplication.Size = new System.Drawing.Size(186, 21);
+            checkboxAutostartApplication.TabIndex = 7;
+            checkboxAutostartApplication.Text = "Autorun agent on sign-in";
+            checkboxAutostartApplication.UseVisualStyleBackColor = true;
+            checkboxAutostartApplication.CheckedChanged += new System.EventHandler(CheckboxAutostartApplication_CheckedChanged);
             // 
             // reportErrorsCheckbox
             // 
-            this.reportErrorsCheckbox.AutoSize = true;
-            this.reportErrorsCheckbox.Location = new System.Drawing.Point(3, 125);
-            this.reportErrorsCheckbox.Name = "reportErrorsCheckbox";
-            this.reportErrorsCheckbox.Size = new System.Drawing.Size(220, 21);
-            this.reportErrorsCheckbox.TabIndex = 8;
-            this.reportErrorsCheckbox.Text = "Report errors to Cloud service";
-            this.reportErrorsCheckbox.UseVisualStyleBackColor = true;
-            this.reportErrorsCheckbox.CheckedChanged += new System.EventHandler(this.ReportErrorsCheckbox_CheckedChanged);
+            reportErrorsCheckbox.AutoSize = true;
+            reportErrorsCheckbox.Location = new System.Drawing.Point(3, 125);
+            reportErrorsCheckbox.Name = "reportErrorsCheckbox";
+            reportErrorsCheckbox.Size = new System.Drawing.Size(220, 21);
+            reportErrorsCheckbox.TabIndex = 8;
+            reportErrorsCheckbox.Text = "Report errors to Cloud service";
+            reportErrorsCheckbox.UseVisualStyleBackColor = true;
+            reportErrorsCheckbox.CheckedChanged += new System.EventHandler(ReportErrorsCheckbox_CheckedChanged);
             // 
             // logLevelLabel
             // 
-            this.logLevelLabel.AutoSize = true;
-            this.logLevelLabel.Location = new System.Drawing.Point(3, 155);
-            this.logLevelLabel.Name = "logLevelLabel";
-            this.logLevelLabel.Size = new System.Drawing.Size(65, 17);
-            this.logLevelLabel.TabIndex = 9;
-            this.logLevelLabel.Text = "Log level";
+            logLevelLabel.AutoSize = true;
+            logLevelLabel.Location = new System.Drawing.Point(3, 155);
+            logLevelLabel.Name = "logLevelLabel";
+            logLevelLabel.Size = new System.Drawing.Size(65, 17);
+            logLevelLabel.TabIndex = 9;
+            logLevelLabel.Text = "Log level";
             // 
             // logLevelComboBox
             // 
-            this.logLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.logLevelComboBox.FormattingEnabled = true;
-            this.logLevelComboBox.Location = new System.Drawing.Point(74, 152);
-            this.logLevelComboBox.Name = "logLevelComboBox";
-            this.logLevelComboBox.Size = new System.Drawing.Size(149, 24);
-            this.logLevelComboBox.TabIndex = 10;
-            this.logLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.LogLevelComboBox_SelectedIndexChanged);
+            logLevelComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            logLevelComboBox.FormattingEnabled = true;
+            logLevelComboBox.Location = new System.Drawing.Point(74, 152);
+            logLevelComboBox.Name = "logLevelComboBox";
+            logLevelComboBox.Size = new System.Drawing.Size(149, 24);
+            logLevelComboBox.TabIndex = 10;
+            logLevelComboBox.SelectedIndexChanged += new System.EventHandler(LogLevelComboBox_SelectedIndexChanged);
             // 
             // progressBarUploadLatest
             // 
-            this.progressBarUploadLatest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBarUploadLatest.Location = new System.Drawing.Point(3, 85);
-            this.progressBarUploadLatest.Name = "progressBarUploadLatest";
-            this.progressBarUploadLatest.Size = new System.Drawing.Size(411, 13);
-            this.progressBarUploadLatest.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBarUploadLatest.TabIndex = 11;
+            progressBarUploadLatest.Anchor = AnchorStyles.Top | AnchorStyles.Left
+            | AnchorStyles.Right;
+            progressBarUploadLatest.Location = new System.Drawing.Point(3, 85);
+            progressBarUploadLatest.Name = "progressBarUploadLatest";
+            progressBarUploadLatest.Size = new System.Drawing.Size(411, 13);
+            progressBarUploadLatest.Style = ProgressBarStyle.Continuous;
+            progressBarUploadLatest.TabIndex = 11;
             // 
             // GeneralSettingsControl
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.Controls.Add(this.progressBarUploadLatest);
-            this.Controls.Add(this.logLevelComboBox);
-            this.Controls.Add(this.logLevelLabel);
-            this.Controls.Add(this.reportErrorsCheckbox);
-            this.Controls.Add(this.checkboxAutostartApplication);
-            this.Controls.Add(this.autodetectCmdrNameButton);
-            this.Controls.Add(this.cmdrNameLabel);
-            this.Controls.Add(this.cmdrNameTextBox);
-            this.Controls.Add(this.uploadLatestDataButton);
-            this.Name = "GeneralSettingsControl";
-            this.Size = new System.Drawing.Size(417, 219);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleMode = AutoScaleMode.Inherit;
+            Controls.Add(progressBarUploadLatest);
+            Controls.Add(logLevelComboBox);
+            Controls.Add(logLevelLabel);
+            Controls.Add(reportErrorsCheckbox);
+            Controls.Add(checkboxAutostartApplication);
+            Controls.Add(autodetectCmdrNameButton);
+            Controls.Add(cmdrNameLabel);
+            Controls.Add(cmdrNameTextBox);
+            Controls.Add(uploadLatestDataButton);
+            Name = "GeneralSettingsControl";
+            Size = new System.Drawing.Size(417, 219);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         private Label cmdrNameLabel;

@@ -1,13 +1,11 @@
-﻿using DW.ELA.Utility.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.UnitTests.Utility
+﻿namespace DW.ELA.UnitTests.Utility
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json.Linq;
+
     public static class JsonComparer
     {
         /// <summary>
@@ -35,7 +33,9 @@ namespace DW.ELA.UnitTests.Utility
         {
             var diffs = new List<string>();
             if (t1?.GetType() != t2?.GetType())
+            {
                 diffs.Add($"{tokenName}: Different types: {t1?.GetType().ToString() ?? "null"} vs {t2?.GetType().ToString() ?? "null"}");
+            }
             else
             {
                 switch (t1)

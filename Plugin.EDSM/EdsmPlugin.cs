@@ -1,34 +1,38 @@
-﻿using DW.ELA.Controller;
-using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Settings;
-using MoreLinq;
-using Newtonsoft.Json.Linq;
-using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Utility;
-
-namespace ELA.Plugin.EDSM
+﻿namespace ELA.Plugin.EDSM
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Settings;
+    using DW.ELA.Utility;
+    using MoreLinq;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+    using DW.ELA.Utility;
+
     public class EdsmPlugin : AbstractPlugin<JObject,EdsmSettings>
     {
-        private readonly IRestClient RestClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
+        private readonly IRestClient restClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
         private Task<HashSet<string>> ignoredEvents;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private IEdsmApiFacade apiFacade;
         private readonly IEventConverter<JObject> eventConverter = new EventRawJsonExtractor();
+
         protected override IEventConverter<JObject> EventConverter => eventConverter;
+
         public override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
 
-        public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder) : base (settingsProvider)
+        public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
+            : base (settingsProvider)
         {
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
 
             ignoredEvents =
-                 RestClient.GetAsync("discard")
+                 restClient.GetAsync("discard")
                     .ContinueWith((t) => new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
 
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
@@ -38,7 +42,7 @@ namespace ELA.Plugin.EDSM
         public override void ReloadSettings()
         {
             FlushQueue();
-            apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
+            apiFacade = new EdsmApiFacade(restClient, GlobalSettings.CommanderName, Settings.ApiKey);
         }
 
         public override async void FlushEvents(ICollection<JObject> events)
@@ -64,7 +68,9 @@ namespace ELA.Plugin.EDSM
         }
 
         public const string CPluginId = "EdsmUploader";
+
         public override string PluginName => "EDSM";
+
         public override string PluginId => CPluginId;
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings };

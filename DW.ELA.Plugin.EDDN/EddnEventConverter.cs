@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Events;
-using DW.ELA.Plugin.EDDN.Model;
-using Newtonsoft.Json.Linq;
-using NLog;
-using Utility;
-
-namespace DW.ELA.Plugin.EDDN
+﻿namespace DW.ELA.Plugin.EDDN
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using DW.ELA.Plugin.EDDN.Model;
+    using DW.ELA.Utility;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+
     public class EddnEventConverter : IEventConverter<EddnEvent>
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
@@ -154,7 +154,9 @@ namespace DW.ELA.Plugin.EDDN
             {
                 var system = stateHistoryRecorder.GetPlayerSystem(e.Timestamp);
                 if (system != null)
+                {
                     @event.Message.Add("StarSystem", system);
+                }
                 else // if we can't determine player's location, abort
                 {
                     logger.Error("Unable to determine player location");
@@ -187,8 +189,10 @@ namespace DW.ELA.Plugin.EDDN
             };
 
             foreach (var attribute in raw)
+            {
                 if (attribute.Key.EndsWith("_Localised"))
                     attributesToRemove.Add(attribute.Key);
+            }
 
             foreach (var key in attributesToRemove)
                 raw.Remove(key);

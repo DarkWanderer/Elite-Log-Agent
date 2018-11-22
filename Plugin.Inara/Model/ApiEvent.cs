@@ -1,9 +1,9 @@
-﻿using DW.ELA.Utility.Json;
-using Newtonsoft.Json;
-using System;
-
-namespace DW.ELA.Plugin.Inara.Model
+﻿namespace DW.ELA.Plugin.Inara.Model
 {
+    using System;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json;
+
     public sealed class ApiEvent
     {
         public ApiEvent(string eventName)

@@ -1,13 +1,8 @@
-﻿using Controller;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using DW.ELA.Controller;
+    using NUnit.Framework;
+
     public class SavedGamesDirectoryHelperTests
     {
         [Test]

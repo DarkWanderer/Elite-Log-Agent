@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-
-namespace DW.ELA.Interfaces.Settings
+﻿namespace DW.ELA.Interfaces.Settings
 {
+    using System;
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public class GlobalSettings : ICloneable
     {
         [JsonProperty("pluginSettings")]

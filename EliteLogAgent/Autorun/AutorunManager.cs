@@ -1,10 +1,9 @@
-﻿using Microsoft.Win32;
-using System;
-using System.IO;
-using System.Reflection;
-
-namespace EliteLogAgent.Autorun
+﻿namespace EliteLogAgent.Autorun
 {
+    using System;
+    using System.IO;
+    using Microsoft.Win32;
+
     public static class AutorunManager
     {
         private const string autorunRegistryKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -25,6 +24,7 @@ namespace EliteLogAgent.Autorun
                 using (var readHandle = Registry.CurrentUser.OpenSubKey(autorunRegistryKey, false))
                     return readHandle.GetValue(eliteLogAgentKey) as string == ExecutablePath;
             }
+
             set
             {
                 using (var writeHandle = Registry.CurrentUser.OpenSubKey(autorunRegistryKey, true))

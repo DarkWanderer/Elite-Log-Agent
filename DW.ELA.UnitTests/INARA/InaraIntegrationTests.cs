@@ -1,17 +1,13 @@
-﻿using Controller;
-using DW.ELA.Interfaces.Events;
-using DW.ELA.Plugin.Inara;
-using DW.ELA.Plugin.Inara.Model;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Utility;
-
-namespace DW.ELA.UnitTests.INARA
+﻿namespace DW.ELA.UnitTests.INARA
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using DW.ELA.Controller;
+    using DW.ELA.Plugin.Inara;
+    using DW.ELA.Plugin.Inara.Model;
+    using DW.ELA.Utility;
+    using NUnit.Framework;
+
     [TestFixture]
     public class InaraIntegrationTests
     {

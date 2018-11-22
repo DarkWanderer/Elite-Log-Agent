@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using System.Reflection;
-
-namespace Utility
+﻿namespace DW.ELA.Utility
 {
+    using System.Diagnostics;
+    using System.Reflection;
+
     public static class AppInfo
     {
         public static string Version

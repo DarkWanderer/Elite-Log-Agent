@@ -1,8 +1,8 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace ELA.Plugin.EDSM
+﻿namespace ELA.Plugin.EDSM
 {
+    using System;
+    using System.Runtime.Serialization;
+
     [Serializable]
     internal class EdsmApiException : Exception
     {
@@ -12,25 +12,30 @@ namespace ELA.Plugin.EDSM
         {
         }
 
-        public EdsmApiException(string message) : base(message)
+        public EdsmApiException(string message)
+            : base(message)
         {
         }
 
-        public EdsmApiException(string message, int returnCode) : base(message)
-        {
-            ReturnCode = returnCode;
-        }
-
-        public EdsmApiException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        public EdsmApiException(string message, int returnCode, Exception innerException) : base(message, innerException)
+        public EdsmApiException(string message, int returnCode)
+            : base(message)
         {
             ReturnCode = returnCode;
         }
 
-        protected EdsmApiException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public EdsmApiException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        public EdsmApiException(string message, int returnCode, Exception innerException)
+            : base(message, innerException)
+        {
+            ReturnCode = returnCode;
+        }
+
+        protected EdsmApiException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }

@@ -1,16 +1,16 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.LogModel;
-using DW.ELA.Utility.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NLog;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.LogModel;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+
     public class LogReader
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();

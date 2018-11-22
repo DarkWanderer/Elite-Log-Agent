@@ -1,15 +1,13 @@
-﻿using DW.ELA.Utility;
-using DW.ELA.Utility.Json;
-using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DW.ELA.Plugin.Inara.Model
+﻿namespace DW.ELA.Plugin.Inara.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json;
+    using NLog;
+
     public class InaraApiFacade
     {
         private readonly IRestClient client;

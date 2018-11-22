@@ -1,9 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using System;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using System;
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class MissionAccepted : LogEvent
     {
         [JsonProperty("Faction")]

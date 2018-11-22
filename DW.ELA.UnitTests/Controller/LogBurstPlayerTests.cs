@@ -1,16 +1,16 @@
-﻿using Controller;
-using DW.ELA.Interfaces;
-using DW.ELA.UnitTests.Utility;
-using DW.ELA.Utility.Json;
-using NUnit.Framework;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using DW.ELA.UnitTests.Utility;
+    using DW.ELA.Utility.Json;
+    using NUnit.Framework;
+
     [TestFixture]
     public class LogBurstPlayerTests
     {
@@ -43,5 +43,4 @@ namespace DW.ELA.UnitTests
 
         private static IEnumerable<string> EventsAsJson => TestEventSource.CannedEvents.Select(Serialize.ToJson);
     }
-
 }

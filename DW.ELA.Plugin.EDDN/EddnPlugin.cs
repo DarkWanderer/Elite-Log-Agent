@@ -1,17 +1,17 @@
-﻿using DW.ELA.Controller;
-using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Settings;
-using DW.ELA.Plugin.EDDN.Model;
-using Newtonsoft.Json.Linq;
-using NLog;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using Utility;
-
-namespace DW.ELA.Plugin.EDDN
+﻿namespace DW.ELA.Plugin.EDDN
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Settings;
+    using DW.ELA.Plugin.EDDN.Model;
+    using DW.ELA.Utility;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+
     public class EddnPlugin : AbstractPlugin<EddnEvent, EddnSettings>
     {
         private static readonly IRestClient RestClient = new ThrottlingRestClient("https://eddn.edcd.io:4430/upload/");
@@ -25,7 +25,8 @@ namespace DW.ELA.Plugin.EDDN
 
         protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
 
-        public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder) : base(settingsProvider)
+        public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
+            : base(settingsProvider)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
@@ -35,11 +36,14 @@ namespace DW.ELA.Plugin.EDDN
         }
 
         public override string PluginName => "EDDN";
+
         public override string PluginId => "EDDN";
+
         // EDDN accepts events one-by-one, so no need to batch
         public override TimeSpan FlushInterval => TimeSpan.FromSeconds(1);
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
+
         public override async void FlushEvents(ICollection<EddnEvent> events)
         {
             foreach (var @event in events)
@@ -67,8 +71,10 @@ namespace DW.ELA.Plugin.EDDN
                 messageObject?.Property("timestamp")?.Remove();
 
                 foreach (var recent in lastPushedEvents)
+                {
                     if (JToken.DeepEquals(jObject,recent))
                         return false;
+                }
 
                 lastPushedEvents.Enqueue(jObject);
                 return true;
@@ -79,7 +85,6 @@ namespace DW.ELA.Plugin.EDDN
                 return true; // by default, we consider any message unique and so will send it
             }
         }
-
 
         public override void ReloadSettings() => eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
     }

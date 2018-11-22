@@ -1,8 +1,8 @@
-﻿using DW.ELA.Interfaces.Settings;
-using System.Windows.Forms;
-
-namespace DW.ELA.Interfaces
+﻿namespace DW.ELA.Interfaces
 {
+    using System.Windows.Forms;
+    using DW.ELA.Interfaces.Settings;
+
     public class AbstractSettingsControl : UserControl
     {
         public AbstractSettingsControl()

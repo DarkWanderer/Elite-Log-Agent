@@ -1,10 +1,10 @@
-﻿using DW.ELA.Controller;
-using DW.ELA.Interfaces;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json.Linq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class EventRawJsonExtractorTests
     {

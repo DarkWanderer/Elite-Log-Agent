@@ -1,16 +1,15 @@
-﻿using DW.ELA.Controller;
-using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Settings;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Settings;
+    using Moq;
+    using NUnit.Framework;
+
     public class AbstractPluginTests
     {
         [Test]
@@ -41,12 +40,15 @@ namespace DW.ELA.UnitTests
         {
             public readonly ConcurrentBag<LogEvent> Flushed = new ConcurrentBag<LogEvent>();
 
-            public TestPlugin(ISettingsProvider settingsProvider) : base(settingsProvider)
+            public TestPlugin(ISettingsProvider settingsProvider)
+                : base(settingsProvider)
             {
             }
 
             public override string PluginName => "TestPlugin";
+
             public override string PluginId => "TestPlugin";
+
             protected override IEventConverter<LogEvent> EventConverter => new IdentityLogConverter();
 
             public override void FlushEvents(ICollection<LogEvent> events)
@@ -56,8 +58,11 @@ namespace DW.ELA.UnitTests
             }
 
             public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
+
             public override void ReloadSettings() { }
+
             public override TimeSpan FlushInterval => TimeSpan.FromHours(10);
+
             public new void FlushQueue() => base.FlushQueue();
         }
 
@@ -68,8 +73,7 @@ namespace DW.ELA.UnitTests
 
         private class TestSettings
         {
-            bool TestValue { get; set; }
+            public bool TestValue { get; set; }
         }
     }
-
 }

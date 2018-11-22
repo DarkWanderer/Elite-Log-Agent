@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Utility
+﻿namespace DW.ELA.Utility
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public static class Functional
     {
         public static Exception ExecuteAndCatch(Action action)

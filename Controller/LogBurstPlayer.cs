@@ -1,32 +1,27 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.LogModel;
-using DW.ELA.Utility.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Utility.Observable;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using Utility.Observable;
+
     /// <summary>
     /// This class replays N last log files to observers - to fill up historic data
     /// </summary>
     public class LogBurstPlayer : BasicObservable<LogEvent>
     {
-        private readonly string LogDirectory;
+        private readonly string logDirectory;
         private readonly int filesNumber;
 
         public LogBurstPlayer(string logDirectory, int filesNumber = 5)
         {
-            if (String.IsNullOrEmpty(logDirectory))
+            if (string.IsNullOrEmpty(logDirectory))
                 throw new ArgumentException("Must provide log directory", nameof(logDirectory));
             if (filesNumber <= 0)
                 throw new ArgumentOutOfRangeException(nameof(logDirectory), filesNumber, "nubmer of files must be > 0");
 
-            LogDirectory = logDirectory;
+            this.logDirectory = logDirectory;
             this.filesNumber = filesNumber;
         }
 
@@ -36,7 +31,7 @@ namespace Controller
             {
                 var reader = new LogReader();
 
-                var files = LogEnumerator.GetLogFiles(LogDirectory)
+                var files = LogEnumerator.GetLogFiles(logDirectory)
                     .Take(filesNumber)
                     .OrderBy(x => x) // from oldest to freshest
                     .ToList();
