@@ -72,7 +72,7 @@
 
                 foreach (var recent in lastPushedEvents)
                 {
-                    if (JToken.DeepEquals(jObject,recent))
+                    if (JToken.DeepEquals(jObject, recent))
                         return false;
                 }
 

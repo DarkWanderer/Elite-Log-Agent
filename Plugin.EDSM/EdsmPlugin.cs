@@ -11,9 +11,8 @@
     using MoreLinq;
     using Newtonsoft.Json.Linq;
     using NLog;
-    using DW.ELA.Utility;
 
-    public class EdsmPlugin : AbstractPlugin<JObject,EdsmSettings>
+    public class EdsmPlugin : AbstractPlugin<JObject, EdsmSettings>
     {
         private readonly IRestClient restClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
         private Task<HashSet<string>> ignoredEvents;
@@ -27,7 +26,7 @@
         public override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
-            : base (settingsProvider)
+            : base(settingsProvider)
         {
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
 

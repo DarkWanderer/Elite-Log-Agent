@@ -58,6 +58,7 @@
             Assert.IsNotEmpty(eventsString);
         }
 
+#pragma warning disable SA1005 // Single line comments must begin with single space
         //[Test]
         //[Explicit]
         //public static void GenerateCodeForUnknownEvents()
@@ -101,4 +102,5 @@
         //    return code;
         //}
     }
+#pragma warning restore SA1005 // Single line comments must begin with single space
 }

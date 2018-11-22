@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
     <Compile Include="App\AppInfo.cs" />
     <Compile Include="CloudApiLogTarget.cs" />
     <Compile Include="Disposable\CompositeDisposable.cs" />

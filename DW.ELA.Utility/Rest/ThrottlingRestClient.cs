@@ -29,9 +29,7 @@
                 if (lastRequestTimestamp != DateTime.MinValue)
                     secondsSinceLastCall = (int)(now - lastRequestTimestamp).TotalSeconds;
 
-                int decayedRequestCounter = Math.Max(0,requestCounter - secondsSinceLastCall / 5);
-                //if (decayedRequestCounter > 3)
-                //    throw new ApplicationException("Internal error: queries are too frequent");
+                int decayedRequestCounter = Math.Max(0, requestCounter - (secondsSinceLastCall / 5));
 
                 lastRequestTimestamp = now;
                 requestCounter = decayedRequestCounter + 1;
@@ -62,7 +60,7 @@
             return response;
         }
 
-        public async Task<string> PostAsync(IDictionary<string,string> values)
+        public async Task<string> PostAsync(IDictionary<string, string> values)
         {
             ThrowIfQuotaExceeded();
 

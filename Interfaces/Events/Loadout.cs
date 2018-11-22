@@ -36,36 +36,6 @@
         public Module[] Modules { get; set; }
     }
 
-    public class Module
-    {
-        [JsonProperty("Slot")]
-        public string Slot { get; set; }
-
-        [JsonProperty("Item")]
-        public string Item { get; set; }
-
-        [JsonProperty("On")]
-        public bool On { get; set; }
-
-        [JsonProperty("Priority")]
-        public long Priority { get; set; }
-
-        [JsonProperty("Health")]
-        public double Health { get; set; }
-
-        [JsonProperty("Value")]
-        public long? Value { get; set; }
-
-        [JsonProperty("Engineering")]
-        public Engineering Engineering { get; set; }
-
-        [JsonProperty("AmmoInClip")]
-        public long? AmmoInClip { get; set; }
-
-        [JsonProperty("AmmoInHopper")]
-        public long? AmmoInHopper { get; set; }
-    }
-
     public class Engineering
     {
         [JsonProperty("Engineer")]
@@ -94,26 +64,5 @@
 
         [JsonProperty("ExperimentalEffect_Localised")]
         public string ExperimentalEffectLocalised { get; set; }
-    }
-
-    public class Modifier
-    {
-        [JsonProperty("Label")]
-        public string Label { get; set; }
-
-        [JsonProperty("Value")]
-        public double? Value { get; set; }
-
-        [JsonProperty("ValueStr")]
-        public string ValueStr { get; set; }
-
-        [JsonProperty("ValueStr_Localised")]
-        public string ValueStrLocalised { get; set; }
-
-        [JsonProperty("OriginalValue")]
-        public double? OriginalValue { get; set; }
-
-        [JsonProperty("LessIsGood")]
-        public long? LessIsGood { get; set; }
     }
 }

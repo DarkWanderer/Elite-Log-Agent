@@ -25,7 +25,7 @@
             var @event = (FsdJump)LogEventConverter.Convert(JObject.Parse(eventString));
             Assert.AreEqual(new DateTime(2018, 06, 25, 18, 10, 30, DateTimeKind.Utc), @event.Timestamp);
         }
-        
+
         [Test]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.TypedLogEvents))]
         public void EventsTransformationShouldNotSpoilData(LogEvent e)
@@ -39,8 +39,9 @@
                 e.Raw.Remove("Parents"); // TODO: find a way to serialize that structure
 
             Assert.IsEmpty(JsonComparer.Compare(e.Event, e.Raw, serialized));
+
             // This assert should never trigger - if it triggers means there's an error in comparison code
-            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized), "Json objects before/after serialization should be 'DeepEqual'"); 
+            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized), "Json objects before/after serialization should be 'DeepEqual'");
         }
     }
 }

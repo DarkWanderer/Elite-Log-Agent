@@ -9,10 +9,10 @@
     using Castle.Windsor;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
-    using NLog;
     using DW.ELA.Utility;
+    using NLog;
 
-    static partial class Program
+    internal static partial class Program
     {
         /// <summary>
         /// The main entry point for the application.

@@ -6,7 +6,8 @@
     using Newtonsoft.Json.Linq;
     using NLog;
 
-    public class PluginSettingsFacade<T> where T : class, new()
+    public class PluginSettingsFacade<T>
+        where T : class, new()
     {
         private readonly string pluginId;
         private readonly GlobalSettings globalSettings;

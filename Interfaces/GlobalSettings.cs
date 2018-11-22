@@ -7,6 +7,8 @@
 
     public class GlobalSettings : ICloneable
     {
+        public static GlobalSettings Defaults => new GlobalSettings();
+
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; } = new Dictionary<string, JObject>();
 
@@ -19,11 +21,10 @@
         [JsonProperty("reportErrorsToCloud")]
         public bool ReportErrorsToCloud { get; set; } = true;
 
-        public static GlobalSettings Defaults => new GlobalSettings();
-
         object ICloneable.Clone() => Clone();
 
-        public GlobalSettings Clone() {
+        public GlobalSettings Clone()
+        {
             var jsonSerializer = new JsonSerializer();
             return JsonConvert.DeserializeObject<GlobalSettings>(JsonConvert.SerializeObject(this));
         }

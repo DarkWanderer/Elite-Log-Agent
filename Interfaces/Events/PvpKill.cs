@@ -5,7 +5,6 @@
 
     public class PvpKill : LogEvent
     {
-
         [JsonProperty("Victim")]
         public string Victim { get; set; }
 

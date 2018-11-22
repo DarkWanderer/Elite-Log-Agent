@@ -122,7 +122,6 @@
 
         private IEnumerable<ApiEvent> ConvertEvent(ShipyardTransfer e)
         {
-
             yield return new ApiEvent("setCommanderShipTransfer")
             {
                 Timestamp = e.Timestamp,
@@ -307,6 +306,7 @@
                 }
             };
             yield return @event;
+
             // and for new, indicating that it's now current
             @event = new ApiEvent("setCommanderShip")
             {
@@ -469,17 +469,17 @@
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
                 {
-                    { "shipType" , e.Ship },
-                    { "shipGameID" , e.ShipId },
-                    { "shipName" , e.ShipName },
-                    { "shipIdent" , e.ShipIdent },
-                    { "isCurrentShip" , true },
-                    { "isMainShip" , false },
-                    { "isHot" , false }, // TODO
-                    { "shipHullValue" , e.HullValue },
-                    { "shipModulesValue" , e.ModulesValue },
-                    { "shipRebuyCost" , e.Rebuy },
-                    { "starsystemName" , playerStateRecorder.GetPlayerSystem(e.Timestamp) }
+                    { "shipType", e.Ship },
+                    { "shipGameID", e.ShipId },
+                    { "shipName", e.ShipName },
+                    { "shipIdent", e.ShipIdent },
+                    { "isCurrentShip", true },
+                    { "isMainShip", false },
+                    { "isHot", false }, // TODO
+                    { "shipHullValue", e.HullValue },
+                    { "shipModulesValue", e.ModulesValue },
+                    { "shipRebuyCost", e.Rebuy },
+                    { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) }
                 }
             };
 
@@ -547,7 +547,8 @@
         {
             yield return new ApiEvent("addCommanderCombatInterdictionEscape")
             {
-                EventData = new Dictionary<string, object> {
+                EventData = new Dictionary<string, object>
+                {
                     { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
                     { "opponentName", e.Interdictor },
                     { "isPlayer", e.IsPlayer }
@@ -560,7 +561,8 @@
         {
             yield return new ApiEvent("addCommanderCombatInterdiction")
             {
-                EventData = new Dictionary<string, object> {
+                EventData = new Dictionary<string, object>
+                {
                     { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
                     { "opponentName", e.Interdicted ?? e.Faction },
                     { "isPlayer", e.IsPlayer }
@@ -573,7 +575,8 @@
         {
             yield return new ApiEvent("addCommanderCombatInterdicted")
             {
-                EventData = new Dictionary<string, object> {
+                EventData = new Dictionary<string, object>
+                {
                     { "starsystemName", playerStateRecorder.GetPlayerSystem(e.Timestamp) },
                     { "opponentName", e.Interdictor },
                     { "isPlayer", e.IsPlayer },
@@ -588,7 +591,8 @@
             var timestamp = @event.Timestamp;
             yield return new ApiEvent("addCommanderCombatKill")
             {
-                EventData = new Dictionary<string, object> {
+                EventData = new Dictionary<string, object>
+                {
                     { "starsystemName", playerStateRecorder.GetPlayerSystem(timestamp) },
                     { "opponentName", @event.Victim },
                 },
@@ -610,7 +614,8 @@
             var timestamp = @event.Timestamp;
             yield return new ApiEvent("addCommanderTravelDock")
             {
-                EventData = new Dictionary<string, object> {
+                EventData = new Dictionary<string, object>
+                {
                     { "starsystemName", @event.StarSystem },
                     { "stationName", @event.StationName },
                     { "marketID", @event.MarketId },
@@ -626,7 +631,8 @@
             var timestamp = @event.Timestamp;
             yield return new ApiEvent("addCommanderTravelFSDJump")
             {
-                EventData = new Dictionary<string, object> {
+                EventData = new Dictionary<string, object>
+                {
                     { "starsystemName", @event.StarSystem },
                     { "jumpDistance", @event.JumpDist },
                     { "shipGameID", playerStateRecorder.GetPlayerShipId(timestamp) },
@@ -655,7 +661,8 @@
         {
             yield return new ApiEvent("setCommanderCredits")
             {
-                EventData = new Dictionary<string, object> {
+                EventData = new Dictionary<string, object>
+                {
                     { "commanderCredits", @event.Credits },
                     { "commanderLoan", @event.Loan }
                 },
@@ -671,7 +678,8 @@
                 {
                     yield return new ApiEvent("setCommanderRankEngineer")
                     {
-                        EventData = new Dictionary<string, object> {
+                        EventData = new Dictionary<string, object>
+                        {
                             { "engineerName", engineer.EngineerName },
                             { "rankStage", engineer.Progress },
                             { "rankValue", engineer.RankProgress }

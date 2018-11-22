@@ -26,7 +26,7 @@
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JournalMonitor"/> class.
-        /// 
+        ///
         /// </summary>
         /// <param name="logDirectoryProvider">Log directory name provider</param>
         /// <param name="checkInterval">Check interval in milliseconds</param>
@@ -162,6 +162,7 @@
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
+
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }

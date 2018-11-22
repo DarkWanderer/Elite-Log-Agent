@@ -11,7 +11,7 @@
     using MoreLinq;
     using NLog;
 
-    public class InaraPlugin : AbstractPlugin<ApiEvent,InaraSettings>
+    public class InaraPlugin : AbstractPlugin<ApiEvent, InaraSettings>
     {
         public override string PluginName => CPluginName;
 
@@ -38,9 +38,9 @@
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
-        
+
         // Explicitly set to 30 as Inara prefers batches of events
-        public override TimeSpan FlushInterval => TimeSpan.FromSeconds(30); 
+        public override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
 
         public override void ReloadSettings() => FlushQueue();
 
@@ -65,7 +65,8 @@
             }
         }
 
-        private static readonly string[] latestOnlyEvents = new[] {
+        private static readonly string[] latestOnlyEvents = new[]
+        {
             "setCommanderInventoryMaterials",
             "setCommanderGameStatistics",
             "setCommanderStorageModules"

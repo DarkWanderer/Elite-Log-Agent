@@ -38,7 +38,8 @@
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             currentSettings = Provider.Settings.Clone();
-            settingsControls.Add("General", new GeneralSettingsControl() {
+            settingsControls.Add("General", new GeneralSettingsControl()
+            {
                 MessageBroker = MessageBroker,
                 GlobalSettings = currentSettings,
                 Plugins = Plugins,

@@ -47,7 +47,7 @@
         {
             try
             {
-                var schemaRef = @event.SchemaRef.Replace("/test","");
+                var schemaRef = @event.SchemaRef.Replace("/test", string.Empty);
                 if (!schemaCache.ContainsKey(schemaRef))
                 {
                     logger.Error("Schema not found: {0}", schemaRef);

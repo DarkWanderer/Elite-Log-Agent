@@ -9,7 +9,8 @@
         private const string autorunRegistryKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         private const string eliteLogAgentKey = @"EliteLogAgent";
 
-        private static string ExecutablePath {
+        private static string ExecutablePath
+        {
             get
             {
                 var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);

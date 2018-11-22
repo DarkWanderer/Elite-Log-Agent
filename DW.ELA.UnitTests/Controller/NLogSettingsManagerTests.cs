@@ -13,6 +13,7 @@
         {
             var manager = new NLogSettingsManager(new Mock<ISettingsProvider>().Object);
             manager.Setup();
+
             // Reset log
             LogManager.Configuration = new NLog.Config.LoggingConfiguration();
         }

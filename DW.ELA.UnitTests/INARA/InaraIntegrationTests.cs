@@ -25,7 +25,7 @@
 
             // Populate the state recorder to avoid missing ships/starsystems data
             foreach (var ev in logEventSource.Events)
-                stateRecorder.OnNext(ev); 
+                stateRecorder.OnNext(ev);
 
             var convertedEvents = logEventSource
                 .Events

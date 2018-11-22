@@ -59,8 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="Model\Commodity.cs" />
     <Compile Include="Model\CommodityEvent.cs" />
     <Compile Include="EddnApiFacade.cs" />
+    <Compile Include="Model\CommodityMessage.cs" />
+    <Compile Include="Model\Economy.cs" />
     <Compile Include="Model\EddnEvent.cs" />
     <Compile Include="EddnEventConverter.cs" />
     <Compile Include="EddnPlugin.cs" />

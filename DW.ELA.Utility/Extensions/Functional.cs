@@ -35,7 +35,7 @@
         public static void ExecuteManyWithAggregateException<T>(this IEnumerable<T> items, Action<T> function)
         {
             var exceptions = items
-                .Select(i => ExecuteAndCatch(function,i))
+                .Select(i => ExecuteAndCatch(function, i))
                 .Where(e => e != null)
                 .ToList();
             if (exceptions.Any())

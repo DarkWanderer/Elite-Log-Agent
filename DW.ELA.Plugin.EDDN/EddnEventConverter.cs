@@ -139,7 +139,7 @@
                 Demand = arg.Demand,
                 DemandBracket = arg.DemandBracket,
                 MeanPrice = arg.MeanPrice,
-                Name = arg.Name.Replace("$", "").Replace("_name;", ""),
+                Name = arg.Name.Replace("$", string.Empty).Replace("_name;", string.Empty),
                 SellPrice = arg.SellPrice,
                 Stock = arg.Stock,
                 StockBracket = arg.StockBracket
@@ -153,11 +153,13 @@
             if (@event.Message["StarSystem"] == null)
             {
                 var system = stateHistoryRecorder.GetPlayerSystem(e.Timestamp);
+
+                // if we can't determine player's location, abort
                 if (system != null)
                 {
                     @event.Message.Add("StarSystem", system);
                 }
-                else // if we can't determine player's location, abort
+                else
                 {
                     logger.Error("Unable to determine player location");
                     yield break;
@@ -178,7 +180,8 @@
         private JObject Strip(JObject raw)
         {
             raw = (JObject)raw.DeepClone();
-            var attributesToRemove = new List<string>() {
+            var attributesToRemove = new List<string>()
+            {
                 "CockpitBreach",
                 "BoostUsed",
                 "FuelLevel",

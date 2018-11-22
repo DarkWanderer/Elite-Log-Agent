@@ -83,6 +83,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
     <Compile Include="AbstractPluginTests.cs" />
     <Compile Include="UI\AutorunManagerTests.cs" />
     <Compile Include="Controller\NLogSettingsManagerTests.cs" />

@@ -44,9 +44,6 @@
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
 
-            //if (settingsProvider.Settings.ReportErrorsToCloud)
-            //    config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error, new CloudApiLogTarget(restClient)));
-
             LogManager.Configuration = config;
             logger.Info("Enabled logging with level {0}", logLevel);
         }
@@ -65,14 +62,16 @@
                         new JsonAttribute("logger", "${logger}"),
                         new JsonAttribute("exception", new JsonLayout()
                         {
-                            Attributes = {
+                            Attributes =
+                            {
                                 new JsonAttribute("type", "${exception:format=ShortType}"),
                                 new JsonAttribute("message", "${exception:format=Message}"),
                                 new JsonAttribute("data", "${exception:format=Data}"),
                                 new JsonAttribute("stackTrace", "${exception:format=StackTrace}"),
                                 new JsonAttribute("innerException", new JsonLayout()
                                 {
-                                    Attributes = {
+                                    Attributes =
+                                    {
                                         new JsonAttribute("type", "${exception:format=:innerFormat=ShortType:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
                                         new JsonAttribute("message", "${exception:format=:innerFormat=Message:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
                                         new JsonAttribute("data", "${exception:format=:innerFormat=Data:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
@@ -93,7 +92,6 @@
 
         private Target CreateFileTarget()
         {
-
             return new FileTarget
             {
                 FileName = Path.Combine(LogDirectory, "EliteLogAgent.json"),

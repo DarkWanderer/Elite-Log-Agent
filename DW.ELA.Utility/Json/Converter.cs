@@ -14,7 +14,8 @@
             NullValueHandling = NullValueHandling.Ignore,
             DateFormatString = "u",
             Culture = CultureInfo.InvariantCulture,
-            Converters = {
+            Converters =
+            {
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal },
                 new StringEnumConverter()
             },

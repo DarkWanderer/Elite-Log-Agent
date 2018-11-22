@@ -51,7 +51,8 @@
             // Verify output
             if (outputData.Events != null)
             {
-                for (int i = 0; i < events.Length; i++) {
+                for (int i = 0; i < events.Length; i++)
+                {
                     if (outputData.Events[i].EventStatus != 200)
                     {
                         var statusText = outputData.Events[i].EventStatusText;
