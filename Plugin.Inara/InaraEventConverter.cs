@@ -499,7 +499,7 @@
             yield return loadoutEvent;
         }
 
-        JObject ConvertModule(Module module)
+        private JObject ConvertModule(Module module)
         {
             var item = new JObject
             {

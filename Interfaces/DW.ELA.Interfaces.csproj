@@ -56,12 +56,14 @@
     <Compile Include="Events\Commander.cs" />
     <Compile Include="Events\CommunityGoal.cs" />
     <Compile Include="Events\CommunityGoalRecord.cs" />
+    <Compile Include="Events\Composition.cs" />
     <Compile Include="Events\Docked.cs" />
     <Compile Include="Events\EngineerProgress.cs" />
     <Compile Include="Events\EngineerProgressRecord.cs" />
     <Compile Include="Events\EscapeInterdiction.cs" />
     <Compile Include="Events\Faction.cs" />
     <Compile Include="Events\FsdJump.cs" />
+    <Compile Include="Events\GeologicComposition.cs" />
     <Compile Include="Events\Interdicted.cs" />
     <Compile Include="Events\Interdiction.cs" />
     <Compile Include="Events\JoinACrew.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Events\QuitACrew.cs" />
     <Compile Include="Events\Rank.cs" />
     <Compile Include="Events\Reputation.cs" />
+    <Compile Include="Events\Ring.cs" />
     <Compile Include="Events\Scan.cs" />
     <Compile Include="Events\Shipyard.cs" />
     <Compile Include="Events\ShipyardSell.cs" />

@@ -75,6 +75,7 @@
     <Compile Include="IEddnApiFacade.cs" />
     <Compile Include="JournalEvent.cs" />
     <Compile Include="Model\OutfittingEvent.cs" />
+    <Compile Include="Model\OutfittingMessage.cs" />
     <Compile Include="Model\ShipyardEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
