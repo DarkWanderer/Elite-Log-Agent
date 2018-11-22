@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		Prepare-Release.ps1 = Prepare-Release.ps1
 		README.md = README.md
-		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DW.ELA.Interfaces", "Interfaces\DW.ELA.Interfaces.csproj", "{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}"
