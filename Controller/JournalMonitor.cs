@@ -1,23 +1,23 @@
-﻿using System;
-using System.IO;
-using DW.ELA.Interfaces;
-using NLog;
-using NLog.Fluent;
-using System.Linq;
-using System.Timers;
-using System.Threading.Tasks;
-using Utility.Observable;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Timers;
+    using DW.ELA.Interfaces;
+    using NLog;
+    using NLog.Fluent;
+    using Utility.Observable;
+
     /// <summary>
     /// This class runs in background to monitor and notify consumers (observers) of new log events
     /// </summary>
     public class JournalMonitor : LogReader, ILogRealTimeDataSource
     {
         private readonly FileSystemWatcher fileWatcher;
-        private string CurrentFile;
-        private readonly string LogDirectory;
+        private string currentFile;
+        private readonly string logDirectory;
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private long filePosition;
         private readonly object @lock = new object();
@@ -25,14 +25,15 @@ namespace Controller
         private readonly BasicObservable<LogEvent> basicObservable = new BasicObservable<LogEvent>();
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="JournalMonitor"/> class.
+        ///
         /// </summary>
         /// <param name="logDirectoryProvider">Log directory name provider</param>
         /// <param name="checkInterval">Check interval in milliseconds</param>
         public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 5000)
         {
-            LogDirectory = logDirectoryProvider.Directory;
-            fileWatcher = new FileSystemWatcher(LogDirectory);
+            logDirectory = logDirectoryProvider.Directory;
+            fileWatcher = new FileSystemWatcher(logDirectory);
 
             fileWatcher.Changed += FileWatcher_Event;
             fileWatcher.Created += FileWatcher_Event;
@@ -46,8 +47,8 @@ namespace Controller
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => SendEventsFromJournal(false));
             logFlushTimer.Enabled = true;
 
-            CurrentFile = LogEnumerator.GetLogFiles(LogDirectory).First();
-            filePosition = new FileInfo(CurrentFile).Length;
+            currentFile = LogEnumerator.GetLogFiles(logDirectory).First();
+            filePosition = new FileInfo(currentFile).Length;
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
             logger.Info("Started monitoring");
@@ -56,10 +57,10 @@ namespace Controller
         private void FileWatcher_Event(object sender, FileSystemEventArgs e)
         {
             if (Path.GetExtension(e.FullPath) == ".log")
-                SendEventsFromJournal(checkOtherFiles: e.FullPath != CurrentFile);
+                SendEventsFromJournal(checkOtherFiles: e.FullPath != currentFile);
         }
 
-        private string GetJsonFileFullPath(string fileName) => Path.Combine(LogDirectory, Path.ChangeExtension(fileName, ".json"));
+        private string GetJsonFileFullPath(string fileName) => Path.Combine(logDirectory, Path.ChangeExtension(fileName, ".json"));
 
         private void SendEventFromFile(string fullPath)
         {
@@ -87,14 +88,14 @@ namespace Controller
                     // We are not checking file size to make decision about whether
                     // we should read the file. Reason being - the log write operations
                     // are often buffered, so we need to open the file to flush buffers
-                    filePosition = ReadJournalFromPosition(CurrentFile, filePosition);
+                    filePosition = ReadJournalFromPosition(currentFile, filePosition);
                     if (checkOtherFiles)
                     {
-                        var latestFile = LogEnumerator.GetLogFiles(LogDirectory).First();
-                        if (latestFile != CurrentFile)
+                        var latestFile = LogEnumerator.GetLogFiles(logDirectory).First();
+                        if (latestFile != currentFile)
                         {
-                            CurrentFile = latestFile;
-                            filePosition = ReadJournalFromPosition(CurrentFile, 0);
+                            currentFile = latestFile;
+                            filePosition = ReadJournalFromPosition(currentFile, 0);
                         }
                     }
                 }
@@ -103,9 +104,9 @@ namespace Controller
                     logger.Error()
                         .Message("Error while reading journal file")
                         .Exception(e)
-                        .Property("journal-file", CurrentFile)
+                        .Property("journal-file", currentFile)
                         .Write();
-                    filePosition = new FileInfo(CurrentFile).Length; // Skipping the 'poisoned' data
+                    filePosition = new FileInfo(currentFile).Length; // Skipping the 'poisoned' data
                 }
         }
 
@@ -130,7 +131,6 @@ namespace Controller
             }
         }
 
-        #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -162,10 +162,10 @@ namespace Controller
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
+
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }
-        #endregion
 
         public IDisposable Subscribe(IObserver<LogEvent> observer) => basicObservable.Subscribe(observer);
     }

@@ -1,12 +1,14 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-
-namespace DW.ELA.Interfaces.Settings
+﻿namespace DW.ELA.Interfaces.Settings
 {
+    using System;
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public class GlobalSettings : ICloneable
     {
+        public static GlobalSettings Defaults => new GlobalSettings();
+
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; } = new Dictionary<string, JObject>();
 
@@ -19,11 +21,10 @@ namespace DW.ELA.Interfaces.Settings
         [JsonProperty("reportErrorsToCloud")]
         public bool ReportErrorsToCloud { get; set; } = true;
 
-        public static GlobalSettings Defaults => new GlobalSettings();
-
         object ICloneable.Clone() => Clone();
 
-        public GlobalSettings Clone() {
+        public GlobalSettings Clone()
+        {
             var jsonSerializer = new JsonSerializer();
             return JsonConvert.DeserializeObject<GlobalSettings>(JsonConvert.SerializeObject(this));
         }

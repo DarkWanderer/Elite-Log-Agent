@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using Newtonsoft.Json;
+
     public class MaterialTrade : LogEvent
     {
         [JsonProperty("MarketID")]

@@ -1,15 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
-    public class JoinACrew : LogEvent
-    {
-        [JsonProperty("Captain")]
-        public string Captain { get; set; }
-    }
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
 
-    public class QuitACrew : LogEvent
+    public class JoinACrew : LogEvent
     {
         [JsonProperty("Captain")]
         public string Captain { get; set; }

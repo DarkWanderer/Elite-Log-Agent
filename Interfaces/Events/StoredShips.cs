@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using Newtonsoft.Json;
+
     public class StoredShips : LogEvent
     {
         [JsonProperty("StationName")]
@@ -73,5 +73,4 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("Hot")]
         public bool Hot { get; set; }
     }
-
 }

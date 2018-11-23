@@ -1,15 +1,15 @@
-﻿using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using DW.ELA.Interfaces;
-using NLog;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-
-namespace EliteLogAgent
+﻿namespace EliteLogAgent
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using Castle.MicroKernel.Registration;
+    using Castle.Windsor;
+    using DW.ELA.Interfaces;
+    using NLog;
+
     internal class CastleWindsorPluginLoader : IPluginManager
     {
         private readonly IWindsorContainer container;
@@ -21,6 +21,7 @@ namespace EliteLogAgent
         }
 
         public IReadOnlyCollection<string> LoadedPluginIds => Plugins.Select(p => p.PluginId).ToArray();
+
         public IReadOnlyCollection<IPlugin> LoadedPlugins => Plugins.ToArray();
 
         public IList<IPlugin> Plugins => container.ResolveAll<IPlugin>();

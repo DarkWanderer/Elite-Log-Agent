@@ -1,12 +1,12 @@
-﻿using DW.ELA.Interfaces;
-using NLog;
-using System;
-using System.Linq;
-using Utility;
-using Utility.Observable;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility;
+    using NLog;
+    using Utility.Observable;
+
     /// <summary>
     /// Forwards events from one IObservables to multiple IObservers in parallel fashion
     /// </summary>
@@ -59,7 +59,6 @@ namespace Controller
 
         void IObserver<LogEvent>.OnNext(LogEvent value) => OnNext(value);
 
-        #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -67,8 +66,11 @@ namespace Controller
             if (!disposedValue)
             {
                 if (disposing)
+                {
                     lock (Observers)
                         Observers.Clear();
+                }
+
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.
 
@@ -87,9 +89,9 @@ namespace Controller
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
+
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }
-        #endregion
     }
 }

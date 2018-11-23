@@ -1,9 +1,9 @@
-﻿using DW.ELA.Plugin.EDDN;
-using DW.ELA.Plugin.EDDN.Model;
-using NUnit.Framework;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using DW.ELA.Plugin.EDDN;
+    using DW.ELA.Plugin.EDDN.Model;
+    using NUnit.Framework;
+
     public class EventSchemaValidatorTests
     {
         [Test]

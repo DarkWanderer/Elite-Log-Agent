@@ -1,13 +1,9 @@
-﻿using DW.ELA.Utility.Log;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System;
+    using DW.ELA.Utility.Log;
+    using NUnit.Framework;
+
     public class LoggingTimerTests
     {
         [Test]

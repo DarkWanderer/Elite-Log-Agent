@@ -1,9 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-
-namespace DW.ELA.Controller
+﻿namespace DW.ELA.Controller
 {
+    using System.Collections.Generic;
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json.Linq;
+
     public class EventRawJsonExtractor : IEventConverter<JObject>
     {
         public IEnumerable<JObject> Convert(LogEvent @event)

@@ -1,4 +1,4 @@
-﻿namespace Controller
+﻿namespace DW.ELA.Controller
 {
     public interface ILogSettingsBootstrapper
     {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Utility
+﻿namespace DW.ELA.Utility
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public static class Functional
     {
         public static Exception ExecuteAndCatch(Action action)
@@ -35,7 +35,7 @@ namespace Utility
         public static void ExecuteManyWithAggregateException<T>(this IEnumerable<T> items, Action<T> function)
         {
             var exceptions = items
-                .Select(i => ExecuteAndCatch(function,i))
+                .Select(i => ExecuteAndCatch(function, i))
                 .Where(e => e != null)
                 .ToList();
             if (exceptions.Any())

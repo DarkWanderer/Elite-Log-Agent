@@ -1,13 +1,8 @@
-﻿using EliteLogAgent;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using EliteLogAgent;
+    using NUnit.Framework;
+
     public class SingleLaunchTests
     {
         [Test]

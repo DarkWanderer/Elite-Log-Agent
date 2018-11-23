@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-
-namespace DW.ELA.Interfaces
+﻿namespace DW.ELA.Interfaces
 {
+    using System;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public class LogEvent
     {
         [JsonProperty("timestamp")]

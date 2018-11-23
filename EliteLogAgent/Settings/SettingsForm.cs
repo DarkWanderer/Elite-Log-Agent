@@ -1,27 +1,30 @@
-﻿using DW.ELA.Interfaces.Settings;
-using EliteLogAgent.Properties;
-using EliteLogAgent.Settings;
-using DW.ELA.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Utility;
-using System.Linq;
-using NLog;
-
-namespace EliteLogAgent
+﻿namespace EliteLogAgent
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Settings;
+    using DW.ELA.Utility;
+    using EliteLogAgent.Properties;
+    using EliteLogAgent.Settings;
+    using NLog;
+
     public partial class SettingsForm : Form
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
         // These fields have to be properties because Form designer does not allow arguments in constructor
         internal ISettingsProvider Provider { get; set; }
+
         internal IMessageBroker MessageBroker { get; set; }
+
         internal List<IPlugin> Plugins { get; set; }
 
         private GlobalSettings currentSettings;
 
-        private IDictionary<string, AbstractSettingsControl> SettingsControls = new Dictionary<string, AbstractSettingsControl>();
+        private IDictionary<string, AbstractSettingsControl> settingsControls = new Dictionary<string, AbstractSettingsControl>();
 
         public SettingsForm()
         {
@@ -35,7 +38,8 @@ namespace EliteLogAgent
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             currentSettings = Provider.Settings.Clone();
-            SettingsControls.Add("General", new GeneralSettingsControl() {
+            settingsControls.Add("General", new GeneralSettingsControl()
+            {
                 MessageBroker = MessageBroker,
                 GlobalSettings = currentSettings,
                 Plugins = Plugins,
@@ -52,7 +56,7 @@ namespace EliteLogAgent
                         continue;
                     control.Dock = DockStyle.Fill;
                     control.PerformLayout();
-                    SettingsControls.Add(plugin.PluginName, control);
+                    settingsControls.Add(plugin.PluginName, control);
                 }
                 catch (Exception ex)
                 {
@@ -60,9 +64,12 @@ namespace EliteLogAgent
                 }
             }
 
-            foreach (var category in SettingsControls.Keys.OrderBy(x => x))
+            foreach (var category in settingsControls.Keys.OrderBy(x => x))
+            {
                 if (category != "General")
                     settingsCategoriesListView.Items.Add(category);
+            }
+
             settingsCategoriesListView.SelectedIndices.Add(0);
         }
 
@@ -73,7 +80,7 @@ namespace EliteLogAgent
                 var selectedIndex = settingsCategoriesListView.SelectedIndices.Cast<int>().Single();
                 settingsControlContainer.Controls.OfType<AbstractSettingsControl>().SingleOrDefault()?.SaveSettings();
                 settingsControlContainer.Controls.Clear();
-                settingsControlContainer.Controls.Add(SettingsControls[settingsCategoriesListView.Items[selectedIndex].Text]);
+                settingsControlContainer.Controls.Add(settingsControls[settingsCategoriesListView.Items[selectedIndex].Text]);
                 settingsControlContainer.PerformLayout();
             }
         }

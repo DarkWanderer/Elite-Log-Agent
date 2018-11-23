@@ -1,14 +1,13 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Events;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-
-namespace DW.ELA.LogModel
+﻿namespace DW.ELA.LogModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using Newtonsoft.Json.Linq;
+
     public static class LogEventConverter
     {
         private static readonly IReadOnlyDictionary<string, Type> eventTypes;

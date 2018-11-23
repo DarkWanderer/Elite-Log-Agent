@@ -1,13 +1,11 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.LogModel;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+
     public class LogEventTypeCounter : IObserver<LogEvent>
     {
         private ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
@@ -27,7 +25,9 @@ namespace Controller
             {
                 eventTypeCounters.AddOrUpdate(value.Event, key => 1, (key, count) => count++);
             }
-            catch { /* do nothing */ }
+            catch
+            { /* do nothing */
+            }
         }
 
         public void FromEnumerable(IEnumerable<LogEvent> events)

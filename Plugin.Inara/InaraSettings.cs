@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace DW.ELA.Plugin.Inara
+﻿namespace DW.ELA.Plugin.Inara
 {
+    using Newtonsoft.Json;
+
     public class InaraSettings
     {
         [JsonProperty("apiKey")]

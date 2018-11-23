@@ -1,9 +1,9 @@
-﻿using DW.ELA.Utility.Json;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-
-namespace DW.ELA.Plugin.EDDN.Model
+﻿namespace DW.ELA.Plugin.EDDN.Model
 {
+    using System.Collections.Generic;
+    using DW.ELA.Utility.Json;
+    using Newtonsoft.Json;
+
     public class EddnEvent
     {
         [JsonProperty("$schemaRef")]

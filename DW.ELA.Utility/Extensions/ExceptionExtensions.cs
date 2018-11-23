@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
-
-namespace Utility.Extensions
+﻿namespace DW.ELA.Utility.Extensions
 {
+    using System;
+    using System.Text;
+
     public static class ExceptionExtensions
     {
         public static string GetStackedErrorMessages(this Exception ex, int offset = 0)
@@ -19,7 +19,9 @@ namespace Utility.Extensions
                     builder.AppendLine(GetStackedErrorMessages(ce, offset));
             }
             else if (ex.InnerException != null)
+            {
                 builder.AppendLine(GetStackedErrorMessages(ex.InnerException, offset));
+            }
 
             return builder.ToString();
         }

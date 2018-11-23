@@ -1,11 +1,11 @@
-﻿using Controller;
-using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Events;
-using NUnit.Framework;
-using System;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using NUnit.Framework;
+
     [TestFixture]
     public class PlayerStateRecorderTests
     {

@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Linq;
-
-namespace Controller
+﻿namespace DW.ELA.Controller
 {
+    using System.IO;
+    using System.Linq;
+
     public static class LogEnumerator
     {
         /// <summary>

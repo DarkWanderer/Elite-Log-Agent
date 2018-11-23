@@ -1,8 +1,8 @@
-﻿using EliteLogAgent.Autorun;
-using NUnit.Framework;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using EliteLogAgent.Autorun;
+    using NUnit.Framework;
+
     public class AutorunManagerTests
     {
         [Test]

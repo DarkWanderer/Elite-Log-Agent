@@ -1,8 +1,8 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class MissionCompleted : LogEvent
     {
         [JsonProperty("Faction")]
@@ -59,7 +59,6 @@ namespace DW.ELA.Interfaces.Events
         [JsonProperty("Target")]
         public string Target { get; set; }
     }
-
 
     public class FactionEffect
     {

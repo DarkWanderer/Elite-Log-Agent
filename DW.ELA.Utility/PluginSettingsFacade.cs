@@ -1,12 +1,13 @@
-﻿using DW.ELA.Interfaces.Settings;
-using DW.ELA.Utility.Extensions;
-using Newtonsoft.Json.Linq;
-using NLog;
-using System;
-
-namespace DW.ELA.Utility
+﻿namespace DW.ELA.Utility
 {
-    public class PluginSettingsFacade<T> where T : class, new()
+    using System;
+    using DW.ELA.Interfaces.Settings;
+    using DW.ELA.Utility.Extensions;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+
+    public class PluginSettingsFacade<T>
+        where T : class, new()
     {
         private readonly string pluginId;
         private readonly GlobalSettings globalSettings;
@@ -24,6 +25,7 @@ namespace DW.ELA.Utility
             else
                 return null;
         }
+
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);

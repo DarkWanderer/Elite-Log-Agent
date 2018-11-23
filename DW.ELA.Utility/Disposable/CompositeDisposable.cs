@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Utility
+﻿namespace DW.ELA.Utility
 {
+    using System;
+    using System.Collections.Generic;
+
     // copy, modified from Rx Official
     // copied from UniRx (MIT license)
-
     public sealed class CompositeDisposable : ICollection<IDisposable>, IDisposable
     {
-        private readonly object _gate = new object();
-        private List<IDisposable> _disposables;
-        private int _count;
-        private const int SHRINK_THRESHOLD = 64;
+        private readonly object gate = new object();
+        private List<IDisposable> disposables;
+        private int count;
+        private const int ShrinkTreshold = 64;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class with no disposables contained by it initially.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class with no disposables contained by it initially.
         /// </summary>
         public CompositeDisposable()
         {
-            _disposables = new List<IDisposable>();
+            disposables = new List<IDisposable>();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class with the specified number of disposables.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class with the specified number of disposables.
         /// </summary>
         /// <param name="capacity">The number of disposables that the new CompositeDisposable can initially store.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="capacity"/> is less than zero.</exception>
@@ -31,11 +30,11 @@ namespace Utility
             if (capacity < 0)
                 throw new ArgumentOutOfRangeException("capacity");
 
-            _disposables = new List<IDisposable>(capacity);
+            disposables = new List<IDisposable>(capacity);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class from a group of disposables.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class from a group of disposables.
         /// </summary>
         /// <param name="disposables">Disposables that will be disposed together.</param>
         /// <exception cref="ArgumentNullException"><paramref name="disposables"/> is null.</exception>
@@ -44,12 +43,12 @@ namespace Utility
             if (disposables == null)
                 throw new ArgumentNullException("disposables");
 
-            _disposables = new List<IDisposable>(disposables);
-            _count = _disposables.Count;
+            this.disposables = new List<IDisposable>(disposables);
+            count = this.disposables.Count;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> class from a group of disposables.
+        /// Initializes a new instance of the <see cref="CompositeDisposable"/> class from a group of disposables.
         /// </summary>
         /// <param name="disposables">Disposables that will be disposed together.</param>
         /// <exception cref="ArgumentNullException"><paramref name="disposables"/> is null.</exception>
@@ -58,8 +57,8 @@ namespace Utility
             if (disposables == null)
                 throw new ArgumentNullException("disposables");
 
-            _disposables = new List<IDisposable>(disposables);
-            _count = _disposables.Count;
+            this.disposables = new List<IDisposable>(disposables);
+            count = this.disposables.Count;
         }
 
         /// <summary>
@@ -69,7 +68,7 @@ namespace Utility
         {
             get
             {
-                return _count;
+                return count;
             }
         }
 
@@ -84,13 +83,13 @@ namespace Utility
                 throw new ArgumentNullException("item");
 
             var shouldDispose = false;
-            lock (_gate)
+            lock (gate)
             {
                 shouldDispose = IsDisposed;
                 if (!IsDisposed)
                 {
-                    _disposables.Add(item);
-                    _count++;
+                    disposables.Add(item);
+                    count++;
                 }
             }
             if (shouldDispose)
@@ -110,32 +109,32 @@ namespace Utility
 
             var shouldDispose = false;
 
-            lock (_gate)
+            lock (gate)
             {
                 if (!IsDisposed)
                 {
-                    //
                     // List<T> doesn't shrink the size of the underlying array but does collapse the array
                     // by copying the tail one position to the left of the removal index. We don't need
                     // index-based lookup but only ordering for sequential disposal. So, instead of spending
                     // cycles on the Array.Copy imposed by Remove, we use a null sentinel value. We also
                     // do manual Swiss cheese detection to shrink the list if there's a lot of holes in it.
-                    //
-                    var i = _disposables.IndexOf(item);
+                    var i = disposables.IndexOf(item);
                     if (i >= 0)
                     {
                         shouldDispose = true;
-                        _disposables[i] = null;
-                        _count--;
+                        disposables[i] = null;
+                        count--;
 
-                        if (_disposables.Capacity > SHRINK_THRESHOLD && _count < _disposables.Capacity / 2)
+                        if (disposables.Capacity > ShrinkTreshold && count < disposables.Capacity / 2)
                         {
-                            var old = _disposables;
-                            _disposables = new List<IDisposable>(_disposables.Capacity / 2);
+                            var old = disposables;
+                            disposables = new List<IDisposable>(disposables.Capacity / 2);
 
                             foreach (var d in old)
+                            {
                                 if (d != null)
-                                    _disposables.Add(d);
+                                    disposables.Add(d);
+                            }
                         }
                     }
                 }
@@ -153,22 +152,24 @@ namespace Utility
         public void Dispose()
         {
             var currentDisposables = default(IDisposable[]);
-            lock (_gate)
+            lock (gate)
             {
                 if (!IsDisposed)
                 {
                     IsDisposed = true;
-                    currentDisposables = _disposables.ToArray();
-                    _disposables.Clear();
-                    _count = 0;
+                    currentDisposables = disposables.ToArray();
+                    disposables.Clear();
+                    count = 0;
                 }
             }
 
             if (currentDisposables != null)
             {
                 foreach (var d in currentDisposables)
+                {
                     if (d != null)
                         d.Dispose();
+                }
             }
         }
 
@@ -178,16 +179,18 @@ namespace Utility
         public void Clear()
         {
             var currentDisposables = default(IDisposable[]);
-            lock (_gate)
+            lock (gate)
             {
-                currentDisposables = _disposables.ToArray();
-                _disposables.Clear();
-                _count = 0;
+                currentDisposables = disposables.ToArray();
+                disposables.Clear();
+                count = 0;
             }
 
             foreach (var d in currentDisposables)
+            {
                 if (d != null)
                     d.Dispose();
+            }
         }
 
         /// <summary>
@@ -201,9 +204,9 @@ namespace Utility
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            lock (_gate)
+            lock (gate)
             {
-                return _disposables.Contains(item);
+                return disposables.Contains(item);
             }
         }
 
@@ -221,10 +224,10 @@ namespace Utility
             if (arrayIndex < 0 || arrayIndex >= array.Length)
                 throw new ArgumentOutOfRangeException("arrayIndex");
 
-            lock (_gate)
+            lock (gate)
             {
                 var disArray = new List<IDisposable>();
-                foreach (var item in _disposables)
+                foreach (var item in disposables)
                 {
                     if (item != null) disArray.Add(item);
                 }
@@ -246,9 +249,9 @@ namespace Utility
         {
             var res = new List<IDisposable>();
 
-            lock (_gate)
+            lock (gate)
             {
-                foreach (var d in _disposables)
+                foreach (var d in disposables)
                 {
                     if (d != null) res.Add(d);
                 }

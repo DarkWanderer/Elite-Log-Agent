@@ -1,10 +1,9 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.Runtime.Serialization;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
     public class FsdJump : LogEvent
     {
         [JsonProperty("StarSystem")]
@@ -71,42 +70,6 @@ namespace DW.ELA.Interfaces.Events
         public FactionState? FactionState { get; set; }
     }
 
-    public class Faction
-    {
-        [JsonProperty("Name")]
-        public string Name { get; set; }
-
-        [JsonProperty("FactionState")]
-        public FactionState FactionState { get; set; }
-
-        [JsonProperty("Government")]
-        public string Government { get; set; }
-
-        [JsonProperty("Influence")]
-        public double Influence { get; set; }
-
-        [JsonProperty("Allegiance")]
-        public string Allegiance { get; set; }
-
-        [JsonProperty("ActiveStates")]
-        public FactionStateTrend[] ActiveStates { get; set; }
-
-        [JsonProperty("PendingStates")]
-        public FactionStateTrend[] PendingStates { get; set; }
-
-        [JsonProperty("RecoveringStates")]
-        public FactionStateTrend[] RecoveringStates { get; set; }
-
-        [JsonProperty("Happiness")]
-        public string Happiness { get; set; }
-
-        [JsonProperty("Happiness_Localised")]
-        public string HappinessLocalised { get; set; }
-
-        [JsonProperty("MyReputation")]
-        public double? MyReputation { get; set; }
-    }
-
     public partial class FactionStateTrend
     {
         [JsonProperty("State")]
@@ -121,8 +84,10 @@ namespace DW.ELA.Interfaces.Events
     public enum FactionState
     {
         None,
+
         //[EnumMember(Value = "Civil Unrest")]
         CivilUnrest,
+
         //[EnumMember(Value = "Civil War")]
         CivilWar,
         Boom,
@@ -136,5 +101,5 @@ namespace DW.ELA.Interfaces.Events
         Retreat,
         War,
         CivilLiberty
-    };
+    }
 }

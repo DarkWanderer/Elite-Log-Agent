@@ -46,16 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
     <Compile Include="AbstractSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ErrorRecord.cs" />
     <Compile Include="Events\Commander.cs" />
     <Compile Include="Events\CommunityGoal.cs" />
+    <Compile Include="Events\CommunityGoalRecord.cs" />
+    <Compile Include="Events\Composition.cs" />
     <Compile Include="Events\Docked.cs" />
     <Compile Include="Events\EngineerProgress.cs" />
+    <Compile Include="Events\EngineerProgressRecord.cs" />
     <Compile Include="Events\EscapeInterdiction.cs" />
+    <Compile Include="Events\Faction.cs" />
     <Compile Include="Events\FsdJump.cs" />
+    <Compile Include="Events\GeologicComposition.cs" />
     <Compile Include="Events\Interdicted.cs" />
     <Compile Include="Events\Interdiction.cs" />
     <Compile Include="Events\JoinACrew.cs" />
@@ -70,20 +78,26 @@
     <Compile Include="Events\MissionAccepted.cs" />
     <Compile Include="Events\MissionCompleted.cs" />
     <Compile Include="Events\MissionFailed.cs" />
+    <Compile Include="Events\Modifier.cs" />
+    <Compile Include="Events\Module.cs" />
     <Compile Include="Events\Outfitting.cs" />
     <Compile Include="Events\Progress.cs" />
     <Compile Include="Events\PvpKill.cs" />
+    <Compile Include="Events\QuitACrew.cs" />
     <Compile Include="Events\Rank.cs" />
     <Compile Include="Events\Reputation.cs" />
+    <Compile Include="Events\Ring.cs" />
     <Compile Include="Events\Scan.cs" />
     <Compile Include="Events\Shipyard.cs" />
     <Compile Include="Events\ShipyardSell.cs" />
     <Compile Include="Events\ShipyardSwap.cs" />
     <Compile Include="Events\ShipyardTransfer.cs" />
+    <Compile Include="Events\StationEconomy.cs" />
     <Compile Include="Events\Statistics.cs" />
     <Compile Include="Events\StoredModules.cs" />
     <Compile Include="Events\StoredShips.cs" />
     <Compile Include="Events\SupercruiseEntry.cs" />
+    <Compile Include="Events\TopTier.cs" />
     <Compile Include="Events\Undocked.cs" />
     <Compile Include="Events\USSDrop.cs" />
     <Compile Include="GlobalSettings.cs" />
@@ -103,6 +117,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

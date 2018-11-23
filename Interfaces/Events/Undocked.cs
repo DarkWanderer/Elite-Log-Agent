@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using Newtonsoft.Json;
+
     public class Undocked : LogEvent
     {
         [JsonProperty("StationName")]

@@ -1,9 +1,8 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using System;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class ShipyardSwap : LogEvent
     {
         [JsonProperty("ShipType")]

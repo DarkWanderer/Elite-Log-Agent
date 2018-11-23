@@ -1,15 +1,10 @@
-﻿using Controller;
-using DW.ELA.UnitTests.Utility;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System.IO;
+    using DW.ELA.Controller;
+    using DW.ELA.UnitTests.Utility;
+    using NUnit.Framework;
+
     public partial class LogEnumeratorTests
     {
         [Test]

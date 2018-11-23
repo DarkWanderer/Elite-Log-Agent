@@ -1,8 +1,7 @@
-﻿using DW.ELA.Interfaces;
-using System;
-
-namespace DW.ELA.Interfaces
+﻿namespace DW.ELA.Interfaces
 {
+    using System;
+
     public interface IMessageBroker : IObservable<LogEvent>, IObserver<LogEvent>, IDisposable
     {
     }

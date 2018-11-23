@@ -1,13 +1,12 @@
-﻿using DW.ELA.Interfaces;
-using System.Linq;
-using System.Threading.Tasks;
-using DW.ELA.Utility.Json;
-using NLog;
-using DW.ELA.Plugin.EDDN.Model;
-using System;
-
-namespace DW.ELA.Plugin.EDDN
+﻿namespace DW.ELA.Plugin.EDDN
 {
+    using System;
+    using System.Threading.Tasks;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Plugin.EDDN.Model;
+    using DW.ELA.Utility.Json;
+    using NLog;
+
     public class EddnApiFacade : IEddnApiFacade
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
@@ -21,6 +20,7 @@ namespace DW.ELA.Plugin.EDDN
         public async Task PostEventsAsync(params EddnEvent[] events)
         {
             foreach (var @event in events)
+            {
                 try
                 {
                     await PostAsync(@event);
@@ -29,6 +29,8 @@ namespace DW.ELA.Plugin.EDDN
                 {
                     logger.Error(e, "Error pushing event");
                 }
+            }
+
             logger.Info("Pushed {0} events", events.Length);
         }
 

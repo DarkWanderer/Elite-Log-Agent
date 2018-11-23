@@ -1,15 +1,15 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.Utility.Log;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-
-namespace Utility
+﻿namespace DW.ELA.Utility
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Web;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility.Log;
+
     public class ThrottlingRestClient : IRestClient
     {
         private readonly string baseUrl;
@@ -29,9 +29,7 @@ namespace Utility
                 if (lastRequestTimestamp != DateTime.MinValue)
                     secondsSinceLastCall = (int)(now - lastRequestTimestamp).TotalSeconds;
 
-                int decayedRequestCounter = Math.Max(0,requestCounter - secondsSinceLastCall / 5);
-                //if (decayedRequestCounter > 3)
-                //    throw new ApplicationException("Internal error: queries are too frequent");
+                int decayedRequestCounter = Math.Max(0, requestCounter - (secondsSinceLastCall / 5));
 
                 lastRequestTimestamp = now;
                 requestCounter = decayedRequestCounter + 1;
@@ -62,7 +60,7 @@ namespace Utility
             return response;
         }
 
-        public async Task<string> PostAsync(IDictionary<string,string> values)
+        public async Task<string> PostAsync(IDictionary<string, string> values)
         {
             ThrowIfQuotaExceeded();
 

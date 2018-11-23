@@ -1,16 +1,11 @@
-﻿using Controller;
-using DW.ELA.Interfaces;
-using Moq;
-using NLog;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.UnitTests.Controller
+﻿namespace DW.ELA.UnitTests.Controller
 {
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+    using Moq;
+    using NLog;
+    using NUnit.Framework;
+
     public class NLogSettingsManagerTests
     {
         [Test]
@@ -18,6 +13,7 @@ namespace DW.ELA.UnitTests.Controller
         {
             var manager = new NLogSettingsManager(new Mock<ISettingsProvider>().Object);
             manager.Setup();
+
             // Reset log
             LogManager.Configuration = new NLog.Config.LoggingConfiguration();
         }

@@ -1,23 +1,22 @@
-﻿using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Settings;
-using DW.ELA.Utility;
-using NLog;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Timers;
-
-namespace DW.ELA.Controller
+﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Timers;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Settings;
+    using DW.ELA.Utility;
+    using NLog;
+
     public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin, IObserver<LogEvent>, IDisposable
         where TSettings : class, new()
         where TEvent : class
     {
-        protected readonly ISettingsProvider SettingsProvider;
-        private readonly ConcurrentQueue<TEvent> EventQueue = new ConcurrentQueue<TEvent>();
-        private readonly Timer flushTimer = new Timer();
 
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
+        private readonly ConcurrentQueue<TEvent> eventQueue = new ConcurrentQueue<TEvent>();
+        private readonly Timer flushTimer = new Timer();
 
         protected AbstractPlugin(ISettingsProvider settingsProvider)
         {
@@ -28,14 +27,20 @@ namespace DW.ELA.Controller
             flushTimer.Elapsed += (o, e) => FlushQueue();
         }
 
+        protected ISettingsProvider SettingsProvider { get; }
+
         public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
 
         public abstract string PluginName { get; }
+
         public abstract string PluginId { get; }
 
         protected abstract IEventConverter<TEvent> EventConverter { get; }
+
         public abstract AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings);
+
         public abstract void FlushEvents(ICollection<TEvent> events);
+
         public abstract void ReloadSettings();
 
         public void FlushQueue()
@@ -43,14 +48,14 @@ namespace DW.ELA.Controller
             try
             {
                 var events = new List<TEvent>();
-                while (EventQueue.TryDequeue(out var @event))
+                while (eventQueue.TryDequeue(out var @event))
                     events.Add(@event);
                 if (events.Count > 0)
                     FlushEvents(events);
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error while processing events");
+                Logger.Error(e, "Error while processing events");
             }
             finally
             {
@@ -61,14 +66,17 @@ namespace DW.ELA.Controller
         public void OnNext(LogEvent @event)
         {
             foreach (var e in EventConverter.Convert(@event))
-                EventQueue.Enqueue(e);
+                eventQueue.Enqueue(e);
         }
 
         public virtual void OnCompleted() => FlushQueue();
+
         public virtual void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
+
         public virtual void OnError(Exception error) { }
 
         public IObserver<LogEvent> GetLogObserver() => this;
+
         public void Dispose() => flushTimer.Dispose();
 
         protected GlobalSettings GlobalSettings

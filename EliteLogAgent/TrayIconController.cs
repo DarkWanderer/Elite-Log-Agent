@@ -1,15 +1,14 @@
-﻿using EliteLogAgent.Properties;
-using DW.ELA.Interfaces;
-using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using Utility;
-
-namespace EliteLogAgent
+﻿namespace EliteLogAgent
 {
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Forms;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility;
+    using EliteLogAgent.Properties;
+
     public class TrayIconController : ITrayIconController
     {
         private readonly NotifyIcon trayIcon;
@@ -36,23 +35,25 @@ namespace EliteLogAgent
         {
             var menuStrip = new ContextMenuStrip();
             menuStrip.Items.Add(new ToolStripLabel($"Version: {AppInfo.Version}") { ForeColor = SystemColors.ControlDark });
-            //menuStrip.Items.Add("Upload latest log", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(1, false));
-            //menuStrip.Items.Add("Upload 5 latest logs", Resources.EliteIcon.ToBitmap(), (o, e) => uploadController.UploadLatestFiles(5, false));
+
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Settings", Resources.EliteIcon.ToBitmap(), (o, e) => OpenSettings());
             menuStrip.Items.Add("Report issue", Resources.GitHub.ToBitmap(), (o, e) => OpenReportIssueLink());
-            //menuStrip.Items.Add("About", SystemIcons.Information.ToBitmap(), (o, e) => { using (var form = new AboutForm()) { form.ShowDialog(); } });
+
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("About", SystemIcons.Information.ToBitmap(), (o, e) => OpenAboutForm());
             menuStrip.Items.Add("Changelog", Resources.GitHub.ToBitmap(), (o, e) => OpenChangelog());
+
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Exit", SystemIcons.Error.ToBitmap(), (o, e) => Application.Exit());
+
             return menuStrip;
         }
 
         private void OpenChangelog() => Process.Start(Resources.GitHubChangelogLink);
 
         static Form form;
+
         private void OpenAboutForm()
         {
             if (form != null)
@@ -102,7 +103,6 @@ namespace EliteLogAgent
 
         private static ToolStripSeparator ToolStripSeparatorLeft => new ToolStripSeparator { Alignment = ToolStripItemAlignment.Left };
 
-        #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
         public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IMessageBroker messageBroker)
@@ -140,9 +140,9 @@ namespace EliteLogAgent
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
+
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }
-        #endregion
     }
 }

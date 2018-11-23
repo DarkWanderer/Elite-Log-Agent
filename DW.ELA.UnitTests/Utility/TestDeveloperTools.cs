@@ -1,16 +1,14 @@
-﻿using Controller;
-using DW.ELA.Interfaces;
-using DW.ELA.LogModel;
-using DW.ELA.Utility.Json;
-using MoreLinq;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace DW.ELA.UnitTests.Utility
+﻿namespace DW.ELA.UnitTests.Utility
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Utility.Json;
+    using MoreLinq;
+    using Newtonsoft.Json.Linq;
+    using NUnit.Framework;
+
     public static class TestDeveloperTools
     {
         [Test]
@@ -48,7 +46,6 @@ namespace DW.ELA.UnitTests.Utility
         /// <summary>
         /// Utility method for developer to get canned events from own logs
         /// </summary>
-        /// <returns></returns>
         [Test]
         [Explicit]
         public static void ToolPrepareCannedEvents()
@@ -61,6 +58,7 @@ namespace DW.ELA.UnitTests.Utility
             Assert.IsNotEmpty(eventsString);
         }
 
+#pragma warning disable SA1005 // Single line comments must begin with single space
         //[Test]
         //[Explicit]
         //public static void GenerateCodeForUnknownEvents()
@@ -104,4 +102,5 @@ namespace DW.ELA.UnitTests.Utility
         //    return code;
         //}
     }
+#pragma warning restore SA1005 // Single line comments must begin with single space
 }

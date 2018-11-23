@@ -1,12 +1,12 @@
-﻿using Controller;
-using DW.ELA.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.IO;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using DW.ELA.Controller;
+    using DW.ELA.Interfaces;
+
     public static class TestEventSource
     {
         public static IEnumerable<LogEvent> TypedLogEvents => CannedEvents.Where(e => e.GetType() != typeof(LogEvent));
@@ -33,6 +33,7 @@ namespace DW.ELA.UnitTests
             get
             {
                 foreach (var file in Directory.EnumerateFiles(new SavedGamesDirectoryHelper().Directory, "JournalBeta.*.log"))
+                {
                     using (var fileReader = File.OpenRead(file))
                     using (var textReader = new StreamReader(fileReader))
                     {
@@ -40,6 +41,7 @@ namespace DW.ELA.UnitTests
                         foreach (var @event in reader.ReadEventsFromStream(textReader))
                             yield return @event;
                     }
+                }
             }
         }
 
@@ -48,6 +50,7 @@ namespace DW.ELA.UnitTests
             get
             {
                 foreach (var file in Directory.EnumerateFiles(new SavedGamesDirectoryHelper().Directory, "Journal.*.log"))
+                {
                     using (var fileReader = File.OpenRead(file))
                     using (var textReader = new StreamReader(fileReader))
                     {
@@ -55,6 +58,7 @@ namespace DW.ELA.UnitTests
                         foreach (var @event in reader.ReadEventsFromStream(textReader))
                             yield return @event;
                     }
+                }
             }
         }
     }

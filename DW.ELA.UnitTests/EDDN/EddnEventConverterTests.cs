@@ -1,14 +1,13 @@
-﻿using Controller;
-using DW.ELA.Interfaces;
-using DW.ELA.Plugin.EDDN;
-using DW.ELA.Plugin.EDDN.Model;
-using Moq;
-using NUnit.Framework;
-using System;
-using System.Linq;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Plugin.EDDN;
+    using DW.ELA.Plugin.EDDN.Model;
+    using Moq;
+    using NUnit.Framework;
+
     [TestFixture]
     public class EddnEventConverterTests
     {

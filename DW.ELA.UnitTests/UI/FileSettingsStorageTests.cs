@@ -1,14 +1,9 @@
-﻿using EliteLogAgent;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests
 {
+    using System.IO;
+    using EliteLogAgent;
+    using NUnit.Framework;
+
     public class FileSettingsStorageTests
     {
         private const string TestCommander = "TestCommander123";

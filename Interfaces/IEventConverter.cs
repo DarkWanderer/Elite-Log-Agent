@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace DW.ELA.Interfaces
+﻿namespace DW.ELA.Interfaces
 {
-    public interface IEventConverter<out TEvent> where TEvent : class
+    using System.Collections.Generic;
+
+    public interface IEventConverter<out TEvent>
+        where TEvent : class
     {
         IEnumerable<TEvent> Convert(LogEvent @event);
     }

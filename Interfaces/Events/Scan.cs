@@ -1,10 +1,8 @@
-﻿using DW.ELA.Interfaces;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-
-namespace DW.ELA.Interfaces.Events
+﻿namespace DW.ELA.Interfaces.Events
 {
+    using DW.ELA.Interfaces;
+    using Newtonsoft.Json;
+
     public class Scan : LogEvent
     {
         [JsonProperty("BodyName")]
@@ -102,44 +100,5 @@ namespace DW.ELA.Interfaces.Events
 
         [JsonProperty("Materials")]
         public Composition[] Materials { get; set; }
-    }
-
-    public class Composition
-    {
-        [JsonProperty("Name")]
-        public string Name { get; set; }
-
-        [JsonProperty("Percent")]
-        public double Percent { get; set; }
-    }
-
-    public class GeologicComposition
-    {
-        [JsonProperty("Ice")]
-        public double Ice { get; set; }
-
-        [JsonProperty("Rock")]
-        public double Rock { get; set; }
-
-        [JsonProperty("Metal")]
-        public double Metal { get; set; }
-    }
-
-    public class Ring
-    {
-        [JsonProperty("Name")]
-        public string Name { get; set; }
-
-        [JsonProperty("RingClass")]
-        public string RingClass { get; set; }
-
-        [JsonProperty("MassMT")]
-        public long MassMt { get; set; }
-
-        [JsonProperty("InnerRad")]
-        public long InnerRad { get; set; }
-
-        [JsonProperty("OuterRad")]
-        public long OuterRad { get; set; }
     }
 }

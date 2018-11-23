@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DW.ELA.Interfaces;
-using DW.ELA.Interfaces.Events;
-using DW.ELA.Plugin.EDDN.Model;
-using Newtonsoft.Json.Linq;
-using NLog;
-using Utility;
-
-namespace DW.ELA.Plugin.EDDN
+﻿namespace DW.ELA.Plugin.EDDN
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using DW.ELA.Plugin.EDDN.Model;
+    using DW.ELA.Utility;
+    using Newtonsoft.Json.Linq;
+    using NLog;
+
     public class EddnEventConverter : IEventConverter<EddnEvent>
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
@@ -139,7 +139,7 @@ namespace DW.ELA.Plugin.EDDN
                 Demand = arg.Demand,
                 DemandBracket = arg.DemandBracket,
                 MeanPrice = arg.MeanPrice,
-                Name = arg.Name.Replace("$", "").Replace("_name;", ""),
+                Name = arg.Name.Replace("$", string.Empty).Replace("_name;", string.Empty),
                 SellPrice = arg.SellPrice,
                 Stock = arg.Stock,
                 StockBracket = arg.StockBracket
@@ -153,9 +153,13 @@ namespace DW.ELA.Plugin.EDDN
             if (@event.Message["StarSystem"] == null)
             {
                 var system = stateHistoryRecorder.GetPlayerSystem(e.Timestamp);
+
+                // if we can't determine player's location, abort
                 if (system != null)
+                {
                     @event.Message.Add("StarSystem", system);
-                else // if we can't determine player's location, abort
+                }
+                else
                 {
                     logger.Error("Unable to determine player location");
                     yield break;
@@ -176,7 +180,8 @@ namespace DW.ELA.Plugin.EDDN
         private JObject Strip(JObject raw)
         {
             raw = (JObject)raw.DeepClone();
-            var attributesToRemove = new List<string>() {
+            var attributesToRemove = new List<string>()
+            {
                 "CockpitBreach",
                 "BoostUsed",
                 "FuelLevel",
@@ -187,8 +192,10 @@ namespace DW.ELA.Plugin.EDDN
             };
 
             foreach (var attribute in raw)
+            {
                 if (attribute.Key.EndsWith("_Localised"))
                     attributesToRemove.Add(attribute.Key);
+            }
 
             foreach (var key in attributesToRemove)
                 raw.Remove(key);
