@@ -93,7 +93,7 @@
         public double? AbsoluteMagnitude { get; set; }
 
         [JsonProperty("Luminosity")]
-        public double? Luminosity { get; set; }
+        public string Luminosity { get; set; }
 
         [JsonProperty("Rings")]
         public Ring[] Rings { get; set; }
