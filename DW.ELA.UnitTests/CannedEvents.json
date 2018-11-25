@@ -16417,41 +16417,6 @@
 }
 {
   "timestamp": "2018-08-27T21:00:00Z",
-  "event": "EngineerProgress",
-  "Engineer": "Liz Ryder",
-  "EngineerID": 300080,
-  "Rank": 5
-}
-{
-  "timestamp": "2018-08-27T21:00:00Z",
-  "event": "EngineerProgress",
-  "Engineer": "Liz Ryder",
-  "EngineerID": 300080,
-  "Rank": 4
-}
-{
-  "timestamp": "2018-08-27T21:00:00Z",
-  "event": "EngineerProgress",
-  "Engineer": "Etienne Dorn",
-  "EngineerID": 300290,
-  "Progress": "Invited"
-}
-{
-  "timestamp": "2018-08-27T21:00:00Z",
-  "event": "EngineerProgress",
-  "Engineer": "Petra Olmanova",
-  "EngineerID": 300130,
-  "Progress": "Invited"
-}
-{
-  "timestamp": "2018-08-27T21:00:00Z",
-  "event": "EngineerProgress",
-  "Engineer": "Marsha Hicks",
-  "EngineerID": 300150,
-  "Progress": "Invited"
-}
-{
-  "timestamp": "2018-08-27T21:00:00Z",
   "event": "EscapeInterdiction",
   "Interdictor": "Micro",
   "IsPlayer": false
@@ -29045,7 +29010,7 @@
   },
   "Combat": {
     "Bounties_Claimed": 6272,
-    "Bounty_Hunting_Profit": 293238340.5,
+    "Bounty_Hunting_Profit": 293238340,
     "Combat_Bonds": 1541,
     "Combat_Bond_Profits": 54840124,
     "Assassinations": 85,
@@ -29166,7 +29131,7 @@
   },
   "Combat": {
     "Bounties_Claimed": 6272,
-    "Bounty_Hunting_Profit": 293238340.5,
+    "Bounty_Hunting_Profit": 293238340,
     "Combat_Bonds": 1541,
     "Combat_Bond_Profits": 54840124,
     "Assassinations": 85,
@@ -29287,7 +29252,7 @@
   },
   "Combat": {
     "Bounties_Claimed": 6272,
-    "Bounty_Hunting_Profit": 293238340.5,
+    "Bounty_Hunting_Profit": 293238340,
     "Combat_Bonds": 1541,
     "Combat_Bond_Profits": 54840124,
     "Assassinations": 85,
@@ -29408,7 +29373,7 @@
   },
   "Combat": {
     "Bounties_Claimed": 6272,
-    "Bounty_Hunting_Profit": 293238340.5,
+    "Bounty_Hunting_Profit": 293238340,
     "Combat_Bonds": 1541,
     "Combat_Bond_Profits": 54840124,
     "Assassinations": 85,
@@ -29529,7 +29494,7 @@
   },
   "Combat": {
     "Bounties_Claimed": 6272,
-    "Bounty_Hunting_Profit": 293238340.5,
+    "Bounty_Hunting_Profit": 293238340,
     "Combat_Bonds": 1541,
     "Combat_Bond_Profits": 54840124,
     "Assassinations": 85,
