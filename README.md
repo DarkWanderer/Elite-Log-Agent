@@ -55,6 +55,8 @@ Releasing to ClickOnce installer is done via merging to `prod` branch
 | master        | [![appveyor build status][buildstatus-master]][project] |
 | prod          | [![appveyor build status][buildstatus-prod]][project]   |
 
+Coverage: ![coverage badge][codecov-badge]
+
 ## Links
 
 * [Elite: Dangerous in official store](https://www.frontierstore.net/games/elite-dangerous-cat.html)
@@ -66,3 +68,4 @@ Releasing to ClickOnce installer is done via merging to `prod` branch
 [project]: https://ci.appveyor.com/project/DarkWanderer/Elite-Log-Agent
 [clickonce]: https://elitelogagent.blob.core.windows.net/clickonce/EliteLogAgent.application
 [releases]: https://github.com/DarkWanderer/Elite-Log-Agent/releases
+[codecov-badge]: https://codecov.io/gh/DarkWanderer/Elite-Log-Agent/branch/master/graph/badge.svg
