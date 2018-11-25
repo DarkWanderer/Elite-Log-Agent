@@ -110,7 +110,7 @@
                     shipType.Contains("Fighter"))
                     return;
 
-                shipRecorder.RecordState(new ShipRecord { ShipID = shipId.Value, ShipType = shipType }, timestamp);
+                shipRecorder.RecordState(new ShipRecord(shipId.Value, shipType), timestamp);
             }
             catch (Exception e)
             {
@@ -120,8 +120,15 @@
 
         private class ShipRecord
         {
-            public long ShipID;
-            public string ShipType;
+            public ShipRecord(long shipID, string shipType)
+            {
+                ShipID = shipID;
+                ShipType = shipType;
+            }
+
+            public long ShipID { get; }
+
+            public string ShipType { get; }
 
             public override bool Equals(object obj)
             {

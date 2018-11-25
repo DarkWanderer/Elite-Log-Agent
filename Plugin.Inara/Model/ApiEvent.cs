@@ -24,18 +24,18 @@
         [JsonProperty("eventData")]
         public object EventData { get; internal set; }
 
-        public override string ToString() => Serialize.ToJson(this);
-
         /// <summary>
-        /// Denotes status of event processing as returned by API
+        /// Gets status of event processing as returned by API
         /// </summary>
         [JsonProperty("eventStatus")]
         public int? EventStatus { get; internal set; }
 
         /// <summary>
-        /// Denotes error codes as returned by API
+        /// Gets error codes as returned by API
         /// </summary>
         [JsonProperty("eventStatusText")]
         public string EventStatusText { get; internal set; }
+
+        public override string ToString() => Serialize.ToJson(this);
     }
 }

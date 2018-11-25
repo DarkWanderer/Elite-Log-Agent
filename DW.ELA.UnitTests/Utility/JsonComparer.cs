@@ -8,13 +8,6 @@
 
     public static class JsonComparer
     {
-        /// <summary>
-        /// Deep compare two NewtonSoft JObjects. If they don't match, returns text diffs
-        /// </summary>
-        /// <param name="source">The expected results</param>
-        /// <param name="target">The actual results</param>
-        /// <returns>Text string</returns>
-
         public static IList<string> Compare(string tokenName, JObject source, JObject target)
         {
             var diffs = new List<string>();

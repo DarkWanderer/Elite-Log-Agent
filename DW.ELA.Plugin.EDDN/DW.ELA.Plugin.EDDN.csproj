@@ -77,6 +77,7 @@
     <Compile Include="Model\OutfittingEvent.cs" />
     <Compile Include="Model\OutfittingMessage.cs" />
     <Compile Include="Model\ShipyardEvent.cs" />
+    <Compile Include="Model\ShipyardMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

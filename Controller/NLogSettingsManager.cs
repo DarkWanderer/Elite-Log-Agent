@@ -1,13 +1,13 @@
 ﻿namespace DW.ELA.Controller
 {
+    using System;
+    using System.IO;
+    using System.Text;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
     using NLog;
     using NLog.Layouts;
     using NLog.Targets;
-    using System;
-    using System.IO;
-    using System.Text;
 
     public class NLogSettingsManager : ILogSettingsBootstrapper
     {
@@ -32,7 +32,7 @@
             var logLevel = LogLevel.Info;
             try
             {
-                if (!String.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
+                if (!string.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
                     logLevel = LogLevel.FromString(settingsProvider.Settings.LogLevel);
             }
             catch

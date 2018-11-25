@@ -24,7 +24,7 @@
         public long? Value { get; set; }
 
         [JsonProperty("Engineering")]
-        public Engineering Engineering { get; set; }
+        public ModuleEngineering Engineering { get; set; }
 
         [JsonProperty("AmmoInClip")]
         public long? AmmoInClip { get; set; }

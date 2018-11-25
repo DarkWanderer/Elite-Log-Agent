@@ -13,11 +13,13 @@
 
         // Input fields
         [JsonProperty("appName")]
-        public readonly string AppName = Utility.AppInfo.Name;
+        public string AppName => Utility.AppInfo.Name;
+
         [JsonProperty("appVersion")]
-        public readonly string AppVersion = Utility.AppInfo.Version;
+        public string AppVersion => Utility.AppInfo.Version;
+
         [JsonProperty("isDeveloped")]
-        public readonly bool IsDeveloped = false;
+        public bool IsDeveloped => false;
 
         [JsonProperty("APIkey")]
         public string ApiKey { get; }

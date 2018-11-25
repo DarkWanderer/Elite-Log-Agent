@@ -15,14 +15,15 @@
     /// </summary>
     public class JournalMonitor : LogReader, ILogRealTimeDataSource
     {
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly FileSystemWatcher fileWatcher;
-        private string currentFile;
         private readonly string logDirectory;
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-        private long filePosition;
         private readonly object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
         private readonly BasicObservable<LogEvent> basicObservable = new BasicObservable<LogEvent>();
+
+        private string currentFile;
+        private long filePosition;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JournalMonitor"/> class.
@@ -51,7 +52,7 @@
             filePosition = new FileInfo(currentFile).Length;
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
-            logger.Info("Started monitoring");
+            Log.Info("Started monitoring");
         }
 
         private void FileWatcher_Event(object sender, FileSystemEventArgs e)
@@ -72,7 +73,7 @@
             }
             catch (Exception e)
             {
-                logger.Error()
+                Log.Error()
                     .Message("Error while reading event file")
                     .Exception(e)
                     .Property("event-file", fullPath)
@@ -101,7 +102,7 @@
                 }
                 catch (Exception e)
                 {
-                    logger.Error()
+                    Log.Error()
                         .Message("Error while reading journal file")
                         .Exception(e)
                         .Property("journal-file", currentFile)

@@ -2,7 +2,6 @@
 {
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public class FsdJump : LogEvent
     {
@@ -68,34 +67,5 @@
 
         [JsonProperty("FactionState")]
         public FactionState? FactionState { get; set; }
-    }
-
-    public partial class FactionStateTrend
-    {
-        [JsonProperty("State")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public FactionState State { get; set; }
-
-        [JsonProperty("Trend")]
-        public long? Trend { get; set; }
-    }
-
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum FactionState
-    {
-        None,
-        CivilUnrest,
-        CivilWar,
-        Boom,
-        Bust,
-        Election,
-        Expansion,
-        Famine,
-        Investment,
-        Lockdown,
-        Outbreak,
-        Retreat,
-        War,
-        CivilLiberty
     }
 }

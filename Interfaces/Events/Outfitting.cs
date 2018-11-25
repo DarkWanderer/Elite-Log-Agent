@@ -19,16 +19,4 @@
         [JsonProperty("Items")]
         public OutfittingItem[] Items { get; set; }
     }
-
-    public class OutfittingItem
-    {
-        [JsonProperty("id")]
-        public long Id { get; set; }
-
-        [JsonProperty("Name")]
-        public string Name { get; set; }
-
-        [JsonProperty("BuyPrice")]
-        public long BuyPrice { get; set; }
-    }
 }

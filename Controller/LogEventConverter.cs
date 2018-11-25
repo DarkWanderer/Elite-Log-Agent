@@ -23,8 +23,8 @@
                .Where(t => t.Namespace == exampleType.Namespace)
                .Where(t => t.BaseType == baseType)
                .ToDictionary(t => t.Name.ToLowerInvariant(), t => t);
-            Debug.Assert(eventTypes.Count > 0);
-            Debug.Assert(eventTypes.Values.Contains(exampleType));
+            Debug.Assert(eventTypes.Count > 0, "Must have events");
+            Debug.Assert(eventTypes.Values.Contains(exampleType), "Event LoadGame not loaded");
         }
 
         public static LogEvent Convert(JObject jObject)

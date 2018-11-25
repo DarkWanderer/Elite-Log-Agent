@@ -348,7 +348,7 @@
             yield return @event;
         }
 
-        private Dictionary<string, object> ConvertStoredItem(Item item)
+        private Dictionary<string, object> ConvertStoredItem(StoredItem item)
         {
             var result = new Dictionary<string, object>()
             {
@@ -518,7 +518,7 @@
             return item;
         }
 
-        private JObject ConvertEngineering(Engineering eng)
+        private JObject ConvertEngineering(ModuleEngineering eng)
         {
             var item = new JObject
             {
