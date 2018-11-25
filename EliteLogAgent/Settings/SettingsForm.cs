@@ -38,13 +38,14 @@
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             currentSettings = Provider.Settings.Clone();
-            settingsControls.Add("General", new GeneralSettingsControl()
+            var generalSettingsControl = new GeneralSettingsControl()
             {
                 MessageBroker = MessageBroker,
                 GlobalSettings = currentSettings,
                 Plugins = Plugins,
                 Dock = DockStyle.Fill
-            });
+            };
+            settingsControls.Add("General", generalSettingsControl);
             settingsCategoriesListView.Items.Add("General");
 
             foreach (var plugin in Plugins)

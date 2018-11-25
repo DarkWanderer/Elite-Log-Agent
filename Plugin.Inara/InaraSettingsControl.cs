@@ -13,13 +13,13 @@
 
     internal class InaraSettingsControl : AbstractSettingsControl
     {
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private TextBox inaraApiKeyTextBox;
         private Button testCredentialsButton;
         private Label credentialsStatusLabel;
         private Button button1;
         private CheckBox apiKeyValidatedCheckbox;
         private LinkLabel apiKeyLabel;
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         public InaraSettingsControl()
         {

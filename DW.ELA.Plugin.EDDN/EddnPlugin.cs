@@ -22,9 +22,7 @@
         private readonly IEddnApiFacade apiFacade = new EddnApiFacade(RestClient);
         private readonly EddnEventConverter eventConverter;
         private readonly EventSchemaValidator schemaManager = new EventSchemaValidator();
-
-        protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
-
+        
         public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
             : base(settingsProvider)
         {
@@ -34,6 +32,8 @@
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
+
+        protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
 
         public override string PluginName => "EDDN";
 
@@ -56,7 +56,7 @@
         /// <summary>
         /// Check event against list of last few sent events, excluding timestamp from comparison
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">Event to check uniqueness</param>
         /// <returns>true if event wasn't sent before</returns>
         private bool IsUnique(EddnEvent e)
         {

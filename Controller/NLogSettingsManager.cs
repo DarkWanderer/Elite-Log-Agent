@@ -1,20 +1,23 @@
 ﻿namespace DW.ELA.Controller
 {
-    using System;
-    using System.IO;
-    using System.Text;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
     using NLog;
     using NLog.Layouts;
     using NLog.Targets;
+    using System;
+    using System.IO;
+    using System.Text;
 
     public class NLogSettingsManager : ILogSettingsBootstrapper
     {
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
 
-        static NLogSettingsManager() => AppDomain.CurrentDomain.DomainUnload += (o, e) => LogManager.Flush();
+        static NLogSettingsManager()
+        {
+            AppDomain.CurrentDomain.DomainUnload += (o, e) => LogManager.Flush();
+        }
 
         public NLogSettingsManager(ISettingsProvider settingsProvider)
         {
@@ -29,7 +32,7 @@
             var logLevel = LogLevel.Info;
             try
             {
-                if (!string.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
+                if (!String.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
                     logLevel = LogLevel.FromString(settingsProvider.Settings.LogLevel);
             }
             catch
@@ -48,6 +51,7 @@
             logger.Info("Enabled logging with level {0}", logLevel);
         }
 
+#pragma warning disable SA1118 // Parameter must not span multiple lines
         private Layout DefaultJsonLayout
         {
             get
@@ -78,10 +82,12 @@
                                         new JsonAttribute("stackTrace", "${exception:format=:innerFormat=StackTrace:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
                                     },
                                     RenderEmptyObject = false
-                                }, false)
+                                },
+                                false)
                             },
                             RenderEmptyObject = false
-                        }, false)
+                        },
+                        false)
                     },
                     RenderEmptyObject = false,
                     IncludeAllProperties = true,
@@ -89,6 +95,7 @@
                 };
             }
         }
+#pragma warning restore SA1118 // Parameter must not span multiple lines
 
         private Target CreateFileTarget()
         {

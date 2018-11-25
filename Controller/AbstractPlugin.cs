@@ -13,7 +13,6 @@
         where TSettings : class, new()
         where TEvent : class
     {
-
         private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
         private readonly ConcurrentQueue<TEvent> eventQueue = new ConcurrentQueue<TEvent>();
         private readonly Timer flushTimer = new Timer();
@@ -73,7 +72,9 @@
 
         public virtual void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 
-        public virtual void OnError(Exception error) { }
+        public virtual void OnError(Exception error)
+        {
+        }
 
         public IObserver<LogEvent> GetLogObserver() => this;
 

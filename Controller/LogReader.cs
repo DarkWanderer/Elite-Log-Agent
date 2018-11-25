@@ -20,11 +20,12 @@
         /// <summary>
         /// Reads the given Journal file from specified position and generates the events
         /// </summary>
-        /// <param name="file">Journal file</param>
-        /// <param name="filePosition">starting position</param>
-        /// <returns></returns>
+        /// <param name="textReader">Stream reader for input data</param>
+        /// <returns>Sequence of events read from input</returns>
         public IEnumerable<LogEvent> ReadEventsFromStream(TextReader textReader)
         {
+            if (textReader == null)
+                throw new ArgumentNullException(nameof(textReader));
             using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true, CloseInput = false })
             {
                 while (jsonReader.Read())

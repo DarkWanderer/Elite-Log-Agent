@@ -10,7 +10,7 @@
         }
 
         /// <summary>
-        /// Provides reference to temporary instance of Settings existing in settings form
+        /// Gets or sets reference to temporary instance of Settings existing in settings form
         /// </summary>
         public GlobalSettings GlobalSettings { get; set; }
 
