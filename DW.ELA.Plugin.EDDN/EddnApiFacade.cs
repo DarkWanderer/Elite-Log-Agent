@@ -24,6 +24,7 @@
                 try
                 {
                     await PostAsync(@event);
+                    logger.Info("Pushed event {0}", @event.GetType());
                 }
                 catch (Exception e)
                 {
@@ -31,7 +32,6 @@
                 }
             }
 
-            logger.Info("Pushed {0} events", events.Length);
         }
 
         private async Task PostAsync(EddnEvent e)

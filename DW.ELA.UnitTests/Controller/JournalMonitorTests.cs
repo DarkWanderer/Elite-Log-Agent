@@ -15,6 +15,10 @@
     [TestFixture]
     public class JournalMonitorTests
     {
+        private static IEnumerable<string> EventsAsJson => TestEventSource.CannedEvents.Select(Serialize.ToJson);
+
+        private Task Delay => Task.Delay(50);
+
         [Test]
         public async Task ShouldPickUpEvents()
         {
@@ -47,9 +51,5 @@
             await Delay;
             CollectionAssert.IsEmpty(events);
         }
-
-        private static IEnumerable<string> EventsAsJson => TestEventSource.CannedEvents.Select(Serialize.ToJson);
-
-        private Task Delay => Task.Delay(50);
     }
 }

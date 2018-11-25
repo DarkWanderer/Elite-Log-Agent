@@ -1,6 +1,8 @@
 ﻿namespace DW.ELA.UnitTests
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Events;
     using DW.ELA.LogModel;
@@ -11,6 +13,9 @@
 
     public class LogEventConverterTests
     {
+        public static IEnumerable<TestCaseData> RawTestCases => TestEventSource.CannedEventsRaw
+            .Select(jo => new TestCaseData(jo).SetArgDisplayNames(jo.Property("event").Value.ToString()));
+
         [Test]
         public void ShouldConvertFsdJumpEvent()
         {
@@ -27,21 +32,23 @@
         }
 
         [Test]
-        [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.TypedLogEvents))]
-        public void EventsTransformationShouldNotSpoilData(LogEvent e)
+        [TestCaseSource(typeof(LogEventConverterTests), nameof(RawTestCases))]
+        public void EventsTransformationShouldNotSpoilData(JObject source)
         {
-            if (e.GetType() == typeof(LogEvent))
-                Assert.Fail("This test only supports typed events");
+            var @event = LogEventConverter.Convert(source);
 
-            var serialized = JObject.FromObject(e,  Converter.Serializer);
+            if (@event.GetType() == typeof(LogEvent))
+                Assert.Pass("Automatic pass for non-typed events");
 
-            if (e is Scan)
-                e.Raw.Remove("Parents"); // TODO: find a way to serialize that structure
+            var serialized = JObject.FromObject(@event, Converter.Serializer);
 
-            Assert.IsEmpty(JsonComparer.Compare(e.Event, e.Raw, serialized));
+            if (@event is Scan)
+                @event.Raw.Remove("Parents"); // TODO: find a way to serialize that structure
+
+            Assert.IsEmpty(JsonComparer.Compare(@event.Event, @event.Raw, serialized));
 
             // This assert should never trigger - if it triggers means there's an error in comparison code
-            Assert.IsTrue(JToken.DeepEquals(e.Raw, serialized), "Json objects before/after serialization should be 'DeepEqual'");
+            Assert.IsTrue(JToken.DeepEquals(@event.Raw, serialized), "Json objects before/after serialization should be 'DeepEqual'");
         }
     }
 }
