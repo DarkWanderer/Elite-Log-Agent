@@ -36,7 +36,7 @@
             }
         }
 
-        public static IEnumerable<LogEvent> LocalBetaEvents
+        public static IEnumerable<JObject> LocalBetaEvents
         {
             get
             {
@@ -44,16 +44,18 @@
                 {
                     using (var fileReader = File.OpenRead(file))
                     using (var textReader = new StreamReader(fileReader))
+                    using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true, CloseInput = false })
                     {
-                        var reader = new LogReader();
-                        foreach (var @event in reader.ReadEventsFromStream(textReader))
-                            yield return @event;
+                        while (jsonReader.Read())
+                        {
+                            yield return Converter.Serializer.Deserialize<JObject>(jsonReader);
+                        }
                     }
                 }
             }
         }
 
-        public static IEnumerable<LogEvent> LocalEvents
+        public static IEnumerable<JObject> LocalEvents
         {
             get
             {
@@ -61,10 +63,12 @@
                 {
                     using (var fileReader = File.OpenRead(file))
                     using (var textReader = new StreamReader(fileReader))
+                    using (var jsonReader = new JsonTextReader(textReader) { SupportMultipleContent = true, CloseInput = false })
                     {
-                        var reader = new LogReader();
-                        foreach (var @event in reader.ReadEventsFromStream(textReader))
-                            yield return @event;
+                        while (jsonReader.Read())
+                        {
+                            yield return Converter.Serializer.Deserialize<JObject>(jsonReader);
+                        }
                     }
                 }
             }

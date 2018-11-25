@@ -13,7 +13,7 @@
 
     public class LogEventConverterTests
     {
-        public static IEnumerable<TestCaseData> RawTestCases => TestEventSource.CannedEventsRaw
+        private static IEnumerable<TestCaseData> RawTestCases => TestEventSource.CannedEventsRaw
             .Select(jo => new TestCaseData(jo).SetArgDisplayNames(jo.Property("event").Value.ToString()));
 
         [Test]
@@ -49,6 +49,14 @@
 
             // This assert should never trigger - if it triggers means there's an error in comparison code
             Assert.IsTrue(JToken.DeepEquals(@event.Raw, serialized), "Json objects before/after serialization should be 'DeepEqual'");
+        }
+
+        [Test]
+        [Explicit]
+        public void ShouldConvertLocalEvents()
+        {
+            var events = TestEventSource.LocalBetaEvents.Concat(TestEventSource.LocalEvents).ToList();
+            events.ForEach(x => LogEventConverter.Convert(x));
         }
     }
 }
