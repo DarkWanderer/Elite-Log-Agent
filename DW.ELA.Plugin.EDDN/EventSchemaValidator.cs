@@ -55,7 +55,10 @@
                 }
 
                 var schema = schemaCache[schemaRef];
-                var validationErrors = schema.Validate(JObject.FromObject(@event));
+                var validationErrors = schema.Validate(JObject.FromObject(@event))
+                    .Where(ve => ve.Path != "#/message.prohibited") // Bug in NJsonSchema, TODO
+                    .Where(ve => ve.Path != "#/message.economies") // Bug in NJsonSchema, TODO
+                    .ToList();
                 foreach (var error in validationErrors)
                     logger.Error(error.ToString());
 

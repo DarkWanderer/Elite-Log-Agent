@@ -1,4 +1,6492 @@
 ﻿{
+  "timestamp": "2018-10-30T19:04:53Z",
+  "event": "Cargo",
+  "Count": 0,
+  "Inventory": []
+}
+{
+  "timestamp": "2018-10-30T19:06:11Z",
+  "event": "Market",
+  "MarketID": 3228926720,
+  "StationName": "Meredith City",
+  "StarSystem": "LFT 926",
+  "Items": [
+    {
+      "id": 128049152,
+      "Name": "$platinum_name;",
+      "Name_Localised": "Platinum",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 42523,
+      "MeanPrice": 42503,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 12020,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049153,
+      "Name": "$palladium_name;",
+      "Name_Localised": "Palladium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 14169,
+      "MeanPrice": 12959,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 161229,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049154,
+      "Name": "$gold_name;",
+      "Name_Localised": "Gold",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 10633,
+      "MeanPrice": 9845,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 26950,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049155,
+      "Name": "$silver_name;",
+      "Name_Localised": "Silver",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 5608,
+      "MeanPrice": 4766,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 344978,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049156,
+      "Name": "$bertrandite_name;",
+      "Name_Localised": "Bertrandite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 2943,
+      "MeanPrice": 2517,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 97929,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049157,
+      "Name": "$indite_name;",
+      "Name_Localised": "Indite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 2563,
+      "MeanPrice": 2233,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 95069,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049158,
+      "Name": "$gallite_name;",
+      "Name_Localised": "Gallite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 2516,
+      "MeanPrice": 1959,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 670618,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049159,
+      "Name": "$coltan_name;",
+      "Name_Localised": "Coltan",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 1737,
+      "MeanPrice": 1473,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 66463,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049160,
+      "Name": "$uraninite_name;",
+      "Name_Localised": "Uraninite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 1019,
+      "MeanPrice": 989,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 45035,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049161,
+      "Name": "$lepidolite_name;",
+      "Name_Localised": "Lepidolite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 743,
+      "MeanPrice": 711,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 77679,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049162,
+      "Name": "$cobalt_name;",
+      "Name_Localised": "Cobalt",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 1167,
+      "MeanPrice": 753,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 1379527,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049163,
+      "Name": "$rutile_name;",
+      "Name_Localised": "Rutile",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 842,
+      "MeanPrice": 448,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 3233727,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049165,
+      "Name": "$bauxite_name;",
+      "Name_Localised": "Bauxite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 245,
+      "MeanPrice": 262,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 166355,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049166,
+      "Name": "$water_name;",
+      "Name_Localised": "Water",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 0,
+      "SellPrice": 614,
+      "MeanPrice": 270,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 68273,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049168,
+      "Name": "$beryllium_name;",
+      "Name_Localised": "Beryllium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 8907,
+      "MeanPrice": 8133,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 108345,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049169,
+      "Name": "$indium_name;",
+      "Name_Localised": "Indium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 6421,
+      "MeanPrice": 5649,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 269693,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049170,
+      "Name": "$gallium_name;",
+      "Name_Localised": "Gallium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 5456,
+      "MeanPrice": 5068,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 134746,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049171,
+      "Name": "$tantalum_name;",
+      "Name_Localised": "Tantalum",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 4507,
+      "MeanPrice": 3946,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 388390,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049172,
+      "Name": "$uranium_name;",
+      "Name_Localised": "Uranium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 3173,
+      "MeanPrice": 2756,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 522615,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049173,
+      "Name": "$lithium_name;",
+      "Name_Localised": "Lithium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 2069,
+      "MeanPrice": 1696,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 799388,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049174,
+      "Name": "$titanium_name;",
+      "Name_Localised": "Titanium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 963,
+      "SellPrice": 914,
+      "MeanPrice": 1117,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 170939,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049175,
+      "Name": "$copper_name;",
+      "Name_Localised": "Copper",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 476,
+      "SellPrice": 440,
+      "MeanPrice": 613,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 83245,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049176,
+      "Name": "$aluminium_name;",
+      "Name_Localised": "Aluminium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 343,
+      "SellPrice": 315,
+      "MeanPrice": 475,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 238398,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049178,
+      "Name": "$fruitandvegetables_name;",
+      "Name_Localised": "Fruit and Vegetables",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 0,
+      "SellPrice": 862,
+      "MeanPrice": 530,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 111612,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049180,
+      "Name": "$grain_name;",
+      "Name_Localised": "Grain",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 0,
+      "SellPrice": 741,
+      "MeanPrice": 436,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 551799,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049182,
+      "Name": "$animalmeat_name;",
+      "Name_Localised": "Animal Meat",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 0,
+      "SellPrice": 1956,
+      "MeanPrice": 1527,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 24135,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049183,
+      "Name": "$fish_name;",
+      "Name_Localised": "Fish",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 0,
+      "SellPrice": 964,
+      "MeanPrice": 643,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 229176,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049184,
+      "Name": "$foodcartridges_name;",
+      "Name_Localised": "Food Cartridges",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 0,
+      "SellPrice": 146,
+      "MeanPrice": 225,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 11175,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049185,
+      "Name": "$syntheticmeat_name;",
+      "Name_Localised": "Synthetic Meat",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 170,
+      "SellPrice": 151,
+      "MeanPrice": 489,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 249290,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049188,
+      "Name": "$tea_name;",
+      "Name_Localised": "Tea",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 0,
+      "SellPrice": 2146,
+      "MeanPrice": 1695,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 22867,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049189,
+      "Name": "$coffee_name;",
+      "Name_Localised": "Coffee",
+      "Category": "$MARKET_category_foods;",
+      "Category_Localised": "Foods",
+      "BuyPrice": 0,
+      "SellPrice": 1956,
+      "MeanPrice": 1506,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 10313,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049193,
+      "Name": "$syntheticfabrics_name;",
+      "Name_Localised": "Synthetic Fabrics",
+      "Category": "$MARKET_category_textiles;",
+      "Category_Localised": "Textiles",
+      "BuyPrice": 177,
+      "SellPrice": 148,
+      "MeanPrice": 361,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 97741,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049197,
+      "Name": "$polymers_name;",
+      "Name_Localised": "Polymers",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 121,
+      "SellPrice": 90,
+      "MeanPrice": 309,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 139936,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049199,
+      "Name": "$semiconductors_name;",
+      "Name_Localised": "Semiconductors",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 863,
+      "SellPrice": 818,
+      "MeanPrice": 1094,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 18943,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049200,
+      "Name": "$superconductors_name;",
+      "Name_Localised": "Superconductors",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 6239,
+      "SellPrice": 6105,
+      "MeanPrice": 6476,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 51962,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049202,
+      "Name": "$hydrogenfuel_name;",
+      "Name_Localised": "Hydrogen Fuel",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 85,
+      "SellPrice": 80,
+      "MeanPrice": 107,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 354859,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049203,
+      "Name": "$mineraloil_name;",
+      "Name_Localised": "Mineral Oil",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 0,
+      "SellPrice": 727,
+      "MeanPrice": 396,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 243147,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049204,
+      "Name": "$explosives_name;",
+      "Name_Localised": "Explosives",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 313,
+      "SellPrice": 281,
+      "MeanPrice": 421,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 35210,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049205,
+      "Name": "$pesticides_name;",
+      "Name_Localised": "Pesticides",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 145,
+      "SellPrice": 128,
+      "MeanPrice": 439,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 17696,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049208,
+      "Name": "$agriculturalmedicines_name;",
+      "Name_Localised": "Agri-Medicines",
+      "Category": "$MARKET_category_medicines;",
+      "Category_Localised": "Medicines",
+      "BuyPrice": 812,
+      "SellPrice": 770,
+      "MeanPrice": 1234,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 16026,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049209,
+      "Name": "$performanceenhancers_name;",
+      "Name_Localised": "Performance Enhancers",
+      "Category": "$MARKET_category_medicines;",
+      "Category_Localised": "Medicines",
+      "BuyPrice": 6227,
+      "SellPrice": 6092,
+      "MeanPrice": 6840,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 26172,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049210,
+      "Name": "$basicmedicines_name;",
+      "Name_Localised": "Basic Medicines",
+      "Category": "$MARKET_category_medicines;",
+      "Category_Localised": "Medicines",
+      "BuyPrice": 292,
+      "SellPrice": 262,
+      "MeanPrice": 436,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 50259,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049214,
+      "Name": "$beer_name;",
+      "Name_Localised": "Beer",
+      "Category": "$MARKET_category_drugs;",
+      "Category_Localised": "Legal drugs",
+      "BuyPrice": 0,
+      "SellPrice": 709,
+      "MeanPrice": 406,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 131914,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049215,
+      "Name": "$wine_name;",
+      "Name_Localised": "Wine",
+      "Category": "$MARKET_category_drugs;",
+      "Category_Localised": "Legal drugs",
+      "BuyPrice": 0,
+      "SellPrice": 791,
+      "MeanPrice": 485,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 68627,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049216,
+      "Name": "$liquor_name;",
+      "Name_Localised": "Liquor",
+      "Category": "$MARKET_category_drugs;",
+      "Category_Localised": "Legal drugs",
+      "BuyPrice": 0,
+      "SellPrice": 1215,
+      "MeanPrice": 794,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 10608,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049217,
+      "Name": "$powergenerators_name;",
+      "Name_Localised": "Power Generators",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 532,
+      "MeanPrice": 627,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 19994,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049218,
+      "Name": "$waterpurifiers_name;",
+      "Name_Localised": "Water Purifiers",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 305,
+      "MeanPrice": 411,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 12625,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049220,
+      "Name": "$heliostaticfurnaces_name;",
+      "Name_Localised": "Microbial Furnaces",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 251,
+      "SellPrice": 212,
+      "MeanPrice": 469,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 166855,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049225,
+      "Name": "$computercomponents_name;",
+      "Name_Localised": "Computer Components",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 0,
+      "SellPrice": 1063,
+      "MeanPrice": 696,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 249587,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049226,
+      "Name": "$hazardousenvironmentsuits_name;",
+      "Name_Localised": "H.E. Suits",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 0,
+      "SellPrice": 637,
+      "MeanPrice": 576,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 102168,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049227,
+      "Name": "$robotics_name;",
+      "Name_Localised": "Robotics",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 1699,
+      "SellPrice": 1638,
+      "MeanPrice": 2039,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 8608,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049228,
+      "Name": "$autofabricators_name;",
+      "Name_Localised": "Auto-Fabricators",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 3446,
+      "SellPrice": 3329,
+      "MeanPrice": 3865,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 9758,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049229,
+      "Name": "$animalmonitors_name;",
+      "Name_Localised": "Animal Monitors",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 215,
+      "SellPrice": 193,
+      "MeanPrice": 535,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 221352,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049230,
+      "Name": "$aquaponicsystems_name;",
+      "Name_Localised": "Aquaponic Systems",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 192,
+      "SellPrice": 172,
+      "MeanPrice": 528,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 41066,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049231,
+      "Name": "$advancedcatalysers_name;",
+      "Name_Localised": "Advanced Catalysers",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 0,
+      "SellPrice": 3639,
+      "MeanPrice": 3119,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 131214,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049232,
+      "Name": "$terrainenrichmentsystems_name;",
+      "Name_Localised": "Land Enrichment Systems",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 4171,
+      "SellPrice": 4031,
+      "MeanPrice": 4955,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 14023,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049235,
+      "Name": "$reactivearmour_name;",
+      "Name_Localised": "Reactive Armour",
+      "Category": "$MARKET_category_weapons;",
+      "Category_Localised": "Weapons",
+      "BuyPrice": 1976,
+      "SellPrice": 1906,
+      "MeanPrice": 2228,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 13555,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049236,
+      "Name": "$nonlethalweapons_name;",
+      "Name_Localised": "Non-Lethal Weapons",
+      "Category": "$MARKET_category_weapons;",
+      "Category_Localised": "Weapons",
+      "BuyPrice": 1471,
+      "SellPrice": 1418,
+      "MeanPrice": 1933,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 44778,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049238,
+      "Name": "$domesticappliances_name;",
+      "Name_Localised": "Domestic Appliances",
+      "Category": "$MARKET_category_consumer_items;",
+      "Category_Localised": "Consumer items",
+      "BuyPrice": 0,
+      "SellPrice": 906,
+      "MeanPrice": 659,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 33225,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049240,
+      "Name": "$consumertechnology_name;",
+      "Name_Localised": "Consumer Technology",
+      "Category": "$MARKET_category_consumer_items;",
+      "Category_Localised": "Consumer items",
+      "BuyPrice": 6258,
+      "SellPrice": 6123,
+      "MeanPrice": 6811,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 26935,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049241,
+      "Name": "$clothing_name;",
+      "Name_Localised": "Clothing",
+      "Category": "$MARKET_category_consumer_items;",
+      "Category_Localised": "Consumer items",
+      "BuyPrice": 0,
+      "SellPrice": 862,
+      "MeanPrice": 460,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 110234,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049244,
+      "Name": "$biowaste_name;",
+      "Name_Localised": "Biowaste",
+      "Category": "$MARKET_category_waste;",
+      "Category_Localised": "Waste",
+      "BuyPrice": 46,
+      "SellPrice": 27,
+      "MeanPrice": 342,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 22819,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049246,
+      "Name": "$chemicalwaste_name;",
+      "Name_Localised": "Chemical Waste",
+      "Category": "$MARKET_category_waste;",
+      "Category_Localised": "Waste",
+      "BuyPrice": 0,
+      "SellPrice": 670,
+      "MeanPrice": 676,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 20535,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128049248,
+      "Name": "$scrap_name;",
+      "Name_Localised": "Scrap",
+      "Category": "$MARKET_category_waste;",
+      "Category_Localised": "Waste",
+      "BuyPrice": 139,
+      "SellPrice": 115,
+      "MeanPrice": 254,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 80662,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049669,
+      "Name": "$progenitorcells_name;",
+      "Name_Localised": "Progenitor Cells",
+      "Category": "$MARKET_category_medicines;",
+      "Category_Localised": "Medicines",
+      "BuyPrice": 6375,
+      "SellPrice": 6238,
+      "MeanPrice": 6804,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 2510,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049671,
+      "Name": "$resonatingseparators_name;",
+      "Name_Localised": "Resonating Separators",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 5363,
+      "SellPrice": 5247,
+      "MeanPrice": 6059,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 257924,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128049672,
+      "Name": "$bioreducinglichen_name;",
+      "Name_Localised": "Bioreducing Lichen",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 942,
+      "SellPrice": 893,
+      "MeanPrice": 1234,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 7461,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128666757,
+      "Name": "$usscargorareartwork_name;",
+      "Name_Localised": "Rare Artwork",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 5323,
+      "MeanPrice": 5217,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128668550,
+      "Name": "$painite_name;",
+      "Name_Localised": "Painite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 67455,
+      "MeanPrice": 67168,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 3069,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128671118,
+      "Name": "$osmium_name;",
+      "Name_Localised": "Osmium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 10351,
+      "MeanPrice": 10347,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 208334,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672124,
+      "Name": "$encripteddatastorage_name;",
+      "Name_Localised": "Encrypted Data Storage",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 1303,
+      "MeanPrice": 1230,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672127,
+      "Name": "$comercialsamples_name;",
+      "Name_Localised": "Commercial Samples",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 769,
+      "MeanPrice": 701,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672128,
+      "Name": "$tacticaldata_name;",
+      "Name_Localised": "Tactical Data",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 862,
+      "MeanPrice": 794,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672129,
+      "Name": "$assaultplans_name;",
+      "Name_Localised": "Assault Plans",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 845,
+      "MeanPrice": 777,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672130,
+      "Name": "$encryptedcorrespondence_name;",
+      "Name_Localised": "Encrypted Correspondence",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 781,
+      "MeanPrice": 712,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672131,
+      "Name": "$diplomaticbag_name;",
+      "Name_Localised": "Diplomatic Bag",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 1015,
+      "MeanPrice": 945,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672132,
+      "Name": "$scientificresearch_name;",
+      "Name_Localised": "Scientific Research",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 1105,
+      "MeanPrice": 1034,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672133,
+      "Name": "$scientificsamples_name;",
+      "Name_Localised": "Scientific Samples",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 1257,
+      "MeanPrice": 1185,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672136,
+      "Name": "$largeexplorationdatacash_name;",
+      "Name_Localised": "Large Survey Data Cache",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 223532,
+      "MeanPrice": 222974,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672137,
+      "Name": "$smallexplorationdatacash_name;",
+      "Name_Localised": "Small Survey Data Cache",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 11017,
+      "MeanPrice": 10878,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672159,
+      "Name": "$antiquejewellery_name;",
+      "Name_Localised": "Antique Jewellery ",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 160050,
+      "MeanPrice": 159580,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672160,
+      "Name": "$preciousgems_name;",
+      "Name_Localised": "Precious Gems",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 140056,
+      "MeanPrice": 139619,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672161,
+      "Name": "$earthrelics_name;",
+      "Name_Localised": "Earth Relics ",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 11730,
+      "MeanPrice": 11587,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672162,
+      "Name": "$genebank_name;",
+      "Name_Localised": "Gene Bank",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 13300,
+      "MeanPrice": 13151,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672163,
+      "Name": "$timecapsule_name;",
+      "Name_Localised": "Time Capsule",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 5025,
+      "MeanPrice": 4919,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672294,
+      "Name": "$cryolite_name;",
+      "Name_Localised": "Cryolite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 2893,
+      "MeanPrice": 2332,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 539747,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672295,
+      "Name": "$goslarite_name;",
+      "Name_Localised": "Goslarite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 1454,
+      "MeanPrice": 1057,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 173380,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672297,
+      "Name": "$pyrophyllite_name;",
+      "Name_Localised": "Pyrophyllite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 2146,
+      "MeanPrice": 1669,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1103175,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672298,
+      "Name": "$lanthanum_name;",
+      "Name_Localised": "Lanthanum",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 9663,
+      "MeanPrice": 8651,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 210407,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672299,
+      "Name": "$thallium_name;",
+      "Name_Localised": "Thallium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 4365,
+      "MeanPrice": 3680,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 386440,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672300,
+      "Name": "$bismuth_name;",
+      "Name_Localised": "Bismuth",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 2849,
+      "MeanPrice": 2373,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 247472,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672301,
+      "Name": "$thorium_name;",
+      "Name_Localised": "Thorium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 12415,
+      "MeanPrice": 11275,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 171009,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672302,
+      "Name": "$ceramiccomposites_name;",
+      "Name_Localised": "Ceramic Composites",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 0,
+      "SellPrice": 239,
+      "MeanPrice": 392,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 21487,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672303,
+      "Name": "$syntheticreagents_name;",
+      "Name_Localised": "Synthetic Reagents",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 0,
+      "SellPrice": 6570,
+      "MeanPrice": 6519,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 820,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672305,
+      "Name": "$surfacestabilisers_name;",
+      "Name_Localised": "Surface Stabilisers",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 529,
+      "SellPrice": 491,
+      "MeanPrice": 685,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 29993,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128672311,
+      "Name": "$structuralregulators_name;",
+      "Name_Localised": "Structural Regulators",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 1471,
+      "SellPrice": 1418,
+      "MeanPrice": 1953,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 15076,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128672314,
+      "Name": "$evacuationshelter_name;",
+      "Name_Localised": "Evacuation Shelter",
+      "Category": "$MARKET_category_consumer_items;",
+      "Category_Localised": "Consumer items",
+      "BuyPrice": 228,
+      "SellPrice": 204,
+      "MeanPrice": 547,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 4254,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128672315,
+      "Name": "$geologicalsamples_name;",
+      "Name_Localised": "Geological Samples",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 845,
+      "MeanPrice": 777,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672701,
+      "Name": "$metaalloys_name;",
+      "Name_Localised": "Meta-Alloys",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 0,
+      "SellPrice": 93949,
+      "MeanPrice": 93916,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 19032,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128672810,
+      "Name": "$unstabledatacore_name;",
+      "Name_Localised": "Unstable Data Core",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 3214,
+      "MeanPrice": 3123,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673845,
+      "Name": "$praseodymium_name;",
+      "Name_Localised": "Praseodymium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 8601,
+      "MeanPrice": 8621,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 121194,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673846,
+      "Name": "$bromellite_name;",
+      "Name_Localised": "Bromellite",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 8601,
+      "MeanPrice": 8589,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 121194,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673847,
+      "Name": "$samarium_name;",
+      "Name_Localised": "Samarium",
+      "Category": "$MARKET_category_metals;",
+      "Category_Localised": "Metals",
+      "BuyPrice": 0,
+      "SellPrice": 8091,
+      "MeanPrice": 8110,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 128205,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673848,
+      "Name": "$lowtemperaturediamond_name;",
+      "Name_Localised": "Low Temperature Diamonds",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 93949,
+      "MeanPrice": 93680,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 12271,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673850,
+      "Name": "$hydrogenperoxide_name;",
+      "Name_Localised": "Hydrogen Peroxide",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 0,
+      "SellPrice": 1177,
+      "MeanPrice": 1210,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 47326,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673851,
+      "Name": "$liquidoxygen_name;",
+      "Name_Localised": "Liquid oxygen",
+      "Category": "$MARKET_category_chemicals;",
+      "Category_Localised": "Chemicals",
+      "BuyPrice": 228,
+      "SellPrice": 201,
+      "MeanPrice": 433,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 7605,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128673852,
+      "Name": "$methanolmonohydratecrystals_name;",
+      "Name_Localised": "Methanol Monohydrate Crystals",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 2485,
+      "MeanPrice": 2478,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 113181,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673853,
+      "Name": "$lithiumhydroxide_name;",
+      "Name_Localised": "Lithium Hydroxide",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 5645,
+      "MeanPrice": 5677,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 95654,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673854,
+      "Name": "$methaneclathrate_name;",
+      "Name_Localised": "Methane Clathrate",
+      "Category": "$MARKET_category_minerals;",
+      "Category_Localised": "Minerals",
+      "BuyPrice": 0,
+      "SellPrice": 920,
+      "MeanPrice": 955,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 375351,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673855,
+      "Name": "$insulatingmembrane_name;",
+      "Name_Localised": "Insulating Membrane",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 0,
+      "SellPrice": 11713,
+      "MeanPrice": 10695,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 38063,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673856,
+      "Name": "$cmmcomposite_name;",
+      "Name_Localised": "CMM Composite",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 0,
+      "SellPrice": 6741,
+      "MeanPrice": 5988,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 59810,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673858,
+      "Name": "$neofabricinsulation_name;",
+      "Name_Localised": "Neofabric Insulation",
+      "Category": "$MARKET_category_industrial_materials;",
+      "Category_Localised": "Industrial materials",
+      "BuyPrice": 0,
+      "SellPrice": 5989,
+      "MeanPrice": 5993,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 66108,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673859,
+      "Name": "$articulationmotors_name;",
+      "Name_Localised": "Articulation Motors",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 7612,
+      "MeanPrice": 7588,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 9767,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673860,
+      "Name": "$hnshockmount_name;",
+      "Name_Localised": "HN Shock Mount",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 1772,
+      "MeanPrice": 1718,
+      "StockBracket": 0,
+      "DemandBracket": 1,
+      "Stock": 0,
+      "Demand": 7780,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673862,
+      "Name": "$powerconverter_name;",
+      "Name_Localised": "Power Converter",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 1870,
+      "MeanPrice": 1464,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 38314,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673863,
+      "Name": "$powergridassembly_name;",
+      "Name_Localised": "Energy Grid Assembly",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 3214,
+      "MeanPrice": 2690,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 21786,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673868,
+      "Name": "$heatsinkinterlink_name;",
+      "Name_Localised": "Heatsink Interlink",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 2610,
+      "MeanPrice": 2113,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 27045,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673869,
+      "Name": "$magneticemittercoil_name;",
+      "Name_Localised": "Magnetic Emitter Coil",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 1789,
+      "MeanPrice": 1356,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 40568,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673870,
+      "Name": "$modularterminals_name;",
+      "Name_Localised": "Modular Terminals",
+      "Category": "$MARKET_category_machinery;",
+      "Category_Localised": "Machinery",
+      "BuyPrice": 0,
+      "SellPrice": 2485,
+      "MeanPrice": 2476,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 28548,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673871,
+      "Name": "$nanobreakers_name;",
+      "Name_Localised": "Nanobreakers",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 0,
+      "SellPrice": 2364,
+      "MeanPrice": 2368,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 39064,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673872,
+      "Name": "$telemetrysuite_name;",
+      "Name_Localised": "Telemetry Suite",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 0,
+      "SellPrice": 3214,
+      "MeanPrice": 3218,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 29048,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128673873,
+      "Name": "$microcontrollers_name;",
+      "Name_Localised": "Micro Controllers",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 5090,
+      "SellPrice": 4920,
+      "MeanPrice": 5626,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 7461,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128673875,
+      "Name": "$diagnosticsensor_name;",
+      "Name_Localised": "Hardware Diagnostic Sensor",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 0,
+      "SellPrice": 7612,
+      "MeanPrice": 6737,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 13022,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128682044,
+      "Name": "$conductivefabrics_name;",
+      "Name_Localised": "Conductive Fabrics",
+      "Category": "$MARKET_category_textiles;",
+      "Category_Localised": "Textiles",
+      "BuyPrice": 0,
+      "SellPrice": 912,
+      "MeanPrice": 658,
+      "StockBracket": 0,
+      "DemandBracket": 2,
+      "Stock": 0,
+      "Demand": 326160,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128682045,
+      "Name": "$militarygradefabrics_name;",
+      "Name_Localised": "Military Grade Fabrics",
+      "Category": "$MARKET_category_textiles;",
+      "Category_Localised": "Textiles",
+      "BuyPrice": 711,
+      "SellPrice": 673,
+      "MeanPrice": 920,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 24154,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128682046,
+      "Name": "$advancedmedicines_name;",
+      "Name_Localised": "Advanced Medicines",
+      "Category": "$MARKET_category_medicines;",
+      "Category_Localised": "Medicines",
+      "BuyPrice": 1247,
+      "SellPrice": 1183,
+      "MeanPrice": 1479,
+      "StockBracket": 2,
+      "DemandBracket": 0,
+      "Stock": 8366,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128682047,
+      "Name": "$medicaldiagnosticequipment_name;",
+      "Name_Localised": "Medical Diagnostic Equipment",
+      "Category": "$MARKET_category_technology;",
+      "Category_Localised": "Technology",
+      "BuyPrice": 2454,
+      "SellPrice": 2369,
+      "MeanPrice": 3074,
+      "StockBracket": 3,
+      "DemandBracket": 0,
+      "Stock": 19330,
+      "Demand": 1,
+      "Consumer": false,
+      "Producer": true,
+      "Rare": false
+    },
+    {
+      "id": 128682049,
+      "Name": "$datacore_name;",
+      "Name_Localised": "Data Core",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 3785,
+      "MeanPrice": 3689,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128682051,
+      "Name": "$mysteriousidol_name;",
+      "Name_Localised": "Mysterious Idol",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 17147,
+      "MeanPrice": 16982,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128682054,
+      "Name": "$spacepioneerrelics_name;",
+      "Name_Localised": "Space Pioneer Relics",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 8601,
+      "MeanPrice": 8475,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128682055,
+      "Name": "$fossilremnants_name;",
+      "Name_Localised": "Fossil Remnants",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 11017,
+      "MeanPrice": 10878,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1567,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128732183,
+      "Name": "$ancientrelic_name;",
+      "Name_Localised": "Ancient Relic",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 13300,
+      "MeanPrice": 13162,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1575,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128732184,
+      "Name": "$ancientorb_name;",
+      "Name_Localised": "Ancient Orb",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 9144,
+      "MeanPrice": 9025,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1575,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128732185,
+      "Name": "$ancientcasket_name;",
+      "Name_Localised": "Ancient Casket",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 8091,
+      "MeanPrice": 7976,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1575,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128732186,
+      "Name": "$ancienttablet_name;",
+      "Name_Localised": "Ancient Tablet",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 9144,
+      "MeanPrice": 9025,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1575,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128732187,
+      "Name": "$ancienturn_name;",
+      "Name_Localised": "Ancient Urn",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 6356,
+      "MeanPrice": 6250,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1575,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128732188,
+      "Name": "$ancienttotem_name;",
+      "Name_Localised": "Ancient Totem",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 11017,
+      "MeanPrice": 10888,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1575,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    },
+    {
+      "id": 128888499,
+      "Name": "$ancientkey_name;",
+      "Name_Localised": "Ancient Key",
+      "Category": "$MARKET_category_salvage;",
+      "Category_Localised": "Salvage",
+      "BuyPrice": 0,
+      "SellPrice": 13300,
+      "MeanPrice": 13162,
+      "StockBracket": 0,
+      "DemandBracket": 3,
+      "Stock": 0,
+      "Demand": 1575,
+      "Consumer": true,
+      "Producer": false,
+      "Rare": false
+    }
+  ]
+}
+{
+  "timestamp": "2018-11-24T10:25:56Z",
+  "event": "ModuleInfo",
+  "Modules": [
+    {
+      "Slot": "MainEngines",
+      "Item": "int_engine_size7_class5",
+      "Power": 10.2144,
+      "Priority": 0
+    },
+    {
+      "Slot": "Slot01_Size7",
+      "Item": "int_shieldgenerator_size7_class5",
+      "Power": 5.39,
+      "Priority": 2
+    },
+    {
+      "Slot": "Slot02_Size7",
+      "Item": "int_shieldcellbank_size7_class5",
+      "Power": 2.9,
+      "Priority": 2
+    },
+    {
+      "Slot": "Slot07_Size5",
+      "Item": "int_guardianfsdbooster_size5",
+      "Power": 2.14,
+      "Priority": 4
+    },
+    {
+      "Slot": "TinyHardpoint1",
+      "Item": "hpt_shieldbooster_size0_class5",
+      "Power": 1.5,
+      "Priority": 3
+    },
+    {
+      "Slot": "TinyHardpoint2",
+      "Item": "hpt_shieldbooster_size0_class5",
+      "Power": 1.5,
+      "Priority": 3
+    },
+    {
+      "Slot": "TinyHardpoint3",
+      "Item": "hpt_shieldbooster_size0_class5",
+      "Power": 1.5,
+      "Priority": 3
+    },
+    {
+      "Slot": "TinyHardpoint4",
+      "Item": "hpt_shieldbooster_size0_class5",
+      "Power": 1.5,
+      "Priority": 3
+    },
+    {
+      "Slot": "TinyHardpoint6",
+      "Item": "hpt_shieldbooster_size0_class5",
+      "Power": 1.5,
+      "Priority": 3
+    },
+    {
+      "Slot": "HugeHardpoint1",
+      "Item": "hpt_plasmaaccelerator_fixed_huge",
+      "Power": 1.3676,
+      "Priority": 1
+    },
+    {
+      "Slot": "HugeHardpoint2",
+      "Item": "hpt_plasmaaccelerator_fixed_huge",
+      "Power": 1.3676,
+      "Priority": 1
+    },
+    {
+      "Slot": "SmallHardpoint1",
+      "Item": "hpt_railgun_fixed_small",
+      "Power": 1.288,
+      "Priority": 1
+    },
+    {
+      "Slot": "SmallHardpoint2",
+      "Item": "hpt_railgun_fixed_small",
+      "Power": 1.288,
+      "Priority": 1
+    },
+    {
+      "Slot": "TinyHardpoint5",
+      "Item": "hpt_shieldbooster_size0_class5",
+      "Power": 1.2,
+      "Priority": 3
+    },
+    {
+      "Slot": "MediumHardpoint1",
+      "Item": "hpt_pulselaserburst_gimbal_medium",
+      "Power": 1.04,
+      "Priority": 1
+    },
+    {
+      "Slot": "MediumHardpoint2",
+      "Item": "hpt_pulselaserburst_gimbal_medium",
+      "Power": 1.04,
+      "Priority": 1
+    },
+    {
+      "Slot": "LargeHardpoint1",
+      "Item": "hpt_multicannon_turret_large",
+      "Power": 0.989,
+      "Priority": 1
+    },
+    {
+      "Slot": "Slot03_Size7",
+      "Item": "int_dronecontrol_collection_size7_class5",
+      "Power": 0.97,
+      "Priority": 3
+    },
+    {
+      "Slot": "PowerDistributor",
+      "Item": "int_powerdistributor_size8_class5",
+      "Power": 0.96,
+      "Priority": 1
+    },
+    {
+      "Slot": "FrameShiftDrive",
+      "Item": "int_hyperdrive_size6_class5",
+      "Power": 0.8625,
+      "Priority": 1
+    },
+    {
+      "Slot": "LifeSupport",
+      "Item": "int_lifesupport_size5_class5",
+      "Power": 0.85,
+      "Priority": 1
+    },
+    {
+      "Slot": "TinyHardpoint8",
+      "Item": "hpt_crimescanner_size0_class3",
+      "Power": 0.8,
+      "Priority": 3
+    },
+    {
+      "Slot": "Radar",
+      "Item": "int_sensors_size8_class2",
+      "Power": 0.62,
+      "Priority": 0
+    },
+    {
+      "Slot": "CargoHatch",
+      "Item": "modularcargobaydoor",
+      "Power": 0.6,
+      "Priority": 3
+    },
+    {
+      "Slot": "Slot06_Size5",
+      "Item": "int_fuelscoop_size5_class4",
+      "Power": 0.6,
+      "Priority": 4
+    },
+    {
+      "Slot": "Slot10_Size3",
+      "Item": "int_fsdinterdictor_size3_class5",
+      "Power": 0.48,
+      "Priority": 3
+    },
+    {
+      "Slot": "Slot04_Size6",
+      "Item": "int_fighterbay_size6_class1",
+      "Power": 0.35,
+      "Priority": 3
+    },
+    {
+      "Slot": "TinyHardpoint7",
+      "Item": "hpt_heatsinklauncher_turret_tiny",
+      "Power": 0.2,
+      "Priority": 2
+    },
+    {
+      "Slot": "ShipCockpit",
+      "Item": "federation_corvette_cockpit",
+      "Power": 0.0
+    },
+    {
+      "Slot": "PowerPlant",
+      "Item": "int_powerplant_size8_class5",
+      "Power": 0.0
+    },
+    {
+      "Slot": "Slot05_Size6",
+      "Item": "int_cargorack_size6_class1",
+      "Power": 0.0
+    },
+    {
+      "Slot": "WeaponColour",
+      "Item": "weaponcustomisation_white",
+      "Power": 0.0
+    },
+    {
+      "Slot": "EngineColour",
+      "Item": "enginecustomisation_white",
+      "Power": 0.0
+    },
+    {
+      "Slot": "DataLinkScanner",
+      "Item": "hpt_shipdatalinkscanner",
+      "Power": 0.0,
+      "Priority": 0
+    },
+    {
+      "Slot": "Slot08_Size4",
+      "Item": "int_modulereinforcement_size4_class2"
+    },
+    {
+      "Slot": "Slot09_Size4",
+      "Item": "int_modulereinforcement_size4_class2"
+    },
+    {
+      "Slot": "Military01",
+      "Item": "int_hullreinforcement_size5_class2"
+    },
+    {
+      "Slot": "Military02",
+      "Item": "int_hullreinforcement_size5_class2"
+    }
+  ]
+}
+{
+  "timestamp": "2018-11-24T12:01:52Z",
+  "event": "Outfitting",
+  "MarketID": 3228926720,
+  "StationName": "Meredith City",
+  "StarSystem": "LFT 926",
+  "Horizons": true,
+  "Items": [
+    {
+      "id": 128681994,
+      "Name": "hpt_beamlaser_gimbal_huge",
+      "BuyPrice": 8746160
+    },
+    {
+      "id": 128049437,
+      "Name": "hpt_beamlaser_turret_large",
+      "BuyPrice": 19399600
+    },
+    {
+      "id": 128049430,
+      "Name": "hpt_beamlaser_fixed_large",
+      "BuyPrice": 1177600
+    },
+    {
+      "id": 128049433,
+      "Name": "hpt_beamlaser_gimbal_medium",
+      "BuyPrice": 500600
+    },
+    {
+      "id": 128049436,
+      "Name": "hpt_beamlaser_turret_medium",
+      "BuyPrice": 2099900
+    },
+    {
+      "id": 128049432,
+      "Name": "hpt_beamlaser_gimbal_small",
+      "BuyPrice": 74650
+    },
+    {
+      "id": 128049435,
+      "Name": "hpt_beamlaser_turret_small",
+      "BuyPrice": 500000
+    },
+    {
+      "id": 128049428,
+      "Name": "hpt_beamlaser_fixed_small",
+      "BuyPrice": 37430
+    },
+    {
+      "id": 128049429,
+      "Name": "hpt_beamlaser_fixed_medium",
+      "BuyPrice": 299520
+    },
+    {
+      "id": 128727920,
+      "Name": "hpt_pulselaserburst_gimbal_huge",
+      "BuyPrice": 1245600
+    },
+    {
+      "id": 128049408,
+      "Name": "hpt_pulselaserburst_turret_medium",
+      "BuyPrice": 162800
+    },
+    {
+      "id": 128049406,
+      "Name": "hpt_pulselaserburst_gimbal_large",
+      "BuyPrice": 281600
+    },
+    {
+      "id": 128049404,
+      "Name": "hpt_pulselaserburst_gimbal_small",
+      "BuyPrice": 8600
+    },
+    {
+      "id": 128049405,
+      "Name": "hpt_pulselaserburst_gimbal_medium",
+      "BuyPrice": 48500
+    },
+    {
+      "id": 128049402,
+      "Name": "hpt_pulselaserburst_fixed_large",
+      "BuyPrice": 140400
+    },
+    {
+      "id": 128049400,
+      "Name": "hpt_pulselaserburst_fixed_small",
+      "BuyPrice": 4400
+    },
+    {
+      "id": 128681995,
+      "Name": "hpt_pulselaser_gimbal_huge",
+      "BuyPrice": 877600
+    },
+    {
+      "id": 128049390,
+      "Name": "hpt_pulselaser_turret_large",
+      "BuyPrice": 400400
+    },
+    {
+      "id": 128049389,
+      "Name": "hpt_pulselaser_turret_medium",
+      "BuyPrice": 132800
+    },
+    {
+      "id": 128049387,
+      "Name": "hpt_pulselaser_gimbal_large",
+      "BuyPrice": 140600
+    },
+    {
+      "id": 128049386,
+      "Name": "hpt_pulselaser_gimbal_medium",
+      "BuyPrice": 35400
+    },
+    {
+      "id": 128049385,
+      "Name": "hpt_pulselaser_gimbal_small",
+      "BuyPrice": 6600
+    },
+    {
+      "id": 128049383,
+      "Name": "hpt_pulselaser_fixed_large",
+      "BuyPrice": 70400
+    },
+    {
+      "id": 128049382,
+      "Name": "hpt_pulselaser_fixed_medium",
+      "BuyPrice": 17600
+    },
+    {
+      "id": 128049381,
+      "Name": "hpt_pulselaser_fixed_small",
+      "BuyPrice": 2200
+    },
+    {
+      "id": 128049441,
+      "Name": "hpt_cannon_fixed_huge",
+      "BuyPrice": 2700800
+    },
+    {
+      "id": 128049444,
+      "Name": "hpt_cannon_gimbal_huge",
+      "BuyPrice": 5401600
+    },
+    {
+      "id": 128049447,
+      "Name": "hpt_cannon_turret_large",
+      "BuyPrice": 16204800
+    },
+    {
+      "id": 128671120,
+      "Name": "hpt_cannon_gimbal_large",
+      "BuyPrice": 1350400
+    },
+    {
+      "id": 128049445,
+      "Name": "hpt_cannon_turret_small",
+      "BuyPrice": 506400
+    },
+    {
+      "id": 128049440,
+      "Name": "hpt_cannon_fixed_large",
+      "BuyPrice": 675200
+    },
+    {
+      "id": 128049442,
+      "Name": "hpt_cannon_gimbal_small",
+      "BuyPrice": 42200
+    },
+    {
+      "id": 128049443,
+      "Name": "hpt_cannon_gimbal_medium",
+      "BuyPrice": 337600
+    },
+    {
+      "id": 128671321,
+      "Name": "hpt_slugshot_gimbal_large",
+      "BuyPrice": 1751040
+    },
+    {
+      "id": 128671322,
+      "Name": "hpt_slugshot_turret_large",
+      "BuyPrice": 5836800
+    },
+    {
+      "id": 128049454,
+      "Name": "hpt_slugshot_turret_medium",
+      "BuyPrice": 1459200
+    },
+    {
+      "id": 128049450,
+      "Name": "hpt_slugshot_fixed_large",
+      "BuyPrice": 1167360
+    },
+    {
+      "id": 128049453,
+      "Name": "hpt_slugshot_turret_small",
+      "BuyPrice": 182400
+    },
+    {
+      "id": 128049451,
+      "Name": "hpt_slugshot_gimbal_small",
+      "BuyPrice": 54720
+    },
+    {
+      "id": 128049452,
+      "Name": "hpt_slugshot_gimbal_medium",
+      "BuyPrice": 437760
+    },
+    {
+      "id": 128049448,
+      "Name": "hpt_slugshot_fixed_small",
+      "BuyPrice": 36000
+    },
+    {
+      "id": 128049461,
+      "Name": "hpt_multicannon_gimbal_large",
+      "BuyPrice": 578436
+    },
+    {
+      "id": 128049457,
+      "Name": "hpt_multicannon_fixed_large",
+      "BuyPrice": 140400
+    },
+    {
+      "id": 128049462,
+      "Name": "hpt_multicannon_turret_small",
+      "BuyPrice": 81600
+    },
+    {
+      "id": 128049459,
+      "Name": "hpt_multicannon_gimbal_small",
+      "BuyPrice": 14250
+    },
+    {
+      "id": 128049460,
+      "Name": "hpt_multicannon_gimbal_medium",
+      "BuyPrice": 57000
+    },
+    {
+      "id": 128049456,
+      "Name": "hpt_multicannon_fixed_medium",
+      "BuyPrice": 38000
+    },
+    {
+      "id": 128049455,
+      "Name": "hpt_multicannon_fixed_small",
+      "BuyPrice": 9500
+    },
+    {
+      "id": 128049489,
+      "Name": "hpt_railgun_fixed_medium",
+      "BuyPrice": 412800
+    },
+    {
+      "id": 128049488,
+      "Name": "hpt_railgun_fixed_small",
+      "BuyPrice": 51600
+    },
+    {
+      "id": 128049493,
+      "Name": "hpt_basicmissilerack_fixed_medium",
+      "BuyPrice": 512400
+    },
+    {
+      "id": 128049492,
+      "Name": "hpt_basicmissilerack_fixed_small",
+      "BuyPrice": 72600
+    },
+    {
+      "id": 128049501,
+      "Name": "hpt_minelauncher_fixed_medium",
+      "BuyPrice": 294080
+    },
+    {
+      "id": 128671448,
+      "Name": "hpt_minelauncher_fixed_small_impulse",
+      "BuyPrice": 36390
+    },
+    {
+      "id": 128049500,
+      "Name": "hpt_minelauncher_fixed_small",
+      "BuyPrice": 24260
+    },
+    {
+      "id": 128891602,
+      "Name": "hpt_dumbfiremissilerack_fixed_large",
+      "BuyPrice": 1021500
+    },
+    {
+      "id": 128049509,
+      "Name": "hpt_advancedtorppylon_fixed_small",
+      "BuyPrice": 11200
+    },
+    {
+      "id": 128666725,
+      "Name": "hpt_dumbfiremissilerack_fixed_medium",
+      "BuyPrice": 240400
+    },
+    {
+      "id": 128666724,
+      "Name": "hpt_dumbfiremissilerack_fixed_small",
+      "BuyPrice": 32175
+    },
+    {
+      "id": 128049466,
+      "Name": "hpt_plasmaaccelerator_fixed_large",
+      "BuyPrice": 3051200
+    },
+    {
+      "id": 128049465,
+      "Name": "hpt_plasmaaccelerator_fixed_medium",
+      "BuyPrice": 834200
+    },
+    {
+      "id": 128049446,
+      "Name": "hpt_cannon_turret_medium",
+      "BuyPrice": 4051200
+    },
+    {
+      "id": 128049439,
+      "Name": "hpt_cannon_fixed_medium",
+      "BuyPrice": 168430
+    },
+    {
+      "id": 128049438,
+      "Name": "hpt_cannon_fixed_small",
+      "BuyPrice": 21100
+    },
+    {
+      "id": 128049434,
+      "Name": "hpt_beamlaser_gimbal_large",
+      "BuyPrice": 2396160
+    },
+    {
+      "id": 128049458,
+      "Name": "hpt_multicannon_fixed_huge",
+      "BuyPrice": 1177600
+    },
+    {
+      "id": 128681996,
+      "Name": "hpt_multicannon_gimbal_huge",
+      "BuyPrice": 6377600
+    },
+    {
+      "id": 128049463,
+      "Name": "hpt_multicannon_turret_medium",
+      "BuyPrice": 1292800
+    },
+    {
+      "id": 128049407,
+      "Name": "hpt_pulselaserburst_turret_small",
+      "BuyPrice": 52800
+    },
+    {
+      "id": 128049401,
+      "Name": "hpt_pulselaserburst_fixed_medium",
+      "BuyPrice": 23000
+    },
+    {
+      "id": 128049449,
+      "Name": "hpt_slugshot_fixed_medium",
+      "BuyPrice": 291840
+    },
+    {
+      "id": 128049494,
+      "Name": "hpt_basicmissilerack_fixed_large",
+      "BuyPrice": 1471030
+    },
+    {
+      "id": 128833687,
+      "Name": "hpt_guardian_gausscannon_fixed_medium",
+      "BuyPrice": 543800
+    },
+    {
+      "id": 128834783,
+      "Name": "hpt_guardian_plasmalauncher_fixed_large",
+      "BuyPrice": 1423300
+    },
+    {
+      "id": 128891610,
+      "Name": "hpt_guardian_gausscannon_fixed_small",
+      "BuyPrice": 167250
+    },
+    {
+      "id": 128662529,
+      "Name": "hpt_cloudscanner_size0_class5",
+      "BuyPrice": 1097095
+    },
+    {
+      "id": 128662527,
+      "Name": "hpt_cloudscanner_size0_class3",
+      "BuyPrice": 121899
+    },
+    {
+      "id": 128049549,
+      "Name": "int_dockingcomputer_standard",
+      "BuyPrice": 4500
+    },
+    {
+      "id": 128662531,
+      "Name": "hpt_crimescanner_size0_class2",
+      "BuyPrice": 40633
+    },
+    {
+      "id": 128662532,
+      "Name": "hpt_crimescanner_size0_class3",
+      "BuyPrice": 121899
+    },
+    {
+      "id": 128662533,
+      "Name": "hpt_crimescanner_size0_class4",
+      "BuyPrice": 365698
+    },
+    {
+      "id": 128662534,
+      "Name": "hpt_crimescanner_size0_class5",
+      "BuyPrice": 1097095
+    },
+    {
+      "id": 128662520,
+      "Name": "hpt_cargoscanner_size0_class1",
+      "BuyPrice": 13544
+    },
+    {
+      "id": 128662522,
+      "Name": "hpt_cargoscanner_size0_class3",
+      "BuyPrice": 121899
+    },
+    {
+      "id": 128662524,
+      "Name": "hpt_cargoscanner_size0_class5",
+      "BuyPrice": 1097095
+    },
+    {
+      "id": 128049513,
+      "Name": "hpt_chafflauncher_tiny",
+      "BuyPrice": 8500
+    },
+    {
+      "id": 128049516,
+      "Name": "hpt_electroniccountermeasure_tiny",
+      "BuyPrice": 12500
+    },
+    {
+      "id": 128049526,
+      "Name": "hpt_mininglaser_fixed_medium",
+      "BuyPrice": 22576
+    },
+    {
+      "id": 128740820,
+      "Name": "hpt_mininglaser_turret_medium",
+      "BuyPrice": 32576
+    },
+    {
+      "id": 128049525,
+      "Name": "hpt_mininglaser_fixed_small",
+      "BuyPrice": 6800
+    },
+    {
+      "id": 128740819,
+      "Name": "hpt_mininglaser_turret_small",
+      "BuyPrice": 9400
+    },
+    {
+      "id": 128049522,
+      "Name": "hpt_plasmapointdefence_turret_tiny",
+      "BuyPrice": 18546
+    },
+    {
+      "id": 128662521,
+      "Name": "hpt_cargoscanner_size0_class2",
+      "BuyPrice": 40633
+    },
+    {
+      "id": 128662523,
+      "Name": "hpt_cargoscanner_size0_class4",
+      "BuyPrice": 365698
+    },
+    {
+      "id": 128662528,
+      "Name": "hpt_cloudscanner_size0_class4",
+      "BuyPrice": 365698
+    },
+    {
+      "id": 128662526,
+      "Name": "hpt_cloudscanner_size0_class2",
+      "BuyPrice": 40633
+    },
+    {
+      "id": 128049292,
+      "Name": "dolphin_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049293,
+      "Name": "dolphin_armour_grade2",
+      "BuyPrice": 534929
+    },
+    {
+      "id": 128049294,
+      "Name": "dolphin_armour_grade3",
+      "BuyPrice": 1203590
+    },
+    {
+      "id": 128049296,
+      "Name": "dolphin_armour_reactive",
+      "BuyPrice": 3152070
+    },
+    {
+      "id": 128049295,
+      "Name": "dolphin_armour_mirrored",
+      "BuyPrice": 2808378
+    },
+    {
+      "id": 128049352,
+      "Name": "ferdelance_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049353,
+      "Name": "ferdelance_armour_grade2",
+      "BuyPrice": 20626816
+    },
+    {
+      "id": 128049354,
+      "Name": "ferdelance_armour_grade3",
+      "BuyPrice": 46410336
+    },
+    {
+      "id": 128049355,
+      "Name": "ferdelance_armour_mirrored",
+      "BuyPrice": 109683094
+    },
+    {
+      "id": 128049356,
+      "Name": "ferdelance_armour_reactive",
+      "BuyPrice": 121543513
+    },
+    {
+      "id": 128049340,
+      "Name": "python_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049341,
+      "Name": "python_armour_grade2",
+      "BuyPrice": 22791271
+    },
+    {
+      "id": 128049342,
+      "Name": "python_armour_grade3",
+      "BuyPrice": 51280361
+    },
+    {
+      "id": 128049344,
+      "Name": "python_armour_reactive",
+      "BuyPrice": 134297567
+    },
+    {
+      "id": 128049343,
+      "Name": "python_armour_mirrored",
+      "BuyPrice": 121192586
+    },
+    {
+      "id": 128049322,
+      "Name": "federation_dropship_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049323,
+      "Name": "federation_dropship_armour_grade2",
+      "BuyPrice": 5725682
+    },
+    {
+      "id": 128049324,
+      "Name": "federation_dropship_armour_grade3",
+      "BuyPrice": 12882784
+    },
+    {
+      "id": 128049326,
+      "Name": "federation_dropship_armour_reactive",
+      "BuyPrice": 33738581
+    },
+    {
+      "id": 128049325,
+      "Name": "federation_dropship_armour_mirrored",
+      "BuyPrice": 30446314
+    },
+    {
+      "id": 128049328,
+      "Name": "orca_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049329,
+      "Name": "orca_armour_grade2",
+      "BuyPrice": 19415954
+    },
+    {
+      "id": 128049330,
+      "Name": "orca_armour_grade3",
+      "BuyPrice": 43685898
+    },
+    {
+      "id": 128049332,
+      "Name": "orca_armour_reactive",
+      "BuyPrice": 114408513
+    },
+    {
+      "id": 128049331,
+      "Name": "orca_armour_mirrored",
+      "BuyPrice": 103244339
+    },
+    {
+      "id": 128049348,
+      "Name": "belugaliner_armour_grade3",
+      "BuyPrice": 76079487
+    },
+    {
+      "id": 128049346,
+      "Name": "belugaliner_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049347,
+      "Name": "belugaliner_armour_grade2",
+      "BuyPrice": 33813105
+    },
+    {
+      "id": 128049350,
+      "Name": "belugaliner_armour_reactive",
+      "BuyPrice": 199243724
+    },
+    {
+      "id": 128049349,
+      "Name": "belugaliner_armour_mirrored",
+      "BuyPrice": 179801189
+    },
+    {
+      "id": 128672278,
+      "Name": "asp_scout_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128672279,
+      "Name": "asp_scout_armour_grade2",
+      "BuyPrice": 1584461
+    },
+    {
+      "id": 128672280,
+      "Name": "asp_scout_armour_grade3",
+      "BuyPrice": 3565038
+    },
+    {
+      "id": 128672282,
+      "Name": "asp_scout_armour_reactive",
+      "BuyPrice": 9336439
+    },
+    {
+      "id": 128672281,
+      "Name": "asp_scout_armour_mirrored",
+      "BuyPrice": 8425374
+    },
+    {
+      "id": 128049370,
+      "Name": "federation_corvette_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049371,
+      "Name": "federation_corvette_armour_grade2",
+      "BuyPrice": 75187780
+    },
+    {
+      "id": 128049372,
+      "Name": "federation_corvette_armour_grade3",
+      "BuyPrice": 169172505
+    },
+    {
+      "id": 128049373,
+      "Name": "federation_corvette_armour_mirrored",
+      "BuyPrice": 399811021
+    },
+    {
+      "id": 128049374,
+      "Name": "federation_corvette_armour_reactive",
+      "BuyPrice": 443043995
+    },
+    {
+      "id": 128049304,
+      "Name": "asp_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049305,
+      "Name": "asp_armour_grade2",
+      "BuyPrice": 2664461
+    },
+    {
+      "id": 128049306,
+      "Name": "asp_armour_grade3",
+      "BuyPrice": 5995038
+    },
+    {
+      "id": 128049308,
+      "Name": "asp_armour_reactive",
+      "BuyPrice": 15700339
+    },
+    {
+      "id": 128049307,
+      "Name": "asp_armour_mirrored",
+      "BuyPrice": 14168274
+    },
+    {
+      "id": 128671832,
+      "Name": "diamondbackxl_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128671833,
+      "Name": "diamondbackxl_armour_grade2",
+      "BuyPrice": 757904
+    },
+    {
+      "id": 128671834,
+      "Name": "diamondbackxl_armour_grade3",
+      "BuyPrice": 1705284
+    },
+    {
+      "id": 128671835,
+      "Name": "diamondbackxl_armour_mirrored",
+      "BuyPrice": 3978996
+    },
+    {
+      "id": 128671836,
+      "Name": "diamondbackxl_armour_reactive",
+      "BuyPrice": 4465949
+    },
+    {
+      "id": 128672271,
+      "Name": "independant_trader_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128672272,
+      "Name": "independant_trader_armour_grade2",
+      "BuyPrice": 1250461
+    },
+    {
+      "id": 128672273,
+      "Name": "independant_trader_armour_grade3",
+      "BuyPrice": 2813538
+    },
+    {
+      "id": 128672275,
+      "Name": "independant_trader_armour_reactive",
+      "BuyPrice": 7368344
+    },
+    {
+      "id": 128672274,
+      "Name": "independant_trader_armour_mirrored",
+      "BuyPrice": 6649329
+    },
+    {
+      "id": 128671218,
+      "Name": "diamondback_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128671219,
+      "Name": "diamondback_armour_grade2",
+      "BuyPrice": 225731
+    },
+    {
+      "id": 128671220,
+      "Name": "diamondback_armour_grade3",
+      "BuyPrice": 507896
+    },
+    {
+      "id": 128671222,
+      "Name": "diamondback_armour_reactive",
+      "BuyPrice": 1330123
+    },
+    {
+      "id": 128671221,
+      "Name": "diamondback_armour_mirrored",
+      "BuyPrice": 1185090
+    },
+    {
+      "id": 128049310,
+      "Name": "vulture_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049311,
+      "Name": "vulture_armour_grade2",
+      "BuyPrice": 1970246
+    },
+    {
+      "id": 128049312,
+      "Name": "vulture_armour_grade3",
+      "BuyPrice": 4433053
+    },
+    {
+      "id": 128049314,
+      "Name": "vulture_armour_reactive",
+      "BuyPrice": 11609674
+    },
+    {
+      "id": 128049313,
+      "Name": "vulture_armour_mirrored",
+      "BuyPrice": 10476783
+    },
+    {
+      "id": 128662535,
+      "Name": "int_stellarbodydiscoveryscanner_standard",
+      "BuyPrice": 1000
+    },
+    {
+      "id": 128064338,
+      "Name": "int_cargorack_size1_class1",
+      "BuyPrice": 1000
+    },
+    {
+      "id": 128666684,
+      "Name": "int_refinery_size1_class1",
+      "BuyPrice": 6000
+    },
+    {
+      "id": 128666644,
+      "Name": "int_fuelscoop_size1_class1",
+      "BuyPrice": 309
+    },
+    {
+      "id": 128672317,
+      "Name": "int_planetapproachsuite",
+      "BuyPrice": 500
+    },
+    {
+      "id": 128666704,
+      "Name": "int_fsdinterdictor_size1_class1",
+      "BuyPrice": 12000
+    },
+    {
+      "id": 128066532,
+      "Name": "int_dronecontrol_resourcesiphon_size1_class1",
+      "BuyPrice": 600
+    },
+    {
+      "id": 128064263,
+      "Name": "int_shieldgenerator_size2_class1",
+      "BuyPrice": 1978
+    },
+    {
+      "id": 128064112,
+      "Name": "int_hyperdrive_size3_class5",
+      "BuyPrice": 507912
+    },
+    {
+      "id": 128064107,
+      "Name": "int_hyperdrive_size2_class5",
+      "BuyPrice": 160224
+    },
+    {
+      "id": 128064111,
+      "Name": "int_hyperdrive_size3_class4",
+      "BuyPrice": 169304
+    },
+    {
+      "id": 128064106,
+      "Name": "int_hyperdrive_size2_class4",
+      "BuyPrice": 53408
+    },
+    {
+      "id": 128064110,
+      "Name": "int_hyperdrive_size3_class3",
+      "BuyPrice": 56435
+    },
+    {
+      "id": 128064105,
+      "Name": "int_hyperdrive_size2_class3",
+      "BuyPrice": 17803
+    },
+    {
+      "id": 128064109,
+      "Name": "int_hyperdrive_size3_class2",
+      "BuyPrice": 18812
+    },
+    {
+      "id": 128064104,
+      "Name": "int_hyperdrive_size2_class2",
+      "BuyPrice": 5934
+    },
+    {
+      "id": 128064108,
+      "Name": "int_hyperdrive_size3_class1",
+      "BuyPrice": 6271
+    },
+    {
+      "id": 128064103,
+      "Name": "int_hyperdrive_size2_class1",
+      "BuyPrice": 1978
+    },
+    {
+      "id": 128727932,
+      "Name": "int_fighterbay_size7_class1",
+      "BuyPrice": 2369320
+    },
+    {
+      "id": 128727931,
+      "Name": "int_fighterbay_size6_class1",
+      "BuyPrice": 1869340
+    },
+    {
+      "id": 128727930,
+      "Name": "int_fighterbay_size5_class1",
+      "BuyPrice": 575643
+    },
+    {
+      "id": 128064345,
+      "Name": "int_cargorack_size8_class1",
+      "BuyPrice": 3829866
+    },
+    {
+      "id": 128064344,
+      "Name": "int_cargorack_size7_class1",
+      "BuyPrice": 1178420
+    },
+    {
+      "id": 128064343,
+      "Name": "int_cargorack_size6_class1",
+      "BuyPrice": 362591
+    },
+    {
+      "id": 128064342,
+      "Name": "int_cargorack_size5_class1",
+      "BuyPrice": 111566
+    },
+    {
+      "id": 128064341,
+      "Name": "int_cargorack_size4_class1",
+      "BuyPrice": 34328
+    },
+    {
+      "id": 128064340,
+      "Name": "int_cargorack_size3_class1",
+      "BuyPrice": 10563
+    },
+    {
+      "id": 128064339,
+      "Name": "int_cargorack_size2_class1",
+      "BuyPrice": 3250
+    },
+    {
+      "id": 128671272,
+      "Name": "int_dronecontrol_prospector_size1_class4",
+      "BuyPrice": 4800
+    },
+    {
+      "id": 128671284,
+      "Name": "int_dronecontrol_prospector_size7_class1",
+      "BuyPrice": 437400
+    },
+    {
+      "id": 128671280,
+      "Name": "int_dronecontrol_prospector_size5_class2",
+      "BuyPrice": 97200
+    },
+    {
+      "id": 128671276,
+      "Name": "int_dronecontrol_prospector_size3_class3",
+      "BuyPrice": 21600
+    },
+    {
+      "id": 128671271,
+      "Name": "int_dronecontrol_prospector_size1_class3",
+      "BuyPrice": 2400
+    },
+    {
+      "id": 128671279,
+      "Name": "int_dronecontrol_prospector_size5_class1",
+      "BuyPrice": 48600
+    },
+    {
+      "id": 128671275,
+      "Name": "int_dronecontrol_prospector_size3_class2",
+      "BuyPrice": 10800
+    },
+    {
+      "id": 128671270,
+      "Name": "int_dronecontrol_prospector_size1_class2",
+      "BuyPrice": 1200
+    },
+    {
+      "id": 128671274,
+      "Name": "int_dronecontrol_prospector_size3_class1",
+      "BuyPrice": 5400
+    },
+    {
+      "id": 128671269,
+      "Name": "int_dronecontrol_prospector_size1_class1",
+      "BuyPrice": 600
+    },
+    {
+      "id": 128672293,
+      "Name": "int_buggybay_size6_class2",
+      "BuyPrice": 691200
+    },
+    {
+      "id": 128672291,
+      "Name": "int_buggybay_size4_class2",
+      "BuyPrice": 86400
+    },
+    {
+      "id": 128672292,
+      "Name": "int_buggybay_size6_class1",
+      "BuyPrice": 576000
+    },
+    {
+      "id": 128672289,
+      "Name": "int_buggybay_size2_class2",
+      "BuyPrice": 21600
+    },
+    {
+      "id": 128672290,
+      "Name": "int_buggybay_size4_class1",
+      "BuyPrice": 72000
+    },
+    {
+      "id": 128672288,
+      "Name": "int_buggybay_size2_class1",
+      "BuyPrice": 18000
+    },
+    {
+      "id": 128064207,
+      "Name": "int_powerdistributor_size6_class5",
+      "BuyPrice": 3475688
+    },
+    {
+      "id": 128064202,
+      "Name": "int_powerdistributor_size5_class5",
+      "BuyPrice": 1241317
+    },
+    {
+      "id": 128064206,
+      "Name": "int_powerdistributor_size6_class4",
+      "BuyPrice": 1390275
+    },
+    {
+      "id": 128064201,
+      "Name": "int_powerdistributor_size5_class4",
+      "BuyPrice": 496527
+    },
+    {
+      "id": 128064205,
+      "Name": "int_powerdistributor_size6_class3",
+      "BuyPrice": 556110
+    },
+    {
+      "id": 128064200,
+      "Name": "int_powerdistributor_size5_class3",
+      "BuyPrice": 198611
+    },
+    {
+      "id": 128064204,
+      "Name": "int_powerdistributor_size6_class2",
+      "BuyPrice": 222444
+    },
+    {
+      "id": 128064195,
+      "Name": "int_powerdistributor_size4_class3",
+      "BuyPrice": 70932
+    },
+    {
+      "id": 128064199,
+      "Name": "int_powerdistributor_size5_class2",
+      "BuyPrice": 79444
+    },
+    {
+      "id": 128064203,
+      "Name": "int_powerdistributor_size6_class1",
+      "BuyPrice": 88978
+    },
+    {
+      "id": 128064194,
+      "Name": "int_powerdistributor_size4_class2",
+      "BuyPrice": 28373
+    },
+    {
+      "id": 128064198,
+      "Name": "int_powerdistributor_size5_class1",
+      "BuyPrice": 31778
+    },
+    {
+      "id": 128064193,
+      "Name": "int_powerdistributor_size4_class1",
+      "BuyPrice": 11349
+    },
+    {
+      "id": 128668546,
+      "Name": "int_hullreinforcement_size5_class2",
+      "BuyPrice": 450000
+    },
+    {
+      "id": 128737279,
+      "Name": "int_modulereinforcement_size5_class2",
+      "BuyPrice": 450000
+    },
+    {
+      "id": 128668544,
+      "Name": "int_hullreinforcement_size4_class2",
+      "BuyPrice": 195000
+    },
+    {
+      "id": 128737277,
+      "Name": "int_modulereinforcement_size4_class2",
+      "BuyPrice": 195000
+    },
+    {
+      "id": 128668542,
+      "Name": "int_hullreinforcement_size3_class2",
+      "BuyPrice": 84000
+    },
+    {
+      "id": 128668540,
+      "Name": "int_hullreinforcement_size2_class2",
+      "BuyPrice": 36000
+    },
+    {
+      "id": 128737273,
+      "Name": "int_modulereinforcement_size2_class2",
+      "BuyPrice": 36000
+    },
+    {
+      "id": 128668538,
+      "Name": "int_hullreinforcement_size1_class2",
+      "BuyPrice": 15000
+    },
+    {
+      "id": 128737271,
+      "Name": "int_modulereinforcement_size1_class2",
+      "BuyPrice": 15000
+    },
+    {
+      "id": 128064317,
+      "Name": "int_shieldcellbank_size4_class5",
+      "BuyPrice": 443328
+    },
+    {
+      "id": 128064326,
+      "Name": "int_shieldcellbank_size6_class4",
+      "BuyPrice": 1390275
+    },
+    {
+      "id": 128064321,
+      "Name": "int_shieldcellbank_size5_class4",
+      "BuyPrice": 496527
+    },
+    {
+      "id": 128064316,
+      "Name": "int_shieldcellbank_size4_class4",
+      "BuyPrice": 177331
+    },
+    {
+      "id": 128064325,
+      "Name": "int_shieldcellbank_size6_class3",
+      "BuyPrice": 556110
+    },
+    {
+      "id": 128064320,
+      "Name": "int_shieldcellbank_size5_class3",
+      "BuyPrice": 198611
+    },
+    {
+      "id": 128064324,
+      "Name": "int_shieldcellbank_size6_class2",
+      "BuyPrice": 222444
+    },
+    {
+      "id": 128064315,
+      "Name": "int_shieldcellbank_size4_class3",
+      "BuyPrice": 70932
+    },
+    {
+      "id": 128064319,
+      "Name": "int_shieldcellbank_size5_class2",
+      "BuyPrice": 79444
+    },
+    {
+      "id": 128064323,
+      "Name": "int_shieldcellbank_size6_class1",
+      "BuyPrice": 88978
+    },
+    {
+      "id": 128064314,
+      "Name": "int_shieldcellbank_size4_class2",
+      "BuyPrice": 28373
+    },
+    {
+      "id": 128064318,
+      "Name": "int_shieldcellbank_size5_class1",
+      "BuyPrice": 31778
+    },
+    {
+      "id": 128064313,
+      "Name": "int_shieldcellbank_size4_class1",
+      "BuyPrice": 11349
+    },
+    {
+      "id": 128064042,
+      "Name": "int_powerplant_size3_class5",
+      "BuyPrice": 480411
+    },
+    {
+      "id": 128064041,
+      "Name": "int_powerplant_size3_class4",
+      "BuyPrice": 160137
+    },
+    {
+      "id": 128064036,
+      "Name": "int_powerplant_size2_class4",
+      "BuyPrice": 53379
+    },
+    {
+      "id": 128064040,
+      "Name": "int_powerplant_size3_class3",
+      "BuyPrice": 53379
+    },
+    {
+      "id": 128064035,
+      "Name": "int_powerplant_size2_class3",
+      "BuyPrice": 17793
+    },
+    {
+      "id": 128064039,
+      "Name": "int_powerplant_size3_class2",
+      "BuyPrice": 17793
+    },
+    {
+      "id": 128064034,
+      "Name": "int_powerplant_size2_class2",
+      "BuyPrice": 5931
+    },
+    {
+      "id": 128064038,
+      "Name": "int_powerplant_size3_class1",
+      "BuyPrice": 5931
+    },
+    {
+      "id": 128064033,
+      "Name": "int_powerplant_size2_class1",
+      "BuyPrice": 1977
+    },
+    {
+      "id": 128727928,
+      "Name": "int_passengercabin_size6_class3",
+      "BuyPrice": 552698
+    },
+    {
+      "id": 128727926,
+      "Name": "int_passengercabin_size6_class1",
+      "BuyPrice": 61410
+    },
+    {
+      "id": 128734692,
+      "Name": "int_passengercabin_size3_class2",
+      "BuyPrice": 26705
+    },
+    {
+      "id": 128734695,
+      "Name": "int_passengercabin_size5_class3",
+      "BuyPrice": 340526
+    },
+    {
+      "id": 128727922,
+      "Name": "int_passengercabin_size4_class1",
+      "BuyPrice": 18954
+    },
+    {
+      "id": 128727923,
+      "Name": "int_passengercabin_size4_class2",
+      "BuyPrice": 56862
+    },
+    {
+      "id": 128734690,
+      "Name": "int_passengercabin_size2_class1",
+      "BuyPrice": 4312
+    },
+    {
+      "id": 128734691,
+      "Name": "int_passengercabin_size3_class1",
+      "BuyPrice": 8657
+    },
+    {
+      "id": 128734693,
+      "Name": "int_passengercabin_size5_class1",
+      "BuyPrice": 34954
+    },
+    {
+      "id": 128668534,
+      "Name": "hpt_shieldbooster_size0_class3",
+      "BuyPrice": 53000
+    },
+    {
+      "id": 128668533,
+      "Name": "hpt_shieldbooster_size0_class2",
+      "BuyPrice": 23000
+    },
+    {
+      "id": 128668532,
+      "Name": "hpt_shieldbooster_size0_class1",
+      "BuyPrice": 10000
+    },
+    {
+      "id": 128064272,
+      "Name": "int_shieldgenerator_size3_class5",
+      "BuyPrice": 507912
+    },
+    {
+      "id": 128064267,
+      "Name": "int_shieldgenerator_size2_class5",
+      "BuyPrice": 160224
+    },
+    {
+      "id": 128064271,
+      "Name": "int_shieldgenerator_size3_class4",
+      "BuyPrice": 169304
+    },
+    {
+      "id": 128064266,
+      "Name": "int_shieldgenerator_size2_class4",
+      "BuyPrice": 53408
+    },
+    {
+      "id": 128671333,
+      "Name": "int_shieldgenerator_size3_class3_fast",
+      "BuyPrice": 84653
+    },
+    {
+      "id": 128671332,
+      "Name": "int_shieldgenerator_size2_class3_fast",
+      "BuyPrice": 26705
+    },
+    {
+      "id": 128671331,
+      "Name": "int_shieldgenerator_size1_class3_fast",
+      "BuyPrice": 7713
+    },
+    {
+      "id": 128064270,
+      "Name": "int_shieldgenerator_size3_class3",
+      "BuyPrice": 56435
+    },
+    {
+      "id": 128064265,
+      "Name": "int_shieldgenerator_size2_class3",
+      "BuyPrice": 17803
+    },
+    {
+      "id": 128064269,
+      "Name": "int_shieldgenerator_size3_class2",
+      "BuyPrice": 18812
+    },
+    {
+      "id": 128064264,
+      "Name": "int_shieldgenerator_size2_class2",
+      "BuyPrice": 5934
+    },
+    {
+      "id": 128064268,
+      "Name": "int_shieldgenerator_size3_class1",
+      "BuyPrice": 6271
+    },
+    {
+      "id": 128663561,
+      "Name": "int_stellarbodydiscoveryscanner_advanced",
+      "BuyPrice": 1545000
+    },
+    {
+      "id": 128663560,
+      "Name": "int_stellarbodydiscoveryscanner_intermediate",
+      "BuyPrice": 505000
+    },
+    {
+      "id": 128666634,
+      "Name": "int_detailedsurfacescanner_tiny",
+      "BuyPrice": 250000
+    },
+    {
+      "id": 128064057,
+      "Name": "int_powerplant_size6_class5",
+      "BuyPrice": 12971097
+    },
+    {
+      "id": 128064052,
+      "Name": "int_powerplant_size5_class5",
+      "BuyPrice": 4323699
+    },
+    {
+      "id": 128064047,
+      "Name": "int_powerplant_size4_class5",
+      "BuyPrice": 1441233
+    },
+    {
+      "id": 128064056,
+      "Name": "int_powerplant_size6_class4",
+      "BuyPrice": 4323699
+    },
+    {
+      "id": 128064055,
+      "Name": "int_powerplant_size6_class3",
+      "BuyPrice": 1441233
+    },
+    {
+      "id": 128064050,
+      "Name": "int_powerplant_size5_class3",
+      "BuyPrice": 480411
+    },
+    {
+      "id": 128064054,
+      "Name": "int_powerplant_size6_class2",
+      "BuyPrice": 480411
+    },
+    {
+      "id": 128064045,
+      "Name": "int_powerplant_size4_class3",
+      "BuyPrice": 160137
+    },
+    {
+      "id": 128064049,
+      "Name": "int_powerplant_size5_class2",
+      "BuyPrice": 160137
+    },
+    {
+      "id": 128064053,
+      "Name": "int_powerplant_size6_class1",
+      "BuyPrice": 160137
+    },
+    {
+      "id": 128064044,
+      "Name": "int_powerplant_size4_class2",
+      "BuyPrice": 53379
+    },
+    {
+      "id": 128064048,
+      "Name": "int_powerplant_size5_class1",
+      "BuyPrice": 53379
+    },
+    {
+      "id": 128064043,
+      "Name": "int_powerplant_size4_class1",
+      "BuyPrice": 17793
+    },
+    {
+      "id": 128064077,
+      "Name": "int_engine_size3_class5",
+      "BuyPrice": 507912
+    },
+    {
+      "id": 128064072,
+      "Name": "int_engine_size2_class5",
+      "BuyPrice": 160224
+    },
+    {
+      "id": 128064076,
+      "Name": "int_engine_size3_class4",
+      "BuyPrice": 169304
+    },
+    {
+      "id": 128064071,
+      "Name": "int_engine_size2_class4",
+      "BuyPrice": 53408
+    },
+    {
+      "id": 128064075,
+      "Name": "int_engine_size3_class3",
+      "BuyPrice": 56435
+    },
+    {
+      "id": 128064070,
+      "Name": "int_engine_size2_class3",
+      "BuyPrice": 17803
+    },
+    {
+      "id": 128064074,
+      "Name": "int_engine_size3_class2",
+      "BuyPrice": 18812
+    },
+    {
+      "id": 128064069,
+      "Name": "int_engine_size2_class2",
+      "BuyPrice": 5934
+    },
+    {
+      "id": 128064073,
+      "Name": "int_engine_size3_class1",
+      "BuyPrice": 6271
+    },
+    {
+      "id": 128064068,
+      "Name": "int_engine_size2_class1",
+      "BuyPrice": 1978
+    },
+    {
+      "id": 128671288,
+      "Name": "int_dronecontrol_prospector_size7_class5",
+      "BuyPrice": 6998400
+    },
+    {
+      "id": 128671273,
+      "Name": "int_dronecontrol_prospector_size1_class5",
+      "BuyPrice": 9600
+    },
+    {
+      "id": 128671287,
+      "Name": "int_dronecontrol_prospector_size7_class4",
+      "BuyPrice": 3499200
+    },
+    {
+      "id": 128671282,
+      "Name": "int_dronecontrol_prospector_size5_class4",
+      "BuyPrice": 388800
+    },
+    {
+      "id": 128671286,
+      "Name": "int_dronecontrol_prospector_size7_class3",
+      "BuyPrice": 1749600
+    },
+    {
+      "id": 128671277,
+      "Name": "int_dronecontrol_prospector_size3_class4",
+      "BuyPrice": 43200
+    },
+    {
+      "id": 128671285,
+      "Name": "int_dronecontrol_prospector_size7_class2",
+      "BuyPrice": 874800
+    },
+    {
+      "id": 128671281,
+      "Name": "int_dronecontrol_prospector_size5_class3",
+      "BuyPrice": 194400
+    },
+    {
+      "id": 128064192,
+      "Name": "int_powerdistributor_size3_class5",
+      "BuyPrice": 158331
+    },
+    {
+      "id": 128064182,
+      "Name": "int_powerdistributor_size1_class5",
+      "BuyPrice": 20195
+    },
+    {
+      "id": 128064191,
+      "Name": "int_powerdistributor_size3_class4",
+      "BuyPrice": 63333
+    },
+    {
+      "id": 128064186,
+      "Name": "int_powerdistributor_size2_class4",
+      "BuyPrice": 22619
+    },
+    {
+      "id": 128064190,
+      "Name": "int_powerdistributor_size3_class3",
+      "BuyPrice": 25333
+    },
+    {
+      "id": 128064180,
+      "Name": "int_powerdistributor_size1_class3",
+      "BuyPrice": 3231
+    },
+    {
+      "id": 128064185,
+      "Name": "int_powerdistributor_size2_class3",
+      "BuyPrice": 9048
+    },
+    {
+      "id": 128064189,
+      "Name": "int_powerdistributor_size3_class2",
+      "BuyPrice": 10133
+    },
+    {
+      "id": 128064179,
+      "Name": "int_powerdistributor_size1_class2",
+      "BuyPrice": 1293
+    },
+    {
+      "id": 128064184,
+      "Name": "int_powerdistributor_size2_class2",
+      "BuyPrice": 3619
+    },
+    {
+      "id": 128064188,
+      "Name": "int_powerdistributor_size3_class1",
+      "BuyPrice": 4053
+    },
+    {
+      "id": 128064178,
+      "Name": "int_powerdistributor_size1_class1",
+      "BuyPrice": 517
+    },
+    {
+      "id": 128064183,
+      "Name": "int_powerdistributor_size2_class1",
+      "BuyPrice": 1448
+    },
+    {
+      "id": 128666701,
+      "Name": "int_refinery_size2_class5",
+      "BuyPrice": 1020600
+    },
+    {
+      "id": 128666700,
+      "Name": "int_refinery_size1_class5",
+      "BuyPrice": 486000
+    },
+    {
+      "id": 128666693,
+      "Name": "int_refinery_size2_class3",
+      "BuyPrice": 113400
+    },
+    {
+      "id": 128666696,
+      "Name": "int_refinery_size1_class4",
+      "BuyPrice": 162000
+    },
+    {
+      "id": 128666689,
+      "Name": "int_refinery_size2_class2",
+      "BuyPrice": 37800
+    },
+    {
+      "id": 128666692,
+      "Name": "int_refinery_size1_class3",
+      "BuyPrice": 54000
+    },
+    {
+      "id": 128666685,
+      "Name": "int_refinery_size2_class1",
+      "BuyPrice": 12600
+    },
+    {
+      "id": 128666688,
+      "Name": "int_refinery_size1_class2",
+      "BuyPrice": 18000
+    },
+    {
+      "id": 128064127,
+      "Name": "int_hyperdrive_size6_class5",
+      "BuyPrice": 16179531
+    },
+    {
+      "id": 128064122,
+      "Name": "int_hyperdrive_size5_class5",
+      "BuyPrice": 5103953
+    },
+    {
+      "id": 128064117,
+      "Name": "int_hyperdrive_size4_class5",
+      "BuyPrice": 1610080
+    },
+    {
+      "id": 128064126,
+      "Name": "int_hyperdrive_size6_class4",
+      "BuyPrice": 5393177
+    },
+    {
+      "id": 128064116,
+      "Name": "int_hyperdrive_size4_class4",
+      "BuyPrice": 536693
+    },
+    {
+      "id": 128064125,
+      "Name": "int_hyperdrive_size6_class3",
+      "BuyPrice": 1797726
+    },
+    {
+      "id": 128064124,
+      "Name": "int_hyperdrive_size6_class2",
+      "BuyPrice": 599242
+    },
+    {
+      "id": 128064115,
+      "Name": "int_hyperdrive_size4_class3",
+      "BuyPrice": 178898
+    },
+    {
+      "id": 128064119,
+      "Name": "int_hyperdrive_size5_class2",
+      "BuyPrice": 189035
+    },
+    {
+      "id": 128064123,
+      "Name": "int_hyperdrive_size6_class1",
+      "BuyPrice": 199747
+    },
+    {
+      "id": 128064114,
+      "Name": "int_hyperdrive_size4_class2",
+      "BuyPrice": 59633
+    },
+    {
+      "id": 128064118,
+      "Name": "int_hyperdrive_size5_class1",
+      "BuyPrice": 63012
+    },
+    {
+      "id": 128064113,
+      "Name": "int_hyperdrive_size4_class1",
+      "BuyPrice": 19878
+    },
+    {
+      "id": 128667611,
+      "Name": "int_repairer_size6_class2",
+      "BuyPrice": 566870
+    },
+    {
+      "id": 128667605,
+      "Name": "int_repairer_size8_class1",
+      "BuyPrice": 612220
+    },
+    {
+      "id": 128667623,
+      "Name": "int_repairer_size2_class4",
+      "BuyPrice": 486000
+    },
+    {
+      "id": 128667616,
+      "Name": "int_repairer_size3_class3",
+      "BuyPrice": 291600
+    },
+    {
+      "id": 128667610,
+      "Name": "int_repairer_size5_class2",
+      "BuyPrice": 314928
+    },
+    {
+      "id": 128667604,
+      "Name": "int_repairer_size7_class1",
+      "BuyPrice": 340122
+    },
+    {
+      "id": 128667609,
+      "Name": "int_repairer_size4_class2",
+      "BuyPrice": 174960
+    },
+    {
+      "id": 128667622,
+      "Name": "int_repairer_size1_class4",
+      "BuyPrice": 270000
+    },
+    {
+      "id": 128667615,
+      "Name": "int_repairer_size2_class3",
+      "BuyPrice": 162000
+    },
+    {
+      "id": 128667603,
+      "Name": "int_repairer_size6_class1",
+      "BuyPrice": 188957
+    },
+    {
+      "id": 128667614,
+      "Name": "int_repairer_size1_class3",
+      "BuyPrice": 90000
+    },
+    {
+      "id": 128667608,
+      "Name": "int_repairer_size3_class2",
+      "BuyPrice": 97200
+    },
+    {
+      "id": 128667602,
+      "Name": "int_repairer_size5_class1",
+      "BuyPrice": 104976
+    },
+    {
+      "id": 128667607,
+      "Name": "int_repairer_size2_class2",
+      "BuyPrice": 54000
+    },
+    {
+      "id": 128667601,
+      "Name": "int_repairer_size4_class1",
+      "BuyPrice": 58320
+    },
+    {
+      "id": 128667606,
+      "Name": "int_repairer_size1_class2",
+      "BuyPrice": 30000
+    },
+    {
+      "id": 128667600,
+      "Name": "int_repairer_size3_class1",
+      "BuyPrice": 32400
+    },
+    {
+      "id": 128667599,
+      "Name": "int_repairer_size2_class1",
+      "BuyPrice": 18000
+    },
+    {
+      "id": 128666721,
+      "Name": "int_fsdinterdictor_size2_class5",
+      "BuyPrice": 2721600
+    },
+    {
+      "id": 128666717,
+      "Name": "int_fsdinterdictor_size2_class4",
+      "BuyPrice": 907200
+    },
+    {
+      "id": 128666713,
+      "Name": "int_fsdinterdictor_size2_class3",
+      "BuyPrice": 302400
+    },
+    {
+      "id": 128666716,
+      "Name": "int_fsdinterdictor_size1_class4",
+      "BuyPrice": 324000
+    },
+    {
+      "id": 128666712,
+      "Name": "int_fsdinterdictor_size1_class3",
+      "BuyPrice": 108000
+    },
+    {
+      "id": 128666709,
+      "Name": "int_fsdinterdictor_size2_class2",
+      "BuyPrice": 100800
+    },
+    {
+      "id": 128666708,
+      "Name": "int_fsdinterdictor_size1_class2",
+      "BuyPrice": 36000
+    },
+    {
+      "id": 128666705,
+      "Name": "int_fsdinterdictor_size2_class1",
+      "BuyPrice": 33600
+    },
+    {
+      "id": 128064251,
+      "Name": "int_sensors_size7_class4",
+      "BuyPrice": 3892770
+    },
+    {
+      "id": 128064250,
+      "Name": "int_sensors_size7_class3",
+      "BuyPrice": 1557108
+    },
+    {
+      "id": 128064254,
+      "Name": "int_sensors_size8_class2",
+      "BuyPrice": 1743961
+    },
+    {
+      "id": 128064253,
+      "Name": "int_sensors_size8_class1",
+      "BuyPrice": 697584
+    },
+    {
+      "id": 128064248,
+      "Name": "int_sensors_size7_class1",
+      "BuyPrice": 249137
+    },
+    {
+      "id": 128666678,
+      "Name": "int_fuelscoop_size3_class5",
+      "BuyPrice": 902954
+    },
+    {
+      "id": 128666677,
+      "Name": "int_fuelscoop_size2_class5",
+      "BuyPrice": 284844
+    },
+    {
+      "id": 128666670,
+      "Name": "int_fuelscoop_size3_class4",
+      "BuyPrice": 225738
+    },
+    {
+      "id": 128666662,
+      "Name": "int_fuelscoop_size3_class3",
+      "BuyPrice": 56435
+    },
+    {
+      "id": 128666669,
+      "Name": "int_fuelscoop_size2_class4",
+      "BuyPrice": 71211
+    },
+    {
+      "id": 128666676,
+      "Name": "int_fuelscoop_size1_class5",
+      "BuyPrice": 82270
+    },
+    {
+      "id": 128666661,
+      "Name": "int_fuelscoop_size2_class3",
+      "BuyPrice": 17803
+    },
+    {
+      "id": 128666668,
+      "Name": "int_fuelscoop_size1_class4",
+      "BuyPrice": 20568
+    },
+    {
+      "id": 128666654,
+      "Name": "int_fuelscoop_size3_class2",
+      "BuyPrice": 14109
+    },
+    {
+      "id": 128666660,
+      "Name": "int_fuelscoop_size1_class3",
+      "BuyPrice": 5142
+    },
+    {
+      "id": 128666653,
+      "Name": "int_fuelscoop_size2_class2",
+      "BuyPrice": 4451
+    },
+    {
+      "id": 128666646,
+      "Name": "int_fuelscoop_size3_class1",
+      "BuyPrice": 3386
+    },
+    {
+      "id": 128666652,
+      "Name": "int_fuelscoop_size1_class2",
+      "BuyPrice": 1285
+    },
+    {
+      "id": 128666645,
+      "Name": "int_fuelscoop_size2_class1",
+      "BuyPrice": 1068
+    },
+    {
+      "id": 128777346,
+      "Name": "int_dronecontrol_repair_size7_class5",
+      "BuyPrice": 6998400
+    },
+    {
+      "id": 128671268,
+      "Name": "int_dronecontrol_fueltransfer_size7_class5",
+      "BuyPrice": 6998400
+    },
+    {
+      "id": 128671263,
+      "Name": "int_dronecontrol_fueltransfer_size5_class5",
+      "BuyPrice": 777600
+    },
+    {
+      "id": 128777336,
+      "Name": "int_dronecontrol_repair_size3_class5",
+      "BuyPrice": 86400
+    },
+    {
+      "id": 128671258,
+      "Name": "int_dronecontrol_fueltransfer_size3_class5",
+      "BuyPrice": 86400
+    },
+    {
+      "id": 128777331,
+      "Name": "int_dronecontrol_repair_size1_class5",
+      "BuyPrice": 9600
+    },
+    {
+      "id": 128671253,
+      "Name": "int_dronecontrol_fueltransfer_size1_class5",
+      "BuyPrice": 9600
+    },
+    {
+      "id": 128777345,
+      "Name": "int_dronecontrol_repair_size7_class4",
+      "BuyPrice": 3499200
+    },
+    {
+      "id": 128671267,
+      "Name": "int_dronecontrol_fueltransfer_size7_class4",
+      "BuyPrice": 3499200
+    },
+    {
+      "id": 128671262,
+      "Name": "int_dronecontrol_fueltransfer_size5_class4",
+      "BuyPrice": 388800
+    },
+    {
+      "id": 128777344,
+      "Name": "int_dronecontrol_repair_size7_class3",
+      "BuyPrice": 1749600
+    },
+    {
+      "id": 128671266,
+      "Name": "int_dronecontrol_fueltransfer_size7_class3",
+      "BuyPrice": 1749600
+    },
+    {
+      "id": 128777335,
+      "Name": "int_dronecontrol_repair_size3_class4",
+      "BuyPrice": 43200
+    },
+    {
+      "id": 128671257,
+      "Name": "int_dronecontrol_fueltransfer_size3_class4",
+      "BuyPrice": 43200
+    },
+    {
+      "id": 128777343,
+      "Name": "int_dronecontrol_repair_size7_class2",
+      "BuyPrice": 874800
+    },
+    {
+      "id": 128671265,
+      "Name": "int_dronecontrol_fueltransfer_size7_class2",
+      "BuyPrice": 874800
+    },
+    {
+      "id": 128777339,
+      "Name": "int_dronecontrol_repair_size5_class3",
+      "BuyPrice": 194400
+    },
+    {
+      "id": 128666703,
+      "Name": "int_refinery_size4_class5",
+      "BuyPrice": 4500846
+    },
+    {
+      "id": 128666699,
+      "Name": "int_refinery_size4_class4",
+      "BuyPrice": 1500282
+    },
+    {
+      "id": 128666695,
+      "Name": "int_refinery_size4_class3",
+      "BuyPrice": 500094
+    },
+    {
+      "id": 128666702,
+      "Name": "int_refinery_size3_class5",
+      "BuyPrice": 2143260
+    },
+    {
+      "id": 128666698,
+      "Name": "int_refinery_size3_class4",
+      "BuyPrice": 714420
+    },
+    {
+      "id": 128666691,
+      "Name": "int_refinery_size4_class2",
+      "BuyPrice": 166698
+    },
+    {
+      "id": 128666694,
+      "Name": "int_refinery_size3_class3",
+      "BuyPrice": 238140
+    },
+    {
+      "id": 128666687,
+      "Name": "int_refinery_size4_class1",
+      "BuyPrice": 55566
+    },
+    {
+      "id": 128666690,
+      "Name": "int_refinery_size3_class2",
+      "BuyPrice": 79380
+    },
+    {
+      "id": 128666686,
+      "Name": "int_refinery_size3_class1",
+      "BuyPrice": 26460
+    },
+    {
+      "id": 128064312,
+      "Name": "int_shieldcellbank_size3_class5",
+      "BuyPrice": 158331
+    },
+    {
+      "id": 128064302,
+      "Name": "int_shieldcellbank_size1_class5",
+      "BuyPrice": 20195
+    },
+    {
+      "id": 128064307,
+      "Name": "int_shieldcellbank_size2_class5",
+      "BuyPrice": 56547
+    },
+    {
+      "id": 128064311,
+      "Name": "int_shieldcellbank_size3_class4",
+      "BuyPrice": 63333
+    },
+    {
+      "id": 128064306,
+      "Name": "int_shieldcellbank_size2_class4",
+      "BuyPrice": 22619
+    },
+    {
+      "id": 128064301,
+      "Name": "int_shieldcellbank_size1_class4",
+      "BuyPrice": 8078
+    },
+    {
+      "id": 128064310,
+      "Name": "int_shieldcellbank_size3_class3",
+      "BuyPrice": 25333
+    },
+    {
+      "id": 128064300,
+      "Name": "int_shieldcellbank_size1_class3",
+      "BuyPrice": 3231
+    },
+    {
+      "id": 128064305,
+      "Name": "int_shieldcellbank_size2_class3",
+      "BuyPrice": 9048
+    },
+    {
+      "id": 128064309,
+      "Name": "int_shieldcellbank_size3_class2",
+      "BuyPrice": 10133
+    },
+    {
+      "id": 128064299,
+      "Name": "int_shieldcellbank_size1_class2",
+      "BuyPrice": 1293
+    },
+    {
+      "id": 128064304,
+      "Name": "int_shieldcellbank_size2_class2",
+      "BuyPrice": 3619
+    },
+    {
+      "id": 128064308,
+      "Name": "int_shieldcellbank_size3_class1",
+      "BuyPrice": 4053
+    },
+    {
+      "id": 128064298,
+      "Name": "int_shieldcellbank_size1_class1",
+      "BuyPrice": 517
+    },
+    {
+      "id": 128064303,
+      "Name": "int_shieldcellbank_size2_class1",
+      "BuyPrice": 1448
+    },
+    {
+      "id": 128667637,
+      "Name": "int_repairer_size8_class5",
+      "BuyPrice": 49589823
+    },
+    {
+      "id": 128667636,
+      "Name": "int_repairer_size7_class5",
+      "BuyPrice": 27549901
+    },
+    {
+      "id": 128667629,
+      "Name": "int_repairer_size8_class4",
+      "BuyPrice": 16529941
+    },
+    {
+      "id": 128667635,
+      "Name": "int_repairer_size6_class5",
+      "BuyPrice": 15305501
+    },
+    {
+      "id": 128667628,
+      "Name": "int_repairer_size7_class4",
+      "BuyPrice": 9183300
+    },
+    {
+      "id": 128667621,
+      "Name": "int_repairer_size8_class3",
+      "BuyPrice": 5509980
+    },
+    {
+      "id": 128667634,
+      "Name": "int_repairer_size5_class5",
+      "BuyPrice": 8503056
+    },
+    {
+      "id": 128667620,
+      "Name": "int_repairer_size7_class3",
+      "BuyPrice": 3061100
+    },
+    {
+      "id": 128667633,
+      "Name": "int_repairer_size4_class5",
+      "BuyPrice": 4723920
+    },
+    {
+      "id": 128667619,
+      "Name": "int_repairer_size6_class3",
+      "BuyPrice": 1700611
+    },
+    {
+      "id": 128667613,
+      "Name": "int_repairer_size8_class2",
+      "BuyPrice": 1836660
+    },
+    {
+      "id": 128667632,
+      "Name": "int_repairer_size3_class5",
+      "BuyPrice": 2624400
+    },
+    {
+      "id": 128667625,
+      "Name": "int_repairer_size4_class4",
+      "BuyPrice": 1574640
+    },
+    {
+      "id": 128667618,
+      "Name": "int_repairer_size5_class3",
+      "BuyPrice": 944784
+    },
+    {
+      "id": 128667612,
+      "Name": "int_repairer_size7_class2",
+      "BuyPrice": 1020367
+    },
+    {
+      "id": 128667617,
+      "Name": "int_repairer_size4_class3",
+      "BuyPrice": 524880
+    },
+    {
+      "id": 128777330,
+      "Name": "int_dronecontrol_repair_size1_class4",
+      "BuyPrice": 4800
+    },
+    {
+      "id": 128671252,
+      "Name": "int_dronecontrol_fueltransfer_size1_class4",
+      "BuyPrice": 4800
+    },
+    {
+      "id": 128777342,
+      "Name": "int_dronecontrol_repair_size7_class1",
+      "BuyPrice": 437400
+    },
+    {
+      "id": 128671264,
+      "Name": "int_dronecontrol_fueltransfer_size7_class1",
+      "BuyPrice": 437400
+    },
+    {
+      "id": 128777338,
+      "Name": "int_dronecontrol_repair_size5_class2",
+      "BuyPrice": 97200
+    },
+    {
+      "id": 128671260,
+      "Name": "int_dronecontrol_fueltransfer_size5_class2",
+      "BuyPrice": 97200
+    },
+    {
+      "id": 128777334,
+      "Name": "int_dronecontrol_repair_size3_class3",
+      "BuyPrice": 21600
+    },
+    {
+      "id": 128671256,
+      "Name": "int_dronecontrol_fueltransfer_size3_class3",
+      "BuyPrice": 21600
+    },
+    {
+      "id": 128777329,
+      "Name": "int_dronecontrol_repair_size1_class3",
+      "BuyPrice": 2400
+    },
+    {
+      "id": 128671251,
+      "Name": "int_dronecontrol_fueltransfer_size1_class3",
+      "BuyPrice": 2400
+    },
+    {
+      "id": 128777337,
+      "Name": "int_dronecontrol_repair_size5_class1",
+      "BuyPrice": 48600
+    },
+    {
+      "id": 128671259,
+      "Name": "int_dronecontrol_fueltransfer_size5_class1",
+      "BuyPrice": 48600
+    },
+    {
+      "id": 128777333,
+      "Name": "int_dronecontrol_repair_size3_class2",
+      "BuyPrice": 10800
+    },
+    {
+      "id": 128671255,
+      "Name": "int_dronecontrol_fueltransfer_size3_class2",
+      "BuyPrice": 10800
+    },
+    {
+      "id": 128777328,
+      "Name": "int_dronecontrol_repair_size1_class2",
+      "BuyPrice": 1200
+    },
+    {
+      "id": 128666682,
+      "Name": "int_fuelscoop_size7_class5",
+      "BuyPrice": 91180644
+    },
+    {
+      "id": 128666675,
+      "Name": "int_fuelscoop_size8_class4",
+      "BuyPrice": 72260660
+    },
+    {
+      "id": 128666674,
+      "Name": "int_fuelscoop_size7_class4",
+      "BuyPrice": 22795161
+    },
+    {
+      "id": 128666667,
+      "Name": "int_fuelscoop_size8_class3",
+      "BuyPrice": 18065165
+    },
+    {
+      "id": 128666659,
+      "Name": "int_fuelscoop_size8_class2",
+      "BuyPrice": 4516291
+    },
+    {
+      "id": 128666658,
+      "Name": "int_fuelscoop_size7_class2",
+      "BuyPrice": 1424698
+    },
+    {
+      "id": 128666651,
+      "Name": "int_fuelscoop_size8_class1",
+      "BuyPrice": 1083910
+    },
+    {
+      "id": 128666650,
+      "Name": "int_fuelscoop_size7_class1",
+      "BuyPrice": 341927
+    },
+    {
+      "id": 128066551,
+      "Name": "int_dronecontrol_resourcesiphon_size7_class5",
+      "BuyPrice": 6998400
+    },
+    {
+      "id": 128066550,
+      "Name": "int_dronecontrol_resourcesiphon_size7_class4",
+      "BuyPrice": 3499200
+    },
+    {
+      "id": 128066545,
+      "Name": "int_dronecontrol_resourcesiphon_size5_class4",
+      "BuyPrice": 388800
+    },
+    {
+      "id": 128066549,
+      "Name": "int_dronecontrol_resourcesiphon_size7_class3",
+      "BuyPrice": 1749600
+    },
+    {
+      "id": 128066548,
+      "Name": "int_dronecontrol_resourcesiphon_size7_class2",
+      "BuyPrice": 874800
+    },
+    {
+      "id": 128066547,
+      "Name": "int_dronecontrol_resourcesiphon_size7_class1",
+      "BuyPrice": 437400
+    },
+    {
+      "id": 128066543,
+      "Name": "int_dronecontrol_resourcesiphon_size5_class2",
+      "BuyPrice": 97200
+    },
+    {
+      "id": 128066542,
+      "Name": "int_dronecontrol_resourcesiphon_size5_class1",
+      "BuyPrice": 48600
+    },
+    {
+      "id": 128064232,
+      "Name": "int_sensors_size3_class5",
+      "BuyPrice": 158331
+    },
+    {
+      "id": 128064227,
+      "Name": "int_sensors_size2_class5",
+      "BuyPrice": 56547
+    },
+    {
+      "id": 128064231,
+      "Name": "int_sensors_size3_class4",
+      "BuyPrice": 63333
+    },
+    {
+      "id": 128064226,
+      "Name": "int_sensors_size2_class4",
+      "BuyPrice": 22619
+    },
+    {
+      "id": 128064221,
+      "Name": "int_sensors_size1_class4",
+      "BuyPrice": 8078
+    },
+    {
+      "id": 128064230,
+      "Name": "int_sensors_size3_class3",
+      "BuyPrice": 25333
+    },
+    {
+      "id": 128064220,
+      "Name": "int_sensors_size1_class3",
+      "BuyPrice": 3231
+    },
+    {
+      "id": 128064225,
+      "Name": "int_sensors_size2_class3",
+      "BuyPrice": 9048
+    },
+    {
+      "id": 128064229,
+      "Name": "int_sensors_size3_class2",
+      "BuyPrice": 10133
+    },
+    {
+      "id": 128064219,
+      "Name": "int_sensors_size1_class2",
+      "BuyPrice": 1293
+    },
+    {
+      "id": 128064224,
+      "Name": "int_sensors_size2_class2",
+      "BuyPrice": 3619
+    },
+    {
+      "id": 128064228,
+      "Name": "int_sensors_size3_class1",
+      "BuyPrice": 4053
+    },
+    {
+      "id": 128064218,
+      "Name": "int_sensors_size1_class1",
+      "BuyPrice": 517
+    },
+    {
+      "id": 128064223,
+      "Name": "int_sensors_size2_class1",
+      "BuyPrice": 1448
+    },
+    {
+      "id": 128064132,
+      "Name": "int_hyperdrive_size7_class5",
+      "BuyPrice": 51289112
+    },
+    {
+      "id": 128064131,
+      "Name": "int_hyperdrive_size7_class4",
+      "BuyPrice": 17096371
+    },
+    {
+      "id": 128064135,
+      "Name": "int_hyperdrive_size8_class3",
+      "BuyPrice": 18065165
+    },
+    {
+      "id": 128064130,
+      "Name": "int_hyperdrive_size7_class3",
+      "BuyPrice": 5698790
+    },
+    {
+      "id": 128064129,
+      "Name": "int_hyperdrive_size7_class2",
+      "BuyPrice": 1899597
+    },
+    {
+      "id": 128064133,
+      "Name": "int_hyperdrive_size8_class1",
+      "BuyPrice": 2007241
+    },
+    {
+      "id": 128064128,
+      "Name": "int_hyperdrive_size7_class1",
+      "BuyPrice": 633199
+    },
+    {
+      "id": 128671232,
+      "Name": "int_dronecontrol_collection_size1_class4",
+      "BuyPrice": 4800
+    },
+    {
+      "id": 128841594,
+      "Name": "int_dronecontrol_recon_size7_class1",
+      "BuyPrice": 612200
+    },
+    {
+      "id": 128671244,
+      "Name": "int_dronecontrol_collection_size7_class1",
+      "BuyPrice": 437400
+    },
+    {
+      "id": 128841593,
+      "Name": "int_dronecontrol_recon_size5_class1",
+      "BuyPrice": 75800
+    },
+    {
+      "id": 128671240,
+      "Name": "int_dronecontrol_collection_size5_class2",
+      "BuyPrice": 97200
+    },
+    {
+      "id": 128671236,
+      "Name": "int_dronecontrol_collection_size3_class3",
+      "BuyPrice": 21600
+    },
+    {
+      "id": 128837858,
+      "Name": "int_dronecontrol_recon_size1_class1",
+      "BuyPrice": 2600
+    },
+    {
+      "id": 128671231,
+      "Name": "int_dronecontrol_collection_size1_class3",
+      "BuyPrice": 2400
+    },
+    {
+      "id": 128671239,
+      "Name": "int_dronecontrol_collection_size5_class1",
+      "BuyPrice": 48600
+    },
+    {
+      "id": 128671235,
+      "Name": "int_dronecontrol_collection_size3_class2",
+      "BuyPrice": 10800
+    },
+    {
+      "id": 128841592,
+      "Name": "int_dronecontrol_recon_size3_class1",
+      "BuyPrice": 8200
+    },
+    {
+      "id": 128671230,
+      "Name": "int_dronecontrol_collection_size1_class2",
+      "BuyPrice": 1200
+    },
+    {
+      "id": 128671234,
+      "Name": "int_dronecontrol_collection_size3_class1",
+      "BuyPrice": 5400
+    },
+    {
+      "id": 128064062,
+      "Name": "int_powerplant_size7_class5",
+      "BuyPrice": 38913291
+    },
+    {
+      "id": 128064061,
+      "Name": "int_powerplant_size7_class4",
+      "BuyPrice": 12971097
+    },
+    {
+      "id": 128064060,
+      "Name": "int_powerplant_size7_class3",
+      "BuyPrice": 4323699
+    },
+    {
+      "id": 128064064,
+      "Name": "int_powerplant_size8_class2",
+      "BuyPrice": 4323699
+    },
+    {
+      "id": 128064059,
+      "Name": "int_powerplant_size7_class2",
+      "BuyPrice": 1441233
+    },
+    {
+      "id": 128064063,
+      "Name": "int_powerplant_size8_class1",
+      "BuyPrice": 1441233
+    },
+    {
+      "id": 128064058,
+      "Name": "int_powerplant_size7_class1",
+      "BuyPrice": 480411
+    },
+    {
+      "id": 128668545,
+      "Name": "int_hullreinforcement_size5_class1",
+      "BuyPrice": 150000
+    },
+    {
+      "id": 128737278,
+      "Name": "int_modulereinforcement_size5_class1",
+      "BuyPrice": 150000
+    },
+    {
+      "id": 128668543,
+      "Name": "int_hullreinforcement_size4_class1",
+      "BuyPrice": 65000
+    },
+    {
+      "id": 128737276,
+      "Name": "int_modulereinforcement_size4_class1",
+      "BuyPrice": 65000
+    },
+    {
+      "id": 128668541,
+      "Name": "int_hullreinforcement_size3_class1",
+      "BuyPrice": 28000
+    },
+    {
+      "id": 128737274,
+      "Name": "int_modulereinforcement_size3_class1",
+      "BuyPrice": 28000
+    },
+    {
+      "id": 128668539,
+      "Name": "int_hullreinforcement_size2_class1",
+      "BuyPrice": 12000
+    },
+    {
+      "id": 128737272,
+      "Name": "int_modulereinforcement_size2_class1",
+      "BuyPrice": 12000
+    },
+    {
+      "id": 128668537,
+      "Name": "int_hullreinforcement_size1_class1",
+      "BuyPrice": 5000
+    },
+    {
+      "id": 128737270,
+      "Name": "int_modulereinforcement_size1_class1",
+      "BuyPrice": 5000
+    },
+    {
+      "id": 128064152,
+      "Name": "int_lifesupport_size3_class5",
+      "BuyPrice": 158331
+    },
+    {
+      "id": 128064142,
+      "Name": "int_lifesupport_size1_class5",
+      "BuyPrice": 20195
+    },
+    {
+      "id": 128064147,
+      "Name": "int_lifesupport_size2_class5",
+      "BuyPrice": 56547
+    },
+    {
+      "id": 128064151,
+      "Name": "int_lifesupport_size3_class4",
+      "BuyPrice": 63333
+    },
+    {
+      "id": 128064146,
+      "Name": "int_lifesupport_size2_class4",
+      "BuyPrice": 22619
+    },
+    {
+      "id": 128064141,
+      "Name": "int_lifesupport_size1_class4",
+      "BuyPrice": 8078
+    },
+    {
+      "id": 128064150,
+      "Name": "int_lifesupport_size3_class3",
+      "BuyPrice": 25333
+    },
+    {
+      "id": 128064140,
+      "Name": "int_lifesupport_size1_class3",
+      "BuyPrice": 3231
+    },
+    {
+      "id": 128064145,
+      "Name": "int_lifesupport_size2_class3",
+      "BuyPrice": 9048
+    },
+    {
+      "id": 128064149,
+      "Name": "int_lifesupport_size3_class2",
+      "BuyPrice": 10133
+    },
+    {
+      "id": 128064139,
+      "Name": "int_lifesupport_size1_class2",
+      "BuyPrice": 1293
+    },
+    {
+      "id": 128064144,
+      "Name": "int_lifesupport_size2_class2",
+      "BuyPrice": 3619
+    },
+    {
+      "id": 128666681,
+      "Name": "int_fuelscoop_size6_class5",
+      "BuyPrice": 28763610
+    },
+    {
+      "id": 128666673,
+      "Name": "int_fuelscoop_size6_class4",
+      "BuyPrice": 7190903
+    },
+    {
+      "id": 128666672,
+      "Name": "int_fuelscoop_size5_class4",
+      "BuyPrice": 2268424
+    },
+    {
+      "id": 128666665,
+      "Name": "int_fuelscoop_size6_class3",
+      "BuyPrice": 1797726
+    },
+    {
+      "id": 128666679,
+      "Name": "int_fuelscoop_size4_class5",
+      "BuyPrice": 2862364
+    },
+    {
+      "id": 128666664,
+      "Name": "int_fuelscoop_size5_class3",
+      "BuyPrice": 567106
+    },
+    {
+      "id": 128666663,
+      "Name": "int_fuelscoop_size4_class3",
+      "BuyPrice": 178898
+    },
+    {
+      "id": 128666657,
+      "Name": "int_fuelscoop_size6_class2",
+      "BuyPrice": 449431
+    },
+    {
+      "id": 128666656,
+      "Name": "int_fuelscoop_size5_class2",
+      "BuyPrice": 141776
+    },
+    {
+      "id": 128666649,
+      "Name": "int_fuelscoop_size6_class1",
+      "BuyPrice": 107864
+    },
+    {
+      "id": 128666655,
+      "Name": "int_fuelscoop_size4_class2",
+      "BuyPrice": 44724
+    },
+    {
+      "id": 128666648,
+      "Name": "int_fuelscoop_size5_class1",
+      "BuyPrice": 34026
+    },
+    {
+      "id": 128671248,
+      "Name": "int_dronecontrol_collection_size7_class5",
+      "BuyPrice": 6998400
+    },
+    {
+      "id": 128671238,
+      "Name": "int_dronecontrol_collection_size3_class5",
+      "BuyPrice": 86400
+    },
+    {
+      "id": 128671247,
+      "Name": "int_dronecontrol_collection_size7_class4",
+      "BuyPrice": 3499200
+    },
+    {
+      "id": 128671242,
+      "Name": "int_dronecontrol_collection_size5_class4",
+      "BuyPrice": 388800
+    },
+    {
+      "id": 128671246,
+      "Name": "int_dronecontrol_collection_size7_class3",
+      "BuyPrice": 1749600
+    },
+    {
+      "id": 128671237,
+      "Name": "int_dronecontrol_collection_size3_class4",
+      "BuyPrice": 43200
+    },
+    {
+      "id": 128671245,
+      "Name": "int_dronecontrol_collection_size7_class2",
+      "BuyPrice": 874800
+    },
+    {
+      "id": 128671241,
+      "Name": "int_dronecontrol_collection_size5_class3",
+      "BuyPrice": 194400
+    },
+    {
+      "id": 128064167,
+      "Name": "int_lifesupport_size6_class5",
+      "BuyPrice": 3475688
+    },
+    {
+      "id": 128064157,
+      "Name": "int_lifesupport_size4_class5",
+      "BuyPrice": 443328
+    },
+    {
+      "id": 128064161,
+      "Name": "int_lifesupport_size5_class4",
+      "BuyPrice": 496527
+    },
+    {
+      "id": 128064156,
+      "Name": "int_lifesupport_size4_class4",
+      "BuyPrice": 177331
+    },
+    {
+      "id": 128064160,
+      "Name": "int_lifesupport_size5_class3",
+      "BuyPrice": 198611
+    },
+    {
+      "id": 128064164,
+      "Name": "int_lifesupport_size6_class2",
+      "BuyPrice": 222444
+    },
+    {
+      "id": 128064155,
+      "Name": "int_lifesupport_size4_class3",
+      "BuyPrice": 70932
+    },
+    {
+      "id": 128064159,
+      "Name": "int_lifesupport_size5_class2",
+      "BuyPrice": 79444
+    },
+    {
+      "id": 128064163,
+      "Name": "int_lifesupport_size6_class1",
+      "BuyPrice": 88978
+    },
+    {
+      "id": 128064154,
+      "Name": "int_lifesupport_size4_class2",
+      "BuyPrice": 28373
+    },
+    {
+      "id": 128064158,
+      "Name": "int_lifesupport_size5_class1",
+      "BuyPrice": 31778
+    },
+    {
+      "id": 128064087,
+      "Name": "int_engine_size5_class5",
+      "BuyPrice": 5103953
+    },
+    {
+      "id": 128064086,
+      "Name": "int_engine_size5_class4",
+      "BuyPrice": 1701318
+    },
+    {
+      "id": 128064081,
+      "Name": "int_engine_size4_class4",
+      "BuyPrice": 536693
+    },
+    {
+      "id": 128064090,
+      "Name": "int_engine_size6_class3",
+      "BuyPrice": 1797726
+    },
+    {
+      "id": 128064085,
+      "Name": "int_engine_size5_class3",
+      "BuyPrice": 567106
+    },
+    {
+      "id": 128064080,
+      "Name": "int_engine_size4_class3",
+      "BuyPrice": 178898
+    },
+    {
+      "id": 128064084,
+      "Name": "int_engine_size5_class2",
+      "BuyPrice": 189035
+    },
+    {
+      "id": 128064088,
+      "Name": "int_engine_size6_class1",
+      "BuyPrice": 199747
+    },
+    {
+      "id": 128064079,
+      "Name": "int_engine_size4_class2",
+      "BuyPrice": 59633
+    },
+    {
+      "id": 128064083,
+      "Name": "int_engine_size5_class1",
+      "BuyPrice": 63012
+    },
+    {
+      "id": 128064287,
+      "Name": "int_shieldgenerator_size6_class5",
+      "BuyPrice": 16179531
+    },
+    {
+      "id": 128064282,
+      "Name": "int_shieldgenerator_size5_class5",
+      "BuyPrice": 5103953
+    },
+    {
+      "id": 128064277,
+      "Name": "int_shieldgenerator_size4_class5",
+      "BuyPrice": 1610080
+    },
+    {
+      "id": 128064281,
+      "Name": "int_shieldgenerator_size5_class4",
+      "BuyPrice": 1701318
+    },
+    {
+      "id": 128064276,
+      "Name": "int_shieldgenerator_size4_class4",
+      "BuyPrice": 536693
+    },
+    {
+      "id": 128671336,
+      "Name": "int_shieldgenerator_size6_class3_fast",
+      "BuyPrice": 2696589
+    },
+    {
+      "id": 128064285,
+      "Name": "int_shieldgenerator_size6_class3",
+      "BuyPrice": 1797726
+    },
+    {
+      "id": 128671335,
+      "Name": "int_shieldgenerator_size5_class3_fast",
+      "BuyPrice": 850659
+    },
+    {
+      "id": 128064284,
+      "Name": "int_shieldgenerator_size6_class2",
+      "BuyPrice": 599242
+    },
+    {
+      "id": 128064280,
+      "Name": "int_shieldgenerator_size5_class3",
+      "BuyPrice": 567106
+    },
+    {
+      "id": 128064353,
+      "Name": "int_fueltank_size8_class3",
+      "BuyPrice": 5428429
+    },
+    {
+      "id": 128064352,
+      "Name": "int_fueltank_size7_class3",
+      "BuyPrice": 1780914
+    },
+    {
+      "id": 128064351,
+      "Name": "int_fueltank_size6_class3",
+      "BuyPrice": 341577
+    },
+    {
+      "id": 128064350,
+      "Name": "int_fueltank_size5_class3",
+      "BuyPrice": 97754
+    },
+    {
+      "id": 128064349,
+      "Name": "int_fueltank_size4_class3",
+      "BuyPrice": 24734
+    },
+    {
+      "id": 128064348,
+      "Name": "int_fueltank_size3_class3",
+      "BuyPrice": 7063
+    },
+    {
+      "id": 128064347,
+      "Name": "int_fueltank_size2_class3",
+      "BuyPrice": 3750
+    },
+    {
+      "id": 128064346,
+      "Name": "int_fueltank_size1_class3",
+      "BuyPrice": 1000
+    },
+    {
+      "id": 128064216,
+      "Name": "int_powerdistributor_size8_class4",
+      "BuyPrice": 10899756
+    },
+    {
+      "id": 128064211,
+      "Name": "int_powerdistributor_size7_class4",
+      "BuyPrice": 3892770
+    },
+    {
+      "id": 128064215,
+      "Name": "int_powerdistributor_size8_class3",
+      "BuyPrice": 4359903
+    },
+    {
+      "id": 128064210,
+      "Name": "int_powerdistributor_size7_class3",
+      "BuyPrice": 1557108
+    },
+    {
+      "id": 128064214,
+      "Name": "int_powerdistributor_size8_class2",
+      "BuyPrice": 1743961
+    },
+    {
+      "id": 128064209,
+      "Name": "int_powerdistributor_size7_class2",
+      "BuyPrice": 622843
+    },
+    {
+      "id": 128064213,
+      "Name": "int_powerdistributor_size8_class1",
+      "BuyPrice": 697584
+    },
+    {
+      "id": 128064208,
+      "Name": "int_powerdistributor_size7_class1",
+      "BuyPrice": 249137
+    },
+    {
+      "id": 128666723,
+      "Name": "int_fsdinterdictor_size4_class5",
+      "BuyPrice": 21337344
+    },
+    {
+      "id": 128666719,
+      "Name": "int_fsdinterdictor_size4_class4",
+      "BuyPrice": 7112448
+    },
+    {
+      "id": 128666722,
+      "Name": "int_fsdinterdictor_size3_class5",
+      "BuyPrice": 7620480
+    },
+    {
+      "id": 128666718,
+      "Name": "int_fsdinterdictor_size3_class4",
+      "BuyPrice": 2540160
+    },
+    {
+      "id": 128666711,
+      "Name": "int_fsdinterdictor_size4_class2",
+      "BuyPrice": 790272
+    },
+    {
+      "id": 128666714,
+      "Name": "int_fsdinterdictor_size3_class3",
+      "BuyPrice": 846720
+    },
+    {
+      "id": 128666707,
+      "Name": "int_fsdinterdictor_size4_class1",
+      "BuyPrice": 263424
+    },
+    {
+      "id": 128666706,
+      "Name": "int_fsdinterdictor_size3_class1",
+      "BuyPrice": 94080
+    },
+    {
+      "id": 128064331,
+      "Name": "int_shieldcellbank_size7_class4",
+      "BuyPrice": 3892770
+    },
+    {
+      "id": 128064330,
+      "Name": "int_shieldcellbank_size7_class3",
+      "BuyPrice": 1557108
+    },
+    {
+      "id": 128064334,
+      "Name": "int_shieldcellbank_size8_class2",
+      "BuyPrice": 1743961
+    },
+    {
+      "id": 128064329,
+      "Name": "int_shieldcellbank_size7_class2",
+      "BuyPrice": 622843
+    },
+    {
+      "id": 128064333,
+      "Name": "int_shieldcellbank_size8_class1",
+      "BuyPrice": 697584
+    },
+    {
+      "id": 128064328,
+      "Name": "int_shieldcellbank_size7_class1",
+      "BuyPrice": 249137
+    },
+    {
+      "id": 128064176,
+      "Name": "int_lifesupport_size8_class4",
+      "BuyPrice": 10899756
+    },
+    {
+      "id": 128064171,
+      "Name": "int_lifesupport_size7_class4",
+      "BuyPrice": 3892770
+    },
+    {
+      "id": 128064169,
+      "Name": "int_lifesupport_size7_class2",
+      "BuyPrice": 622843
+    },
+    {
+      "id": 128064173,
+      "Name": "int_lifesupport_size8_class1",
+      "BuyPrice": 697584
+    },
+    {
+      "id": 128064168,
+      "Name": "int_lifesupport_size7_class1",
+      "BuyPrice": 249137
+    },
+    {
+      "id": 128064097,
+      "Name": "int_engine_size7_class5",
+      "BuyPrice": 51289112
+    },
+    {
+      "id": 128064099,
+      "Name": "int_engine_size8_class2",
+      "BuyPrice": 6021722
+    },
+    {
+      "id": 128064094,
+      "Name": "int_engine_size7_class2",
+      "BuyPrice": 1899597
+    },
+    {
+      "id": 128064098,
+      "Name": "int_engine_size8_class1",
+      "BuyPrice": 2007241
+    },
+    {
+      "id": 128064093,
+      "Name": "int_engine_size7_class1",
+      "BuyPrice": 633199
+    },
+    {
+      "id": 128064291,
+      "Name": "int_shieldgenerator_size7_class4",
+      "BuyPrice": 17096371
+    },
+    {
+      "id": 128064295,
+      "Name": "int_shieldgenerator_size8_class3",
+      "BuyPrice": 18065165
+    },
+    {
+      "id": 128671338,
+      "Name": "int_shieldgenerator_size8_class3_fast",
+      "BuyPrice": 27097748
+    },
+    {
+      "id": 128671337,
+      "Name": "int_shieldgenerator_size7_class3_fast",
+      "BuyPrice": 8548185
+    },
+    {
+      "id": 128064289,
+      "Name": "int_shieldgenerator_size7_class2",
+      "BuyPrice": 1899597
+    },
+    {
+      "id": 128064293,
+      "Name": "int_shieldgenerator_size8_class1",
+      "BuyPrice": 2007241
+    },
+    {
+      "id": 128066541,
+      "Name": "int_dronecontrol_resourcesiphon_size3_class5",
+      "BuyPrice": 86400
+    },
+    {
+      "id": 128066536,
+      "Name": "int_dronecontrol_resourcesiphon_size1_class5",
+      "BuyPrice": 9600
+    },
+    {
+      "id": 128066540,
+      "Name": "int_dronecontrol_resourcesiphon_size3_class4",
+      "BuyPrice": 43200
+    },
+    {
+      "id": 128066535,
+      "Name": "int_dronecontrol_resourcesiphon_size1_class4",
+      "BuyPrice": 4800
+    },
+    {
+      "id": 128066539,
+      "Name": "int_dronecontrol_resourcesiphon_size3_class3",
+      "BuyPrice": 21600
+    },
+    {
+      "id": 128066534,
+      "Name": "int_dronecontrol_resourcesiphon_size1_class3",
+      "BuyPrice": 2400
+    },
+    {
+      "id": 128064247,
+      "Name": "int_sensors_size6_class5",
+      "BuyPrice": 3475688
+    },
+    {
+      "id": 128064242,
+      "Name": "int_sensors_size5_class5",
+      "BuyPrice": 1241317
+    },
+    {
+      "id": 128064246,
+      "Name": "int_sensors_size6_class4",
+      "BuyPrice": 1390275
+    },
+    {
+      "id": 128064236,
+      "Name": "int_sensors_size4_class4",
+      "BuyPrice": 177331
+    },
+    {
+      "id": 128064240,
+      "Name": "int_sensors_size5_class3",
+      "BuyPrice": 198611
+    },
+    {
+      "id": 128049250,
+      "Name": "sidewinder_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049251,
+      "Name": "sidewinder_armour_grade2",
+      "BuyPrice": 25600
+    },
+    {
+      "id": 128049252,
+      "Name": "sidewinder_armour_grade3",
+      "BuyPrice": 80320
+    },
+    {
+      "id": 128049254,
+      "Name": "sidewinder_armour_reactive",
+      "BuyPrice": 139424
+    },
+    {
+      "id": 128049253,
+      "Name": "sidewinder_armour_mirrored",
+      "BuyPrice": 132064
+    },
+    {
+      "id": 128049262,
+      "Name": "hauler_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049263,
+      "Name": "hauler_armour_grade2",
+      "BuyPrice": 42176
+    },
+    {
+      "id": 128049264,
+      "Name": "hauler_armour_grade3",
+      "BuyPrice": 185047
+    },
+    {
+      "id": 128049266,
+      "Name": "hauler_armour_reactive",
+      "BuyPrice": 282421
+    },
+    {
+      "id": 128049265,
+      "Name": "hauler_armour_mirrored",
+      "BuyPrice": 270295
+    },
+    {
+      "id": 128049256,
+      "Name": "eagle_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128049257,
+      "Name": "eagle_armour_grade2",
+      "BuyPrice": 26880
+    },
+    {
+      "id": 128049258,
+      "Name": "eagle_armour_grade3",
+      "BuyPrice": 90048
+    },
+    {
+      "id": 128049260,
+      "Name": "eagle_armour_reactive",
+      "BuyPrice": 150393
+    },
+    {
+      "id": 128049259,
+      "Name": "eagle_armour_mirrored",
+      "BuyPrice": 140089
+    },
+    {
+      "id": 128672154,
+      "Name": "federation_gunship_armour_grade1",
+      "BuyPrice": 0
+    },
+    {
+      "id": 128672155,
+      "Name": "federation_gunship_armour_grade2",
+      "BuyPrice": 14325682
+    },
+    {
+      "id": 128672156,
+      "Name": "federation_gunship_armour_grade3",
+      "BuyPrice": 32232784
+    },
+    {
+      "id": 128672158,
+      "Name": "federation_gunship_armour_reactive",
+      "BuyPrice": 84414081
+    },
+    {
+      "id": 128672157,
+      "Name": "federation_gunship_armour_mirrored",
+      "BuyPrice": 76176814
+    },
+    {
+      "id": 128064187,
+      "Name": "int_powerdistributor_size2_class5",
+      "BuyPrice": 56547
+    },
+    {
+      "id": 128064196,
+      "Name": "int_powerdistributor_size4_class4",
+      "BuyPrice": 177331
+    },
+    {
+      "id": 128064327,
+      "Name": "int_shieldcellbank_size6_class5",
+      "BuyPrice": 3475688
+    },
+    {
+      "id": 128064322,
+      "Name": "int_shieldcellbank_size5_class5",
+      "BuyPrice": 1241317
+    },
+    {
+      "id": 128671250,
+      "Name": "int_dronecontrol_fueltransfer_size1_class2",
+      "BuyPrice": 1200
+    },
+    {
+      "id": 128777332,
+      "Name": "int_dronecontrol_repair_size3_class1",
+      "BuyPrice": 5400
+    },
+    {
+      "id": 128671254,
+      "Name": "int_dronecontrol_fueltransfer_size3_class1",
+      "BuyPrice": 5400
+    },
+    {
+      "id": 128777327,
+      "Name": "int_dronecontrol_repair_size1_class1",
+      "BuyPrice": 600
+    },
+    {
+      "id": 128671249,
+      "Name": "int_dronecontrol_fueltransfer_size1_class1",
+      "BuyPrice": 600
+    },
+    {
+      "id": 128668536,
+      "Name": "hpt_shieldbooster_size0_class5",
+      "BuyPrice": 281000
+    },
+    {
+      "id": 128668535,
+      "Name": "hpt_shieldbooster_size0_class4",
+      "BuyPrice": 122000
+    },
+    {
+      "id": 128064148,
+      "Name": "int_lifesupport_size3_class1",
+      "BuyPrice": 4053
+    },
+    {
+      "id": 128064138,
+      "Name": "int_lifesupport_size1_class1",
+      "BuyPrice": 517
+    },
+    {
+      "id": 128064143,
+      "Name": "int_lifesupport_size2_class1",
+      "BuyPrice": 1448
+    },
+    {
+      "id": 128064051,
+      "Name": "int_powerplant_size5_class4",
+      "BuyPrice": 1441233
+    },
+    {
+      "id": 128064046,
+      "Name": "int_powerplant_size4_class4",
+      "BuyPrice": 480411
+    },
+    {
+      "id": 128666697,
+      "Name": "int_refinery_size2_class4",
+      "BuyPrice": 340200
+    },
+    {
+      "id": 128064121,
+      "Name": "int_hyperdrive_size5_class4",
+      "BuyPrice": 1701318
+    },
+    {
+      "id": 128064120,
+      "Name": "int_hyperdrive_size5_class3",
+      "BuyPrice": 567106
+    },
+    {
+      "id": 128667598,
+      "Name": "int_repairer_size1_class1",
+      "BuyPrice": 10000
+    },
+    {
+      "id": 128064252,
+      "Name": "int_sensors_size7_class5",
+      "BuyPrice": 9731925
+    },
+    {
+      "id": 128064249,
+      "Name": "int_sensors_size7_class2",
+      "BuyPrice": 622843
+    },
+    {
+      "id": 128667631,
+      "Name": "int_repairer_size2_class5",
+      "BuyPrice": 1458000
+    },
+    {
+      "id": 128667624,
+      "Name": "int_repairer_size3_class4",
+      "BuyPrice": 874800
+    },
+    {
+      "id": 128666666,
+      "Name": "int_fuelscoop_size7_class3",
+      "BuyPrice": 5698790
+    },
+    {
+      "id": 128066544,
+      "Name": "int_dronecontrol_resourcesiphon_size5_class3",
+      "BuyPrice": 194400
+    },
+    {
+      "id": 128064137,
+      "Name": "int_hyperdrive_size8_class5",
+      "BuyPrice": 162586486
+    },
+    {
+      "id": 128671261,
+      "Name": "int_dronecontrol_fueltransfer_size5_class3",
+      "BuyPrice": 194400
+    },
+    {
+      "id": 128064067,
+      "Name": "int_powerplant_size8_class5",
+      "BuyPrice": 116739873
+    },
+    {
+      "id": 128064066,
+      "Name": "int_powerplant_size8_class4",
+      "BuyPrice": 38913291
+    },
+    {
+      "id": 128064065,
+      "Name": "int_powerplant_size8_class3",
+      "BuyPrice": 12971097
+    },
+    {
+      "id": 128064237,
+      "Name": "int_sensors_size4_class5",
+      "BuyPrice": 443328
+    },
+    {
+      "id": 128064241,
+      "Name": "int_sensors_size5_class4",
+      "BuyPrice": 496527
+    },
+    {
+      "id": 128064245,
+      "Name": "int_sensors_size6_class3",
+      "BuyPrice": 556110
+    },
+    {
+      "id": 128064244,
+      "Name": "int_sensors_size6_class2",
+      "BuyPrice": 222444
+    },
+    {
+      "id": 128064235,
+      "Name": "int_sensors_size4_class3",
+      "BuyPrice": 70932
+    },
+    {
+      "id": 128064239,
+      "Name": "int_sensors_size5_class2",
+      "BuyPrice": 79444
+    },
+    {
+      "id": 128064243,
+      "Name": "int_sensors_size6_class1",
+      "BuyPrice": 88978
+    },
+    {
+      "id": 128064234,
+      "Name": "int_sensors_size4_class2",
+      "BuyPrice": 28373
+    },
+    {
+      "id": 128064238,
+      "Name": "int_sensors_size5_class1",
+      "BuyPrice": 31778
+    },
+    {
+      "id": 128064233,
+      "Name": "int_sensors_size4_class1",
+      "BuyPrice": 11349
+    },
+    {
+      "id": 128666671,
+      "Name": "int_fuelscoop_size4_class4",
+      "BuyPrice": 715591
+    },
+    {
+      "id": 128666647,
+      "Name": "int_fuelscoop_size4_class1",
+      "BuyPrice": 10734
+    },
+    {
+      "id": 128671229,
+      "Name": "int_dronecontrol_collection_size1_class1",
+      "BuyPrice": 600
+    },
+    {
+      "id": 128064166,
+      "Name": "int_lifesupport_size6_class4",
+      "BuyPrice": 1390275
+    },
+    {
+      "id": 128064165,
+      "Name": "int_lifesupport_size6_class3",
+      "BuyPrice": 556110
+    },
+    {
+      "id": 128064153,
+      "Name": "int_lifesupport_size4_class1",
+      "BuyPrice": 11349
+    },
+    {
+      "id": 128671278,
+      "Name": "int_dronecontrol_prospector_size3_class5",
+      "BuyPrice": 86400
+    },
+    {
+      "id": 128064082,
+      "Name": "int_engine_size4_class5",
+      "BuyPrice": 1610080
+    },
+    {
+      "id": 128064091,
+      "Name": "int_engine_size6_class4",
+      "BuyPrice": 5393177
+    },
+    {
+      "id": 128064089,
+      "Name": "int_engine_size6_class2",
+      "BuyPrice": 599242
+    },
+    {
+      "id": 128064078,
+      "Name": "int_engine_size4_class1",
+      "BuyPrice": 19878
+    },
+    {
+      "id": 128064286,
+      "Name": "int_shieldgenerator_size6_class4",
+      "BuyPrice": 5393177
+    },
+    {
+      "id": 128671334,
+      "Name": "int_shieldgenerator_size4_class3_fast",
+      "BuyPrice": 268347
+    },
+    {
+      "id": 128064283,
+      "Name": "int_shieldgenerator_size6_class1",
+      "BuyPrice": 199747
+    },
+    {
+      "id": 128064279,
+      "Name": "int_shieldgenerator_size5_class2",
+      "BuyPrice": 189035
+    },
+    {
+      "id": 128064275,
+      "Name": "int_shieldgenerator_size4_class3",
+      "BuyPrice": 178898
+    },
+    {
+      "id": 128064274,
+      "Name": "int_shieldgenerator_size4_class2",
+      "BuyPrice": 59633
+    },
+    {
+      "id": 128064278,
+      "Name": "int_shieldgenerator_size5_class1",
+      "BuyPrice": 63012
+    },
+    {
+      "id": 128064273,
+      "Name": "int_shieldgenerator_size4_class1",
+      "BuyPrice": 19878
+    },
+    {
+      "id": 128064212,
+      "Name": "int_powerdistributor_size7_class5",
+      "BuyPrice": 9731925
+    },
+    {
+      "id": 128734694,
+      "Name": "int_passengercabin_size5_class2",
+      "BuyPrice": 92362
+    },
+    {
+      "id": 128666715,
+      "Name": "int_fsdinterdictor_size4_class3",
+      "BuyPrice": 2370816
+    },
+    {
+      "id": 128064332,
+      "Name": "int_shieldcellbank_size7_class5",
+      "BuyPrice": 9731925
+    },
+    {
+      "id": 128064337,
+      "Name": "int_shieldcellbank_size8_class5",
+      "BuyPrice": 27249391
+    },
+    {
+      "id": 128064177,
+      "Name": "int_lifesupport_size8_class5",
+      "BuyPrice": 27249391
+    },
+    {
+      "id": 128064175,
+      "Name": "int_lifesupport_size8_class3",
+      "BuyPrice": 4359903
+    },
+    {
+      "id": 128064170,
+      "Name": "int_lifesupport_size7_class3",
+      "BuyPrice": 1557108
+    },
+    {
+      "id": 128064174,
+      "Name": "int_lifesupport_size8_class2",
+      "BuyPrice": 1743961
+    },
+    {
+      "id": 128064102,
+      "Name": "int_engine_size8_class5",
+      "BuyPrice": 162586486
+    },
+    {
+      "id": 128064096,
+      "Name": "int_engine_size7_class4",
+      "BuyPrice": 17096371
+    },
+    {
+      "id": 128066538,
+      "Name": "int_dronecontrol_resourcesiphon_size3_class2",
+      "BuyPrice": 10800
+    },
+    {
+      "id": 128066533,
+      "Name": "int_dronecontrol_resourcesiphon_size1_class2",
+      "BuyPrice": 1200
+    },
+    {
+      "id": 128066537,
+      "Name": "int_dronecontrol_resourcesiphon_size3_class1",
+      "BuyPrice": 5400
+    },
+    {
+      "id": 128064296,
+      "Name": "int_shieldgenerator_size8_class4",
+      "BuyPrice": 54195495
+    },
+    {
+      "id": 128064290,
+      "Name": "int_shieldgenerator_size7_class3",
+      "BuyPrice": 5698790
+    },
+    {
+      "id": 128064294,
+      "Name": "int_shieldgenerator_size8_class2",
+      "BuyPrice": 6021722
+    },
+    {
+      "id": 128064288,
+      "Name": "int_shieldgenerator_size7_class1",
+      "BuyPrice": 633199
+    },
+    {
+      "id": 128833975,
+      "Name": "int_guardianfsdbooster_size1",
+      "BuyPrice": 405021
+    },
+    {
+      "id": 128833976,
+      "Name": "int_guardianfsdbooster_size2",
+      "BuyPrice": 810520
+    },
+    {
+      "id": 128833977,
+      "Name": "int_guardianfsdbooster_size3",
+      "BuyPrice": 1620430
+    },
+    {
+      "id": 128833978,
+      "Name": "int_guardianfsdbooster_size4",
+      "BuyPrice": 3245012
+    },
+    {
+      "id": 128833979,
+      "Name": "int_guardianfsdbooster_size5",
+      "BuyPrice": 6483100
+    },
+    {
+      "id": 128833980,
+      "Name": "int_guardianpowerdistributor_size1",
+      "BuyPrice": 40956
+    },
+    {
+      "id": 128833981,
+      "Name": "int_guardianpowerdistributor_size2",
+      "BuyPrice": 111600
+    },
+    {
+      "id": 128833982,
+      "Name": "int_guardianpowerdistributor_size3",
+      "BuyPrice": 311364
+    },
+    {
+      "id": 128833983,
+      "Name": "int_guardianpowerdistributor_size4",
+      "BuyPrice": 868706
+    },
+    {
+      "id": 128833984,
+      "Name": "int_guardianpowerdistributor_size5",
+      "BuyPrice": 2423689
+    },
+    {
+      "id": 128833985,
+      "Name": "int_guardianpowerdistributor_size6",
+      "BuyPrice": 6762091
+    },
+    {
+      "id": 128833986,
+      "Name": "int_guardianpowerdistributor_size7",
+      "BuyPrice": 18866234
+    },
+    {
+      "id": 128833987,
+      "Name": "int_guardianpowerdistributor_size8",
+      "BuyPrice": 52636792
+    }
+  ]
+}
+{
+  "timestamp": "2018-11-24T10:26:30Z",
+  "event": "Shipyard",
+  "MarketID": 3228926720,
+  "StationName": "Meredith City",
+  "StarSystem": "LFT 926",
+  "Horizons": true,
+  "AllowCobraMkIV": true,
+  "PriceList": [
+    {
+      "id": 128049249,
+      "ShipType": "sidewinder",
+      "ShipPrice": 32000
+    },
+    {
+      "id": 128049255,
+      "ShipType": "eagle",
+      "ShipPrice": 44800
+    },
+    {
+      "id": 128049261,
+      "ShipType": "hauler",
+      "ShipPrice": 52720
+    },
+    {
+      "id": 128671217,
+      "ShipType": "diamondback",
+      "ShipType_Localised": "Diamondback Scout",
+      "ShipPrice": 564329
+    },
+    {
+      "id": 128049291,
+      "ShipType": "dolphin",
+      "ShipPrice": 1337323
+    },
+    {
+      "id": 128671831,
+      "ShipType": "diamondbackxl",
+      "ShipType_Localised": "Diamondback Explorer",
+      "ShipPrice": 1894760
+    },
+    {
+      "id": 128672269,
+      "ShipType": "independant_trader",
+      "ShipType_Localised": "Keelback",
+      "ShipPrice": 3126154
+    },
+    {
+      "id": 128672276,
+      "ShipType": "asp_scout",
+      "ShipType_Localised": "Asp Scout",
+      "ShipPrice": 3961154
+    },
+    {
+      "id": 128049309,
+      "ShipType": "vulture",
+      "ShipPrice": 4925615
+    },
+    {
+      "id": 128049303,
+      "ShipType": "asp",
+      "ShipType_Localised": "Asp Explorer",
+      "ShipPrice": 6661154
+    },
+    {
+      "id": 128049321,
+      "ShipType": "federation_dropship",
+      "ShipType_Localised": "Federal Dropship",
+      "ShipPrice": 14314205
+    },
+    {
+      "id": 128672152,
+      "ShipType": "federation_gunship",
+      "ShipType_Localised": "Federal Gunship",
+      "ShipPrice": 35814205
+    },
+    {
+      "id": 128049327,
+      "ShipType": "orca",
+      "ShipPrice": 48539887
+    },
+    {
+      "id": 128049351,
+      "ShipType": "ferdelance",
+      "ShipType_Localised": "Fer-de-Lance",
+      "ShipPrice": 51567040
+    },
+    {
+      "id": 128049339,
+      "ShipType": "python",
+      "ShipPrice": 56978179
+    },
+    {
+      "id": 128049345,
+      "ShipType": "belugaliner",
+      "ShipType_Localised": "Beluga Liner",
+      "ShipPrice": 84532764
+    },
+    {
+      "id": 128049369,
+      "ShipType": "federation_corvette",
+      "ShipType_Localised": "Federal Corvette",
+      "ShipPrice": 187969451
+    }
+  ]
+}
+{
+  "timestamp": "2018-11-24T12:02:28Z",
+  "event": "Status",
+  "Flags": 0
+}
+{
   "timestamp": "2018-08-27T21:00:00Z",
   "event": "AppliedToSquadron",
   "SquadronName": "THE FATHERHOOD - ALPHA"

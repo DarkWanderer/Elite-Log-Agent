@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using DW.ELA.Controller;
     using DW.ELA.Interfaces;
     using DW.ELA.LogModel;
     using DW.ELA.Utility.Json;
@@ -34,7 +36,8 @@
         [Explicit]
         public static void ToolPrepareCannedEvents()
         {
-            var eventExamples = ExtractSamples(TestEventSource.LocalBetaEvents)
+            var eventExamples = LoadJsonEvents()
+                .Concat(ExtractSamples(TestEventSource.LocalBetaEvents))
                 .Concat(ExtractSamples(TestEventSource.LocalEvents))
                 .ToHashSet();
 
@@ -82,5 +85,10 @@
 
             return processedEvents;
         }
+
+        private static IEnumerable<string> LoadJsonEvents() => LogEnumerator.GetJsonEventFiles(new SavedGamesDirectoryHelper().Directory)
+            .Select(File.ReadAllText)
+            .Select(Serialize.FromJson<JObject>)
+            .Select(Serialize.ToJson);
     }
 }
