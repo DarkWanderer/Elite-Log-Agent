@@ -11,6 +11,7 @@
     using MoreLinq;
     using Newtonsoft.Json.Linq;
     using NLog;
+    using NLog.Fluent;
 
     public class EdsmPlugin : AbstractPlugin<JObject, EdsmSettings>
     {
@@ -58,7 +59,10 @@
                     .ToList();
                 foreach (var batch in apiEventsBatches)
                     await apiFacade?.PostLogEvents(batch.ToArray());
-                logger.Info("Uploaded {0} EDSM events", events.Count);
+                logger.Info()
+                    .Message("Uploaded {0} events", events.Count)
+                    .Property("eventsCount", events.Count)
+                    .Write();
             }
             catch (Exception e)
             {

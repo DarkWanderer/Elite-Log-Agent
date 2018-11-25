@@ -7,6 +7,7 @@
     using DW.ELA.Utility.Json;
     using Newtonsoft.Json;
     using NLog;
+    using NLog.Fluent;
 
     public class InaraApiFacade
     {
@@ -72,7 +73,12 @@
 
             if (outputData.Header.EventStatus != 200)
                 throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
-            logger.Info("Uploaded {0} INARA events", events.Length);
+
+            logger.Info()
+                .Message("Uploaded {0} events", events.Length)
+                .Property("eventsCount", events.Length)
+                .Write();
+
             return outputData.Events;
         }
     }
