@@ -11,8 +11,10 @@
 
     public class NLogSettingsManager : ILogSettingsBootstrapper
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ToString,StackTrace:innerFormat=ToString,StackTrace:maxInnerExceptionLevel=10}";
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
+        private readonly IRestClient restClient = new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
 
         static NLogSettingsManager()
         {
@@ -24,8 +26,6 @@
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
         }
 
-        private readonly IRestClient restClient = new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
-        private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ToString,StackTrace:innerFormat=ToString,StackTrace:maxInnerExceptionLevel=10}";
 
         public void Setup()
         {
@@ -48,7 +48,7 @@
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
 
             LogManager.Configuration = config;
-            logger.Info("Enabled logging with level {0}", logLevel);
+            Log.Info("Enabled logging with level {0}", logLevel);
         }
 
 #pragma warning disable SA1118 // Parameter must not span multiple lines
@@ -128,7 +128,7 @@
             }
             catch (Exception e2)
             {
-                logger.Error(e2, "Exception format test");
+                Log.Error(e2, "Exception format test");
             }
         }
 

@@ -16,14 +16,18 @@
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
         private static ILogger logger = LogManager.GetCurrentClassLogger();
-        private ProgressBar progressBarUploadLatest;
         private const int UploadFileCount = 5;
+        private ProgressBar progressBarUploadLatest;
 
         public GeneralSettingsControl()
         {
             Load += GeneralSettingsControl_Load;
             InitializeComponent();
         }
+
+        public IMessageBroker MessageBroker { get; internal set; }
+
+        public IReadOnlyCollection<IPlugin> Plugins { get; internal set; }
 
         private GlobalSettings Settings { get => GlobalSettings; set => GlobalSettings = value; }
 
@@ -40,10 +44,6 @@
             logLevelComboBox.SelectedItem = logLevelComboBox.Items.OfType<LogLevel>().SingleOrDefault(t => t.Name == Settings.LogLevel) ?? LogLevel.Info;
             reportErrorsCheckbox.Checked = GlobalSettings.ReportErrorsToCloud;
         }
-
-        public IMessageBroker MessageBroker { get; internal set; }
-
-        public IReadOnlyCollection<IPlugin> Plugins { get; internal set; }
 
         private async void UploadLatestDataButton_Click(object sender, EventArgs e)
         {

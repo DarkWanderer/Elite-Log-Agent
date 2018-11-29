@@ -41,12 +41,14 @@
                 foreach (var @event in events)
                     yield return @event;
 
+                /*
                 // Read Market.json, Outfitting.json etc.
                 // Disabled - it is unclear for now how to deal with beta data
-                //files = LogEnumerator.GetJsonEventFiles(LogDirectory).ToList();
-                //events = files.Select(f => reader.ReadFileEvent(f)).Where(e => e != null);
-                //foreach (var @event in events)
-                //    yield return @event;
+                files = LogEnumerator.GetJsonEventFiles(LogDirectory).ToList();
+                events = files.Select(f => reader.ReadFileEvent(f)).Where(e => e != null);
+                foreach (var @event in events)
+                    yield return @event;
+                */
             }
         }
 

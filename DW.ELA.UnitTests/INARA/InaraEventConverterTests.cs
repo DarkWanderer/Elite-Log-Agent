@@ -7,6 +7,7 @@
     using NUnit.Framework;
 
     [TestFixture]
+    [Parallelizable]
     public class InaraEventConverterTests
     {
         private readonly IPlayerStateHistoryRecorder stateRecorder = new PlayerStateRecorder();
@@ -15,6 +16,7 @@
         public InaraEventConverterTests() => eventConverter = new InaraEventConverter(stateRecorder);
 
         [Test]
+        [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {

@@ -11,6 +11,8 @@
     using Newtonsoft.Json.Linq;
     using NUnit.Framework;
 
+    [TestFixture]
+    [Parallelizable]
     public class LogEventConverterTests
     {
         private static IEnumerable<TestCaseData> RawTestCases => TestEventSource.CannedEventsRaw
@@ -32,6 +34,7 @@
         }
 
         [Test]
+        [Parallelizable]
         [TestCaseSource(typeof(LogEventConverterTests), nameof(RawTestCases))]
         public void EventsTransformationShouldNotSpoilData(JObject source)
         {

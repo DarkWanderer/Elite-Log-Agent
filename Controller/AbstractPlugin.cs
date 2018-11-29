@@ -26,8 +26,6 @@
             flushTimer.Elapsed += (o, e) => FlushQueue();
         }
 
-        protected ISettingsProvider SettingsProvider { get; }
-
         public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
 
         public abstract string PluginName { get; }
@@ -35,6 +33,16 @@
         public abstract string PluginId { get; }
 
         protected abstract IEventConverter<TEvent> EventConverter { get; }
+
+        protected ISettingsProvider SettingsProvider { get; }
+
+        protected GlobalSettings GlobalSettings
+        {
+            get => SettingsProvider.Settings;
+            set => SettingsProvider.Settings = value;
+        }
+
+        protected TSettings Settings => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings;
 
         public abstract AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings);
 
@@ -79,13 +87,5 @@
         public IObserver<LogEvent> GetLogObserver() => this;
 
         public void Dispose() => flushTimer.Dispose();
-
-        protected GlobalSettings GlobalSettings
-        {
-            get => SettingsProvider.Settings;
-            set => SettingsProvider.Settings = value;
-        }
-
-        protected TSettings Settings => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings;
     }
 }

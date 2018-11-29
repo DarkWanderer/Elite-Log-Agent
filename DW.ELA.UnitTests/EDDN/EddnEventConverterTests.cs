@@ -12,6 +12,7 @@
     public class EddnEventConverterTests
     {
         [Test]
+        [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {

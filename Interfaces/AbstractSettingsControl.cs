@@ -14,6 +14,8 @@
         /// </summary>
         public GlobalSettings GlobalSettings { get; set; }
 
-        public virtual void SaveSettings() { }
+        public virtual void SaveSettings()
+        {
+        }
     }
 }

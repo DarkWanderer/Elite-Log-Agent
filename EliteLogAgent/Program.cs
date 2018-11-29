@@ -35,8 +35,7 @@
                     Component.For<ISettingsProvider>().ImplementedBy<FileSettingsStorage>().LifestyleSingleton(),
                     Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
                     Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),
-                    Component.For<IWindsorContainer>().Instance(container)
-                );
+                    Component.For<IWindsorContainer>().Instance(container));
                 container.Resolve<ILogSettingsBootstrapper>().Setup();
 
                 // Register core classes
@@ -44,8 +43,7 @@
                     Component.For<ILogDirectoryNameProvider>().ImplementedBy<SavedGamesDirectoryHelper>().LifestyleSingleton(),
                     Component.For<ILogRealTimeDataSource>().ImplementedBy<JournalMonitor>().LifestyleSingleton(),
                     Component.For<IMessageBroker>().ImplementedBy<AsyncMessageBroker>().LifestyleSingleton(),
-                    Component.For<IPlayerStateHistoryRecorder>().ImplementedBy<PlayerStateRecorder>().LifestyleSingleton()
-                );
+                    Component.For<IPlayerStateHistoryRecorder>().ImplementedBy<PlayerStateRecorder>().LifestyleSingleton());
 
                 // Register UI classes
                 container.Register(Component.For<ITrayIconController>().ImplementedBy<TrayIconController>().LifestyleSingleton());

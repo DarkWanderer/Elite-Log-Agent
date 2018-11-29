@@ -12,7 +12,7 @@
     /// </summary>
     public class AsyncMessageBroker : BasicObservable<LogEvent>, IMessageBroker, IObserver<LogEvent>, IObservable<LogEvent>
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public override void OnCompleted()
         {
@@ -23,7 +23,7 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error caught in Async Broker");
+                Log.Error(e, "Error caught in Async Broker");
             }
         }
 
@@ -36,7 +36,7 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error caught in Async Broker");
+                Log.Error(e, "Error caught in Async Broker");
             }
         }
 
@@ -49,7 +49,7 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error caught in Async Broker");
+                Log.Error(e, "Error caught in Async Broker");
             }
         }
 

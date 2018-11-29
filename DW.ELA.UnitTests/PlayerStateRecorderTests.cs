@@ -12,6 +12,7 @@
         private readonly IPlayerStateHistoryRecorder eventConverter = new PlayerStateRecorder();
 
         [Test]
+        [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {

@@ -32,9 +32,13 @@
 
         public double[] GetStarPos(string systemName) => systemCoordinates.GetValueOrDefault(systemName);
 
-        public void OnCompleted() { }
+        public void OnCompleted()
+        {
+        }
 
-        public void OnError(Exception error) { }
+        public void OnError(Exception error)
+        {
+        }
 
         public void OnNext(LogEvent @event)
         {

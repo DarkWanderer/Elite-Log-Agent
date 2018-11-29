@@ -22,7 +22,7 @@
         private readonly IEddnApiFacade apiFacade = new EddnApiFacade(RestClient);
         private readonly EddnEventConverter eventConverter;
         private readonly EventSchemaValidator schemaManager = new EventSchemaValidator();
-        
+
         public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
             : base(settingsProvider)
         {

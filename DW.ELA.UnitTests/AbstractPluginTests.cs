@@ -10,9 +10,12 @@
     using Moq;
     using NUnit.Framework;
 
+    [TestFixture]
+    [Parallelizable]
     public class AbstractPluginTests
     {
         [Test]
+        [Parallelizable]
         public void ShouldNotGiveEventsInstantly()
         {
             using (var plugin = new TestPlugin(Mock.Of<ISettingsProvider>()))
@@ -24,6 +27,7 @@
         }
 
         [Test]
+        [Parallelizable]
         public void ShouldFlushEventsAfterTimeout()
         {
             using (var plugin = new TestPlugin(Mock.Of<ISettingsProvider>()))
@@ -59,7 +63,9 @@
 
             public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
 
-            public override void ReloadSettings() { }
+            public override void ReloadSettings()
+            {
+            }
 
             public override TimeSpan FlushInterval => TimeSpan.FromHours(10);
 
@@ -68,7 +74,10 @@
 
         private class IdentityLogConverter : IEventConverter<LogEvent>
         {
-            public IEnumerable<LogEvent> Convert(LogEvent @event) { yield return @event; }
+            public IEnumerable<LogEvent> Convert(LogEvent @event)
+            {
+                yield return @event;
+            }
         }
 
         private class TestSettings

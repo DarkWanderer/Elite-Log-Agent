@@ -5,7 +5,10 @@
 
     public class EngineerProgressRecord
     {
-        public enum ProgressState { Invited, Known, Unlocked }
+        public enum ProgressState
+        {
+            Invited, Known, Unlocked
+        }
 
         [JsonProperty("Engineer")]
         public string EngineerName { get; set; }

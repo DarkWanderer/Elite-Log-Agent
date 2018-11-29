@@ -62,14 +62,6 @@
 
         private static IEnumerable<string> ExtractSamples(IEnumerable<JObject> events)
         {
-            //return events
-            //    .GroupBy(jo => jo.Property("event").Value.ToString())
-            //    .SelectMany(g => g.OrderByDescending(jo => jo.Property("timestamp").Value.ToObject<DateTime>()).Take(5))
-            //    .OrderBy(e => e.Event).ThenBy(e => e.Timestamp)
-            //    .Select(e => e.Raw)
-            //    .Select(ReplaceTimestamp)
-            //    .Select(Serialize.ToJson);
-
             var eventGroups = from @event in events
                               let eventName = @event.Property("event").Value.ToString()
                               let timestamp = @event.Property("timestamp").Value.ToObject<DateTime>()

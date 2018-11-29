@@ -14,27 +14,10 @@
     {
         private readonly string baseUrl;
         private readonly HttpClient client = new HttpClient();
+        private readonly object @lock = new object();
 
         private DateTime lastRequestTimestamp = DateTime.MinValue;
         private int requestCounter;
-        private readonly object @lock = new object();
-
-        private void ThrowIfQuotaExceeded()
-        {
-            lock (@lock)
-            {
-                var now = DateTime.UtcNow;
-                int secondsSinceLastCall = 0;
-
-                if (lastRequestTimestamp != DateTime.MinValue)
-                    secondsSinceLastCall = (int)(now - lastRequestTimestamp).TotalSeconds;
-
-                int decayedRequestCounter = Math.Max(0, requestCounter - (secondsSinceLastCall / 5));
-
-                lastRequestTimestamp = now;
-                requestCounter = decayedRequestCounter + 1;
-            }
-        }
 
         public ThrottlingRestClient(string url)
         {
@@ -51,13 +34,6 @@
                 var response = await client.PostAsync(baseUrl, httpContent);
                 return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
             }
-        }
-
-        private HttpResponseMessage ThrowIfErrorCode(HttpResponseMessage response)
-        {
-            if (!response.IsSuccessStatusCode)
-                throw new HttpException(Convert.ToInt32(response.StatusCode), response.ReasonPhrase);
-            return response;
         }
 
         public async Task<string> PostAsync(IDictionary<string, string> values)
@@ -84,6 +60,30 @@
             {
                 var response = await client.GetAsync(url);
                 return await ThrowIfErrorCode(response).Content.ReadAsStringAsync();
+            }
+        }
+
+        private HttpResponseMessage ThrowIfErrorCode(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+                throw new HttpException(Convert.ToInt32(response.StatusCode), response.ReasonPhrase);
+            return response;
+        }
+
+        private void ThrowIfQuotaExceeded()
+        {
+            lock (@lock)
+            {
+                var now = DateTime.UtcNow;
+                int secondsSinceLastCall = 0;
+
+                if (lastRequestTimestamp != DateTime.MinValue)
+                    secondsSinceLastCall = (int)(now - lastRequestTimestamp).TotalSeconds;
+
+                int decayedRequestCounter = Math.Max(0, requestCounter - (secondsSinceLastCall / 5));
+
+                lastRequestTimestamp = now;
+                requestCounter = decayedRequestCounter + 1;
             }
         }
     }

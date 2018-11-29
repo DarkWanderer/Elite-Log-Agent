@@ -15,16 +15,12 @@
 
     public class EdsmPlugin : AbstractPlugin<JObject, EdsmSettings>
     {
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly IRestClient restClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
-        private Task<HashSet<string>> ignoredEvents;
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private readonly Task<HashSet<string>> ignoredEvents;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
-        private IEdsmApiFacade apiFacade;
         private readonly IEventConverter<JObject> eventConverter = new EventRawJsonExtractor();
-
-        protected override IEventConverter<JObject> EventConverter => eventConverter;
-
-        public override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
+        private IEdsmApiFacade apiFacade;
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
             : base(settingsProvider)
@@ -38,6 +34,10 @@
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
+
+        protected override IEventConverter<JObject> EventConverter => eventConverter;
+
+        public override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
 
         public override void ReloadSettings()
         {
@@ -59,14 +59,14 @@
                     .ToList();
                 foreach (var batch in apiEventsBatches)
                     await apiFacade?.PostLogEvents(batch.ToArray());
-                logger.Info()
+                Log.Info()
                     .Message("Uploaded {0} events", events.Count)
                     .Property("eventsCount", events.Count)
                     .Write();
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error while processing events");
+                Log.Error(e, "Error while processing events");
             }
         }
 

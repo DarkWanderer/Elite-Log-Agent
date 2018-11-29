@@ -30,29 +30,6 @@
             flushTimer.Elapsed += (o, e) => FlushAsync((ex) => { });
         }
 
-        private void EnqueueEvents(params AsyncLogEventInfo[] events) => EnqueueEvents(events.AsEnumerable());
-
-        private void EnqueueEvents(IEnumerable<AsyncLogEventInfo> events)
-        {
-            foreach (var @event in events)
-            {
-                try
-                {
-                    if (@event.LogEvent.Level < LogLevel.Error)
-                        continue;
-                    foreach (var rec in Convert(@event.LogEvent))
-                        recordQueue.Enqueue(rec);
-                    @event.Continuation(null);
-                }
-                catch (Exception ex)
-                {
-                    if (Debugger.IsAttached)
-                        Debugger.Break(); // Can't log inside of logger
-                    @event.Continuation(ex);
-                }
-            }
-        }
-
         protected override void Write(IList<AsyncLogEventInfo> logEvents) => EnqueueEvents(logEvents);
 
         protected override void Write(AsyncLogEventInfo logEvent) => EnqueueEvents(logEvent);
@@ -83,6 +60,29 @@
             catch (Exception ex)
             {
                 asyncContinuation(ex);
+            }
+        }
+
+        private void EnqueueEvents(params AsyncLogEventInfo[] events) => EnqueueEvents(events.AsEnumerable());
+
+        private void EnqueueEvents(IEnumerable<AsyncLogEventInfo> events)
+        {
+            foreach (var @event in events)
+            {
+                try
+                {
+                    if (@event.LogEvent.Level < LogLevel.Error)
+                        continue;
+                    foreach (var rec in Convert(@event.LogEvent))
+                        recordQueue.Enqueue(rec);
+                    @event.Continuation(null);
+                }
+                catch (Exception ex)
+                {
+                    if (Debugger.IsAttached)
+                        Debugger.Break(); // Can't log inside of logger
+                    @event.Continuation(ex);
+                }
             }
         }
 

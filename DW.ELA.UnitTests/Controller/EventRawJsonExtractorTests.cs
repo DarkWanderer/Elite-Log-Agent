@@ -6,11 +6,13 @@
     using NUnit.Framework;
 
     [TestFixture]
+    [Parallelizable]
     public class EventRawJsonExtractorTests
     {
         private readonly EventRawJsonExtractor eventConverter = new EventRawJsonExtractor();
 
         [Test]
+        [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
         public void ShouldNotFailOnEvents(LogEvent e)
         {
