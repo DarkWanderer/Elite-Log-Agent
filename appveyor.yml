@@ -29,7 +29,7 @@ build_script:
 
 after_build:
 - cmd: mkdir ela-portable
-- .\ILMerge\tools\net452\ilmerge.exe /wildcards /out:ela-portable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- .\ILMerge\tools\net452\ilmerge.exe /ndebug /wildcards /out:ela-portable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -filter:"+[*]* -[*]NUnit* -[Moq*]*" -output:"coverage.xml"
