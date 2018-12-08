@@ -5,6 +5,7 @@
     using DW.ELA.Controller;
     using DW.ELA.Plugin.Inara;
     using DW.ELA.Plugin.Inara.Model;
+    using DW.ELA.UnitTests.Utility;
     using DW.ELA.Utility;
     using NUnit.Framework;
 
@@ -21,7 +22,7 @@
 
             var inaraRestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
             var inaraConverter = new InaraEventConverter(stateRecorder);
-            var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.ApiKey, TestCredentials.UserName);
+            var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.Inara.ApiKey, TestCredentials.Inara.UserName);
 
             // Populate the state recorder to avoid missing ships/starsystems data
             foreach (var ev in logEventSource.Events)

@@ -87,6 +87,7 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="AbstractPluginTests.cs" />
+    <Compile Include="EDSM\EdsmIntegrationTests.cs" />
     <Compile Include="UI\AutorunManagerTests.cs" />
     <Compile Include="Controller\NLogSettingsManagerTests.cs" />
     <Compile Include="EDDN\EddnEventConverterTests.cs" />
@@ -95,7 +96,7 @@
     <Compile Include="UI\FileSettingsStorageTests.cs" />
     <Compile Include="INARA\InaraEventConverterTests.cs" />
     <Compile Include="INARA\InaraIntegrationTests.cs" />
-    <Compile Include="INARA\TestCredentials.cs" />
+    <Compile Include="Utility\TestCredentials.cs" />
     <Compile Include="Controller\JournalMonitorTests.cs" />
     <Compile Include="Controller\LogBurstPlayerTests.cs" />
     <Compile Include="Controller\LogEnumeratorTests.cs" />
@@ -135,6 +136,10 @@
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj">
       <Project>{FD518ED2-7A6E-42F7-8C90-603235C1FEE6}</Project>
       <Name>DW.ELA.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin.EDSM\DW.ELA.Plugin.EDSM.csproj">
+      <Project>{CF1A7347-AD57-49B2-BA8E-7390B195A4E8}</Project>
+      <Name>DW.ELA.Plugin.EDSM</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plugin.Inara\DW.ELA.Plugin.Inara.csproj">
       <Project>{6F64B299-6A1D-4F4A-9BD6-911634A9F02F}</Project>
