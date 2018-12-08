@@ -18,7 +18,7 @@
         public EventSchemaValidator()
         {
             Log.Debug("Loading EDDN schemas");
-            LoadSchemas().Wait();
+            LoadSchemas().GetAwaiter().GetResult();
         }
 
         public bool ValidateSchema(EddnEvent @event)
