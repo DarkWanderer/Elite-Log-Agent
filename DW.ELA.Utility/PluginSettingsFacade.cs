@@ -26,7 +26,7 @@
                 return null;
         }
 
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
 
@@ -48,7 +48,7 @@
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e);
+                    Log.Error(e);
                     return new T();
                 }
             }

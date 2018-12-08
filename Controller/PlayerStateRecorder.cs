@@ -12,7 +12,7 @@
 
     public class PlayerStateRecorder : IPlayerStateHistoryRecorder
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         private readonly StateRecorder<ShipRecord> shipRecorder = new StateRecorder<ShipRecord>();
         private readonly StateRecorder<string> starSystemRecorder = new StateRecorder<string>();
@@ -67,7 +67,7 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error in OnNext");
+                Log.Error(e, "Error in OnNext");
             }
         }
 
@@ -98,9 +98,9 @@
         private void ProcessLocation(string starSystem, double[] starPos, DateTime timestamp)
         {
             if (systemCoordinates.TryAdd(starSystem, starPos))
-                logger.Trace("Recorded location for {0}", starSystem);
+                Log.Trace("Recorded location for {0}", starSystem);
             else
-                logger.Trace("Location for {0} already recorded", starSystem);
+                Log.Trace("Location for {0} already recorded", starSystem);
             starSystemRecorder.RecordState(starSystem, timestamp);
         }
 
@@ -118,7 +118,7 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error decoding used ship reference");
+                Log.Error(e, "Error decoding used ship reference");
             }
         }
 
@@ -171,7 +171,7 @@
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e);
+                    Log.Error(e);
                     return default(T);
                 }
             }
@@ -191,7 +191,7 @@
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e);
+                    Log.Error(e);
                 }
             }
         }

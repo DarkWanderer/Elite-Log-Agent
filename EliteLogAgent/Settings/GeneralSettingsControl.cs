@@ -15,8 +15,8 @@
 
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
-        private static ILogger logger = LogManager.GetCurrentClassLogger();
-        private const int UploadFileCount = 5;
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+        private readonly int uploadFileCount = 5;
         private ProgressBar progressBarUploadLatest;
 
         public GeneralSettingsControl()
@@ -64,7 +64,7 @@
             catch (Exception ex)
             {
                 MessageBox.Show("Error processing update:\n" + ex.GetStackedErrorMessages(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                logger.Error(ex, "Error while uploading data");
+                Log.Error(ex, "Error while uploading data");
             }
             finally
             {
@@ -74,8 +74,8 @@
 
         private void UploadLatestData()
         {
-            logger.Info("Starting latest data upload");
-            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, UploadFileCount);
+            Log.Info("Starting latest data upload");
+            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, uploadFileCount);
             var logCounter = new LogEventTypeCounter();
 
             using (logEventSource.Subscribe(logCounter))
@@ -84,7 +84,7 @@
                 logEventSource.Play();
             }
 
-            logger.Info("Uploaded {0} events", logCounter.EventCounts.Values.DefaultIfEmpty(0).Sum());
+            Log.Info("Uploaded {0} events", logCounter.EventCounts.Values.DefaultIfEmpty(0).Sum());
         }
 
         private void ReportErrorsCheckbox_CheckedChanged(object sender, EventArgs e) => Settings.ReportErrorsToCloud = reportErrorsCheckbox.Checked;
@@ -99,12 +99,12 @@
                 var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
                 var cmdrEvent = logEventSource.Events.OfType<Commander>().FirstOrDefault();
                 cmdrNameTextBox.Text = cmdrEvent?.Name ?? cmdrNameTextBox.Text;
-                logger.Info("Detected commander name as {0}", cmdrEvent?.Name);
+                Log.Info("Detected commander name as {0}", cmdrEvent?.Name);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error detecting cmdr name:\n" + ex.GetStackedErrorMessages(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                logger.Error(ex, "Error while detecting cmdr name");
+                Log.Error(ex, "Error while detecting cmdr name");
             }
             finally
             {

@@ -5,8 +5,8 @@
 
     public interface ISettingsProvider
     {
-        GlobalSettings Settings { get; set; }
-
         event EventHandler SettingsChanged;
+
+        GlobalSettings Settings { get; set; }
     }
 }

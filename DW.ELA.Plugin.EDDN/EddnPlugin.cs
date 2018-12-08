@@ -15,13 +15,14 @@
     public class EddnPlugin : AbstractPlugin<EddnEvent, EddnSettings>
     {
         private static readonly IRestClient RestClient = new ThrottlingRestClient("https://eddn.edcd.io:4430/upload/");
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
 
         private readonly IEddnApiFacade apiFacade = new EddnApiFacade(RestClient);
         private readonly EddnEventConverter eventConverter;
         private readonly EventSchemaValidator schemaManager = new EventSchemaValidator();
+        private readonly ConcurrentQueue<JObject> lastPushedEvents = new ConcurrentQueue<JObject>(); // stores
 
         public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
             : base(settingsProvider)
@@ -33,14 +34,14 @@
             ReloadSettings();
         }
 
-        protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
-
         public override string PluginName => "EDDN";
 
         public override string PluginId => "EDDN";
 
         // EDDN accepts events one-by-one, so no need to batch
-        public override TimeSpan FlushInterval => TimeSpan.FromSeconds(1);
+        protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(1);
+
+        protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
 
@@ -51,7 +52,7 @@
             await apiFacade.PostEventsAsync(events.Where(IsUnique).ToArray());
         }
 
-        private readonly ConcurrentQueue<JObject> lastPushedEvents = new ConcurrentQueue<JObject>(); // stores
+        public override void ReloadSettings() => eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
 
         /// <summary>
         /// Check event against list of last few sent events, excluding timestamp from comparison
@@ -81,11 +82,9 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Error in deduplication");
+                Log.Error(ex, "Error in deduplication");
                 return true; // by default, we consider any message unique and so will send it
             }
         }
-
-        public override void ReloadSettings() => eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
     }
 }

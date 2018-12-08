@@ -14,7 +14,7 @@
     public class InaraEventConverter : IEventConverter<ApiEvent>
     {
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public InaraEventConverter(IPlayerStateHistoryRecorder playerStateRecorder)
         {
@@ -75,7 +75,7 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error in OnNext");
+                Log.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
         }

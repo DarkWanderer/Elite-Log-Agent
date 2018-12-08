@@ -12,7 +12,7 @@
 
     public class EddnEventConverter : IEventConverter<EddnEvent>
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         public string UploaderID = "Unknown";
         public TimeSpan MaxAge = TimeSpan.FromMinutes(10); // TODO: should extract to separate class
 
@@ -21,16 +21,6 @@
         public EddnEventConverter(IPlayerStateHistoryRecorder stateHistoryRecorder)
         {
             this.stateHistoryRecorder = stateHistoryRecorder;
-        }
-
-        private IDictionary<string, string> CreateHeader()
-        {
-            return new Dictionary<string, string>
-            {
-                ["uploaderID"] = UploaderID,
-                ["softwareName"] = AppInfo.Name,
-                ["softwareVersion"] = AppInfo.Version
-            };
         }
 
         public IEnumerable<EddnEvent> Convert(LogEvent @event)
@@ -56,9 +46,19 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error converting message");
+                Log.Error(e, "Error converting message");
             }
             return Enumerable.Empty<EddnEvent>();
+        }
+
+        private IDictionary<string, string> CreateHeader()
+        {
+            return new Dictionary<string, string>
+            {
+                ["uploaderID"] = UploaderID,
+                ["softwareName"] = AppInfo.Name,
+                ["softwareVersion"] = AppInfo.Version
+            };
         }
 
         private IEnumerable<EddnEvent> ConvertShipyardEvent(Shipyard e)
@@ -161,7 +161,7 @@
                 }
                 else
                 {
-                    logger.Error("Unable to determine player location");
+                    Log.Error("Unable to determine player location");
                     yield break;
                 }
             }

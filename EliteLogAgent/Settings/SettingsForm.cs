@@ -13,7 +13,7 @@
 
     public partial class SettingsForm : Form
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         // These fields have to be properties because Form designer does not allow arguments in constructor
         internal ISettingsProvider Provider { get; set; }
@@ -61,7 +61,7 @@
                 }
                 catch (Exception ex)
                 {
-                    logger.Error(ex, "Error loading plugin {0}", plugin.PluginId);
+                    Log.Error(ex, "Error loading plugin {0}", plugin.PluginId);
                 }
             }
 

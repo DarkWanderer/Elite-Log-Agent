@@ -13,9 +13,9 @@
 
     public class LogReader
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        private static readonly HashSet<string> skippedEvents = new HashSet<string>(new[] { "Outfitting", "Shipyard", "Market" });
+        private static readonly HashSet<string> SkippedEvents = new HashSet<string>(new[] { "Outfitting", "Shipyard", "Market" });
 
         /// <summary>
         /// Reads the given Journal file from specified position and generates the events
@@ -38,7 +38,7 @@
                     }
                     catch (Exception e)
                     {
-                        logger.Error(e, "Error deserializing event from journal");
+                        Log.Error(e, "Error deserializing event from journal");
                     }
                     if (@event != null)
                         yield return @event;
@@ -53,8 +53,6 @@
                 return ReadEventsFromStream(textReader).SingleOrDefault();
         }
 
-        private Stream OpenForSharedRead(string file) => new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
         public IEnumerable<LogEvent> ReadEventsFromJournal(string journalFile)
         {
             using (var fileReader = OpenForSharedRead(journalFile))
@@ -64,5 +62,7 @@
                     yield return @event;
             }
         }
+
+        private Stream OpenForSharedRead(string file) => new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
     }
 }

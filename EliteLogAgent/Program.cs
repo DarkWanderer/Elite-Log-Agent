@@ -14,11 +14,13 @@
 
     internal static partial class Program
     {
+        private static readonly ILogger RootLog = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        internal static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -77,11 +79,9 @@
             var exceptionObjectString = e.ExceptionObject?.ToString() ?? "null";
 
             if (e.ExceptionObject is Exception)
-                rootLogger.Fatal(e.ExceptionObject as Exception, message + " from {0}", senderString);
+                RootLog.Fatal(e.ExceptionObject as Exception, message + " from {0}", senderString);
             else
-                rootLogger.Fatal(message + " of unknown type: {0} {1}", exceptionTypeString, exceptionObjectString);
+                RootLog.Fatal(message + " of unknown type: {0} {1}", exceptionTypeString, exceptionObjectString);
         }
-
-        private static readonly ILogger rootLogger = LogManager.GetCurrentClassLogger();
     }
 }

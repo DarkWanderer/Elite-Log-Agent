@@ -9,7 +9,7 @@
 
     public class EddnApiFacade : IEddnApiFacade
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly IRestClient restClient;
 
         public EddnApiFacade(IRestClient restClient)
@@ -24,21 +24,20 @@
                 try
                 {
                     await PostAsync(@event);
-                    logger.Info("Pushed event {0}", @event.GetType());
+                    Log.Info("Pushed event {0}", @event.GetType());
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e, "Error pushing event");
+                    Log.Error(e, "Error pushing event");
                 }
             }
-
         }
 
         private async Task PostAsync(EddnEvent e)
         {
             var result = await restClient.PostAsync(Serialize.ToJson(e));
             if (result != "OK")
-                logger.Error(result);
+                Log.Error(result);
         }
     }
 }

@@ -7,9 +7,9 @@
 
     public class LoggingTimer : IDisposable
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
         private readonly Stopwatch stopwatch = new Stopwatch();
         private readonly string context;
-        private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public LoggingTimer(string context)
         {
@@ -18,12 +18,13 @@
         }
 
         public LogLevel LogLevel { get; set; } = LogLevel.Debug;
+
         public TimeSpan Elapsed => stopwatch.Elapsed;
 
         public void Dispose()
         {
             stopwatch.Stop();
-            logger.Log(LogLevel)
+            Log.Log(LogLevel)
                 .Message("{0}", context)
                 .Property("duration", stopwatch.ElapsedMilliseconds)
                 .Write();

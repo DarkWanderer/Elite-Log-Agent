@@ -35,9 +35,9 @@
             ReloadSettings();
         }
 
-        protected override IEventConverter<JObject> EventConverter => eventConverter;
+        protected override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
 
-        public override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
+        protected override IEventConverter<JObject> EventConverter => eventConverter;
 
         public override void ReloadSettings()
         {

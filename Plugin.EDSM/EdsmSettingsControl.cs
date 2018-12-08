@@ -16,7 +16,7 @@
         private Button button1;
         private CheckBox apiKeyValidatedCheckbox;
         private LinkLabel apiKeyLabel;
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public EdsmSettingsControl()
         {

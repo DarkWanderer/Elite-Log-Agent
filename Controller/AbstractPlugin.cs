@@ -13,7 +13,7 @@
         where TSettings : class, new()
         where TEvent : class
     {
-        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ConcurrentQueue<TEvent> eventQueue = new ConcurrentQueue<TEvent>();
         private readonly Timer flushTimer = new Timer();
 
@@ -26,11 +26,11 @@
             flushTimer.Elapsed += (o, e) => FlushQueue();
         }
 
-        public virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
-
         public abstract string PluginName { get; }
 
         public abstract string PluginId { get; }
+
+        protected virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
 
         protected abstract IEventConverter<TEvent> EventConverter { get; }
 
@@ -62,7 +62,7 @@
             }
             catch (Exception e)
             {
-                Logger.Error(e, "Error while processing events");
+                Log.Error(e, "Error while processing events");
             }
             finally
             {

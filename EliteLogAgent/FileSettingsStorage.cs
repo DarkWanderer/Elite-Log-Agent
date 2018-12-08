@@ -10,9 +10,13 @@
 
     public class FileSettingsStorage : ISettingsProvider
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
         private readonly object settingsCacheLock = new object();
+
         private GlobalSettings settingsCache;
+
+        public event EventHandler SettingsChanged;
 
         public GlobalSettings Settings
         {
@@ -29,7 +33,7 @@
                 }
                 catch (Exception e)
                 {
-                    logger.Warn(e, "Exception while reading settings, using defaults");
+                    Log.Warn(e, "Exception while reading settings, using defaults");
                 }
                 return GlobalSettings.Defaults;
             }
@@ -50,8 +54,6 @@
         }
 
         public string SettingsFileDirectory { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");
-
-        public event EventHandler SettingsChanged;
 
         private string SettingsFilePath => Path.Combine(SettingsFileDirectory, "Settings.json");
     }

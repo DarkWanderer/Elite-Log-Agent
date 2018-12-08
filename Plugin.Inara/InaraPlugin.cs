@@ -27,7 +27,7 @@
 
         protected override IEventConverter<ApiEvent> EventConverter => eventConverter;
 
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider)
             : base(settingsProvider)
@@ -40,7 +40,7 @@
         }
 
         // Explicitly set to 30 as Inara prefers batches of events
-        public override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
+        protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
 
         public override void ReloadSettings() => FlushQueue();
 
@@ -61,7 +61,7 @@
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error while processing events");
+                Log.Error(e, "Error while processing events");
             }
         }
 

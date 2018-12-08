@@ -14,7 +14,7 @@
         private readonly IRestClient client;
         private readonly string apiKey;
         private readonly string commanderName;
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public InaraApiFacade(IRestClient client, string apiKey, string commanderName)
         {
@@ -66,7 +66,7 @@
                         ex.Data.Add("input", inputData.Events[i].ToString());
                         ex.Data.Add("output", outputData.Events[i].ToString());
                         exceptions.Add(ex);
-                        logger.Error(ex, "Error returned from Inara API");
+                        Log.Error(ex, "Error returned from Inara API");
                     }
                 }
             }
@@ -74,7 +74,7 @@
             if (outputData.Header.EventStatus != 200)
                 throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
 
-            logger.Info()
+            Log.Info()
                 .Message("Uploaded {0} events", events.Length)
                 .Property("eventsCount", events.Length)
                 .Write();

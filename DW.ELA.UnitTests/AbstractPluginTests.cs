@@ -67,9 +67,9 @@
             {
             }
 
-            public override TimeSpan FlushInterval => TimeSpan.FromHours(10);
-
             public new void FlushQueue() => base.FlushQueue();
+
+            protected override TimeSpan FlushInterval => TimeSpan.FromHours(10);
         }
 
         private class IdentityLogConverter : IEventConverter<LogEvent>

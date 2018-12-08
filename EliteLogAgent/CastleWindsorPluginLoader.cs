@@ -13,7 +13,7 @@
     internal class CastleWindsorPluginLoader : IPluginManager
     {
         private readonly IWindsorContainer container;
-        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public CastleWindsorPluginLoader(IWindsorContainer container)
         {
@@ -46,7 +46,7 @@
             }
             catch (Exception e)
             {
-                Logger.Error(e, "Error while loading plugin " + pluginAssemblyName);
+                Log.Error(e, "Error while loading plugin " + pluginAssemblyName);
             }
         }
     }
