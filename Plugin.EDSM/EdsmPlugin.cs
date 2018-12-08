@@ -21,6 +21,7 @@
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly IEventConverter<JObject> eventConverter = new EventRawJsonExtractor();
         private IEdsmApiFacade apiFacade;
+        public const string CPluginId = "EdsmUploader";
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
             : base(settingsProvider)
@@ -52,6 +53,7 @@
             try
             {
                 var apiEventsBatches = events
+                    .Where(e => !ignoredEvents.Result.Contains(e["event"].ToString()))
                     .TakeLast(2000) // Limit to last N events to avoid EDSM overload
                     .Reverse()
                     .Select(Enrich)
@@ -69,8 +71,6 @@
                 Log.Error(e, "Error while processing events");
             }
         }
-
-        public const string CPluginId = "EdsmUploader";
 
         public override string PluginName => "EDSM";
 
