@@ -87,7 +87,6 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="AbstractPluginTests.cs" />
-    <Compile Include="EDSM\EdsmIntegrationTests.cs" />
     <Compile Include="UI\AutorunManagerTests.cs" />
     <Compile Include="Controller\NLogSettingsManagerTests.cs" />
     <Compile Include="EDDN\EddnEventConverterTests.cs" />
@@ -152,6 +151,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EDSM\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
