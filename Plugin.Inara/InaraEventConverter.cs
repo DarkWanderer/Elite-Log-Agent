@@ -682,7 +682,7 @@
                         {
                             { "engineerName", engineer.EngineerName },
                             { "rankStage", engineer.Progress },
-                            { "rankValue", engineer.RankProgress }
+                            { "rankValue", engineer.Rank }
                         },
                         Timestamp = @event.Timestamp
                     };
