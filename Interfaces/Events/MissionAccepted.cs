@@ -62,5 +62,8 @@
 
         [JsonProperty("Count")]
         public long? Count { get; set; }
+
+        [JsonProperty("KillCount")]
+        public long? KillCount { get; set; }
     }
 }

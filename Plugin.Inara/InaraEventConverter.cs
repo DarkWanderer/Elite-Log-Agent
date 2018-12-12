@@ -25,7 +25,7 @@
         {
             try
             {
-                var eventName = @event.Event;
+                string eventName = @event.Event;
                 switch (@event)
                 {
                     // Generic
@@ -427,8 +427,8 @@
                     { "stationNameOrigin", playerStateRecorder.GetPlayerStation(e.Timestamp) },
                     { "minorfactionNameOrigin", e.Faction },
                     { "starsystemNameTarget", e.DestinationSystem },
-                    { "minorfactionNameTarget", e.TargetFaction },
                     { "stationNameTarget", e.DestinationStation },
+                    { "minorfactionNameTarget", e.TargetFaction }
                 };
 
             if (!string.IsNullOrWhiteSpace(e.Commodity))
@@ -436,6 +436,15 @@
                 data.Add("commodityName", e.Commodity);
                 data.Add("commodityCount", e.Count);
             }
+
+            if (!string.IsNullOrWhiteSpace(e.Target))
+                data.Add("targetName", e.Target);
+
+            if (!string.IsNullOrWhiteSpace(e.TargetType))
+                data.Add("targetType", e.TargetType);
+
+            if (e.KillCount.HasValue)
+                data.Add("killCount", e.KillCount);
 
             var @event = new ApiEvent("addCommanderMission")
             {
