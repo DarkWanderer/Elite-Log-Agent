@@ -13,13 +13,15 @@
 
     public class InaraEventConverter : IEventConverter<ApiEvent>
     {
-        private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+        private readonly IPlayerStateHistoryRecorder playerStateRecorder;
 
         public InaraEventConverter(IPlayerStateHistoryRecorder playerStateRecorder)
         {
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
         }
+
+        public bool ManageFriends { get; set; } = false;
 
         public IEnumerable<ApiEvent> Convert(LogEvent @event)
         {
@@ -71,6 +73,9 @@
 
                     // Community goals
                     case CommunityGoal e: return ConvertEvent(e);
+
+                    // Friends/squadrons
+                    case Friends e: return ConvertEvent(e);
                 }
             }
             catch (Exception e)
@@ -78,6 +83,36 @@
                 Log.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(Friends e)
+        {
+            if (!ManageFriends)
+                yield break;
+            if (e.Status == "Lost")
+            {
+                yield return new ApiEvent("delCommanderFriend")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        { "commanderName", e.Name },
+                        { "gamePlatform", "PC" }
+                    }
+                };
+            }
+            else if (e.Status == "Added" || e.Status == "Online")
+            {
+                yield return new ApiEvent("addCommanderFriend")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        { "commanderName", e.Name },
+                        { "gamePlatform", "PC" }
+                    }
+                };
+            }
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(StoredShips e)

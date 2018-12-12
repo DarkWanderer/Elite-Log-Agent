@@ -9,5 +9,8 @@
 
         [JsonProperty("verified")]
         public bool Verified { get; internal set; } = false;
+
+        [JsonProperty("manageFriends")]
+        public bool ManageFriends { get; internal set; } = false;
     }
 }

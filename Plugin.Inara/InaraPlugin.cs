@@ -42,7 +42,11 @@
         // Explicitly set to 30 as Inara prefers batches of events
         protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
 
-        public override void ReloadSettings() => FlushQueue();
+        public override void ReloadSettings()
+        {
+            eventConverter.ManageFriends = Settings.ManageFriends;
+            FlushQueue();
+        }
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
 

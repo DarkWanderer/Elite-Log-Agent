@@ -13,7 +13,7 @@
         private readonly IPlayerStateHistoryRecorder stateRecorder = new PlayerStateRecorder();
         private readonly InaraEventConverter eventConverter;
 
-        public InaraEventConverterTests() => eventConverter = new InaraEventConverter(stateRecorder);
+        public InaraEventConverterTests() => eventConverter = new InaraEventConverter(stateRecorder) { ManageFriends = true };
 
         [Test]
         [Parallelizable]

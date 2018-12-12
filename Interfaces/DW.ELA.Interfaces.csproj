@@ -72,6 +72,7 @@
     <Compile Include="Events\FactionInfluenceEffect.cs" />
     <Compile Include="Events\FactionState.cs" />
     <Compile Include="Events\FactionStateTrend.cs" />
+    <Compile Include="Events\Friends.cs" />
     <Compile Include="Events\FsdJump.cs" />
     <Compile Include="Events\GeologicComposition.cs" />
     <Compile Include="Events\Influence.cs" />
