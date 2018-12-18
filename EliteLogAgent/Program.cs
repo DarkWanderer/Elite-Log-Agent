@@ -1,6 +1,7 @@
 ﻿namespace EliteLogAgent
 {
     using System;
+    using System.Deployment.Application;
     using System.Linq;
     using System.Windows.Forms;
     using Castle.Facilities.Logging;
@@ -10,6 +11,7 @@
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
+    using EliteLogAgent.Autorun;
     using NLog;
 
     internal static partial class Program
@@ -31,24 +33,7 @@
 
             using (var container = new WindsorContainer())
             {
-                // Initalize infrastructure classes - NLog, Windsor
-                container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().ConfiguredExternally());
-                container.Register(
-                    Component.For<ISettingsProvider>().ImplementedBy<FileSettingsStorage>().LifestyleSingleton(),
-                    Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
-                    Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),
-                    Component.For<IWindsorContainer>().Instance(container));
-                container.Resolve<ILogSettingsBootstrapper>().Setup();
-
-                // Register core classes
-                container.Register(
-                    Component.For<ILogDirectoryNameProvider>().ImplementedBy<SavedGamesDirectoryHelper>().LifestyleSingleton(),
-                    Component.For<ILogRealTimeDataSource>().ImplementedBy<JournalMonitor>().LifestyleSingleton(),
-                    Component.For<IMessageBroker>().ImplementedBy<AsyncMessageBroker>().LifestyleSingleton(),
-                    Component.For<IPlayerStateHistoryRecorder>().ImplementedBy<PlayerStateRecorder>().LifestyleSingleton());
-
-                // Register UI classes
-                container.Register(Component.For<ITrayIconController>().ImplementedBy<TrayIconController>().LifestyleSingleton());
+                ContainerBootstrapper.Initalize(container);
 
                 // Load plugins
                 // TODO: add dynamic plugin loader

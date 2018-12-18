@@ -30,7 +30,7 @@
 
             ignoredEvents =
                  restClient.GetAsync("discard")
-                    .ContinueWith((t) => new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
+                    .ContinueWith((t) => t.IsFaulted ? new HashSet<string>() : new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
 
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();

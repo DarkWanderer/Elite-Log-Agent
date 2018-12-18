@@ -15,14 +15,16 @@
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        // These fields have to be properties because Form designer does not allow arguments in constructor
+        private GlobalSettings currentSettings;
+
+        // These have to be properties because Form designer does not allow arguments in constructor
         internal ISettingsProvider Provider { get; set; }
 
         internal IMessageBroker MessageBroker { get; set; }
 
         internal List<IPlugin> Plugins { get; set; }
 
-        private GlobalSettings currentSettings;
+        internal IAutorunManager AutorunManager { get; set; }
 
         private IDictionary<string, AbstractSettingsControl> settingsControls = new Dictionary<string, AbstractSettingsControl>();
 
@@ -38,11 +40,13 @@
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             currentSettings = Provider.Settings.Clone();
+            // Will check passed properties for null here as they are not yet set in constructor
             var generalSettingsControl = new GeneralSettingsControl()
             {
-                MessageBroker = MessageBroker,
-                GlobalSettings = currentSettings,
-                Plugins = Plugins,
+                MessageBroker = MessageBroker ?? throw new ArgumentNullException("MessageBroker"),
+                GlobalSettings = currentSettings ?? throw new ArgumentNullException("Settings"),
+                Plugins = Plugins ?? throw new ArgumentNullException("Plugins"),
+                AutorunManager = AutorunManager ?? throw new ArgumentNullException("AutorunManager"),
                 Dock = DockStyle.Fill
             };
             settingsControls.Add("General", generalSettingsControl);
@@ -92,10 +96,7 @@
             Close();
         }
 
-        private void ApplyButton_Click(object sender, EventArgs e)
-        {
-            ApplySettings();
-        }
+        private void ApplyButton_Click(object sender, EventArgs e) => ApplySettings();
 
         private void ApplySettings()
         {

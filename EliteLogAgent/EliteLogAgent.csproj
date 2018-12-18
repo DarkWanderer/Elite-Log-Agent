@@ -132,9 +132,11 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Autorun\AutorunManager.cs" />
+    <Compile Include="Autorun\ClickOnceAutorunManager.cs" />
+    <Compile Include="Autorun\PortableAutorunManager.cs" />
     <Compile Include="Autorun\SingleLaunch.cs" />
     <Compile Include="CastleWindsorPluginLoader.cs" />
+    <Compile Include="ContainerBootstrapper.cs" />
     <Compile Include="FileSettingsStorage.cs" />
     <Compile Include="Settings\GeneralSettingsControl.cs">
       <SubType>UserControl</SubType>

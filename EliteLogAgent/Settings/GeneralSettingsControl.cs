@@ -29,7 +29,7 @@
 
         public IReadOnlyCollection<IPlugin> Plugins { get; internal set; }
 
-        private GlobalSettings Settings { get => GlobalSettings; set => GlobalSettings = value; }
+        public IAutorunManager AutorunManager { get; set; }
 
         private void GeneralSettingsControl_Load(object sender, EventArgs e)
         {
@@ -39,9 +39,9 @@
 
         private void ReloadSettings()
         {
-            checkboxAutostartApplication.Checked = AutorunManager.AutorunEnabled;
+            checkboxAutostartApplication.Checked = AutorunManager?.AutorunEnabled ?? false;
             cmdrNameTextBox.Text = GlobalSettings.CommanderName;
-            logLevelComboBox.SelectedItem = logLevelComboBox.Items.OfType<LogLevel>().SingleOrDefault(t => t.Name == Settings.LogLevel) ?? LogLevel.Info;
+            logLevelComboBox.SelectedItem = logLevelComboBox.Items.OfType<LogLevel>().SingleOrDefault(t => t.Name == GlobalSettings.LogLevel) ?? LogLevel.Info;
             reportErrorsCheckbox.Checked = GlobalSettings.ReportErrorsToCloud;
         }
 
@@ -87,9 +87,9 @@
             Log.Info("Uploaded {0} events", logCounter.EventCounts.Values.DefaultIfEmpty(0).Sum());
         }
 
-        private void ReportErrorsCheckbox_CheckedChanged(object sender, EventArgs e) => Settings.ReportErrorsToCloud = reportErrorsCheckbox.Checked;
+        private void ReportErrorsCheckbox_CheckedChanged(object sender, EventArgs e) => GlobalSettings.ReportErrorsToCloud = reportErrorsCheckbox.Checked;
 
-        private void LogLevelComboBox_SelectedIndexChanged(object sender, EventArgs e) => Settings.LogLevel = logLevelComboBox.SelectedItem.ToString();
+        private void LogLevelComboBox_SelectedIndexChanged(object sender, EventArgs e) => GlobalSettings.LogLevel = logLevelComboBox.SelectedItem.ToString();
 
         private void AutodetectCmdrNameButton_Click(object sender, EventArgs e)
         {
@@ -112,9 +112,13 @@
             }
         }
 
-        private void CheckboxAutostartApplication_CheckedChanged(object sender, EventArgs e) => AutorunManager.AutorunEnabled = checkboxAutostartApplication.Checked;
+        private void CheckboxAutostartApplication_CheckedChanged(object sender, EventArgs e)
+        {
+            if (AutorunManager != null)
+                AutorunManager.AutorunEnabled = checkboxAutostartApplication.Checked;
+        }
 
-        private void CmdrNameTextBox_TextChanged(object sender, EventArgs e) => Settings.CommanderName = cmdrNameTextBox.Text;
+        private void CmdrNameTextBox_TextChanged(object sender, EventArgs e) => GlobalSettings.CommanderName = cmdrNameTextBox.Text;
 
         /// <summary>
         /// Required method for Designer support - do not modify

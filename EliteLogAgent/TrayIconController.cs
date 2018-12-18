@@ -15,6 +15,7 @@
         private readonly IPluginManager pluginManager;
         private readonly IMessageBroker messageBroker;
         private readonly ISettingsProvider settingsProvider;
+        private readonly IAutorunManager autorunManager;
 
         private NotifyIcon CreateTrayIcon()
         {
@@ -89,7 +90,8 @@
                 {
                     Plugins = pluginManager.LoadedPlugins.ToList(),
                     Provider = settingsProvider,
-                    MessageBroker = messageBroker
+                    MessageBroker = messageBroker,
+                    AutorunManager = autorunManager
                 })
                 {
                     form.ShowDialog();
@@ -105,12 +107,13 @@
 
         private bool disposedValue = false; // To detect redundant calls
 
-        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IMessageBroker messageBroker)
+        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IMessageBroker messageBroker, IAutorunManager autorunManager)
         {
             trayIcon = CreateTrayIcon();
             this.pluginManager = pluginManager;
             this.messageBroker = messageBroker;
             this.settingsProvider = settingsProvider;
+            this.autorunManager = autorunManager;
         }
 
         protected virtual void Dispose(bool disposing)

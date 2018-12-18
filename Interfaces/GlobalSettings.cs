@@ -7,13 +7,17 @@
 
     public class GlobalSettings : ICloneable
     {
+        [JsonIgnore]
+        public const string DefaultCmdrName = "Unknown Commander";
+
+        [JsonIgnore]
         public static GlobalSettings Defaults => new GlobalSettings();
 
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; } = new Dictionary<string, JObject>();
 
         [JsonProperty("commanderName")]
-        public string CommanderName { get; set; } = "Unknown Commander";
+        public string CommanderName { get; set; } = DefaultCmdrName;
 
         [JsonProperty("logLevel")]
         public string LogLevel { get; set; } = "Debug";

@@ -3,15 +3,27 @@
     using EliteLogAgent.Autorun;
     using NUnit.Framework;
 
-    public class AutorunManagerTests
+    public class ClickOnceAutorunManagerTests
     {
         [Test]
-        public void ShouldEnableThenDisableAutorun()
+        public void ShouldEnableThenDisableClickOnceAutorun()
         {
-            AutorunManager.AutorunEnabled = true;
-            Assert.IsTrue(AutorunManager.AutorunEnabled);
-            AutorunManager.AutorunEnabled = false;
-            Assert.IsFalse(AutorunManager.AutorunEnabled);
+            var manager = new ClickOnceAutorunManager();
+            manager.AutorunEnabled = true;
+            Assert.IsTrue(manager.AutorunEnabled);
+            manager.AutorunEnabled = false;
+            Assert.IsFalse(manager.AutorunEnabled);
         }
+
+        [Test]
+        public void ShouldEnableThenDisablePortableAutorun()
+        {
+            var manager = new PortableAutorunManager();
+            manager.AutorunEnabled = true;
+            Assert.IsTrue(manager.AutorunEnabled);
+            manager.AutorunEnabled = false;
+            Assert.IsFalse(manager.AutorunEnabled);
+        }
+
     }
 }
