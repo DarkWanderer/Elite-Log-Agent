@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
@@ -61,6 +62,12 @@
   <ItemGroup>
     <Compile Include="..\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="EddnSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EddnSettingsControl.Designer.cs">
+      <DependentUpon>EddnSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Commodity.cs" />
     <Compile Include="Model\CommodityEvent.cs" />
@@ -82,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="EddnSettingsControl.resx">
+      <DependentUpon>EddnSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Schemas\blackmarket-v1.0.json" />
     <EmbeddedResource Include="Schemas\commodity-v3.0.json" />
     <EmbeddedResource Include="Schemas\journal-v1.0.json" />

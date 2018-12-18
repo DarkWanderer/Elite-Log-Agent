@@ -43,7 +43,7 @@
 
         protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
 
-        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => null;
+        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EddnSettingsControl();
 
         public override async void FlushEvents(ICollection<EddnEvent> events)
         {
