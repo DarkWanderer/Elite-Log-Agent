@@ -65,5 +65,17 @@
 
         [JsonProperty("KillCount")]
         public long? KillCount { get; set; }
+
+        [JsonProperty("PassengerType")]
+        public string PassengerType { get; set; }
+
+        [JsonProperty("PassengerCount")]
+        public long? PassengerCount { get; set; }
+
+        [JsonProperty("PassengerWanted")]
+        public bool? PassengerWanted { get; set; }
+
+        [JsonProperty("PassengerVIPs")]
+        public bool? PassengerVIPs { get; set; }
     }
 }

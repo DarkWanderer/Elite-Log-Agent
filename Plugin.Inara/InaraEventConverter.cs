@@ -6,6 +6,7 @@
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Events;
     using DW.ELA.Plugin.Inara.Model;
+    using DW.ELA.Utility.Extensions;
     using DW.ELA.Utility.Json;
     using MoreLinq;
     using Newtonsoft.Json.Linq;
@@ -393,7 +394,7 @@
                 { "starsystemName", item.StarSystem },
                 { "marketID", item.MarketId },
             };
-            if (!string.IsNullOrEmpty(item.EngineerModifications))
+            if (!String.IsNullOrEmpty(item.EngineerModifications))
             {
                 var value = new Dictionary<string, object>()
                 {
@@ -466,20 +467,16 @@
                     { "minorfactionNameTarget", e.TargetFaction }
                 };
 
-            if (!string.IsNullOrWhiteSpace(e.Commodity))
-            {
-                data.Add("commodityName", e.Commodity);
-                data.Add("commodityCount", e.Count);
-            }
+            data.AddIfNotNull("commodityName", e.Commodity);
+            data.AddIfNotNull("commodityCount", e.Count);
+            data.AddIfNotNull("targetName", e.Target);
+            data.AddIfNotNull("targetType", e.TargetType);
+            data.AddIfNotNull("killCount", e.KillCount);
 
-            if (!string.IsNullOrWhiteSpace(e.Target))
-                data.Add("targetName", e.Target);
-
-            if (!string.IsNullOrWhiteSpace(e.TargetType))
-                data.Add("targetType", e.TargetType);
-
-            if (e.KillCount.HasValue)
-                data.Add("killCount", e.KillCount);
+            data.AddIfNotNull("passengerType", e.PassengerType);
+            data.AddIfNotNull("passengerCount", e.PassengerCount);
+            data.AddIfNotNull("passengerIsVIP", e.PassengerVIPs);
+            data.AddIfNotNull("passengerIsWanted", e.PassengerWanted);
 
             var @event = new ApiEvent("addCommanderMission")
             {
