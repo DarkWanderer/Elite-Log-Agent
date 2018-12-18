@@ -11,5 +11,7 @@
         IReadOnlyCollection<IPlugin> LoadedPlugins { get; }
 
         void LoadPlugin(string pluginAssemblyName);
+
+        void LoadEmbeddedPlugins();
     }
 }

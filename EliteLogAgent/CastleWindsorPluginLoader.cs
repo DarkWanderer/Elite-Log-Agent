@@ -49,5 +49,22 @@
                 Log.Error(e, "Error while loading plugin " + pluginAssemblyName);
             }
         }
+
+        public void LoadEmbeddedPlugins()
+        {
+            try
+            {
+                container.Register(Classes
+                    .FromThisAssembly()
+                    .BasedOn<IPlugin>()
+                    .WithService
+                    .FromInterface()
+                    .LifestyleSingleton());
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Error while loading embedded plugins");
+            }
+        }
     }
 }
