@@ -87,7 +87,6 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="AbstractPluginTests.cs" />
-    <Compile Include="ELA\ContainerBootstrapperTests.cs" />
     <Compile Include="UI\AutorunManagerTests.cs" />
     <Compile Include="Controller\NLogSettingsManagerTests.cs" />
     <Compile Include="EDDN\EddnEventConverterTests.cs" />
