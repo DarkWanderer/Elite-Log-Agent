@@ -30,6 +30,14 @@
         }
 
         [Test]
+        public void AddIfNotNullShouldNotAdd()
+        {
+            var dictionary = GetTestDictionary();
+            dictionary.AddIfNotNull("D", null);
+            Assert.IsFalse(dictionary.ContainsKey("D"));
+        }
+
+        [Test]
         public void AddIfNotNullShouldThrow()
         {
             var dictionary = GetTestDictionary();
