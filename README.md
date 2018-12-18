@@ -1,35 +1,18 @@
 ![ELA logo](EliteLogAgent/Resources/elite-dangerous-icon.ico)
 
-# Elite-Log-Agent
+# Elite Log Agent
 
-A windows utility written in C#, presenting Json events from Elite: Dangerous log as data source. 
-Allows updating external sites (and possibly do other actions) in near-real-time as the log gets updated
+A Windows utility, sitting in tray and feeding trade data from Elite journal to various game-related sites
 
 **Does not require Elite login/password - only the target sites API keys**
 
 ## Quickstart
 
-* Download [latest version][clickonce]
-* Input commander name, Inara and/or EDSM API keys, click 'verify' to check info is correct
+* Download [ClickOnce installer][clickonce] or [portable version][portable]
+* Input or detect commander name, Inara and/or EDSM API keys, click 'verify' to check info is correct
 * Save settings (apply and/or OK)
 * (optional) Upload logs from last few sessions
-* launch the game.
-
-## Current Features
-
-* Inara
-* EDSM
-* EDDN
-
-## Planned features
-
-* "Cloud" error reporting
-* Support for [Canonn API v2](https://github.com/canonn-science/CAPIv2-Strapi)
-* Google sheets for Powerplay/BGS work
-
-## Get latest version
-
-* ClickOnce application installer [here][clickonce]
+* Launch the game.
 
 ## Plugin development
 
@@ -67,5 +50,6 @@ Coverage: ![coverage badge][codecov-badge]
 [buildstatus-prod]: https://ci.appveyor.com/api/projects/status/6n52i9wkthtwtb34/branch/prod
 [project]: https://ci.appveyor.com/project/DarkWanderer/Elite-Log-Agent
 [clickonce]: https://elitelogagent.blob.core.windows.net/clickonce/EliteLogAgent.application
+[portable]: https://github.com/DarkWanderer/Elite-Log-Agent/releases/latest
 [releases]: https://github.com/DarkWanderer/Elite-Log-Agent/releases
 [codecov-badge]: https://codecov.io/gh/DarkWanderer/Elite-Log-Agent/branch/master/graph/badge.svg
