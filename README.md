@@ -8,7 +8,7 @@ A Windows utility, sitting in tray and feeding trade data from Elite journal to 
 
 ## Quickstart
 
-* Download [ClickOnce installer][clickonce] or [portable version][portable]
+* Download [ClickOnce installer][clickonce] or [portable version][release-latest]
 * Input or detect commander name, Inara and/or EDSM API keys, click 'verify' to check info is correct
 * Save settings (apply and/or OK)
 * (optional) Upload logs from last few sessions
@@ -30,15 +30,14 @@ You're welcome to contribute by:
 ## SDLC
 
 Builds are done in AppVeyor. `master` branch is the primary integration branch ('potentially releasable').
-GitHub pre-releases are published from `master`
-Releasing to ClickOnce installer is done via merging to `prod` branch
+Releasing to ClickOnce installer and github  is done via merging to `prod` branch
 
-| Branch        | Build status  |
+| Item          | Status  |
 | ------------- | ------------: |
-| master        | [![appveyor build status][buildstatus-master]][project] |
-| prod          | [![appveyor build status][buildstatus-prod]][project]   |
-
-Coverage: ![coverage badge][codecov-badge]
+| master   | [![appveyor build status][buildstatus-master]][project] |
+| prod     | [![appveyor build status][buildstatus-prod]][project]   |
+| coverage | ![coverage badge][codecov-badge]
+| release  | ![release badge][release-badge]
 
 ## Links
 
@@ -50,6 +49,7 @@ Coverage: ![coverage badge][codecov-badge]
 [buildstatus-prod]: https://ci.appveyor.com/api/projects/status/6n52i9wkthtwtb34/branch/prod
 [project]: https://ci.appveyor.com/project/DarkWanderer/Elite-Log-Agent
 [clickonce]: https://elitelogagent.blob.core.windows.net/clickonce/EliteLogAgent.application
-[portable]: https://github.com/DarkWanderer/Elite-Log-Agent/releases/latest
+[release-latest]: https://github.com/DarkWanderer/Elite-Log-Agent/releases/latest
 [releases]: https://github.com/DarkWanderer/Elite-Log-Agent/releases
 [codecov-badge]: https://codecov.io/gh/DarkWanderer/Elite-Log-Agent/branch/master/graph/badge.svg
+[release-badge]: https://img.shields.io/github/release/DarkWanderer/Elite-Log-Agent.svg
