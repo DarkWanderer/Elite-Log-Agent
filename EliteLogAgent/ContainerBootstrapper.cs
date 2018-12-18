@@ -16,7 +16,7 @@
 
     internal static class ContainerBootstrapper
     {
-        internal static void Initalize(WindsorContainer container)
+        internal static void Initalize(IWindsorContainer container)
         {
             // Initalize infrastructure classes - NLog, Windsor
             container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().ConfiguredExternally());

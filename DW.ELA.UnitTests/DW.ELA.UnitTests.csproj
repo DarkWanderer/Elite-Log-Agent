@@ -87,6 +87,7 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="AbstractPluginTests.cs" />
+    <Compile Include="ELA\ContainerBootstrapperTests.cs" />
     <Compile Include="UI\AutorunManagerTests.cs" />
     <Compile Include="Controller\NLogSettingsManagerTests.cs" />
     <Compile Include="EDDN\EddnEventConverterTests.cs" />
@@ -101,7 +102,7 @@
     <Compile Include="Controller\LogEnumeratorTests.cs" />
     <Compile Include="Controller\LogEventConverterTests.cs" />
     <Compile Include="LoggingTimerTests.cs" />
-    <Compile Include="PlayerStateRecorderTests.cs" />
+    <Compile Include="Controller\PlayerStateRecorderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controller\SavedGamesDirectoryHelperTests.cs" />
     <Compile Include="UI\SingleLaunchTests.cs" />
