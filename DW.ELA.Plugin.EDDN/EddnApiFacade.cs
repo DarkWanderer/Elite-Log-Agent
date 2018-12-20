@@ -6,6 +6,7 @@
     using DW.ELA.Plugin.EDDN.Model;
     using DW.ELA.Utility.Json;
     using NLog;
+    using NLog.Fluent;
 
     public class EddnApiFacade : IEddnApiFacade
     {
@@ -14,30 +15,16 @@
 
         public EddnApiFacade(IRestClient restClient)
         {
-            this.restClient = restClient ?? throw new System.ArgumentNullException(nameof(restClient));
+            this.restClient = restClient ?? throw new ArgumentNullException(nameof(restClient));
         }
 
-        public async Task PostEventsAsync(params EddnEvent[] events)
+        public async Task PostEventAsync(EddnEvent @event)
         {
-            foreach (var @event in events)
-            {
-                try
-                {
-                    await PostAsync(@event);
-                    Log.Info("Pushed event {0}", @event.GetType());
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e, "Error pushing event");
-                }
-            }
-        }
-
-        private async Task PostAsync(EddnEvent e)
-        {
-            var result = await restClient.PostAsync(Serialize.ToJson(e));
+            var result = await restClient.PostAsync(Serialize.ToJson(@event));
             if (result != "OK")
-                Log.Error(result);
+                Log.Error("Error pushing event: {0}", result);
+            else
+                Log.Info("Pushed event {0}", @event.GetType());
         }
     }
 }
