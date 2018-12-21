@@ -43,6 +43,8 @@ after_test:
 artifacts:
 - path: ela-portable
   name: ela-portable
+- path: coverage.xml
+  name: coverage
 
 deploy:
 
