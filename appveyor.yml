@@ -45,6 +45,7 @@ artifacts:
   name: ela-portable
 - path: coverage.xml
   name: coverage
+  type: Zip
 
 deploy:
 
