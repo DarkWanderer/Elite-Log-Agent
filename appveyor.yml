@@ -33,6 +33,7 @@ after_build:
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -filter:"+[*]* -[*]NUnit* -[Moq*]*" -output:"coverage.xml"
+- 7z a coverage.zip coverage.xml
 
 after_test:
   - ps: |
@@ -43,7 +44,7 @@ after_test:
 artifacts:
 - path: ela-portable
   name: ela-portable
-- path: coverage.xml
+- path: coverage.zip
   name: coverage
   type: Zip
 
