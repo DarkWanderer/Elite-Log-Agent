@@ -11,7 +11,7 @@
         public void GetOrDefaultShouldReturnValue()
         {
             var result = GetTestDictionary().GetValueOrDefault("A");
-            Assert.AreEqual(1, result);
+            Assert.AreEqual("1", result);
         }
 
         [Test]
@@ -25,8 +25,8 @@
         public void AddIfNotNullShouldAdd()
         {
             var dictionary = GetTestDictionary();
-            dictionary.AddIfNotNull("D", 4);
-            Assert.AreEqual(4, dictionary["D"]);
+            dictionary.AddIfNotNull("D", "4");
+            Assert.AreEqual("4", dictionary["D"]);
         }
 
         [Test]
@@ -41,9 +41,9 @@
         public void AddIfNotNullShouldThrow()
         {
             var dictionary = GetTestDictionary();
-            Assert.Throws<ArgumentException>(() => dictionary.AddIfNotNull("C", 4));
+            Assert.Throws<ArgumentException>(() => dictionary.AddIfNotNull("C", "4"));
         }
 
-        private IDictionary<string, int?> GetTestDictionary() => new Dictionary<string, int?> { { "A", 1 }, { "B", null }, { "C", 3 } };
+        private IDictionary<string, string> GetTestDictionary() => new Dictionary<string, string> { { "A", "1" }, { "B", null }, { "C", "3" } };
     }
 }

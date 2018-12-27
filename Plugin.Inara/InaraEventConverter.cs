@@ -202,15 +202,13 @@
 
         private IEnumerable<ApiEvent> ConvertEvent(Rank e)
         {
-            var ranks = new Dictionary<string, int>()
-            {
-                { nameof(e.Combat), e.Combat },
-                { nameof(e.Cqc), e.Cqc },
-                { nameof(e.Empire), e.Empire },
-                { nameof(e.Explore), e.Explore },
-                { nameof(e.Federation), e.Federation },
-                { nameof(e.Trade), e.Trade }
-            };
+            var ranks = new Dictionary<string, int>();
+            ranks.AddIfNotNull(nameof(e.Combat), e.Combat);
+            ranks.AddIfNotNull(nameof(e.Cqc), e.Cqc);
+            ranks.AddIfNotNull(nameof(e.Empire), e.Empire);
+            ranks.AddIfNotNull(nameof(e.Explore), e.Explore);
+            ranks.AddIfNotNull(nameof(e.Federation), e.Federation);
+            ranks.AddIfNotNull(nameof(e.Trade), e.Trade);
 
             foreach (var rank in ranks)
             {

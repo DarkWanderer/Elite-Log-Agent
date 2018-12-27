@@ -104,6 +104,7 @@
     <Compile Include="Events\OutfittingItem.cs" />
     <Compile Include="Events\PassengersStatistics.cs" />
     <Compile Include="Events\Progress.cs" />
+    <Compile Include="Events\Promotion.cs" />
     <Compile Include="Events\PvpKill.cs" />
     <Compile Include="Events\QuitACrew.cs" />
     <Compile Include="Events\Rank.cs" />
