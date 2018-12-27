@@ -20,13 +20,23 @@
         {
             var events = TestEventSource.LocalEvents
                 .Concat(TestEventSource.LocalBetaEvents)
-                .Select(LogEventConverter.Convert)
-                .Where(e => e.GetType() == typeof(LogEvent))
+                .Select(e =>
+                {
+                    try
+                    {
+                        return LogEventConverter.Convert(e);
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                })
+                .Where(e => e != null && e.GetType() == typeof(LogEvent))
                 .Select(e => e.Event)
                 .Distinct()
                 .OrderBy(x => x)
                 .ToList();
-            Assert.Pass(string.Join(", ", events));
+            Assert.Pass(String.Join(", ", events));
         }
 
         /// <summary>
@@ -41,7 +51,7 @@
                 .Concat(ExtractSamples(TestEventSource.LocalEvents))
                 .ToHashSet();
 
-            var eventsString = string.Join("\n", eventExamples);
+            string eventsString = String.Join("\n", eventExamples);
             Assert.IsNotEmpty(eventsString);
         }
 

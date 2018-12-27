@@ -29,7 +29,7 @@
 
         public static LogEvent Convert(JObject jObject)
         {
-            var eventName = jObject["event"]?.ToString().ToLowerInvariant();
+            var eventName = jObject["event"]?.ToString()?.ToLowerInvariant();
             LogEvent result = null;
             if (string.IsNullOrWhiteSpace(eventName))
                 throw new ArgumentException("Empty event name", nameof(jObject));
