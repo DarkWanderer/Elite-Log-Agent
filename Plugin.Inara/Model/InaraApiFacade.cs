@@ -61,6 +61,8 @@
                             continue; // Skip the errors related to data missing on Inara side
                         if (statusText == "There is a newer inventory state recorded already.")
                             continue; // Not really an error
+                        if (statusText == "Everything was alright, the near-neutral status just wasn't stored.")
+                            continue; // Likewise
 
                         var ex = new ApplicationException(statusText ?? "Unknown Error");
                         ex.Data.Add("input", inputData.Events[i].ToString());
