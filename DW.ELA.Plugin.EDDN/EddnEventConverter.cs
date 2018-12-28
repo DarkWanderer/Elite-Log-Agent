@@ -31,14 +31,12 @@
             {
                 switch (@event)
                 {
-                    // Travel events TODO: fix other 2 types
                     case Docked d:
                     case FsdJump f:
                     case Scan s:
                     case Location l:
                         return MakeJournalEvent(@event);
 
-                    // Market events TODO: make a pull request to EDDN for case validation
                     case Market e: return ConvertMarketEvent(e);
                     case Outfitting e: return ConvertOutfittingEvent(e);
                     case Shipyard e: return ConvertShipyardEvent(e);

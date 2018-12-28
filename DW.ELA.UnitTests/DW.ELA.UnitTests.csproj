@@ -88,11 +88,12 @@
     </Compile>
     <Compile Include="AbstractPluginTests.cs" />
     <Compile Include="DictionaryExtensionsTests.cs" />
-    <Compile Include="UI\AutorunManagerTests.cs" />
+    <Compile Include="EDDN\EddnIntegrationTest.cs" />
     <Compile Include="Controller\NLogSettingsManagerTests.cs" />
     <Compile Include="EDDN\EddnEventConverterTests.cs" />
     <Compile Include="Controller\EventRawJsonExtractorTests.cs" />
     <Compile Include="EDDN\EventSchemaValidatorTests.cs" />
+    <Compile Include="UI\ClickOnceAutorunManagerTests.cs" />
     <Compile Include="UI\FileSettingsStorageTests.cs" />
     <Compile Include="INARA\InaraEventConverterTests.cs" />
     <Compile Include="INARA\InaraIntegrationTests.cs" />

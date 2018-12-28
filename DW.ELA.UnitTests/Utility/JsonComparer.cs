@@ -37,8 +37,6 @@
                     case JObject o: return Compare(tokenName, t1 as JObject, t2 as JObject);
                     default:
                         if (Serialize.ToJson(t1) != Serialize.ToJson(t2))
-
-                        //if (!JToken.DeepEquals(t1, t2))
                             return new[] { $"{tokenName}: expected {t1}, got {t2}" };
                         break;
                 }

@@ -5,6 +5,6 @@
 
     public interface IEddnApiFacade
     {
-        Task PostEventsAsync(params EddnEvent[] events);
+        Task PostEventAsync(EddnEvent events);
     }
 }

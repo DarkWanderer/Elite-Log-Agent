@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Concurrent;
-    using System.Collections.Generic;
     using System.Linq;
-    using DW.ELA.Controller;
+    using System.Threading;
+    using System.Threading.Tasks;
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.EDDN.Model;
@@ -12,20 +12,19 @@
     using Newtonsoft.Json.Linq;
     using NLog;
 
-    public class EddnPlugin : AbstractPlugin<EddnEvent, EddnSettings>
+    public class EddnPlugin : IPlugin, IObserver<LogEvent>
     {
         private static readonly IRestClient RestClient = new ThrottlingRestClient("https://eddn.edcd.io:4430/upload/");
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-        private readonly ISettingsProvider settingsProvider;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
 
         private readonly IEddnApiFacade apiFacade = new EddnApiFacade(RestClient);
         private readonly EddnEventConverter eventConverter;
         private readonly EventSchemaValidator schemaManager = new EventSchemaValidator();
-        private readonly ConcurrentQueue<JObject> lastPushedEvents = new ConcurrentQueue<JObject>(); // stores
+        private readonly ConcurrentQueue<JObject> lastPushedEvents = new ConcurrentQueue<JObject>(); // stores last few events to check duplicates
+        private readonly ISettingsProvider settingsProvider;
 
         public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
-            : base(settingsProvider)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
@@ -34,25 +33,47 @@
             ReloadSettings();
         }
 
-        public override string PluginName => "EDDN";
+        public string PluginName => "EDDN";
 
-        public override string PluginId => "EDDN";
+        public string PluginId => "EDDN";
 
-        // EDDN accepts events one-by-one, so no need to batch
-        protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(1);
+        public void FlushQueue() { }
 
-        protected override IEventConverter<EddnEvent> EventConverter => eventConverter;
+        public IObserver<LogEvent> GetLogObserver() => this;
 
-        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EddnSettingsControl();
+        public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EddnSettingsControl();
 
-        public override async void FlushEvents(ICollection<EddnEvent> events)
+        public void OnCompleted() { }
+
+        public void OnError(Exception error) { }
+
+        public void OnNext(LogEvent @event)
         {
-            foreach (var @event in events)
-                schemaManager.ValidateSchema(@event);
-            await apiFacade.PostEventsAsync(events.Where(IsUnique).ToArray());
+            try
+            {
+                var convertedEvents = eventConverter.Convert(@event);
+                foreach (var ce in convertedEvents.Where(IsUnique))
+                {
+                    var task = apiFacade.PostEventAsync(ce);
+                    ContinueWithErrorHandler(task);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Error while processing event {0}", @event.Event);
+            }
         }
 
-        public override void ReloadSettings() => eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
+        public void OnSettingsChanged(object sender, EventArgs e) => ReloadSettings();
+
+        public void ReloadSettings() => eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
+
+        private void ContinueWithErrorHandler(Task task)
+        {
+            task.ContinueWith(t => Log.Error(t.Exception, "Error while uploading"), TaskContinuationOptions.OnlyOnFaulted);
+            task.ContinueWith(t => Log.Debug("Upload task completed"), TaskContinuationOptions.OnlyOnRanToCompletion);
+            task.ContinueWith(t => Log.Debug("Upload task cancelled"), TaskContinuationOptions.OnlyOnCanceled);
+        }
 
         /// <summary>
         /// Check event against list of last few sent events, excluding timestamp from comparison
@@ -64,7 +85,7 @@
             try
             {
                 JObject jObject;
-                while (lastPushedEvents.Count > 10)
+                while (lastPushedEvents.Count > 30)
                     lastPushedEvents.TryDequeue(out jObject);
 
                 jObject = JObject.FromObject(e);
