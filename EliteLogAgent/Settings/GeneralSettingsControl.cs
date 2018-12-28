@@ -12,6 +12,7 @@
     using DW.ELA.Utility.Extensions;
     using EliteLogAgent.Autorun;
     using NLog;
+    using NLog.Fluent;
 
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
@@ -50,12 +51,11 @@
             try
             {
                 uploadLatestDataButton.Enabled = false;
-                progressBarUploadLatest.Maximum = Plugins.Count + 1;
+                progressBarUploadLatest.Maximum = Plugins.Count;
                 progressBarUploadLatest.Value = 0;
-                await Task.Factory.StartNew(UploadLatestData);
-                progressBarUploadLatest.Value = 1;
                 foreach (var plugin in Plugins)
                 {
+                    await Task.Factory.StartNew(() => UploadLatestData(plugin));
                     plugin.FlushQueue();
                     progressBarUploadLatest.Value += 1;
                     await Task.Delay(1); // yield to redraw UI
@@ -72,19 +72,23 @@
             }
         }
 
-        private void UploadLatestData()
+        private void UploadLatestData(IPlugin plugin)
         {
             Log.Info("Starting latest data upload");
             var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, uploadFileCount);
             var logCounter = new LogEventTypeCounter();
 
             using (logEventSource.Subscribe(logCounter))
-            using (logEventSource.Subscribe(MessageBroker))
+            using (logEventSource.Subscribe(plugin.GetLogObserver()))
             {
                 logEventSource.Play();
             }
 
-            Log.Info("Uploaded {0} events", logCounter.EventCounts.Values.DefaultIfEmpty(0).Sum());
+            Log.Info()
+                .Message("Uploaded events")
+                .Property("eventsCount", logCounter.EventCounts.Sum(kv => kv.Value))
+                .Property("plugin", plugin.PluginName)
+                .Write();
         }
 
         private void ReportErrorsCheckbox_CheckedChanged(object sender, EventArgs e) => GlobalSettings.ReportErrorsToCloud = reportErrorsCheckbox.Checked;
