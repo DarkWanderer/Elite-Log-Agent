@@ -1,18 +1,13 @@
 ﻿namespace EliteLogAgent
 {
     using System;
-    using System.Deployment.Application;
     using System.Linq;
     using System.Windows.Forms;
-    using Castle.Facilities.Logging;
-    using Castle.MicroKernel.Registration;
-    using Castle.Services.Logging.NLogIntegration;
     using Castle.Windsor;
-    using DW.ELA.Controller;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
-    using EliteLogAgent.Autorun;
     using NLog;
+    using NLog.Fluent;
 
     internal static partial class Program
     {
@@ -34,6 +29,10 @@
             using (var container = new WindsorContainer())
             {
                 ContainerBootstrapper.Initalize(container);
+                RootLog.Info()
+                    .Message("Application started")
+                    .Property("version", AppInfo.Version)
+                    .Write();
 
                 // Load plugins
                 var pluginManager = container.Resolve<IPluginManager>();
