@@ -34,6 +34,7 @@
                     // Generic
                     case LoadGame e: return ConvertEvent(e);
                     case Statistics e: return ConvertEvent(e);
+                    case Location e: return ConvertMinorFactionReputation(e.Timestamp, e.Factions);
 
                     // Inventory
                     case Materials e: return ConvertEvent(e);
@@ -679,6 +680,28 @@
                 },
                 Timestamp = timestamp
             };
+
+            foreach (var reputationEvent in ConvertMinorFactionReputation(@event.Timestamp, @event.Factions))
+                yield return reputationEvent;
+        }
+
+        private IEnumerable<ApiEvent> ConvertMinorFactionReputation(DateTime timestamp, Faction[] factions)
+        {
+            if (factions == null)
+                yield break;
+
+            foreach (var faction in factions.Where(f => f.MyReputation.HasValue))
+            {
+                yield return new ApiEvent("setCommanderReputationMinorFaction")
+                {
+                    EventData = new Dictionary<string, object>
+                    {
+                        { "minorfactionName", faction.Name },
+                        { "minorfactionReputation", faction.MyReputation / 100.0 },
+                    },
+                    Timestamp = timestamp
+                };
+            }
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(Materials @event)
