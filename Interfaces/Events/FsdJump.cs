@@ -9,7 +9,7 @@
         public string StarSystem { get; set; }
 
         [JsonProperty("SystemAddress")]
-        public long? SystemAddress { get; set; }
+        public ulong? SystemAddress { get; set; }
 
         [JsonProperty("StarPos")]
         public double[] StarPos { get; set; }

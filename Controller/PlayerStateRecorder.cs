@@ -19,6 +19,7 @@
         private readonly StateRecorder<string> stationRecorder = new StateRecorder<string>();
         private readonly StateRecorder<bool> crewRecorder = new StateRecorder<bool>();
         private readonly ConcurrentDictionary<string, double[]> systemCoordinates = new ConcurrentDictionary<string, double[]>();
+        private readonly ConcurrentDictionary<string, ulong> systemAddresses = new ConcurrentDictionary<string, ulong>();
 
         public string GetPlayerSystem(DateTime atTime) => starSystemRecorder.GetStateAt(atTime);
 
@@ -31,6 +32,8 @@
         public bool GetPlayerIsInCrew(DateTime atTime) => crewRecorder.GetStateAt(atTime);
 
         public double[] GetStarPos(string systemName) => systemCoordinates.GetValueOrDefault(systemName);
+
+        public ulong? GetSystemAddress(string systemName) => systemAddresses.ContainsKey(systemName) ? systemAddresses[systemName] : (ulong?)null;
 
         public void OnCompleted()
         {
@@ -79,12 +82,27 @@
 
         private void Process(ShipyardSwap e) => ProcessShipIDEvent(e.ShipId, e.ShipType, e.Timestamp);
 
-        private void Process(Location e) => ProcessLocation(e.StarSystem, e.StarPos, e.Timestamp);
+        private void Process(Location e)
+        {
+            if (e.SystemAddress.HasValue)
+                systemAddresses.TryAdd(e.StarSystem, e.SystemAddress.Value);
+            systemCoordinates.TryAdd(e.StarSystem, e.StarPos);
+            starSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
+        }
 
-        private void Process(FsdJump e) => ProcessLocation(e.StarSystem, e.StarPos, e.Timestamp);
+        private void Process(FsdJump e)
+        {
+            if (e.SystemAddress.HasValue)
+                systemAddresses.TryAdd(e.StarSystem, e.SystemAddress.Value);
+            systemCoordinates.TryAdd(e.StarSystem, e.StarPos);
+            starSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
+        }
 
         private void Process(Docked e)
         {
+            if (e.SystemAddress.HasValue)
+                systemAddresses.TryAdd(e.StarSystem, e.SystemAddress.Value);
+
             starSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
             stationRecorder.RecordState(e.StationName, e.Timestamp);
         }
@@ -94,15 +112,6 @@
         private void Process(QuitACrew e) => crewRecorder.RecordState(false, e.Timestamp);
 
         private void Process(JoinACrew e) => crewRecorder.RecordState(true, e.Timestamp);
-
-        private void ProcessLocation(string starSystem, double[] starPos, DateTime timestamp)
-        {
-            if (systemCoordinates.TryAdd(starSystem, starPos))
-                Log.Trace("Recorded location for {0}", starSystem);
-            else
-                Log.Trace("Location for {0} already recorded", starSystem);
-            starSystemRecorder.RecordState(starSystem, timestamp);
-        }
 
         private void ProcessShipIDEvent(long? shipId, string shipType, DateTime timestamp)
         {

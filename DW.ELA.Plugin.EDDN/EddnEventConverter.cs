@@ -174,6 +174,15 @@
                     yield break; // we don't know what the system coordinates are
                 @event.Message.Add("StarPos", new JArray(starPos));
             }
+
+            if (@event.Message["SystemAddress"] == null)
+            {
+                var starSystem = @event.Message["StarSystem"].ToObject<string>();
+                var systemAddress = stateHistoryRecorder.GetSystemAddress(starSystem);
+                if (systemAddress != null)
+                    @event.Message.Add("SystemAddress", systemAddress);
+            }
+
             if (Log.IsTraceEnabled)
             {
                 Log.Trace()
