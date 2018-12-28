@@ -12,10 +12,10 @@
         {
             var pm = Mock.Of<IPluginManager>();
             var sp = Mock.Of<ISettingsProvider>();
-            var mb = Mock.Of<IMessageBroker>();
+            var ps = Mock.Of<IPlayerStateHistoryRecorder>();
             var am = Mock.Of<IAutorunManager>();
 
-            using (var controller = new TrayIconController(pm, sp, mb, am))
+            using (var controller = new TrayIconController(pm, sp, ps, am))
             {
             }
         }

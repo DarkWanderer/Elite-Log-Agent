@@ -20,7 +20,7 @@
         // These have to be properties because Form designer does not allow arguments in constructor
         internal ISettingsProvider Provider { get; set; }
 
-        internal IMessageBroker MessageBroker { get; set; }
+        internal IPlayerStateHistoryRecorder PlayerStateRecorder { get; set; }
 
         internal List<IPlugin> Plugins { get; set; }
 
@@ -43,7 +43,7 @@
             // Will check passed properties for null here as they are not yet set in constructor
             var generalSettingsControl = new GeneralSettingsControl()
             {
-                MessageBroker = MessageBroker ?? throw new ArgumentNullException("MessageBroker"),
+                PlayerStateRecorder = PlayerStateRecorder ?? throw new ArgumentNullException("MessageBroker"),
                 GlobalSettings = currentSettings ?? throw new ArgumentNullException("Settings"),
                 Plugins = Plugins ?? throw new ArgumentNullException("Plugins"),
                 AutorunManager = AutorunManager ?? throw new ArgumentNullException("AutorunManager"),

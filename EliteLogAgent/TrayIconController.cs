@@ -13,7 +13,7 @@
     {
         private readonly NotifyIcon trayIcon;
         private readonly IPluginManager pluginManager;
-        private readonly IMessageBroker messageBroker;
+        private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly ISettingsProvider settingsProvider;
         private readonly IAutorunManager autorunManager;
 
@@ -90,7 +90,7 @@
                 {
                     Plugins = pluginManager.LoadedPlugins.ToList(),
                     Provider = settingsProvider,
-                    MessageBroker = messageBroker,
+                    PlayerStateRecorder = playerStateRecorder,
                     AutorunManager = autorunManager
                 })
                 {
@@ -107,11 +107,11 @@
 
         private bool disposedValue = false; // To detect redundant calls
 
-        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IMessageBroker messageBroker, IAutorunManager autorunManager)
+        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IAutorunManager autorunManager)
         {
             trayIcon = CreateTrayIcon();
             this.pluginManager = pluginManager;
-            this.messageBroker = messageBroker;
+            this.playerStateRecorder = playerStateRecorder;
             this.settingsProvider = settingsProvider;
             this.autorunManager = autorunManager;
         }

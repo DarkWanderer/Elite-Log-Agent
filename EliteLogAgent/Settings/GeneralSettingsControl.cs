@@ -26,7 +26,7 @@
             InitializeComponent();
         }
 
-        public IMessageBroker MessageBroker { get; internal set; }
+        public IPlayerStateHistoryRecorder PlayerStateRecorder { get; internal set; }
 
         public IReadOnlyCollection<IPlugin> Plugins { get; internal set; }
 
@@ -78,6 +78,7 @@
             var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, uploadFileCount);
             var logCounter = new LogEventTypeCounter();
 
+            using (logEventSource.Subscribe(PlayerStateRecorder))
             using (logEventSource.Subscribe(logCounter))
             using (logEventSource.Subscribe(plugin.GetLogObserver()))
             {
