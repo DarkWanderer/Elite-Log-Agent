@@ -70,7 +70,6 @@
     <Compile Include="Events\Faction.cs" />
     <Compile Include="Events\FactionEffect.cs" />
     <Compile Include="Events\FactionInfluenceEffect.cs" />
-    <Compile Include="Events\FactionState.cs" />
     <Compile Include="Events\FactionStateTrend.cs" />
     <Compile Include="Events\Friends.cs" />
     <Compile Include="Events\FsdJump.cs" />
