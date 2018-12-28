@@ -42,14 +42,14 @@
                 pluginManager.LoadPlugin("DW.ELA.Plugin.EDSM");
                 pluginManager.LoadEmbeddedPlugins();
 
-                var broker = container.Resolve<IMessageBroker>();
                 var logMonitor = container.Resolve<ILogRealTimeDataSource>();
                 var trayController = container.Resolve<ITrayIconController>();
                 var playerStateRecorder = container.Resolve<IPlayerStateHistoryRecorder>();
 
-                using (logMonitor.Subscribe(broker)) // subscription 'token' is IDisposable
-                using (broker.Subscribe(playerStateRecorder))
-                using (new CompositeDisposable(pluginManager.LoadedPlugins.Select(p => broker.Subscribe(p.GetLogObserver()))))
+                // subscription 'token' is IDisposable
+                // subscribing the PlayerStateRecorder first to avoid potential issues with out-of-order execution because of threading
+                using (logMonitor.Subscribe(playerStateRecorder))
+                using (new CompositeDisposable(pluginManager.LoadedPlugins.Select(p => logMonitor.Subscribe(p.GetLogObserver()))))
                 {
                     Application.Run();
                 }

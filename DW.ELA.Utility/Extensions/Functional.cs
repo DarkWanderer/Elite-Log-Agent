@@ -37,18 +37,10 @@
             var exceptions = items
                 .Select(i => ExecuteAndCatch(function, i))
                 .Where(e => e != null)
-                .ToList();
-            if (exceptions.Any())
-                throw new AggregateException(exceptions);
-        }
-
-        public static void ExecuteManyWithAggregateException<T>(this ParallelQuery<T> items, Action<T> function)
-        {
-            var exceptions = items
-                .Select(i => ExecuteAndCatch(function, i))
-                .Where(e => e != null)
-                .ToList();
-            if (exceptions.Any())
+                .ToArray();
+            if (exceptions.Length == 1)
+                throw exceptions.Single();
+            if (exceptions.Length > 1)
                 throw new AggregateException(exceptions);
         }
     }
