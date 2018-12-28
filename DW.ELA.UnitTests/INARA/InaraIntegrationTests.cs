@@ -22,7 +22,7 @@
 
             var inaraRestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
             var inaraConverter = new InaraEventConverter(stateRecorder);
-            var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.Inara.ApiKey, TestCredentials.Inara.UserName);
+            var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.Inara.ApiKey, TestCredentials.UserName);
 
             // Populate the state recorder to avoid missing ships/starsystems data
             foreach (var ev in logEventSource.Events)

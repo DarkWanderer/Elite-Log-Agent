@@ -22,7 +22,7 @@
             var @event = new TestEddnEvent();
             @event.Header = new Dictionary<string, string>
             {
-                { "uploaderID", TestCredentials.Edsm.UserName },
+                { "uploaderID", TestCredentials.UserName },
                 { "softwareName", AppInfo.Name },
                 { "softwareVersion", AppInfo.Version }
             };
