@@ -66,6 +66,6 @@
         public string SystemFaction { get; set; }
 
         [JsonProperty("FactionState")]
-        public FactionState? FactionState { get; set; }
+        public string FactionState { get; set; }
     }
 }

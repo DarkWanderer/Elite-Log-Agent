@@ -39,9 +39,9 @@
 
             // Different components will be used based on whether apps are portable
             if (ApplicationDeployment.IsNetworkDeployed)
-                container.Register(Component.For<IAutorunManager>().ImplementedBy<ClickOnceAutorunManager>());
+                container.Register(Component.For<IAutorunManager>().ImplementedBy<ClickOnceAutorunManager>().LifestyleTransient());
             else
-                container.Register(Component.For<IAutorunManager>().ImplementedBy<PortableAutorunManager>());
+                container.Register(Component.For<IAutorunManager>().ImplementedBy<PortableAutorunManager>().LifestyleTransient());
         }
     }
 }

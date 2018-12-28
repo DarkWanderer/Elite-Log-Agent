@@ -7,8 +7,10 @@
     using DW.ELA.Interfaces.Events;
     using DW.ELA.Plugin.EDDN.Model;
     using DW.ELA.Utility;
+    using DW.ELA.Utility.Json;
     using Newtonsoft.Json.Linq;
     using NLog;
+    using NLog.Fluent;
 
     public class EddnEventConverter : IEventConverter<EddnEvent>
     {
@@ -172,6 +174,14 @@
                     yield break; // we don't know what the system coordinates are
                 @event.Message.Add("StarPos", new JArray(starPos));
             }
+            if (Log.IsTraceEnabled)
+            {
+                Log.Trace()
+                .Message("Converted message")
+                .Property("source", Serialize.ToJson(e))
+                .Property("output", Serialize.ToJson(@event));
+            }
+
             yield return @event;
         }
 

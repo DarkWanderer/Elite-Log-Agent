@@ -92,7 +92,7 @@
                     filePosition = ReadJournalFromPosition(currentFile, filePosition);
                     if (checkOtherFiles)
                     {
-                        var latestFile = LogEnumerator.GetLogFiles(logDirectory).First();
+                        string latestFile = LogEnumerator.GetLogFiles(logDirectory).First();
                         if (latestFile != currentFile)
                         {
                             currentFile = latestFile;
@@ -107,7 +107,6 @@
                         .Exception(e)
                         .Property("journal-file", currentFile)
                         .Write();
-                    filePosition = new FileInfo(currentFile).Length; // Skipping the 'poisoned' data
                 }
         }
 
@@ -117,15 +116,28 @@
             {
                 using (var textReader = new StreamReader(fileReader))
                 {
-                    fileReader.Position = filePosition;
-                    var events = ReadEventsFromStream(textReader);
-                    foreach (var @event in events)
+                    try
                     {
-                        // Outfitting, market, etc. events are just indicators that data must be read from json
-                        if (@event.Event == "Outfitting" || @event.Event == "Market" || @event.Event == "Shipyard")
-                            SendEventFromFile(GetJsonFileFullPath(@event.Event));
-                        else
-                            basicObservable.OnNext(@event);
+                        fileReader.Position = filePosition;
+                        var events = ReadEventsFromStream(textReader);
+                        foreach (var @event in events)
+                        {
+                            // Outfitting, market, etc. events are just indicators that data must be read from json
+                            if (@event.Event == "Outfitting" || @event.Event == "Market" || @event.Event == "Shipyard")
+                                SendEventFromFile(GetJsonFileFullPath(@event.Event));
+                            else
+                                basicObservable.OnNext(@event);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error()
+                            .Message("Error while reading journal file")
+                            .Exception(e)
+                            .Property("journal-file", currentFile)
+                            .Property("position", fileReader.Position)
+                            .Write();
+                        textReader.ReadLine(); // read to end of current line, to skip 'bad' data
                     }
                     return fileReader.Position;
                 }

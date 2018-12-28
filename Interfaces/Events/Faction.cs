@@ -10,7 +10,7 @@
         public string Name { get; set; }
 
         [JsonProperty("FactionState")]
-        public FactionState FactionState { get; set; }
+        public string FactionState { get; set; }
 
         [JsonProperty("Government")]
         public string Government { get; set; }

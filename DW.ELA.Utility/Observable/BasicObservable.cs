@@ -5,7 +5,7 @@
 
     public class BasicObservable<T> : IObservable<T>
     {
-        protected readonly List<IObserver<T>> Observers = new List<IObserver<T>>();
+        protected List<IObserver<T>> Observers { get; } = new List<IObserver<T>>();
 
         public IDisposable Subscribe(IObserver<T> observer)
         {
@@ -18,6 +18,24 @@
                     Observers.Add(observer);
             }
             return new Unsubscriber(Observers, observer);
+        }
+
+        public virtual void OnError(Exception exception)
+        {
+            lock (Observers)
+                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnError(exception));
+        }
+
+        public virtual void OnNext(T next)
+        {
+            lock (Observers)
+                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnNext(next));
+        }
+
+        public virtual void OnCompleted()
+        {
+            lock (Observers)
+                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnCompleted());
         }
 
         private class Unsubscriber : IDisposable
@@ -39,24 +57,6 @@
                         observers.Remove(observer);
                 }
             }
-        }
-
-        public virtual void OnError(Exception exception)
-        {
-            lock (Observers)
-                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnError(exception));
-        }
-
-        public virtual void OnNext(T next)
-        {
-            lock (Observers)
-                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnNext(next));
-        }
-
-        public virtual void OnCompleted()
-        {
-            lock (Observers)
-                Functional.ExecuteManyWithAggregateException(Observers, i => i.OnCompleted());
         }
     }
 }

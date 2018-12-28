@@ -7,8 +7,7 @@
     public partial class FactionStateTrend
     {
         [JsonProperty("State")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public FactionState State { get; set; }
+        public string State { get; set; }
 
         [JsonProperty("Trend")]
         public long? Trend { get; set; }
