@@ -131,15 +131,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            cmdrNameLabel = new System.Windows.Forms.Label();
-            cmdrNameTextBox = new System.Windows.Forms.TextBox();
-            uploadLatestDataButton = new System.Windows.Forms.Button();
-            autodetectCmdrNameButton = new System.Windows.Forms.Button();
-            checkboxAutostartApplication = new System.Windows.Forms.CheckBox();
-            reportErrorsCheckbox = new System.Windows.Forms.CheckBox();
-            logLevelLabel = new System.Windows.Forms.Label();
-            logLevelComboBox = new System.Windows.Forms.ComboBox();
-            progressBarUploadLatest = new System.Windows.Forms.ProgressBar();
+            cmdrNameLabel = new Label();
+            cmdrNameTextBox = new TextBox();
+            uploadLatestDataButton = new Button();
+            autodetectCmdrNameButton = new Button();
+            checkboxAutostartApplication = new CheckBox();
+            reportErrorsCheckbox = new CheckBox();
+            logLevelLabel = new Label();
+            logLevelComboBox = new ComboBox();
+            progressBarUploadLatest = new ProgressBar();
             SuspendLayout();
 
             // cmdrNameLabel
@@ -159,7 +159,7 @@
             cmdrNameTextBox.TabIndex = 4;
             cmdrNameTextBox.Text = "Commander Name";
             cmdrNameTextBox.TextAlign = HorizontalAlignment.Center;
-            cmdrNameTextBox.TextChanged += new System.EventHandler(CmdrNameTextBox_TextChanged);
+            cmdrNameTextBox.TextChanged += new EventHandler(CmdrNameTextBox_TextChanged);
 
             // uploadLatestDataButton
             uploadLatestDataButton.Anchor = AnchorStyles.Top | AnchorStyles.Left
@@ -170,7 +170,7 @@
             uploadLatestDataButton.TabIndex = 3;
             uploadLatestDataButton.Text = "Upload last 5 files via all plugins";
             uploadLatestDataButton.UseVisualStyleBackColor = true;
-            uploadLatestDataButton.Click += new System.EventHandler(UploadLatestDataButton_Click);
+            uploadLatestDataButton.Click += new EventHandler(UploadLatestDataButton_Click);
 
             // autodetectCmdrNameButton
             autodetectCmdrNameButton.Anchor = AnchorStyles.Top | AnchorStyles.Left
@@ -181,7 +181,7 @@
             autodetectCmdrNameButton.TabIndex = 6;
             autodetectCmdrNameButton.Text = "Autodetect CMDR Name";
             autodetectCmdrNameButton.UseVisualStyleBackColor = true;
-            autodetectCmdrNameButton.Click += new System.EventHandler(AutodetectCmdrNameButton_Click);
+            autodetectCmdrNameButton.Click += new EventHandler(AutodetectCmdrNameButton_Click);
 
             // checkboxAutostartApplication
             checkboxAutostartApplication.AutoSize = true;
@@ -191,7 +191,7 @@
             checkboxAutostartApplication.TabIndex = 7;
             checkboxAutostartApplication.Text = "Autorun agent on sign-in";
             checkboxAutostartApplication.UseVisualStyleBackColor = true;
-            checkboxAutostartApplication.CheckedChanged += new System.EventHandler(CheckboxAutostartApplication_CheckedChanged);
+            checkboxAutostartApplication.CheckedChanged += new EventHandler(CheckboxAutostartApplication_CheckedChanged);
 
             // reportErrorsCheckbox
             reportErrorsCheckbox.AutoSize = true;
@@ -201,7 +201,7 @@
             reportErrorsCheckbox.TabIndex = 8;
             reportErrorsCheckbox.Text = "Report errors to Cloud service";
             reportErrorsCheckbox.UseVisualStyleBackColor = true;
-            reportErrorsCheckbox.CheckedChanged += new System.EventHandler(ReportErrorsCheckbox_CheckedChanged);
+            reportErrorsCheckbox.CheckedChanged += new EventHandler(ReportErrorsCheckbox_CheckedChanged);
 
             // logLevelLabel
             logLevelLabel.AutoSize = true;
@@ -218,7 +218,7 @@
             logLevelComboBox.Name = "logLevelComboBox";
             logLevelComboBox.Size = new System.Drawing.Size(149, 24);
             logLevelComboBox.TabIndex = 10;
-            logLevelComboBox.SelectedIndexChanged += new System.EventHandler(LogLevelComboBox_SelectedIndexChanged);
+            logLevelComboBox.SelectedIndexChanged += new EventHandler(LogLevelComboBox_SelectedIndexChanged);
 
             // progressBarUploadLatest
             progressBarUploadLatest.Anchor = AnchorStyles.Top | AnchorStyles.Left

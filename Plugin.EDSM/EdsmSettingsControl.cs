@@ -58,18 +58,18 @@
 
         private void InitializeComponent()
         {
-            button1 = new System.Windows.Forms.Button();
-            edsmApiKeyTextBox = new System.Windows.Forms.TextBox();
-            testCredentialsButton = new System.Windows.Forms.Button();
-            credentialsStatusLabel = new System.Windows.Forms.Label();
-            apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
-            apiKeyLabel = new System.Windows.Forms.LinkLabel();
+            button1 = new Button();
+            edsmApiKeyTextBox = new TextBox();
+            testCredentialsButton = new Button();
+            credentialsStatusLabel = new Label();
+            apiKeyValidatedCheckbox = new CheckBox();
+            apiKeyLabel = new LinkLabel();
             SuspendLayout();
 
             // button1
-            button1.Location = new System.Drawing.Point(0, 0);
+            button1.Location = new Point(0, 0);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
+            button1.Size = new Size(75, 23);
             button1.TabIndex = 0;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -77,51 +77,51 @@
             // edsmApiKeyTextBox
             edsmApiKeyTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left
             | AnchorStyles.Right;
-            edsmApiKeyTextBox.Location = new System.Drawing.Point(87, 3);
+            edsmApiKeyTextBox.Location = new Point(87, 3);
             edsmApiKeyTextBox.Name = "edsmApiKeyTextBox";
-            edsmApiKeyTextBox.Size = new System.Drawing.Size(284, 20);
+            edsmApiKeyTextBox.Size = new Size(284, 20);
             edsmApiKeyTextBox.TabIndex = 1;
             edsmApiKeyTextBox.Text = "EDSM API Key";
             edsmApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
-            edsmApiKeyTextBox.TextChanged += new System.EventHandler(edsmApiKeyTextBox_TextChanged);
+            edsmApiKeyTextBox.TextChanged += new EventHandler(edsmApiKeyTextBox_TextChanged);
 
             // testCredentialsButton
-            testCredentialsButton.Location = new System.Drawing.Point(3, 27);
+            testCredentialsButton.Location = new Point(3, 27);
             testCredentialsButton.Name = "testCredentialsButton";
-            testCredentialsButton.Size = new System.Drawing.Size(125, 23);
+            testCredentialsButton.Size = new Size(125, 23);
             testCredentialsButton.TabIndex = 2;
             testCredentialsButton.Text = "Validate";
             testCredentialsButton.UseVisualStyleBackColor = true;
-            testCredentialsButton.Click += new System.EventHandler(testCredentialsButton_Click);
+            testCredentialsButton.Click += new EventHandler(testCredentialsButton_Click);
 
             // credentialsStatusLabel
             credentialsStatusLabel.AutoSize = true;
-            credentialsStatusLabel.Location = new System.Drawing.Point(3, 55);
+            credentialsStatusLabel.Location = new Point(3, 55);
             credentialsStatusLabel.Name = "credentialsStatusLabel";
-            credentialsStatusLabel.Size = new System.Drawing.Size(69, 13);
+            credentialsStatusLabel.Size = new Size(69, 13);
             credentialsStatusLabel.TabIndex = 3;
             credentialsStatusLabel.Text = "Not checked";
 
             // apiKeyValidatedCheckbox
             apiKeyValidatedCheckbox.AutoSize = true;
             apiKeyValidatedCheckbox.Enabled = false;
-            apiKeyValidatedCheckbox.Location = new System.Drawing.Point(134, 31);
+            apiKeyValidatedCheckbox.Location = new Point(134, 31);
             apiKeyValidatedCheckbox.Name = "apiKeyValidatedCheckbox";
-            apiKeyValidatedCheckbox.Size = new System.Drawing.Size(184, 17);
+            apiKeyValidatedCheckbox.Size = new Size(184, 17);
             apiKeyValidatedCheckbox.TabIndex = 4;
             apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
             apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
-            apiKeyValidatedCheckbox.CheckedChanged += new System.EventHandler(apiKeyValidatedCheckbox_CheckedChanged);
+            apiKeyValidatedCheckbox.CheckedChanged += new EventHandler(apiKeyValidatedCheckbox_CheckedChanged);
 
             // apiKeyLabel
             apiKeyLabel.AutoSize = true;
-            apiKeyLabel.Location = new System.Drawing.Point(3, 6);
+            apiKeyLabel.Location = new Point(3, 6);
             apiKeyLabel.Name = "apiKeyLabel";
-            apiKeyLabel.Size = new System.Drawing.Size(81, 13);
+            apiKeyLabel.Size = new Size(81, 13);
             apiKeyLabel.TabIndex = 6;
             apiKeyLabel.TabStop = true;
             apiKeyLabel.Text = "EDSM API key:";
-            apiKeyLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(apiKeyLabel_LinkClicked);
+            apiKeyLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(apiKeyLabel_LinkClicked);
 
             // EdsmSettingsControl
             Controls.Add(apiKeyLabel);
@@ -130,7 +130,7 @@
             Controls.Add(testCredentialsButton);
             Controls.Add(edsmApiKeyTextBox);
             Name = "EdsmSettingsControl";
-            Size = new System.Drawing.Size(374, 150);
+            Size = new Size(374, 150);
             ResumeLayout(false);
             PerformLayout();
         }
