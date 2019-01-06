@@ -15,5 +15,7 @@
         bool GetPlayerIsInCrew(DateTime atTime);
 
         double[] GetStarPos(string systemName);
+
+        ulong? GetSystemAddress(string systemName);
     }
 }

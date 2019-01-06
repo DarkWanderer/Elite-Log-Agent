@@ -15,7 +15,7 @@
         public Economy[] Economies { get; set; }
 
         [JsonProperty("marketId")]
-        public double? MarketId { get; set; }
+        public long MarketId { get; set; }
 
         [JsonProperty("prohibited")]
         public string[] Prohibited { get; set; }

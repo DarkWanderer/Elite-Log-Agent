@@ -26,10 +26,11 @@
                 { "softwareName", AppInfo.Name },
                 { "softwareVersion", AppInfo.Version }
             };
-            @event.Message.Add("timestamp", DateTime.UtcNow);
-            @event.Message.Add("event", "FSDJump");
-            @event.Message.Add("StarSystem", "Sol");
-            @event.Message.Add("StarPos", new JArray(new[] { 0, 0, 0 }));
+            var message = @event.Message;
+            message.Add("timestamp", DateTime.UtcNow);
+            message.Add("event", "FSDJump");
+            message.Add("StarSystem", "Sol");
+            message.Add("StarPos", new JArray(new[] { 0, 0, 0 }));
 
             Assert.IsTrue(new EventSchemaValidator().ValidateSchema(@event));
             await facade.PostEventAsync(@event);

@@ -6,7 +6,7 @@
     public partial class ShipyardMessage
     {
         [JsonProperty("marketId", NullValueHandling = NullValueHandling.Ignore)]
-        public double? MarketId { get; set; }
+        public long MarketId { get; set; }
 
         [JsonProperty("ships")]
         public string[] Ships { get; set; }
