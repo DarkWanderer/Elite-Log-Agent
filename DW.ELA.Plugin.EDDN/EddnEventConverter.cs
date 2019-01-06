@@ -166,9 +166,10 @@
                 }
             }
 
+            var starSystem = @event.Message["StarSystem"].ToObject<string>();
+
             if (@event.Message["StarPos"] == null)
             {
-                var starSystem = @event.Message["StarSystem"].ToObject<string>();
                 var starPos = stateHistoryRecorder.GetStarPos(starSystem);
                 if (starPos == null)
                     yield break; // we don't know what the system coordinates are
@@ -177,7 +178,6 @@
 
             if (@event.Message["SystemAddress"] == null)
             {
-                var starSystem = @event.Message["StarSystem"].ToObject<string>();
                 var systemAddress = stateHistoryRecorder.GetSystemAddress(starSystem);
                 if (systemAddress != null)
                     @event.Message.Add("SystemAddress", systemAddress);
@@ -186,9 +186,10 @@
             if (Log.IsTraceEnabled)
             {
                 Log.Trace()
-                .Message("Converted message")
-                .Property("source", Serialize.ToJson(e))
-                .Property("output", Serialize.ToJson(@event));
+                    .Message("Converted message")
+                    .Property("source", Serialize.ToJson(e))
+                    .Property("output", Serialize.ToJson(@event))
+                    .Write();
             }
 
             yield return @event;
