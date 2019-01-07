@@ -5,6 +5,7 @@
     using System.Linq;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.Inara.Model;
     using DW.ELA.Utility;
@@ -44,8 +45,17 @@
 
         public override void ReloadSettings()
         {
-            eventConverter.ManageFriends = Settings.ManageFriends;
             FlushQueue();
+        }
+
+        public override void OnNext(LogEvent @event)
+        {
+            base.OnNext(@event);
+            if (Settings.ManageFriends && @event is Friends friends)
+            {
+                foreach (var e in eventConverter.ConvertFriendsEvent(friends))
+                    EventQueue.Enqueue(e);
+            }
         }
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
