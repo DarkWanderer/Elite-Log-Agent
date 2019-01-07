@@ -1,4 +1,4 @@
-﻿namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests.EDDN
 {
     using System;
     using System.Linq;
@@ -12,11 +12,13 @@
 
     [TestFixture]
     public class EddnEventConverterTests
-    { 
+    {
+        private EventSchemaValidator validator = new EventSchemaValidator();
+
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void ShouldNotFailOnEvents(LogEvent e)
+        public void EddnConverterShouldConvertAndValidate(LogEvent e)
         {
             var recorderMock = GetRecorderMock();
 
@@ -24,7 +26,6 @@
             var result = eventConverter.Convert(e).ToList();
             Assert.NotNull(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(EddnEvent));
-            var validator = new EventSchemaValidator();
             foreach (var @event in result)
                 Assert.IsTrue(validator.ValidateSchema(@event), "Event {0} should have validated", e.Event);
         }

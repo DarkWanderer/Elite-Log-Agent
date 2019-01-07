@@ -53,9 +53,9 @@
             apiKeyLabel = new LinkLabel();
             autoManageFriendsCheckbox = new CheckBox();
             SuspendLayout();
-            // 
+            //
             // inaraApiKeyTextBox
-            // 
+            //
             inaraApiKeyTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             inaraApiKeyTextBox.Location = new Point(114, 3);
             inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
@@ -63,9 +63,9 @@
             inaraApiKeyTextBox.TabIndex = 1;
             inaraApiKeyTextBox.Text = "Inara API Key";
             inaraApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
-            // 
+            //
             // testCredentialsButton
-            // 
+            //
             testCredentialsButton.Location = new Point(3, 27);
             testCredentialsButton.Name = "testCredentialsButton";
             testCredentialsButton.Size = new Size(122, 23);
@@ -73,9 +73,9 @@
             testCredentialsButton.Text = "Validate";
             testCredentialsButton.UseVisualStyleBackColor = true;
             testCredentialsButton.Click += new EventHandler(testCredentialsButton_Click);
-            // 
+            //
             // credentialsStatusLabel
-            // 
+            //
             credentialsStatusLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             credentialsStatusLabel.AutoSize = true;
             credentialsStatusLabel.Location = new Point(271, 55);
@@ -83,9 +83,9 @@
             credentialsStatusLabel.Size = new Size(87, 17);
             credentialsStatusLabel.TabIndex = 3;
             credentialsStatusLabel.Text = "Not checked";
-            // 
+            //
             // apiKeyValidatedCheckbox
-            // 
+            //
             apiKeyValidatedCheckbox.AutoSize = true;
             apiKeyValidatedCheckbox.Enabled = false;
             apiKeyValidatedCheckbox.Location = new Point(131, 31);
@@ -95,9 +95,9 @@
             apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
             apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
             apiKeyValidatedCheckbox.CheckedChanged += new EventHandler(apiKeyValidatedCheckbox_CheckedChanged);
-            // 
+            //
             // apiKeyLabel
-            // 
+            //
             apiKeyLabel.AutoSize = true;
             apiKeyLabel.Location = new Point(3, 6);
             apiKeyLabel.Name = "apiKeyLabel";
@@ -106,9 +106,9 @@
             apiKeyLabel.TabStop = true;
             apiKeyLabel.Text = "INARA Api Key:";
             apiKeyLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(apiKeyLabel_LinkClicked);
-            // 
+            //
             // autoManageFriendsCheckbox
-            // 
+            //
             autoManageFriendsCheckbox.AutoSize = true;
             autoManageFriendsCheckbox.Location = new Point(3, 80);
             autoManageFriendsCheckbox.Name = "autoManageFriendsCheckbox";
@@ -116,9 +116,9 @@
             autoManageFriendsCheckbox.TabIndex = 9;
             autoManageFriendsCheckbox.Text = "Add friends automatically";
             autoManageFriendsCheckbox.UseVisualStyleBackColor = true;
-            // 
+            //
             // InaraSettingsControl
-            // 
+            //
             Controls.Add(autoManageFriendsCheckbox);
             Controls.Add(apiKeyLabel);
             Controls.Add(apiKeyValidatedCheckbox);

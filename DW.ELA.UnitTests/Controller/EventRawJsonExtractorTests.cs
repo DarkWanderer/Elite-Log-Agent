@@ -1,4 +1,4 @@
-﻿namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests.Controller
 {
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
@@ -14,7 +14,7 @@
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void ShouldNotFailOnEvents(LogEvent e)
+        public void JsonExtractorShouldNotFailOnEvents(LogEvent e)
         {
             var result = eventConverter.Convert(e);
             Assert.NotNull(result);
