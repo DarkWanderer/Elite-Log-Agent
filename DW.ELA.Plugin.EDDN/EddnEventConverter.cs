@@ -200,13 +200,15 @@
             raw = (JObject)raw.DeepClone();
             var attributesToRemove = new List<string>()
             {
-                "CockpitBreach",
+                "ActiveFine",
                 "BoostUsed",
+                "CockpitBreach",
                 "FuelLevel",
                 "FuelUsed",
                 "JumpDist",
                 "Latitude",
-                "Longitude"
+                "Longitude",
+                "Wanted"
             };
 
             foreach (var attribute in raw)

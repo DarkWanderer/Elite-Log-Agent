@@ -1,4 +1,4 @@
-﻿namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests.UI
 {
     using EliteLogAgent.Autorun;
     using NUnit.Framework;

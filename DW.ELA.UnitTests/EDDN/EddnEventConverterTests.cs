@@ -1,8 +1,10 @@
 ﻿namespace DW.ELA.UnitTests.EDDN
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using DW.ELA.Interfaces;
+    using DW.ELA.LogModel;
     using DW.ELA.Plugin.EDDN;
     using DW.ELA.Plugin.EDDN.Model;
     using Moq;
@@ -49,6 +51,36 @@
                 Assert.NotNull(e.Message.Property("SystemAddress"));
                 Assert.NotNull(e.Message.Property("StarPos"));
                 Assert.NotNull(e.Message.Property("StarSystem"));
+            }
+        }
+
+        [Test]
+        [Parallelizable]
+        public void JournalEventsShouldNotContainPersonalInfo()
+        {
+            var recorderMock = GetRecorderMock();
+
+            var eventConverter = new EddnEventConverter(recorderMock) { MaxAge = TimeSpan.FromDays(5000) };
+
+            var convertedEvents = TestEventSource.CannedEvents
+                .SelectMany(eventConverter.Convert)
+                .OfType<JournalEvent>()
+                .ToList();
+
+            CollectionAssert.IsNotEmpty(convertedEvents);
+            CollectionAssert.AllItemsAreNotNull(convertedEvents);
+
+            foreach (var e in convertedEvents.OfType<JournalEvent>())
+            {
+                Assert.Null(e.Message.Property("ActiveFine"));
+                Assert.Null(e.Message.Property("BoostUsed"));
+                Assert.Null(e.Message.Property("CockpitBreach"));
+                Assert.Null(e.Message.Property("FuelLevel"));
+                Assert.Null(e.Message.Property("FuelUsed"));
+                Assert.Null(e.Message.Property("JumpDist"));
+                Assert.Null(e.Message.Property("Latitude"));
+                Assert.Null(e.Message.Property("Longitude"));
+                Assert.Null(e.Message.Property("Wanted"));
             }
         }
 

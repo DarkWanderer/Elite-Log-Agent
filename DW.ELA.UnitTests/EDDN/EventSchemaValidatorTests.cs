@@ -1,4 +1,4 @@
-﻿namespace DW.ELA.UnitTests
+﻿namespace DW.ELA.UnitTests.EDDN
 {
     using DW.ELA.Plugin.EDDN;
     using DW.ELA.Plugin.EDDN.Model;
