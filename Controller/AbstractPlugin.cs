@@ -14,7 +14,6 @@
         where TEvent : class
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-        private readonly ConcurrentQueue<TEvent> eventQueue = new ConcurrentQueue<TEvent>();
         private readonly Timer flushTimer = new Timer();
 
         protected AbstractPlugin(ISettingsProvider settingsProvider)
@@ -44,6 +43,8 @@
 
         protected TSettings Settings => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings;
 
+        protected ConcurrentQueue<TEvent> EventQueue { get; } = new ConcurrentQueue<TEvent>();
+
         public abstract AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings);
 
         public abstract void FlushEvents(ICollection<TEvent> events);
@@ -55,7 +56,7 @@
             try
             {
                 var events = new List<TEvent>();
-                while (eventQueue.TryDequeue(out var @event))
+                while (EventQueue.TryDequeue(out var @event))
                     events.Add(@event);
                 if (events.Count > 0)
                     FlushEvents(events);
@@ -70,10 +71,10 @@
             }
         }
 
-        public void OnNext(LogEvent @event)
+        public virtual void OnNext(LogEvent @event)
         {
             foreach (var e in EventConverter.Convert(@event))
-                eventQueue.Enqueue(e);
+                EventQueue.Enqueue(e);
         }
 
         public virtual void OnCompleted() => FlushQueue();

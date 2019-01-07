@@ -22,8 +22,6 @@
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
         }
 
-        public bool ManageFriends { get; set; } = false;
-
         public IEnumerable<ApiEvent> Convert(LogEvent @event)
         {
             try
@@ -75,9 +73,6 @@
 
                     // Community goals
                     case CommunityGoal e: return ConvertEvent(e);
-
-                    // Friends/squadrons
-                    case Friends e: return ConvertEvent(e);
                 }
             }
             catch (Exception e)
@@ -87,23 +82,27 @@
             return Enumerable.Empty<ApiEvent>();
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Friends e)
+        /// <summary>
+        /// Separate entry point to convert friends added
+        /// </summary>
+        /// <param name="e">"Friends" journal event</param>
+        /// <returns>sequence of INARA API inputs</returns>
+        public IEnumerable<ApiEvent> ConvertFriendsEvent(Friends e)
         {
-            if (!ManageFriends)
-                yield break;
-            if (e.Status == "Lost")
-            {
-                yield return new ApiEvent("delCommanderFriend")
-                {
-                    Timestamp = e.Timestamp,
-                    EventData = new Dictionary<string, object>()
-                    {
-                        { "commanderName", e.Name },
-                        { "gamePlatform", "PC" }
-                    }
-                };
-            }
-            else if (e.Status == "Added" || e.Status == "Online")
+            // if (e.Status == "Lost")
+            // {
+            //     yield return new ApiEvent("delCommanderFriend")
+            //     {
+            //         Timestamp = e.Timestamp,
+            //         EventData = new Dictionary<string, object>()
+            //         {
+            //             { "commanderName", e.Name },
+            //             { "gamePlatform", "PC" }
+            //         }
+            //     };
+            // }
+            // else
+            if (e.Status == "Added" || e.Status == "Online")
             {
                 yield return new ApiEvent("addCommanderFriend")
                 {
