@@ -10,7 +10,6 @@
     using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Utility.Extensions;
-    using EliteLogAgent.Autorun;
     using NLog;
     using NLog.Fluent;
 

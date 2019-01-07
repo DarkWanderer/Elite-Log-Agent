@@ -1,6 +1,5 @@
 ﻿namespace DW.ELA.Plugin.EDDN.Model
 {
-    using System;
     using Newtonsoft.Json;
 
     internal class OutfittingEvent : EddnEvent

@@ -1,18 +1,13 @@
 ﻿namespace EliteLogAgent
 {
-    using System;
     using System.Deployment.Application;
-    using System.Linq;
-    using System.Windows.Forms;
     using Castle.Facilities.Logging;
     using Castle.MicroKernel.Registration;
     using Castle.Services.Logging.NLogIntegration;
     using Castle.Windsor;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
     using EliteLogAgent.Autorun;
-    using NLog;
 
     internal static class ContainerBootstrapper
     {

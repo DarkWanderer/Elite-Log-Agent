@@ -1,6 +1,5 @@
 ﻿namespace DW.ELA.Interfaces.Events
 {
-    using System;
     using Newtonsoft.Json;
 
     public class TopTier

@@ -6,7 +6,6 @@
     using DW.ELA.Plugin.EDDN.Model;
     using DW.ELA.Utility.Json;
     using NLog;
-    using NLog.Fluent;
 
     public class EddnApiFacade : IEddnApiFacade
     {
