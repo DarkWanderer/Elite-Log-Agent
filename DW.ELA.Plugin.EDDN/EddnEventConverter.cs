@@ -198,15 +198,18 @@
         private JObject Strip(JObject raw)
         {
             raw = (JObject)raw.DeepClone();
+
             var attributesToRemove = new List<string>()
             {
-                "CockpitBreach",
+                "ActiveFine",
                 "BoostUsed",
+                "CockpitBreach",
                 "FuelLevel",
                 "FuelUsed",
                 "JumpDist",
                 "Latitude",
-                "Longitude"
+                "Longitude",
+                "Wanted"
             };
 
             foreach (var attribute in raw)
@@ -217,6 +220,17 @@
 
             foreach (var key in attributesToRemove)
                 raw.Remove(key);
+
+            if (raw["Factions"] is JArray factions)
+            {
+                foreach (JObject faction in factions)
+                {
+                    faction.Remove("HappiestSystem");
+                    faction.Remove("HomeSystem");
+                    faction.Remove("MyReputation");
+                    faction.Remove("SquadronFaction");
+                }
+            }
 
             return raw;
         }
