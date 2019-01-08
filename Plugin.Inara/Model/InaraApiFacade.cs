@@ -63,6 +63,8 @@
                             continue; // Not really an error
                         if (statusText == "Everything was alright, the near-neutral status just wasn't stored.")
                             continue; // Likewise
+                        if (statusText == "No commander by in-game name found, the friendship request was not added.")
+                            continue;
 
                         var ex = new ApplicationException(statusText ?? "Unknown Error");
                         ex.Data.Add("input", inputData.Events[i].ToString());
