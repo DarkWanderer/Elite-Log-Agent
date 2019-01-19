@@ -2,9 +2,7 @@
 
 # Elite Log Agent
 
-A Windows utility, sitting in tray and feeding trade data from Elite journal to various game-related sites
-
-**Does not require Elite login/password - only the target sites API keys**
+A Windows utility, sitting in tray. Feeds your commander data to INARA and/or EDSM sites. Also helps other players by sharing trade/commodity/outfitting data via EDDN
 
 ## Quickstart
 
