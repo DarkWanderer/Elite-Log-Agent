@@ -74,12 +74,6 @@
         [JsonProperty("Factions")]
         public Faction[] Factions { get; set; }
 
-        [JsonProperty("SystemFaction")]
-        public string SystemFaction { get; set; }
-
-        [JsonProperty("FactionState")]
-        public string FactionState { get; set; }
-
         [JsonProperty("Latitude")]
         public double? Latitude { get; set; }
 

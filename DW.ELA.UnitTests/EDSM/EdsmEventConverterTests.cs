@@ -1,15 +1,19 @@
-﻿namespace DW.ELA.UnitTests.Controller
+﻿namespace DW.ELA.UnitTests.EDSM
 {
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
+    using DW.ELA.Plugin.EDSM;
     using Newtonsoft.Json.Linq;
     using NUnit.Framework;
 
     [TestFixture]
     [Parallelizable]
-    public class EventRawJsonExtractorTests
+    public class EdsmEventConverterTests
     {
-        private readonly EventRawJsonExtractor eventConverter = new EventRawJsonExtractor();
+        private readonly IPlayerStateHistoryRecorder stateRecorder = new PlayerStateRecorder();
+        private readonly EdsmEventConverter eventConverter;
+
+        public EdsmEventConverterTests() => eventConverter = new EdsmEventConverter(stateRecorder);
 
         [Test]
         [Parallelizable]

@@ -1,4 +1,4 @@
-﻿namespace ELA.Plugin.EDSM
+﻿namespace DW.ELA.Plugin.EDSM
 {
     using System.Threading.Tasks;
     using Newtonsoft.Json.Linq;

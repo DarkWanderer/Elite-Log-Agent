@@ -1,4 +1,4 @@
-﻿namespace ELA.Plugin.EDSM
+﻿namespace DW.ELA.Plugin.EDSM
 {
     using System;
     using System.Collections.Generic;
@@ -19,7 +19,7 @@
         private readonly IRestClient restClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
         private readonly Task<HashSet<string>> ignoredEvents;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
-        private readonly IEventConverter<JObject> eventConverter = new EventRawJsonExtractor();
+        private readonly IEventConverter<JObject> eventConverter;
         private IEdsmApiFacade apiFacade;
         public const string CPluginId = "EdsmUploader";
 
@@ -27,7 +27,7 @@
             : base(settingsProvider)
         {
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
-
+            eventConverter = new EdsmEventConverter(playerStateRecorder);
             ignoredEvents =
                  restClient.GetAsync("discard")
                     .ContinueWith((t) => t.IsFaulted ? new HashSet<string>() : new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
@@ -54,9 +54,8 @@
             {
                 var apiEventsBatches = events
                     .Where(e => !ignoredEvents.Result.Contains(e["event"].ToString()))
-                    .TakeLast(2000) // Limit to last N events to avoid EDSM overload
+                    .TakeLast(3000) // Limit to last N events to avoid EDSM overload
                     .Reverse()
-                    .Select(Enrich)
                     .Batch(100) // EDSM API only accepts 100 events in single call
                     .ToList();
                 foreach (var batch in apiEventsBatches)
@@ -78,13 +77,5 @@
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings };
 
-        private JObject Enrich(JObject @event)
-        {
-            @event = (JObject)@event.DeepClone();
-            var timestamp = DateTime.Parse(@event["timestamp"].ToString());
-            @event["_systemName"] = playerStateRecorder.GetPlayerSystem(timestamp);
-            @event["_shipId"] = playerStateRecorder.GetPlayerShipId(timestamp);
-            return @event;
-        }
     }
 }

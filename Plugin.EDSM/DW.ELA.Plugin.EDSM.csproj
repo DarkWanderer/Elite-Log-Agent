@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="EdsmApiException.cs" />
     <Compile Include="EdsmApiFacade.cs" />
+    <Compile Include="EdsmEventConverter.cs" />
     <Compile Include="EdsmPlugin.cs" />
     <Compile Include="EdsmSettings.cs" />
     <Compile Include="EdsmSettingsControl.cs">
