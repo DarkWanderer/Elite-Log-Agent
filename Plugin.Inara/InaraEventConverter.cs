@@ -392,7 +392,7 @@
                 { "starsystemName", item.StarSystem },
                 { "marketID", item.MarketId },
             };
-            if (!String.IsNullOrEmpty(item.EngineerModifications))
+            if (!string.IsNullOrEmpty(item.EngineerModifications))
             {
                 var value = new Dictionary<string, object>()
                 {

@@ -73,5 +73,15 @@
                 }
             }
         }
+
+        public static IEnumerable<JObject> LocalStaticEvents
+        {
+            get
+            {
+                var reader = new LogReader();
+                foreach (string file in Directory.EnumerateFiles(new SavedGamesDirectoryHelper().Directory, "*.json"))
+                    yield return JObject.Parse(File.ReadAllText(file));
+            }
+        }
     }
 }
