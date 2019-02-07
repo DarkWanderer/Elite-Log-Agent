@@ -83,7 +83,8 @@
         {
             "setCommanderInventoryMaterials",
             "setCommanderGameStatistics",
-            "setCommanderStorageModules"
+            "setCommanderStorageModules",
+            "setCommanderInventoryCargo"
         };
 
         private static readonly IReadOnlyDictionary<string, string[]> supersedesEvents = new Dictionary<string, string[]>

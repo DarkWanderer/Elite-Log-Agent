@@ -1,6 +1,7 @@
 ﻿namespace DW.ELA.Controller
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -21,6 +22,7 @@
         private readonly object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
         private readonly BasicObservable<LogEvent> basicObservable = new BasicObservable<LogEvent>();
+        private readonly IReadOnlyCollection<string> eventsToReadFromFile = new HashSet<string> { "Outfitting", "Market", "Shipyard", "Cargo" };
 
         private string currentFile;
         private long filePosition;
@@ -123,7 +125,7 @@
                         foreach (var @event in events)
                         {
                             // Outfitting, market, etc. events are just indicators that data must be read from json
-                            if (@event.Event == "Outfitting" || @event.Event == "Market" || @event.Event == "Shipyard")
+                            if (eventsToReadFromFile.Contains(@event.Event))
                                 SendEventFromFile(GetJsonFileFullPath(@event.Event));
                             else
                                 basicObservable.OnNext(@event);

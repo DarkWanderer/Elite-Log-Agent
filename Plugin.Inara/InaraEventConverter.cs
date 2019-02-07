@@ -39,6 +39,7 @@
                     case MaterialCollected e: return ConvertEvent(e);
                     case MaterialTrade e: return ConvertEvent(e);
                     case StoredModules e: return ConvertEvent(e);
+                    case Cargo e: return ConvertEvent(e);
 
                     // Shipyard
                     case ShipyardSell e: return ConvertEvent(e);
@@ -80,6 +81,17 @@
                 Log.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(Cargo e)
+        {
+            yield return new ApiEvent("setCommanderInventoryCargo")
+            {
+                Timestamp = e.Timestamp,
+                EventData = (e.Inventory ?? Enumerable.Empty<InventoryRecord>())
+                    .Select(cr => new { itemName = cr.Name, itemCount = cr.Count, isStolen = cr.Stolen })
+                    .ToArray()
+            };
         }
 
         /// <summary>

@@ -36,7 +36,7 @@
                 .Distinct()
                 .OrderBy(x => x)
                 .ToList();
-            Assert.Pass(String.Join(", ", events));
+            Assert.Pass(string.Join(", ", events));
         }
 
         /// <summary>
@@ -49,9 +49,10 @@
             var eventExamples = LoadJsonEvents()
                 .Concat(ExtractSamples(TestEventSource.LocalBetaEvents))
                 .Concat(ExtractSamples(TestEventSource.LocalEvents))
+                .Concat(ExtractSamples(TestEventSource.LocalStaticEvents))
                 .ToHashSet();
 
-            string eventsString = String.Join("\n", eventExamples);
+            string eventsString = string.Join("\n", eventExamples);
             Assert.IsNotEmpty(eventsString);
         }
 

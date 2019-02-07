@@ -1,8 +1,16 @@
 ﻿{
-  "timestamp": "2018-10-30T19:04:53Z",
+  "timestamp": "2019-01-31T20:11:44Z",
   "event": "Cargo",
-  "Count": 0,
-  "Inventory": []
+  "Vessel": "Ship",
+  "Count": 3,
+  "Inventory": [
+    {
+      "Name": "ancientkey",
+      "Name_Localised": "Ancient Key",
+      "Count": 3,
+      "Stolen": 0
+    }
+  ]
 }
 {
   "timestamp": "2018-10-30T19:06:11Z",
