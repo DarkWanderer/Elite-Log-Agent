@@ -86,7 +86,7 @@
             if (e.Items == null)
                 yield break;
 
-            var items = e.Items
+            string[] items = e.Items
                 .Select(i => i.Name)
                 .Select(i => i.Replace("hpt_", "Hpt_").Replace("int_", "Int_").Replace("armour_", "Armour_"))
                 .ToArray();
@@ -113,7 +113,7 @@
 
             var commodities = e.Items
                 .Where(i => i.Category != "NonMarketable")
-                .Where(i => string.IsNullOrEmpty(i.Legality))
+                .Where(i => String.IsNullOrEmpty(i.Legality))
                 .ToArray();
 
             var @event = new CommodityEvent()
@@ -139,7 +139,7 @@
                 Demand = arg.Demand,
                 DemandBracket = arg.DemandBracket,
                 MeanPrice = arg.MeanPrice,
-                Name = arg.Name.Replace("$", string.Empty).Replace("_name;", string.Empty),
+                Name = arg.Name.Replace("$", String.Empty).Replace("_name;", String.Empty),
                 SellPrice = arg.SellPrice,
                 Stock = arg.Stock,
                 StockBracket = arg.StockBracket
@@ -152,7 +152,7 @@
 
             if (@event.Message["StarSystem"] == null)
             {
-                var system = stateHistoryRecorder.GetPlayerSystem(e.Timestamp);
+                string system = stateHistoryRecorder.GetPlayerSystem(e.Timestamp);
 
                 // if we can't determine player's location, abort
                 if (system != null)
@@ -166,11 +166,11 @@
                 }
             }
 
-            var starSystem = @event.Message["StarSystem"].ToObject<string>();
+            string starSystem = @event.Message["StarSystem"].ToObject<string>();
 
             if (@event.Message["StarPos"] == null)
             {
-                var starPos = stateHistoryRecorder.GetStarPos(starSystem);
+                double[] starPos = stateHistoryRecorder.GetStarPos(starSystem);
                 if (starPos == null)
                     yield break; // we don't know what the system coordinates are
                 @event.Message.Add("StarPos", new JArray(starPos));
@@ -178,7 +178,7 @@
 
             if (@event.Message["SystemAddress"] == null)
             {
-                var systemAddress = stateHistoryRecorder.GetSystemAddress(starSystem);
+                ulong? systemAddress = stateHistoryRecorder.GetSystemAddress(starSystem);
                 if (systemAddress != null)
                     @event.Message.Add("SystemAddress", systemAddress);
             }
@@ -195,7 +195,7 @@
             yield return @event;
         }
 
-        private JObject Strip(JObject raw)
+        private static JObject Strip(JObject raw)
         {
             raw = (JObject)raw.DeepClone();
 
@@ -212,13 +212,7 @@
                 "Wanted"
             };
 
-            foreach (var attribute in raw)
-            {
-                if (attribute.Key.EndsWith("_Localised"))
-                    attributesToRemove.Add(attribute.Key);
-            }
-
-            foreach (var key in attributesToRemove)
+            foreach (string key in attributesToRemove)
                 raw.Remove(key);
 
             if (raw["Factions"] is JArray factions)
@@ -232,7 +226,47 @@
                 }
             }
 
+            WalkNode(raw, RemoveLocalizedProperties, null);
+
             return raw;
+        }
+
+        private static void RemoveLocalizedProperties(JObject obj)
+        {
+            var keysToRemove = new List<string>();
+
+            foreach (var property in obj)
+            {
+                if (property.Key.EndsWith("_Localised"))
+                    keysToRemove.Add(property.Key);
+            }
+
+            foreach (var key in keysToRemove)
+                obj.Remove(key);
+        }
+
+        private static void WalkNode(
+                                JToken node,
+                                Action<JObject> objectAction,
+                                Action<JProperty> propertyAction)
+        {
+            if (node.Type == JTokenType.Object)
+            {
+                objectAction?.Invoke((JObject)node);
+
+                foreach (var child in node.Children<JProperty>())
+                {
+                    propertyAction?.Invoke(child);
+                    WalkNode(child.Value, objectAction, propertyAction);
+                }
+            }
+            else if (node.Type == JTokenType.Array)
+            {
+                foreach (var child in node.Children())
+                {
+                    WalkNode(child, objectAction, propertyAction);
+                }
+            }
         }
     }
 }
