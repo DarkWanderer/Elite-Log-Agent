@@ -17,7 +17,7 @@
         [Explicit]
         public async Task IntegrationTestUploadToEddn()
         {
-            var restClient = new ThrottlingRestClient("https://eddn.edcd.io:4430/upload/");
+            var restClient = new ThrottlingRestClient.Factory().CreateRestClient("https://eddn.edcd.io:4430/upload/");
             var facade = new EddnApiFacade(restClient);
             var @event = new TestEddnEvent();
             @event.Header = new Dictionary<string, string>

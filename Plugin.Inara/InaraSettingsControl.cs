@@ -44,6 +44,8 @@
             set => new PluginSettingsFacade<InaraSettings>(InaraPlugin.CPluginId, GlobalSettings).Settings = value;
         }
 
+        internal IRestClient RestClient { get; set; }
+
         private void InitializeComponent()
         {
             inaraApiKeyTextBox = new TextBox();
@@ -129,7 +131,6 @@
             Size = new Size(361, 155);
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         private async void testCredentialsButton_Click(object sender, EventArgs e)
@@ -139,7 +140,7 @@
                 testCredentialsButton.Enabled = false;
                 string apiKey = inaraApiKeyTextBox.Text;
                 string cmdrName = GlobalSettings.CommanderName;
-                var apiFacade = new InaraApiFacade(InaraPlugin.RestClient, apiKey, cmdrName);
+                var apiFacade = new InaraApiFacade(RestClient, apiKey, cmdrName);
                 var @event = new ApiEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
                 var result = await apiFacade.ApiCall(@event);
                 credentialsStatusLabel.Text = "Success, inara ID: " + (result.Single().EventData as JObject)["userID"]?.ToString();

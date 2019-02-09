@@ -14,7 +14,6 @@
         private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ToString,StackTrace:innerFormat=ToString,StackTrace:maxInnerExceptionLevel=10}";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
-        private readonly IRestClient restClient = new ThrottlingRestClient("https://elitelogagent-api.azurewebsites.net/api/errors");
 
         static NLogSettingsManager()
         {
@@ -25,7 +24,6 @@
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
         }
-
 
         public void Setup()
         {

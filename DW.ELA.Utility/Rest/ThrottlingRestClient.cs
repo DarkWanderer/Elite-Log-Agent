@@ -19,7 +19,7 @@
         private DateTime lastRequestTimestamp = DateTime.MinValue;
         private int requestCounter;
 
-        public ThrottlingRestClient(string url)
+        internal ThrottlingRestClient(string url)
         {
             baseUrl = url;
             client.DefaultRequestHeaders.Add("X-Requested-With", "EliteLogAgent");
@@ -85,6 +85,11 @@
                 lastRequestTimestamp = now;
                 requestCounter = decayedRequestCounter + 1;
             }
+        }
+
+        public class Factory : IRestClientFactory
+        {
+            public IRestClient CreateRestClient(string url) => new ThrottlingRestClient(url);
         }
     }
 }

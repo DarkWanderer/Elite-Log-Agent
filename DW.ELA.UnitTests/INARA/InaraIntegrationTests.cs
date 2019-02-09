@@ -20,7 +20,7 @@
             var logCounter = new LogEventTypeCounter();
             var stateRecorder = new PlayerStateRecorder();
 
-            var inaraRestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
+            var inaraRestClient = new ThrottlingRestClient.Factory().CreateRestClient("https://inara.cz/inapi/v1/");
             var inaraConverter = new InaraEventConverter(stateRecorder);
             var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.Inara.ApiKey, TestCredentials.UserName);
 

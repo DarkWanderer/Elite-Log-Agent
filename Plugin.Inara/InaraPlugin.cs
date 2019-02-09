@@ -14,13 +14,16 @@
 
     public class InaraPlugin : AbstractPlugin<ApiEvent, InaraSettings>
     {
+        private const string InaraApiUrl = "https://inara.cz/inapi/v1/";
+
         public override string PluginName => CPluginName;
 
         public override string PluginId => CPluginId;
 
         public const string CPluginName = "INARA";
         public const string CPluginId = "InaraUploader";
-        public static readonly IRestClient RestClient = new ThrottlingRestClient("https://inara.cz/inapi/v1/");
+
+        protected internal IRestClient RestClient { get; }
 
         private readonly InaraEventConverter eventConverter;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
@@ -30,9 +33,10 @@
 
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider)
+        public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, IRestClientFactory restClientFactory)
             : base(settingsProvider)
         {
+            RestClient = restClientFactory.CreateRestClient(InaraApiUrl);
             this.playerStateRecorder = playerStateRecorder;
             eventConverter = new InaraEventConverter(this.playerStateRecorder);
             this.settingsProvider = settingsProvider;
@@ -58,7 +62,7 @@
             }
         }
 
-        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings };
+        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings, RestClient = RestClient };
 
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 

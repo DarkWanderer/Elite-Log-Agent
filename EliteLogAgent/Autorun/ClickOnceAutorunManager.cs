@@ -10,7 +10,6 @@
         private const string AutorunRegistryKey = @"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         private const string EliteLogAgentKey = @"EliteLogAgent";
 
-
         public bool AutorunEnabled
         {
             get
