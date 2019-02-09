@@ -79,7 +79,7 @@
             }
         }
 
-        private static readonly string[] latestOnlyEvents = new[]
+        private static readonly string[] LatestOnlyEvents = new[]
         {
             "setCommanderInventoryMaterials",
             "setCommanderGameStatistics",
@@ -87,7 +87,7 @@
             "setCommanderInventoryCargo"
         };
 
-        private static readonly IReadOnlyDictionary<string, string[]> supersedesEvents = new Dictionary<string, string[]>
+        private static readonly IReadOnlyDictionary<string, string[]> SupersedesEvents = new Dictionary<string, string[]>
         {
             { "setCommanderInventoryMaterials", new[] { "addCommanderInventoryMaterialsItem", "delCommanderInventoryMaterialsItem" } }
         };
@@ -97,14 +97,14 @@
             var eventsByType = events
                 .GroupBy(e => e.EventName, e => e)
                 .ToDictionary(g => g.Key, g => g.ToArray());
-            foreach (var type in latestOnlyEvents.Intersect(eventsByType.Keys))
+            foreach (var type in LatestOnlyEvents.Intersect(eventsByType.Keys))
                 eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp).FirstOrDefault() };
 
             // It does not make sense to e.g. add inventory materials if we already have a newer inventory snapshot
-            foreach (var type in supersedesEvents.Keys.Intersect(eventsByType.Keys))
+            foreach (var type in SupersedesEvents.Keys.Intersect(eventsByType.Keys))
             {
                 var cutoffTimestamp = eventsByType[type].Max(e => e.Timestamp);
-                foreach (var supersededType in supersedesEvents[type].Intersect(eventsByType.Keys))
+                foreach (var supersededType in SupersedesEvents[type].Intersect(eventsByType.Keys))
                 {
                     eventsByType[supersededType] = eventsByType[supersededType]
                         .Where(e => e.Timestamp > cutoffTimestamp)
