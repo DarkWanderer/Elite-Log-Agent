@@ -30,6 +30,7 @@
             message.Add("timestamp", DateTime.UtcNow);
             message.Add("event", "FSDJump");
             message.Add("StarSystem", "Sol");
+            message.Add("SystemAddress", 12345678901234567890);
             message.Add("StarPos", new JArray(new[] { 0, 0, 0 }));
 
             Assert.IsTrue(new EventSchemaValidator().ValidateSchema(@event));
