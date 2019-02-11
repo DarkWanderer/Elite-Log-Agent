@@ -24,6 +24,5 @@
             manager.AutorunEnabled = false;
             Assert.IsFalse(manager.AutorunEnabled);
         }
-
     }
 }

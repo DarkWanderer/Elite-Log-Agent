@@ -7,7 +7,6 @@
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Utility;
     using MoreLinq;
     using Newtonsoft.Json.Linq;
     using NLog;
@@ -15,21 +14,24 @@
 
     public class EdsmPlugin : AbstractPlugin<JObject, EdsmSettings>
     {
+        private const string EdsmApiUrl = "https://www.edsm.net/api-journal-v1/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-        private readonly IRestClient restClient = new ThrottlingRestClient("https://www.edsm.net/api-journal-v1/");
         private readonly Task<HashSet<string>> ignoredEvents;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly IEventConverter<JObject> eventConverter;
         private IEdsmApiFacade apiFacade;
         public const string CPluginId = "EdsmUploader";
 
-        public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder)
+        protected internal IRestClient RestClient { get; }
+
+        public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory)
             : base(settingsProvider)
         {
+            RestClient = restClientFactory.CreateRestClient(EdsmApiUrl);
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
             eventConverter = new EdsmEventConverter(playerStateRecorder);
             ignoredEvents =
-                 restClient.GetAsync("discard")
+                 RestClient.GetAsync("discard")
                     .ContinueWith((t) => t.IsFaulted ? new HashSet<string>() : new HashSet<string>(JArray.Parse(t.Result).ToObject<string[]>()));
 
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
@@ -43,7 +45,7 @@
         public override void ReloadSettings()
         {
             FlushQueue();
-            apiFacade = new EdsmApiFacade(restClient, GlobalSettings.CommanderName, Settings.ApiKey);
+            apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
         }
 
         public override async void FlushEvents(ICollection<JObject> events)
@@ -75,7 +77,6 @@
 
         public override string PluginId => CPluginId;
 
-        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings };
-
+        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings, RestClient = RestClient };
     }
 }

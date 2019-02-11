@@ -24,14 +24,6 @@
             InitializeComponent();
         }
 
-        private void EdsmSettingsControl_Load(object sender, EventArgs e) => ReloadSettings();
-
-        private void ReloadSettings()
-        {
-            edsmApiKeyTextBox.Text = Settings.ApiKey;
-            apiKeyValidatedCheckbox.Checked = Settings.Verified;
-        }
-
         internal EdsmSettings Settings
         {
             get => new PluginSettingsFacade<EdsmSettings>(EdsmPlugin.CPluginId, GlobalSettings).Settings;
@@ -54,6 +46,16 @@
                 edsmApiKeyTextBox.Text = value.ApiKey;
                 apiKeyValidatedCheckbox.Checked = value.Verified;
             }
+        }
+
+        internal IRestClient RestClient { get; set; }
+
+        private void EdsmSettingsControl_Load(object sender, EventArgs e) => ReloadSettings();
+
+        private void ReloadSettings()
+        {
+            edsmApiKeyTextBox.Text = Settings.ApiKey;
+            apiKeyValidatedCheckbox.Checked = Settings.Verified;
         }
 
         private void InitializeComponent()
@@ -141,7 +143,7 @@
             {
                 testCredentialsButton.Enabled = false;
                 var apiKey = edsmApiKeyTextBox.Text;
-                var apiFacade = new EdsmApiFacade(new ThrottlingRestClient("https://www.edsm.net/api-commander-v1/get-ranks"), GlobalSettings.CommanderName, apiKey);
+                var apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, apiKey);
                 var result = await apiFacade.GetCommanderRanks();
                 credentialsStatusLabel.Text = "Success, combat rank: " + result["ranksVerbose"]["Combat"]?.ToString();
                 apiKeyValidatedCheckbox.Checked = true;

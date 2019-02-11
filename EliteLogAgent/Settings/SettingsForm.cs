@@ -40,6 +40,7 @@
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             currentSettings = Provider.Settings.Clone();
+
             // Will check passed properties for null here as they are not yet set in constructor
             var generalSettingsControl = new GeneralSettingsControl()
             {

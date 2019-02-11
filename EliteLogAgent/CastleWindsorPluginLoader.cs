@@ -12,8 +12,9 @@
 
     internal class CastleWindsorPluginLoader : IPluginManager
     {
-        private readonly IWindsorContainer container;
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+
+        private readonly IWindsorContainer container;
 
         public CastleWindsorPluginLoader(IWindsorContainer container)
         {
@@ -36,7 +37,6 @@
                 if (!pluginAssemblyName.EndsWith(".dll"))
                     pluginAssemblyName += ".dll";
 
-                //var assembly = Assembly.LoadFile(pluginAssemblyName);
                 container.Register(Classes
                     .FromAssemblyNamed(Path.Combine(assemblyDirectory, pluginAssemblyName))
                     .BasedOn<IPlugin>()

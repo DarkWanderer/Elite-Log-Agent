@@ -2,6 +2,6 @@
 {
     public interface IRestClientFactory
     {
-        IRestClient CreateThrottlingRestClient(string url);
+        IRestClient CreateRestClient(string url);
     }
 }
