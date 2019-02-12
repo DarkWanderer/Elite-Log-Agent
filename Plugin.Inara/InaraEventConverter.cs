@@ -446,19 +446,58 @@
 
         private IEnumerable<ApiEvent> ConvertEvent(MissionCompleted e)
         {
-            var @event = new ApiEvent("setCommanderMissionCompleted")
+            var data = new Dictionary<string, object>()
             {
-                Timestamp = e.Timestamp,
-                EventData = new Dictionary<string, object>()
-                {
                     { "missionGameID", e.MissionId },
                     { "missionName", e.Name },
                     { "donationCredits", e.Donation },
                     { "rewardCredits", e.Reward },
-                }
+            };
+
+            data.AddIfNotNull("rewardCommodities", ConvertCommodityReward(e.CommodityReward));
+            data.AddIfNotNull("rewardMaterials", ConvertMaterialReward(e.MaterialsReward));
+            data.AddIfNotNull("minorfactionEffects", ConvertMissionFactionEffects(e.FactionEffects));
+
+            var @event = new ApiEvent("setCommanderMissionCompleted")
+            {
+                Timestamp = e.Timestamp,
+                EventData = data
             };
             yield return @event;
+
+            if (e.MaterialsReward != null)
+            {
+                foreach (var cr in e.MaterialsReward)
+                {
+                    @event = new ApiEvent("addCommanderInventoryMaterialsItem")
+                    {
+                        Timestamp = e.Timestamp,
+                        EventData = new Dictionary<string, object>()
+                        {
+                            { "itemName", e.Name },
+                            { "itemCount", e.Count }
+                        }
+                    };
+                    yield return @event;
+                }
+            }
         }
+
+        private object[] ConvertMissionFactionEffects(FactionEffect[] factionEffects)
+        {
+            if (factionEffects == null)
+                return null;
+
+            var effects = from fe in factionEffects
+                          from inf in fe.Influence
+                          select new { minorfactionName = fe.Faction, influenceGain = inf.InfluenceValue, reputationGain = fe.Reputation };
+
+            return effects.ToArray();
+        }
+
+        private object[] ConvertCommodityReward(CommodityReward[] commodityRewards) => commodityRewards?.Select(cr => new { itemName = cr.Name, itemCount = cr.Count })?.ToArray<object>();
+
+        private object[] ConvertMaterialReward(MaterialsReward[] materialsRewards) => materialsRewards?.Select(cr => new { itemName = cr.Name, itemCount = cr.Count })?.ToArray<object>();
 
         private IEnumerable<ApiEvent> ConvertEvent(MissionAccepted e)
         {
