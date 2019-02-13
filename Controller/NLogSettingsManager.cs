@@ -47,7 +47,7 @@
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
 
-            if (settingsProvider.Settings.ReportErrorsToCloud)
+            if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
             {
                 var webCollector = new WebServiceTarget() { Protocol = WebServiceProtocol.JsonPost, Url = new Uri(CloudErrorReportingUrl) };
                 webCollector.Parameters.Add(new MethodCallParameter(string.Empty, DefaultJsonLayout));
