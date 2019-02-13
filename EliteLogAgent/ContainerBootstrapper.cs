@@ -7,6 +7,7 @@
     using Castle.Windsor;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
+    using DW.ELA.Utility;
     using EliteLogAgent.Autorun;
 
     internal static class ContainerBootstrapper
@@ -19,7 +20,9 @@
                 Component.For<ISettingsProvider>().ImplementedBy<FileSettingsStorage>().LifestyleSingleton(),
                 Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
                 Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),
-                Component.For<IWindsorContainer>().Instance(container));
+                Component.For<IWindsorContainer>().Instance(container),
+                Component.For<IRestClientFactory>().ImplementedBy<ThrottlingRestClient.Factory>());
+
             container.Resolve<ILogSettingsBootstrapper>().Setup();
 
             // Register core classes
