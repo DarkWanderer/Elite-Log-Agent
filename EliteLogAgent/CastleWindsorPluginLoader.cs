@@ -44,9 +44,13 @@
                     .FromInterface()
                     .LifestyleSingleton());
             }
+            catch (FileNotFoundException e)
+            {
+                Log.Warn(e, $"Plugin assembly not found {pluginAssemblyName}");
+            }
             catch (Exception e)
             {
-                Log.Error(e, "Error while loading plugin " + pluginAssemblyName);
+                Log.Error(e, $"Error while loading plugin: {pluginAssemblyName}");
             }
         }
 
