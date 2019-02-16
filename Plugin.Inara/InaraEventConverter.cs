@@ -474,8 +474,8 @@
                         Timestamp = e.Timestamp,
                         EventData = new Dictionary<string, object>()
                         {
-                            { "itemName", e.Name },
-                            { "itemCount", e.Count }
+                            { "itemName", cr.Name },
+                            { "itemCount", cr.Count }
                         }
                     };
                     yield return @event;
