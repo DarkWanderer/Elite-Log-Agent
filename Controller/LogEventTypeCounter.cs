@@ -10,13 +10,6 @@
     {
         private ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
 
-        public void OnCompleted()
-        {
-        }
-
-        public void OnError(Exception error)
-        {
-        }
 
         public IReadOnlyCollection<string> EventTypes =>
             eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();
@@ -27,11 +20,19 @@
         {
             try
             {
-                eventTypeCounters.AddOrUpdate(value.Event, key => 1, (key, count) => count++);
+                eventTypeCounters.AddOrUpdate(value.Event, key => 1, (key, count) => count + 1);
             }
             catch
             { /* do nothing */
             }
+        }
+
+        public void OnCompleted()
+        {
+        }
+
+        public void OnError(Exception error)
+        {
         }
 
         public void FromEnumerable(IEnumerable<LogEvent> events)

@@ -4,14 +4,16 @@
     using System.IO;
     using System.Text;
     using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
     using NLog;
     using NLog.Layouts;
     using NLog.Targets;
+    using NLog.Targets.Wrappers;
 
     public class NLogSettingsManager : ILogSettingsBootstrapper
     {
         private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ToString,StackTrace:innerFormat=ToString,StackTrace:maxInnerExceptionLevel=10}";
+        private const string CloudErrorReportingUrl = "https://app-telemetry.azurewebsites.net/api/post-errors";
+
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
 
@@ -30,7 +32,7 @@
             var logLevel = LogLevel.Info;
             try
             {
-                if (!string.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
+                if (!String.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
                     logLevel = LogLevel.FromString(settingsProvider.Settings.LogLevel);
             }
             catch
@@ -44,6 +46,25 @@
 
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
+
+            if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
+            {
+                var webCollector = new WebServiceTarget() { Protocol = WebServiceProtocol.JsonPost, Url = new Uri(CloudErrorReportingUrl) };
+                webCollector.Parameters.Add(new MethodCallParameter(string.Empty, DefaultJsonLayout));
+                var asyncWrapper = new AsyncTargetWrapper()
+                {
+                    OverflowAction = AsyncTargetWrapperOverflowAction.Discard,
+                    WrappedTarget = webCollector,
+                    BatchSize = 1,
+                    QueueLimit = 10,
+                    FullBatchSizeWriteLimit = 10,
+                    TimeToSleepBetweenBatches = 0,
+                    Name = "CloudErrorTargetAsync"
+                };
+
+                config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error, asyncWrapper));
+                config.AddTarget(asyncWrapper);
+            }
 
             LogManager.Configuration = config;
             Log.Info("Enabled logging with level {0}", logLevel);
@@ -109,25 +130,6 @@
                 Encoding = Encoding.UTF8,
                 Layout = DefaultJsonLayout
             };
-        }
-
-        private void TestExceptionLogging()
-        {
-            try
-            {
-                try
-                {
-                    throw new ApplicationException("Test inner exception");
-                }
-                catch (Exception e1)
-                {
-                    throw new ApplicationException("Test outer exception", e1);
-                }
-            }
-            catch (Exception e2)
-            {
-                Log.Error(e2, "Exception format test");
-            }
         }
 
         private static string LogDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"EliteLogAgent\Log");
