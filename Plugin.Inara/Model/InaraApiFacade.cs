@@ -16,21 +16,22 @@
         private readonly string commanderName;
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
+        private readonly ICollection<string> ignoredErrors = new HashSet<string>
+        {
+            "Everything was alright, the near-neutral status just wasn't stored.",
+            "There is a newer inventory state recorded already.",
+            "This ship was not found but was added automatically.",
+            "Some errors in the loadout appeared",
+            "There is a newer inventory state recorded already.",
+            "No commander by in-game name found, the friendship request was not added.",
+            "No items provided, the module storage was just erased."
+        };
+
         public InaraApiFacade(IRestClient client, string apiKey, string commanderName)
         {
             this.client = client;
             this.apiKey = apiKey;
             this.commanderName = commanderName;
-        }
-
-        private struct ApiInputOutput
-        {
-            [JsonProperty("header")]
-            public Header Header;
-            [JsonProperty("events")]
-            public IList<ApiEvent> Events;
-
-            public override string ToString() => Serialize.ToJson(this);
         }
 
         public async Task<ICollection<ApiEvent>> ApiCall(params ApiEvent[] events)
@@ -54,23 +55,23 @@
             {
                 for (int i = 0; i < events.Length; i++)
                 {
-                    if (outputData.Events[i].EventStatus != 200)
+                    var statusCode = outputData.Events[i].EventStatus;
+                    if (statusCode != 200)
                     {
                         var statusText = outputData.Events[i].EventStatusText;
-                        if (statusText.StartsWith("Some errors in the loadout appeared"))
-                            continue; // Skip the errors related to data missing on Inara side
-                        if (statusText == "There is a newer inventory state recorded already.")
-                            continue; // Not really an error
-                        if (statusText == "Everything was alright, the near-neutral status just wasn't stored.")
-                            continue; // Likewise
-                        if (statusText == "No commander by in-game name found, the friendship request was not added.")
+
+                        if (ignoredErrors.Contains(statusText))
                             continue;
 
                         var ex = new ApplicationException(statusText ?? "Unknown Error");
                         ex.Data.Add("input", inputData.Events[i].ToString());
                         ex.Data.Add("output", outputData.Events[i].ToString());
                         exceptions.Add(ex);
-                        Log.Error(ex, "Error returned from Inara API");
+
+                        if (statusCode < 300)
+                            Log.Warn(ex, "Warning returned from Inara API");
+                        else
+                            Log.Error(ex, "Error returned from Inara API");
                     }
                 }
             }
@@ -84,6 +85,17 @@
                 .Write();
 
             return outputData.Events;
+        }
+
+        private struct ApiInputOutput
+        {
+            [JsonProperty("header")]
+            public Header Header;
+
+            [JsonProperty("events")]
+            public IList<ApiEvent> Events;
+
+            public override string ToString() => Serialize.ToJson(this);
         }
     }
 }
