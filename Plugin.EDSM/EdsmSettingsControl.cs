@@ -145,6 +145,8 @@
                 var apiKey = edsmApiKeyTextBox.Text;
                 var apiFacade = new EdsmApiFacade(new ThrottlingRestClient.Factory().CreateRestClient("https://www.edsm.net/api-commander-v1/get-ranks"), GlobalSettings.CommanderName, apiKey);
                 var result = await apiFacade.GetCommanderRanks();
+                if (result["ranksVerbose"] == null)
+                    throw new EdsmApiException("No access to CMDR ranks");
                 credentialsStatusLabel.Text = "Success, combat rank: " + result["ranksVerbose"]["Combat"]?.ToString();
                 apiKeyValidatedCheckbox.Checked = true;
             }

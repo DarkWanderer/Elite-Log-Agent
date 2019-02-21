@@ -15,10 +15,6 @@
 
         public EdsmApiFacade(IRestClient restClient, string commanderName, string apiKey)
         {
-            if (string.IsNullOrWhiteSpace(commanderName))
-                throw new ArgumentException(nameof(commanderName));
-            if (string.IsNullOrWhiteSpace(apiKey))
-                throw new ArgumentException(nameof(apiKey));
             this.restClient = restClient ?? throw new ArgumentNullException(nameof(restClient));
             this.commanderName = commanderName;
             this.apiKey = apiKey;

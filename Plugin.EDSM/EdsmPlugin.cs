@@ -19,10 +19,8 @@
         private readonly Task<HashSet<string>> ignoredEvents;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly IEventConverter<JObject> eventConverter;
-        private IEdsmApiFacade apiFacade;
         public const string CPluginId = "EdsmUploader";
 
-        protected internal IRestClient RestClient { get; }
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory)
             : base(settingsProvider)
@@ -38,6 +36,8 @@
             ReloadSettings();
         }
 
+        protected internal IRestClient RestClient { get; }
+
         protected override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
 
         protected override IEventConverter<JObject> EventConverter => eventConverter;
@@ -45,15 +45,18 @@
         public override void ReloadSettings()
         {
             FlushQueue();
-            apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
         }
 
         public override async void FlushEvents(ICollection<JObject> events)
         {
             if (!Settings.Verified)
                 return;
+            if (string.IsNullOrEmpty(Settings.ApiKey))
+                return;
+
             try
             {
+                var apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
                 var apiEventsBatches = events
                     .Where(e => !ignoredEvents.Result.Contains(e["event"].ToString()))
                     .TakeLast(3000) // Limit to last N events to avoid EDSM overload
