@@ -63,15 +63,14 @@
                         if (ignoredErrors.Contains(statusText))
                             continue;
 
-                        var ex = new ApplicationException(statusText ?? "Unknown Error");
-                        ex.Data.Add("input", inputData.Events[i].ToString());
-                        ex.Data.Add("output", outputData.Events[i].ToString());
-                        exceptions.Add(ex);
+                        exceptions.Add(new ApplicationException(statusText ?? "Unknown Error"));
 
-                        if (statusCode < 300)
-                            Log.Warn(ex, "Warning returned from Inara API");
-                        else
-                            Log.Error(ex, "Error returned from Inara API");
+                        var log = statusCode < 300 ? Log.Warn() : Log.Error();
+                        log.Message("Error code returned from")
+                            .Property("input", inputData.Events[i].ToString())
+                            .Property("output", outputData.Events[i].ToString())
+                            .Property("status", statusCode)
+                            .Write();
                     }
                 }
             }
