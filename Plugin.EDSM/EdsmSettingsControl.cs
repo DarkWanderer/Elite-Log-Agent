@@ -143,7 +143,7 @@
             {
                 testCredentialsButton.Enabled = false;
                 var apiKey = edsmApiKeyTextBox.Text;
-                var apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, apiKey);
+                var apiFacade = new EdsmApiFacade(new ThrottlingRestClient.Factory().CreateRestClient("https://www.edsm.net/api-commander-v1/get-ranks"), GlobalSettings.CommanderName, apiKey);
                 var result = await apiFacade.GetCommanderRanks();
                 credentialsStatusLabel.Text = "Success, combat rank: " + result["ranksVerbose"]["Combat"]?.ToString();
                 apiKeyValidatedCheckbox.Checked = true;
