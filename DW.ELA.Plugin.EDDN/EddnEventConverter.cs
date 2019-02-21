@@ -113,7 +113,7 @@
 
             var commodities = e.Items
                 .Where(i => i.Category != "NonMarketable")
-                .Where(i => String.IsNullOrEmpty(i.Legality))
+                .Where(i => string.IsNullOrEmpty(i.Legality))
                 .ToArray();
 
             var @event = new CommodityEvent()
@@ -139,7 +139,7 @@
                 Demand = arg.Demand,
                 DemandBracket = arg.DemandBracket,
                 MeanPrice = arg.MeanPrice,
-                Name = arg.Name.Replace("$", String.Empty).Replace("_name;", String.Empty),
+                Name = arg.Name.Replace("$", string.Empty).Replace("_name;", string.Empty),
                 SellPrice = arg.SellPrice,
                 Stock = arg.Stock,
                 StockBracket = arg.StockBracket

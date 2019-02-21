@@ -27,12 +27,14 @@
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
         }
 
+        private static string LogDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"EliteLogAgent\Log");
+
         public void Setup()
         {
             var logLevel = LogLevel.Info;
             try
             {
-                if (!String.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
+                if (!string.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
                     logLevel = LogLevel.FromString(settingsProvider.Settings.LogLevel);
             }
             catch
@@ -50,7 +52,7 @@
             if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
             {
                 var webCollector = new WebServiceTarget() { Protocol = WebServiceProtocol.JsonPost, Url = new Uri(CloudErrorReportingUrl) };
-                webCollector.Parameters.Add(new MethodCallParameter(string.Empty, DefaultJsonLayout));
+                webCollector.Parameters.Add(new MethodCallParameter(string.Empty, GetDefaultJsonLayout()));
                 var asyncWrapper = new AsyncTargetWrapper()
                 {
                     OverflowAction = AsyncTargetWrapperOverflowAction.Discard,
@@ -71,13 +73,11 @@
         }
 
 #pragma warning disable SA1118 // Parameter must not span multiple lines
-        private Layout DefaultJsonLayout
+        private Layout GetDefaultJsonLayout()
         {
-            get
+            return new JsonLayout()
             {
-                return new JsonLayout()
-                {
-                    Attributes =
+                Attributes =
                     {
                         new JsonAttribute("level", "${level}"),
                         new JsonAttribute("time", "${longdate}"),
@@ -108,11 +108,10 @@
                         },
                         false)
                     },
-                    RenderEmptyObject = false,
-                    IncludeAllProperties = true,
-                    ExcludeProperties = { "CallerFilePath", "CallerLineNumber", "CallerMemberName" }
-                };
-            }
+                RenderEmptyObject = false,
+                IncludeAllProperties = true,
+                ExcludeProperties = { "CallerFilePath", "CallerLineNumber", "CallerMemberName" }
+            };
         }
 #pragma warning restore SA1118 // Parameter must not span multiple lines
 
@@ -128,10 +127,8 @@
                 ConcurrentWrites = true,
                 ReplaceFileContentsOnEachWrite = false,
                 Encoding = Encoding.UTF8,
-                Layout = DefaultJsonLayout
+                Layout = GetDefaultJsonLayout()
             };
         }
-
-        private static string LogDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"EliteLogAgent\Log");
     }
 }
