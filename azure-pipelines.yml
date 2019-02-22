@@ -33,3 +33,14 @@ steps:
     configuration: '$(buildConfiguration)'
     codeCoverageEnabled: True
     runInParallel: True
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: 'EliteLogAgent\bin\$(buildConfiguration)\'
+    contents: '*.dll|*.exe|*.config'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: $(Build.ArtifactStagingDirectory)
+    ArtifactName: EliteLogAgent
