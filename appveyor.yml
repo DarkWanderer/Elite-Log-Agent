@@ -28,8 +28,9 @@ build_script:
 - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
 after_build:
-- cmd: mkdir ela-portable
-- .\ILMerge\tools\net452\ilmerge.exe /ndebug /wildcards /out:ela-portable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- cmd: mkdir portable
+- .\ILMerge\tools\net452\ilmerge.exe /ndebug /wildcards /out:portable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
+- 7z a ELA.Portable.$(appveyor_build_version).zip portable\EliteLogAgent.exe
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -filter:"+[*]* -[*]NUnit* -[Moq*]*" -excludebyattribute:NUnit.Framework.ExplicitAttribute -output:"coverage.xml"
@@ -42,8 +43,8 @@ after_test:
       bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
 
 artifacts:
-- path: ela-portable
-  name: ela-portable
+- path: ELA.Portable.$(appveyor_build_version).zip
+  name: portable
 - path: coverage.zip
   name: coverage
   type: Zip
@@ -73,7 +74,7 @@ for:
     release: $(appveyor_build_version)
     auth_token:
       secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-    artifact: ela-portable
+    artifact: portable
     draft: false
     prerelease: false
     force_update: true
