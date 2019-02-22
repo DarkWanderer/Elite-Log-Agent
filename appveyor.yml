@@ -30,24 +30,19 @@ build_script:
 after_build:
 - cmd: mkdir portable
 - .\ILMerge\tools\net452\ilmerge.exe /ndebug /wildcards /out:portable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
-- 7z a ELA.Portable.$(appveyor_build_version).zip portable\EliteLogAgent.exe
+- 7z a ELA.Portable.%APPVEYOR_BUILD_VERSION%.zip portable\EliteLogAgent.exe
+- ps: Push-AppveyorArtifact "ELA.Portable.$(appveyor_build_version).zip" -DeploymentName portable
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -filter:"+[*]* -[*]NUnit* -[Moq*]*" -excludebyattribute:NUnit.Framework.ExplicitAttribute -output:"coverage.xml"
 - 7z a coverage.zip coverage.xml
+- ps: Push-AppveyorArtifact coverage.zip
 
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
       Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
       bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
-
-artifacts:
-- path: ELA.Portable.$(appveyor_build_version).zip
-  name: portable
-- path: coverage.zip
-  name: coverage
-  type: Zip
 
 deploy:
 
