@@ -42,10 +42,7 @@
 
         protected override IEventConverter<JObject> EventConverter => eventConverter;
 
-        public override void ReloadSettings()
-        {
-            FlushQueue();
-        }
+        public override void ReloadSettings() => FlushQueue();
 
         public override async void FlushEvents(ICollection<JObject> events)
         {
@@ -59,12 +56,12 @@
                 var apiFacade = new EdsmApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
                 var apiEventsBatches = events
                     .Where(e => !ignoredEvents.Result.Contains(e["event"].ToString()))
-                    .TakeLast(3000) // Limit to last N events to avoid EDSM overload
+                    .TakeLast(1000) // Limit to last N events to avoid EDSM overload
                     .Reverse()
                     .Batch(100) // EDSM API only accepts 100 events in single call
                     .ToList();
                 foreach (var batch in apiEventsBatches)
-                    await apiFacade?.PostLogEvents(batch.ToArray());
+                    await apiFacade.PostLogEvents(batch.ToArray());
                 Log.Info()
                     .Message("Uploaded {0} events", events.Count)
                     .Property("eventsCount", events.Count)
