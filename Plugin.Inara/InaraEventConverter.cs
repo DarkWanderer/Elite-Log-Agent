@@ -56,6 +56,12 @@
                     case Progress e: return ConvertEvent(e);
                     case Reputation e: return ConvertEvent(e);
 
+                    // Powerplay pledge
+                    case Powerplay e: return ConvertEvent(e);
+                    case PowerplayLeave e: return ConvertEvent(e);
+                    case PowerplayJoin e: return ConvertEvent(e);
+                    case PowerplayDefect e: return ConvertEvent(e);
+
                     // Combat
                     case Interdicted e: return ConvertEvent(e);
                     case Interdiction e: return ConvertEvent(e);
@@ -81,6 +87,24 @@
                 Log.Error(e, "Error in OnNext");
             }
             return Enumerable.Empty<ApiEvent>();
+        }
+
+        private IEnumerable<ApiEvent> ConvertEvent(PowerplayDefect e) => GetPowerplayRankEvent(e.Timestamp, e.ToPower, 1);
+        private IEnumerable<ApiEvent> ConvertEvent(PowerplayJoin e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 1);
+        private IEnumerable<ApiEvent> ConvertEvent(PowerplayLeave e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 0);
+        private IEnumerable<ApiEvent> ConvertEvent(Powerplay e) => GetPowerplayRankEvent(e.Timestamp, e.Power, Math.Max(e.Rank, 1));
+
+        private IEnumerable<ApiEvent> GetPowerplayRankEvent(DateTime timestamp, string power, int? rank = null)
+        {
+            yield return new ApiEvent("setCommanderRankPower")
+            {
+                Timestamp = timestamp,
+                EventData = new Dictionary<string, object>
+                {
+                    { "powerName", power },
+                    { "rankValue", rank ?? 0 }
+                }
+            };
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(Cargo e)

@@ -80,7 +80,7 @@
                 throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
 
             Log.Info()
-                .Message("Uploaded {0} events", events.Length)
+                .Message("Uploaded events", events.Length)
                 .Property("eventsCount", events.Length)
                 .Write();
 

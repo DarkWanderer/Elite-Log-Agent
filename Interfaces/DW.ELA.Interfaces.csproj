@@ -104,6 +104,10 @@
     <Compile Include="Events\Outfitting.cs" />
     <Compile Include="Events\OutfittingItem.cs" />
     <Compile Include="Events\PassengersStatistics.cs" />
+    <Compile Include="Events\Powerplay.cs" />
+    <Compile Include="Events\PowerplayDefect.cs" />
+    <Compile Include="Events\PowerplayJoin.cs" />
+    <Compile Include="Events\PowerplayLeave.cs" />
     <Compile Include="Events\Progress.cs" />
     <Compile Include="Events\Promotion.cs" />
     <Compile Include="Events\PvpKill.cs" />
