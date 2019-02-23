@@ -55,20 +55,21 @@
             {
                 for (int i = 0; i < events.Length; i++)
                 {
-                    var statusCode = outputData.Events[i].EventStatus;
+                    var outputEvent = outputData.Events[i];
+                    var statusCode = outputEvent.EventStatus;
+                    var statusText = outputEvent.EventStatusText;
+
                     if (statusCode != 200)
                     {
-                        var statusText = outputData.Events[i].EventStatusText;
-
                         if (ignoredErrors.Contains(statusText))
                             continue;
 
                         exceptions.Add(new ApplicationException(statusText ?? "Unknown Error"));
 
                         var log = statusCode < 300 ? Log.Warn() : Log.Error();
-                        log.Message("Error code returned from")
+                        log.Message(statusText)
                             .Property("input", inputData.Events[i].ToString())
-                            .Property("output", outputData.Events[i].ToString())
+                            .Property("output", outputEvent.ToString())
                             .Property("status", statusCode)
                             .Write();
                     }
