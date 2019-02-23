@@ -25,9 +25,16 @@
             {
                 var result = await restClient.PostAsync(eventData);
                 if (result != "OK")
-                    Log.Error("Error pushing event: {0}", result);
+                {
+                    Log.Error()
+                        .Message(result)
+                        .Property("input", eventData)
+                        .Write();
+                }
                 else
+                {
                     Log.Info("Pushed event {0}", @event.GetType());
+                }
             }
             catch (Exception e)
             {
