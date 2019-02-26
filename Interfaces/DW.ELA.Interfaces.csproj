@@ -52,7 +52,6 @@
     <Compile Include="AbstractSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ErrorRecord.cs" />
     <Compile Include="Events\Cargo.cs" />
     <Compile Include="Events\CombatStatistics.cs" />
     <Compile Include="Events\Commander.cs" />

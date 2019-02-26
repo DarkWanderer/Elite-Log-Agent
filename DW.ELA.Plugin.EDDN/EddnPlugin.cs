@@ -7,7 +7,6 @@
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.EDDN.Model;
-    using DW.ELA.Utility;
     using Newtonsoft.Json.Linq;
     using NLog;
 

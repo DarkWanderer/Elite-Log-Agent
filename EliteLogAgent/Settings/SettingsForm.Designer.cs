@@ -87,7 +87,7 @@
             this.settingsCategoriesListView.TabIndex = 8;
             this.settingsCategoriesListView.UseCompatibleStateImageBehavior = false;
             this.settingsCategoriesListView.View = System.Windows.Forms.View.List;
-            this.settingsCategoriesListView.SelectedIndexChanged += new System.EventHandler(this.settingsCategoriesListView_SelectedIndexChanged);
+            this.settingsCategoriesListView.SelectedIndexChanged += new System.EventHandler(this.SettingsCategoriesListView_SelectedIndexChanged);
             // 
             // settingsCategoriesImageList
             // 

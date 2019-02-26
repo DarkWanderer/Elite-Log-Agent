@@ -55,9 +55,8 @@
             apiKeyLabel = new LinkLabel();
             autoManageFriendsCheckbox = new CheckBox();
             SuspendLayout();
-            //
+
             // inaraApiKeyTextBox
-            //
             inaraApiKeyTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             inaraApiKeyTextBox.Location = new Point(114, 3);
             inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
@@ -65,19 +64,17 @@
             inaraApiKeyTextBox.TabIndex = 1;
             inaraApiKeyTextBox.Text = "Inara API Key";
             inaraApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
-            //
+
             // testCredentialsButton
-            //
             testCredentialsButton.Location = new Point(3, 27);
             testCredentialsButton.Name = "testCredentialsButton";
             testCredentialsButton.Size = new Size(122, 23);
             testCredentialsButton.TabIndex = 2;
             testCredentialsButton.Text = "Validate";
             testCredentialsButton.UseVisualStyleBackColor = true;
-            testCredentialsButton.Click += new EventHandler(testCredentialsButton_Click);
-            //
+            testCredentialsButton.Click += new EventHandler(TestCredentialsButton_Click);
+
             // credentialsStatusLabel
-            //
             credentialsStatusLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             credentialsStatusLabel.AutoSize = true;
             credentialsStatusLabel.Location = new Point(271, 55);
@@ -85,9 +82,8 @@
             credentialsStatusLabel.Size = new Size(87, 17);
             credentialsStatusLabel.TabIndex = 3;
             credentialsStatusLabel.Text = "Not checked";
-            //
+
             // apiKeyValidatedCheckbox
-            //
             apiKeyValidatedCheckbox.AutoSize = true;
             apiKeyValidatedCheckbox.Enabled = false;
             apiKeyValidatedCheckbox.Location = new Point(131, 31);
@@ -96,10 +92,9 @@
             apiKeyValidatedCheckbox.TabIndex = 7;
             apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
             apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
-            apiKeyValidatedCheckbox.CheckedChanged += new EventHandler(apiKeyValidatedCheckbox_CheckedChanged);
-            //
+            apiKeyValidatedCheckbox.CheckedChanged += new EventHandler(ApiKeyValidatedCheckbox_CheckedChanged);
+
             // apiKeyLabel
-            //
             apiKeyLabel.AutoSize = true;
             apiKeyLabel.Location = new Point(3, 6);
             apiKeyLabel.Name = "apiKeyLabel";
@@ -107,10 +102,9 @@
             apiKeyLabel.TabIndex = 8;
             apiKeyLabel.TabStop = true;
             apiKeyLabel.Text = "INARA Api Key:";
-            apiKeyLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(apiKeyLabel_LinkClicked);
-            //
+            apiKeyLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(ApiKeyLabel_LinkClicked);
+
             // autoManageFriendsCheckbox
-            //
             autoManageFriendsCheckbox.AutoSize = true;
             autoManageFriendsCheckbox.Location = new Point(3, 80);
             autoManageFriendsCheckbox.Name = "autoManageFriendsCheckbox";
@@ -118,9 +112,8 @@
             autoManageFriendsCheckbox.TabIndex = 9;
             autoManageFriendsCheckbox.Text = "Add friends automatically";
             autoManageFriendsCheckbox.UseVisualStyleBackColor = true;
-            //
+
             // InaraSettingsControl
-            //
             Controls.Add(autoManageFriendsCheckbox);
             Controls.Add(apiKeyLabel);
             Controls.Add(apiKeyValidatedCheckbox);
@@ -133,7 +126,7 @@
             PerformLayout();
         }
 
-        private async void testCredentialsButton_Click(object sender, EventArgs e)
+        private async void TestCredentialsButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -158,8 +151,8 @@
             }
         }
 
-        private void apiKeyValidatedCheckbox_CheckedChanged(object sender, EventArgs e) => inaraApiKeyTextBox.BackColor = apiKeyValidatedCheckbox.Checked ? Color.LightGreen : Color.LightSalmon;
+        private void ApiKeyValidatedCheckbox_CheckedChanged(object sender, EventArgs e) => inaraApiKeyTextBox.BackColor = apiKeyValidatedCheckbox.Checked ? Color.LightGreen : Color.LightSalmon;
 
-        private void apiKeyLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://inara.cz/settings-api/");
+        private void ApiKeyLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://inara.cz/settings-api/");
     }
 }

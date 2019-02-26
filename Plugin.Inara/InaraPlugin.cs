@@ -8,30 +8,19 @@
     using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.Inara.Model;
-    using DW.ELA.Utility;
     using MoreLinq;
     using NLog;
 
     public class InaraPlugin : AbstractPlugin<ApiEvent, InaraSettings>
     {
-        private const string InaraApiUrl = "https://inara.cz/inapi/v1/";
-
-        public override string PluginName => CPluginName;
-
-        public override string PluginId => CPluginId;
-
         public const string CPluginName = "INARA";
         public const string CPluginId = "InaraUploader";
-
-        protected internal IRestClient RestClient { get; }
+        private const string InaraApiUrl = "https://inara.cz/inapi/v1/";
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         private readonly InaraEventConverter eventConverter;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
-        private ISettingsProvider settingsProvider;
-
-        protected override IEventConverter<ApiEvent> EventConverter => eventConverter;
-
-        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+        private readonly ISettingsProvider settingsProvider;
 
         public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, IRestClientFactory restClientFactory)
             : base(settingsProvider)
@@ -44,13 +33,18 @@
             ReloadSettings();
         }
 
+        public override string PluginName => CPluginName;
+
+        public override string PluginId => CPluginId;
+
+        protected internal IRestClient RestClient { get; }
+
+        protected override IEventConverter<ApiEvent> EventConverter => eventConverter;
+
         // Explicitly set to 30 as Inara prefers batches of events
         protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
 
-        public override void ReloadSettings()
-        {
-            FlushQueue();
-        }
+        public override void ReloadSettings() => FlushQueue();
 
         public override void OnNext(LogEvent @event)
         {
@@ -102,14 +96,14 @@
             var eventsByType = events
                 .GroupBy(e => e.EventName, e => e)
                 .ToDictionary(g => g.Key, g => g.ToArray());
-            foreach (var type in LatestOnlyEvents.Intersect(eventsByType.Keys))
+            foreach (string type in LatestOnlyEvents.Intersect(eventsByType.Keys))
                 eventsByType[type] = new[] { eventsByType[type].MaxBy(e => e.Timestamp).FirstOrDefault() };
 
             // It does not make sense to e.g. add inventory materials if we already have a newer inventory snapshot
-            foreach (var type in SupersedesEvents.Keys.Intersect(eventsByType.Keys))
+            foreach (string type in SupersedesEvents.Keys.Intersect(eventsByType.Keys))
             {
                 var cutoffTimestamp = eventsByType[type].Max(e => e.Timestamp);
-                foreach (var supersededType in SupersedesEvents[type].Intersect(eventsByType.Keys))
+                foreach (string supersededType in SupersedesEvents[type].Intersect(eventsByType.Keys))
                 {
                     eventsByType[supersededType] = eventsByType[supersededType]
                         .Where(e => e.Timestamp > cutoffTimestamp)

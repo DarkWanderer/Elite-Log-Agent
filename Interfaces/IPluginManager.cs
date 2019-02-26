@@ -6,9 +6,9 @@
     {
         IReadOnlyCollection<string> LoadedPluginIds { get; }
 
-        IPlugin GetPluginById(string pluginId);
-
         IReadOnlyCollection<IPlugin> LoadedPlugins { get; }
+
+        IPlugin GetPluginById(string pluginId);
 
         void LoadPlugin(string pluginAssemblyName);
 

@@ -21,7 +21,6 @@
         private readonly IEventConverter<JObject> eventConverter;
         public const string CPluginId = "EdsmUploader";
 
-
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory)
             : base(settingsProvider)
         {
@@ -41,6 +40,10 @@
         protected override TimeSpan FlushInterval => TimeSpan.FromMinutes(1);
 
         protected override IEventConverter<JObject> EventConverter => eventConverter;
+
+        public override string PluginName => "EDSM";
+
+        public override string PluginId => CPluginId;
 
         public override void ReloadSettings() => FlushQueue();
 
@@ -72,10 +75,6 @@
                 Log.Error(e, "Error while processing events");
             }
         }
-
-        public override string PluginName => "EDSM";
-
-        public override string PluginId => CPluginId;
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EdsmSettingsControl() { GlobalSettings = settings, RestClient = RestClient };
     }

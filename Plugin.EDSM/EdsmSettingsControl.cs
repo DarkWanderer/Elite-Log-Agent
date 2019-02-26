@@ -85,7 +85,7 @@
             edsmApiKeyTextBox.TabIndex = 1;
             edsmApiKeyTextBox.Text = "EDSM API Key";
             edsmApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
-            edsmApiKeyTextBox.TextChanged += new EventHandler(edsmApiKeyTextBox_TextChanged);
+            edsmApiKeyTextBox.TextChanged += new EventHandler(EdsmApiKeyTextBox_TextChanged);
 
             // testCredentialsButton
             testCredentialsButton.Location = new Point(3, 27);
@@ -94,7 +94,7 @@
             testCredentialsButton.TabIndex = 2;
             testCredentialsButton.Text = "Validate";
             testCredentialsButton.UseVisualStyleBackColor = true;
-            testCredentialsButton.Click += new EventHandler(testCredentialsButton_Click);
+            testCredentialsButton.Click += new EventHandler(TestCredentialsButton_Click);
 
             // credentialsStatusLabel
             credentialsStatusLabel.AutoSize = true;
@@ -113,7 +113,7 @@
             apiKeyValidatedCheckbox.TabIndex = 4;
             apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
             apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
-            apiKeyValidatedCheckbox.CheckedChanged += new EventHandler(apiKeyValidatedCheckbox_CheckedChanged);
+            apiKeyValidatedCheckbox.CheckedChanged += new EventHandler(ApiKeyValidatedCheckbox_CheckedChanged);
 
             // apiKeyLabel
             apiKeyLabel.AutoSize = true;
@@ -123,7 +123,7 @@
             apiKeyLabel.TabIndex = 6;
             apiKeyLabel.TabStop = true;
             apiKeyLabel.Text = "EDSM API key:";
-            apiKeyLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(apiKeyLabel_LinkClicked);
+            apiKeyLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(ApiKeyLabel_LinkClicked);
 
             // EdsmSettingsControl
             Controls.Add(apiKeyLabel);
@@ -137,7 +137,7 @@
             PerformLayout();
         }
 
-        private async void testCredentialsButton_Click(object sender, EventArgs e)
+        private async void TestCredentialsButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -163,16 +163,16 @@
 
         public override void SaveSettings() => Settings = new EdsmSettings() { ApiKey = edsmApiKeyTextBox.Text, Verified = apiKeyValidatedCheckbox.Checked };
 
-        private void apiKeyLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void ApiKeyLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://www.edsm.net/en/settings/api");
         }
 
-        private void edsmApiKeyTextBox_TextChanged(object sender, EventArgs e)
+        private void EdsmApiKeyTextBox_TextChanged(object sender, EventArgs e)
         {
             edsmApiKeyTextBox.BackColor = Color.LightGray;
         }
 
-        private void apiKeyValidatedCheckbox_CheckedChanged(object sender, EventArgs e) => edsmApiKeyTextBox.BackColor = apiKeyValidatedCheckbox.Checked ? Color.LightGreen : Color.LightSalmon;
+        private void ApiKeyValidatedCheckbox_CheckedChanged(object sender, EventArgs e) => edsmApiKeyTextBox.BackColor = apiKeyValidatedCheckbox.Checked ? Color.LightGreen : Color.LightSalmon;
     }
 }

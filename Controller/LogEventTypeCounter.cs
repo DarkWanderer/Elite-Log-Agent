@@ -10,7 +10,6 @@
     {
         private ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
 
-
         public IReadOnlyCollection<string> EventTypes =>
             eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();
 

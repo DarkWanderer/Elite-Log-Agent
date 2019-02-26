@@ -9,6 +9,7 @@
     public class PluginSettingsFacade<T>
         where T : class, new()
     {
+        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly string pluginId;
         private readonly GlobalSettings globalSettings;
 
@@ -16,26 +17,6 @@
         {
             this.pluginId = pluginId;
             this.globalSettings = globalSettings;
-        }
-
-        private JObject GetPluginSettings()
-        {
-            if (globalSettings.PluginSettings.ContainsKey(pluginId))
-                return globalSettings.PluginSettings[pluginId];
-            else
-                return null;
-        }
-
-        private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-
-        JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
-
-        private void SetPluginSettings(JObject value)
-        {
-            if (!globalSettings.PluginSettings.ContainsKey(pluginId))
-                globalSettings.PluginSettings.Add(pluginId, value);
-            else
-                globalSettings.PluginSettings[pluginId] = value;
         }
 
         public T Settings
@@ -54,5 +35,24 @@
             }
             set => SetPluginSettings(JObject.FromObject(value));
         }
+
+        private JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
+
+        private JObject GetPluginSettings()
+        {
+            if (globalSettings.PluginSettings.ContainsKey(pluginId))
+                return globalSettings.PluginSettings[pluginId];
+            else
+                return null;
+        }
+
+        private void SetPluginSettings(JObject value)
+        {
+            if (!globalSettings.PluginSettings.ContainsKey(pluginId))
+                globalSettings.PluginSettings.Add(pluginId, value);
+            else
+                globalSettings.PluginSettings[pluginId] = value;
+        }
+
     }
 }

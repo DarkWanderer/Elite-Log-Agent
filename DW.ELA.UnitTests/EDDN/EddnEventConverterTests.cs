@@ -1,10 +1,8 @@
 ﻿namespace DW.ELA.UnitTests.EDDN
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using DW.ELA.Interfaces;
-    using DW.ELA.LogModel;
     using DW.ELA.Plugin.EDDN;
     using DW.ELA.Plugin.EDDN.Model;
     using Moq;

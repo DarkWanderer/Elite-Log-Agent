@@ -17,15 +17,6 @@
 
         private GlobalSettings currentSettings;
 
-        // These have to be properties because Form designer does not allow arguments in constructor
-        internal ISettingsProvider Provider { get; set; }
-
-        internal IPlayerStateHistoryRecorder PlayerStateRecorder { get; set; }
-
-        internal List<IPlugin> Plugins { get; set; }
-
-        internal IAutorunManager AutorunManager { get; set; }
-
         private IDictionary<string, AbstractSettingsControl> settingsControls = new Dictionary<string, AbstractSettingsControl>();
 
         public SettingsForm()
@@ -36,6 +27,15 @@
             Text += ". " + versionLabel;
             Load += SettingsForm_Load;
         }
+
+        // These have to be properties because Form designer does not allow arguments in constructor
+        internal ISettingsProvider Provider { get; set; }
+
+        internal IPlayerStateHistoryRecorder PlayerStateRecorder { get; set; }
+
+        internal List<IPlugin> Plugins { get; set; }
+
+        internal IAutorunManager AutorunManager { get; set; }
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
@@ -79,7 +79,7 @@
             settingsCategoriesListView.SelectedIndices.Add(0);
         }
 
-        private void settingsCategoriesListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void SettingsCategoriesListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (settingsCategoriesListView.SelectedIndices.Count > 0)
             {
