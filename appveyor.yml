@@ -1,4 +1,4 @@
-version: 1.0.1.{build}
+version: 1.0.2.{build}
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
@@ -20,9 +20,6 @@ install:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge -Version 3.0.21
 - cmd: nuget install -ExcludeVersion OpenCover
-
-build:
-  publish_azure: true
 
 build_script:
 - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
@@ -69,7 +66,7 @@ for:
     release: $(appveyor_build_version)
     auth_token:
       secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
-    artifact: portable
+    artifact: Portable
     draft: false
     prerelease: false
     force_update: true
