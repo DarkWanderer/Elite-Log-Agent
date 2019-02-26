@@ -11,6 +11,8 @@
 
     public class TrayIconController : ITrayIconController
     {
+        private static Form form;
+
         private readonly NotifyIcon trayIcon;
         private readonly IPluginManager pluginManager;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
@@ -53,8 +55,6 @@
 
         private void OpenChangelog() => Process.Start(Resources.GitHubChangelogLink);
 
-        static Form form;
-
         private void OpenAboutForm()
         {
             if (form != null)
@@ -73,8 +73,6 @@
                 form = null;
             }
         }
-
-        private void OpenReportIssueLink() => Process.Start(Resources.GitHubReportIssueLink);
 
         public void OpenSettings()
         {
@@ -102,6 +100,8 @@
                 form = null;
             }
         }
+
+        private void OpenReportIssueLink() => Process.Start(Resources.GitHubReportIssueLink);
 
         private static ToolStripSeparator ToolStripSeparatorLeft => new ToolStripSeparator { Alignment = ToolStripItemAlignment.Left };
 

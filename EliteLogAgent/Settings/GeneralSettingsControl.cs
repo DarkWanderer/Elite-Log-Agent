@@ -14,6 +14,13 @@
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
+        private Label cmdrNameLabel;
+        private TextBox cmdrNameTextBox;
+        private Button autodetectCmdrNameButton;
+        private CheckBox checkboxAutostartApplication;
+        private CheckBox reportErrorsCheckbox;
+        private Label logLevelLabel;
+        private ComboBox logLevelComboBox;
 
         public GeneralSettingsControl()
         {
@@ -168,15 +175,6 @@
             Size = new System.Drawing.Size(417, 219);
             ResumeLayout(false);
             PerformLayout();
-
         }
-
-        private Label cmdrNameLabel;
-        private TextBox cmdrNameTextBox;
-        private Button autodetectCmdrNameButton;
-        private CheckBox checkboxAutostartApplication;
-        private CheckBox reportErrorsCheckbox;
-        private Label logLevelLabel;
-        private ComboBox logLevelComboBox;
     }
 }

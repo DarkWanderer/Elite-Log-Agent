@@ -53,6 +53,5 @@
             else
                 globalSettings.PluginSettings[pluginId] = value;
         }
-
     }
 }
