@@ -28,7 +28,7 @@
             // Register core classes
             container.Register(
                 Component.For<ILogDirectoryNameProvider>().ImplementedBy<SavedGamesDirectoryHelper>().LifestyleSingleton(),
-                Component.For<ILogRealTimeDataSource>().ImplementedBy<JournalMonitor>().LifestyleSingleton(),
+                Component.For<IJournalDataSource>().ImplementedBy<JournalUdpMonitor>().LifestyleSingleton(),
                 Component.For<IPlayerStateHistoryRecorder>().ImplementedBy<PlayerStateRecorder>().LifestyleSingleton());
 
             // Register UI classes

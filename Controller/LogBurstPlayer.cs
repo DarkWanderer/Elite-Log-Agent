@@ -29,7 +29,7 @@
         {
             get
             {
-                var reader = new LogReader();
+                var reader = new JournalFileReader();
 
                 var files = LogEnumerator.GetLogFiles(logDirectory)
                     .Take(filesNumber)

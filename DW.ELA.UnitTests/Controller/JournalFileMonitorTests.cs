@@ -13,7 +13,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class JournalMonitorTests
+    public class JournalFileMonitorTests
     {
         private static IEnumerable<string> EventsAsJson => TestEventSource.CannedEvents.Select(Serialize.ToJson);
 
@@ -31,7 +31,7 @@
             string testFile2 = Path.Combine(directoryProvider.Directory, "Journal.2345.log");
 
             File.WriteAllText(testFile1, EventsAsJson.Skip(5).First());
-            var journalMonitor = new JournalMonitor(directoryProvider, 5);
+            var journalMonitor = new JournalFileMonitor(directoryProvider, 5);
             journalMonitor.Subscribe(events.Add);
 
             File.AppendAllText(testFile1, EventsAsJson.Skip(8).First());

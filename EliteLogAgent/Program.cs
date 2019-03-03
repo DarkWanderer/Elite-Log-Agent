@@ -41,7 +41,7 @@
                 pluginManager.LoadPlugin("DW.ELA.Plugin.EDSM");
                 pluginManager.LoadEmbeddedPlugins();
 
-                var logMonitor = container.Resolve<ILogRealTimeDataSource>();
+                var logMonitor = container.Resolve<IJournalDataSource>();
                 var trayController = container.Resolve<ITrayIconController>();
                 var playerStateRecorder = container.Resolve<IPlayerStateHistoryRecorder>();
 

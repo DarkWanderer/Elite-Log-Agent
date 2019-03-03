@@ -25,6 +25,9 @@
         [JsonProperty("reportErrorsToCloud")]
         public bool ReportErrorsToCloud { get; set; } = true;
 
+        [JsonIgnore]
+        public ushort Port => 57634;
+
         object ICloneable.Clone() => Clone();
 
         public GlobalSettings Clone()

@@ -87,6 +87,7 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="AbstractPluginTests.cs" />
+    <Compile Include="Controller\JournalFileMonitorTests.cs" />
     <Compile Include="DictionaryExtensionsTests.cs" />
     <Compile Include="EDDN\EddnIntegrationTest.cs" />
     <Compile Include="Controller\NLogSettingsManagerTests.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="INARA\InaraEventConverterTests.cs" />
     <Compile Include="INARA\InaraIntegrationTests.cs" />
     <Compile Include="Utility\TestCredentials.cs" />
-    <Compile Include="Controller\JournalMonitorTests.cs" />
     <Compile Include="Controller\LogBurstPlayerTests.cs" />
     <Compile Include="Controller\LogEnumeratorTests.cs" />
     <Compile Include="Controller\LogEventConverterTests.cs" />

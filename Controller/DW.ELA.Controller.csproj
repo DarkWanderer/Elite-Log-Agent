@@ -62,12 +62,13 @@
     </Compile>
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="AsyncMessageBroker.cs" />
-    <Compile Include="JournalMonitor.cs" />
+    <Compile Include="JournalFileMonitor.cs" />
+    <Compile Include="JournalFileReader.cs" />
+    <Compile Include="JournalUdpMonitor.cs" />
     <Compile Include="LogBurstPlayer.cs" />
     <Compile Include="LogEnumerator.cs" />
     <Compile Include="LogEventConverter.cs" />
     <Compile Include="LogEventTypeCounter.cs" />
-    <Compile Include="LogReader.cs" />
     <Compile Include="NLogSettingsManager.cs" />
     <Compile Include="PlayerStateRecorder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

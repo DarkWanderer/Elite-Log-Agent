@@ -14,7 +14,7 @@
     /// <summary>
     /// This class runs in background to monitor and notify consumers (observers) of new log events
     /// </summary>
-    public class JournalMonitor : LogReader, ILogRealTimeDataSource
+    public class JournalFileMonitor : JournalFileReader, IJournalDataSource
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly FileSystemWatcher fileWatcher;
@@ -33,7 +33,7 @@
         /// </summary>
         /// <param name="logDirectoryProvider">Log directory name provider</param>
         /// <param name="checkInterval">Check interval in milliseconds</param>
-        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 5000)
+        public JournalFileMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 5000)
         {
             logDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(logDirectory);

@@ -11,7 +11,7 @@
     using Newtonsoft.Json.Linq;
     using NLog;
 
-    public class LogReader
+    public class JournalFileReader
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 

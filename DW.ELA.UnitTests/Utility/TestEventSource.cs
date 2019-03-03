@@ -78,7 +78,7 @@
         {
             get
             {
-                var reader = new LogReader();
+                var reader = new JournalFileReader();
                 foreach (string file in Directory.EnumerateFiles(new SavedGamesDirectoryHelper().Directory, "*.json"))
                     yield return JObject.Parse(File.ReadAllText(file));
             }

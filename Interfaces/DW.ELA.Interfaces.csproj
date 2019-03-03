@@ -138,9 +138,10 @@
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="IAutorunManager.cs" />
     <Compile Include="IEventConverter.cs" />
+    <Compile Include="IJournalContext.cs" />
+    <Compile Include="IJournalDataSource.cs" />
     <Compile Include="ILogDirectoryNameProvider.cs" />
     <Compile Include="ILogHistoricDataSource.cs" />
-    <Compile Include="ILogRealTimeDataSource.cs" />
     <Compile Include="ILogSettingsBootstrapper.cs" />
     <Compile Include="IMessageBroker.cs" />
     <Compile Include="IPlayerStateHistoryRecorder.cs" />
