@@ -4,6 +4,7 @@
     using System.IO;
     using System.Text;
     using DW.ELA.Interfaces;
+    using DW.ELA.Utility;
     using NLog;
     using NLog.Layouts;
     using NLog.Targets;
@@ -52,7 +53,7 @@
             if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
             {
                 var webCollector = new WebServiceTarget() { Protocol = WebServiceProtocol.JsonPost, Url = new Uri(CloudErrorReportingUrl) };
-                webCollector.Parameters.Add(new MethodCallParameter(string.Empty, GetDefaultJsonLayout()));
+                webCollector.Parameters.Add(new MethodCallParameter(string.Empty, GetCloudErrorLayout()));
                 var asyncWrapper = new AsyncTargetWrapper()
                 {
                     OverflowAction = AsyncTargetWrapperOverflowAction.Discard,
@@ -73,7 +74,7 @@
         }
 
 #pragma warning disable SA1118 // Parameter must not span multiple lines
-        private Layout GetDefaultJsonLayout()
+        private JsonLayout GetDefaultJsonLayout()
         {
             return new JsonLayout()
             {
@@ -83,35 +84,45 @@
                         new JsonAttribute("time", "${longdate}"),
                         new JsonAttribute("message", "${message}"),
                         new JsonAttribute("logger", "${logger}"),
-                        new JsonAttribute("exception", new JsonLayout()
-                        {
-                            Attributes =
+                        new JsonAttribute("exception", 
+                            new JsonLayout()
                             {
-                                new JsonAttribute("type", "${exception:format=ShortType}"),
-                                new JsonAttribute("message", "${exception:format=Message}"),
-                                new JsonAttribute("data", "${exception:format=Data}"),
-                                new JsonAttribute("stackTrace", "${exception:format=StackTrace}"),
-                                new JsonAttribute("innerException", new JsonLayout()
+                                Attributes =
                                 {
-                                    Attributes =
-                                    {
-                                        new JsonAttribute("type", "${exception:format=:innerFormat=ShortType:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                        new JsonAttribute("message", "${exception:format=:innerFormat=Message:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                        new JsonAttribute("data", "${exception:format=:innerFormat=Data:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                        new JsonAttribute("stackTrace", "${exception:format=:innerFormat=StackTrace:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
-                                    },
-                                    RenderEmptyObject = false
+                                    new JsonAttribute("type", "${exception:format=ShortType}"),
+                                    new JsonAttribute("message", "${exception:format=Message}"),
+                                    new JsonAttribute("data", "${exception:format=Data}"),
+                                    new JsonAttribute("stackTrace", "${exception:format=StackTrace}"),
+                                    new JsonAttribute("innerException", 
+                                        new JsonLayout()
+                                        {
+                                            Attributes =
+                                            {
+                                                new JsonAttribute("type", "${exception:format=:innerFormat=ShortType:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                                new JsonAttribute("message", "${exception:format=:innerFormat=Message:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                                new JsonAttribute("data", "${exception:format=:innerFormat=Data:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                                new JsonAttribute("stackTrace", "${exception:format=:innerFormat=StackTrace:MaxInnerExceptionLevel=1:InnerExceptionSeparator="),
+                                            },
+                                            RenderEmptyObject = false
+                                        },
+                                        false)
                                 },
-                                false)
+                                RenderEmptyObject = false
                             },
-                            RenderEmptyObject = false
-                        },
-                        false)
+                            false)
                     },
                 RenderEmptyObject = false,
                 IncludeAllProperties = true,
                 ExcludeProperties = { "CallerFilePath", "CallerLineNumber", "CallerMemberName" }
             };
+        }
+
+        private JsonLayout GetCloudErrorLayout()
+        {
+            var layout = GetDefaultJsonLayout();
+            layout.Attributes.Add(new JsonAttribute("application", AppInfo.Name));
+            layout.Attributes.Add(new JsonAttribute("version", AppInfo.Version));
+            return layout;
         }
 #pragma warning restore SA1118 // Parameter must not span multiple lines
 
