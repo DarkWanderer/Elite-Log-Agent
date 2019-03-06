@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
@@ -120,8 +121,10 @@
         private JsonLayout GetCloudErrorLayout()
         {
             var layout = GetDefaultJsonLayout();
+            layout.Attributes.Remove(layout.Attributes.Single(a => a.Name == "time"));
             layout.Attributes.Add(new JsonAttribute("application", AppInfo.Name));
             layout.Attributes.Add(new JsonAttribute("version", AppInfo.Version));
+            layout.Attributes.Add(new JsonAttribute("time", "${date:format=o}"));
             return layout;
         }
 #pragma warning restore SA1118 // Parameter must not span multiple lines
