@@ -6,6 +6,9 @@ platform: Any CPU
 skip_tags: true
 skip_branch_with_pr: true
 
+cache:
+  - packages -> **\packages.config
+
 environment:
   PFX_PASSWORD:
     secure: wB19redOwiER/t000/oJpCZEu41oxfSlcBuVUNaILO0=
