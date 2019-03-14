@@ -33,6 +33,7 @@
                     case LoadGame e: return ConvertEvent(e);
                     case Statistics e: return ConvertEvent(e);
                     case Location e: return ConvertMinorFactionReputation(e.Timestamp, e.Factions);
+                    case Friends e: return ConvertEvent(e);
 
                     // Inventory
                     case Materials e: return ConvertEvent(e);
@@ -118,27 +119,21 @@
             };
         }
 
-        /// <summary>
-        /// Separate entry point to convert friends added
-        /// </summary>
-        /// <param name="e">"Friends" journal event</param>
-        /// <returns>sequence of INARA API inputs</returns>
-        public IEnumerable<ApiEvent> ConvertFriendsEvent(Friends e)
+        private IEnumerable<ApiEvent> ConvertEvent(Friends e)
         {
-            // if (e.Status == "Lost")
-            // {
-            //     yield return new ApiEvent("delCommanderFriend")
-            //     {
-            //         Timestamp = e.Timestamp,
-            //         EventData = new Dictionary<string, object>()
-            //         {
-            //             { "commanderName", e.Name },
-            //             { "gamePlatform", "PC" }
-            //         }
-            //     };
-            // }
-            // else
-            if (e.Status == "Added" || e.Status == "Online")
+            if (e.Status == "Lost")
+            {
+                yield return new ApiEvent("delCommanderFriend")
+                {
+                    Timestamp = e.Timestamp,
+                    EventData = new Dictionary<string, object>()
+                    {
+                        { "commanderName", e.Name },
+                        { "gamePlatform", "PC" }
+                    }
+                };
+            }
+            else if (e.Status == "Added" || e.Status == "Online")
             {
                 yield return new ApiEvent("addCommanderFriend")
                 {
@@ -428,7 +423,7 @@
                 { "starsystemName", item.StarSystem },
                 { "marketID", item.MarketId },
             };
-            if (!string.IsNullOrEmpty(item.EngineerModifications))
+            if (!String.IsNullOrEmpty(item.EngineerModifications))
             {
                 var value = new Dictionary<string, object>()
                 {

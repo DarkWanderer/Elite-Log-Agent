@@ -18,7 +18,7 @@
         private const string InaraApiUrl = "https://inara.cz/inapi/v1/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        private readonly InaraEventConverter eventConverter;
+        private readonly IEventConverter<ApiEvent> eventConverter;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly ISettingsProvider settingsProvider;
 
@@ -45,16 +45,6 @@
         protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
 
         public override void ReloadSettings() => FlushQueue();
-
-        public override void OnNext(LogEvent @event)
-        {
-            base.OnNext(@event);
-            if (Settings.ManageFriends && @event is Friends friends)
-            {
-                foreach (var e in eventConverter.ConvertFriendsEvent(friends))
-                    EventQueue.Enqueue(e);
-            }
-        }
 
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings, RestClient = RestClient };
 

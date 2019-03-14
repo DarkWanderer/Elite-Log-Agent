@@ -18,7 +18,6 @@
         private Button testCredentialsButton;
         private Label credentialsStatusLabel;
         private CheckBox apiKeyValidatedCheckbox;
-        private CheckBox autoManageFriendsCheckbox;
         private LinkLabel apiKeyLabel;
 
         public InaraSettingsControl()
@@ -27,7 +26,7 @@
             InitializeComponent();
         }
 
-        public override void SaveSettings() => Settings = new InaraSettings() { ApiKey = inaraApiKeyTextBox.Text, Verified = apiKeyValidatedCheckbox.Checked, ManageFriends = autoManageFriendsCheckbox.Checked };
+        public override void SaveSettings() => Settings = new InaraSettings() { ApiKey = inaraApiKeyTextBox.Text, Verified = apiKeyValidatedCheckbox.Checked };
 
         private void InaraSettingsControl_Load(object sender, EventArgs e) => ReloadSettings();
 
@@ -35,7 +34,6 @@
         {
             inaraApiKeyTextBox.Text = Settings.ApiKey;
             apiKeyValidatedCheckbox.Checked = Settings.Verified;
-            autoManageFriendsCheckbox.Checked = Settings.ManageFriends;
         }
 
         internal InaraSettings Settings
@@ -53,7 +51,6 @@
             this.credentialsStatusLabel = new System.Windows.Forms.Label();
             this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
             this.apiKeyLabel = new System.Windows.Forms.LinkLabel();
-            this.autoManageFriendsCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // inaraApiKeyTextBox
@@ -109,19 +106,8 @@
             this.apiKeyLabel.Text = "INARA Api Key:";
             this.apiKeyLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ApiKeyLabel_LinkClicked);
             // 
-            // autoManageFriendsCheckbox
-            // 
-            this.autoManageFriendsCheckbox.AutoSize = true;
-            this.autoManageFriendsCheckbox.Location = new System.Drawing.Point(3, 80);
-            this.autoManageFriendsCheckbox.Name = "autoManageFriendsCheckbox";
-            this.autoManageFriendsCheckbox.Size = new System.Drawing.Size(188, 21);
-            this.autoManageFriendsCheckbox.TabIndex = 9;
-            this.autoManageFriendsCheckbox.Text = "Add friends automatically";
-            this.autoManageFriendsCheckbox.UseVisualStyleBackColor = true;
-            // 
             // InaraSettingsControl
             // 
-            this.Controls.Add(this.autoManageFriendsCheckbox);
             this.Controls.Add(this.apiKeyLabel);
             this.Controls.Add(this.apiKeyValidatedCheckbox);
             this.Controls.Add(this.credentialsStatusLabel);
