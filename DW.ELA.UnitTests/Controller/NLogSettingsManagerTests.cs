@@ -11,7 +11,7 @@
         [Test]
         public void ShouldSetupLogByDefault()
         {
-            var manager = new NLogSettingsManager(new Mock<ISettingsProvider>().Object);
+            var manager = new NLogSettingsManager(new Mock<ISettingsProvider>().Object, new Mock<ITrayIconController>().Object);
             manager.Setup();
 
             // Reset log
