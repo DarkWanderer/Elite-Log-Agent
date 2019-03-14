@@ -18,19 +18,19 @@
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
         private readonly ITrayIconController trayController;
+        private readonly string logDirectory;
 
         static NLogSettingsManager()
         {
             AppDomain.CurrentDomain.DomainUnload += (o, e) => LogManager.Flush();
         }
 
-        public NLogSettingsManager(ISettingsProvider settingsProvider, ITrayIconController trayController)
+        public NLogSettingsManager(ISettingsProvider settingsProvider, ITrayIconController trayController, IPathManager pathManager)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.trayController = trayController ?? throw new ArgumentNullException(nameof(trayController));
+            this.logDirectory = pathManager.LogDirectory;
         }
-
-        private static string LogDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"EliteLogAgent\Log");
 
         public void Setup()
         {
@@ -135,8 +135,8 @@
         {
             return new FileTarget
             {
-                FileName = Path.Combine(LogDirectory, "EliteLogAgent.json"),
-                ArchiveFileName = Path.Combine(LogDirectory, "EliteLogAgent.{###}.json"),
+                FileName = Path.Combine(logDirectory, "EliteLogAgent.json"),
+                ArchiveFileName = Path.Combine(logDirectory, "EliteLogAgent.{###}.json"),
                 ArchiveNumbering = ArchiveNumberingMode.DateAndSequence,
                 ArchiveEvery = FileArchivePeriod.Day,
                 MaxArchiveFiles = 10,

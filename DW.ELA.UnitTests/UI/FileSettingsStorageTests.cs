@@ -1,6 +1,8 @@
 ﻿namespace DW.ELA.UnitTests.UI
 {
     using System.IO;
+    using DW.ELA.Interfaces;
+    using DW.ELA.UnitTests.Utility;
     using EliteLogAgent;
     using NUnit.Framework;
 
@@ -11,7 +13,7 @@
         [Test]
         public void ShouldSaveLoadSettings()
         {
-            var storage = new FileSettingsStorage() { SettingsFileDirectory = Path.GetTempPath() };
+            var storage = new FileSettingsStorage(new TempDirPathManager());
             var settings = storage.Settings;
             settings.CommanderName = TestCommander;
             storage.Settings = settings;

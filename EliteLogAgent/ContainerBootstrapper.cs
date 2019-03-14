@@ -9,6 +9,7 @@
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
     using EliteLogAgent.Autorun;
+    using EliteLogAgent.Deployment;
 
     internal static class ContainerBootstrapper
     {
@@ -17,6 +18,7 @@
             // Initalize infrastructure classes - NLog, Windsor
             container.AddFacility<LoggingFacility>(f => f.LogUsing<NLogFactory>().ConfiguredExternally());
             container.Register(
+                Component.For<IPathManager>().ImplementedBy<DataPathManager>().LifestyleSingleton(),
                 Component.For<ISettingsProvider>().ImplementedBy<FileSettingsStorage>().LifestyleSingleton(),
                 Component.For<ILogSettingsBootstrapper>().ImplementedBy<NLogSettingsManager>().LifestyleTransient(),
                 Component.For<IPluginManager>().ImplementedBy<CastleWindsorPluginLoader>().LifestyleSingleton(),

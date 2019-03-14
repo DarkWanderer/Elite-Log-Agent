@@ -13,8 +13,14 @@
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         private readonly object settingsCacheLock = new object();
+        private readonly string settingsFileDirectory;
 
         private GlobalSettings settingsCache;
+
+        public FileSettingsStorage(IPathManager pathManager)
+        {
+            settingsFileDirectory = pathManager.SettingsDirectory;
+        }
 
         public event EventHandler SettingsChanged;
 
@@ -53,8 +59,6 @@
             }
         }
 
-        public string SettingsFileDirectory { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");
-
-        private string SettingsFilePath => Path.Combine(SettingsFileDirectory, "Settings.json");
+        private string SettingsFilePath => Path.Combine(settingsFileDirectory, "Settings.json");
     }
 }
