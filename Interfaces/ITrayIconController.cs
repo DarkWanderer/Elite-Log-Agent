@@ -4,5 +4,6 @@
 
     public interface ITrayIconController : IDisposable
     {
+        void ShowErrorNotification(string error);
     }
 }

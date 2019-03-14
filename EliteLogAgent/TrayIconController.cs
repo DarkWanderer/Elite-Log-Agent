@@ -18,6 +18,16 @@
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly ISettingsProvider settingsProvider;
         private readonly IAutorunManager autorunManager;
+        private bool disposedValue = false; // To detect redundant calls
+
+        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IAutorunManager autorunManager)
+        {
+            trayIcon = CreateTrayIcon();
+            this.pluginManager = pluginManager;
+            this.playerStateRecorder = playerStateRecorder;
+            this.settingsProvider = settingsProvider;
+            this.autorunManager = autorunManager;
+        }
 
         private NotifyIcon CreateTrayIcon()
         {
@@ -33,6 +43,8 @@
             notifyIcon.DoubleClick += (o, e) => OpenSettings();
             return notifyIcon;
         }
+
+        private static ToolStripSeparator ToolStripSeparatorLeft => new ToolStripSeparator { Alignment = ToolStripItemAlignment.Left };
 
         private ContextMenuStrip CreateMenuStrip()
         {
@@ -74,6 +86,8 @@
             }
         }
 
+        public void ShowErrorNotification(string error) => trayIcon.ShowBalloonTip(30000, "Elite Log Agent Error", error, ToolTipIcon.Error);
+
         public void OpenSettings()
         {
             if (form != null)
@@ -102,19 +116,6 @@
         }
 
         private void OpenReportIssueLink() => Process.Start(Resources.GitHubReportIssueLink);
-
-        private static ToolStripSeparator ToolStripSeparatorLeft => new ToolStripSeparator { Alignment = ToolStripItemAlignment.Left };
-
-        private bool disposedValue = false; // To detect redundant calls
-
-        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IAutorunManager autorunManager)
-        {
-            trayIcon = CreateTrayIcon();
-            this.pluginManager = pluginManager;
-            this.playerStateRecorder = playerStateRecorder;
-            this.settingsProvider = settingsProvider;
-            this.autorunManager = autorunManager;
-        }
 
         protected virtual void Dispose(bool disposing)
         {
@@ -146,5 +147,6 @@
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }
+
     }
 }

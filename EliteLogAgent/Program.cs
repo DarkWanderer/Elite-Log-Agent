@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Windows.Forms;
     using Castle.Windsor;
+    using DW.ELA.Controller;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
     using NLog;
@@ -29,6 +30,9 @@
             using (var container = new WindsorContainer())
             {
                 ContainerBootstrapper.Initalize(container);
+
+                // Setup logs
+                container.Resolve<ILogSettingsBootstrapper>().Setup();
                 RootLog.Info()
                     .Message("Application started")
                     .Property("version", AppInfo.Version)

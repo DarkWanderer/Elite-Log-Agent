@@ -17,15 +17,17 @@
 
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
+        private readonly ITrayIconController trayController;
 
         static NLogSettingsManager()
         {
             AppDomain.CurrentDomain.DomainUnload += (o, e) => LogManager.Flush();
         }
 
-        public NLogSettingsManager(ISettingsProvider settingsProvider)
+        public NLogSettingsManager(ISettingsProvider settingsProvider, ITrayIconController trayController)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
+            this.trayController = trayController ?? throw new ArgumentNullException(nameof(trayController));
         }
 
         private static string LogDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"EliteLogAgent\Log");
@@ -49,6 +51,8 @@
 
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
+            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error,
+                new MethodCallTarget("popup", (logEvent, data) => trayController.ShowErrorNotification(logEvent.FormattedMessage))));
 
             if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
             {
@@ -84,7 +88,7 @@
                         new JsonAttribute("time", "${longdate}"),
                         new JsonAttribute("message", "${message}"),
                         new JsonAttribute("logger", "${logger}"),
-                        new JsonAttribute("exception", 
+                        new JsonAttribute("exception",
                             new JsonLayout()
                             {
                                 Attributes =
@@ -93,7 +97,7 @@
                                     new JsonAttribute("message", "${exception:format=Message}"),
                                     new JsonAttribute("data", "${exception:format=Data}"),
                                     new JsonAttribute("stackTrace", "${exception:format=StackTrace}"),
-                                    new JsonAttribute("innerException", 
+                                    new JsonAttribute("innerException",
                                         new JsonLayout()
                                         {
                                             Attributes =

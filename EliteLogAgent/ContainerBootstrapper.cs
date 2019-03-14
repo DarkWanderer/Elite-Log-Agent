@@ -23,15 +23,13 @@
                 Component.For<IWindsorContainer>().Instance(container),
                 Component.For<IRestClientFactory>().ImplementedBy<ThrottlingRestClient.Factory>());
 
-            container.Resolve<ILogSettingsBootstrapper>().Setup();
-
             // Register core classes
             container.Register(
                 Component.For<ILogDirectoryNameProvider>().ImplementedBy<SavedGamesDirectoryHelper>().LifestyleSingleton(),
                 Component.For<ILogRealTimeDataSource>().ImplementedBy<JournalMonitor>().LifestyleSingleton(),
                 Component.For<IPlayerStateHistoryRecorder>().ImplementedBy<PlayerStateRecorder>().LifestyleSingleton());
 
-            // Register UI classes
+            // Register UI classes. Need to initalize before log to enable tray icon
             container.Register(Component.For<ITrayIconController>().ImplementedBy<TrayIconController>().LifestyleSingleton());
 
             // Different components will be used based on whether apps are portable
