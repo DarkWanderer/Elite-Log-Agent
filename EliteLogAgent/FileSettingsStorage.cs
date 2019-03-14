@@ -28,34 +28,35 @@
         {
             get
             {
-                try
-                {
-                    lock (settingsCacheLock)
-                        if (settingsCache != null)
-                            return settingsCache;
+                lock (settingsCacheLock)
+                    try
+                    {
+                        if (settingsCache == null && File.Exists(SettingsFilePath))
+                            settingsCache = JsonConvert.DeserializeObject<GlobalSettings>(File.ReadAllText(SettingsFilePath));
 
-                    if (File.Exists(SettingsFilePath))
-                        return JsonConvert.DeserializeObject<GlobalSettings>(File.ReadAllText(SettingsFilePath));
-                }
-                catch (Exception e)
-                {
-                    Log.Warn(e, "Exception while reading settings, using defaults");
-                }
-                return GlobalSettings.Defaults;
+                            return settingsCache ?? GlobalSettings.Defaults;
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Warn(e, "Exception while reading settings, using defaults");
+                        return GlobalSettings.Defaults;
+                    }
             }
 
             set
             {
                 lock (settingsCacheLock)
-                    settingsCache = null;
-
-                using (var fileStream = File.Open(SettingsFilePath, FileMode.Create))
-                using (var streamWriter = new StreamWriter(fileStream))
-                using (var jsonWriter = new JsonTextWriter(streamWriter))
                 {
-                    Converter.Serializer.Serialize(jsonWriter, value);
+                    settingsCache = value;
+
+                    using (var fileStream = File.Open(SettingsFilePath, FileMode.Create))
+                    using (var streamWriter = new StreamWriter(fileStream))
+                    using (var jsonWriter = new JsonTextWriter(streamWriter))
+                    {
+                        Converter.Serializer.Serialize(jsonWriter, value);
+                    }
+                    SettingsChanged?.Invoke(this, new EventArgs());
                 }
-                SettingsChanged?.Invoke(this, new EventArgs());
             }
         }
 

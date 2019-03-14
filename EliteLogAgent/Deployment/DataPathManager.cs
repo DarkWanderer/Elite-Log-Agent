@@ -13,6 +13,6 @@
 
         private string AppDataDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EliteLogAgent");
 
-        private string LocalDirectory => Path.GetDirectoryName(typeof(Program).Assembly.CodeBase);
+        private string LocalDirectory => Path.GetDirectoryName(new Uri(typeof(Program).Assembly.CodeBase).LocalPath);
     }
 }
