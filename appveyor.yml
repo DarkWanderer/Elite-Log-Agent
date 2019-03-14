@@ -8,6 +8,8 @@ skip_branch_with_pr: true
 
 cache:
   - packages -> **\packages.config
+  - ILMerge -> appveyor.yml
+  - OpenCover -> appveyor.yml
 
 environment:
   PFX_PASSWORD:
