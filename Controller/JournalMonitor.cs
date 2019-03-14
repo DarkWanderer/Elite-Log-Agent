@@ -97,7 +97,7 @@
                     if (checkOtherFiles || currentFile == null)
                     {
                         string latestFile = LogEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
-                        if (latestFile == currentFile)
+                        if (latestFile == currentFile || latestFile == null)
                             return;
 
                         currentFile = latestFile;
