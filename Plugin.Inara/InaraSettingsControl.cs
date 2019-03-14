@@ -48,82 +48,90 @@
 
         private void InitializeComponent()
         {
-            inaraApiKeyTextBox = new TextBox();
-            testCredentialsButton = new Button();
-            credentialsStatusLabel = new Label();
-            apiKeyValidatedCheckbox = new CheckBox();
-            apiKeyLabel = new LinkLabel();
-            autoManageFriendsCheckbox = new CheckBox();
-            SuspendLayout();
-
+            this.inaraApiKeyTextBox = new System.Windows.Forms.TextBox();
+            this.testCredentialsButton = new System.Windows.Forms.Button();
+            this.credentialsStatusLabel = new System.Windows.Forms.Label();
+            this.apiKeyValidatedCheckbox = new System.Windows.Forms.CheckBox();
+            this.apiKeyLabel = new System.Windows.Forms.LinkLabel();
+            this.autoManageFriendsCheckbox = new System.Windows.Forms.CheckBox();
+            this.SuspendLayout();
+            // 
             // inaraApiKeyTextBox
-            inaraApiKeyTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            inaraApiKeyTextBox.Location = new Point(114, 3);
-            inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
-            inaraApiKeyTextBox.Size = new Size(244, 22);
-            inaraApiKeyTextBox.TabIndex = 1;
-            inaraApiKeyTextBox.Text = "Inara API Key";
-            inaraApiKeyTextBox.TextAlign = HorizontalAlignment.Center;
-
+            // 
+            this.inaraApiKeyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.inaraApiKeyTextBox.Location = new System.Drawing.Point(114, 3);
+            this.inaraApiKeyTextBox.Name = "inaraApiKeyTextBox";
+            this.inaraApiKeyTextBox.Size = new System.Drawing.Size(303, 22);
+            this.inaraApiKeyTextBox.TabIndex = 1;
+            this.inaraApiKeyTextBox.Text = "Inara API Key";
+            this.inaraApiKeyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // testCredentialsButton
-            testCredentialsButton.Location = new Point(3, 27);
-            testCredentialsButton.Name = "testCredentialsButton";
-            testCredentialsButton.Size = new Size(122, 23);
-            testCredentialsButton.TabIndex = 2;
-            testCredentialsButton.Text = "Validate";
-            testCredentialsButton.UseVisualStyleBackColor = true;
-            testCredentialsButton.Click += new EventHandler(TestCredentialsButton_Click);
-
+            // 
+            this.testCredentialsButton.Location = new System.Drawing.Point(3, 27);
+            this.testCredentialsButton.Name = "testCredentialsButton";
+            this.testCredentialsButton.Size = new System.Drawing.Size(122, 23);
+            this.testCredentialsButton.TabIndex = 2;
+            this.testCredentialsButton.Text = "Validate";
+            this.testCredentialsButton.UseVisualStyleBackColor = true;
+            this.testCredentialsButton.Click += new System.EventHandler(this.TestCredentialsButton_Click);
+            // 
             // credentialsStatusLabel
-            credentialsStatusLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            credentialsStatusLabel.AutoSize = true;
-            credentialsStatusLabel.Location = new Point(271, 55);
-            credentialsStatusLabel.Name = "credentialsStatusLabel";
-            credentialsStatusLabel.Size = new Size(87, 17);
-            credentialsStatusLabel.TabIndex = 3;
-            credentialsStatusLabel.Text = "Not checked";
-
+            // 
+            this.credentialsStatusLabel.AutoSize = true;
+            this.credentialsStatusLabel.Location = new System.Drawing.Point(3, 53);
+            this.credentialsStatusLabel.Name = "credentialsStatusLabel";
+            this.credentialsStatusLabel.Size = new System.Drawing.Size(87, 17);
+            this.credentialsStatusLabel.TabIndex = 3;
+            this.credentialsStatusLabel.Text = "Not checked";
+            // 
             // apiKeyValidatedCheckbox
-            apiKeyValidatedCheckbox.AutoSize = true;
-            apiKeyValidatedCheckbox.Enabled = false;
-            apiKeyValidatedCheckbox.Location = new Point(131, 31);
-            apiKeyValidatedCheckbox.Name = "apiKeyValidatedCheckbox";
-            apiKeyValidatedCheckbox.Size = new Size(233, 21);
-            apiKeyValidatedCheckbox.TabIndex = 7;
-            apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
-            apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
-            apiKeyValidatedCheckbox.CheckedChanged += new EventHandler(ApiKeyValidatedCheckbox_CheckedChanged);
-
+            // 
+            this.apiKeyValidatedCheckbox.AutoSize = true;
+            this.apiKeyValidatedCheckbox.Enabled = false;
+            this.apiKeyValidatedCheckbox.Location = new System.Drawing.Point(131, 31);
+            this.apiKeyValidatedCheckbox.Name = "apiKeyValidatedCheckbox";
+            this.apiKeyValidatedCheckbox.Size = new System.Drawing.Size(233, 21);
+            this.apiKeyValidatedCheckbox.TabIndex = 7;
+            this.apiKeyValidatedCheckbox.Text = "CMDR Name / API Key validated";
+            this.apiKeyValidatedCheckbox.UseVisualStyleBackColor = true;
+            this.apiKeyValidatedCheckbox.CheckedChanged += new System.EventHandler(this.ApiKeyValidatedCheckbox_CheckedChanged);
+            // 
             // apiKeyLabel
-            apiKeyLabel.AutoSize = true;
-            apiKeyLabel.Location = new Point(3, 6);
-            apiKeyLabel.Name = "apiKeyLabel";
-            apiKeyLabel.Size = new Size(105, 17);
-            apiKeyLabel.TabIndex = 8;
-            apiKeyLabel.TabStop = true;
-            apiKeyLabel.Text = "INARA Api Key:";
-            apiKeyLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(ApiKeyLabel_LinkClicked);
-
+            // 
+            this.apiKeyLabel.AutoSize = true;
+            this.apiKeyLabel.Location = new System.Drawing.Point(3, 6);
+            this.apiKeyLabel.Name = "apiKeyLabel";
+            this.apiKeyLabel.Size = new System.Drawing.Size(105, 17);
+            this.apiKeyLabel.TabIndex = 8;
+            this.apiKeyLabel.TabStop = true;
+            this.apiKeyLabel.Text = "INARA Api Key:";
+            this.apiKeyLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ApiKeyLabel_LinkClicked);
+            // 
             // autoManageFriendsCheckbox
-            autoManageFriendsCheckbox.AutoSize = true;
-            autoManageFriendsCheckbox.Location = new Point(3, 80);
-            autoManageFriendsCheckbox.Name = "autoManageFriendsCheckbox";
-            autoManageFriendsCheckbox.Size = new Size(188, 21);
-            autoManageFriendsCheckbox.TabIndex = 9;
-            autoManageFriendsCheckbox.Text = "Add friends automatically";
-            autoManageFriendsCheckbox.UseVisualStyleBackColor = true;
-
+            // 
+            this.autoManageFriendsCheckbox.AutoSize = true;
+            this.autoManageFriendsCheckbox.Location = new System.Drawing.Point(3, 80);
+            this.autoManageFriendsCheckbox.Name = "autoManageFriendsCheckbox";
+            this.autoManageFriendsCheckbox.Size = new System.Drawing.Size(188, 21);
+            this.autoManageFriendsCheckbox.TabIndex = 9;
+            this.autoManageFriendsCheckbox.Text = "Add friends automatically";
+            this.autoManageFriendsCheckbox.UseVisualStyleBackColor = true;
+            // 
             // InaraSettingsControl
-            Controls.Add(autoManageFriendsCheckbox);
-            Controls.Add(apiKeyLabel);
-            Controls.Add(apiKeyValidatedCheckbox);
-            Controls.Add(credentialsStatusLabel);
-            Controls.Add(testCredentialsButton);
-            Controls.Add(inaraApiKeyTextBox);
-            Name = "InaraSettingsControl";
-            Size = new Size(361, 155);
-            ResumeLayout(false);
-            PerformLayout();
+            // 
+            this.Controls.Add(this.autoManageFriendsCheckbox);
+            this.Controls.Add(this.apiKeyLabel);
+            this.Controls.Add(this.apiKeyValidatedCheckbox);
+            this.Controls.Add(this.credentialsStatusLabel);
+            this.Controls.Add(this.testCredentialsButton);
+            this.Controls.Add(this.inaraApiKeyTextBox);
+            this.Name = "InaraSettingsControl";
+            this.Size = new System.Drawing.Size(420, 177);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         private async void TestCredentialsButton_Click(object sender, EventArgs e)
