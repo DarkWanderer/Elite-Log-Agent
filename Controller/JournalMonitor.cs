@@ -33,7 +33,7 @@
         /// </summary>
         /// <param name="logDirectoryProvider">Log directory name provider</param>
         /// <param name="checkInterval">Check interval in milliseconds</param>
-        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 5000)
+        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 10000)
         {
             logDirectory = logDirectoryProvider.Directory;
             fileWatcher = new FileSystemWatcher(logDirectory);
@@ -50,8 +50,8 @@
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => SendEventsFromJournal(false));
             logFlushTimer.Enabled = true;
 
-            currentFile = LogEnumerator.GetLogFiles(logDirectory).First();
-            filePosition = new FileInfo(currentFile).Length;
+            currentFile = LogEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
+            filePosition = String.IsNullOrEmpty(currentFile) ? 0 : new FileInfo(currentFile).Length;
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
             Log.Info("Started monitoring");
@@ -91,16 +91,27 @@
                     // We are not checking file size to make decision about whether
                     // we should read the file. Reason being - the log write operations
                     // are often buffered, so we need to open the file to flush buffers
-                    filePosition = ReadJournalFromPosition(currentFile, filePosition);
-                    if (checkOtherFiles)
+                    if (currentFile != null)
+                        filePosition = ReadJournalFromPosition(currentFile, filePosition);
+
+                    if (checkOtherFiles || currentFile == null)
                     {
-                        string latestFile = LogEnumerator.GetLogFiles(logDirectory).First();
-                        if (latestFile != currentFile)
-                        {
-                            currentFile = latestFile;
-                            filePosition = ReadJournalFromPosition(currentFile, 0);
-                        }
+                        string latestFile = LogEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
+                        if (latestFile == currentFile)
+                            return;
+
+                        currentFile = latestFile;
+                        filePosition = ReadJournalFromPosition(currentFile, 0);
                     }
+                }
+                catch (FileNotFoundException e)
+                {
+                    Log.Error()
+                        .Message("Journal file not found")
+                        .Exception(e)
+                        .Property("journal-file", currentFile)
+                        .Write();
+                    currentFile = null;
                 }
                 catch (Exception e)
                 {
