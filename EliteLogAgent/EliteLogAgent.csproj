@@ -137,6 +137,7 @@
     <Compile Include="Autorun\SingleLaunch.cs" />
     <Compile Include="CastleWindsorPluginLoader.cs" />
     <Compile Include="ContainerBootstrapper.cs" />
+    <Compile Include="Deployment\DataPathManager.cs" />
     <Compile Include="FileSettingsStorage.cs" />
     <Compile Include="Settings\GeneralSettingsControl.cs">
       <SubType>UserControl</SubType>

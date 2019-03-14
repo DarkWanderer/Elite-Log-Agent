@@ -143,6 +143,7 @@
     <Compile Include="ILogRealTimeDataSource.cs" />
     <Compile Include="ILogSettingsBootstrapper.cs" />
     <Compile Include="IMessageBroker.cs" />
+    <Compile Include="IPathManager.cs" />
     <Compile Include="IPlayerStateHistoryRecorder.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IPluginManager.cs" />
