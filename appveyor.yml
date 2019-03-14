@@ -4,6 +4,7 @@ configuration: Release
 platform: Any CPU
 
 skip_tags: true
+skip_branch_with_pr: true
 
 environment:
   PFX_PASSWORD:
