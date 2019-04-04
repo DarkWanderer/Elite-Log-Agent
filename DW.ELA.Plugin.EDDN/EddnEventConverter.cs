@@ -83,7 +83,7 @@
 
         private IEnumerable<EddnEvent> ConvertOutfittingEvent(Outfitting e)
         {
-            if (e.Items == null)
+            if (e.Items == null || e.Items.Length == 0)
                 yield break;
 
             string[] items = e.Items
