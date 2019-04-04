@@ -11,7 +11,6 @@
         public void ShouldPlayEvents()
         {
             var directoryProvider = new TestDirectoryProvider();
-            Directory.Delete(directoryProvider.Directory, true);
 
             string testFile1 = Path.Combine(directoryProvider.Directory, "Journal.1234.log");
             string testFile2 = Path.Combine(directoryProvider.Directory, "JournalBeta.2345.log");

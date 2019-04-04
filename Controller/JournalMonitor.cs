@@ -36,6 +36,7 @@
         public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 10000)
         {
             logDirectory = logDirectoryProvider.Directory;
+            Directory.CreateDirectory(logDirectory); // In case Elite Dangerous was not launched yet
             fileWatcher = new FileSystemWatcher(logDirectory);
 
             fileWatcher.Changed += FileWatcher_Event;
@@ -54,7 +55,7 @@
             filePosition = String.IsNullOrEmpty(currentFile) ? 0 : new FileInfo(currentFile).Length;
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
-            Log.Info("Started monitoring");
+            Log.Info("Started monitoring {directory}", logDirectory);
         }
 
         private void FileWatcher_Event(object sender, FileSystemEventArgs e)

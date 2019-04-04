@@ -23,7 +23,6 @@
         public async Task ShouldPickUpEvents()
         {
             var directoryProvider = new TestDirectoryProvider();
-            Directory.Delete(directoryProvider.Directory, true);
             var events = new ConcurrentBag<LogEvent>();
             CollectionAssert.IsEmpty(events);
 
@@ -50,6 +49,19 @@
 
             await Delay;
             CollectionAssert.IsEmpty(events);
+        }
+
+        [Test]
+        public void ShouldNotFailOnMissingDirectory()
+        {
+            var directoryProvider = new TestDirectoryProvider();
+            Directory.Delete(directoryProvider.Directory, true);
+            Assert.IsFalse(Directory.Exists(directoryProvider.Directory));
+            Assert.DoesNotThrow(() => new JournalMonitor(directoryProvider, 1));
+
+            // In current implementation, JournalMonitor creates the dir if missing
+            // Remove if implementation changes
+            Assert.IsTrue(Directory.Exists(directoryProvider.Directory));
         }
     }
 }

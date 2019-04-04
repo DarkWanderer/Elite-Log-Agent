@@ -18,7 +18,6 @@
         public void ShouldPlayEvents()
         {
             var directoryProvider = new TestDirectoryProvider();
-            Directory.Delete(directoryProvider.Directory, true);
             var events = new ConcurrentBag<LogEvent>();
             CollectionAssert.IsEmpty(events);
 
