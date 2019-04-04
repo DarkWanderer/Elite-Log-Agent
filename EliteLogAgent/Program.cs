@@ -22,7 +22,6 @@
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
             if (SingleLaunch.IsRunning)
                 return; // only one instance should be running

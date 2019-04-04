@@ -10,6 +10,8 @@
     public class PlayerStateRecorderTests
     {
         private readonly IPlayerStateHistoryRecorder eventConverter = new PlayerStateRecorder();
+        private const string ValidShip = "Valid_Ship";
+        private const long ValidShipId = 77;
 
         [Test]
         [Parallelizable]
@@ -23,9 +25,6 @@
             eventConverter.GetPlayerShipId(DateTime.UtcNow);
             eventConverter.GetPlayerIsInCrew(DateTime.UtcNow);
         }
-
-        private const string ValidShip = "Valid_Ship";
-        private const long ValidShipId = 77;
 
         [Test]
         public void ShouldNotRecordFighterOrSrv()

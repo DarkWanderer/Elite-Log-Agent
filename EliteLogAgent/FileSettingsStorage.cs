@@ -34,7 +34,7 @@
                         if (settingsCache == null && File.Exists(SettingsFilePath))
                             settingsCache = JsonConvert.DeserializeObject<GlobalSettings>(File.ReadAllText(SettingsFilePath));
 
-                            return settingsCache ?? GlobalSettings.Defaults;
+                        return settingsCache ?? GlobalSettings.Defaults;
                     }
                     catch (Exception e)
                     {

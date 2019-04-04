@@ -91,8 +91,11 @@
         }
 
         private IEnumerable<ApiEvent> ConvertEvent(PowerplayDefect e) => GetPowerplayRankEvent(e.Timestamp, e.ToPower, 1);
+
         private IEnumerable<ApiEvent> ConvertEvent(PowerplayJoin e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 1);
+
         private IEnumerable<ApiEvent> ConvertEvent(PowerplayLeave e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 0);
+
         private IEnumerable<ApiEvent> ConvertEvent(Powerplay e) => GetPowerplayRankEvent(e.Timestamp, e.Power, Math.Max(e.Rank, 1));
 
         private IEnumerable<ApiEvent> GetPowerplayRankEvent(DateTime timestamp, string power, int? rank = null)

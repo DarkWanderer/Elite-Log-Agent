@@ -4,7 +4,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class Statistics: LogEvent
+    public class Statistics : LogEvent
     {
         [JsonProperty("Bank_Account")]
         public Dictionary<string, long> BankAccount { get; set; }

@@ -29,7 +29,7 @@
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.trayController = trayController ?? throw new ArgumentNullException(nameof(trayController));
-            this.logDirectory = pathManager.LogDirectory;
+            logDirectory = pathManager.LogDirectory;
         }
 
         public void Setup()
