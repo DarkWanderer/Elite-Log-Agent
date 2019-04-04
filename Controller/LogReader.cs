@@ -31,7 +31,7 @@
                 while (jsonReader.Read())
                 {
                     var @object = Converter.Serializer.Deserialize<JObject>(jsonReader);
-                    LogEvent @event = null;
+                    LogEvent? @event = null;
                     try
                     {
                         @event = LogEventConverter.Convert(@object);

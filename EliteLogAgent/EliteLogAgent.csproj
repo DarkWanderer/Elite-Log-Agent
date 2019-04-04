@@ -13,6 +13,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile />
+    <LangVersion>8.0</LangVersion>
+    <NullableContextOptions>enable</NullableContextOptions>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -34,8 +36,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <LangVersion>8.0</LangVersion>
-    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -225,10 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\github.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
