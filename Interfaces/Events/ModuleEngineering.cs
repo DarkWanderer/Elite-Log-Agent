@@ -8,7 +8,7 @@
         public string Engineer { get; set; }
 
         [JsonProperty("EngineerID")]
-        public long EngineerId { get; set; }
+        public ulong EngineerId { get; set; }
 
         [JsonProperty("BlueprintID")]
         public long BlueprintId { get; set; }
