@@ -12,7 +12,7 @@
 
     public class EventSchemaValidator
     {
-        private IReadOnlyDictionary<string, JsonSchema4> schemaCache;
+        private IReadOnlyDictionary<string, JsonSchema> schemaCache;
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public EventSchemaValidator()
@@ -56,14 +56,14 @@
             if (!resources.Any())
                 throw new ApplicationException("Unable to load any schemas");
 
-            var schemas = new Dictionary<string, JsonSchema4>();
+            var schemas = new Dictionary<string, JsonSchema>();
             foreach (var resource in resources)
             {
                 using (var stream = assembly.GetManifestResourceStream(resource))
                 using (var reader = new StreamReader(stream))
                 {
                     var json = await reader.ReadToEndAsync();
-                    var schema = await JsonSchema4.FromJsonAsync(json);
+                    var schema = await JsonSchema.FromJsonAsync(json);
                     schemas.Add(schema.Id.TrimEnd('#'), schema);
                     Log.Trace("Loaded schema {0}", schema.Id);
                 }

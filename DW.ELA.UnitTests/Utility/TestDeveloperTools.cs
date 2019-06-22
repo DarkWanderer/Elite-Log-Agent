@@ -8,6 +8,7 @@
     using DW.ELA.Interfaces;
     using DW.ELA.LogModel;
     using DW.ELA.Utility.Json;
+    using MoreLinq;
     using Newtonsoft.Json.Linq;
     using NUnit.Framework;
 
