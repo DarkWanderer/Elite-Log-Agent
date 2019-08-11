@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public partial class Docked : LogEvent
+    public partial class Docked : JournalEvent
     {
         [JsonProperty("StationName")]
         public string StationName { get; set; }

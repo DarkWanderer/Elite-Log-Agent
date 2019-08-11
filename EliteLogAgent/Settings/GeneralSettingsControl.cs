@@ -57,7 +57,7 @@
             try
             {
                 autodetectCmdrNameButton.Enabled = false;
-                var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
+                var logEventSource = new JournalBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
                 var cmdrEvent = logEventSource.Events.OfType<Commander>().FirstOrDefault();
                 cmdrNameTextBox.Text = cmdrEvent?.Name ?? cmdrNameTextBox.Text;
                 Log.Info("Detected commander name as {0}", cmdrEvent?.Name);

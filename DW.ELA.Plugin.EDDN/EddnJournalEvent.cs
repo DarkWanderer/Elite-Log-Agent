@@ -4,7 +4,7 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
-    public class JournalEvent : EddnEvent
+    public class EddnJournalEvent : EddnEvent
     {
         [JsonProperty("message")]
         public JObject Message { get; set; }

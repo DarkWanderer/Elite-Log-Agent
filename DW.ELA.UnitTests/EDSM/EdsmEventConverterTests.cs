@@ -18,7 +18,7 @@
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void JsonExtractorShouldNotFailOnEvents(LogEvent e)
+        public void JsonExtractorShouldNotFailOnEvents(JournalEvent e)
         {
             var result = eventConverter.Convert(e);
             Assert.NotNull(result);

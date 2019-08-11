@@ -9,7 +9,7 @@
     using DW.ELA.Utility;
     using NLog;
 
-    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin, IObserver<LogEvent>, IDisposable
+    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin, IObserver<JournalEvent>, IDisposable
         where TSettings : class, new()
         where TEvent : class
     {
@@ -71,7 +71,7 @@
             }
         }
 
-        public virtual void OnNext(LogEvent @event)
+        public virtual void OnNext(JournalEvent @event)
         {
             foreach (var e in EventConverter.Convert(@event))
                 EventQueue.Enqueue(e);
@@ -85,7 +85,7 @@
         {
         }
 
-        public IObserver<LogEvent> GetLogObserver() => this;
+        public IObserver<JournalEvent> GetLogObserver() => this;
 
         public void Dispose() => flushTimer.Dispose();
     }

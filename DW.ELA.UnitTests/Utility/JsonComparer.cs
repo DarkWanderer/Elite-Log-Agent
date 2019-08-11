@@ -33,8 +33,10 @@
             {
                 switch (t1)
                 {
-                    case JArray a: return Compare(tokenName, t1 as JArray, t2 as JArray);
-                    case JObject o: return Compare(tokenName, t1 as JObject, t2 as JObject);
+                    case JArray a:
+                        return Compare(tokenName, t1 as JArray, t2 as JArray);
+                    case JObject o:
+                        return Compare(tokenName, t1 as JObject, t2 as JObject);
                     default:
                         if (Serialize.ToJson(t1) != Serialize.ToJson(t2))
                             return new[] { $"{tokenName}: expected {t1}, got {t2}" };

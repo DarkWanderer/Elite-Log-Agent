@@ -10,7 +10,7 @@
     using Newtonsoft.Json.Linq;
     using NLog;
 
-    public class EddnPlugin : IPlugin, IObserver<LogEvent>
+    public class EddnPlugin : IPlugin, IObserver<JournalEvent>
     {
         private const string EddnUrl = @"https://eddn.edcd.io:4430/upload/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
@@ -40,7 +40,7 @@
         {
         }
 
-        public IObserver<LogEvent> GetLogObserver() => this;
+        public IObserver<JournalEvent> GetLogObserver() => this;
 
         public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EddnSettingsControl();
 
@@ -52,7 +52,7 @@
         {
         }
 
-        public void OnNext(LogEvent @event)
+        public void OnNext(JournalEvent @event)
         {
             try
             {

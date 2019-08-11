@@ -13,7 +13,7 @@
             this.playerStateRecorder = playerStateRecorder ?? throw new System.ArgumentNullException(nameof(playerStateRecorder));
         }
 
-        public IEnumerable<JObject> Convert(LogEvent sourceEvent)
+        public IEnumerable<JObject> Convert(JournalEvent sourceEvent)
         {
             var @event = (JObject)sourceEvent.Raw.DeepClone();
             var timestamp = sourceEvent.Timestamp;

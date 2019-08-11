@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class USSDrop : LogEvent
+    public class USSDrop : JournalEvent
     {
         [JsonProperty("USSType")]
         public string UssType { get; set; }

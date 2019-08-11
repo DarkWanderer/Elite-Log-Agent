@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class Market : LogEvent
+    public class Market : JournalEvent
     {
         [JsonProperty("MarketID")]
         public long MarketId { get; set; }

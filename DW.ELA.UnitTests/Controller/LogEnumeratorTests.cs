@@ -18,7 +18,7 @@
             File.WriteAllText(testFile1, "asd");
             File.WriteAllText(testFile2, "asd");
 
-            var files = LogEnumerator.GetLogFiles(directoryProvider.Directory);
+            string[] files = JournalFileEnumerator.GetLogFiles(directoryProvider.Directory);
             CollectionAssert.Contains(files, testFile1);
             CollectionAssert.DoesNotContain(files, testFile2);
         }

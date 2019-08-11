@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class Powerplay : LogEvent
+    public class Powerplay : JournalEvent
     {
         [JsonProperty]
         public string Power { get; set; }

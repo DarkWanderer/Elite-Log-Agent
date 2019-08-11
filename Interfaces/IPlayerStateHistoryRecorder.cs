@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IPlayerStateHistoryRecorder : IObserver<LogEvent>
+    public interface IPlayerStateHistoryRecorder : IObserver<JournalEvent>
     {
         long? GetPlayerShipId(DateTime atTime);
 

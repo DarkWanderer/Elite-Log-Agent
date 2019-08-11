@@ -5,7 +5,6 @@
     using System.Linq;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.Inara.Model;
     using MoreLinq;
@@ -20,7 +19,6 @@
 
         private readonly IEventConverter<ApiEvent> eventConverter;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
-        private readonly ISettingsProvider settingsProvider;
 
         public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, IRestClientFactory restClientFactory)
             : base(settingsProvider)
@@ -28,7 +26,6 @@
             RestClient = restClientFactory.CreateRestClient(InaraApiUrl);
             this.playerStateRecorder = playerStateRecorder;
             eventConverter = new InaraEventConverter(this.playerStateRecorder);
-            this.settingsProvider = settingsProvider;
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
@@ -56,7 +53,7 @@
                 return;
             try
             {
-                var facade = new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName);
+                var facade = new InaraApiFacade(RestClient, GlobalSettings.CommanderName, Settings.ApiKey);
                 var apiEvents = Compact(events).ToArray();
                 if (apiEvents.Length > 0)
                     await facade.ApiCall(apiEvents);

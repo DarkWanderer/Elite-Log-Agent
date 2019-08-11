@@ -59,6 +59,7 @@
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
     <Compile Include="App\AppInfo.cs" />
+    <Compile Include="App\EliteDangerous.cs" />
     <Compile Include="CloudApiLogTarget.cs" />
     <Compile Include="Disposable\CompositeDisposable.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

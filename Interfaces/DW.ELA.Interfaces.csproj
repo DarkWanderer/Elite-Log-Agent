@@ -157,7 +157,8 @@
     <Compile Include="IRestClientFactory.cs" />
     <Compile Include="ISettingsProvider.cs" />
     <Compile Include="ITrayIconController.cs" />
-    <Compile Include="LogEvent.cs" />
+    <Compile Include="JournalContext.cs" />
+    <Compile Include="JournalEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

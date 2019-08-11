@@ -24,13 +24,13 @@
         [Explicit]
         public async Task IntegrationTestUploadToInara()
         {
-            var logEventSource = new LogBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
-            var logCounter = new LogEventTypeCounter();
+            var logEventSource = new JournalBurstPlayer(new SavedGamesDirectoryHelper().Directory, 5);
+            var logCounter = new JournalEventTypeCounter();
             var stateRecorder = new PlayerStateRecorder();
 
             var inaraRestClient = new ThrottlingRestClient.Factory().CreateRestClient("https://inara.cz/inapi/v1/");
             var inaraConverter = new InaraEventConverter(stateRecorder);
-            var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.Inara.ApiKey, TestCredentials.UserName);
+            var inaraApiFacade = new InaraApiFacade(inaraRestClient, TestCredentials.UserName, TestCredentials.Inara.ApiKey, null);
 
             // Populate the state recorder to avoid missing ships/starsystems data
             foreach (var ev in logEventSource.Events)

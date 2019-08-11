@@ -9,12 +9,12 @@
     /// <summary>
     /// This class replays N last log files to observers - to fill up historic data
     /// </summary>
-    public class LogBurstPlayer : BasicObservable<LogEvent>
+    public class JournalBurstPlayer : BasicObservable<JournalEvent>
     {
         private readonly string logDirectory;
         private readonly int filesNumber;
 
-        public LogBurstPlayer(string logDirectory, int filesNumber = 5)
+        public JournalBurstPlayer(string logDirectory, int filesNumber = 5)
         {
             if (string.IsNullOrEmpty(logDirectory))
                 throw new ArgumentException("Must provide log directory", nameof(logDirectory));
@@ -25,13 +25,13 @@
             this.filesNumber = filesNumber;
         }
 
-        public IEnumerable<LogEvent> Events
+        public IEnumerable<JournalEvent> Events
         {
             get
             {
-                var reader = new LogReader();
+                var reader = new JournalFileReader();
 
-                var files = LogEnumerator.GetLogFiles(logDirectory)
+                var files = JournalFileEnumerator.GetLogFiles(logDirectory)
                     .Take(filesNumber)
                     .OrderBy(x => x) // from oldest to freshest
                     .ToList();

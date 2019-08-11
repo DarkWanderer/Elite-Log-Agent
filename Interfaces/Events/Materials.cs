@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public partial class Materials : LogEvent
+    public partial class Materials : JournalEvent
     {
         [JsonProperty("Raw")]
         public Material[] RawMats { get; set; }

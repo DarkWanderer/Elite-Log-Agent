@@ -229,7 +229,8 @@
                 var disArray = new List<IDisposable>();
                 foreach (var item in disposables)
                 {
-                    if (item != null) disArray.Add(item);
+                    if (item != null)
+                        disArray.Add(item);
                 }
 
                 Array.Copy(disArray.ToArray(), 0, array, arrayIndex, array.Length - arrayIndex);
@@ -253,7 +254,8 @@
             {
                 foreach (var d in disposables)
                 {
-                    if (d != null) res.Add(d);
+                    if (d != null)
+                        res.Add(d);
                 }
             }
 

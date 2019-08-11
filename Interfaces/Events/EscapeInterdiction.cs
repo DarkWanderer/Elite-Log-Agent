@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class EscapeInterdiction : LogEvent
+    public class EscapeInterdiction : JournalEvent
     {
         [JsonProperty("Interdictor")]
         public string Interdictor { get; set; }

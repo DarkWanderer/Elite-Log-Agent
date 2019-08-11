@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility.Json;
@@ -14,6 +15,7 @@
         private readonly IRestClient client;
         private readonly string apiKey;
         private readonly string commanderName;
+        private readonly string frontierID;
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         private readonly ICollection<string> ignoredErrors = new HashSet<string>
@@ -27,11 +29,12 @@
             "No items provided, the module storage was just erased."
         };
 
-        public InaraApiFacade(IRestClient client, string apiKey, string commanderName)
+        public InaraApiFacade(IRestClient client, string commanderName, string apiKey, string frontierID = null)
         {
             this.client = client;
             this.apiKey = apiKey;
             this.commanderName = commanderName;
+            this.frontierID = frontierID;
         }
 
         public async Task<ICollection<ApiEvent>> ApiCall(params ApiEvent[] events)
@@ -41,7 +44,7 @@
 
             var inputData = new ApiInputOutput()
             {
-                Header = new Header(commanderName, apiKey),
+                Header = new Header(commanderName, apiKey, frontierID),
                 Events = events
             };
             var inputJson = inputData.ToJson();
@@ -85,6 +88,16 @@
                 .Write();
 
             return outputData.Events;
+        }
+
+        public async Task<string> GetCmdrName()
+        {
+            var @event = new ApiEvent("getCommanderProfile") { EventData = new Dictionary<string, object>(), Timestamp = DateTime.Now };
+            var result = (await ApiCall(@event)).SingleOrDefault();
+            if (result == null)
+                throw new ApplicationException("Null result from API");
+            string cmdrName = (result.EventData as dynamic).commanderName ?? "Error: cmdr name was not returned";
+            return cmdrName;
         }
 
         private struct ApiInputOutput

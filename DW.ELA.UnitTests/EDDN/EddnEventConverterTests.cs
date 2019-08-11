@@ -16,7 +16,7 @@
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void EddnConverterShouldConvertAndValidate(LogEvent e)
+        public void EddnConverterShouldConvertAndValidate(JournalEvent e)
         {
             var recorderMock = GetRecorderMock();
 
@@ -38,13 +38,13 @@
 
             var convertedEvents = TestEventSource.CannedEvents
                 .SelectMany(eventConverter.Convert)
-                .OfType<JournalEvent>()
+                .OfType<EddnJournalEvent>()
                 .ToList();
 
             CollectionAssert.IsNotEmpty(convertedEvents);
             CollectionAssert.AllItemsAreNotNull(convertedEvents);
 
-            foreach (var e in convertedEvents.OfType<JournalEvent>())
+            foreach (var e in convertedEvents.OfType<EddnJournalEvent>())
             {
                 Assert.NotNull(e.Message.Property("SystemAddress"));
                 Assert.NotNull(e.Message.Property("StarPos"));
@@ -62,13 +62,13 @@
 
             var convertedEvents = TestEventSource.CannedEvents
                 .SelectMany(eventConverter.Convert)
-                .OfType<JournalEvent>()
+                .OfType<EddnJournalEvent>()
                 .ToList();
 
             CollectionAssert.IsNotEmpty(convertedEvents);
             CollectionAssert.AllItemsAreNotNull(convertedEvents);
 
-            foreach (var e in convertedEvents.OfType<JournalEvent>())
+            foreach (var e in convertedEvents.OfType<EddnJournalEvent>())
             {
                 Assert.Null(e.Message.Property("ActiveFine"));
                 Assert.Null(e.Message.Property("BoostUsed"));

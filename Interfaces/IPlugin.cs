@@ -13,7 +13,7 @@
         /// Get an observer for the logs event stream
         /// </summary>
         /// <returns>log event observer</returns>
-        IObserver<LogEvent> GetLogObserver();
+        IObserver<JournalEvent> GetLogObserver();
 
         /// <summary>
         /// Gets a control which changes plugin settings

@@ -3,7 +3,7 @@
     using System.IO;
     using System.Linq;
 
-    public static class LogEnumerator
+    public static class JournalFileEnumerator
     {
         /// <summary>
         /// Returns log file names from freshest to oldest

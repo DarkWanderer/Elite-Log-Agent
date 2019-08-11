@@ -1,12 +1,15 @@
 ﻿namespace DW.ELA.Controller
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Timers;
     using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
+    using DW.ELA.Utility.App;
     using NLog;
     using NLog.Fluent;
     using Utility.Observable;
@@ -14,18 +17,22 @@
     /// <summary>
     /// This class runs in background to monitor and notify consumers (observers) of new log events
     /// </summary>
-    public class JournalMonitor : LogReader, ILogRealTimeDataSource
+    public class JournalMonitor : JournalFileReader, ILogRealTimeDataSource
     {
+        // Static/readonly members
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly FileSystemWatcher fileWatcher;
         private readonly string logDirectory;
         private readonly object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
-        private readonly BasicObservable<LogEvent> basicObservable = new BasicObservable<LogEvent>();
+        private readonly BasicObservable<JournalEvent> basicObservable = new BasicObservable<JournalEvent>();
         private readonly IReadOnlyCollection<string> eventsToReadFromFile = new HashSet<string> { "Outfitting", "Market", "Shipyard", "Cargo" };
+        private readonly ConcurrentQueue<JournalEvent> queuedEvents = new ConcurrentQueue<JournalEvent>();
 
+        // 
         private string currentFile;
         private long filePosition;
+        private JournalContext journalContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JournalMonitor"/> class.
@@ -51,8 +58,8 @@
             logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => SendEventsFromJournal(false));
             logFlushTimer.Enabled = true;
 
-            currentFile = LogEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
-            filePosition = String.IsNullOrEmpty(currentFile) ? 0 : new FileInfo(currentFile).Length;
+            currentFile = JournalFileEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
+            filePosition = string.IsNullOrEmpty(currentFile) || EliteDangerous.IsRunning ? 0 : new FileInfo(currentFile).Length;
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
             Log.Info("Started monitoring {directory}", logDirectory);
@@ -97,7 +104,7 @@
 
                     if (checkOtherFiles || currentFile == null)
                     {
-                        string latestFile = LogEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
+                        string latestFile = JournalFileEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
                         if (latestFile == currentFile || latestFile == null)
                             return;
 
@@ -136,6 +143,8 @@
                         var events = ReadEventsFromStream(textReader);
                         foreach (var @event in events)
                         {
+                            ProcessHeader(@event);
+                            @event.Context = journalContext;
                             // Outfitting, market, etc. events are just indicators that data must be read from json
                             if (eventsToReadFromFile.Contains(@event.Event))
                                 SendEventFromFile(GetJsonFileFullPath(@event.Event));
@@ -156,6 +165,12 @@
                     return fileReader.Position;
                 }
             }
+        }
+
+        private void ProcessHeader(JournalEvent @event)
+        {
+            if (@event is Commander commanderEvent)
+                journalContext = new JournalContext(commanderEvent.Name, null, commanderEvent.FrontierId);
         }
 
         private bool disposedValue = false; // To detect redundant calls
@@ -194,6 +209,6 @@
             // GC.SuppressFinalize(this);
         }
 
-        public IDisposable Subscribe(IObserver<LogEvent> observer) => basicObservable.Subscribe(observer);
+        public IDisposable Subscribe(IObserver<JournalEvent> observer) => basicObservable.Subscribe(observer);
     }
 }

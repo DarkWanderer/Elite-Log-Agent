@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class ShipyardSell : LogEvent
+    public class ShipyardSell : JournalEvent
     {
         [JsonProperty("ShipType")]
         public string ShipType { get; set; }

@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class Friends : LogEvent
+    public class Friends : JournalEvent
     {
         [JsonProperty]
         public string Status { get; set; }

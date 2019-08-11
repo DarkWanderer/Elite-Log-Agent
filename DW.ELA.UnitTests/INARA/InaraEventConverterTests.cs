@@ -18,7 +18,7 @@
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void InaraConverterShouldNotFailOnEvents(LogEvent e)
+        public void InaraConverterShouldNotFailOnEvents(JournalEvent e)
         {
             var result = eventConverter.Convert(e);
             Assert.NotNull(result);

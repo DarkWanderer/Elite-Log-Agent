@@ -43,7 +43,7 @@
         {
         }
 
-        public void OnNext(LogEvent @event)
+        public void OnNext(JournalEvent @event)
         {
             if (@event == null)
                 throw new ArgumentNullException(nameof(@event));
@@ -52,20 +52,40 @@
                 switch (@event)
                 {
                     // Ship change events
-                    case ShipyardSwap e: Process(e); break;
-                    case LoadGame e: Process(e); break;
-                    case Loadout e: Process(e); break;
+                    case ShipyardSwap e:
+                        Process(e);
+                        break;
+                    case LoadGame e:
+                        Process(e);
+                        break;
+                    case Loadout e:
+                        Process(e);
+                        break;
 
                     // Location change events
-                    case Location e: Process(e); break;
-                    case FsdJump e: Process(e); break;
-                    case Docked e: Process(e); break;
-                    case SupercruiseEntry e: Process(e); break;
-                    case Undocked e: Process(e); break;
+                    case Location e:
+                        Process(e);
+                        break;
+                    case FsdJump e:
+                        Process(e);
+                        break;
+                    case Docked e:
+                        Process(e);
+                        break;
+                    case SupercruiseEntry e:
+                        Process(e);
+                        break;
+                    case Undocked e:
+                        Process(e);
+                        break;
 
                     // Crew status change events
-                    case JoinACrew e: Process(e); break;
-                    case QuitACrew e: Process(e); break;
+                    case JoinACrew e:
+                        Process(e);
+                        break;
+                    case QuitACrew e:
+                        Process(e);
+                        break;
                 }
             }
             catch (Exception e)
@@ -181,7 +201,7 @@
                 catch (Exception e)
                 {
                     Log.Error(e);
-                    return default(T);
+                    return default;
                 }
             }
 

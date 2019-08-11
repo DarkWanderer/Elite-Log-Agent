@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class CommunityGoal : LogEvent
+    public class CommunityGoal : JournalEvent
     {
         [JsonProperty("CurrentGoals")]
         public CommunityGoalRecord[] CurrentGoals { get; set; }

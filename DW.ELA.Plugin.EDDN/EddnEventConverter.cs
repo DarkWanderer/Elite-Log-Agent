@@ -25,7 +25,7 @@
             this.stateHistoryRecorder = stateHistoryRecorder;
         }
 
-        public IEnumerable<EddnEvent> Convert(LogEvent @event)
+        public IEnumerable<EddnEvent> Convert(JournalEvent @event)
         {
             if (@event.Timestamp.Add(MaxAge) < DateTime.UtcNow)
                 return Enumerable.Empty<EddnEvent>();
@@ -39,9 +39,12 @@
                     case Location l:
                         return MakeJournalEvent(@event);
 
-                    case Market e: return ConvertMarketEvent(e);
-                    case Outfitting e: return ConvertOutfittingEvent(e);
-                    case Shipyard e: return ConvertShipyardEvent(e);
+                    case Market e:
+                        return ConvertMarketEvent(e);
+                    case Outfitting e:
+                        return ConvertOutfittingEvent(e);
+                    case Shipyard e:
+                        return ConvertShipyardEvent(e);
                 }
             }
             catch (Exception e)
@@ -146,9 +149,9 @@
             };
         }
 
-        private IEnumerable<EddnEvent> MakeJournalEvent(LogEvent e)
+        private IEnumerable<EddnEvent> MakeJournalEvent(JournalEvent e)
         {
-            var @event = new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) };
+            var @event = new EddnJournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) };
 
             if (@event.Message["StarSystem"] == null)
             {

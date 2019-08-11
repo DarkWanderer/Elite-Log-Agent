@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class Scan : LogEvent
+    public class Scan : JournalEvent
     {
         [JsonProperty("BodyName")]
         public string BodyName { get; set; }

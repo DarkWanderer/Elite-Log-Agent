@@ -99,7 +99,9 @@
     <Compile Include="EDDN\EddnEventConverterTests.cs" />
     <Compile Include="EDDN\EventSchemaValidatorTests.cs" />
     <Compile Include="EDSM\EdsmApiFacadeTests.cs" />
+    <Compile Include="EDSM\EdsmConfigurationTests.cs" />
     <Compile Include="EDSM\EdsmEventConverterTests.cs" />
+    <Compile Include="INARA\InaraConfigurationTests.cs" />
     <Compile Include="UI\ClickOnceAutorunManagerTests.cs" />
     <Compile Include="UI\DataPathManagerTests.cs" />
     <Compile Include="UI\FileSettingsStorageTests.cs" />

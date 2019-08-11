@@ -5,10 +5,11 @@
 
     public class Header
     {
-        public Header(string commander, string apiKey)
+        public Header(string commander, string apiKey, string frontierID)
         {
             CommanderName = commander;
             ApiKey = apiKey;
+            FrontierID = frontierID;
         }
 
         // Input fields
@@ -26,6 +27,9 @@
 
         [JsonProperty("commanderName")]
         public string CommanderName { get; }
+
+        [JsonProperty("commanderFrontierID")]
+        public string FrontierID { get; }
 
         // Output fields
         [JsonProperty("eventStatus")]

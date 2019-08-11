@@ -22,7 +22,7 @@
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
         }
 
-        public IEnumerable<ApiEvent> Convert(LogEvent @event)
+        public IEnumerable<ApiEvent> Convert(JournalEvent @event)
         {
             try
             {
@@ -30,57 +30,90 @@
                 switch (@event)
                 {
                     // Generic
-                    case LoadGame e: return ConvertEvent(e);
-                    case Statistics e: return ConvertEvent(e);
-                    case Location e: return ConvertMinorFactionReputation(e.Timestamp, e.Factions);
-                    case Friends e: return ConvertEvent(e);
+                    case LoadGame e:
+                        return ConvertEvent(e);
+                    case Statistics e:
+                        return ConvertEvent(e);
+                    case Location e:
+                        return ConvertMinorFactionReputation(e.Timestamp, e.Factions);
+                    case Friends e:
+                        return ConvertEvent(e);
 
                     // Inventory
-                    case Materials e: return ConvertEvent(e);
-                    case MaterialCollected e: return ConvertEvent(e);
-                    case MaterialTrade e: return ConvertEvent(e);
-                    case StoredModules e: return ConvertEvent(e);
-                    case Cargo e: return ConvertEvent(e);
+                    case Materials e:
+                        return ConvertEvent(e);
+                    case MaterialCollected e:
+                        return ConvertEvent(e);
+                    case MaterialTrade e:
+                        return ConvertEvent(e);
+                    case StoredModules e:
+                        return ConvertEvent(e);
+                    case Cargo e:
+                        return ConvertEvent(e);
 
                     // Shipyard
-                    case ShipyardSell e: return ConvertEvent(e);
-                    case ShipyardTransfer e: return ConvertEvent(e);
-                    case StoredShips e: return ConvertEvent(e);
+                    case ShipyardSell e:
+                        return ConvertEvent(e);
+                    case ShipyardTransfer e:
+                        return ConvertEvent(e);
+                    case StoredShips e:
+                        return ConvertEvent(e);
 
                     // Travel
-                    case FsdJump e: return ConvertEvent(e);
-                    case Docked e: return ConvertEvent(e);
+                    case FsdJump e:
+                        return ConvertEvent(e);
+                    case Docked e:
+                        return ConvertEvent(e);
 
                     // Ranks/reputation
-                    case EngineerProgress e: return ConvertEvent(e);
-                    case Rank e: return ConvertEvent(e);
-                    case Progress e: return ConvertEvent(e);
-                    case Reputation e: return ConvertEvent(e);
+                    case EngineerProgress e:
+                        return ConvertEvent(e);
+                    case Rank e:
+                        return ConvertEvent(e);
+                    case Progress e:
+                        return ConvertEvent(e);
+                    case Reputation e:
+                        return ConvertEvent(e);
 
                     // Powerplay pledge
-                    case Powerplay e: return ConvertEvent(e);
-                    case PowerplayLeave e: return ConvertEvent(e);
-                    case PowerplayJoin e: return ConvertEvent(e);
-                    case PowerplayDefect e: return ConvertEvent(e);
+                    case Powerplay e:
+                        return ConvertEvent(e);
+                    case PowerplayLeave e:
+                        return ConvertEvent(e);
+                    case PowerplayJoin e:
+                        return ConvertEvent(e);
+                    case PowerplayDefect e:
+                        return ConvertEvent(e);
 
                     // Combat
-                    case Interdicted e: return ConvertEvent(e);
-                    case Interdiction e: return ConvertEvent(e);
-                    case EscapeInterdiction e: return ConvertEvent(e);
-                    case PvpKill e: return ConvertEvent(e);
+                    case Interdicted e:
+                        return ConvertEvent(e);
+                    case Interdiction e:
+                        return ConvertEvent(e);
+                    case EscapeInterdiction e:
+                        return ConvertEvent(e);
+                    case PvpKill e:
+                        return ConvertEvent(e);
 
                     // Ship events
-                    case Loadout e: return ConvertEvent(e);
-                    case ShipyardSwap e: return ConvertEvent(e);
+                    case Loadout e:
+                        return ConvertEvent(e);
+                    case ShipyardSwap e:
+                        return ConvertEvent(e);
 
                     // Missions
-                    case MissionAccepted e: return ConvertEvent(e);
-                    case MissionCompleted e: return ConvertEvent(e);
-                    case MissionAbandoned e: return ConvertEvent(e);
-                    case MissionFailed e: return ConvertEvent(e);
+                    case MissionAccepted e:
+                        return ConvertEvent(e);
+                    case MissionCompleted e:
+                        return ConvertEvent(e);
+                    case MissionAbandoned e:
+                        return ConvertEvent(e);
+                    case MissionFailed e:
+                        return ConvertEvent(e);
 
                     // Community goals
-                    case CommunityGoal e: return ConvertEvent(e);
+                    case CommunityGoal e:
+                        return ConvertEvent(e);
                 }
             }
             catch (Exception e)

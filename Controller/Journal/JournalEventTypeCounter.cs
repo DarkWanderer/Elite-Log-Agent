@@ -6,7 +6,7 @@
     using System.Linq;
     using DW.ELA.Interfaces;
 
-    public class LogEventTypeCounter : IObserver<LogEvent>
+    public class JournalEventTypeCounter : IObserver<JournalEvent>
     {
         private ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
 
@@ -15,7 +15,7 @@
 
         public IReadOnlyDictionary<string, int> EventCounts => eventTypeCounters;
 
-        public void OnNext(LogEvent value)
+        public void OnNext(JournalEvent value)
         {
             try
             {
@@ -34,7 +34,7 @@
         {
         }
 
-        public void FromEnumerable(IEnumerable<LogEvent> events)
+        public void FromEnumerable(IEnumerable<JournalEvent> events)
         {
             foreach (var e in events)
                 OnNext(e);
