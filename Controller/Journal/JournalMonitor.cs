@@ -28,11 +28,11 @@
         private readonly BasicObservable<JournalEvent> basicObservable = new BasicObservable<JournalEvent>();
         private readonly IReadOnlyCollection<string> eventsToReadFromFile = new HashSet<string> { "Outfitting", "Market", "Shipyard", "Cargo" };
         private readonly ConcurrentQueue<JournalEvent> queuedEvents = new ConcurrentQueue<JournalEvent>();
+        private readonly TimeSpan checkInterval;
 
         // 
         private string currentFile;
         private long filePosition;
-        private JournalContext journalContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JournalMonitor"/> class.
@@ -40,8 +40,9 @@
         /// </summary>
         /// <param name="logDirectoryProvider">Log directory name provider</param>
         /// <param name="checkInterval">Check interval in milliseconds</param>
-        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 10000)
+        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkIntervalMilliseconds = 10000)
         {
+            checkInterval = TimeSpan.FromMilliseconds(checkIntervalMilliseconds);
             logDirectory = logDirectoryProvider.Directory;
             Directory.CreateDirectory(logDirectory); // In case Elite Dangerous was not launched yet
             fileWatcher = new FileSystemWatcher(logDirectory);
@@ -54,15 +55,25 @@
                                        NotifyFilters.Size;
 
             logFlushTimer.AutoReset = true;
-            logFlushTimer.Interval = checkInterval; // sometimes the filesystem event does not trigger
-            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => SendEventsFromJournal(false));
+            logFlushTimer.Interval = checkInterval.TotalMilliseconds; // sometimes the filesystem event does not trigger
+            logFlushTimer.Elapsed += LogFlushTimer_Event;
             logFlushTimer.Enabled = true;
 
             currentFile = JournalFileEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
-            filePosition = string.IsNullOrEmpty(currentFile) || EliteDangerous.IsRunning ? 0 : new FileInfo(currentFile).Length;
+            filePosition = string.IsNullOrEmpty(currentFile) ? 0 : new FileInfo(currentFile).Length;
+
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
             Log.Info("Started monitoring {directory}", logDirectory);
+        }
+
+        private void LogFlushTimer_Event(object sender, ElapsedEventArgs e)
+        {
+            Task.Factory.StartNew(() => SendEventsFromJournal(false));
+            if (EliteDangerous.IsRunning)
+                logFlushTimer.Interval = checkInterval.TotalMilliseconds;
+            else
+                logFlushTimer.Interval = checkInterval.TotalMilliseconds * 6;
         }
 
         private void FileWatcher_Event(object sender, FileSystemEventArgs e)
@@ -143,8 +154,6 @@
                         var events = ReadEventsFromStream(textReader);
                         foreach (var @event in events)
                         {
-                            ProcessHeader(@event);
-                            @event.Context = journalContext;
                             // Outfitting, market, etc. events are just indicators that data must be read from json
                             if (eventsToReadFromFile.Contains(@event.Event))
                                 SendEventFromFile(GetJsonFileFullPath(@event.Event));
@@ -165,12 +174,6 @@
                     return fileReader.Position;
                 }
             }
-        }
-
-        private void ProcessHeader(JournalEvent @event)
-        {
-            if (@event is Commander commanderEvent)
-                journalContext = new JournalContext(commanderEvent.Name, null, commanderEvent.FrontierId);
         }
 
         private bool disposedValue = false; // To detect redundant calls

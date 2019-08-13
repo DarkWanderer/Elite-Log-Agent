@@ -36,8 +36,6 @@
             set => SetPluginSettings(JObject.FromObject(value));
         }
 
-        private JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
-
         private JObject GetPluginSettings()
         {
             if (globalSettings.PluginSettings.ContainsKey(pluginId))

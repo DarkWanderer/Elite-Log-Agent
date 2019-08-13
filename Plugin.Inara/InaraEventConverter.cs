@@ -12,7 +12,7 @@
     using Newtonsoft.Json.Linq;
     using NLog;
 
-    public class InaraEventConverter : IEventConverter<ApiEvent>
+    public class InaraEventConverter : IEventConverter<ApiInputEvent>
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
@@ -22,7 +22,7 @@
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
         }
 
-        public IEnumerable<ApiEvent> Convert(JournalEvent @event)
+        public IEnumerable<ApiInputEvent> Convert(JournalEvent @event)
         {
             try
             {
@@ -120,20 +120,20 @@
             {
                 Log.Error(e, "Error in OnNext");
             }
-            return Enumerable.Empty<ApiEvent>();
+            return Enumerable.Empty<ApiInputEvent>();
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(PowerplayDefect e) => GetPowerplayRankEvent(e.Timestamp, e.ToPower, 1);
+        private IEnumerable<ApiInputEvent> ConvertEvent(PowerplayDefect e) => GetPowerplayRankEvent(e.Timestamp, e.ToPower, 1);
 
-        private IEnumerable<ApiEvent> ConvertEvent(PowerplayJoin e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 1);
+        private IEnumerable<ApiInputEvent> ConvertEvent(PowerplayJoin e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 1);
 
-        private IEnumerable<ApiEvent> ConvertEvent(PowerplayLeave e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 0);
+        private IEnumerable<ApiInputEvent> ConvertEvent(PowerplayLeave e) => GetPowerplayRankEvent(e.Timestamp, e.Power, 0);
 
-        private IEnumerable<ApiEvent> ConvertEvent(Powerplay e) => GetPowerplayRankEvent(e.Timestamp, e.Power, Math.Max(e.Rank, 1));
+        private IEnumerable<ApiInputEvent> ConvertEvent(Powerplay e) => GetPowerplayRankEvent(e.Timestamp, e.Power, Math.Max(e.Rank, 1));
 
-        private IEnumerable<ApiEvent> GetPowerplayRankEvent(DateTime timestamp, string power, int? rank = null)
+        private IEnumerable<ApiInputEvent> GetPowerplayRankEvent(DateTime timestamp, string power, int? rank = null)
         {
-            yield return new ApiEvent("setCommanderRankPower")
+            yield return new ApiInputEvent("setCommanderRankPower")
             {
                 Timestamp = timestamp,
                 EventData = new Dictionary<string, object>
@@ -144,9 +144,9 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Cargo e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Cargo e)
         {
-            yield return new ApiEvent("setCommanderInventoryCargo")
+            yield return new ApiInputEvent("setCommanderInventoryCargo")
             {
                 Timestamp = e.Timestamp,
                 EventData = (e.Inventory ?? Enumerable.Empty<InventoryRecord>())
@@ -155,11 +155,11 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Friends e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Friends e)
         {
             if (e.Status == "Lost")
             {
-                yield return new ApiEvent("delCommanderFriend")
+                yield return new ApiInputEvent("delCommanderFriend")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -171,7 +171,7 @@
             }
             else if (e.Status == "Added" || e.Status == "Online")
             {
-                yield return new ApiEvent("addCommanderFriend")
+                yield return new ApiInputEvent("addCommanderFriend")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -183,11 +183,11 @@
             }
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(StoredShips e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(StoredShips e)
         {
             foreach (var ship in e.ShipsHere)
             {
-                var @event = new ApiEvent("setCommanderShip")
+                var @event = new ApiInputEvent("setCommanderShip")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -206,7 +206,7 @@
 
             foreach (var ship in e.ShipsRemote)
             {
-                var @event = new ApiEvent("setCommanderShip")
+                var @event = new ApiInputEvent("setCommanderShip")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -223,9 +223,9 @@
             }
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(ShipyardTransfer e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(ShipyardTransfer e)
         {
-            yield return new ApiEvent("setCommanderShipTransfer")
+            yield return new ApiInputEvent("setCommanderShipTransfer")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -240,7 +240,7 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Progress e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Progress e)
         {
             var ranks = new Dictionary<string, float>()
             {
@@ -254,7 +254,7 @@
 
             foreach (var rank in ranks)
             {
-                var @event = new ApiEvent("setCommanderRankPilot")
+                var @event = new ApiInputEvent("setCommanderRankPilot")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -267,7 +267,7 @@
             }
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Rank e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Rank e)
         {
             var ranks = new Dictionary<string, int>();
             ranks.AddIfNotNull(nameof(e.Combat), e.Combat);
@@ -279,7 +279,7 @@
 
             foreach (var rank in ranks)
             {
-                var @event = new ApiEvent("setCommanderRankPilot")
+                var @event = new ApiInputEvent("setCommanderRankPilot")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -292,9 +292,9 @@
             }
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(MaterialTrade e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(MaterialTrade e)
         {
-            var @event = new ApiEvent("addCommanderInventoryMaterialsItem")
+            var @event = new ApiInputEvent("addCommanderInventoryMaterialsItem")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -305,7 +305,7 @@
             };
             yield return @event;
 
-            @event = new ApiEvent("delCommanderInventoryMaterialsItem")
+            @event = new ApiInputEvent("delCommanderInventoryMaterialsItem")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -317,11 +317,11 @@
             yield return @event;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(CommunityGoal e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(CommunityGoal e)
         {
             foreach (var goal in e.CurrentGoals)
             {
-                yield return new ApiEvent("setCommunityGoal")
+                yield return new ApiInputEvent("setCommunityGoal")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -344,7 +344,7 @@
                 if (goal.PlayerContribution == 0)
                     continue; // INARA rejects setCommanderCommunityGoalProgress with 0 contribution
 
-                yield return new ApiEvent("setCommanderCommunityGoalProgress")
+                yield return new ApiInputEvent("setCommanderCommunityGoalProgress")
                 {
                     Timestamp = e.Timestamp,
                     EventData = new Dictionary<string, object>()
@@ -359,9 +359,9 @@
             }
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Reputation e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Reputation e)
         {
-            yield return new ApiEvent("setCommanderReputationMajorFaction")
+            yield return new ApiInputEvent("setCommanderReputationMajorFaction")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -370,7 +370,7 @@
                     { "majorfactionReputation", System.Convert.ToSingle(e.Empire) / 100.0f },
                 }
             };
-            yield return new ApiEvent("setCommanderReputationMajorFaction")
+            yield return new ApiInputEvent("setCommanderReputationMajorFaction")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -379,7 +379,7 @@
                     { "majorfactionReputation", System.Convert.ToSingle(e.Alliance) / 100.0f },
                 }
             };
-            yield return new ApiEvent("setCommanderReputationMajorFaction")
+            yield return new ApiInputEvent("setCommanderReputationMajorFaction")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -390,10 +390,10 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(ShipyardSwap e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(ShipyardSwap e)
         {
             // Send event for old ship indicating it's location
-            var @event = new ApiEvent("setCommanderShip")
+            var @event = new ApiInputEvent("setCommanderShip")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -409,7 +409,7 @@
             yield return @event;
 
             // and for new, indicating that it's now current
-            @event = new ApiEvent("setCommanderShip")
+            @event = new ApiInputEvent("setCommanderShip")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -425,9 +425,9 @@
             yield return @event;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(ShipyardSell e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(ShipyardSell e)
         {
-            var @event = new ApiEvent("delCommanderShip")
+            var @event = new ApiInputEvent("delCommanderShip")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -439,9 +439,9 @@
             yield return @event;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(StoredModules e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(StoredModules e)
         {
-            var @event = new ApiEvent("setCommanderStorageModules")
+            var @event = new ApiInputEvent("setCommanderStorageModules")
             {
                 Timestamp = e.Timestamp,
                 EventData = e.Items.Select(ConvertStoredItem).ToArray()
@@ -473,9 +473,9 @@
             return result;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(MissionFailed e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(MissionFailed e)
         {
-            var @event = new ApiEvent("setCommanderMissionFailed")
+            var @event = new ApiInputEvent("setCommanderMissionFailed")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -486,9 +486,9 @@
             yield return @event;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(MissionAbandoned e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(MissionAbandoned e)
         {
-            var @event = new ApiEvent("setCommanderMissionAbandoned")
+            var @event = new ApiInputEvent("setCommanderMissionAbandoned")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -499,7 +499,7 @@
             yield return @event;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(MissionCompleted e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(MissionCompleted e)
         {
             var data = new Dictionary<string, object>()
             {
@@ -513,7 +513,7 @@
             data.AddIfNotNull("rewardMaterials", ConvertMaterialReward(e.MaterialsReward));
             data.AddIfNotNull("minorfactionEffects", ConvertMissionFactionEffects(e.FactionEffects));
 
-            var @event = new ApiEvent("setCommanderMissionCompleted")
+            var @event = new ApiInputEvent("setCommanderMissionCompleted")
             {
                 Timestamp = e.Timestamp,
                 EventData = data
@@ -524,7 +524,7 @@
             {
                 foreach (var cr in e.MaterialsReward)
                 {
-                    @event = new ApiEvent("addCommanderInventoryMaterialsItem")
+                    @event = new ApiInputEvent("addCommanderInventoryMaterialsItem")
                     {
                         Timestamp = e.Timestamp,
                         EventData = new Dictionary<string, object>()
@@ -554,7 +554,7 @@
 
         private object[] ConvertMaterialReward(MaterialsReward[] materialsRewards) => materialsRewards?.Select(cr => new { itemName = cr.Name, itemCount = cr.Count })?.ToArray<object>();
 
-        private IEnumerable<ApiEvent> ConvertEvent(MissionAccepted e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(MissionAccepted e)
         {
             var data = new Dictionary<string, object>()
                 {
@@ -582,7 +582,7 @@
             data.AddIfNotNull("passengerIsVIP", e.PassengerVIPs);
             data.AddIfNotNull("passengerIsWanted", e.PassengerWanted);
 
-            var @event = new ApiEvent("addCommanderMission")
+            var @event = new ApiInputEvent("addCommanderMission")
             {
                 Timestamp = e.Timestamp,
                 EventData = data
@@ -590,9 +590,9 @@
             yield return @event;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(MaterialCollected e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(MaterialCollected e)
         {
-            var @event = new ApiEvent("addCommanderInventoryMaterialsItem")
+            var @event = new ApiInputEvent("addCommanderInventoryMaterialsItem")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -604,12 +604,12 @@
             yield return @event;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Loadout e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Loadout e)
         {
             if (e.Ship == null || e.Ship.Contains("Fighter"))
                 yield break;
 
-            var shipEvent = new ApiEvent("setCommanderShip")
+            var shipEvent = new ApiInputEvent("setCommanderShip")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>()
@@ -630,7 +630,7 @@
 
             yield return shipEvent;
 
-            var loadoutEvent = new ApiEvent("setCommanderShipLoadout")
+            var loadoutEvent = new ApiInputEvent("setCommanderShipLoadout")
             {
                 Timestamp = e.Timestamp,
                 EventData = new Dictionary<string, object>
@@ -688,9 +688,9 @@
             return item;
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(EscapeInterdiction e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(EscapeInterdiction e)
         {
-            yield return new ApiEvent("addCommanderCombatInterdictionEscape")
+            yield return new ApiInputEvent("addCommanderCombatInterdictionEscape")
             {
                 EventData = new Dictionary<string, object>
                 {
@@ -702,9 +702,9 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Interdiction e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Interdiction e)
         {
-            yield return new ApiEvent("addCommanderCombatInterdiction")
+            yield return new ApiInputEvent("addCommanderCombatInterdiction")
             {
                 EventData = new Dictionary<string, object>
                 {
@@ -716,9 +716,9 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Interdicted e)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Interdicted e)
         {
-            yield return new ApiEvent("addCommanderCombatInterdicted")
+            yield return new ApiInputEvent("addCommanderCombatInterdicted")
             {
                 EventData = new Dictionary<string, object>
                 {
@@ -731,10 +731,10 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(PvpKill @event)
+        private IEnumerable<ApiInputEvent> ConvertEvent(PvpKill @event)
         {
             var timestamp = @event.Timestamp;
-            yield return new ApiEvent("addCommanderCombatKill")
+            yield return new ApiInputEvent("addCommanderCombatKill")
             {
                 EventData = new Dictionary<string, object>
                 {
@@ -745,19 +745,19 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Statistics @event)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Statistics @event)
         {
-            yield return new ApiEvent("setCommanderGameStatistics")
+            yield return new ApiInputEvent("setCommanderGameStatistics")
             {
                 EventData = @event.Raw,
                 Timestamp = @event.Timestamp
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Docked @event)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Docked @event)
         {
             var timestamp = @event.Timestamp;
-            yield return new ApiEvent("addCommanderTravelDock")
+            yield return new ApiInputEvent("addCommanderTravelDock")
             {
                 EventData = new Dictionary<string, object>
                 {
@@ -771,10 +771,10 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(FsdJump @event)
+        private IEnumerable<ApiInputEvent> ConvertEvent(FsdJump @event)
         {
             var timestamp = @event.Timestamp;
-            yield return new ApiEvent("addCommanderTravelFSDJump")
+            yield return new ApiInputEvent("addCommanderTravelFSDJump")
             {
                 EventData = new Dictionary<string, object>
                 {
@@ -790,14 +790,14 @@
                 yield return reputationEvent;
         }
 
-        private IEnumerable<ApiEvent> ConvertMinorFactionReputation(DateTime timestamp, Faction[] factions)
+        private IEnumerable<ApiInputEvent> ConvertMinorFactionReputation(DateTime timestamp, Faction[] factions)
         {
             if (factions == null)
                 yield break;
 
             foreach (var faction in factions.Where(f => f.MyReputation.HasValue))
             {
-                yield return new ApiEvent("setCommanderReputationMinorFaction")
+                yield return new ApiInputEvent("setCommanderReputationMinorFaction")
                 {
                     EventData = new Dictionary<string, object>
                     {
@@ -809,12 +809,12 @@
             }
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(Materials @event)
+        private IEnumerable<ApiInputEvent> ConvertEvent(Materials @event)
         {
             var materialCounts = @event.RawMats.Concat(@event.Manufactured).Concat(@event.Encoded)
                 .ToDictionary(mat => mat.Name, mat => mat.Count);
 
-            yield return new ApiEvent("setCommanderInventoryMaterials")
+            yield return new ApiInputEvent("setCommanderInventoryMaterials")
             {
                 EventData = materialCounts
                     .Select(kvp => new { itemName = kvp.Key, itemCount = kvp.Value })
@@ -824,9 +824,9 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(LoadGame @event)
+        private IEnumerable<ApiInputEvent> ConvertEvent(LoadGame @event)
         {
-            yield return new ApiEvent("setCommanderCredits")
+            yield return new ApiInputEvent("setCommanderCredits")
             {
                 EventData = new Dictionary<string, object>
                 {
@@ -837,13 +837,13 @@
             };
         }
 
-        private IEnumerable<ApiEvent> ConvertEvent(EngineerProgress @event)
+        private IEnumerable<ApiInputEvent> ConvertEvent(EngineerProgress @event)
         {
             if (@event.Engineers != null)
             {
                 foreach (var engineer in @event.Engineers)
                 {
-                    yield return new ApiEvent("setCommanderRankEngineer")
+                    yield return new ApiInputEvent("setCommanderRankEngineer")
                     {
                         EventData = new Dictionary<string, object>
                         {

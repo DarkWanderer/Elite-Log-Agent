@@ -33,14 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MoreLinq, Version=3.1.1.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
-      <HintPath>..\packages\morelinq.3.1.1\lib\net451\MoreLinq.dll</HintPath>
+    <Reference Include="MoreLinq, Version=3.2.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.2.0\lib\net451\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.6.5\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -68,10 +68,10 @@
     <Compile Include="InaraEventConverter.cs" />
     <Compile Include="InaraPlugin.cs" />
     <Compile Include="InaraSettings.cs" />
-    <Compile Include="InaraSettingsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Model\ApiEvent.cs" />
+    <Compile Include="Model\ApiInput.cs" />
+    <Compile Include="Model\ApiInputBatch.cs" />
+    <Compile Include="Model\ApiOutputBatch.cs" />
+    <Compile Include="Model\ApiOutputEvent.cs" />
     <Compile Include="Model\Header.cs" />
     <Compile Include="Model\InaraApiFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,11 +93,6 @@
       <Project>{fd518ed2-7a6e-42f7-8c90-603235c1fee6}</Project>
       <Name>DW.ELA.Interfaces</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="InaraSettingsControl.resx">
-      <DependentUpon>InaraSettingsControl.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

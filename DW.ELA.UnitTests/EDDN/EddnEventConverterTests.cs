@@ -5,6 +5,7 @@
     using DW.ELA.Interfaces;
     using DW.ELA.Plugin.EDDN;
     using DW.ELA.Plugin.EDDN.Model;
+    using DW.ELA.UnitTests.Utility;
     using Moq;
     using NUnit.Framework;
 
@@ -21,7 +22,7 @@
             var recorderMock = GetRecorderMock();
 
             var eventConverter = new EddnEventConverter(recorderMock) { MaxAge = TimeSpan.FromDays(5000) };
-            var result = eventConverter.Convert(e).ToList();
+            var result = eventConverter.Convert(e, TestCredentials.UserName).ToList();
             Assert.NotNull(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(EddnEvent));
             foreach (var @event in result)
@@ -37,7 +38,7 @@
             var eventConverter = new EddnEventConverter(recorderMock) { MaxAge = TimeSpan.FromDays(5000) };
 
             var convertedEvents = TestEventSource.CannedEvents
-                .SelectMany(eventConverter.Convert)
+                .SelectMany(e => eventConverter.Convert(e, TestCredentials.UserName))
                 .OfType<EddnJournalEvent>()
                 .ToList();
 
@@ -61,7 +62,7 @@
             var eventConverter = new EddnEventConverter(recorderMock) { MaxAge = TimeSpan.FromDays(5000) };
 
             var convertedEvents = TestEventSource.CannedEvents
-                .SelectMany(eventConverter.Convert)
+                .SelectMany(e => eventConverter.Convert(e, TestCredentials.UserName))
                 .OfType<EddnJournalEvent>()
                 .ToList();
 

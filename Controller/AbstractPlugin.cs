@@ -5,33 +5,38 @@
     using System.Collections.Generic;
     using System.Timers;
     using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Utility;
     using NLog;
 
-    public abstract class AbstractPlugin<TEvent, TSettings> : IPlugin, IObserver<JournalEvent>, IDisposable
+    public abstract class AbstractBatchSendPlugin<TEvent, TSettings> : IPlugin, IObserver<JournalEvent>, IDisposable
         where TSettings : class, new()
         where TEvent : class
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly Timer flushTimer = new Timer();
+        private PluginSettingsFacade<TSettings> pluginSettingsFacade;
 
-        protected AbstractPlugin(ISettingsProvider settingsProvider)
+        protected AbstractBatchSendPlugin(ISettingsProvider settingsProvider)
         {
             SettingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             flushTimer.AutoReset = false;
             flushTimer.Interval = FlushInterval.TotalMilliseconds;
             flushTimer.Start();
             flushTimer.Elapsed += (o, e) => FlushQueue();
+            pluginSettingsFacade = new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings);
         }
 
         public abstract string PluginName { get; }
 
         public abstract string PluginId { get; }
 
+        protected CommanderData CurrentCommander { get; private set; }
+
         protected virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
 
-        protected abstract IEventConverter<TEvent> EventConverter { get; }
+        protected IEventConverter<TEvent> EventConverter { get; set; }
 
         protected ISettingsProvider SettingsProvider { get; }
 
@@ -41,7 +46,11 @@
             set => SettingsProvider.Settings = value;
         }
 
-        protected TSettings Settings => new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings).Settings;
+        protected TSettings PluginConfiguration
+        {
+            get => pluginSettingsFacade.Settings;
+            set => pluginSettingsFacade.Settings = value;
+        }
 
         protected ConcurrentQueue<TEvent> EventQueue { get; } = new ConcurrentQueue<TEvent>();
 
@@ -73,6 +82,12 @@
 
         public virtual void OnNext(JournalEvent @event)
         {
+            if (@event is Commander commanderEvent)
+            {
+                FlushQueue();
+                CurrentCommander = new CommanderData(commanderEvent.Name, commanderEvent.FrontierId);
+            }
+
             foreach (var e in EventConverter.Convert(@event))
                 EventQueue.Enqueue(e);
         }
@@ -88,5 +103,17 @@
         public IObserver<JournalEvent> GetLogObserver() => this;
 
         public void Dispose() => flushTimer.Dispose();
+
+        public class CommanderData
+        {
+            public readonly string Name;
+            public readonly string FrontierID;
+
+            public CommanderData(string commanderName, string commanderFid)
+            {
+                Name = commanderName;
+                FrontierID = commanderFid;
+            }
+        }
     }
 }

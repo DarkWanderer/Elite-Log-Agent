@@ -22,7 +22,7 @@
         {
             var result = eventConverter.Convert(e);
             Assert.NotNull(result);
-            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(ApiEvent));
+            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(ApiInputEvent));
         }
     }
 }

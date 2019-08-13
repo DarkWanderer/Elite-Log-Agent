@@ -15,9 +15,6 @@
         [JsonIgnore]
         public JObject Raw { get; set; }
 
-        [JsonIgnore]
-        public JournalContext Context { get; set; }
-
         public override string ToString() => Event;
     }
 }

@@ -37,19 +37,19 @@
             this.frontierID = frontierID;
         }
 
-        public async Task<ICollection<ApiEvent>> ApiCall(params ApiEvent[] events)
+        public async Task<ICollection<ApiOutputEvent>> ApiCall(params ApiInputEvent[] events)
         {
             if (events.Length == 0)
-                return new ApiEvent[0];
+                return new ApiOutputEvent[0];
 
-            var inputData = new ApiInputOutput()
+            var inputData = new ApiInputBatch()
             {
                 Header = new Header(commanderName, apiKey, frontierID),
                 Events = events
             };
             var inputJson = inputData.ToJson();
             var outputJson = await client.PostAsync(inputJson);
-            var outputData = JsonConvert.DeserializeObject<ApiInputOutput>(outputJson);
+            var outputData = JsonConvert.DeserializeObject<ApiOutputBatch>(outputJson);
 
             var exceptions = new List<Exception>();
 
@@ -92,7 +92,7 @@
 
         public async Task<string> GetCmdrName()
         {
-            var @event = new ApiEvent("getCommanderProfile") { EventData = new Dictionary<string, object>(), Timestamp = DateTime.Now };
+            var @event = new ApiInputEvent("getCommanderProfile") { EventData = new Dictionary<string, object>(), Timestamp = DateTime.Now };
             var result = (await ApiCall(@event)).SingleOrDefault();
             if (result == null)
                 throw new ApplicationException("Null result from API");
@@ -100,15 +100,5 @@
             return cmdrName;
         }
 
-        private struct ApiInputOutput
-        {
-            [JsonProperty("header")]
-            public Header Header;
-
-            [JsonProperty("events")]
-            public IList<ApiEvent> Events;
-
-            public override string ToString() => Serialize.ToJson(this);
-        }
     }
 }

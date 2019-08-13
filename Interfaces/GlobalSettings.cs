@@ -8,29 +8,23 @@
     public class GlobalSettings : ICloneable
     {
         [JsonIgnore]
-        public const string DefaultCmdrName = "Unknown Commander";
-
-        [JsonIgnore]
-        public static GlobalSettings Defaults => new GlobalSettings();
+        public static GlobalSettings Default => new GlobalSettings();
 
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; } = new Dictionary<string, JObject>();
 
+        [Obsolete("Retained for backward compatibility")]
         [JsonProperty("commanderName")]
-        public string CommanderName { get; set; } = DefaultCmdrName;
+        public string CommanderName { get; set; } = null;
 
         [JsonProperty("logLevel")]
-        public string LogLevel { get; set; } = "Debug";
+        public string LogLevel { get; set; } = "Info";
 
         [JsonProperty("reportErrorsToCloud")]
         public bool ReportErrorsToCloud { get; set; } = true;
 
         object ICloneable.Clone() => Clone();
 
-        public GlobalSettings Clone()
-        {
-            var jsonSerializer = new JsonSerializer();
-            return JsonConvert.DeserializeObject<GlobalSettings>(JsonConvert.SerializeObject(this));
-        }
+        public GlobalSettings Clone() => JsonConvert.DeserializeObject<GlobalSettings>(JsonConvert.SerializeObject(this));
     }
 }
