@@ -12,6 +12,7 @@
     using DW.ELA.Utility;
     using MoreLinq;
     using NLog;
+    using NLog.Fluent;
 
     public class InaraPlugin : AbstractBatchSendPlugin<ApiInputEvent, InaraSettings>
     {
@@ -96,13 +97,25 @@
             try
             {
                 var commander = CurrentCommander;
-                if (commander !=null && ApiKeys.TryGetValue(commander.Name, out var apiKey))
+                if (commander != null && ApiKeys.TryGetValue(commander.Name, out var apiKey))
                 {
                     var facade = new InaraApiFacade(RestClient, commander.Name, apiKey, commander.FrontierID);
                     var ApiInputs = Compact(events).ToArray();
                     if (ApiInputs.Length > 0)
                         await facade.ApiCall(ApiInputs);
+
+                    Log.Info()
+                        .Message("Uploaded events")
+                        .Property("eventsCount", events.Count)
+                        .Property("commander", commander)
+                        .Write();
                 }
+                else
+                    Log.Info()
+                        .Message("Events discarded, commander not known")
+                        .Property("eventsCount", events.Count)
+                        .Property("commander", commander?.Name ?? "null")
+                        .Write();
             }
             catch (Exception e)
             {

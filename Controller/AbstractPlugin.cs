@@ -114,6 +114,8 @@
                 Name = commanderName;
                 FrontierID = commanderFid;
             }
+
+            public override string ToString() => $"{Name}|{FrontierID}";
         }
     }
 }

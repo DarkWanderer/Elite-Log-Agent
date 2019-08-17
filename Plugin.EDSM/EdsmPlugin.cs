@@ -94,10 +94,17 @@
                         await apiFacade.PostLogEvents(batch.ToArray());
 
                     Log.Info()
-                        .Message("Uploaded {0} events", events.Count)
+                        .Message("Uploaded events")
                         .Property("eventsCount", events.Count)
+                        .Property("commander", commander)
                         .Write();
                 }
+                else
+                    Log.Info()
+                        .Message("Events discarded, commander not known")
+                        .Property("eventsCount", events.Count)
+                        .Property("commander", commander?.Name ?? "null")
+                        .Write();
             }
             catch (Exception e)
             {
