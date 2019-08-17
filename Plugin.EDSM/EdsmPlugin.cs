@@ -8,7 +8,7 @@
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Utility.Extensions;
+    using DW.ELA.Utility;
     using MoreLinq;
     using Newtonsoft.Json.Linq;
     using NLog;
@@ -19,14 +19,12 @@
         private const string EdsmApiUrl = "https://www.edsm.net/api-journal-v1/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly Task<HashSet<string>> ignoredEvents;
-        private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly ConcurrentDictionary<string, string> ApiKeys = new ConcurrentDictionary<string, string>();
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory)
             : base(settingsProvider)
         {
             RestClient = restClientFactory.CreateRestClient(EdsmApiUrl);
-            this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
             EventConverter = new EdsmEventConverter(playerStateRecorder);
             ignoredEvents =
                  RestClient.GetAsync("discard")
@@ -44,27 +42,37 @@
 
         public override string PluginId => "EdsmUploader";
 
-        public override void ReloadSettings()
+        /// <summary>
+        /// Property which merges the 'new' API keys with multi-commander support with the old legacy single-commander one
+        /// </summary>
+        private IReadOnlyDictionary<string, string> GetActualApiKeys()
         {
-            FlushQueue();
-            var config = PluginConfiguration.ApiKeys;
+            var config = PluginSettings.ApiKeys.ToDictionary();
 
 #pragma warning disable CS0618 // Type or member is obsolete
 #pragma warning disable CS0612 // Type or member is obsolete
             var legacyCmdrName = GlobalSettings.CommanderName;
-            var legacyApiKey = PluginConfiguration.ApiKey;
+            var legacyApiKey = PluginSettings.ApiKey;
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore CS0618 // Type or member is obsolete
 
             if (!string.IsNullOrEmpty(legacyCmdrName) && !string.IsNullOrEmpty(legacyCmdrName) && !config.ContainsKey(legacyCmdrName))
                 config.Add(legacyCmdrName, legacyApiKey);
 
+            return config;
+        }
+
+        public override void ReloadSettings()
+        {
+            FlushQueue();
+            var actualApiKeys = GetActualApiKeys();
+
             // Update keys for which new values were provided
-            foreach (var kvp in config)
+            foreach (var kvp in actualApiKeys)
                 ApiKeys.AddOrUpdate(kvp.Key, kvp.Value, (key, oldValue) => kvp.Value);
 
             // Remove keys which were removed from config
-            foreach (var key in ApiKeys.Keys.Except(config.Keys))
+            foreach (var key in ApiKeys.Keys.Except(actualApiKeys.Keys))
                 ApiKeys.TryRemove(key, out var _);
         }
 
@@ -97,6 +105,16 @@
             }
         }
 
-        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new MultiCmdrApiKeyControl() { GlobalSettings = settings };
+        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new MultiCmdrApiKeyControl()
+        {
+            ApiKeys = GetActualApiKeys(),
+            GlobalSettings = settings,
+            ValidateApiKeyFunc = ValidateApiKeyAsync,
+            SaveSettingsFunc = SaveSettings
+        };
+
+        private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) => new PluginSettingsFacade<EdsmSettings>(PluginId, settings).Settings = new EdsmSettings() { ApiKeys = values.ToDictionary() };
+
+        private Task<bool> ValidateApiKeyAsync(string cmdrName, string apiKey) { return Task.FromResult(true); }
     }
 }

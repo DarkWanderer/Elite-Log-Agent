@@ -60,64 +60,64 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkboxAutostartApplication = new System.Windows.Forms.CheckBox();
-            this.reportErrorsCheckbox = new System.Windows.Forms.CheckBox();
-            this.logLevelLabel = new System.Windows.Forms.Label();
-            this.logLevelComboBox = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
+            checkboxAutostartApplication = new CheckBox();
+            reportErrorsCheckbox = new CheckBox();
+            logLevelLabel = new Label();
+            logLevelComboBox = new ComboBox();
+            SuspendLayout();
             // 
             // checkboxAutostartApplication
             // 
-            this.checkboxAutostartApplication.AutoSize = true;
-            this.checkboxAutostartApplication.Location = new System.Drawing.Point(3, 3);
-            this.checkboxAutostartApplication.Name = "checkboxAutostartApplication";
-            this.checkboxAutostartApplication.Size = new System.Drawing.Size(186, 21);
-            this.checkboxAutostartApplication.TabIndex = 7;
-            this.checkboxAutostartApplication.Text = "Autorun agent on sign-in";
-            this.checkboxAutostartApplication.UseVisualStyleBackColor = true;
-            this.checkboxAutostartApplication.CheckedChanged += new System.EventHandler(this.CheckboxAutostartApplication_CheckedChanged);
+            checkboxAutostartApplication.AutoSize = true;
+            checkboxAutostartApplication.Location = new System.Drawing.Point(3, 3);
+            checkboxAutostartApplication.Name = "checkboxAutostartApplication";
+            checkboxAutostartApplication.Size = new System.Drawing.Size(186, 21);
+            checkboxAutostartApplication.TabIndex = 7;
+            checkboxAutostartApplication.Text = "Autorun agent on sign-in";
+            checkboxAutostartApplication.UseVisualStyleBackColor = true;
+            checkboxAutostartApplication.CheckedChanged += new EventHandler(CheckboxAutostartApplication_CheckedChanged);
             // 
             // reportErrorsCheckbox
             // 
-            this.reportErrorsCheckbox.AutoSize = true;
-            this.reportErrorsCheckbox.Location = new System.Drawing.Point(3, 30);
-            this.reportErrorsCheckbox.Name = "reportErrorsCheckbox";
-            this.reportErrorsCheckbox.Size = new System.Drawing.Size(220, 21);
-            this.reportErrorsCheckbox.TabIndex = 8;
-            this.reportErrorsCheckbox.Text = "Report errors to Cloud service";
-            this.reportErrorsCheckbox.UseVisualStyleBackColor = true;
-            this.reportErrorsCheckbox.CheckedChanged += new System.EventHandler(this.ReportErrorsCheckbox_CheckedChanged);
+            reportErrorsCheckbox.AutoSize = true;
+            reportErrorsCheckbox.Location = new System.Drawing.Point(3, 30);
+            reportErrorsCheckbox.Name = "reportErrorsCheckbox";
+            reportErrorsCheckbox.Size = new System.Drawing.Size(220, 21);
+            reportErrorsCheckbox.TabIndex = 8;
+            reportErrorsCheckbox.Text = "Report errors to Cloud service";
+            reportErrorsCheckbox.UseVisualStyleBackColor = true;
+            reportErrorsCheckbox.CheckedChanged += new EventHandler(ReportErrorsCheckbox_CheckedChanged);
             // 
             // logLevelLabel
             // 
-            this.logLevelLabel.AutoSize = true;
-            this.logLevelLabel.Location = new System.Drawing.Point(0, 60);
-            this.logLevelLabel.Name = "logLevelLabel";
-            this.logLevelLabel.Size = new System.Drawing.Size(65, 17);
-            this.logLevelLabel.TabIndex = 9;
-            this.logLevelLabel.Text = "Log level";
+            logLevelLabel.AutoSize = true;
+            logLevelLabel.Location = new System.Drawing.Point(0, 60);
+            logLevelLabel.Name = "logLevelLabel";
+            logLevelLabel.Size = new System.Drawing.Size(65, 17);
+            logLevelLabel.TabIndex = 9;
+            logLevelLabel.Text = "Log level";
             // 
             // logLevelComboBox
             // 
-            this.logLevelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.logLevelComboBox.FormattingEnabled = true;
-            this.logLevelComboBox.Location = new System.Drawing.Point(71, 57);
-            this.logLevelComboBox.Name = "logLevelComboBox";
-            this.logLevelComboBox.Size = new System.Drawing.Size(149, 24);
-            this.logLevelComboBox.TabIndex = 10;
-            this.logLevelComboBox.SelectedIndexChanged += new System.EventHandler(this.LogLevelComboBox_SelectedIndexChanged);
+            logLevelComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            logLevelComboBox.FormattingEnabled = true;
+            logLevelComboBox.Location = new System.Drawing.Point(71, 57);
+            logLevelComboBox.Name = "logLevelComboBox";
+            logLevelComboBox.Size = new System.Drawing.Size(149, 24);
+            logLevelComboBox.TabIndex = 10;
+            logLevelComboBox.SelectedIndexChanged += new EventHandler(LogLevelComboBox_SelectedIndexChanged);
             // 
             // GeneralSettingsControl
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.Controls.Add(this.logLevelComboBox);
-            this.Controls.Add(this.logLevelLabel);
-            this.Controls.Add(this.reportErrorsCheckbox);
-            this.Controls.Add(this.checkboxAutostartApplication);
-            this.Name = "GeneralSettingsControl";
-            this.Size = new System.Drawing.Size(417, 219);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleMode = AutoScaleMode.Inherit;
+            Controls.Add(logLevelComboBox);
+            Controls.Add(logLevelLabel);
+            Controls.Add(reportErrorsCheckbox);
+            Controls.Add(checkboxAutostartApplication);
+            Name = "GeneralSettingsControl";
+            Size = new System.Drawing.Size(417, 219);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
     }

@@ -4,10 +4,12 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.Inara.Model;
+    using DW.ELA.Utility;
     using MoreLinq;
     using NLog;
 
@@ -40,31 +42,52 @@
         // Explicitly set to 30 as Inara prefers batches of events
         protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
 
-        public override void ReloadSettings()
+        /// <summary>
+        /// Property which merges the 'new' API keys with multi-commander support with the old legacy single-commander one
+        /// </summary>
+        private IReadOnlyDictionary<string, string> GetActualApiKeys()
         {
-            FlushQueue();
-            var config = PluginConfiguration.ApiKeys;
+            var config = PluginSettings.ApiKeys.ToDictionary();
 
 #pragma warning disable CS0618 // Type or member is obsolete
 #pragma warning disable CS0612 // Type or member is obsolete
             var legacyCmdrName = GlobalSettings.CommanderName;
-            var legacyApiKey = PluginConfiguration.ApiKey;
+            var legacyApiKey = PluginSettings.ApiKey;
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore CS0618 // Type or member is obsolete
 
             if (!string.IsNullOrEmpty(legacyCmdrName) && !string.IsNullOrEmpty(legacyCmdrName) && !config.ContainsKey(legacyCmdrName))
                 config.Add(legacyCmdrName, legacyApiKey);
 
+            return config;
+        }
+
+        public override void ReloadSettings()
+        {
+            FlushQueue();
+            var actualApiKeys = GetActualApiKeys();
+
             // Update keys for which new values were provided
-            foreach (var kvp in config)
+            foreach (var kvp in actualApiKeys)
                 ApiKeys.AddOrUpdate(kvp.Key, kvp.Value, (key, oldValue) => kvp.Value);
 
             // Remove keys which were removed from config
-            foreach (var key in ApiKeys.Keys.Except(config.Keys))
+            foreach (var key in ApiKeys.Keys.Except(actualApiKeys.Keys))
                 ApiKeys.TryRemove(key, out var _);
         }
 
-        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new MultiCmdrApiKeyControl() { GlobalSettings = settings };
+
+        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new MultiCmdrApiKeyControl()
+        {
+            ApiKeys = GetActualApiKeys(),
+            GlobalSettings = settings,
+            ValidateApiKeyFunc = ValidateApiKeyAsync,
+            SaveSettingsFunc = SaveSettings
+        };
+
+        private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) => new PluginSettingsFacade<InaraSettings>(PluginId, settings).Settings = new InaraSettings() { ApiKeys = values.ToDictionary() };
+
+        private Task<bool> ValidateApiKeyAsync(string cmdrName, string apiKey) { return Task.FromResult(true); }
 
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 

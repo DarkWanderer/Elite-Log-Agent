@@ -46,7 +46,7 @@
             set => SettingsProvider.Settings = value;
         }
 
-        protected TSettings PluginConfiguration
+        protected TSettings PluginSettings
         {
             get => pluginSettingsFacade.Settings;
             set => pluginSettingsFacade.Settings = value;
