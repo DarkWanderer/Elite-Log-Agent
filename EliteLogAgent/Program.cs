@@ -52,6 +52,7 @@
                 // subscribing the PlayerStateRecorder first to avoid potential issues with out-of-order execution because of threading
                 using (logMonitor.Subscribe(playerStateRecorder))
                 using (new CompositeDisposable(pluginManager.LoadedPlugins.Select(p => logMonitor.Subscribe(p.GetLogObserver()))))
+                using (logMonitor) // log monitor needs to get disposed first to ensure every plugin gets 'OnCompleted' event
                 {
                     Application.Run();
                 }
