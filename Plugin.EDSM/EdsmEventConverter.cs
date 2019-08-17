@@ -17,7 +17,7 @@
         {
             var @event = (JObject)sourceEvent.Raw.DeepClone();
             var timestamp = sourceEvent.Timestamp;
-            var starSystem = @event["StarSystem"]?.ToObject<string>() ?? playerStateRecorder.GetPlayerSystem(timestamp);
+            string starSystem = @event["StarSystem"]?.ToObject<string>() ?? playerStateRecorder.GetPlayerSystem(timestamp);
 
             @event["_systemName"] = starSystem;
             @event["_shipId"] = playerStateRecorder.GetPlayerShipId(timestamp);

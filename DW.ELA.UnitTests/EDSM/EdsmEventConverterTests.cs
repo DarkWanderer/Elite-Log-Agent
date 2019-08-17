@@ -13,7 +13,10 @@
         private readonly IPlayerStateHistoryRecorder stateRecorder = new PlayerStateRecorder();
         private readonly EdsmEventConverter eventConverter;
 
-        public EdsmEventConverterTests() => eventConverter = new EdsmEventConverter(stateRecorder);
+        public EdsmEventConverterTests()
+        {
+            eventConverter = new EdsmEventConverter(stateRecorder);
+        }
 
         [Test]
         [Parallelizable]

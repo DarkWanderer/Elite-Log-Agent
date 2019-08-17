@@ -12,7 +12,7 @@
     [TestFixture]
     public class EddnEventConverterTests
     {
-        private EventSchemaValidator validator = new EventSchemaValidator();
+        private readonly EventSchemaValidator validator = new EventSchemaValidator();
 
         [Test]
         [Parallelizable]

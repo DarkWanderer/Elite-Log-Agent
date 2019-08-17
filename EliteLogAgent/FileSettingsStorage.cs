@@ -29,6 +29,7 @@
             get
             {
                 lock (settingsCacheLock)
+                {
                     try
                     {
                         if (settingsCache == null && File.Exists(SettingsFilePath))
@@ -41,6 +42,7 @@
                         Log.Warn(e, "Exception while reading settings, using defaults");
                         return GlobalSettings.Default;
                     }
+                }
             }
 
             set

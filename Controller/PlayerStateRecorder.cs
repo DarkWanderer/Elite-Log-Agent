@@ -141,7 +141,9 @@
                     shipType == null ||
                     shipType.ToLower() == "testbuggy" ||
                     shipType.Contains("Fighter"))
+                {
                     return;
+                }
 
                 shipRecorder.RecordState(new ShipRecord(shipId.Value, shipType), timestamp);
             }
@@ -173,7 +175,7 @@
 
             public override int GetHashCode()
             {
-                var hashCode = -1167275223;
+                int hashCode = -1167275223;
                 hashCode = hashCode * -1521134295 + ShipID.GetHashCode();
                 hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ShipType);
                 return hashCode;
@@ -191,12 +193,14 @@
                 try
                 {
                     lock (stateRecording)
+                    {
                         return stateRecording
                             .Where(l => l.Key <= atTime)
                             .DefaultIfEmpty()
                             .MaxBy(l => l.Key)
                             .FirstOrDefault()
                             .Value;
+                    }
                 }
                 catch (Exception e)
                 {

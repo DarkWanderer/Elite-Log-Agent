@@ -16,7 +16,7 @@
             diffs.AddRange(srcPropertyNames.Except(tgtPropertyNames).Select(p => tokenName + ": missing on right side: " + p));
             diffs.AddRange(tgtPropertyNames.Except(srcPropertyNames).Select(p => tokenName + ": missing on left side: " + p));
 
-            foreach (var property in srcPropertyNames.Intersect(tgtPropertyNames))
+            foreach (string property in srcPropertyNames.Intersect(tgtPropertyNames))
                 diffs.AddRange(Compare($"{tokenName}.{property}", source[property], target[property]));
 
             return diffs;

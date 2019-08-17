@@ -29,16 +29,16 @@
 
             var input = CreateHeader();
             input["message"] = new JArray(events).ToString();
-            var result = await PostAsync(input);
-            var returnCode = JObject.Parse(result)["msgnum"].ToObject<int>();
+            string result = await PostAsync(input);
+            int returnCode = JObject.Parse(result)["msgnum"].ToObject<int>();
         }
 
         private async Task<string> PostAsync(IDictionary<string, string> input)
         {
-            var result = await restClient.PostAsync(input);
+            string result = await restClient.PostAsync(input);
             var jResult = JObject.Parse(result);
-            var returnCode = jResult["msgnum"]?.ToObject<int>();
-            var msg = jResult["msg"]?.ToString();
+            int? returnCode = jResult["msgnum"]?.ToObject<int>();
+            string msg = jResult["msg"]?.ToString();
             if (returnCode != 100)
                 throw new EdsmApiException(msg);
             return result;

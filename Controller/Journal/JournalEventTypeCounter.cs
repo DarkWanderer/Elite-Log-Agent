@@ -8,7 +8,7 @@
 
     public class JournalEventTypeCounter : IObserver<JournalEvent>
     {
-        private ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
+        private readonly ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
 
         public IReadOnlyCollection<string> EventTypes =>
             eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();

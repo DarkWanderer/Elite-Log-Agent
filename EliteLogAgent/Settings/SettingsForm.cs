@@ -17,13 +17,13 @@
 
         private GlobalSettings currentSettings;
 
-        private IDictionary<string, AbstractSettingsControl> settingsControls = new Dictionary<string, AbstractSettingsControl>();
+        private readonly IDictionary<string, AbstractSettingsControl> settingsControls = new Dictionary<string, AbstractSettingsControl>();
 
         public SettingsForm()
         {
             InitializeComponent();
             Icon = Resources.EliteIcon;
-            var versionLabel = "Version: " + AppInfo.Version;
+            string versionLabel = "Version: " + AppInfo.Version;
             Text += ". " + versionLabel;
             Load += SettingsForm_Load;
         }
@@ -70,7 +70,7 @@
                 }
             }
 
-            foreach (var category in settingsControls.Keys.OrderBy(x => x))
+            foreach (string category in settingsControls.Keys.OrderBy(x => x))
             {
                 if (category != "General")
                     settingsCategoriesListView.Items.Add(category);
@@ -83,7 +83,7 @@
         {
             if (settingsCategoriesListView.SelectedIndices.Count > 0)
             {
-                var selectedIndex = settingsCategoriesListView.SelectedIndices.Cast<int>().Single();
+                int selectedIndex = settingsCategoriesListView.SelectedIndices.Cast<int>().Single();
                 settingsControlContainer.Controls.OfType<AbstractSettingsControl>().SingleOrDefault()?.SaveSettings();
                 settingsControlContainer.Controls.Clear();
                 settingsControlContainer.Controls.Add(settingsControls[settingsCategoriesListView.Items[selectedIndex].Text]);

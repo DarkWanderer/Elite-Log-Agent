@@ -40,7 +40,7 @@
         {
             ThrowIfQuotaExceeded();
 
-            var encodedPost = string.Join("&", values.Select(kvp => kvp.Key + "=" + HttpUtility.UrlEncode(kvp.Value)));
+            string encodedPost = string.Join("&", values.Select(kvp => kvp.Key + "=" + HttpUtility.UrlEncode(kvp.Value)));
 
             var httpContent = new StringContent(encodedPost, Encoding.UTF8, "application/x-www-form-urlencoded");
 

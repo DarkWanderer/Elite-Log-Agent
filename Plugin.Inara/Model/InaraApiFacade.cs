@@ -47,8 +47,8 @@
                 Header = new Header(commanderName, apiKey, frontierID),
                 Events = events
             };
-            var inputJson = inputData.ToJson();
-            var outputJson = await client.PostAsync(inputJson);
+            string inputJson = inputData.ToJson();
+            string outputJson = await client.PostAsync(inputJson);
             var outputData = JsonConvert.DeserializeObject<ApiOutputBatch>(outputJson);
 
             var exceptions = new List<Exception>();
@@ -59,8 +59,8 @@
                 for (int i = 0; i < events.Length; i++)
                 {
                     var outputEvent = outputData.Events[i];
-                    var statusCode = outputEvent.EventStatus;
-                    var statusText = outputEvent.EventStatusText;
+                    int? statusCode = outputEvent.EventStatus;
+                    string statusText = outputEvent.EventStatusText;
 
                     if (statusCode != 200)
                     {

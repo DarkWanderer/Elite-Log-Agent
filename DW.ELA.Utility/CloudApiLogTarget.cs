@@ -88,7 +88,7 @@
 
         private Task PostEventAsync(params ExceptionRecord[] records)
         {
-            var json = Serialize.ToJson(new JArray(records.Select(JObject.FromObject)));
+            string json = Serialize.ToJson(new JArray(records.Select(JObject.FromObject)));
             return restClient.PostAsync(json);
         }
 

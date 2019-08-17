@@ -243,7 +243,7 @@
                     keysToRemove.Add(property.Key);
             }
 
-            foreach (var key in keysToRemove)
+            foreach (string key in keysToRemove)
                 obj.Remove(key);
         }
 

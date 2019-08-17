@@ -25,7 +25,7 @@
         {
             try
             {
-                var schemaRef = @event.SchemaRef.Replace("/test", string.Empty);
+                string schemaRef = @event.SchemaRef.Replace("/test", string.Empty);
                 if (!schemaCache.ContainsKey(schemaRef))
                 {
                     Log.Error("Schema not found: {0}", schemaRef);
@@ -57,12 +57,12 @@
                 throw new ApplicationException("Unable to load any schemas");
 
             var schemas = new Dictionary<string, JsonSchema>();
-            foreach (var resource in resources)
+            foreach (string resource in resources)
             {
                 using (var stream = assembly.GetManifestResourceStream(resource))
                 using (var reader = new StreamReader(stream))
                 {
-                    var json = await reader.ReadToEndAsync();
+                    string json = await reader.ReadToEndAsync();
                     var schema = await JsonSchema.FromJsonAsync(json);
                     schemas.Add(schema.Id.TrimEnd('#'), schema);
                     Log.Trace("Loaded schema {0}", schema.Id);

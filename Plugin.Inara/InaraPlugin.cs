@@ -52,8 +52,8 @@
 
 #pragma warning disable CS0618 // Type or member is obsolete
 #pragma warning disable CS0612 // Type or member is obsolete
-            var legacyCmdrName = GlobalSettings.CommanderName;
-            var legacyApiKey = PluginSettings.ApiKey;
+            string legacyCmdrName = GlobalSettings.CommanderName;
+            string legacyApiKey = PluginSettings.ApiKey;
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -73,8 +73,8 @@
                 ApiKeys.AddOrUpdate(kvp.Key, kvp.Value, (key, oldValue) => kvp.Value);
 
             // Remove keys which were removed from config
-            foreach (var key in ApiKeys.Keys.Except(actualApiKeys.Keys))
-                ApiKeys.TryRemove(key, out var _);
+            foreach (string key in ApiKeys.Keys.Except(actualApiKeys.Keys))
+                ApiKeys.TryRemove(key, out string _);
         }
 
 
@@ -88,7 +88,7 @@
 
         private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) => new PluginSettingsFacade<InaraSettings>(PluginId, settings).Settings = new InaraSettings() { ApiKeys = values.ToDictionary() };
 
-        private Task<bool> ValidateApiKeyAsync(string cmdrName, string apiKey) { return Task.FromResult(true); }
+        private Task<bool> ValidateApiKeyAsync(string cmdrName, string apiKey) => Task.FromResult(true);
 
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 
@@ -97,7 +97,7 @@
             try
             {
                 var commander = CurrentCommander;
-                if (commander != null && ApiKeys.TryGetValue(commander.Name, out var apiKey))
+                if (commander != null && ApiKeys.TryGetValue(commander.Name, out string apiKey))
                 {
                     var facade = new InaraApiFacade(RestClient, commander.Name, apiKey, commander.FrontierID);
                     var ApiInputs = Compact(events).ToArray();
@@ -111,11 +111,13 @@
                         .Write();
                 }
                 else
+                {
                     Log.Info()
                         .Message("Events discarded, commander not known")
                         .Property("eventsCount", events.Count)
                         .Property("commander", commander?.Name ?? "null")
                         .Write();
+                }
             }
             catch (Exception e)
             {

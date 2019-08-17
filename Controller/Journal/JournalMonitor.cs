@@ -8,7 +8,6 @@
     using System.Threading.Tasks;
     using System.Timers;
     using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
     using DW.ELA.Utility.App;
     using NLog;
     using NLog.Fluent;
@@ -105,6 +104,7 @@
         private void SendEventsFromJournal(bool checkOtherFiles)
         {
             lock (@lock)
+            {
                 try
                 {
                     // We are not checking file size to make decision about whether
@@ -140,6 +140,7 @@
                         .Property("journal-file", currentFile)
                         .Write();
                 }
+            }
         }
 
         private long ReadJournalFromPosition(string file, long filePosition)

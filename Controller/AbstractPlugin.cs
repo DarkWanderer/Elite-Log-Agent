@@ -16,7 +16,7 @@
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly Timer flushTimer = new Timer();
-        private PluginSettingsFacade<TSettings> pluginSettingsFacade;
+        private readonly PluginSettingsFacade<TSettings> pluginSettingsFacade;
 
         protected AbstractBatchSendPlugin(ISettingsProvider settingsProvider)
         {

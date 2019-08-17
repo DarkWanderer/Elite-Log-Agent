@@ -64,13 +64,7 @@
         /// <summary>
         /// Gets the number of disposables contained in the CompositeDisposable.
         /// </summary>
-        public int Count
-        {
-            get
-            {
-                return count;
-            }
-        }
+        public int Count => count;
 
         /// <summary>
         /// Adds a disposable to the CompositeDisposable or disposes the disposable if the CompositeDisposable is disposed.
@@ -82,7 +76,7 @@
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            var shouldDispose = false;
+            bool shouldDispose = false;
             lock (gate)
             {
                 shouldDispose = IsDisposed;
@@ -107,7 +101,7 @@
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            var shouldDispose = false;
+            bool shouldDispose = false;
 
             lock (gate)
             {
@@ -118,7 +112,7 @@
                     // index-based lookup but only ordering for sequential disposal. So, instead of spending
                     // cycles on the Array.Copy imposed by Remove, we use a null sentinel value. We also
                     // do manual Swiss cheese detection to shrink the list if there's a lot of holes in it.
-                    var i = disposables.IndexOf(item);
+                    int i = disposables.IndexOf(item);
                     if (i >= 0)
                     {
                         shouldDispose = true;

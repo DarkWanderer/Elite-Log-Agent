@@ -2,7 +2,6 @@
 {
     using System;
     using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Utility.Extensions;
     using Newtonsoft.Json.Linq;
     using NLog;
 
