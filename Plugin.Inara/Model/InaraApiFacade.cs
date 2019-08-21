@@ -82,7 +82,6 @@
             if (outputData.Header.EventStatus != 200)
                 throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
 
-
             return outputData.Events;
         }
 

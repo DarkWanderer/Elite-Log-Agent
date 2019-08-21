@@ -55,6 +55,7 @@
                 using (logMonitor) // log monitor needs to get disposed first to ensure every plugin gets 'OnCompleted' event
                 {
                     Application.Run();
+                    RootLog.Info("Shutting down");
                 }
             }
         }
@@ -62,12 +63,12 @@
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             var message = e.IsTerminating ? "Unhandled fatal exception" : "Unhandled exception";
-            var senderString = sender?.GetType()?.ToString() ?? "null";
-            var exceptionTypeString = e.ExceptionObject?.GetType()?.ToString() ?? "null";
-            var exceptionObjectString = e.ExceptionObject?.ToString() ?? "null";
+            var senderString = sender?.GetType()?.ToString() ?? "unknown";
+            var exceptionTypeString = e.ExceptionObject?.GetType()?.ToString() ?? "unknown";
+            var exceptionObjectString = e.ExceptionObject?.ToString() ?? "unknown";
 
-            if (e.ExceptionObject is Exception)
-                RootLog.Fatal(e.ExceptionObject as Exception, message + " from {0}", senderString);
+            if (e.ExceptionObject is Exception ex)
+                RootLog.Fatal(ex, message + " from {0}", senderString);
             else
                 RootLog.Fatal(message + " of unknown type: {0} {1}", exceptionTypeString, exceptionObjectString);
         }
