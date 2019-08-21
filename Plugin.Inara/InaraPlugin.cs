@@ -48,12 +48,13 @@
         /// </summary>
         private IReadOnlyDictionary<string, string> GetActualApiKeys()
         {
-            var config = PluginSettings.ApiKeys.ToDictionary();
+            var pluginSettings = SettingsFacade.GetPluginSettings(GlobalSettings);
+            var config = pluginSettings.ApiKeys.ToDictionary();
 
 #pragma warning disable CS0618 // Type or member is obsolete
 #pragma warning disable CS0612 // Type or member is obsolete
             string legacyCmdrName = GlobalSettings.CommanderName;
-            string legacyApiKey = PluginSettings.ApiKey;
+            string legacyApiKey = pluginSettings.ApiKey;
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -86,7 +87,8 @@
             SaveSettingsFunc = SaveSettings
         };
 
-        private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) => new PluginSettingsFacade<InaraSettings>(PluginId, settings).Settings = new InaraSettings() { ApiKeys = values.ToDictionary() };
+        private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) =>
+            new PluginSettingsFacade<InaraSettings>(PluginId).SetPluginSettings(settings, new InaraSettings() { ApiKeys = values.ToDictionary() });
 
         private Task<bool> ValidateApiKeyAsync(string cmdrName, string apiKey) => Task.FromResult(true);
 

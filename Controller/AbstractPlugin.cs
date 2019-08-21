@@ -16,7 +16,6 @@
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly Timer flushTimer = new Timer();
-        private readonly PluginSettingsFacade<TSettings> pluginSettingsFacade;
 
         protected AbstractBatchSendPlugin(ISettingsProvider settingsProvider)
         {
@@ -25,7 +24,7 @@
             flushTimer.Interval = FlushInterval.TotalMilliseconds;
             flushTimer.Start();
             flushTimer.Elapsed += (o, e) => FlushQueue();
-            pluginSettingsFacade = new PluginSettingsFacade<TSettings>(PluginId, GlobalSettings);
+            SettingsFacade = new PluginSettingsFacade<TSettings>(PluginId);
         }
 
         public abstract string PluginName { get; }
@@ -33,6 +32,8 @@
         public abstract string PluginId { get; }
 
         protected CommanderData CurrentCommander { get; private set; }
+
+        protected PluginSettingsFacade<TSettings> SettingsFacade { get; private set; }
 
         protected virtual TimeSpan FlushInterval => TimeSpan.FromSeconds(10);
 
@@ -44,12 +45,6 @@
         {
             get => SettingsProvider.Settings;
             set => SettingsProvider.Settings = value;
-        }
-
-        protected TSettings PluginSettings
-        {
-            get => pluginSettingsFacade.Settings;
-            set => pluginSettingsFacade.Settings = value;
         }
 
         protected ConcurrentQueue<TEvent> EventQueue { get; } = new ConcurrentQueue<TEvent>();

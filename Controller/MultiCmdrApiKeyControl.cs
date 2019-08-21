@@ -189,7 +189,7 @@
 
         private void ButtonDelEntry_Click(object sender, EventArgs e)
         {
-            var selectedRows = apiKeysGridView.SelectedRows;
+            var selectedRows = apiKeysGridView.SelectedCells.Cast<DataGridViewCell>().Select(c => c.OwningRow);
             foreach (var row in selectedRows.Cast<DataGridViewRow>())
                 apiKeysGridView.Rows.Remove(row);
         }
