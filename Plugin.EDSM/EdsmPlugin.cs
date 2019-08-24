@@ -135,6 +135,10 @@
                 var combatRank = result?["ranksVerbose"]?["Combat"]?.ToString();
                 return combatRank != null;
             }
+            catch (InvalidApiKeyException)
+            {
+                return false;
+            }
             catch (Exception ex)
             {
                 Log.Info(ex, "Exception while validating API key");

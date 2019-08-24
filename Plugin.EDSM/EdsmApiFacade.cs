@@ -39,6 +39,8 @@
             var jResult = JObject.Parse(result);
             int? returnCode = jResult["msgnum"]?.ToObject<int>();
             string msg = jResult["msg"]?.ToString();
+            if (msg == "Commander name/API Key not found")
+                throw new InvalidApiKeyException();
             if (returnCode != 100)
                 throw new EdsmApiException(msg);
             return result;

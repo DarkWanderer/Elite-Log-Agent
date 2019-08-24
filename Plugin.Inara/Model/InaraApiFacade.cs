@@ -80,8 +80,14 @@
             }
 
             if (outputData.Header.EventStatus != 200)
-                throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
+            {
+                var errorText = outputData.Header.EventStatusText;
+                if (errorText == "Invalid API key.")
+                    throw new InvalidApiKeyException();
+                else
+                    throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
 
+            }
             return outputData.Events;
         }
 

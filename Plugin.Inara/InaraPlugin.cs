@@ -170,9 +170,13 @@
                 var apiFacade = new InaraApiFacade(RestClient, cmdrName, apiKey);
                 return await apiFacade.GetCmdrName() == cmdrName;
             }
+            catch (InvalidApiKeyException)
+            {
+                return false;
+            }
             catch (Exception ex)
             {
-                Log.Info(ex, "Exception while validating API key");
+                Log.Warn(ex, "Exception while validating API key");
                 return false;
             }
         }
