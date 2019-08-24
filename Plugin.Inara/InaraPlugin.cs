@@ -168,9 +168,7 @@
             try
             {
                 var apiFacade = new InaraApiFacade(RestClient, cmdrName, apiKey);
-                var @event = new ApiInputEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
-                await apiFacade.ApiCall(@event);
-                return true;
+                return await apiFacade.GetCmdrName() == cmdrName;
             }
             catch (Exception ex)
             {
