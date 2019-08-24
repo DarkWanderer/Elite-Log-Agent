@@ -51,8 +51,8 @@
 
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
-            config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error,
-                new MethodCallTarget("popup", (logEvent, data) => trayController.ShowErrorNotification(logEvent.FormattedMessage))));
+            //config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error,
+            //    new MethodCallTarget("popup", (logEvent, data) => trayController.ShowErrorNotification(logEvent.FormattedMessage))));
 
             if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
             {
