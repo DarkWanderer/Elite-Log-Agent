@@ -60,7 +60,7 @@
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            if (!string.IsNullOrEmpty(legacyCmdrName) && !string.IsNullOrEmpty(legacyCmdrName) && !config.ContainsKey(legacyCmdrName))
+            if (!string.IsNullOrEmpty(legacyCmdrName) && !string.IsNullOrEmpty(legacyApiKey) && !config.ContainsKey(legacyCmdrName))
                 config.Add(legacyCmdrName, legacyApiKey);
 
             return config;
