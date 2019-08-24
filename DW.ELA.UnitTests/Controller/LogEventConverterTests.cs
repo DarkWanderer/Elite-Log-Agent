@@ -29,7 +29,7 @@
                 ""FuelUsed"":2.983697, ""FuelLevel"":12.767566, ""Factions"":[{""Name"":""Lori Jameson"", ""FactionState"":""None"", ""Government"":""Engineer"", 
                 ""Influence"":0.000000, ""Allegiance"":""Independent""} ], ""SystemFaction"":""Pilots Federation Local Branch""}";
 
-            var @event = (FsdJump)LogEventConverter.Convert(JObject.Parse(eventString));
+            var @event = (FsdJump)JournalEventConverter.Convert(JObject.Parse(eventString));
             Assert.AreEqual(new DateTime(2018, 06, 25, 18, 10, 30, DateTimeKind.Utc), @event.Timestamp);
         }
 
@@ -38,9 +38,9 @@
         [TestCaseSource(typeof(LogEventConverterTests), nameof(RawTestCases))]
         public void EventsTransformationShouldNotSpoilData(JObject source)
         {
-            var @event = LogEventConverter.Convert(source);
+            var @event = JournalEventConverter.Convert(source);
 
-            if (@event.GetType() == typeof(LogEvent))
+            if (@event.GetType() == typeof(JournalEvent))
                 Assert.Pass("Automatic pass for non-typed events");
 
             if (@event is FsdJump || @event is Location || @event is Docked)
@@ -65,8 +65,8 @@
         [Explicit]
         public void ShouldConvertLocalEvents()
         {
-            var events = TestEventSource.LocalBetaEvents.Concat(TestEventSource.LocalEvents).ToList();
-            events.ForEach(x => LogEventConverter.Convert(x));
+            var events = TestEventSource.LocalEvents.ToList();
+            events.ForEach(x => JournalEventConverter.Convert(x));
         }
     }
 }

@@ -9,7 +9,7 @@
         [Test]
         public void ShouldNotValidateEmptyObject()
         {
-            var @event = new JournalEvent();
+            var @event = new EddnJournalEvent();
             Assert.IsFalse(new EventSchemaValidator().ValidateSchema(@event));
         }
 

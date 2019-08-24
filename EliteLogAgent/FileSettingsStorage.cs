@@ -29,18 +29,20 @@
             get
             {
                 lock (settingsCacheLock)
+                {
                     try
                     {
                         if (settingsCache == null && File.Exists(SettingsFilePath))
                             settingsCache = JsonConvert.DeserializeObject<GlobalSettings>(File.ReadAllText(SettingsFilePath));
 
-                        return settingsCache ?? GlobalSettings.Defaults;
+                        return settingsCache ?? GlobalSettings.Default;
                     }
                     catch (Exception e)
                     {
                         Log.Warn(e, "Exception while reading settings, using defaults");
-                        return GlobalSettings.Defaults;
+                        return GlobalSettings.Default;
                     }
+                }
             }
 
             set

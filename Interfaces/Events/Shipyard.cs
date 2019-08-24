@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class Shipyard : LogEvent
+    public class Shipyard : JournalEvent
     {
         [JsonProperty("MarketID")]
         public long MarketId { get; set; }

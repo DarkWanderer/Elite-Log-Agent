@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface ILogRealTimeDataSource : IObservable<LogEvent>, IDisposable
+    public interface ILogRealTimeDataSource : IObservable<JournalEvent>, IDisposable
     {
     }
 }

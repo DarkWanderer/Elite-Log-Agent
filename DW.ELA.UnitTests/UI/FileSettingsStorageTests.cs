@@ -1,7 +1,5 @@
 ﻿namespace DW.ELA.UnitTests.UI
 {
-    using System.IO;
-    using DW.ELA.Interfaces;
     using DW.ELA.UnitTests.Utility;
     using EliteLogAgent;
     using NUnit.Framework;
@@ -15,10 +13,12 @@
         {
             var storage = new FileSettingsStorage(new TempDirPathManager());
             var settings = storage.Settings;
+#pragma warning disable CS0618 // Type or member is obsolete
             settings.CommanderName = TestCommander;
             storage.Settings = settings;
             settings = storage.Settings;
             Assert.AreEqual(TestCommander, settings.CommanderName);
+#pragma warning restore CS0618 // Type or member is obsolete
         }
     }
 }

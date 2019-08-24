@@ -33,18 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MoreLinq, Version=3.1.1.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
-      <HintPath>..\packages\morelinq.3.1.1\lib\net451\MoreLinq.dll</HintPath>
+    <Reference Include="MoreLinq, Version=3.2.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.2.0\lib\net451\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.6.5\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -52,6 +53,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,14 +65,18 @@
     <Compile Include="..\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
-    <Compile Include="AbstractPlugin.cs" />
+    <Compile Include="AbstractBatchSendPlugin.cs" />
     <Compile Include="AsyncMessageBroker.cs" />
-    <Compile Include="JournalMonitor.cs" />
-    <Compile Include="LogBurstPlayer.cs" />
-    <Compile Include="LogEnumerator.cs" />
-    <Compile Include="LogEventConverter.cs" />
-    <Compile Include="LogEventTypeCounter.cs" />
-    <Compile Include="LogReader.cs" />
+    <Compile Include="IApiKeyValidator.cs" />
+    <Compile Include="MultiCmdrApiKeyControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Journal\JournalMonitor.cs" />
+    <Compile Include="Journal\JournalBurstPlayer.cs" />
+    <Compile Include="Journal\JournalFileEnumerator.cs" />
+    <Compile Include="Journal\JournalEventConverter.cs" />
+    <Compile Include="Journal\JournalEventTypeCounter.cs" />
+    <Compile Include="Journal\JournalFileReader.cs" />
     <Compile Include="NLogSettingsManager.cs" />
     <Compile Include="PlayerStateRecorder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +95,11 @@
       <Project>{fd518ed2-7a6e-42f7-8c90-603235c1fee6}</Project>
       <Name>DW.ELA.Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MultiCmdrApiKeyControl.resx">
+      <DependentUpon>MultiCmdrApiKeyControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

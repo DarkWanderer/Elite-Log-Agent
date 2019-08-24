@@ -8,13 +8,13 @@
     using DW.ELA.Interfaces.Events;
     using Newtonsoft.Json.Linq;
 
-    public static class LogEventConverter
+    public static class JournalEventConverter
     {
         private static readonly IReadOnlyDictionary<string, Type> eventTypes;
 
-        static LogEventConverter()
+        static JournalEventConverter()
         {
-            var baseType = typeof(LogEvent);
+            var baseType = typeof(JournalEvent);
             var exampleType = typeof(LoadGame);
 
             eventTypes = baseType
@@ -27,17 +27,17 @@
             Debug.Assert(eventTypes.Values.Contains(exampleType), "Event LoadGame not loaded");
         }
 
-        public static LogEvent Convert(JObject jObject)
+        public static JournalEvent Convert(JObject jObject)
         {
-            var eventName = jObject["event"]?.ToString()?.ToLowerInvariant();
-            LogEvent result;
+            string eventName = jObject["event"]?.ToString()?.ToLowerInvariant();
+            JournalEvent result;
             if (string.IsNullOrWhiteSpace(eventName))
                 throw new ArgumentException("Empty event name", nameof(jObject));
 
             if (eventTypes.ContainsKey(eventName))
-                result = (LogEvent)jObject.ToObject(eventTypes[eventName]);
+                result = (JournalEvent)jObject.ToObject(eventTypes[eventName]);
             else
-                result = jObject.ToObject<LogEvent>();
+                result = jObject.ToObject<JournalEvent>();
 
             result.Raw = jObject;
             return result;

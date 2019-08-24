@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility.Json;
@@ -14,6 +15,7 @@
         private readonly IRestClient client;
         private readonly string apiKey;
         private readonly string commanderName;
+        private readonly string frontierID;
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         private readonly ICollection<string> ignoredErrors = new HashSet<string>
@@ -27,26 +29,27 @@
             "No items provided, the module storage was just erased."
         };
 
-        public InaraApiFacade(IRestClient client, string apiKey, string commanderName)
+        public InaraApiFacade(IRestClient client, string commanderName, string apiKey, string frontierID = null)
         {
             this.client = client;
             this.apiKey = apiKey;
             this.commanderName = commanderName;
+            this.frontierID = frontierID;
         }
 
-        public async Task<ICollection<ApiEvent>> ApiCall(params ApiEvent[] events)
+        public async Task<ICollection<ApiOutputEvent>> ApiCall(params ApiInputEvent[] events)
         {
             if (events.Length == 0)
-                return new ApiEvent[0];
+                return new ApiOutputEvent[0];
 
-            var inputData = new ApiInputOutput()
+            var inputData = new ApiInputBatch()
             {
-                Header = new Header(commanderName, apiKey),
+                Header = new Header(commanderName, apiKey, frontierID),
                 Events = events
             };
-            var inputJson = inputData.ToJson();
-            var outputJson = await client.PostAsync(inputJson);
-            var outputData = JsonConvert.DeserializeObject<ApiInputOutput>(outputJson);
+            string inputJson = inputData.ToJson();
+            string outputJson = await client.PostAsync(inputJson);
+            var outputData = JsonConvert.DeserializeObject<ApiOutputBatch>(outputJson);
 
             var exceptions = new List<Exception>();
 
@@ -56,8 +59,8 @@
                 for (int i = 0; i < events.Length; i++)
                 {
                     var outputEvent = outputData.Events[i];
-                    var statusCode = outputEvent.EventStatus;
-                    var statusText = outputEvent.EventStatusText;
+                    int? statusCode = outputEvent.EventStatus;
+                    string statusText = outputEvent.EventStatusText;
 
                     if (statusCode != 200)
                     {
@@ -79,23 +82,18 @@
             if (outputData.Header.EventStatus != 200)
                 throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
 
-            Log.Info()
-                .Message("Uploaded events", events.Length)
-                .Property("eventsCount", events.Length)
-                .Write();
-
             return outputData.Events;
         }
 
-        private struct ApiInputOutput
+        public async Task<string> GetCmdrName()
         {
-            [JsonProperty("header")]
-            public Header Header;
-
-            [JsonProperty("events")]
-            public IList<ApiEvent> Events;
-
-            public override string ToString() => Serialize.ToJson(this);
+            var @event = new ApiInputEvent("getCommanderProfile") { EventData = new Dictionary<string, object>(), Timestamp = DateTime.Now };
+            var result = (await ApiCall(@event)).SingleOrDefault();
+            if (result == null)
+                throw new ApplicationException("Null result from API");
+            string cmdrName = (result.EventData as dynamic).commanderName ?? "Error: cmdr name was not returned";
+            return cmdrName;
         }
+
     }
 }

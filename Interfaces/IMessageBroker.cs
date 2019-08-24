@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IMessageBroker : IObservable<LogEvent>, IObserver<LogEvent>, IDisposable
+    public interface IMessageBroker : IObservable<JournalEvent>, IObserver<JournalEvent>, IDisposable
     {
     }
 }

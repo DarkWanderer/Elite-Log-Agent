@@ -20,10 +20,10 @@
 
         public async Task PostEventAsync(EddnEvent @event)
         {
-            var eventData = Serialize.ToJson(@event);
+            string eventData = Serialize.ToJson(@event);
             try
             {
-                var result = await restClient.PostAsync(eventData);
+                string result = await restClient.PostAsync(eventData);
                 if (result != "OK")
                 {
                     Log.Error()

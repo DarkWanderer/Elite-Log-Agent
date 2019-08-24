@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class Rank : LogEvent
+    public class Rank : JournalEvent
     {
         [JsonProperty("Combat")]
         public int? Combat { get; set; }

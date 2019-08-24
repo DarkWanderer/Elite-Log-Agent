@@ -12,10 +12,9 @@
     using NLog;
     using NLog.Fluent;
 
-    public class EddnEventConverter : IEventConverter<EddnEvent>
+    public class EddnEventConverter
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-        public string UploaderID = "Unknown";
         public TimeSpan MaxAge = TimeSpan.FromMinutes(10); // TODO: should extract to separate class
 
         private readonly IPlayerStateHistoryRecorder stateHistoryRecorder;
@@ -25,7 +24,7 @@
             this.stateHistoryRecorder = stateHistoryRecorder;
         }
 
-        public IEnumerable<EddnEvent> Convert(LogEvent @event)
+        public IEnumerable<EddnEvent> Convert(JournalEvent @event, string commanderName)
         {
             if (@event.Timestamp.Add(MaxAge) < DateTime.UtcNow)
                 return Enumerable.Empty<EddnEvent>();
@@ -37,11 +36,14 @@
                     case FsdJump f:
                     case Scan s:
                     case Location l:
-                        return MakeJournalEvent(@event);
+                        return MakeJournalEvent(@event, commanderName);
 
-                    case Market e: return ConvertMarketEvent(e);
-                    case Outfitting e: return ConvertOutfittingEvent(e);
-                    case Shipyard e: return ConvertShipyardEvent(e);
+                    case Market e:
+                        return ConvertMarketEvent(e, commanderName);
+                    case Outfitting e:
+                        return ConvertOutfittingEvent(e, commanderName);
+                    case Shipyard e:
+                        return ConvertShipyardEvent(e, commanderName);
                 }
             }
             catch (Exception e)
@@ -51,24 +53,24 @@
             return Enumerable.Empty<EddnEvent>();
         }
 
-        private IDictionary<string, string> CreateHeader()
+        private IDictionary<string, string> CreateHeader(string commanderName)
         {
             return new Dictionary<string, string>
             {
-                ["uploaderID"] = UploaderID,
+                ["uploaderID"] = commanderName,
                 ["softwareName"] = AppInfo.Name,
                 ["softwareVersion"] = AppInfo.Version
             };
         }
 
-        private IEnumerable<EddnEvent> ConvertShipyardEvent(Shipyard e)
+        private IEnumerable<EddnEvent> ConvertShipyardEvent(Shipyard e, string commanderName)
         {
             if (e.Prices == null || e.Prices.Length == 0)
                 yield break;
 
             var @event = new ShipyardEvent
             {
-                Header = CreateHeader(),
+                Header = CreateHeader(commanderName),
                 Message = new ShipyardMessage
                 {
                     StationName = e.StationName,
@@ -81,7 +83,7 @@
             yield return @event;
         }
 
-        private IEnumerable<EddnEvent> ConvertOutfittingEvent(Outfitting e)
+        private IEnumerable<EddnEvent> ConvertOutfittingEvent(Outfitting e, string commanderName)
         {
             if (e.Items == null || e.Items.Length == 0)
                 yield break;
@@ -93,7 +95,7 @@
 
             var @event = new OutfittingEvent()
             {
-                Header = CreateHeader(),
+                Header = CreateHeader(commanderName),
                 Message = new OutfittingMessage()
                 {
                     MarketId = e.MarketId,
@@ -106,7 +108,7 @@
             yield return @event;
         }
 
-        private IEnumerable<EddnEvent> ConvertMarketEvent(Market e)
+        private IEnumerable<EddnEvent> ConvertMarketEvent(Market e, string commanderName)
         {
             if (e.Items == null)
                 yield break;
@@ -118,7 +120,7 @@
 
             var @event = new CommodityEvent()
             {
-                Header = CreateHeader(),
+                Header = CreateHeader(commanderName),
                 Message = new CommodityMessage()
                 {
                     Timestamp = e.Timestamp,
@@ -146,9 +148,9 @@
             };
         }
 
-        private IEnumerable<EddnEvent> MakeJournalEvent(LogEvent e)
+        private IEnumerable<EddnEvent> MakeJournalEvent(JournalEvent e, string commanderName)
         {
-            var @event = new JournalEvent { Header = CreateHeader(), Message = Strip(e.Raw) };
+            var @event = new EddnJournalEvent { Header = CreateHeader(commanderName), Message = Strip(e.Raw) };
 
             if (@event.Message["StarSystem"] == null)
             {
@@ -241,7 +243,7 @@
                     keysToRemove.Add(property.Key);
             }
 
-            foreach (var key in keysToRemove)
+            foreach (string key in keysToRemove)
                 obj.Remove(key);
         }
 

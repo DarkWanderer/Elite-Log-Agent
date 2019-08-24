@@ -13,12 +13,15 @@
         private readonly IPlayerStateHistoryRecorder stateRecorder = new PlayerStateRecorder();
         private readonly EdsmEventConverter eventConverter;
 
-        public EdsmEventConverterTests() => eventConverter = new EdsmEventConverter(stateRecorder);
+        public EdsmEventConverterTests()
+        {
+            eventConverter = new EdsmEventConverter(stateRecorder);
+        }
 
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void JsonExtractorShouldNotFailOnEvents(LogEvent e)
+        public void JsonExtractorShouldNotFailOnEvents(JournalEvent e)
         {
             var result = eventConverter.Convert(e);
             Assert.NotNull(result);

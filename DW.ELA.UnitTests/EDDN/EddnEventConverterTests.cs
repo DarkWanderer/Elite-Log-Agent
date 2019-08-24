@@ -5,23 +5,24 @@
     using DW.ELA.Interfaces;
     using DW.ELA.Plugin.EDDN;
     using DW.ELA.Plugin.EDDN.Model;
+    using DW.ELA.UnitTests.Utility;
     using Moq;
     using NUnit.Framework;
 
     [TestFixture]
     public class EddnEventConverterTests
     {
-        private EventSchemaValidator validator = new EventSchemaValidator();
+        private readonly EventSchemaValidator validator = new EventSchemaValidator();
 
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void EddnConverterShouldConvertAndValidate(LogEvent e)
+        public void EddnConverterShouldConvertAndValidate(JournalEvent e)
         {
             var recorderMock = GetRecorderMock();
 
             var eventConverter = new EddnEventConverter(recorderMock) { MaxAge = TimeSpan.FromDays(5000) };
-            var result = eventConverter.Convert(e).ToList();
+            var result = eventConverter.Convert(e, TestCredentials.UserName).ToList();
             Assert.NotNull(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(EddnEvent));
             foreach (var @event in result)
@@ -37,14 +38,14 @@
             var eventConverter = new EddnEventConverter(recorderMock) { MaxAge = TimeSpan.FromDays(5000) };
 
             var convertedEvents = TestEventSource.CannedEvents
-                .SelectMany(eventConverter.Convert)
-                .OfType<JournalEvent>()
+                .SelectMany(e => eventConverter.Convert(e, TestCredentials.UserName))
+                .OfType<EddnJournalEvent>()
                 .ToList();
 
             CollectionAssert.IsNotEmpty(convertedEvents);
             CollectionAssert.AllItemsAreNotNull(convertedEvents);
 
-            foreach (var e in convertedEvents.OfType<JournalEvent>())
+            foreach (var e in convertedEvents.OfType<EddnJournalEvent>())
             {
                 Assert.NotNull(e.Message.Property("SystemAddress"));
                 Assert.NotNull(e.Message.Property("StarPos"));
@@ -61,14 +62,14 @@
             var eventConverter = new EddnEventConverter(recorderMock) { MaxAge = TimeSpan.FromDays(5000) };
 
             var convertedEvents = TestEventSource.CannedEvents
-                .SelectMany(eventConverter.Convert)
-                .OfType<JournalEvent>()
+                .SelectMany(e => eventConverter.Convert(e, TestCredentials.UserName))
+                .OfType<EddnJournalEvent>()
                 .ToList();
 
             CollectionAssert.IsNotEmpty(convertedEvents);
             CollectionAssert.AllItemsAreNotNull(convertedEvents);
 
-            foreach (var e in convertedEvents.OfType<JournalEvent>())
+            foreach (var e in convertedEvents.OfType<EddnJournalEvent>())
             {
                 Assert.Null(e.Message.Property("ActiveFine"));
                 Assert.Null(e.Message.Property("BoostUsed"));

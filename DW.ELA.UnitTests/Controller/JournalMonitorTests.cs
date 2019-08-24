@@ -23,7 +23,7 @@
         public async Task ShouldPickUpEvents()
         {
             var directoryProvider = new TestDirectoryProvider();
-            var events = new ConcurrentBag<LogEvent>();
+            var events = new ConcurrentBag<JournalEvent>();
             CollectionAssert.IsEmpty(events);
 
             string testFile1 = Path.Combine(directoryProvider.Directory, "Journal.1234.log");

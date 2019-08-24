@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class Undocked : LogEvent
+    public class Undocked : JournalEvent
     {
         [JsonProperty("StationName")]
         public string StationName { get; set; }

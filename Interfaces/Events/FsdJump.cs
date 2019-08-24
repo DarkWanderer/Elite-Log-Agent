@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class FsdJump : LogEvent
+    public class FsdJump : JournalEvent
     {
         [JsonProperty("StarSystem")]
         public string StarSystem { get; set; }

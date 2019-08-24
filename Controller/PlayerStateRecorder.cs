@@ -43,7 +43,7 @@
         {
         }
 
-        public void OnNext(LogEvent @event)
+        public void OnNext(JournalEvent @event)
         {
             if (@event == null)
                 throw new ArgumentNullException(nameof(@event));
@@ -52,20 +52,40 @@
                 switch (@event)
                 {
                     // Ship change events
-                    case ShipyardSwap e: Process(e); break;
-                    case LoadGame e: Process(e); break;
-                    case Loadout e: Process(e); break;
+                    case ShipyardSwap e:
+                        Process(e);
+                        break;
+                    case LoadGame e:
+                        Process(e);
+                        break;
+                    case Loadout e:
+                        Process(e);
+                        break;
 
                     // Location change events
-                    case Location e: Process(e); break;
-                    case FsdJump e: Process(e); break;
-                    case Docked e: Process(e); break;
-                    case SupercruiseEntry e: Process(e); break;
-                    case Undocked e: Process(e); break;
+                    case Location e:
+                        Process(e);
+                        break;
+                    case FsdJump e:
+                        Process(e);
+                        break;
+                    case Docked e:
+                        Process(e);
+                        break;
+                    case SupercruiseEntry e:
+                        Process(e);
+                        break;
+                    case Undocked e:
+                        Process(e);
+                        break;
 
                     // Crew status change events
-                    case JoinACrew e: Process(e); break;
-                    case QuitACrew e: Process(e); break;
+                    case JoinACrew e:
+                        Process(e);
+                        break;
+                    case QuitACrew e:
+                        Process(e);
+                        break;
                 }
             }
             catch (Exception e)
@@ -121,7 +141,9 @@
                     shipType == null ||
                     shipType.ToLower() == "testbuggy" ||
                     shipType.Contains("Fighter"))
+                {
                     return;
+                }
 
                 shipRecorder.RecordState(new ShipRecord(shipId.Value, shipType), timestamp);
             }
@@ -153,7 +175,7 @@
 
             public override int GetHashCode()
             {
-                var hashCode = -1167275223;
+                int hashCode = -1167275223;
                 hashCode = hashCode * -1521134295 + ShipID.GetHashCode();
                 hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ShipType);
                 return hashCode;
@@ -171,17 +193,19 @@
                 try
                 {
                     lock (stateRecording)
+                    {
                         return stateRecording
                             .Where(l => l.Key <= atTime)
                             .DefaultIfEmpty()
                             .MaxBy(l => l.Key)
                             .FirstOrDefault()
                             .Value;
+                    }
                 }
                 catch (Exception e)
                 {
                     Log.Error(e);
-                    return default(T);
+                    return default;
                 }
             }
 

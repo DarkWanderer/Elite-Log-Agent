@@ -24,14 +24,14 @@
                 {
                     try
                     {
-                        return LogEventConverter.Convert(e);
+                        return JournalEventConverter.Convert(e);
                     }
                     catch
                     {
                         return null;
                     }
                 })
-                .Where(e => e != null && e.GetType() == typeof(LogEvent))
+                .Where(e => e != null && e.GetType() == typeof(JournalEvent))
                 .Select(e => e.Event)
                 .Distinct()
                 .OrderBy(x => x)
@@ -89,7 +89,7 @@
             return processedEvents;
         }
 
-        private static IEnumerable<string> LoadJsonEvents() => LogEnumerator.GetJsonEventFiles(new SavedGamesDirectoryHelper().Directory)
+        private static IEnumerable<string> LoadJsonEvents() => JournalFileEnumerator.GetJsonEventFiles(new SavedGamesDirectoryHelper().Directory)
             .Select(File.ReadAllText)
             .Select(Serialize.FromJson<JObject>)
             .Select(Serialize.ToJson);

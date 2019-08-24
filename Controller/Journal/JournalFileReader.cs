@@ -11,7 +11,7 @@
     using Newtonsoft.Json.Linq;
     using NLog;
 
-    public class LogReader
+    public class JournalFileReader
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
@@ -22,7 +22,7 @@
         /// </summary>
         /// <param name="textReader">Stream reader for input data</param>
         /// <returns>Sequence of events read from input</returns>
-        public IEnumerable<LogEvent> ReadEventsFromStream(TextReader textReader)
+        public IEnumerable<JournalEvent> ReadEventsFromStream(TextReader textReader)
         {
             if (textReader == null)
                 throw new ArgumentNullException(nameof(textReader));
@@ -31,10 +31,10 @@
                 while (jsonReader.Read())
                 {
                     var @object = Converter.Serializer.Deserialize<JObject>(jsonReader);
-                    LogEvent @event = null;
+                    JournalEvent @event = null;
                     try
                     {
-                        @event = LogEventConverter.Convert(@object);
+                        @event = JournalEventConverter.Convert(@object);
                     }
                     catch (Exception e)
                     {
@@ -46,14 +46,14 @@
             }
         }
 
-        public LogEvent ReadFileEvent(string file)
+        public JournalEvent ReadFileEvent(string file)
         {
             using (var fileReader = OpenForSharedRead(file))
             using (var textReader = new StreamReader(fileReader))
                 return ReadEventsFromStream(textReader).SingleOrDefault();
         }
 
-        public IEnumerable<LogEvent> ReadEventsFromJournal(string journalFile)
+        public IEnumerable<JournalEvent> ReadEventsFromJournal(string journalFile)
         {
             using (var fileReader = OpenForSharedRead(journalFile))
             using (var textReader = new StreamReader(fileReader))

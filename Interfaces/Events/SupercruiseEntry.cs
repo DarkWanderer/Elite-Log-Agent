@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class SupercruiseEntry : LogEvent
+    public class SupercruiseEntry : JournalEvent
     {
         [JsonProperty("StarSystem")]
         public string StarSystem { get; set; }

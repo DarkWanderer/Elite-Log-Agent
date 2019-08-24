@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class Reputation : LogEvent
+    public class Reputation : JournalEvent
     {
         [JsonProperty("Empire")]
         public double Empire { get; set; }

@@ -13,16 +13,19 @@
         private readonly IPlayerStateHistoryRecorder stateRecorder = new PlayerStateRecorder();
         private readonly InaraEventConverter eventConverter;
 
-        public InaraEventConverterTests() => eventConverter = new InaraEventConverter(stateRecorder);
+        public InaraEventConverterTests()
+        {
+            eventConverter = new InaraEventConverter(stateRecorder);
+        }
 
         [Test]
         [Parallelizable]
         [TestCaseSource(typeof(TestEventSource), nameof(TestEventSource.CannedEvents))]
-        public void InaraConverterShouldNotFailOnEvents(LogEvent e)
+        public void InaraConverterShouldNotFailOnEvents(JournalEvent e)
         {
             var result = eventConverter.Convert(e);
             Assert.NotNull(result);
-            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(ApiEvent));
+            CollectionAssert.AllItemsAreInstancesOfType(result, typeof(ApiInputEvent));
         }
     }
 }

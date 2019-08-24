@@ -14,17 +14,19 @@
     public class EddnIntegrationTest
     {
         [Test]
-        [Explicit]
+        [Category("Integration")]
         public async Task IntegrationTestUploadToEddn()
         {
             var restClient = new ThrottlingRestClient.Factory().CreateRestClient("https://eddn.edcd.io:4430/upload/");
             var facade = new EddnApiFacade(restClient);
-            var @event = new TestEddnEvent();
-            @event.Header = new Dictionary<string, string>
+            var @event = new TestEddnEvent
+            {
+                Header = new Dictionary<string, string>
             {
                 { "uploaderID", TestCredentials.UserName },
-                { "softwareName", AppInfo.Name },
-                { "softwareVersion", AppInfo.Version }
+                { "softwareName", "EliteLogAgentIntegrationTest" },
+                { "softwareVersion", "0.0.1" }
+            }
             };
             var message = @event.Message;
             message.Add("timestamp", DateTime.UtcNow);

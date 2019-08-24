@@ -2,7 +2,7 @@
 {
     using System;
     using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Utility.Extensions;
+    using DW.ELA.Utility.Json;
     using Newtonsoft.Json.Linq;
     using NLog;
 
@@ -11,47 +11,33 @@
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly string pluginId;
-        private readonly GlobalSettings globalSettings;
 
-        public PluginSettingsFacade(string pluginId, GlobalSettings globalSettings)
+        public PluginSettingsFacade(string pluginId)
         {
             this.pluginId = pluginId;
-            this.globalSettings = globalSettings;
         }
 
-        public T Settings
+        public T GetPluginSettings(GlobalSettings settings)
         {
-            get
+            try
             {
-                try
-                {
-                    return GetPluginSettings()?.ToObject<T>() ?? new T();
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                    return new T();
-                }
+                if (settings.PluginSettings.ContainsKey(pluginId))
+                    return settings.PluginSettings[pluginId].ToObject<T>();
             }
-            set => SetPluginSettings(JObject.FromObject(value));
+            catch (Exception e)
+            {
+                Log.Error(e);
+
+            }
+            return new T();
         }
 
-        private JObject PluginSettings => globalSettings.PluginSettings.GetValueOrDefault(pluginId);
-
-        private JObject GetPluginSettings()
+        public void SetPluginSettings(GlobalSettings settings, T value)
         {
-            if (globalSettings.PluginSettings.ContainsKey(pluginId))
-                return globalSettings.PluginSettings[pluginId];
+            if (!settings.PluginSettings.ContainsKey(pluginId))
+                settings.PluginSettings.Add(pluginId, JObject.FromObject(value, Converter.Serializer));
             else
-                return null;
-        }
-
-        private void SetPluginSettings(JObject value)
-        {
-            if (!globalSettings.PluginSettings.ContainsKey(pluginId))
-                globalSettings.PluginSettings.Add(pluginId, value);
-            else
-                globalSettings.PluginSettings[pluginId] = value;
+                settings.PluginSettings[pluginId] = JObject.FromObject(value, Converter.Serializer);
         }
     }
 }

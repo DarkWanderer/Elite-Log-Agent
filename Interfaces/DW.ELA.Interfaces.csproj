@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <LangVersion>8.0</LangVersion>
-    <NullableContextOptions>enable</NullableContextOptions>
+    <NullableContextOptions>disable</NullableContextOptions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -157,7 +157,7 @@
     <Compile Include="IRestClientFactory.cs" />
     <Compile Include="ISettingsProvider.cs" />
     <Compile Include="ITrayIconController.cs" />
-    <Compile Include="LogEvent.cs" />
+    <Compile Include="JournalEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

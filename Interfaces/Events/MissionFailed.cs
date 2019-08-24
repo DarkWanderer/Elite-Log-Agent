@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class MissionFailed : LogEvent
+    public class MissionFailed : JournalEvent
     {
         [JsonProperty("Name")]
         public string Name { get; set; }

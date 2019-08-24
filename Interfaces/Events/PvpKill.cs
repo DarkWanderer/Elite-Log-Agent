@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class PvpKill : LogEvent
+    public class PvpKill : JournalEvent
     {
         [JsonProperty("Victim")]
         public string Victim { get; set; }

@@ -1,34 +1,35 @@
 ﻿namespace DW.ELA.Plugin.Inara
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.Inara.Model;
+    using DW.ELA.Utility;
     using MoreLinq;
     using NLog;
+    using NLog.Fluent;
 
-    public class InaraPlugin : AbstractPlugin<ApiEvent, InaraSettings>
+    public class InaraPlugin : AbstractBatchSendPlugin<ApiInputEvent, InaraSettings>, IApiKeyValidator
     {
         public const string CPluginName = "INARA";
         public const string CPluginId = "InaraUploader";
         private const string InaraApiUrl = "https://inara.cz/inapi/v1/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        private readonly IEventConverter<ApiEvent> eventConverter;
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
-        private readonly ISettingsProvider settingsProvider;
+        private readonly ConcurrentDictionary<string, string> ApiKeys = new ConcurrentDictionary<string, string>();
 
         public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, IRestClientFactory restClientFactory)
             : base(settingsProvider)
         {
             RestClient = restClientFactory.CreateRestClient(InaraApiUrl);
             this.playerStateRecorder = playerStateRecorder;
-            eventConverter = new InaraEventConverter(this.playerStateRecorder);
-            this.settingsProvider = settingsProvider;
+            EventConverter = new InaraEventConverter(this.playerStateRecorder);
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
         }
@@ -39,31 +40,89 @@
 
         protected internal IRestClient RestClient { get; }
 
-        protected override IEventConverter<ApiEvent> EventConverter => eventConverter;
-
         // Explicitly set to 30 as Inara prefers batches of events
         protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
 
-        public override void ReloadSettings() => FlushQueue();
+        /// <summary>
+        /// Property which merges the 'new' API keys with multi-commander support with the old legacy single-commander one
+        /// </summary>
+        private IReadOnlyDictionary<string, string> GetActualApiKeys()
+        {
+            var pluginSettings = SettingsFacade.GetPluginSettings(GlobalSettings);
+            var config = pluginSettings.ApiKeys.ToDictionary();
 
-        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new InaraSettingsControl() { GlobalSettings = settings, RestClient = RestClient };
+#pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CS0612 // Type or member is obsolete
+            string legacyCmdrName = GlobalSettings.CommanderName;
+            string legacyApiKey = pluginSettings.ApiKey;
+#pragma warning restore CS0612 // Type or member is obsolete
+#pragma warning restore CS0618 // Type or member is obsolete
+
+            if (!string.IsNullOrEmpty(legacyCmdrName) && !string.IsNullOrEmpty(legacyCmdrName) && !config.ContainsKey(legacyCmdrName))
+                config.Add(legacyCmdrName, legacyApiKey);
+
+            return config;
+        }
+
+        public override void ReloadSettings()
+        {
+            FlushQueue();
+            var actualApiKeys = GetActualApiKeys();
+
+            // Update keys for which new values were provided
+            foreach (var kvp in actualApiKeys)
+                ApiKeys.AddOrUpdate(kvp.Key, kvp.Value, (key, oldValue) => kvp.Value);
+
+            // Remove keys which were removed from config
+            foreach (string key in ApiKeys.Keys.Except(actualApiKeys.Keys))
+                ApiKeys.TryRemove(key, out string _);
+        }
+
+
+        public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new MultiCmdrApiKeyControl()
+        {
+            ApiKeys = GetActualApiKeys(),
+            ApiKeyValidator = this,
+            ApiSettingsLink = "https://inara.cz/settings-api/",
+            GlobalSettings = settings,
+            SaveSettingsFunc = SaveSettings
+        };
+
+        private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) =>
+            new PluginSettingsFacade<InaraSettings>(PluginId).SetPluginSettings(settings, new InaraSettings() { ApiKeys = values.ToDictionary() });
 
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 
-        public override async void FlushEvents(ICollection<ApiEvent> events)
+        public override async void FlushEvents(ICollection<ApiInputEvent> events)
         {
-            if (!Settings.Verified)
-                return;
             try
             {
-                var facade = new InaraApiFacade(RestClient, Settings.ApiKey, GlobalSettings.CommanderName);
-                var apiEvents = Compact(events).ToArray();
-                if (apiEvents.Length > 0)
-                    await facade.ApiCall(apiEvents);
+                var commander = CurrentCommander;
+                if (commander != null && ApiKeys.TryGetValue(commander.Name, out string apiKey))
+                {
+                    var facade = new InaraApiFacade(RestClient, commander.Name, apiKey, commander.FrontierID);
+                    var ApiInputs = Compact(events).ToArray();
+                    if (ApiInputs.Length > 0)
+                        await facade.ApiCall(ApiInputs);
+
+                    Log.Info()
+                        .Message("Uploaded events")
+                        .Property("eventsCount", events.Count)
+                        .Property("commander", commander)
+                        .Write();
+                }
+                else
+                {
+                    Log.Info()
+                        .Message("Events discarded, commander not known")
+                        .Property("eventsCount", events.Count)
+                        .Property("commander", commander?.Name ?? "null")
+                        .Write();
+                }
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error(e, "Error while processing events");
             }
         }
 
@@ -81,7 +140,7 @@
             { "setCommanderInventoryMaterials", new[] { "addCommanderInventoryMaterialsItem", "delCommanderInventoryMaterialsItem" } }
         };
 
-        private static IEnumerable<ApiEvent> Compact(IEnumerable<ApiEvent> events)
+        private static IEnumerable<ApiInputEvent> Compact(IEnumerable<ApiInputEvent> events)
         {
             var eventsByType = events
                 .GroupBy(e => e.EventName, e => e)
@@ -102,6 +161,22 @@
             }
 
             return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
+        }
+
+        public async Task<bool> ValidateKeyAsync(string cmdrName, string apiKey)
+        {
+            try
+            {
+                var apiFacade = new InaraApiFacade(RestClient, cmdrName, apiKey);
+                var @event = new ApiInputEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
+                await apiFacade.ApiCall(@event);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Info(ex, "Exception while validating API key");
+                return false;
+            }
         }
     }
 }

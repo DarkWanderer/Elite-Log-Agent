@@ -33,7 +33,7 @@
         {
             try
             {
-                var assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 if (!pluginAssemblyName.EndsWith(".dll"))
                     pluginAssemblyName += ".dll";
 

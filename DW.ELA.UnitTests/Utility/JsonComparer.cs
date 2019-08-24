@@ -16,7 +16,7 @@
             diffs.AddRange(srcPropertyNames.Except(tgtPropertyNames).Select(p => tokenName + ": missing on right side: " + p));
             diffs.AddRange(tgtPropertyNames.Except(srcPropertyNames).Select(p => tokenName + ": missing on left side: " + p));
 
-            foreach (var property in srcPropertyNames.Intersect(tgtPropertyNames))
+            foreach (string property in srcPropertyNames.Intersect(tgtPropertyNames))
                 diffs.AddRange(Compare($"{tokenName}.{property}", source[property], target[property]));
 
             return diffs;
@@ -33,8 +33,10 @@
             {
                 switch (t1)
                 {
-                    case JArray a: return Compare(tokenName, t1 as JArray, t2 as JArray);
-                    case JObject o: return Compare(tokenName, t1 as JObject, t2 as JObject);
+                    case JArray a:
+                        return Compare(tokenName, t1 as JArray, t2 as JArray);
+                    case JObject o:
+                        return Compare(tokenName, t1 as JObject, t2 as JObject);
                     default:
                         if (Serialize.ToJson(t1) != Serialize.ToJson(t2))
                             return new[] { $"{tokenName}: expected {t1}, got {t2}" };

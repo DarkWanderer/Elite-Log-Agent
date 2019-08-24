@@ -5,12 +5,13 @@
     using System.Linq;
     using System.Threading.Tasks;
     using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using DW.ELA.Plugin.EDDN.Model;
     using Newtonsoft.Json.Linq;
     using NLog;
 
-    public class EddnPlugin : IPlugin, IObserver<LogEvent>
+    public class EddnPlugin : IPlugin, IObserver<JournalEvent>
     {
         private const string EddnUrl = @"https://eddn.edcd.io:4430/upload/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
@@ -21,12 +22,13 @@
         private readonly EventSchemaValidator schemaManager = new EventSchemaValidator();
         private readonly ConcurrentQueue<JObject> lastPushedEvents = new ConcurrentQueue<JObject>(); // stores last few events to check duplicates
         private readonly ISettingsProvider settingsProvider;
+        private string CurrentCommanderName = "Unknown commander";
 
         public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
             this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
-            eventConverter = new EddnEventConverter(playerStateRecorder) { UploaderID = settingsProvider.Settings.CommanderName };
+            eventConverter = new EddnEventConverter(playerStateRecorder);
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             apiFacade = new EddnApiFacade(restClientFactory.CreateRestClient(EddnUrl));
             ReloadSettings();
@@ -40,9 +42,11 @@
         {
         }
 
-        public IObserver<LogEvent> GetLogObserver() => this;
+        public IObserver<JournalEvent> GetLogObserver() => this;
 
         public AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new EddnSettingsControl();
+
+        public void ReloadSettings() { /* EDDN has no configuration */ }
 
         public void OnCompleted()
         {
@@ -52,11 +56,14 @@
         {
         }
 
-        public void OnNext(LogEvent @event)
+        public void OnNext(JournalEvent @event)
         {
             try
             {
-                var convertedEvents = eventConverter.Convert(@event);
+                if (@event is Commander cmdr)
+                    CurrentCommanderName = cmdr.Name;
+
+                var convertedEvents = eventConverter.Convert(@event, CurrentCommanderName);
                 foreach (var ce in convertedEvents.Where(IsUnique))
                 {
                     var task = apiFacade.PostEventAsync(ce);
@@ -71,7 +78,6 @@
 
         public void OnSettingsChanged(object sender, EventArgs e) => ReloadSettings();
 
-        public void ReloadSettings() => eventConverter.UploaderID = settingsProvider.Settings.CommanderName;
 
         private void ContinueWithErrorHandler(Task task)
         {
@@ -90,6 +96,7 @@
             try
             {
                 JObject jObject;
+                // Housekeep queue to hold it at approximate max size
                 while (lastPushedEvents.Count > 30)
                     lastPushedEvents.TryDequeue(out jObject);
 

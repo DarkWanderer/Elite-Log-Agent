@@ -40,22 +40,21 @@
             }
         }
 
-        private class TestPlugin : AbstractPlugin<LogEvent, TestSettings>
+        private class TestPlugin : AbstractBatchSendPlugin<JournalEvent, TestSettings>
         {
-            public readonly ConcurrentBag<LogEvent> Flushed = new ConcurrentBag<LogEvent>();
+            public readonly ConcurrentBag<JournalEvent> Flushed = new ConcurrentBag<JournalEvent>();
 
             public TestPlugin(ISettingsProvider settingsProvider)
                 : base(settingsProvider)
             {
+                EventConverter = new IdentityLogConverter();
             }
 
             public override string PluginName => "TestPlugin";
 
             public override string PluginId => "TestPlugin";
 
-            protected override IEventConverter<LogEvent> EventConverter => new IdentityLogConverter();
-
-            public override void FlushEvents(ICollection<LogEvent> events)
+            public override void FlushEvents(ICollection<JournalEvent> events)
             {
                 foreach (var e in events)
                     Flushed.Add(e);
@@ -72,9 +71,9 @@
             protected override TimeSpan FlushInterval => TimeSpan.FromHours(10);
         }
 
-        private class IdentityLogConverter : IEventConverter<LogEvent>
+        private class IdentityLogConverter : IEventConverter<JournalEvent>
         {
-            public IEnumerable<LogEvent> Convert(LogEvent @event)
+            public IEnumerable<JournalEvent> Convert(JournalEvent @event)
             {
                 yield return @event;
             }

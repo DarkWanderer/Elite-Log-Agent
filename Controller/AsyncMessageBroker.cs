@@ -10,7 +10,7 @@
     /// <summary>
     /// Forwards events from one IObservables to multiple IObservers in parallel fashion
     /// </summary>
-    public class AsyncMessageBroker : BasicObservable<LogEvent>, IMessageBroker, IObserver<LogEvent>, IObservable<LogEvent>
+    public class AsyncMessageBroker : BasicObservable<JournalEvent>, IMessageBroker, IObserver<JournalEvent>, IObservable<JournalEvent>
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
@@ -40,7 +40,7 @@
             }
         }
 
-        public override void OnNext(LogEvent next)
+        public override void OnNext(JournalEvent next)
         {
             try
             {
@@ -53,11 +53,11 @@
             }
         }
 
-        void IObserver<LogEvent>.OnCompleted() => OnCompleted();
+        void IObserver<JournalEvent>.OnCompleted() => OnCompleted();
 
-        void IObserver<LogEvent>.OnError(Exception error) => OnError(error);
+        void IObserver<JournalEvent>.OnError(Exception error) => OnError(error);
 
-        void IObserver<LogEvent>.OnNext(LogEvent value) => OnNext(value);
+        void IObserver<JournalEvent>.OnNext(JournalEvent value) => OnNext(value);
 
         private bool disposedValue = false; // To detect redundant calls
 

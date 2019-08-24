@@ -1,13 +1,19 @@
 ﻿namespace DW.ELA.Plugin.Inara
 {
+    using System;
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     public class InaraSettings
     {
+        [Obsolete("Retained for backward compatibility")]
         [JsonProperty("apiKey")]
-        public string ApiKey { get; internal set; } = "INARA API key not set";
+        internal string ApiKey { get; set; } = null;
 
-        [JsonProperty("verified")]
-        public bool Verified { get; internal set; } = false;
+        /// <summary>
+        /// Dictionary of CMDR name => API key pairs
+        /// </summary>
+        [JsonProperty("apiKeys")]
+        public IDictionary<string, string> ApiKeys { get; internal set; } = new Dictionary<string, string>();
     }
 }

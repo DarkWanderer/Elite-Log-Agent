@@ -10,14 +10,14 @@
         [Test]
         public void GetOrDefaultShouldReturnValue()
         {
-            var result = GetTestDictionary().GetValueOrDefault("A");
+            string result = GetTestDictionary().GetValueOrDefault("A");
             Assert.AreEqual("1", result);
         }
 
         [Test]
         public void GetOrDefaultShouldReturnNull()
         {
-            var result = GetTestDictionary().GetValueOrDefault("D");
+            string result = GetTestDictionary().GetValueOrDefault("D");
             Assert.IsNull(result);
         }
 

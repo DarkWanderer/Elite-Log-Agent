@@ -1,12 +1,14 @@
 ﻿namespace DW.ELA.Controller
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Timers;
     using DW.ELA.Interfaces;
+    using DW.ELA.Utility.App;
     using NLog;
     using NLog.Fluent;
     using Utility.Observable;
@@ -14,16 +16,20 @@
     /// <summary>
     /// This class runs in background to monitor and notify consumers (observers) of new log events
     /// </summary>
-    public class JournalMonitor : LogReader, ILogRealTimeDataSource
+    public class JournalMonitor : JournalFileReader, ILogRealTimeDataSource
     {
+        // Static/readonly members
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly FileSystemWatcher fileWatcher;
         private readonly string logDirectory;
         private readonly object @lock = new object();
         private readonly Timer logFlushTimer = new Timer();
-        private readonly BasicObservable<LogEvent> basicObservable = new BasicObservable<LogEvent>();
+        private readonly BasicObservable<JournalEvent> basicObservable = new BasicObservable<JournalEvent>();
         private readonly IReadOnlyCollection<string> eventsToReadFromFile = new HashSet<string> { "Outfitting", "Market", "Shipyard", "Cargo" };
+        private readonly ConcurrentQueue<JournalEvent> queuedEvents = new ConcurrentQueue<JournalEvent>();
+        private readonly TimeSpan checkInterval;
 
+        // 
         private string currentFile;
         private long filePosition;
 
@@ -33,8 +39,9 @@
         /// </summary>
         /// <param name="logDirectoryProvider">Log directory name provider</param>
         /// <param name="checkInterval">Check interval in milliseconds</param>
-        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkInterval = 10000)
+        public JournalMonitor(ILogDirectoryNameProvider logDirectoryProvider, int checkIntervalMilliseconds = 10000)
         {
+            checkInterval = TimeSpan.FromMilliseconds(checkIntervalMilliseconds);
             logDirectory = logDirectoryProvider.Directory;
             Directory.CreateDirectory(logDirectory); // In case Elite Dangerous was not launched yet
             fileWatcher = new FileSystemWatcher(logDirectory);
@@ -47,15 +54,25 @@
                                        NotifyFilters.Size;
 
             logFlushTimer.AutoReset = true;
-            logFlushTimer.Interval = checkInterval; // sometimes the filesystem event does not trigger
-            logFlushTimer.Elapsed += (o, e) => Task.Factory.StartNew(() => SendEventsFromJournal(false));
+            logFlushTimer.Interval = checkInterval.TotalMilliseconds; // sometimes the filesystem event does not trigger
+            logFlushTimer.Elapsed += LogFlushTimer_Event;
             logFlushTimer.Enabled = true;
 
-            currentFile = LogEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
-            filePosition = String.IsNullOrEmpty(currentFile) ? 0 : new FileInfo(currentFile).Length;
+            currentFile = JournalFileEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
+            filePosition = string.IsNullOrEmpty(currentFile) ? 0 : new FileInfo(currentFile).Length;
+
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
             Log.Info("Started monitoring {directory}", logDirectory);
+        }
+
+        private void LogFlushTimer_Event(object sender, ElapsedEventArgs e)
+        {
+            Task.Factory.StartNew(() => SendEventsFromJournal(false));
+            if (EliteDangerous.IsRunning)
+                logFlushTimer.Interval = checkInterval.TotalMilliseconds;
+            else
+                logFlushTimer.Interval = checkInterval.TotalMilliseconds * 6;
         }
 
         private void FileWatcher_Event(object sender, FileSystemEventArgs e)
@@ -87,6 +104,7 @@
         private void SendEventsFromJournal(bool checkOtherFiles)
         {
             lock (@lock)
+            {
                 try
                 {
                     // We are not checking file size to make decision about whether
@@ -97,7 +115,7 @@
 
                     if (checkOtherFiles || currentFile == null)
                     {
-                        string latestFile = LogEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
+                        string latestFile = JournalFileEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
                         if (latestFile == currentFile || latestFile == null)
                             return;
 
@@ -122,6 +140,7 @@
                         .Property("journal-file", currentFile)
                         .Write();
                 }
+            }
         }
 
         private long ReadJournalFromPosition(string file, long filePosition)
@@ -194,6 +213,6 @@
             // GC.SuppressFinalize(this);
         }
 
-        public IDisposable Subscribe(IObserver<LogEvent> observer) => basicObservable.Subscribe(observer);
+        public IDisposable Subscribe(IObserver<JournalEvent> observer) => basicObservable.Subscribe(observer);
     }
 }

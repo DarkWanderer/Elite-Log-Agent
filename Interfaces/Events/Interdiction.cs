@@ -3,7 +3,7 @@
     using DW.ELA.Interfaces;
     using Newtonsoft.Json;
 
-    public class Interdiction : LogEvent
+    public class Interdiction : JournalEvent
     {
         [JsonProperty("Success")]
         public bool Success { get; set; }

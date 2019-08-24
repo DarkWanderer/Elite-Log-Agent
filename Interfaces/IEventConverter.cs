@@ -5,6 +5,6 @@
     public interface IEventConverter<out TEvent>
         where TEvent : class
     {
-        IEnumerable<TEvent> Convert(LogEvent @event);
+        IEnumerable<TEvent> Convert(JournalEvent @event);
     }
 }

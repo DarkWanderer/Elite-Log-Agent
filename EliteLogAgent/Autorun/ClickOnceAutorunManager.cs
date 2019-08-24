@@ -34,7 +34,7 @@
         {
             get
             {
-                var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
+                string baseDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
                 return Path.Combine(baseDir, @"Elite Log Agent\Elite Log Agent.appref-ms");
             }
         }
