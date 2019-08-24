@@ -11,7 +11,7 @@
         public ulong EngineerId { get; set; }
 
         [JsonProperty("BlueprintID")]
-        public long BlueprintId { get; set; }
+        public ulong BlueprintId { get; set; }
 
         [JsonProperty("BlueprintName")]
         public string BlueprintName { get; set; }
