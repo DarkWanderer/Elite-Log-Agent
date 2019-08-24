@@ -8,6 +8,7 @@
     using System.Windows.Forms;
     using DW.ELA.Interfaces;
     using DW.ELA.Interfaces.Settings;
+    using MoreLinq;
     using NLog;
 
     public class MultiCmdrApiKeyControl : AbstractSettingsControl
@@ -38,7 +39,10 @@
             {
                 return apiKeysGridView.Rows
                     .Cast<DataGridViewRow>()
-                    .ToDictionary(row => row.Cells[apiKeysGridCommanderColumn.Index].Value.ToString(), row => row.Cells[apiKeysGridKeyColumn.Index].Value.ToString());
+                    .Select(row => new KeyValuePair<string, string>(row.Cells[apiKeysGridCommanderColumn.Index].Value?.ToString(), row.Cells[apiKeysGridKeyColumn.Index].Value?.ToString()))
+                    .Where(kvp => !string.IsNullOrEmpty(kvp.Key))
+                    .Where(kvp => !string.IsNullOrEmpty(kvp.Value))
+                    .ToDictionary();
             }
             set
             {
@@ -110,11 +114,11 @@
             // 
             // buttonAddEntry
             // 
-            this.buttonAddEntry.Location = new System.Drawing.Point(114, 0);
+            this.buttonAddEntry.Location = new System.Drawing.Point(91, 0);
             this.buttonAddEntry.Name = "buttonAddEntry";
-            this.buttonAddEntry.Size = new System.Drawing.Size(23, 23);
+            this.buttonAddEntry.Size = new System.Drawing.Size(46, 23);
             this.buttonAddEntry.TabIndex = 8;
-            this.buttonAddEntry.Text = "+";
+            this.buttonAddEntry.Text = "Add";
             this.buttonAddEntry.UseVisualStyleBackColor = true;
             this.buttonAddEntry.Click += new System.EventHandler(this.ButtonAddEntry_Click);
             // 
@@ -122,15 +126,15 @@
             // 
             this.buttonDelEntry.Location = new System.Drawing.Point(143, 0);
             this.buttonDelEntry.Name = "buttonDelEntry";
-            this.buttonDelEntry.Size = new System.Drawing.Size(23, 23);
+            this.buttonDelEntry.Size = new System.Drawing.Size(74, 23);
             this.buttonDelEntry.TabIndex = 9;
-            this.buttonDelEntry.Text = "-";
+            this.buttonDelEntry.Text = "Remove";
             this.buttonDelEntry.UseVisualStyleBackColor = true;
             this.buttonDelEntry.Click += new System.EventHandler(this.ButtonDelEntry_Click);
             // 
             // buttonValidateKeys
             // 
-            this.buttonValidateKeys.Location = new System.Drawing.Point(172, 0);
+            this.buttonValidateKeys.Location = new System.Drawing.Point(223, 0);
             this.buttonValidateKeys.Name = "buttonValidateKeys";
             this.buttonValidateKeys.Size = new System.Drawing.Size(86, 23);
             this.buttonValidateKeys.TabIndex = 10;
@@ -172,11 +176,12 @@
                     var apiKeyCell = row.Cells[apiKeysGridKeyColumn.Index];
                     apiKeyCell.Style.BackColor = Color.LightGray;
 
-                    var cmdrName = cmdrNameCell.Value.ToString();
-                    var apiKey = apiKeyCell.Value.ToString();
+                    var cmdrName = cmdrNameCell.Value?.ToString();
+                    var apiKey = apiKeyCell.Value?.ToString();
                     var isValid = await validator.ValidateKeyAsync(cmdrName, apiKey);
 
                     apiKeyCell.Style.BackColor = isValid ? Color.LightGreen : Color.LightSalmon;
+                    cmdrNameCell.Style.BackColor = apiKeyCell.Style.BackColor;
                 }
             }
             catch
