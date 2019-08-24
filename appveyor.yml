@@ -41,14 +41,6 @@ test_script:
 - 7z a coverage.zip coverage.xml
 - ps: Push-AppveyorArtifact coverage.zip -DeploymentName Coverage
 
-after_test:
-  - ps: |
-      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
-      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      bash codecov.sh -f "coverage.xml" -t 9416fcda-0f2f-4ef9-bfaa-a8d27d4bce98
-
-deploy:
-
 for:
 - branches:
     only: 
