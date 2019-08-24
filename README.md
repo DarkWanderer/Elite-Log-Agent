@@ -4,18 +4,21 @@
 
 A Windows utility, sitting in tray. Feeds your commander data to INARA and/or EDSM sites. Also helps other players by sharing trade/commodity/outfitting data via EDDN
 
+Key features:
+* Multiple CMDR support
+* Does not require authenticating via Frontier API site
+
 ## Quickstart
 
 * Download [ClickOnce installer][clickonce] or [portable version][release-latest]
-* Input or detect commander name, Inara and/or EDSM API keys, click 'verify' to check info is correct
-* Save settings (apply and/or OK)
-* (optional) Upload logs from last few sessions
+* Input commander name(s) and api key(s) for Inara and/or EDSM
+* Save settings (press 'Apply' and/or 'OK')
 * Launch the game.
 
 ## Plugin development
 
-The code base has not yet reached maturity, so any (even ostensibly public) APIs might change. Hence, at this time, I see the best way of plugin support as incorporating them into this codebase. This will most likely change once a stable version is reached.
-To contribute to development, please fork the repository
+At this time, I see the best way of plugin support as incorporating them into this codebase. This will most likely change once more stable version is reached.
+To contribute to development, please fork the repository and raise PRs
 
 ## Contributions
 
