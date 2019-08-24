@@ -28,6 +28,8 @@
 
         public IApiKeyValidator ApiKeyValidator { private get; set; }
 
+        public string ApiSettingsLink { private get; set; }
+
         public Action<GlobalSettings, IReadOnlyDictionary<string, string>> SaveSettingsFunc { private get; set; }
 
         public IReadOnlyDictionary<string, string> ApiKeys
@@ -50,11 +52,11 @@
         {
             this.apiKeyLabel = new System.Windows.Forms.LinkLabel();
             this.apiKeysGridView = new System.Windows.Forms.DataGridView();
+            this.apiKeysGridCommanderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apiKeysGridKeyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonAddEntry = new System.Windows.Forms.Button();
             this.buttonDelEntry = new System.Windows.Forms.Button();
             this.buttonValidateKeys = new System.Windows.Forms.Button();
-            this.apiKeysGridCommanderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apiKeysGridKeyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.apiKeysGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,10 +65,11 @@
             this.apiKeyLabel.AutoSize = true;
             this.apiKeyLabel.Location = new System.Drawing.Point(3, 3);
             this.apiKeyLabel.Name = "apiKeyLabel";
-            this.apiKeyLabel.Size = new System.Drawing.Size(62, 17);
+            this.apiKeyLabel.Size = new System.Drawing.Size(82, 17);
             this.apiKeyLabel.TabIndex = 6;
             this.apiKeyLabel.TabStop = true;
-            this.apiKeyLabel.Text = "API keys";
+            this.apiKeyLabel.Text = "Get API key";
+            this.apiKeyLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ApiKeyLabel_LinkClicked);
             // 
             // apiKeysGridView
             // 
@@ -90,6 +93,20 @@
             this.apiKeysGridView.Size = new System.Drawing.Size(479, 195);
             this.apiKeysGridView.TabIndex = 7;
             this.apiKeysGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ApiKeysGridView_CellContentClick);
+            // 
+            // apiKeysGridCommanderColumn
+            // 
+            this.apiKeysGridCommanderColumn.HeaderText = "CMDR";
+            this.apiKeysGridCommanderColumn.MinimumWidth = 6;
+            this.apiKeysGridCommanderColumn.Name = "apiKeysGridCommanderColumn";
+            this.apiKeysGridCommanderColumn.Width = 77;
+            // 
+            // apiKeysGridKeyColumn
+            // 
+            this.apiKeysGridKeyColumn.HeaderText = "API Key";
+            this.apiKeysGridKeyColumn.MinimumWidth = 6;
+            this.apiKeysGridKeyColumn.Name = "apiKeysGridKeyColumn";
+            this.apiKeysGridKeyColumn.Width = 86;
             // 
             // buttonAddEntry
             // 
@@ -121,20 +138,6 @@
             this.buttonValidateKeys.UseVisualStyleBackColor = true;
             this.buttonValidateKeys.Click += new System.EventHandler(this.ButtonValidateKeys_ClickAsync);
             // 
-            // apiKeysGridCommanderColumn
-            // 
-            this.apiKeysGridCommanderColumn.HeaderText = "CMDR";
-            this.apiKeysGridCommanderColumn.MinimumWidth = 6;
-            this.apiKeysGridCommanderColumn.Name = "apiKeysGridCommanderColumn";
-            this.apiKeysGridCommanderColumn.Width = 77;
-            // 
-            // apiKeysGridKeyColumn
-            // 
-            this.apiKeysGridKeyColumn.HeaderText = "API Key";
-            this.apiKeysGridKeyColumn.MinimumWidth = 6;
-            this.apiKeysGridKeyColumn.Name = "apiKeysGridKeyColumn";
-            this.apiKeysGridKeyColumn.Width = 86;
-            // 
             // MultiCmdrApiKeyControl
             // 
             this.Controls.Add(this.buttonValidateKeys);
@@ -152,7 +155,7 @@
 
         public override void SaveSettings() => SaveSettingsFunc?.Invoke(GlobalSettings, ApiKeys);
 
-        private void ApiKeyLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://www.edsm.net/en/settings/api");
+        private void ApiKeyLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start(ApiSettingsLink);
 
         private async void ButtonValidateKeys_ClickAsync(object sender, EventArgs e)
         {

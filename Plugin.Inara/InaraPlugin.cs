@@ -83,6 +83,7 @@
         {
             ApiKeys = GetActualApiKeys(),
             ApiKeyValidator = this,
+            ApiSettingsLink = "https://inara.cz/settings-api/",
             GlobalSettings = settings,
             SaveSettingsFunc = SaveSettings
         };

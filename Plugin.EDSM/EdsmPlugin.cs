@@ -119,6 +119,7 @@
         {
             ApiKeys = GetActualApiKeys(),
             ApiKeyValidator = this,
+            ApiSettingsLink = "https://www.edsm.net/en/settings/api",
             GlobalSettings = settings,
             SaveSettingsFunc = SaveSettings
         };
