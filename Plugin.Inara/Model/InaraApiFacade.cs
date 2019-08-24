@@ -69,11 +69,11 @@
 
                         exceptions.Add(new ApplicationException(statusText ?? "Unknown Error"));
 
-                        var log = statusCode < 300 ? Log.Warn() : Log.Error();
-                        log.Message(statusText)
+                        Log.Error().Message(statusText)
                             .Property("input", inputData.Events[i].ToString())
                             .Property("output", outputEvent.ToString())
                             .Property("status", statusCode)
+                            .LoggerName(Log.Name)
                             .Write();
                     }
                 }
