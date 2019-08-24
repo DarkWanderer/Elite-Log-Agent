@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface ITrayIconController : IDisposable
+    public interface IUserNotificationInterface
     {
         void ShowErrorNotification(string error);
     }

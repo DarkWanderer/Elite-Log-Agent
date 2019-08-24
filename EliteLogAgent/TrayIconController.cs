@@ -1,5 +1,6 @@
 ﻿namespace EliteLogAgent
 {
+    using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Drawing;
@@ -9,7 +10,7 @@
     using DW.ELA.Utility;
     using EliteLogAgent.Properties;
 
-    public class TrayIconController : ITrayIconController
+    public class TrayIconController : IUserNotificationInterface, IDisposable
     {
         private static Form form;
 

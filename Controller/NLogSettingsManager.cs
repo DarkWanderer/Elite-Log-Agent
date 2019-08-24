@@ -17,7 +17,6 @@
 
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly ISettingsProvider settingsProvider;
-        private readonly ITrayIconController trayController;
         private readonly string logDirectory;
 
         static NLogSettingsManager()
@@ -25,10 +24,9 @@
             AppDomain.CurrentDomain.DomainUnload += (o, e) => LogManager.Flush();
         }
 
-        public NLogSettingsManager(ISettingsProvider settingsProvider, ITrayIconController trayController, IPathManager pathManager)
+        public NLogSettingsManager(ISettingsProvider settingsProvider, IPathManager pathManager)
         {
             this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
-            this.trayController = trayController ?? throw new ArgumentNullException(nameof(trayController));
             logDirectory = pathManager.LogDirectory;
         }
 
@@ -51,8 +49,6 @@
 
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
-            //config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error,
-            //    new MethodCallTarget("popup", (logEvent, data) => trayController.ShowErrorNotification(logEvent.FormattedMessage))));
 
             if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
             {

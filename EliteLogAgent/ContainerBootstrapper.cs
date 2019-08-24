@@ -32,7 +32,7 @@
                 Component.For<IPlayerStateHistoryRecorder>().ImplementedBy<PlayerStateRecorder>().LifestyleSingleton());
 
             // Register UI classes. Need to initalize before log to enable tray icon
-            container.Register(Component.For<ITrayIconController>().ImplementedBy<TrayIconController>().LifestyleSingleton());
+            container.Register(Component.For<TrayIconController>().ImplementedBy<TrayIconController>().LifestyleSingleton());
 
             // Different components will be used based on whether apps are portable
             if (ApplicationDeployment.IsNetworkDeployed)

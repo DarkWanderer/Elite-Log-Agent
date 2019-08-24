@@ -45,7 +45,7 @@
                 pluginManager.LoadEmbeddedPlugins();
 
                 var logMonitor = container.Resolve<ILogRealTimeDataSource>();
-                var trayController = container.Resolve<ITrayIconController>();
+                var trayController = container.Resolve<TrayIconController>();
                 var playerStateRecorder = container.Resolve<IPlayerStateHistoryRecorder>();
 
                 // subscription 'token' is IDisposable
@@ -55,8 +55,8 @@
                 using (logMonitor) // log monitor needs to get disposed first to ensure every plugin gets 'OnCompleted' event
                 {
                     Application.Run();
-                    RootLog.Info("Shutting down");
                 }
+                RootLog.Info("Shutting down");
             }
         }
 

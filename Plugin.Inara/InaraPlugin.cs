@@ -22,13 +22,15 @@
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
+        private readonly IUserNotificationInterface notificationInterface;
         private readonly ConcurrentDictionary<string, string> ApiKeys = new ConcurrentDictionary<string, string>();
 
-        public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, IRestClientFactory restClientFactory)
+        public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, IRestClientFactory restClientFactory, IUserNotificationInterface notificationInterface)
             : base(settingsProvider)
         {
             RestClient = restClientFactory.CreateRestClient(InaraApiUrl);
             this.playerStateRecorder = playerStateRecorder;
+            this.notificationInterface = notificationInterface;
             EventConverter = new InaraEventConverter(this.playerStateRecorder);
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
@@ -114,11 +116,15 @@
                 else
                 {
                     Log.Info()
-                        .Message("Events discarded, commander not known")
+                        .Message("Events discarded, unknown commander")
                         .Property("eventsCount", events.Count)
                         .Property("commander", commander?.Name ?? "null")
                         .Write();
                 }
+            }
+            catch (InvalidApiKeyException)
+            {
+                notificationInterface.ShowErrorNotification("Invalid EDSM API key for CMDR " + CurrentCommander?.Name);
             }
             catch (Exception e)
             {

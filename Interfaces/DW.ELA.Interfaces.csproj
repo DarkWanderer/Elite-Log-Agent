@@ -157,7 +157,7 @@
     <Compile Include="IRestClient.cs" />
     <Compile Include="IRestClientFactory.cs" />
     <Compile Include="ISettingsProvider.cs" />
-    <Compile Include="ITrayIconController.cs" />
+    <Compile Include="IUserNotificationInterface.cs" />
     <Compile Include="JournalEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -20,8 +20,9 @@
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly Task<HashSet<string>> ignoredEvents;
         private readonly ConcurrentDictionary<string, string> ApiKeys = new ConcurrentDictionary<string, string>();
+        private readonly IUserNotificationInterface notificationInterface;
 
-        public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory)
+        public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory, IUserNotificationInterface notificationInterface)
             : base(settingsProvider)
         {
             RestClient = restClientFactory.CreateRestClient(EdsmApiUrl);
@@ -32,6 +33,7 @@
 
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             ReloadSettings();
+            this.notificationInterface = notificationInterface;
         }
 
         protected internal IRestClient RestClient { get; }
@@ -103,11 +105,15 @@
                 else
                 {
                     Log.Info()
-                        .Message("Events discarded, commander not known")
+                        .Message("Events discarded, unknown commander")
                         .Property("eventsCount", events.Count)
                         .Property("commander", commander?.Name ?? "null")
                         .Write();
                 }
+            }
+            catch (InvalidApiKeyException)
+            {
+                notificationInterface.ShowErrorNotification("Invalid EDSM API key for CMDR " + CurrentCommander?.Name);
             }
             catch (Exception e)
             {

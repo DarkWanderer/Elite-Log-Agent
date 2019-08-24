@@ -12,7 +12,7 @@
         [Test]
         public void ShouldSetupLogByDefault()
         {
-            var manager = new NLogSettingsManager(new Mock<ISettingsProvider>().Object, new Mock<ITrayIconController>().Object, new TempDirPathManager());
+            var manager = new NLogSettingsManager(new Mock<ISettingsProvider>().Object, new TempDirPathManager());
             manager.Setup();
 
             // Reset log
