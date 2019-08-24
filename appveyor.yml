@@ -47,11 +47,11 @@ test_script:
 after_test:
 - ps: |
       ReportGenerator\tools\net47\ReportGenerator.exe
-      "-reports:coverage.xml"
-      "-targetdir:coverage-report"
-      "-historydir:coverage-history"
-      "-reporttypes:HTMLInline"
-      "-verbosity:Info"
+      -reports:coverage.xml
+      -targetdir:coverage-report
+      -historydir:coverage-history
+      -reporttypes:HTMLInline
+      -verbosity:Info
 
 artifacts:
 - path: coverage-report
