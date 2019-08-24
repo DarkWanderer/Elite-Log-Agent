@@ -45,7 +45,7 @@
                 pluginManager.LoadEmbeddedPlugins();
 
                 var logMonitor = container.Resolve<ILogRealTimeDataSource>();
-                var trayController = container.Resolve<TrayIconController>();
+                var trayController = container.Resolve<IUserNotificationInterface>();
                 var playerStateRecorder = container.Resolve<IPlayerStateHistoryRecorder>();
 
                 // subscription 'token' is IDisposable

@@ -87,7 +87,7 @@
             }
         }
 
-        public void ShowErrorNotification(string error) => trayIcon.ShowBalloonTip(30000, "Elite Log Agent Error", error, ToolTipIcon.Error);
+        public void ShowErrorNotification(string error) => trayIcon.ShowBalloonTip(30000, "Elite Log Agent: Error", error, ToolTipIcon.Error);
 
         public void OpenSettings()
         {
