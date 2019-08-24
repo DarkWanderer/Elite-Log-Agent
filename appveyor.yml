@@ -41,15 +41,12 @@ after_build:
 
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -filter:"+[*]* -[*]NUnit* -[Moq*]*" -excludebyattribute:NUnit.Framework.ExplicitAttribute -output:"coverage.xml"
-- 7z a coverage.zip coverage.xml
-- ps: Push-AppveyorArtifact coverage.zip -DeploymentName Coverage
 
 after_test:
 - ps: ReportGenerator\tools\net47\ReportGenerator.exe -reports:coverage.xml -targetdir:coverage-report -historydir:coverage-history -reporttypes:HTML -verbosity:Info -assemblyfilters:"-Excluded MoreLinq.*"
+- 7z a coverage.zip coverage.xml coverage-report/*
+- ps: Push-AppveyorArtifact coverage.zip -DeploymentName Coverage
 
-artifacts:
-- path: coverage-report
-  name: CoverageReport
 
 for:
 - branches:
