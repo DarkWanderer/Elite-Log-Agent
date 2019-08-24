@@ -128,7 +128,7 @@
             }
             catch (Exception e)
             {
-                Log.Error(e, "Error while processing events");
+                Log.Error(e, "Error while processing events for INARA");
             }
         }
 
