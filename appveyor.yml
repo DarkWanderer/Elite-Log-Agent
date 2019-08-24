@@ -10,6 +10,8 @@ cache:
   - packages -> **\packages.config
   - ILMerge -> appveyor.yml
   - OpenCover -> appveyor.yml
+  - ReportGenerator -> appveyor.yml
+  - coverage-history -> appveyor.yml
 
 environment:
   PFX_PASSWORD:
@@ -26,6 +28,7 @@ install:
 - cmd: nuget restore
 - cmd: nuget install -ExcludeVersion ILMerge -Version 3.0.21
 - cmd: nuget install -ExcludeVersion OpenCover
+- cmd: nuget install -ExcludeVersion ReportGenerator
 
 build_script:
 - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
@@ -40,6 +43,19 @@ test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -filter:"+[*]* -[*]NUnit* -[Moq*]*" -excludebyattribute:NUnit.Framework.ExplicitAttribute -output:"coverage.xml"
 - 7z a coverage.zip coverage.xml
 - ps: Push-AppveyorArtifact coverage.zip -DeploymentName Coverage
+
+after_test:
+- ps: |
+      ReportGenerator\tools\net47\ReportGenerator.exe
+      "-reports:coverage.xml"
+      "-targetdir:coverage-report"
+      "-historydir:coverage-history"
+      "-reporttypes:HTMLInline"
+      "-verbosity:Info"
+
+artifacts:
+- path: coverage-report
+  name: CoverageReport
 
 for:
 - branches:
