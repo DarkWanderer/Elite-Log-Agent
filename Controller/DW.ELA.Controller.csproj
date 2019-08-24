@@ -65,8 +65,9 @@
     <Compile Include="..\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
-    <Compile Include="AbstractPlugin.cs" />
+    <Compile Include="AbstractBatchSendPlugin.cs" />
     <Compile Include="AsyncMessageBroker.cs" />
+    <Compile Include="IApiKeyValidator.cs" />
     <Compile Include="MultiCmdrApiKeyControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

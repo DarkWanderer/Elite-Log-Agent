@@ -67,6 +67,7 @@
             }
 
             public new void FlushQueue() => base.FlushQueue();
+
             protected override TimeSpan FlushInterval => TimeSpan.FromHours(10);
         }
 

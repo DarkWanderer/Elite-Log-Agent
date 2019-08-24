@@ -14,7 +14,7 @@
     using NLog;
     using NLog.Fluent;
 
-    public class EdsmPlugin : AbstractBatchSendPlugin<JObject, EdsmSettings>
+    public class EdsmPlugin : AbstractBatchSendPlugin<JObject, EdsmSettings>, IApiKeyValidator
     {
         private const string EdsmApiUrl = "https://www.edsm.net/api-journal-v1/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
@@ -118,13 +118,27 @@
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new MultiCmdrApiKeyControl()
         {
             ApiKeys = GetActualApiKeys(),
+            ApiKeyValidator = this,
             GlobalSettings = settings,
-            ValidateApiKeyFunc = ValidateApiKeyAsync,
             SaveSettingsFunc = SaveSettings
         };
 
         private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) => new PluginSettingsFacade<EdsmSettings>(PluginId).SetPluginSettings(settings, new EdsmSettings() { ApiKeys = values.ToDictionary() });
 
-        private Task<bool> ValidateApiKeyAsync(string cmdrName, string apiKey) => Task.FromResult(true);
+        public async Task<bool> ValidateKeyAsync(string cmdrName, string apiKey)
+        {
+            try
+            {
+                var apiFacade = new EdsmApiFacade(new ThrottlingRestClient.Factory().CreateRestClient("https://www.edsm.net/api-commander-v1/get-ranks"), cmdrName, apiKey);
+                var result = await apiFacade.GetCommanderRanks();
+                var combatRank = result?["ranksVerbose"]?["Combat"]?.ToString();
+                return combatRank != null;
+            }
+            catch (Exception ex)
+            {
+                Log.Info(ex, "Exception while validating API key");
+                return false;
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@
     using NLog;
     using NLog.Fluent;
 
-    public class InaraPlugin : AbstractBatchSendPlugin<ApiInputEvent, InaraSettings>
+    public class InaraPlugin : AbstractBatchSendPlugin<ApiInputEvent, InaraSettings>, IApiKeyValidator
     {
         public const string CPluginName = "INARA";
         public const string CPluginId = "InaraUploader";
@@ -82,15 +82,13 @@
         public override AbstractSettingsControl GetPluginSettingsControl(GlobalSettings settings) => new MultiCmdrApiKeyControl()
         {
             ApiKeys = GetActualApiKeys(),
+            ApiKeyValidator = this,
             GlobalSettings = settings,
-            ValidateApiKeyFunc = ValidateApiKeyAsync,
             SaveSettingsFunc = SaveSettings
         };
 
         private void SaveSettings(GlobalSettings settings, IReadOnlyDictionary<string, string> values) =>
             new PluginSettingsFacade<InaraSettings>(PluginId).SetPluginSettings(settings, new InaraSettings() { ApiKeys = values.ToDictionary() });
-
-        private Task<bool> ValidateApiKeyAsync(string cmdrName, string apiKey) => Task.FromResult(true);
 
         public override void OnSettingsChanged(object o, EventArgs e) => ReloadSettings();
 
@@ -162,6 +160,22 @@
             }
 
             return eventsByType.Values.SelectMany(ev => ev).OrderBy(e => e.Timestamp);
+        }
+
+        public async Task<bool> ValidateKeyAsync(string cmdrName, string apiKey)
+        {
+            try
+            {
+                var apiFacade = new InaraApiFacade(RestClient, cmdrName, apiKey);
+                var @event = new ApiInputEvent("getCommanderProfile") { EventData = new { searchName = cmdrName }, Timestamp = DateTime.Now };
+                await apiFacade.ApiCall(@event);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Info(ex, "Exception while validating API key");
+                return false;
+            }
         }
     }
 }
