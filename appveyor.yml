@@ -45,7 +45,7 @@ test_script:
 - ps: Push-AppveyorArtifact coverage.zip -DeploymentName Coverage
 
 after_test:
-- ps: ReportGenerator\tools\net47\ReportGenerator.exe -reports:coverage.xml -targetdir:coverage-report -historydir:coverage-history -reporttypes:HTMLInline -verbosity:Info
+- ps: ReportGenerator\tools\net47\ReportGenerator.exe -reports:coverage.xml -targetdir:coverage-report -historydir:coverage-history -reporttypes:HTML -verbosity:Info -assemblyfilters:"-Excluded MoreLinq.*"
 
 artifacts:
 - path: coverage-report
