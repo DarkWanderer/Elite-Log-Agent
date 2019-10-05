@@ -12,6 +12,6 @@
         [JsonProperty("events")]
         public IList<ApiOutputEvent> Events;
 
-        public override string ToString() => Serialize.ToJson(this);
+        public override readonly string ToString() => Serialize.ToJson(this);
     }
 }
