@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A9E8BE2A-1256-4933-AC2C-C2CE7AB26900}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DW.ELA.Plugin.EDDN</RootNamespace>
     <AssemblyName>DW.ELA.Plugin.EDDN</AssemblyName>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <LangVersion>8.0</LangVersion>
@@ -37,24 +38,6 @@
     <None Remove="Schemas\journal-v1.0.json" />
     <None Remove="Schemas\outfitting-v2.0.json" />
     <None Remove="Schemas\shipyard-v2.0.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

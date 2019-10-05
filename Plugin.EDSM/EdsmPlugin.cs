@@ -89,7 +89,6 @@
                     var apiFacade = new EdsmApiFacade(RestClient, commander.Name, apiKey);
                     var apiEventsBatches = events
                         .Where(e => !ignoredEvents.Result.Contains(e["event"].ToString()))
-                        .TakeLast(1000) // Limit to last N events to avoid EDSM overload
                         .Reverse()
                         .Batch(100) // EDSM API only accepts 100 events in single call
                         .ToList();

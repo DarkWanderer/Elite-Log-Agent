@@ -59,7 +59,7 @@
             try
             {
                 container.Register(Classes
-                    .FromThisAssembly()
+                    .FromAssembly(typeof(CastleWindsorPluginLoader).Assembly)
                     .BasedOn<IPlugin>()
                     .WithService
                     .FromInterface()

@@ -66,7 +66,7 @@
         private HttpResponseMessage ThrowIfErrorCode(HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
-                throw new HttpException(Convert.ToInt32(response.StatusCode), response.ReasonPhrase);
+                throw new HttpRequestException(response.ReasonPhrase);
             return response;
         }
 
