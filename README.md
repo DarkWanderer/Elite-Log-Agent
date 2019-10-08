@@ -5,7 +5,9 @@
 A Windows utility, sitting in tray. Feeds your commander data to INARA and/or EDSM sites. Also helps other players by sharing trade/commodity/outfitting data via EDDN
 
 Key features:
-* Multiple CMDR support
+* Fills your player profile on INARA and/or EDSM 
+* Sends station data to community sites like EDDB (commodity, shipyard, outfitting)
+* Supports multiple accounts
 * Does not require authenticating via Frontier API site
 
 ## Quickstart
