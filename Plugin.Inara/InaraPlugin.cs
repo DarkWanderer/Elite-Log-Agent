@@ -108,6 +108,7 @@
                         await facade.ApiCall(ApiInputs);
 
                     Log.Info()
+                        .LoggerName(Log.Name)
                         .Message("Uploaded events")
                         .Property("eventsCount", events.Count)
                         .Property("commander", commander)
@@ -116,7 +117,8 @@
                 else
                 {
                     Log.Info()
-                        .Message("Events discarded, unknown commander")
+                        .LoggerName(Log.Name)
+                        .Message("No INARA API key set for commander, events discarded")
                         .Property("eventsCount", events.Count)
                         .Property("commander", commander?.Name ?? "null")
                         .Write();

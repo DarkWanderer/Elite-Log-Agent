@@ -19,15 +19,17 @@
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly ISettingsProvider settingsProvider;
         private readonly IAutorunManager autorunManager;
+        private readonly IPathManager pathManager;
         private bool disposedValue = false; // To detect redundant calls
 
-        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IAutorunManager autorunManager)
+        public TrayIconController(IPluginManager pluginManager, ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IAutorunManager autorunManager, IPathManager pathManager)
         {
             trayIcon = CreateTrayIcon();
             this.pluginManager = pluginManager;
             this.playerStateRecorder = playerStateRecorder;
             this.settingsProvider = settingsProvider;
             this.autorunManager = autorunManager;
+            this.pathManager = pathManager;
         }
 
         private NotifyIcon CreateTrayIcon()
@@ -54,6 +56,10 @@
 
             menuStrip.Items.Add(ToolStripSeparatorLeft);
             menuStrip.Items.Add("Settings", Resources.EliteIcon.ToBitmap(), (o, e) => OpenSettings());
+
+
+            menuStrip.Items.Add(ToolStripSeparatorLeft);
+            menuStrip.Items.Add("Browse logs", Resources.FinderIcon.ToBitmap(), (o, e) => OpenLogsDirectory());
             menuStrip.Items.Add("Report issue", Resources.GitHub.ToBitmap(), (o, e) => OpenReportIssueLink());
 
             menuStrip.Items.Add(ToolStripSeparatorLeft);
@@ -65,6 +71,8 @@
 
             return menuStrip;
         }
+
+        private void OpenLogsDirectory() => Process.Start(pathManager.LogDirectory);
 
         private void OpenChangelog() => Process.Start(Resources.GitHubChangelogLink);
 

@@ -226,5 +226,8 @@
   <ItemGroup>
     <None Include="Resources\github.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\finder.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -89,7 +89,6 @@
                     var apiFacade = new EdsmApiFacade(RestClient, commander.Name, apiKey);
                     var apiEventsBatches = events
                         .Where(e => !ignoredEvents.Result.Contains(e["event"].ToString()))
-                        .TakeLast(1000) // Limit to last N events to avoid EDSM overload
                         .Reverse()
                         .Batch(100) // EDSM API only accepts 100 events in single call
                         .ToList();
@@ -105,7 +104,8 @@
                 else
                 {
                     Log.Info()
-                        .Message("Events discarded, unknown commander")
+                        .LoggerName(Log.Name)
+                        .Message("No EDSM API key set for commander, events discarded")
                         .Property("eventsCount", events.Count)
                         .Property("commander", commander?.Name ?? "null")
                         .Write();
