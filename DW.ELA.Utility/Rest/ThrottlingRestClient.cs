@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
@@ -18,6 +19,12 @@
 
         private DateTime lastRequestTimestamp = DateTime.MinValue;
         private int requestCounter;
+
+        static ThrottlingRestClient()
+        {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        }
 
         internal ThrottlingRestClient(string url)
         {
