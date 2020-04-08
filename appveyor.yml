@@ -70,7 +70,7 @@ for:
     tag: release/$(appveyor_build_version)
     release: $(appveyor_build_version)
     auth_token:
-      secure: cMLUYhjbQt3D197vZwjRci/zvwagN86wEZtJzX1L3apKsslN44Uo6TUo54vIQVg6
+      secure: 7uCw0Z3VgTACacpcn/VbD5PsLzez8JKRBjdt2nI2fTVgkU4E7EzIX0xRPhhktZDe
     artifact: Portable
     draft: false
     prerelease: false
