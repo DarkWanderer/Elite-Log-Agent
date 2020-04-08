@@ -6,21 +6,24 @@
 
     public class SavedGamesDirectoryHelper : ILogDirectoryNameProvider
     {
-        public string Directory => SDirectory;
+        private readonly Lazy<string> lazyDirectoryValue = new Lazy<string>(GetSavedGamesDirectory);
 
-        private static string SDirectory
+        public string Directory => lazyDirectoryValue.Value;
+
+        private static string GetSavedGamesDirectory()
         {
-            get
+            int result = UnsafeNativeMethods.SHGetKnownFolderPath(new Guid("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4"), 0, new IntPtr(0), out var path);
+            if (result >= 0)
             {
-                int result = UnsafeNativeMethods.SHGetKnownFolderPath(new Guid("4C5C32FF-BB9D-43B0-B5B4-2D72E54EAAA4"), 0, new IntPtr(0), out var path);
-                if (result >= 0)
+                try
                 {
                     return Marshal.PtrToStringUni(path) + @"\Frontier Developments\Elite Dangerous";
                 }
-                else
-                {
-                    throw new ExternalException("Failed to find the saved games directory.", result);
-                }
+                finally { Marshal.FreeCoTaskMem(path); }
+            }
+            else
+            {
+                throw new ExternalException("Failed to find the saved games directory.", result);
             }
         }
 
