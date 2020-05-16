@@ -61,5 +61,20 @@
 
         [JsonProperty("Factions")]
         public Faction[] Factions { get; set; }
+
+        [JsonProperty("ActiveFine")]
+        public long? ActiveFine { get; set; }
+
+        [JsonProperty("Body")]
+        public string Body { get; set; }
+
+        [JsonProperty("BodyType")]
+        public string BodyType { get; set; }
+
+        [JsonProperty("BodyID")]
+        public long? BodyId { get; set; }
+
+        [JsonProperty]
+        public int? BoostUsed { get; set; }
     }
 }

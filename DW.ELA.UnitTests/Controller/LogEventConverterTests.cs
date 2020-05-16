@@ -62,10 +62,10 @@
         }
 
         [Test]
-        [Explicit]
+        [Ignore("Heavy test")]
         public void ShouldConvertLocalEvents()
         {
-            var events = TestEventSource.LocalEvents.ToList();
+            var events = TestEventSource.LocalEventsRaw.ToList();
             events.ForEach(x => JournalEventConverter.Convert(x));
         }
     }

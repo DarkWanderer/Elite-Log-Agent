@@ -15,10 +15,10 @@
     public static class TestDeveloperTools
     {
         [Test]
-        [Explicit]
+        [Ignore("Developer tool")]
         public static void ToolGetUnmappedEvents()
         {
-            var events = TestEventSource.LocalEvents
+            var events = TestEventSource.LocalEventsRaw
                 .Concat(TestEventSource.LocalBetaEvents)
                 .Select(e =>
                 {
@@ -36,24 +36,25 @@
                 .Distinct()
                 .OrderBy(x => x)
                 .ToList();
-            Assert.Pass(string.Join(", ", events));
+            Console.WriteLine(string.Join(", ", events));
         }
 
         /// <summary>
         /// Utility method for developer to get canned events from own logs
         /// </summary>
         [Test]
-        [Explicit]
+        [Ignore("Developer tool")]
         public static void ToolPrepareCannedEvents()
         {
             var eventExamples = LoadJsonEvents()
                 .Concat(ExtractSamples(TestEventSource.LocalBetaEvents))
-                .Concat(ExtractSamples(TestEventSource.LocalEvents))
+                .Concat(ExtractSamples(TestEventSource.LocalEventsRaw))
                 .Concat(ExtractSamples(TestEventSource.LocalStaticEvents))
                 .ToHashSet();
 
             string eventsString = string.Join("\n", eventExamples);
             Assert.IsNotEmpty(eventsString);
+            Console.WriteLine(eventsString);
         }
 
         private static JObject ReplaceTimestamp(JObject input)
@@ -81,7 +82,7 @@
                               select eventGroup;
 
             var processedEvents = eventGroups
-                .SelectMany(g => g.Take(5))
+                .SelectMany(g => g.Take(3))
                 .Select(ReplaceTimestamp)
                 .Select(Serialize.ToJson)
                 .ToList();

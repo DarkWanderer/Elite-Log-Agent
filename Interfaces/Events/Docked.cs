@@ -43,5 +43,8 @@
 
         [JsonProperty("DistFromStarLS")]
         public double DistFromStarLs { get; set; }
+
+        [JsonProperty]
+        public bool? ActiveFine { get; set; }
     }
 }

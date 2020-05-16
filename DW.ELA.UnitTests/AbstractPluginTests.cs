@@ -6,8 +6,10 @@
     using System.Linq;
     using DW.ELA.Controller;
     using DW.ELA.Interfaces;
+    using DW.ELA.Interfaces.Events;
     using DW.ELA.Interfaces.Settings;
     using Moq;
+    using MoreLinq;
     using NUnit.Framework;
 
     [TestFixture]
@@ -18,12 +20,14 @@
         [Parallelizable]
         public void ShouldNotGiveEventsInstantly()
         {
-            using (var plugin = new TestPlugin(Mock.Of<ISettingsProvider>()))
-            {
-                foreach (var @event in TestEventSource.TypedLogEvents.Skip(10).Take(10))
-                    plugin.OnNext(@event);
-                CollectionAssert.IsEmpty(plugin.Flushed);
-            }
+            using var plugin = new TestPlugin(Mock.Of<ISettingsProvider>());
+            TestEventSource.TypedLogEvents
+                .Where(e => e.GetType() != typeof(Commander))
+                .Take(1000)
+                .RandomSubset(50)
+                .ForEach(e => plugin.OnNext(e));
+
+            CollectionAssert.IsEmpty(plugin.Flushed);
         }
 
         [Test]

@@ -1,5 +1,6 @@
 ﻿namespace DW.ELA.UnitTests.INARA
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -38,8 +39,12 @@
 
             var convertedEvents = logEventSource
                 .Events
+                .Where(e => e.Timestamp.AddMonths(1) > DateTime.UtcNow)
                 .SelectMany(inaraConverter.Convert)
                 .ToArray();
+
+            if (!convertedEvents.Any())
+                Assert.Inconclusive("No recent enough events to convert");
 
             var results = await inaraApiFacade.ApiCall(convertedEvents);
             results = results

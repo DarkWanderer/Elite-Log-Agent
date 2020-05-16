@@ -20,16 +20,16 @@
         [JsonProperty("ShipID")]
         public long ShipId { get; set; }
 
-        [JsonProperty("ShipName")]
+        [JsonProperty]
         public string ShipName { get; set; }
 
-        [JsonProperty("ShipIdent")]
+        [JsonProperty]
         public string ShipIdent { get; set; }
 
-        [JsonProperty("FuelLevel")]
+        [JsonProperty]
         public double? FuelLevel { get; set; }
 
-        [JsonProperty("FuelCapacity")]
+        [JsonProperty]
         public double? FuelCapacity { get; set; }
 
         [JsonProperty("GameMode")]

@@ -34,5 +34,17 @@
 
         [JsonProperty("Modules")]
         public Module[] Modules { get; set; }
+
+        [JsonProperty]
+        public double? UnladenMass { get; set; }
+
+        [JsonProperty]
+        public int? CargoCapacity { get; set; }
+
+        [JsonProperty]
+        public double? MaxJumpRange { get; set; }
+
+        [JsonProperty]
+        public FuelCapacity? FuelCapacity { get; set; }
     }
 }

@@ -5,6 +5,13 @@
 
     public class Scan : JournalEvent
     {
+
+        [JsonProperty("StarSystem")]
+        public string StarSystem { get; set; }
+
+        [JsonProperty("SystemAddress")]
+        public ulong? SystemAddress { get; set; }
+
         [JsonProperty("BodyName")]
         public string BodyName { get; set; }
 
@@ -100,5 +107,14 @@
 
         [JsonProperty("Materials")]
         public Composition[] Materials { get; set; }
+
+        [JsonProperty]
+        public bool? WasDiscovered { get; set; }
+
+        [JsonProperty]
+        public bool? WasMapped { get; set; }
+
+        [JsonProperty]
+        public int? Subclass { get; set; }
     }
 }

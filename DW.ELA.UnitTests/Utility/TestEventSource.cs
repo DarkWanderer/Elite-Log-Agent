@@ -16,6 +16,9 @@
         public static IEnumerable<JournalEvent> TypedLogEvents => CannedEvents.Where(e => e.GetType() != typeof(JournalEvent));
 
         public static IEnumerable<JournalEvent> CannedEvents => CannedEventsRaw.Select(JournalEventConverter.Convert);
+
+        public static IEnumerable<JournalEvent> LocalEvents => LocalEventsRaw.Select(JournalEventConverter.Convert);
+
         public static IEnumerable<JObject> CannedEventsRaw
         {
             get
@@ -54,7 +57,7 @@
             }
         }
 
-        public static IEnumerable<JObject> LocalEvents
+        public static IEnumerable<JObject> LocalEventsRaw
         {
             get
             {

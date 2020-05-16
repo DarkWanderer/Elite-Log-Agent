@@ -53,6 +53,24 @@
         [JsonProperty("SystemSecurity_Localised")]
         public string SystemSecurityLocalised { get; set; }
 
+        [JsonProperty("StationGovernment")]
+        public string StationGovernment { get; set; }
+
+        [JsonProperty("StationGovernment_Localised")]
+        public string StationGovernmentLocalised { get; set; }
+
+        [JsonProperty("StationServices")]
+        public string[] StationServices { get; set; }
+
+        [JsonProperty("StationEconomy")]
+        public string StationEconomy { get; set; }
+
+        [JsonProperty("StationEconomy_Localised")]
+        public string StationEconomyLocalised { get; set; }
+
+        [JsonProperty("StationEconomies")]
+        public StationEconomy[] StationEconomies { get; set; }
+
         [JsonProperty("Population")]
         public long Population { get; set; }
 

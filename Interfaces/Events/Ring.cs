@@ -11,12 +11,12 @@
         public string RingClass { get; set; }
 
         [JsonProperty("MassMT")]
-        public long MassMt { get; set; }
+        public double MassMt { get; set; }
 
         [JsonProperty("InnerRad")]
-        public long InnerRad { get; set; }
+        public double InnerRad { get; set; }
 
         [JsonProperty("OuterRad")]
-        public long OuterRad { get; set; }
+        public double OuterRad { get; set; }
     }
 }

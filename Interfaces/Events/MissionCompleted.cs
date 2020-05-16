@@ -20,14 +20,23 @@
         [JsonProperty("Commodity_Localised")]
         public string CommodityLocalised { get; set; }
 
-        [JsonProperty("Count")]
+        [JsonProperty]
         public long? Count { get; set; }
 
-        [JsonProperty("DestinationSystem")]
+        [JsonProperty]
+        public long? KillCount { get; set; }
+
+        [JsonProperty]
         public string DestinationSystem { get; set; }
 
-        [JsonProperty("DestinationStation")]
+        [JsonProperty]
         public string DestinationStation { get; set; }
+
+        [JsonProperty]
+        public string NewDestinationSystem { get; set; }
+
+        [JsonProperty]
+        public string NewDestinationStation { get; set; }
 
         [JsonProperty("Reward")]
         public long? Reward { get; set; }

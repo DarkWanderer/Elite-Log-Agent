@@ -11,11 +11,16 @@
     using DW.ELA.UnitTests.Utility;
     using DW.ELA.Utility.Json;
     using NUnit.Framework;
+    using MoreLinq;
+    using DW.ELA.Interfaces.Events;
 
     [TestFixture]
     public class JournalMonitorTests
     {
-        private static IEnumerable<string> EventsAsJson => TestEventSource.CannedEvents.Select(Serialize.ToJson);
+        private static IEnumerable<string> EventsAsJson => TestEventSource.TypedLogEvents
+            .OfType<FsdJump>()
+            .Cast<JournalEvent>()
+            .Select(Serialize.ToJson);
 
         private Task Delay => Task.Delay(50);
 
@@ -29,18 +34,18 @@
             string testFile1 = Path.Combine(directoryProvider.Directory, "Journal.1234.log");
             string testFile2 = Path.Combine(directoryProvider.Directory, "Journal.2345.log");
 
-            File.WriteAllText(testFile1, EventsAsJson.Skip(5).First());
+            File.WriteAllText(testFile1, EventsAsJson.ElementAt(0));
             var journalMonitor = new JournalMonitor(directoryProvider, 5);
             journalMonitor.Subscribe(events.Add);
 
-            File.AppendAllText(testFile1, EventsAsJson.Skip(8).First());
+            File.AppendAllText(testFile1, EventsAsJson.ElementAt(1));
             await Delay;
             CollectionAssert.IsNotEmpty(events);
 
             while (events.Count > 0)
                 events.TryTake(out var e);
 
-            File.WriteAllText(testFile2, EventsAsJson.Skip(9).First());
+            File.WriteAllText(testFile2, EventsAsJson.ElementAt(2));
             await Delay;
             CollectionAssert.IsNotEmpty(events);
 
