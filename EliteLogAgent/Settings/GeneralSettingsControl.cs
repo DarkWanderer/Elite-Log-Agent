@@ -68,9 +68,9 @@
             checkboxAutostartApplication.AutoSize = true;
             checkboxAutostartApplication.Location = new System.Drawing.Point(3, 3);
             checkboxAutostartApplication.Name = "checkboxAutostartApplication";
-            checkboxAutostartApplication.Size = new System.Drawing.Size(186, 21);
+            checkboxAutostartApplication.Size = new System.Drawing.Size(182, 21);
             checkboxAutostartApplication.TabIndex = 7;
-            checkboxAutostartApplication.Text = "Autorun agent on sign-in";
+            checkboxAutostartApplication.Text = "Start agent when I log in";
             checkboxAutostartApplication.UseVisualStyleBackColor = true;
             checkboxAutostartApplication.CheckedChanged += new EventHandler(CheckboxAutostartApplication_CheckedChanged);
             // 
