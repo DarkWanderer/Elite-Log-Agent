@@ -41,13 +41,14 @@
             var @event = JournalEventConverter.Convert(source);
 
             if (@event.GetType() == typeof(JournalEvent))
-                Assert.Pass("Automatic pass for non-typed events");
+                Assert.Inconclusive("Event is not typed");
 
-            if (@event is FsdJump || @event is Location || @event is Docked)
+            if (@event is FsdJump || @event is Location || @event is Docked || @event is CarrierJump)
             {
                 source.Remove("StationFaction");
                 source.Remove("SystemFaction");
                 source.Remove("FactionState");
+                source.Remove("Conflicts");
             } // TODO: return those fields to objects
 
             var serialized = JObject.FromObject(@event, Converter.Serializer);
