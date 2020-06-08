@@ -86,7 +86,6 @@
                     throw new InvalidApiKeyException();
                 else
                     throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
-
             }
             return outputData.Events;
         }

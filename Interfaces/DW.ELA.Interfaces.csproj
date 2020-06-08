@@ -58,6 +58,7 @@
     <Compile Include="AbstractSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Events\CarrierJump.cs" />
     <Compile Include="Events\FuelCapacity.cs" />
     <Compile Include="Events\SaaSignalsFound.cs" />
     <Compile Include="InvalidApiKeyException.cs" />

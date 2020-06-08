@@ -32,11 +32,12 @@
             {
                 switch (@event)
                 {
-                    case Docked d:
-                    case FsdJump fd:
-                    case Scan s:
-                    case Location l:
-                    case SaaSignalsFound ssf:
+                    case CarrierJump _:
+                    case Docked _:
+                    case FsdJump _:
+                    case Scan _:
+                    case Location _:
+                    case SaaSignalsFound _:
                         return MakeJournalEvent(@event, commanderName);
 
                     case Market e:
