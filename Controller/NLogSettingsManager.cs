@@ -35,7 +35,7 @@
             var logLevel = LogLevel.Info;
             try
             {
-                if (!string.IsNullOrEmpty(settingsProvider.Settings.LogLevel))
+                if (!string.IsNullOrEmpty(settingsProvider.Settings?.LogLevel))
                     logLevel = LogLevel.FromString(settingsProvider.Settings.LogLevel);
             }
             catch

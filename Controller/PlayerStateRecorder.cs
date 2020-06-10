@@ -49,103 +49,52 @@
                 throw new ArgumentNullException(nameof(@event));
             try
             {
+                dynamic e = @event.Raw;
+
+                if (e.SystemAddress != null && e.StarSystem != null)
+                    systemAddresses.TryAdd((string)e.StarSystem, (ulong)e.SystemAddress);
+
+                if (e.StarSystem != null)
+                    starSystemRecorder.RecordState((string)e.StarSystem, @event.Timestamp);
+
+                if (e.StationName != null)
+                    stationRecorder.RecordState((string)e.StationName, @event.Timestamp);
+
+                if (e.Ship != null && e.ShipID != null)
+                    ProcessShipIDEvent((long?)e.ShipID, (string)e.Ship, @event.Timestamp);
+
+                // Special cases
                 switch (@event)
                 {
-                    // Ship change events
-                    case ShipyardSwap e:
-                        Process(e);
+                    case Undocked ud:
+                        stationRecorder.RecordState(null, @event.Timestamp);
                         break;
-                    case LoadGame e:
-                        Process(e);
-                        break;
-                    case Loadout e:
-                        Process(e);
-                        break;
-
-                    // Location change events
-                    case Location e:
-                        Process(e);
-                        break;
-                    case FsdJump e:
-                        Process(e);
-                        break;
-                    case Docked e:
-                        Process(e);
-                        break;
-                    case SupercruiseEntry e:
-                        Process(e);
-                        break;
-                    case Undocked e:
-                        Process(e);
-                        break;
-
                     // Crew status change events
-                    case JoinACrew e:
-                        Process(e);
+                    case JoinACrew jc:
+                        crewRecorder.RecordState(true, @event.Timestamp);
                         break;
-                    case QuitACrew e:
-                        Process(e);
+                    case QuitACrew lc:
+                        crewRecorder.RecordState(false, @event.Timestamp);
+                        break;
+                    case ShipyardSwap ss:
+                        ProcessShipIDEvent(ss.ShipId, ss.ShipType, @event.Timestamp);
                         break;
                 }
             }
             catch (Exception e)
             {
-                Log.Error(e, "Error in OnNext");
+                Log.Error(e);
             }
         }
-
-        private void Process(Undocked e) => stationRecorder.RecordState(null, e.Timestamp);
-
-        private void Process(Loadout e) => ProcessShipIDEvent(e.ShipId, e.Ship, e.Timestamp);
-
-        private void Process(LoadGame e) => ProcessShipIDEvent(e.ShipId, e.Ship, e.Timestamp);
-
-        private void Process(ShipyardSwap e) => ProcessShipIDEvent(e.ShipId, e.ShipType, e.Timestamp);
-
-        private void Process(Location e)
-        {
-            if (e.SystemAddress.HasValue)
-                systemAddresses.TryAdd(e.StarSystem, e.SystemAddress.Value);
-            systemCoordinates.TryAdd(e.StarSystem, e.StarPos);
-            starSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
-        }
-
-        private void Process(FsdJump e)
-        {
-            if (e.SystemAddress.HasValue)
-                systemAddresses.TryAdd(e.StarSystem, e.SystemAddress.Value);
-            systemCoordinates.TryAdd(e.StarSystem, e.StarPos);
-            starSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
-        }
-
-        private void Process(Docked e)
-        {
-            if (e.SystemAddress.HasValue)
-                systemAddresses.TryAdd(e.StarSystem, e.SystemAddress.Value);
-
-            starSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
-            stationRecorder.RecordState(e.StationName, e.Timestamp);
-        }
-
-        private void Process(SupercruiseEntry e) => starSystemRecorder.RecordState(e.StarSystem, e.Timestamp);
-
-        private void Process(QuitACrew e) => crewRecorder.RecordState(false, e.Timestamp);
-
-        private void Process(JoinACrew e) => crewRecorder.RecordState(true, e.Timestamp);
 
         private void ProcessShipIDEvent(long? shipId, string shipType, DateTime timestamp)
         {
             try
             {
-                if (shipId == null ||
-                    shipType == null ||
-                    shipType.ToLower() == "testbuggy" ||
-                    shipType.Contains("Fighter"))
+                if (shipId != null && shipType != null && shipType.ToLower() != "testbuggy" && !shipType.Contains("Fighter"))
                 {
-                    return;
+                    shipRecorder.RecordState(new ShipRecord(shipId.Value, shipType), timestamp);
                 }
-
-                shipRecorder.RecordState(new ShipRecord(shipId.Value, shipType), timestamp);
             }
             catch (Exception e)
             {
@@ -168,9 +117,7 @@
             public override bool Equals(object obj)
             {
                 var record = obj as ShipRecord;
-                return record != null &&
-                       ShipID == record.ShipID &&
-                       ShipType == record.ShipType;
+                return record != null && ShipID == record.ShipID && ShipType == record.ShipType;
             }
 
             public override int GetHashCode()
@@ -216,10 +163,8 @@
                     lock (stateRecording)
                     {
                         var current = GetStateAt(at);
-                        if (Equals(current, state))
-                            return;
-
-                        stateRecording.Add(at, state);
+                        if (!Equals(current, state))
+                            stateRecording.Add(at, state);
                     }
                 }
                 catch (Exception e)
