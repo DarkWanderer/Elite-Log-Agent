@@ -249,10 +249,7 @@
                 obj.Remove(key);
         }
 
-        private static void WalkNode(
-                                JToken node,
-                                Action<JObject> objectAction,
-                                Action<JProperty> propertyAction)
+        private static void WalkNode(JToken node, Action<JObject> objectAction, Action<JProperty> propertyAction)
         {
             if (node.Type == JTokenType.Object)
             {

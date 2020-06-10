@@ -5,15 +5,14 @@
 
     public static class AppInfo
     {
-        public static string Version
+        static AppInfo()
         {
-            get
-            {
-                var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly() ?? typeof(AppInfo).Assembly;
-                var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-                return fileVersionInfo.FileVersion;
-            }
+            var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly() ?? typeof(AppInfo).Assembly;
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            Version = fileVersionInfo.FileVersion;
         }
+
+        public static string Version { get; }
 
         public static string Name => "EliteLogAgent";
     }
