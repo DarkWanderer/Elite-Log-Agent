@@ -14,31 +14,6 @@
 
     public static class TestDeveloperTools
     {
-        [Test]
-        [Ignore("Developer tool")]
-        public static void ToolGetUnmappedEvents()
-        {
-            var events = TestEventSource.LocalEventsRaw
-                .Concat(TestEventSource.LocalBetaEvents)
-                .Select(e =>
-                {
-                    try
-                    {
-                        return JournalEventConverter.Convert(e);
-                    }
-                    catch
-                    {
-                        return null;
-                    }
-                })
-                .Where(e => e != null && e.GetType() == typeof(JournalEvent))
-                .Select(e => e.Event)
-                .Distinct()
-                .OrderBy(x => x)
-                .ToList();
-            Console.WriteLine(string.Join(", ", events));
-        }
-
         /// <summary>
         /// Utility method for developer to get canned events from own logs
         /// </summary>
@@ -46,10 +21,12 @@
         [Ignore("Developer tool")]
         public static void ToolPrepareCannedEvents()
         {
-            var eventExamples = LoadJsonEvents()
-                .Concat(ExtractSamples(TestEventSource.LocalBetaEvents))
-                .Concat(ExtractSamples(TestEventSource.LocalEventsRaw))
-                .Concat(ExtractSamples(TestEventSource.LocalStaticEvents))
+            var eventExamples = Enumerable.Empty<JObject>()
+                .Concat(TestEventSource.CannedEventsRaw)
+                .Concat(TestEventSource.LocalBetaEvents)
+                .Concat(TestEventSource.LocalEventsRaw)
+                .Concat(TestEventSource.LocalStaticEvents)
+                .ExtractSamples()
                 .ToHashSet();
 
             string eventsString = string.Join("\n", eventExamples);
@@ -57,22 +34,46 @@
             Console.WriteLine(eventsString);
         }
 
-        private static JObject ReplaceTimestamp(JObject input)
+        private static JObject Sanitize(JObject input)
         {
-            var value = (JObject)input.DeepClone();
-            if (value["timestamp"] != null)
-                value["timestamp"] = new DateTime(2018, 08, 28);
-
-            if (value["Cost"] != null)
-                value["Cost"] = 100;
-
-            if (value["Amount"] != null)
-                value["Amount"] = 200;
-
-            return value;
+            var output = (JObject)input.DeepClone();
+            ReplaceValue(output, "timestamp", new DateTime(2018, 08, 28));
+            ReplaceValue(output, "Commander", "PlayerCommander");
+            ReplaceValue(output, "Amount", 3.456);
+            ReplaceValue(output, "Cost", 555);
+            ReplaceValue(output, "FID", "F12345");
+            ReplaceValue(output, "SquadronName", "Test Squadron");
+            ReplaceValue(output, "Crew", "CrewName");
+            ReplaceValue(output, "Offender", "CriminalCommander");
+            ReplaceValue(output, "ID", 1234);
+            return output;
         }
 
-        private static IEnumerable<string> ExtractSamples(IEnumerable<JObject> events)
+        private static void ReplaceValue(JObject jObject, string key, int value)
+        {
+            if (jObject[key] != null)
+                jObject[key] = value;
+        }
+
+        private static void ReplaceValue(JObject jObject, string key, double value)
+        {
+            if (jObject[key] != null)
+                jObject[key] = value;
+        }
+
+        private static void ReplaceValue(JObject jObject, string key, string value)
+        {
+            if (jObject[key] != null)
+                jObject[key] = value;
+        }
+
+        private static void ReplaceValue(JObject jObject, string key, DateTime value)
+        {
+            if (jObject[key] != null)
+                jObject[key] = value;
+        }
+
+        private static IEnumerable<string> ExtractSamples(this IEnumerable<JObject> events)
         {
             var eventGroups = from @event in events
                               let eventName = @event.Property("event").Value.ToString()
@@ -83,16 +84,11 @@
 
             var processedEvents = eventGroups
                 .SelectMany(g => g.Take(3))
-                .Select(ReplaceTimestamp)
+                .Select(Sanitize)
                 .Select(Serialize.ToJson)
                 .ToList();
 
             return processedEvents;
         }
-
-        private static IEnumerable<string> LoadJsonEvents() => JournalFileEnumerator.GetJsonEventFiles(new SavedGamesDirectoryHelper().Directory)
-            .Select(File.ReadAllText)
-            .Select(Serialize.FromJson<JObject>)
-            .Select(Serialize.ToJson);
     }
 }
