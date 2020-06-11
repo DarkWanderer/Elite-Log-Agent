@@ -27,7 +27,7 @@
                 ""SystemSecondEconomy_Localised"":""Industrial"", ""SystemGovernment"":""$government_Democracy;"", ""SystemGovernment_Localised"":""Democracy"", 
                 ""SystemSecurity"":""$SYSTEM_SECURITY_high;"", ""SystemSecurity_Localised"":""High Security"", ""Population"":85206935, ""JumpDist"":11.896, 
                 ""FuelUsed"":2.983697, ""FuelLevel"":12.767566, ""Factions"":[{""Name"":""Lori Jameson"", ""FactionState"":""None"", ""Government"":""Engineer"", 
-                ""Influence"":0.000000, ""Allegiance"":""Independent""} ], ""SystemFaction"":""Pilots Federation Local Branch""}";
+                ""Influence"":0.000000, ""Allegiance"":""Independent""} ] }";
 
             var @event = (FsdJump)JournalEventConverter.Convert(JObject.Parse(eventString));
             Assert.AreEqual(new DateTime(2018, 06, 25, 18, 10, 30, DateTimeKind.Utc), @event.Timestamp);
@@ -43,23 +43,13 @@
             if (@event.GetType() == typeof(JournalEvent))
                 Assert.Inconclusive("Event is not typed");
 
-            if (@event is FsdJump || @event is Location || @event is Docked || @event is CarrierJump)
-            {
-                source.Remove("StationFaction");
-                source.Remove("SystemFaction");
-                source.Remove("FactionState");
-                source.Remove("Conflicts");
-            } // TODO: return those fields to objects
-
             var serialized = JObject.FromObject(@event, Converter.Serializer);
 
             if (@event is Scan)
                 source.Remove("Parents"); // TODO: find a way to serialize that structure
 
-            Assert.IsEmpty(JsonComparer.Compare(@event.Event, source, serialized));
-
-            // This assert should never trigger - if it triggers means there's an error in comparison code
-            Assert.IsTrue(JToken.DeepEquals(source, serialized), "Json objects before/after serialization should be 'DeepEqual'");
+            var diffs = JsonComparer.Compare(@event.Event, source, serialized);
+            Assert.IsEmpty(diffs);
         }
 
         [Test]

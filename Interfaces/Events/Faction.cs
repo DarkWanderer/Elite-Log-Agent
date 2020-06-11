@@ -14,7 +14,7 @@
         public string Government { get; set; }
 
         [JsonProperty("Influence")]
-        public double Influence { get; set; }
+        public double? Influence { get; set; }
 
         [JsonProperty("Allegiance")]
         public string Allegiance { get; set; }

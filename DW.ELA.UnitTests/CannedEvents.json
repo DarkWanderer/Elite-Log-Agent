@@ -9755,7 +9755,11 @@
     "Recipes_Generated_Rank_4": 393,
     "Recipes_Generated_Rank_5": 721
   },
-  "Crew": "CrewName",
+  "Crew": {
+    "NpcCrew_TotalWages": 222223321,
+    "NpcCrew_Hired": 7,
+    "NpcCrew_Fired": 5
+  },
   "Multicrew": {
     "Multicrew_Time_Total": 147813,
     "Multicrew_Gunner_Time_Total": 1396,
@@ -9797,7 +9801,7 @@
   },
   "Combat": {
     "Bounties_Claimed": 6709,
-    "Bounty_Hunting_Profit": 323094337.5,
+    "Bounty_Hunting_Profit": 323094337,
     "Combat_Bonds": 1759,
     "Combat_Bond_Profits": 67524039,
     "Assassinations": 110,
@@ -9874,7 +9878,11 @@
     "Recipes_Generated_Rank_4": 393,
     "Recipes_Generated_Rank_5": 721
   },
-  "Crew": "CrewName",
+  "Crew": {
+    "NpcCrew_TotalWages": 222223321,
+    "NpcCrew_Hired": 7,
+    "NpcCrew_Fired": 5
+  },
   "Multicrew": {
     "Multicrew_Time_Total": 147757,
     "Multicrew_Gunner_Time_Total": 1396,
@@ -9993,7 +10001,11 @@
     "Recipes_Generated_Rank_4": 393,
     "Recipes_Generated_Rank_5": 721
   },
-  "Crew": "CrewName",
+  "Crew": {
+    "NpcCrew_TotalWages": 222223321,
+    "NpcCrew_Hired": 7,
+    "NpcCrew_Fired": 5
+  },
   "Multicrew": {
     "Multicrew_Time_Total": 145794,
     "Multicrew_Gunner_Time_Total": 1396,

@@ -59,8 +59,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Events\CarrierJump.cs" />
+    <Compile Include="Events\ConflictInfo.cs" />
+    <Compile Include="Events\FactionConflictInfo.cs" />
     <Compile Include="Events\FuelCapacity.cs" />
+    <Compile Include="Events\LocationEventBase.cs" />
     <Compile Include="Events\SaaSignalsFound.cs" />
+    <Compile Include="IJournalEvent.cs" />
     <Compile Include="InvalidApiKeyException.cs" />
     <Compile Include="Events\Cargo.cs" />
     <Compile Include="Events\CombatStatistics.cs" />

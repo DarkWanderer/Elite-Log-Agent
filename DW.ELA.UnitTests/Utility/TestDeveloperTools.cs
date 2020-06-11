@@ -43,34 +43,17 @@
             ReplaceValue(output, "Cost", 555);
             ReplaceValue(output, "FID", "F12345");
             ReplaceValue(output, "SquadronName", "Test Squadron");
-            ReplaceValue(output, "Crew", "CrewName");
             ReplaceValue(output, "Offender", "CriminalCommander");
             ReplaceValue(output, "ID", 1234);
+            if (input["event"].ToString() != "Statistics")
+                ReplaceValue(output, "Crew", "CrewName");
             return output;
         }
 
-        private static void ReplaceValue(JObject jObject, string key, int value)
+        private static void ReplaceValue(JObject jObject, string key, object value)
         {
             if (jObject[key] != null)
-                jObject[key] = value;
-        }
-
-        private static void ReplaceValue(JObject jObject, string key, double value)
-        {
-            if (jObject[key] != null)
-                jObject[key] = value;
-        }
-
-        private static void ReplaceValue(JObject jObject, string key, string value)
-        {
-            if (jObject[key] != null)
-                jObject[key] = value;
-        }
-
-        private static void ReplaceValue(JObject jObject, string key, DateTime value)
-        {
-            if (jObject[key] != null)
-                jObject[key] = value;
+                jObject[key] = JToken.FromObject(value);
         }
 
         private static IEnumerable<string> ExtractSamples(this IEnumerable<JObject> events)

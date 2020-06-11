@@ -20,8 +20,7 @@
             eventTypes = baseType
                .Assembly
                .GetTypes()
-               .Where(t => t.Namespace == exampleType.Namespace)
-               .Where(t => t.BaseType == baseType)
+               .Where(t => t.IsSubclassOf(baseType))
                .ToDictionary(t => t.Name.ToLowerInvariant(), t => t);
             Debug.Assert(eventTypes.Count > 0, "Must have events");
             Debug.Assert(eventTypes.Values.Contains(exampleType), "Event LoadGame not loaded");

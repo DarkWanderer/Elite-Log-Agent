@@ -20,18 +20,21 @@
         public string StarSystem { get; set; }
 
         [JsonProperty("ShipMarketID")]
-        public long ShipMarketId { get; set; }
+        public long? ShipMarketId { get; set; }
 
         [JsonProperty("TransferPrice")]
-        public long TransferPrice { get; set; }
+        public long? TransferPrice { get; set; }
 
         [JsonProperty("TransferTime")]
-        public long TransferTime { get; set; }
+        public long? TransferTime { get; set; }
 
         [JsonProperty("Value")]
         public long Value { get; set; }
 
         [JsonProperty("Hot")]
         public bool Hot { get; set; }
+
+        [JsonProperty]
+        public bool? InTransit { get; set; }
     }
 }

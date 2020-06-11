@@ -4,7 +4,7 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
-    public class JournalEvent
+    public class JournalEvent : IJournalEvent
     {
         [JsonProperty("timestamp")]
         public DateTime Timestamp { get; set; }
