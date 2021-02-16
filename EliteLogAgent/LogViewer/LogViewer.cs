@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using DW.ELA.Utility.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NLog;
-using NLog.Targets;
 
 namespace EliteLogAgent.LogViewer
 {
@@ -29,7 +26,20 @@ namespace EliteLogAgent.LogViewer
                     try
                     {
                         var entry = Serialize.FromJson<Dictionary<string,string>>(line);
-                        listBox1.Items.Add($"[{entry["level"]}][{entry["time"]}] - {entry["message"]}");
+
+                        var str = new StringBuilder();
+                        str.Append($"[{entry["level"]}]");
+                        str.Append($"[{entry["time"]}]");
+                        
+                        if (entry.ContainsKey("commander"))
+                            str.Append($" - commander: {entry["commander"]}");
+                        
+                        if (entry.ContainsKey("eventsCount"))
+                            str.Append($" - events count: {entry["eventsCount"]}");
+                        
+                        str.Append($" - {entry["message"]}");
+                        
+                        listBox1.Items.Add(str.ToString());
                     }
                     catch
                     {
