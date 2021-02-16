@@ -59,7 +59,7 @@
 
 
             menuStrip.Items.Add(ToolStripSeparatorLeft);
-            menuStrip.Items.Add("Browse logs", Resources.FinderIcon.ToBitmap(), (o, e) => OpenLogsDirectory());
+            menuStrip.Items.Add("Browse logs", Resources.FinderIcon.ToBitmap(), (o, e) => OpenLogViewer(pathManager.LogDirectory));
             menuStrip.Items.Add("Report issue", Resources.GitHub.ToBitmap(), (o, e) => OpenReportIssueLink());
 
             menuStrip.Items.Add(ToolStripSeparatorLeft);
@@ -71,7 +71,10 @@
 
             return menuStrip;
         }
-
+        
+        /// <summary>
+        /// Depreciated, use OpenLogViewer()
+        /// </summary>
         private void OpenLogsDirectory() => Process.Start(pathManager.LogDirectory);
 
         private void OpenChangelog() => Process.Start(Resources.GitHubChangelogLink);
@@ -87,6 +90,25 @@
             try
             {
                 using (form = new About())
+                    form.ShowDialog();
+            }
+            finally
+            {
+                form = null;
+            }
+        }
+        
+        private void OpenLogViewer(string pathManagerLogDirectory)
+        {
+            if (form != null)
+            {
+                form.BringToFront();
+                return;
+            }
+
+            try
+            {
+                using (form = new LogViewer.LogViewer(pathManagerLogDirectory))
                     form.ShowDialog();
             }
             finally
