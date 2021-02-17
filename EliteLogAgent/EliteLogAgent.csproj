@@ -142,8 +142,8 @@
     <Compile Include="ContainerBootstrapper.cs" />
     <Compile Include="Deployment\DataPathManager.cs" />
     <Compile Include="FileSettingsStorage.cs" />
-    <Compile Include="LogViewer\LogViewer.cs" />
-    <Compile Include="LogViewer\LogViewer.Designer.cs" />
+    <Compile Include="Plugins\LogViewer\LogViewer.cs" />
+    <Compile Include="Plugins\LogViewer\LogViewer.Designer.cs" />
     <Compile Include="Settings\GeneralSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -159,7 +159,7 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogViewer\LogViewer.resx" />
+    <EmbeddedResource Include="Plugins\LogViewer\LogViewer.resx" />
     <EmbeddedResource Include="Settings\GeneralSettingsControl.resx">
       <DependentUpon>GeneralSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -231,6 +231,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\finder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plugins" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

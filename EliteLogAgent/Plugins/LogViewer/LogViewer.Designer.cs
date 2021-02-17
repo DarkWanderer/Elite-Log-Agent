@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EliteLogAgent.LogViewer
+namespace EliteLogAgent.Plugins.LogViewer
 {
     partial class LogViewer
     {
