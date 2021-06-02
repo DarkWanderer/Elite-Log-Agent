@@ -8,7 +8,8 @@
     using System.Windows.Forms;
     using DW.ELA.Interfaces;
     using DW.ELA.Utility;
-    using EliteLogAgent.Properties;
+    using Properties;
+    using Plugins.LogViewer;
 
     public class TrayIconController : IUserNotificationInterface, IDisposable
     {
@@ -59,7 +60,7 @@
 
 
             menuStrip.Items.Add(ToolStripSeparatorLeft);
-            menuStrip.Items.Add("Browse logs", Resources.FinderIcon.ToBitmap(), (o, e) => OpenLogsDirectory());
+            menuStrip.Items.Add("Browse logs", Resources.FinderIcon.ToBitmap(), (o, e) => OpenLogViewer());
             menuStrip.Items.Add("Report issue", Resources.GitHub.ToBitmap(), (o, e) => OpenReportIssueLink());
 
             menuStrip.Items.Add(ToolStripSeparatorLeft);
@@ -71,7 +72,10 @@
 
             return menuStrip;
         }
-
+        
+        /// <summary>
+        /// Depreciated, use OpenLogViewer()
+        /// </summary>
         private void OpenLogsDirectory() => Process.Start(pathManager.LogDirectory);
 
         private void OpenChangelog() => Process.Start(Resources.GitHubChangelogLink);
@@ -87,6 +91,25 @@
             try
             {
                 using (form = new About())
+                    form.ShowDialog();
+            }
+            finally
+            {
+                form = null;
+            }
+        }
+        
+        private void OpenLogViewer()
+        {
+            if (form != null)
+            {
+                form.BringToFront();
+                return;
+            }
+
+            try
+            {
+                using (form = new LogViewer(pathManager))
                     form.ShowDialog();
             }
             finally
