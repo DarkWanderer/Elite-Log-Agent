@@ -33,12 +33,6 @@ install:
 build_script:
 - msbuild EliteLogAgent.sln /verbosity:minimal /m /target:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:PublishProfile=Release /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
-after_build:
-- cmd: mkdir portable
-- .\ILMerge\tools\net452\ilmerge.exe /ndebug /wildcards /out:portable\EliteLogAgent.exe EliteLogAgent\bin\Release\EliteLogAgent.exe EliteLogAgent\bin\Release\*.dll
-- 7z a ELA.Portable.%APPVEYOR_BUILD_VERSION%.zip %CD%\portable\EliteLogAgent.exe
-- ps: Push-AppveyorArtifact "ELA.Portable.$env:APPVEYOR_BUILD_VERSION.zip" -DeploymentName Portable
-
 test_script:
 - .\OpenCover\tools\OpenCover.Console.exe -returntargetcode -register:user -target:"nunit3-console.exe" -targetargs:"DW.ELA.UnitTests\bin\Release\DW.ELA.UnitTests.dll" -filter:"+[*]* -[*]NUnit* -[Moq*]*" -excludebyattribute:NUnit.Framework.ExplicitAttribute -output:"coverage.xml"
 
@@ -71,7 +65,6 @@ for:
     release: $(appveyor_build_version)
     auth_token:
       secure: 7uCw0Z3VgTACacpcn/VbD5PsLzez8JKRBjdt2nI2fTVgkU4E7EzIX0xRPhhktZDe
-    artifact: Portable
     draft: false
     prerelease: false
     force_update: true
