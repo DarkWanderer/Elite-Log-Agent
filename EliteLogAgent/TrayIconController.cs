@@ -154,7 +154,7 @@ namespace EliteLogAgent
             Dispose(true);
 
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
 
     }

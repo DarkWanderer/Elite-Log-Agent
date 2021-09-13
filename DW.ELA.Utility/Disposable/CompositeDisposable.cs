@@ -28,7 +28,7 @@ namespace DW.ELA.Utility
         public CompositeDisposable(int capacity)
         {
             if (capacity < 0)
-                throw new ArgumentOutOfRangeException("capacity");
+                throw new ArgumentOutOfRangeException(nameof(capacity));
 
             disposables = new List<IDisposable>(capacity);
         }
@@ -41,7 +41,7 @@ namespace DW.ELA.Utility
         public CompositeDisposable(params IDisposable[] disposables)
         {
             if (disposables == null)
-                throw new ArgumentNullException("disposables");
+                throw new ArgumentNullException(nameof(disposables));
 
             this.disposables = new List<IDisposable>(disposables);
             count = this.disposables.Count;
@@ -55,7 +55,7 @@ namespace DW.ELA.Utility
         public CompositeDisposable(IEnumerable<IDisposable> disposables)
         {
             if (disposables == null)
-                throw new ArgumentNullException("disposables");
+                throw new ArgumentNullException(nameof(disposables));
 
             this.disposables = new List<IDisposable>(disposables);
             count = this.disposables.Count;
@@ -74,7 +74,7 @@ namespace DW.ELA.Utility
         public void Add(IDisposable item)
         {
             if (item == null)
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
 
             bool shouldDispose = false;
             lock (gate)
@@ -99,7 +99,7 @@ namespace DW.ELA.Utility
         public bool Remove(IDisposable item)
         {
             if (item == null)
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
 
             bool shouldDispose = false;
 
@@ -196,7 +196,7 @@ namespace DW.ELA.Utility
         public bool Contains(IDisposable item)
         {
             if (item == null)
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException(nameof(item));
 
             lock (gate)
             {
@@ -214,9 +214,9 @@ namespace DW.ELA.Utility
         public void CopyTo(IDisposable[] array, int arrayIndex)
         {
             if (array == null)
-                throw new ArgumentNullException("array");
+                throw new ArgumentNullException(nameof(array));
             if (arrayIndex < 0 || arrayIndex >= array.Length)
-                throw new ArgumentOutOfRangeException("arrayIndex");
+                throw new ArgumentOutOfRangeException(nameof(arrayIndex));
 
             lock (gate)
             {

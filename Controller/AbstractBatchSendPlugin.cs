@@ -97,7 +97,11 @@ namespace DW.ELA.Controller
 
         public IObserver<JournalEvent> GetLogObserver() => this;
 
-        public void Dispose() => flushTimer.Dispose();
+        public void Dispose()
+        {
+            flushTimer.Dispose();
+            GC.SuppressFinalize(this);
+        }
 
         public class CommanderData
         {
