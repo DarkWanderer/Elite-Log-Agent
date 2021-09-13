@@ -82,10 +82,14 @@ namespace DW.ELA.Plugin.Inara.Model
             if (outputData.Header.EventStatus != 200)
             {
                 var errorText = outputData.Header.EventStatusText;
+
+                if (errorText.Contains("Too much requests"))
+                    throw new RateLimitException();
+
                 if (errorText == "Invalid API key.")
                     throw new InvalidApiKeyException();
-                else
-                    throw new AggregateException($"Error from API: {outputData.Header.EventStatusText}", exceptions.ToArray());
+
+                throw new AggregateException($"Error from API: {errorText}", exceptions.ToArray());
             }
             return outputData.Events;
         }

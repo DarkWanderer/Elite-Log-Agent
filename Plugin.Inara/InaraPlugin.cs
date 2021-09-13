@@ -122,9 +122,15 @@ namespace DW.ELA.Plugin.Inara
                         .Write();
                 }
             }
+            catch (RateLimitException)
+            {
+                notificationInterface.ShowErrorNotification($"Rate limit exceeded for {CurrentCommander?.Name}, ensure only one app uploads to INARA");
+                Log.Error().Message("Rate limit exceeded").Property("commander", CurrentCommander?.Name).Write();
+            }
             catch (InvalidApiKeyException)
             {
-                notificationInterface.ShowErrorNotification("Invalid EDSM API key for CMDR " + CurrentCommander?.Name);
+                notificationInterface.ShowErrorNotification($"Invalid EDSM API key for CMDR ${CurrentCommander?.Name}");
+                Log.Error().Message("Invalid INARA API key").Property("commander", CurrentCommander?.Name).Write();
             }
             catch (Exception e)
             {
