@@ -58,9 +58,8 @@ namespace DW.ELA.Controller
             logFlushTimer.Enabled = true;
 
             currentFile = JournalFileEnumerator.GetLogFiles(logDirectory).FirstOrDefault();
-            filePosition = string.IsNullOrEmpty(currentFile) ? 0 : new FileInfo(currentFile).Length;
+            filePosition = string.IsNullOrEmpty(currentFile) || EliteDangerous.IsRunning ? 0 : new FileInfo(currentFile).Length;
 
-            SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
             Log.Info().Message("Started monitoring").Property("directory", logDirectory).Write();
         }
@@ -68,10 +67,7 @@ namespace DW.ELA.Controller
         private void LogFlushTimer_Event(object sender, ElapsedEventArgs e)
         {
             Task.Factory.StartNew(() => SendEventsFromJournal(false));
-            if (EliteDangerous.IsRunning)
-                logFlushTimer.Interval = checkInterval.TotalMilliseconds;
-            else
-                logFlushTimer.Interval = checkInterval.TotalMilliseconds * 6;
+            logFlushTimer.Interval = EliteDangerous.IsRunning ? checkInterval.TotalMilliseconds : checkInterval.TotalMilliseconds * 6;
         }
 
         private void FileWatcher_Event(object sender, FileSystemEventArgs e)
