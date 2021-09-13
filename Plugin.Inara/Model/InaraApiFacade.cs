@@ -40,7 +40,7 @@ namespace DW.ELA.Plugin.Inara.Model
         public async Task<ICollection<ApiOutputEvent>> ApiCall(params ApiInputEvent[] events)
         {
             if (events.Length == 0)
-                return new ApiOutputEvent[0];
+                return Array.Empty<ApiOutputEvent>();
 
             var inputData = new ApiInputBatch()
             {

@@ -31,7 +31,7 @@ namespace DW.ELA.UnitTests.EDSM
             var restClientMock = new Mock<IRestClient>(MockBehavior.Strict);
             var facade = new EdsmApiFacade(restClientMock.Object, TestCredentials.UserName, TestCredentials.Edsm.ApiKey);
 
-            Assert.DoesNotThrowAsync(() => facade.PostLogEvents(new JObject[] { }));
+            Assert.DoesNotThrowAsync(() => facade.PostLogEvents(Array.Empty<JObject>()));
 
             restClientMock.VerifyAll();
         }
