@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Controller
-{
-    using System.IO;
-    using System.Linq;
+﻿using System.IO;
+using System.Linq;
 
+namespace DW.ELA.Controller
+{
     public static class JournalFileEnumerator
     {
         /// <summary>

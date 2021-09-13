@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.UnitTests.UI
-{
-    using EliteLogAgent.Autorun;
-    using NUnit.Framework;
+﻿using EliteLogAgent.Autorun;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.UI
+{
     public class ClickOnceAutorunManagerTests
     {
         [Test]

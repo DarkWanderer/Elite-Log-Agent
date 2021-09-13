@@ -1,10 +1,10 @@
-﻿namespace DW.ELA.UnitTests.UI
-{
-    using DW.ELA.Interfaces;
-    using EliteLogAgent;
-    using Moq;
-    using NUnit.Framework;
+﻿using DW.ELA.Interfaces;
+using EliteLogAgent;
+using Moq;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.UI
+{
     public class TrayIconControllerTests
     {
         [Test]
@@ -16,9 +16,7 @@
             var am = Mock.Of<IAutorunManager>();
             var dm = Mock.Of<IPathManager>();
 
-            using (var controller = new TrayIconController(pm, sp, ps, am, dm))
-            {
-            }
+            using var controller = new TrayIconController(pm, sp, ps, am, dm);
         }
     }
 }

@@ -1,15 +1,16 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
-    using DW.ELA.Utility.Extensions;
-    using MoreLinq;
-    using NLog;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Events;
+using DW.ELA.Utility.Extensions;
+using MoreLinq;
+using NLog;
+using NLog.Fluent;
 
+namespace DW.ELA.Controller
+{
     public class PlayerStateRecorder : IPlayerStateHistoryRecorder
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
@@ -52,16 +53,38 @@
                 dynamic e = @event.Raw;
 
                 if (e.SystemAddress != null && e.StarSystem != null)
-                    systemAddresses.TryAdd((string)e.StarSystem, (ulong)e.SystemAddress);
+                {
+                    if (systemAddresses.TryAdd((string)e.StarSystem, (ulong)e.SystemAddress))
+                    {
+                        Log.Info()
+                            .Message("Got SystemAddress")
+                            .Property("StarSystem", e.StarSystem)
+                            .Property("SystemAddress", e.SystemAddress)
+                            .Write();
+                    }
+                }
 
                 if (e.StarSystem != null)
+                {
                     starSystemRecorder.RecordState((string)e.StarSystem, @event.Timestamp);
+                    Log.Info()
+                        .Message("Recorded new location")
+                        .Property("StarSystem", e.StarSystem)
+                        .Write();
+                }
 
                 if (e.StationName != null)
                     stationRecorder.RecordState((string)e.StationName, @event.Timestamp);
 
                 if (e.Ship != null && e.ShipID != null)
+                {
                     ProcessShipIDEvent((long?)e.ShipID, (string)e.Ship, @event.Timestamp);
+                    Log.Info()
+                        .Message("Ship switch event")
+                        .Property("ShipID", e.ShipID)
+                        .Property("Ship", e.Ship)
+                        .Write();
+                }
 
                 // Special cases
                 switch (@event)
@@ -114,19 +137,9 @@
 
             public string ShipType { get; }
 
-            public override bool Equals(object obj)
-            {
-                var record = obj as ShipRecord;
-                return record != null && ShipID == record.ShipID && ShipType == record.ShipType;
-            }
+            public override bool Equals(object obj) => obj is ShipRecord record && ShipID == record.ShipID && ShipType == record.ShipType;
 
-            public override int GetHashCode()
-            {
-                int hashCode = -1167275223;
-                hashCode = hashCode * -1521134295 + ShipID.GetHashCode();
-                hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ShipType);
-                return hashCode;
-            }
+            public override int GetHashCode() => HashCode.Combine(ShipID, ShipType);
 
             public override string ToString() => $"{ShipType}-{ShipID}";
         }

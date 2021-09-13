@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Interfaces
-{
-    using System;
-    using DW.ELA.Interfaces.Settings;
+﻿using System;
+using DW.ELA.Interfaces.Settings;
 
+namespace DW.ELA.Interfaces
+{
     public interface ISettingsProvider
     {
         event EventHandler SettingsChanged;

@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Interfaces.Events
-{
-    using DW.ELA.Interfaces;
-    using Newtonsoft.Json;
+﻿using DW.ELA.Interfaces;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Interfaces.Events
+{
     public class MissionFailed : JournalEvent
     {
         [JsonProperty("Name")]

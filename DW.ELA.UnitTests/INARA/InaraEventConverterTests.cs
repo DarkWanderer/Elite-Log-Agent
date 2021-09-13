@@ -1,11 +1,11 @@
-﻿namespace DW.ELA.UnitTests.INARA
-{
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Plugin.Inara;
-    using DW.ELA.Plugin.Inara.Model;
-    using NUnit.Framework;
+﻿using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.Plugin.Inara;
+using DW.ELA.Plugin.Inara.Model;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.INARA
+{
     [TestFixture]
     [Parallelizable]
     public class InaraEventConverterTests

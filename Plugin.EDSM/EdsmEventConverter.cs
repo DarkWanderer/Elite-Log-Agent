@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Plugin.EDSM
-{
-    using System.Collections.Generic;
-    using DW.ELA.Interfaces;
-    using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using DW.ELA.Interfaces;
+using Newtonsoft.Json.Linq;
 
+namespace DW.ELA.Plugin.EDSM
+{
     public class EdsmEventConverter : IEventConverter<JObject>
     {
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;

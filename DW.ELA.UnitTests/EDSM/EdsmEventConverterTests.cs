@@ -1,11 +1,11 @@
-﻿namespace DW.ELA.UnitTests.EDSM
-{
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Plugin.EDSM;
-    using Newtonsoft.Json.Linq;
-    using NUnit.Framework;
+﻿using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.Plugin.EDSM;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.EDSM
+{
     [TestFixture]
     [Parallelizable]
     public class EdsmEventConverterTests

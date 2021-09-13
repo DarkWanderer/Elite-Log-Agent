@@ -1,12 +1,12 @@
-﻿namespace DW.ELA.UnitTests.Utility
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DW.ELA.Utility.Json;
-    using Newtonsoft.Json.Linq;
-    using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DW.ELA.Utility.Json;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.Utility
+{
     public static class TestDeveloperTools
     {
         /// <summary>

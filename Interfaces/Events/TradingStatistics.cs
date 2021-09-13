@@ -1,7 +1,7 @@
-﻿namespace DW.ELA.Interfaces.Events
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace DW.ELA.Interfaces.Events
+{
     public class TradingStatistics
     {
         [JsonProperty("Markets_Traded_With")]

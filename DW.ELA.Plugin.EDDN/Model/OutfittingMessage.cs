@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Plugin.EDDN.Model
-{
-    using System;
-    using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Plugin.EDDN.Model
+{
     internal partial class OutfittingMessage
     {
         [JsonProperty("marketId")]

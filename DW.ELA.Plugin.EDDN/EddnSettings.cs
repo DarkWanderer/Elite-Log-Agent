@@ -1,7 +1,7 @@
-﻿namespace DW.ELA.Plugin.EDDN
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace DW.ELA.Plugin.EDDN
+{
     public class EddnSettings
     {
         [JsonProperty("enabled")]

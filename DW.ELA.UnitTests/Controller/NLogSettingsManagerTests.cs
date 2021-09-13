@@ -1,12 +1,12 @@
-﻿namespace DW.ELA.UnitTests.Controller
-{
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.UnitTests.Utility;
-    using Moq;
-    using NLog;
-    using NUnit.Framework;
+﻿using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.UnitTests.Utility;
+using Moq;
+using NLog;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.Controller
+{
     public class NLogSettingsManagerTests
     {
         [Test]

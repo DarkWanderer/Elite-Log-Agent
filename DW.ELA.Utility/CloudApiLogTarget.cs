@@ -1,19 +1,19 @@
-﻿namespace DW.ELA.Utility
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Timers;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility.Json;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using NLog;
-    using NLog.Common;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Timers;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NLog;
+using NLog.Common;
 
+namespace DW.ELA.Utility
+{
     public class CloudApiLogTarget : NLog.Targets.Target
     {
         private readonly IRestClient restClient;

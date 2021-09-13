@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Plugin.EDSM
-{
-    using System;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Plugin.EDSM
+{
     public class EdsmSettings
     {
         [Obsolete("Retained for backward compatibility")]

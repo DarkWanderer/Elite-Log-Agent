@@ -1,16 +1,16 @@
-﻿namespace DW.ELA.Plugin.EDDN
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
-    using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Plugin.EDDN.Model;
-    using Newtonsoft.Json.Linq;
-    using NLog;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Threading.Tasks;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Events;
+using DW.ELA.Interfaces.Settings;
+using DW.ELA.Plugin.EDDN.Model;
+using Newtonsoft.Json.Linq;
+using NLog;
 
+namespace DW.ELA.Plugin.EDDN
+{
     public class EddnPlugin : IPlugin, IObserver<JournalEvent>
     {
         private const string EddnUrl = @"https://eddn.edcd.io:4430/upload/";

@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Interfaces.Events
-{
-    using System.Collections.Generic;
-    using DW.ELA.Interfaces;
-    using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using DW.ELA.Interfaces;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Interfaces.Events
+{
     public class Statistics : JournalEvent
     {
         [JsonProperty("Bank_Account")]

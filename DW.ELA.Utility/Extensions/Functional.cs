@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Utility
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace DW.ELA.Utility
+{
     public static class Functional
     {
         public static Exception ExecuteAndCatch(Action action)

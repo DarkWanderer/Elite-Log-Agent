@@ -1,19 +1,19 @@
-﻿namespace DW.ELA.Plugin.Inara
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Plugin.Inara.Model;
-    using DW.ELA.Utility;
-    using MoreLinq;
-    using NLog;
-    using NLog.Fluent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Settings;
+using DW.ELA.Plugin.Inara.Model;
+using DW.ELA.Utility;
+using MoreLinq;
+using NLog;
+using NLog.Fluent;
 
+namespace DW.ELA.Plugin.Inara
+{
     public class InaraPlugin : AbstractBatchSendPlugin<ApiInputEvent, InaraSettings>, IApiKeyValidator
     {
         public const string CPluginName = "INARA";

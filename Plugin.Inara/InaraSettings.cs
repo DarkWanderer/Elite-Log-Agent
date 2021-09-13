@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Plugin.Inara
-{
-    using System;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Plugin.Inara
+{
     public class InaraSettings
     {
         [Obsolete("Retained for backward compatibility")]

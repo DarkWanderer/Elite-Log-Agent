@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Interfaces
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
+namespace DW.ELA.Interfaces
+{
     public interface IRestClient
     {
         Task<string> PostAsync(string input);

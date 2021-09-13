@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Utility
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace DW.ELA.Utility
+{
     // copy, modified from Rx Official
     // copied from UniRx (MIT license)
     public sealed class CompositeDisposable : ICollection<IDisposable>, IDisposable

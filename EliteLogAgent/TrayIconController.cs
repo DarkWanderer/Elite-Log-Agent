@@ -1,15 +1,15 @@
-﻿namespace EliteLogAgent
-{
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
-    using EliteLogAgent.Properties;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility;
+using EliteLogAgent.Properties;
 
+namespace EliteLogAgent
+{
     public class TrayIconController : IUserNotificationInterface, IDisposable
     {
         private static Form form;

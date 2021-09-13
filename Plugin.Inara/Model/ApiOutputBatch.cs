@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Plugin.Inara.Model
-{
-    using System.Collections.Generic;
-    using DW.ELA.Utility.Json;
-    using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using DW.ELA.Utility.Json;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Plugin.Inara.Model
+{
     internal struct ApiOutputBatch
     {
         [JsonProperty("header")]

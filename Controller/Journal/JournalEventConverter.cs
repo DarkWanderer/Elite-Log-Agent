@@ -1,13 +1,13 @@
-﻿namespace DW.ELA.LogModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
-    using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Events;
+using Newtonsoft.Json.Linq;
 
+namespace DW.ELA.LogModel
+{
     public static class JournalEventConverter
     {
         private static readonly IReadOnlyDictionary<string, Type> eventTypes;

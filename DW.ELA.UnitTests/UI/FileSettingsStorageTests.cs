@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.UnitTests.UI
-{
-    using DW.ELA.UnitTests.Utility;
-    using EliteLogAgent;
-    using NUnit.Framework;
+﻿using DW.ELA.UnitTests.Utility;
+using EliteLogAgent;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.UI
+{
     public class FileSettingsStorageTests
     {
         private const string TestCommander = "TestCommander123";

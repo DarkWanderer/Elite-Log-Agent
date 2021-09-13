@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.UnitTests.UI
-{
-    using EliteLogAgent.Deployment;
-    using NUnit.Framework;
+﻿using EliteLogAgent.Deployment;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.UI
+{
     public class DataPathManagerTests
     {
         [Test]

@@ -1,12 +1,12 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Linq;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
-    using NLog;
-    using Utility.Observable;
+﻿using System;
+using System.Linq;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility;
+using NLog;
+using DW.ELA.Utility.Observable;
 
+namespace DW.ELA.Controller
+{
     /// <summary>
     /// Forwards events from one IObservables to multiple IObservers in parallel fashion
     /// </summary>

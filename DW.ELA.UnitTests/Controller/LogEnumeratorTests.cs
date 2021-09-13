@@ -1,10 +1,10 @@
-﻿namespace DW.ELA.UnitTests.Controller
-{
-    using System.IO;
-    using DW.ELA.Controller;
-    using DW.ELA.UnitTests.Utility;
-    using NUnit.Framework;
+﻿using System.IO;
+using DW.ELA.Controller;
+using DW.ELA.UnitTests.Utility;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.Controller
+{
     public partial class LogEnumeratorTests
     {
         [Test]

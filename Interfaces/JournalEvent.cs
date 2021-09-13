@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Interfaces
-{
-    using System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
+namespace DW.ELA.Interfaces
+{
     public class JournalEvent : IJournalEvent
     {
         [JsonProperty("timestamp")]

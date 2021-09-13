@@ -1,13 +1,13 @@
-﻿namespace DW.ELA.Plugin.EDDN
-{
-    using System;
-    using System.Threading.Tasks;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Plugin.EDDN.Model;
-    using DW.ELA.Utility.Json;
-    using NLog;
-    using NLog.Fluent;
+﻿using System;
+using System.Threading.Tasks;
+using DW.ELA.Interfaces;
+using DW.ELA.Plugin.EDDN.Model;
+using DW.ELA.Utility.Json;
+using NLog;
+using NLog.Fluent;
 
+namespace DW.ELA.Plugin.EDDN
+{
     public class EddnApiFacade : IEddnApiFacade
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();

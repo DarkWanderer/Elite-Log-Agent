@@ -1,10 +1,10 @@
-﻿namespace EliteLogAgent.Deployment
-{
-    using System;
-    using System.IO;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
+﻿using System;
+using System.IO;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility;
 
+namespace EliteLogAgent.Deployment
+{
     public class DataPathManager : IPathManager
     {
         public string SettingsDirectory => AppInfo.IsNetworkDeployed ? AppDataDirectory : LocalDirectory;

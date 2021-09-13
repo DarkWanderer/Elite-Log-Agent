@@ -1,15 +1,15 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Timers;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
-    using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Utility;
-    using NLog;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Timers;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Events;
+using DW.ELA.Interfaces.Settings;
+using DW.ELA.Utility;
+using NLog;
 
+namespace DW.ELA.Controller
+{
     public abstract class AbstractBatchSendPlugin<TEvent, TSettings> : IPlugin, IObserver<JournalEvent>, IDisposable
         where TSettings : class, new()
         where TEvent : class

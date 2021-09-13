@@ -1,11 +1,11 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DW.ELA.Interfaces;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using DW.ELA.Interfaces;
 
+namespace DW.ELA.Controller
+{
     public class JournalEventTypeCounter : IObserver<JournalEvent>
     {
         private readonly ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();

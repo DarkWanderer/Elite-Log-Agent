@@ -1,15 +1,16 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.IO;
-    using System.Text;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
-    using NLog;
-    using NLog.Layouts;
-    using NLog.Targets;
-    using NLog.Targets.Wrappers;
+﻿using System;
+using System.IO;
+using System.Text;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility;
+using NLog;
+using NLog.Fluent;
+using NLog.Layouts;
+using NLog.Targets;
+using NLog.Targets.Wrappers;
 
+namespace DW.ELA.Controller
+{
     public class NLogSettingsManager : ILogSettingsBootstrapper
     {
         private const string DefaultLayout = "${longdate}|${level}|${logger}|${message} ${exception:format=ToString,StackTrace:innerFormat=ToString,StackTrace:maxInnerExceptionLevel=10}";
@@ -70,7 +71,7 @@
             }
 
             LogManager.Configuration = config;
-            Log.Info("Enabled logging with level {0}", logLevel);
+            Log.Info().Message("Logging enabled").Property("level", logLevel).Write();
         }
 
 #pragma warning disable SA1118 // Parameter must not span multiple lines

@@ -1,16 +1,16 @@
-﻿namespace DW.ELA.UnitTests.Controller
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.UnitTests.Utility;
-    using DW.ELA.Utility.Json;
-    using NUnit.Framework;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.UnitTests.Utility;
+using DW.ELA.Utility.Json;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.Controller
+{
     [TestFixture]
     public class LogBurstPlayerTests
     {

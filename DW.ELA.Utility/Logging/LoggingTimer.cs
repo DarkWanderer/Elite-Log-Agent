@@ -1,10 +1,10 @@
-﻿namespace DW.ELA.Utility.Log
-{
-    using System;
-    using System.Diagnostics;
-    using NLog;
-    using NLog.Fluent;
+﻿using System;
+using System.Diagnostics;
+using NLog;
+using NLog.Fluent;
 
+namespace DW.ELA.Utility.Log
+{
     public class LoggingTimer : IDisposable
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();

@@ -1,7 +1,7 @@
-﻿namespace DW.ELA.Plugin.EDDN.Model
-{
-    using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
+namespace DW.ELA.Plugin.EDDN.Model
+{
     /// <summary>
     /// Commodities returned by the Companion API, with illegal commodities omitted
     /// </summary>

@@ -1,11 +1,11 @@
-﻿namespace DW.ELA.Utility
-{
-    using System;
-    using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Utility.Json;
-    using Newtonsoft.Json.Linq;
-    using NLog;
+﻿using System;
+using DW.ELA.Interfaces.Settings;
+using DW.ELA.Utility.Json;
+using Newtonsoft.Json.Linq;
+using NLog;
 
+namespace DW.ELA.Utility
+{
     public class PluginSettingsFacade<T>
         where T : class, new()
     {

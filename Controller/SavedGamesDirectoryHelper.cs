@@ -1,9 +1,9 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Runtime.InteropServices;
-    using DW.ELA.Interfaces;
+﻿using System;
+using System.Runtime.InteropServices;
+using DW.ELA.Interfaces;
 
+namespace DW.ELA.Controller
+{
     public class SavedGamesDirectoryHelper : ILogDirectoryNameProvider
     {
         private readonly Lazy<string> lazyDirectoryValue = new Lazy<string>(GetSavedGamesDirectory);

@@ -1,10 +1,10 @@
-﻿namespace DW.ELA.UnitTests.UI
-{
-    using System.Diagnostics;
-    using System.Linq;
-    using EliteLogAgent;
-    using NUnit.Framework;
+﻿using System.Diagnostics;
+using System.Linq;
+using EliteLogAgent;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.UI
+{
     public class SingleLaunchTests
     {
         [Test]

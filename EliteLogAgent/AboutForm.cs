@@ -1,10 +1,10 @@
-﻿namespace EliteLogAgent
-{
-    using System;
-    using System.Windows.Forms;
-    using DW.ELA.Utility;
-    using EliteLogAgent.Properties;
+﻿using System;
+using System.Windows.Forms;
+using DW.ELA.Utility;
+using EliteLogAgent.Properties;
 
+namespace EliteLogAgent
+{
     public partial class About : Form
     {
         public About()

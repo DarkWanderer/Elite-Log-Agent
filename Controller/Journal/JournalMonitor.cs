@@ -1,18 +1,18 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Timers;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility.App;
-    using NLog;
-    using NLog.Fluent;
-    using Utility.Observable;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Timers;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility.App;
+using NLog;
+using NLog.Fluent;
+using DW.ELA.Utility.Observable;
 
+namespace DW.ELA.Controller
+{
     /// <summary>
     /// This class runs in background to monitor and notify consumers (observers) of new log events
     /// </summary>
@@ -63,7 +63,7 @@
 
             SendEventsFromJournal(false);
             fileWatcher.EnableRaisingEvents = true;
-            Log.Info("Started monitoring {directory}", logDirectory);
+            Log.Info().Message("Started monitoring").Property("directory", logDirectory).Write();
         }
 
         private void LogFlushTimer_Event(object sender, ElapsedEventArgs e)
@@ -96,7 +96,7 @@
                 Log.Error()
                     .Message("Error while reading event file")
                     .Exception(e)
-                    .Property("event-file", fullPath)
+                    .Property("file", fullPath)
                     .Write();
             }
         }
@@ -119,6 +119,11 @@
                         if (latestFile == currentFile || latestFile == null)
                             return;
 
+                        Log.Info()
+                            .Message("Switched to new file")
+                            .Property("file", latestFile)
+                            .Write();
+
                         currentFile = latestFile;
                         filePosition = ReadJournalFromPosition(currentFile, 0);
                     }
@@ -128,7 +133,7 @@
                     Log.Error()
                         .Message("Journal file not found")
                         .Exception(e)
-                        .Property("journal-file", currentFile)
+                        .Property("file", currentFile)
                         .Write();
                     currentFile = null;
                 }
@@ -137,7 +142,7 @@
                     Log.Error()
                         .Message("Error while reading journal file")
                         .Exception(e)
-                        .Property("journal-file", currentFile)
+                        .Property("file", currentFile)
                         .Write();
                 }
             }
@@ -145,36 +150,32 @@
 
         private long ReadJournalFromPosition(string file, long filePosition)
         {
-            using (var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using var fileReader = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var textReader = new StreamReader(fileReader);
+            try
             {
-                using (var textReader = new StreamReader(fileReader))
+                fileReader.Position = filePosition;
+                var events = ReadEventsFromStream(textReader);
+                foreach (var @event in events)
                 {
-                    try
-                    {
-                        fileReader.Position = filePosition;
-                        var events = ReadEventsFromStream(textReader);
-                        foreach (var @event in events)
-                        {
-                            // Outfitting, market, etc. events are just indicators that data must be read from json
-                            if (eventsToReadFromFile.Contains(@event.Event))
-                                SendEventFromFile(GetJsonFileFullPath(@event.Event));
-                            else
-                                basicObservable.OnNext(@event);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Error()
-                            .Message("Error while reading journal file")
-                            .Exception(e)
-                            .Property("journal-file", currentFile)
-                            .Property("position", fileReader.Position)
-                            .Write();
-                        textReader.ReadLine(); // read to end of current line, to skip 'bad' data
-                    }
-                    return fileReader.Position;
+                    // Outfitting, market, etc. events are just indicators that data must be read from json
+                    if (eventsToReadFromFile.Contains(@event.Event))
+                        SendEventFromFile(GetJsonFileFullPath(@event.Event));
+                    else
+                        basicObservable.OnNext(@event);
                 }
             }
+            catch (Exception e)
+            {
+                Log.Error()
+                    .Message("Error while reading journal file")
+                    .Exception(e)
+                    .Property("file", currentFile)
+                    .Property("position", fileReader.Position)
+                    .Write();
+                textReader.ReadLine(); // read to end of current line, to skip 'bad' data
+            }
+            return fileReader.Position;
         }
 
         private bool disposedValue = false; // To detect redundant calls

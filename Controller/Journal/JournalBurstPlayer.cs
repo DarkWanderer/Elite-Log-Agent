@@ -1,11 +1,11 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DW.ELA.Interfaces;
-    using Utility.Observable;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility.Observable;
 
+namespace DW.ELA.Controller
+{
     /// <summary>
     /// This class replays N last log files to observers - to fill up historic data
     /// </summary>

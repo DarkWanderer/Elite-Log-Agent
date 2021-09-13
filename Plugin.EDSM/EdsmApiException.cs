@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Plugin.EDSM
-{
-    using System;
-    using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
+namespace DW.ELA.Plugin.EDSM
+{
     [Serializable]
     internal class EdsmApiException : Exception
     {

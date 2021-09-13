@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Utility.Json
-{
-    using System;
-    using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Utility.Json
+{
     public static class Serialize
     {
         public static string ToJson<T>(this T self) => JsonConvert.SerializeObject(self, Converter.Settings);

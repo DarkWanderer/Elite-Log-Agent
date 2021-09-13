@@ -1,10 +1,10 @@
-﻿namespace DW.ELA.Utility
-{
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Reflection;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 
+namespace DW.ELA.Utility
+{
     public static class AppInfo
     {
         static AppInfo()

@@ -1,16 +1,16 @@
-﻿namespace DW.ELA.UnitTests.INARA
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using DW.ELA.Controller;
-    using DW.ELA.Plugin.Inara;
-    using DW.ELA.Plugin.Inara.Model;
-    using DW.ELA.UnitTests.Utility;
-    using DW.ELA.Utility;
-    using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DW.ELA.Controller;
+using DW.ELA.Plugin.Inara;
+using DW.ELA.Plugin.Inara.Model;
+using DW.ELA.UnitTests.Utility;
+using DW.ELA.Utility;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.INARA
+{
     [TestFixture]
     public class InaraIntegrationTests
     {

@@ -1,7 +1,7 @@
-﻿namespace DW.ELA.Interfaces
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace DW.ELA.Interfaces
+{
     public interface IEventConverter<out TEvent>
         where TEvent : class
     {

@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Utility.Observable
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace DW.ELA.Utility.Observable
+{
     public class BasicObservable<T> : IObservable<T>
     {
         protected List<IObserver<T>> Observers { get; } = new List<IObserver<T>>();

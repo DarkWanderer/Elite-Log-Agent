@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.UnitTests.Controller
-{
-    using DW.ELA.Controller;
-    using NUnit.Framework;
+﻿using DW.ELA.Controller;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.Controller
+{
     public class SavedGamesDirectoryHelperTests
     {
         [Test]

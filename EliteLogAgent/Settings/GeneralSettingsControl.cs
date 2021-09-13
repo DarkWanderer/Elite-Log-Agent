@@ -1,13 +1,13 @@
-﻿namespace EliteLogAgent.Settings
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows.Forms;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Settings;
-    using NLog;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Settings;
+using NLog;
 
+namespace EliteLogAgent.Settings
+{
     public partial class GeneralSettingsControl : AbstractSettingsControl
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();

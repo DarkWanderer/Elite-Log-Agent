@@ -1,17 +1,17 @@
-﻿namespace DW.ELA.UnitTests
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
-    using DW.ELA.Interfaces.Settings;
-    using Moq;
-    using MoreLinq;
-    using NUnit.Framework;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Events;
+using DW.ELA.Interfaces.Settings;
+using Moq;
+using MoreLinq;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests
+{
     [TestFixture]
     [Parallelizable]
     public class AbstractPluginTests
@@ -34,14 +34,12 @@
         [Parallelizable]
         public void ShouldFlushEventsAfterTimeout()
         {
-            using (var plugin = new TestPlugin(Mock.Of<ISettingsProvider>()))
-            {
-                foreach (var @event in TestEventSource.TypedLogEvents.Skip(10).Take(10))
-                    plugin.OnNext(@event);
-                plugin.FlushQueue();
-                CollectionAssert.IsNotEmpty(plugin.Flushed);
-                Assert.AreEqual(10, plugin.Flushed.Count);
-            }
+            using var plugin = new TestPlugin(Mock.Of<ISettingsProvider>());
+            foreach (var @event in TestEventSource.TypedLogEvents.Skip(10).Take(10))
+                plugin.OnNext(@event);
+            plugin.FlushQueue();
+            CollectionAssert.IsNotEmpty(plugin.Flushed);
+            Assert.AreEqual(10, plugin.Flushed.Count);
         }
 
         private class TestPlugin : AbstractBatchSendPlugin<JournalEvent, TestSettings>

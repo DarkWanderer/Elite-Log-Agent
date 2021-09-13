@@ -1,15 +1,15 @@
-﻿namespace EliteLogAgent
-{
-    using Castle.Facilities.Logging;
-    using Castle.MicroKernel.Registration;
-    using Castle.Services.Logging.NLogIntegration;
-    using Castle.Windsor;
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
-    using EliteLogAgent.Autorun;
-    using EliteLogAgent.Deployment;
+﻿using Castle.Facilities.Logging;
+using Castle.MicroKernel.Registration;
+using Castle.Services.Logging.NLogIntegration;
+using Castle.Windsor;
+using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility;
+using EliteLogAgent.Autorun;
+using EliteLogAgent.Deployment;
 
+namespace EliteLogAgent
+{
     internal static class ContainerBootstrapper
     {
         internal static void Initalize(IWindsorContainer container)

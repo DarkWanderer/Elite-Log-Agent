@@ -1,10 +1,10 @@
-﻿namespace DW.ELA.UnitTests
-{
-    using System;
-    using System.Collections.Generic;
-    using DW.ELA.Utility.Extensions;
-    using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using DW.ELA.Utility.Extensions;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests
+{
     public class DictionaryExtensionsTests
     {
         [Test]

@@ -1,19 +1,19 @@
-﻿namespace DW.ELA.Plugin.EDSM
-{
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using DW.ELA.Controller;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Settings;
-    using DW.ELA.Utility;
-    using MoreLinq;
-    using Newtonsoft.Json.Linq;
-    using NLog;
-    using NLog.Fluent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DW.ELA.Controller;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Settings;
+using DW.ELA.Utility;
+using MoreLinq;
+using Newtonsoft.Json.Linq;
+using NLog;
+using NLog.Fluent;
 
+namespace DW.ELA.Plugin.EDSM
+{
     public class EdsmPlugin : AbstractBatchSendPlugin<JObject, EdsmSettings>, IApiKeyValidator
     {
         private const string EdsmApiUrl = "https://www.edsm.net/api-journal-v1/";

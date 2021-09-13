@@ -1,16 +1,16 @@
-﻿namespace DW.ELA.Controller
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Linq;
-    using System.Windows.Forms;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Settings;
-    using MoreLinq;
-    using NLog;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Settings;
+using MoreLinq;
+using NLog;
 
+namespace DW.ELA.Controller
+{
     public class MultiCmdrApiKeyControl : AbstractSettingsControl
     {
         private LinkLabel apiKeyLabel;

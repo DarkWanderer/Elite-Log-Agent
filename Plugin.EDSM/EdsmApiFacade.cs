@@ -1,12 +1,12 @@
-﻿namespace DW.ELA.Plugin.EDSM
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility;
-    using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility;
+using Newtonsoft.Json.Linq;
 
+namespace DW.ELA.Plugin.EDSM
+{
     public class EdsmApiFacade : IEdsmApiFacade
     {
         private readonly IRestClient restClient;

@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Utility.Extensions
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace DW.ELA.Utility.Extensions
+{
     public static class DictionaryExtensions
     {
         public static void AddIfNotNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)

@@ -1,16 +1,16 @@
-﻿namespace DW.ELA.UnitTests.Controller
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Interfaces.Events;
-    using DW.ELA.LogModel;
-    using DW.ELA.UnitTests.Utility;
-    using DW.ELA.Utility.Json;
-    using Newtonsoft.Json.Linq;
-    using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DW.ELA.Interfaces;
+using DW.ELA.Interfaces.Events;
+using DW.ELA.LogModel;
+using DW.ELA.UnitTests.Utility;
+using DW.ELA.Utility.Json;
+using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.Controller
+{
     [TestFixture]
     [Parallelizable]
     public class LogEventConverterTests

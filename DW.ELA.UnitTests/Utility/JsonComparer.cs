@@ -1,11 +1,11 @@
-﻿namespace DW.ELA.UnitTests.Utility
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DW.ELA.Utility.Json;
-    using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DW.ELA.Utility.Json;
+using Newtonsoft.Json.Linq;
 
+namespace DW.ELA.UnitTests.Utility
+{
     public static class JsonComparer
     {
         public static IList<string> Compare(string tokenName, JObject source, JObject target)

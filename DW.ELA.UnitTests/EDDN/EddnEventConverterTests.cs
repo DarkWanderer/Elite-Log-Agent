@@ -1,14 +1,14 @@
-﻿namespace DW.ELA.UnitTests.EDDN
-{
-    using System;
-    using System.Linq;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Plugin.EDDN;
-    using DW.ELA.Plugin.EDDN.Model;
-    using DW.ELA.UnitTests.Utility;
-    using Moq;
-    using NUnit.Framework;
+﻿using System;
+using System.Linq;
+using DW.ELA.Interfaces;
+using DW.ELA.Plugin.EDDN;
+using DW.ELA.Plugin.EDDN.Model;
+using DW.ELA.UnitTests.Utility;
+using Moq;
+using NUnit.Framework;
 
+namespace DW.ELA.UnitTests.EDDN
+{
     [TestFixture]
     public class EddnEventConverterTests
     {

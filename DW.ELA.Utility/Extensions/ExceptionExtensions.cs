@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Utility.Extensions
-{
-    using System;
-    using System.Text;
+﻿using System;
+using System.Text;
 
+namespace DW.ELA.Utility.Extensions
+{
     public static class ExceptionExtensions
     {
         public static string GetStackedErrorMessages(this Exception ex, int offset = 0)

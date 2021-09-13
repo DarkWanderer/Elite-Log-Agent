@@ -1,16 +1,16 @@
-﻿namespace DW.ELA.Utility
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Web;
-    using DW.ELA.Interfaces;
-    using DW.ELA.Utility.Log;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using DW.ELA.Interfaces;
+using DW.ELA.Utility.Log;
 
+namespace DW.ELA.Utility
+{
     public class ThrottlingRestClient : IRestClient
     {
         private readonly string baseUrl;

@@ -1,8 +1,8 @@
-﻿namespace DW.ELA.Plugin.Inara.Model
-{
-    using DW.ELA.Utility.Json;
-    using Newtonsoft.Json;
+﻿using DW.ELA.Utility.Json;
+using Newtonsoft.Json;
 
+namespace DW.ELA.Plugin.Inara.Model
+{
     public sealed class ApiOutputEvent
     {
         [JsonProperty("eventData")]

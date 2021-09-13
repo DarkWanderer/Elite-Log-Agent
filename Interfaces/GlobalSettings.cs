@@ -1,10 +1,10 @@
-﻿namespace DW.ELA.Interfaces.Settings
-{
-    using System;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
+namespace DW.ELA.Interfaces.Settings
+{
     public class GlobalSettings : ICloneable
     {
         [JsonIgnore]
