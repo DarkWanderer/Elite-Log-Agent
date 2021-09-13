@@ -6,7 +6,7 @@ namespace DW.ELA.Controller
 {
     public class SavedGamesDirectoryHelper : ILogDirectoryNameProvider
     {
-        private readonly Lazy<string> lazyDirectoryValue = new Lazy<string>(GetSavedGamesDirectory);
+        private readonly Lazy<string> lazyDirectoryValue = new(GetSavedGamesDirectory);
 
         public string Directory => lazyDirectoryValue.Value;
 

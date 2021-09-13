@@ -7,7 +7,7 @@ namespace DW.ELA.Utility
     // copied from UniRx (MIT license)
     public sealed class CompositeDisposable : ICollection<IDisposable>, IDisposable
     {
-        private readonly object gate = new object();
+        private readonly object gate = new();
         private List<IDisposable> disposables;
         private int count;
         private const int ShrinkTreshold = 64;

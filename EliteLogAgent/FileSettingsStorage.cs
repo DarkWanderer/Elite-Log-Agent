@@ -12,7 +12,7 @@ namespace EliteLogAgent
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        private readonly object settingsCacheLock = new object();
+        private readonly object settingsCacheLock = new();
         private readonly string settingsFileDirectory;
 
         private GlobalSettings settingsCache;

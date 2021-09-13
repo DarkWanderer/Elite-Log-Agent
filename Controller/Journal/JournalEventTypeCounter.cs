@@ -8,7 +8,7 @@ namespace DW.ELA.Controller
 {
     public class JournalEventTypeCounter : IObserver<JournalEvent>
     {
-        private readonly ConcurrentDictionary<string, int> eventTypeCounters = new ConcurrentDictionary<string, int>();
+        private readonly ConcurrentDictionary<string, int> eventTypeCounters = new();
 
         public IReadOnlyCollection<string> EventTypes =>
             eventTypeCounters.Keys.Distinct().OrderBy(x => x).ToList();

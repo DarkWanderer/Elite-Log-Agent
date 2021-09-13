@@ -19,7 +19,7 @@ namespace DW.ELA.Plugin.EDSM
         private const string EdsmApiUrl = "https://www.edsm.net/api-journal-v1/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly Task<HashSet<string>> ignoredEvents;
-        private readonly ConcurrentDictionary<string, string> ApiKeys = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> ApiKeys = new();
         private readonly IUserNotificationInterface notificationInterface;
 
         public EdsmPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory, IUserNotificationInterface notificationInterface)

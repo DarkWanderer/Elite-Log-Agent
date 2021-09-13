@@ -8,7 +8,7 @@ namespace DW.ELA.Utility.Log
     public class LoggingTimer : IDisposable
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-        private readonly Stopwatch stopwatch = new Stopwatch();
+        private readonly Stopwatch stopwatch = new();
         private readonly string context;
 
         public LoggingTimer(string context)

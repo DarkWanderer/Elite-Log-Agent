@@ -8,7 +8,7 @@ namespace DW.ELA.Interfaces.Settings
     public class GlobalSettings : ICloneable
     {
         [JsonIgnore]
-        public static GlobalSettings Default => new GlobalSettings();
+        public static GlobalSettings Default => new();
 
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; } = new Dictionary<string, JObject>();

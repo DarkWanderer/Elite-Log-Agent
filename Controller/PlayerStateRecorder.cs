@@ -15,12 +15,12 @@ namespace DW.ELA.Controller
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        private readonly StateRecorder<ShipRecord> shipRecorder = new StateRecorder<ShipRecord>();
-        private readonly StateRecorder<string> starSystemRecorder = new StateRecorder<string>();
-        private readonly StateRecorder<string> stationRecorder = new StateRecorder<string>();
-        private readonly StateRecorder<bool> crewRecorder = new StateRecorder<bool>();
-        private readonly ConcurrentDictionary<string, double[]> systemCoordinates = new ConcurrentDictionary<string, double[]>();
-        private readonly ConcurrentDictionary<string, ulong> systemAddresses = new ConcurrentDictionary<string, ulong>();
+        private readonly StateRecorder<ShipRecord> shipRecorder = new();
+        private readonly StateRecorder<string> starSystemRecorder = new();
+        private readonly StateRecorder<string> stationRecorder = new();
+        private readonly StateRecorder<bool> crewRecorder = new();
+        private readonly ConcurrentDictionary<string, double[]> systemCoordinates = new();
+        private readonly ConcurrentDictionary<string, ulong> systemAddresses = new();
 
         public string GetPlayerSystem(DateTime atTime) => starSystemRecorder.GetStateAt(atTime);
 
@@ -146,7 +146,7 @@ namespace DW.ELA.Controller
 
         private class StateRecorder<T>
         {
-            private readonly SortedList<DateTime, T> stateRecording = new SortedList<DateTime, T>();
+            private readonly SortedList<DateTime, T> stateRecording = new();
 
             public T GetStateAt(DateTime atTime)
             {

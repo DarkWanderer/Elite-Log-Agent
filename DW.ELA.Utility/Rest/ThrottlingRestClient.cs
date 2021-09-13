@@ -14,8 +14,8 @@ namespace DW.ELA.Utility
     public class ThrottlingRestClient : IRestClient
     {
         private readonly string baseUrl;
-        private readonly HttpClient client = new HttpClient();
-        private readonly object @lock = new object();
+        private readonly HttpClient client = new();
+        private readonly object @lock = new();
 
         private DateTime lastRequestTimestamp = DateTime.MinValue;
         private int requestCounter;

@@ -17,8 +17,8 @@ namespace DW.ELA.Utility
     public class CloudApiLogTarget : NLog.Targets.Target
     {
         private readonly IRestClient restClient;
-        private readonly ConcurrentQueue<ExceptionRecord> recordQueue = new ConcurrentQueue<ExceptionRecord>();
-        private readonly Timer flushTimer = new Timer();
+        private readonly ConcurrentQueue<ExceptionRecord> recordQueue = new();
+        private readonly Timer flushTimer = new();
 
         public CloudApiLogTarget(IRestClient restClient)
         {

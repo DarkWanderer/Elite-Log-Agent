@@ -23,7 +23,7 @@ namespace DW.ELA.Plugin.Inara
 
         private readonly IPlayerStateHistoryRecorder playerStateRecorder;
         private readonly IUserNotificationInterface notificationInterface;
-        private readonly ConcurrentDictionary<string, string> ApiKeys = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> ApiKeys = new();
 
         public InaraPlugin(IPlayerStateHistoryRecorder playerStateRecorder, ISettingsProvider settingsProvider, IRestClientFactory restClientFactory, IUserNotificationInterface notificationInterface)
             : base(settingsProvider)

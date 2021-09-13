@@ -16,7 +16,7 @@ namespace DW.ELA.Controller
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
-        private static readonly HashSet<string> SkippedEvents = new HashSet<string>(new[] { "Outfitting", "Shipyard", "Market" });
+        private static readonly HashSet<string> SkippedEvents = new(new[] { "Outfitting", "Shipyard", "Market" });
 
         /// <summary>
         /// Reads the given Journal file from specified position and generates the events

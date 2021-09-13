@@ -44,7 +44,7 @@ namespace DW.ELA.UnitTests
 
         private class TestPlugin : AbstractBatchSendPlugin<JournalEvent, TestSettings>
         {
-            public readonly ConcurrentBag<JournalEvent> Flushed = new ConcurrentBag<JournalEvent>();
+            public readonly ConcurrentBag<JournalEvent> Flushed = new();
 
             public TestPlugin(ISettingsProvider settingsProvider)
                 : base(settingsProvider)

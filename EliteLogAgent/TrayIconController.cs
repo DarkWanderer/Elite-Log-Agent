@@ -47,7 +47,7 @@ namespace EliteLogAgent
             return notifyIcon;
         }
 
-        private static ToolStripSeparator ToolStripSeparatorLeft => new ToolStripSeparator { Alignment = ToolStripItemAlignment.Left };
+        private static ToolStripSeparator ToolStripSeparatorLeft => new() { Alignment = ToolStripItemAlignment.Left };
 
         private ContextMenuStrip CreateMenuStrip()
         {

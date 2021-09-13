@@ -15,7 +15,7 @@ namespace DW.ELA.Controller
         where TEvent : class
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-        private readonly Timer flushTimer = new Timer();
+        private readonly Timer flushTimer = new();
 
         protected AbstractBatchSendPlugin(ISettingsProvider settingsProvider)
         {

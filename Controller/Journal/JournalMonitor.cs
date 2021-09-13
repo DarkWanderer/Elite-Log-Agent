@@ -22,11 +22,11 @@ namespace DW.ELA.Controller
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private readonly FileSystemWatcher fileWatcher;
         private readonly string logDirectory;
-        private readonly object @lock = new object();
-        private readonly Timer logFlushTimer = new Timer();
-        private readonly BasicObservable<JournalEvent> basicObservable = new BasicObservable<JournalEvent>();
+        private readonly object @lock = new();
+        private readonly Timer logFlushTimer = new();
+        private readonly BasicObservable<JournalEvent> basicObservable = new();
         private readonly IReadOnlyCollection<string> eventsToReadFromFile = new HashSet<string> { "Outfitting", "Market", "Shipyard", "Cargo" };
-        private readonly ConcurrentQueue<JournalEvent> queuedEvents = new ConcurrentQueue<JournalEvent>();
+        private readonly ConcurrentQueue<JournalEvent> queuedEvents = new();
         private readonly TimeSpan checkInterval;
 
         // 
