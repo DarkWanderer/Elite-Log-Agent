@@ -74,7 +74,6 @@ namespace DW.ELA.Controller
             Log.Info().Message("Logging enabled").Property("level", logLevel).Write();
         }
 
-#pragma warning disable SA1118 // Parameter must not span multiple lines
         private JsonLayout GetDefaultJsonLayout()
         {
             return new JsonLayout()
@@ -126,7 +125,6 @@ namespace DW.ELA.Controller
             layout.Attributes.Add(new JsonAttribute("@timestamp", "${date:format=o}"));
             return layout;
         }
-#pragma warning restore SA1118 // Parameter must not span multiple lines
 
         private Target CreateFileTarget()
         {

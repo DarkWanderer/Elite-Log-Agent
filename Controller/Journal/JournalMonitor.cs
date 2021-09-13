@@ -26,7 +26,6 @@ namespace DW.ELA.Controller
         private readonly Timer logFlushTimer = new();
         private readonly BasicObservable<JournalEvent> basicObservable = new();
         private readonly IReadOnlyCollection<string> eventsToReadFromFile = new HashSet<string> { "Outfitting", "Market", "Shipyard", "Cargo" };
-        private readonly ConcurrentQueue<JournalEvent> queuedEvents = new();
         private readonly TimeSpan checkInterval;
 
         // 

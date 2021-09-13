@@ -9,7 +9,6 @@ namespace DW.ELA.Utility
     {
         private readonly object gate = new();
         private List<IDisposable> disposables;
-        private int count;
         private const int ShrinkTreshold = 64;
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace DW.ELA.Utility
                 throw new ArgumentNullException(nameof(disposables));
 
             this.disposables = new List<IDisposable>(disposables);
-            count = this.disposables.Count;
+            Count = this.disposables.Count;
         }
 
         /// <summary>
@@ -58,13 +57,13 @@ namespace DW.ELA.Utility
                 throw new ArgumentNullException(nameof(disposables));
 
             this.disposables = new List<IDisposable>(disposables);
-            count = this.disposables.Count;
+            Count = this.disposables.Count;
         }
 
         /// <summary>
         /// Gets the number of disposables contained in the CompositeDisposable.
         /// </summary>
-        public int Count => count;
+        public int Count { get; private set; }
 
         /// <summary>
         /// Adds a disposable to the CompositeDisposable or disposes the disposable if the CompositeDisposable is disposed.
@@ -83,7 +82,7 @@ namespace DW.ELA.Utility
                 if (!IsDisposed)
                 {
                     disposables.Add(item);
-                    count++;
+                    Count++;
                 }
             }
             if (shouldDispose)
@@ -117,9 +116,9 @@ namespace DW.ELA.Utility
                     {
                         shouldDispose = true;
                         disposables[i] = null;
-                        count--;
+                        Count--;
 
-                        if (disposables.Capacity > ShrinkTreshold && count < disposables.Capacity / 2)
+                        if (disposables.Capacity > ShrinkTreshold && Count < disposables.Capacity / 2)
                         {
                             var old = disposables;
                             disposables = new List<IDisposable>(disposables.Capacity / 2);
@@ -153,7 +152,7 @@ namespace DW.ELA.Utility
                     IsDisposed = true;
                     currentDisposables = disposables.ToArray();
                     disposables.Clear();
-                    count = 0;
+                    Count = 0;
                 }
             }
 
@@ -177,7 +176,7 @@ namespace DW.ELA.Utility
             {
                 currentDisposables = disposables.ToArray();
                 disposables.Clear();
-                count = 0;
+                Count = 0;
             }
 
             foreach (var d in currentDisposables)

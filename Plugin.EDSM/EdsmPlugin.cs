@@ -53,10 +53,8 @@ namespace DW.ELA.Plugin.EDSM
             var config = pluginSettings.ApiKeys.ToDictionary();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-#pragma warning disable CS0612 // Type or member is obsolete
             string legacyCmdrName = GlobalSettings.CommanderName;
             string legacyApiKey = pluginSettings.ApiKey;
-#pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore CS0618 // Type or member is obsolete
 
             if (!string.IsNullOrEmpty(legacyCmdrName) && !string.IsNullOrEmpty(legacyApiKey) && !config.ContainsKey(legacyCmdrName))

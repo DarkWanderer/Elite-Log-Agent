@@ -15,18 +15,14 @@ namespace DW.ELA.Plugin.EDDN
     {
         private const string EddnUrl = @"https://eddn.edcd.io:4430/upload/";
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
-        private readonly IPlayerStateHistoryRecorder playerStateRecorder;
 
         private readonly IEddnApiFacade apiFacade;
         private readonly EddnEventConverter eventConverter;
         private readonly ConcurrentQueue<JObject> lastPushedEvents = new(); // stores last few events to check duplicates
-        private readonly ISettingsProvider settingsProvider;
         private string CurrentCommanderName = "Unknown commander";
 
         public EddnPlugin(ISettingsProvider settingsProvider, IPlayerStateHistoryRecorder playerStateRecorder, IRestClientFactory restClientFactory)
         {
-            this.settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
-            this.playerStateRecorder = playerStateRecorder ?? throw new ArgumentNullException(nameof(playerStateRecorder));
             eventConverter = new EddnEventConverter(playerStateRecorder);
             settingsProvider.SettingsChanged += (o, e) => ReloadSettings();
             apiFacade = new EddnApiFacade(restClientFactory.CreateRestClient(EddnUrl));

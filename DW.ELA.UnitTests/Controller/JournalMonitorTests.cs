@@ -42,14 +42,14 @@ namespace DW.ELA.UnitTests.Controller
             await Delay;
             CollectionAssert.IsNotEmpty(events);
 
-            while (events.Count > 0)
+            while (!events.IsEmpty)
                 events.TryTake(out var e);
 
             File.WriteAllText(testFile2, EventsAsJson.ElementAt(2));
             await Delay;
             CollectionAssert.IsNotEmpty(events);
 
-            while (events.Count > 0)
+            while (!events.IsEmpty)
                 events.TryTake(out var e);
 
             await Delay;

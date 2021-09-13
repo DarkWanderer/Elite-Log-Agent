@@ -33,9 +33,9 @@ namespace DW.ELA.UnitTests.Utility
             {
                 switch (t1)
                 {
-                    case JArray a:
+                    case JArray _:
                         return Compare(tokenName, t1 as JArray, t2 as JArray);
-                    case JObject o:
+                    case JObject _:
                         return Compare(tokenName, t1 as JObject, t2 as JObject);
                     default:
                         if (t1.ToString() != t2.ToString())

@@ -106,7 +106,7 @@ namespace DW.ELA.Utility
 
             var record = new ExceptionRecord
             {
-                Message = logEvent.Message + " " + exception?.Message,
+                Message = message + " " + exception?.Message,
                 ExceptionType = exception?.GetType()?.ToString(),
                 CallStack = exception?.StackTrace,
                 SoftwareVersion = AppInfo.Version
