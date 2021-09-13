@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DW.ELA.Interfaces;
 using DW.ELA.Interfaces.Events;
-using DW.ELA.Utility.Extensions;
 using MoreLinq;
 using NLog;
 using NLog.Fluent;
@@ -52,23 +51,19 @@ namespace DW.ELA.Controller
             {
                 dynamic e = @event.Raw;
 
-                if (e.SystemAddress != null && e.StarSystem != null)
+                if (e.SystemAddress != null && e.StarSystem != null && systemAddresses.TryAdd((string)e.StarSystem, (ulong)e.SystemAddress))
                 {
-                    if (systemAddresses.TryAdd((string)e.StarSystem, (ulong)e.SystemAddress))
-                    {
-                        Log.Info()
-                            .Message("Got SystemAddress")
-                            .Property("StarSystem", e.StarSystem)
-                            .Property("SystemAddress", e.SystemAddress)
-                            .Write();
-                    }
+                    Log.Info()
+                        .Message("SystemAddress update")
+                        .Property("StarSystem", e.StarSystem)
+                        .Property("SystemAddress", e.SystemAddress)
+                        .Write();
                 }
 
-                if (e.StarSystem != null)
+                if (e.StarSystem != null && starSystemRecorder.RecordState((string)e.StarSystem, @event.Timestamp))
                 {
-                    starSystemRecorder.RecordState((string)e.StarSystem, @event.Timestamp);
                     Log.Info()
-                        .Message("Recorded new location")
+                        .Message("StarSystem update")
                         .Property("StarSystem", e.StarSystem)
                         .Write();
                 }
@@ -80,7 +75,7 @@ namespace DW.ELA.Controller
                 {
                     ProcessShipIDEvent((long?)e.ShipID, (string)e.Ship, @event.Timestamp);
                     Log.Info()
-                        .Message("Ship switch event")
+                        .Message("Ship update")
                         .Property("ShipID", e.ShipID)
                         .Property("Ship", e.Ship)
                         .Write();
@@ -156,10 +151,9 @@ namespace DW.ELA.Controller
                     {
                         return stateRecording
                             .Where(l => l.Key <= atTime)
-                            .DefaultIfEmpty()
                             .MaxBy(l => l.Key)
-                            .FirstOrDefault()
-                            .Value;
+                            .Select(l => l.Value)
+                            .FirstOrDefault();
                     }
                 }
                 catch (Exception e)
@@ -169,7 +163,7 @@ namespace DW.ELA.Controller
                 }
             }
 
-            public void RecordState(T state, DateTime at)
+            public bool RecordState(T state, DateTime at)
             {
                 try
                 {
@@ -177,13 +171,17 @@ namespace DW.ELA.Controller
                     {
                         var current = GetStateAt(at);
                         if (!Equals(current, state))
-                            stateRecording.Add(at, state);
+                        {
+                            stateRecording[at] = state;
+                            return true;
+                        }
                     }
                 }
                 catch (Exception e)
                 {
                     Log.Error(e);
                 }
+                return false;
             }
         }
     }
