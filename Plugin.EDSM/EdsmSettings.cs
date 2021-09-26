@@ -6,10 +6,6 @@ namespace DW.ELA.Plugin.EDSM
 {
     public class EdsmSettings
     {
-        [Obsolete("Retained for backward compatibility")]
-        [JsonProperty("apiKey")]
-        internal string ApiKey { get; set; } = null;
-
         /// <summary>
         /// Dictionary of CMDR name => API key pairs
         /// </summary>

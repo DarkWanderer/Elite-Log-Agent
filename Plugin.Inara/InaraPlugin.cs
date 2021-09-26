@@ -52,15 +52,6 @@ namespace DW.ELA.Plugin.Inara
         {
             var pluginSettings = SettingsFacade.GetPluginSettings(GlobalSettings);
             var config = pluginSettings.ApiKeys.ToDictionary();
-
-#pragma warning disable CS0618 // Type or member is obsolete
-            string legacyCmdrName = GlobalSettings.CommanderName;
-            string legacyApiKey = pluginSettings.ApiKey;
-#pragma warning restore CS0618 // Type or member is obsolete
-
-            if (!string.IsNullOrEmpty(legacyCmdrName) && !string.IsNullOrEmpty(legacyApiKey) && !config.ContainsKey(legacyCmdrName))
-                config.Add(legacyCmdrName, legacyApiKey);
-
             return config;
         }
 

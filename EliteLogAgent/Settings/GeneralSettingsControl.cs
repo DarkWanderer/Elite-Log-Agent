@@ -12,7 +12,6 @@ namespace EliteLogAgent.Settings
     {
         private static readonly ILogger Log = LogManager.GetCurrentClassLogger();
         private CheckBox checkboxAutostartApplication;
-        private CheckBox reportErrorsCheckbox;
         private Label logLevelLabel;
         private ComboBox logLevelComboBox;
 
@@ -38,10 +37,7 @@ namespace EliteLogAgent.Settings
         {
             checkboxAutostartApplication.Checked = AutorunManager?.AutorunEnabled ?? false;
             logLevelComboBox.SelectedItem = logLevelComboBox.Items.OfType<LogLevel>().SingleOrDefault(t => t.Name == GlobalSettings.LogLevel) ?? LogLevel.Info;
-            reportErrorsCheckbox.Checked = GlobalSettings.ReportErrorsToCloud;
         }
-
-        private void ReportErrorsCheckbox_CheckedChanged(object sender, EventArgs e) => GlobalSettings.ReportErrorsToCloud = reportErrorsCheckbox.Checked;
 
         private void LogLevelComboBox_SelectedIndexChanged(object sender, EventArgs e) => GlobalSettings.LogLevel = logLevelComboBox.SelectedItem.ToString();
 
@@ -58,7 +54,6 @@ namespace EliteLogAgent.Settings
         private void InitializeComponent()
         {
             checkboxAutostartApplication = new CheckBox();
-            reportErrorsCheckbox = new CheckBox();
             logLevelLabel = new Label();
             logLevelComboBox = new ComboBox();
             SuspendLayout();
@@ -68,29 +63,18 @@ namespace EliteLogAgent.Settings
             checkboxAutostartApplication.AutoSize = true;
             checkboxAutostartApplication.Location = new System.Drawing.Point(3, 3);
             checkboxAutostartApplication.Name = "checkboxAutostartApplication";
-            checkboxAutostartApplication.Size = new System.Drawing.Size(182, 21);
+            checkboxAutostartApplication.Size = new System.Drawing.Size(193, 24);
             checkboxAutostartApplication.TabIndex = 7;
             checkboxAutostartApplication.Text = "Start agent when I log in";
             checkboxAutostartApplication.UseVisualStyleBackColor = true;
             checkboxAutostartApplication.CheckedChanged += new EventHandler(CheckboxAutostartApplication_CheckedChanged);
             // 
-            // reportErrorsCheckbox
-            // 
-            reportErrorsCheckbox.AutoSize = true;
-            reportErrorsCheckbox.Location = new System.Drawing.Point(3, 30);
-            reportErrorsCheckbox.Name = "reportErrorsCheckbox";
-            reportErrorsCheckbox.Size = new System.Drawing.Size(220, 21);
-            reportErrorsCheckbox.TabIndex = 8;
-            reportErrorsCheckbox.Text = "Report errors to Cloud service";
-            reportErrorsCheckbox.UseVisualStyleBackColor = true;
-            reportErrorsCheckbox.CheckedChanged += new EventHandler(ReportErrorsCheckbox_CheckedChanged);
-            // 
             // logLevelLabel
             // 
             logLevelLabel.AutoSize = true;
-            logLevelLabel.Location = new System.Drawing.Point(0, 60);
+            logLevelLabel.Location = new System.Drawing.Point(4, 36);
             logLevelLabel.Name = "logLevelLabel";
-            logLevelLabel.Size = new System.Drawing.Size(65, 17);
+            logLevelLabel.Size = new System.Drawing.Size(69, 20);
             logLevelLabel.TabIndex = 9;
             logLevelLabel.Text = "Log level";
             // 
@@ -98,9 +82,9 @@ namespace EliteLogAgent.Settings
             // 
             logLevelComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             logLevelComboBox.FormattingEnabled = true;
-            logLevelComboBox.Location = new System.Drawing.Point(71, 57);
+            logLevelComboBox.Location = new System.Drawing.Point(75, 33);
             logLevelComboBox.Name = "logLevelComboBox";
-            logLevelComboBox.Size = new System.Drawing.Size(149, 24);
+            logLevelComboBox.Size = new System.Drawing.Size(149, 28);
             logLevelComboBox.TabIndex = 10;
             logLevelComboBox.SelectedIndexChanged += new EventHandler(LogLevelComboBox_SelectedIndexChanged);
             // 
@@ -109,7 +93,6 @@ namespace EliteLogAgent.Settings
             AutoScaleMode = AutoScaleMode.Inherit;
             Controls.Add(logLevelComboBox);
             Controls.Add(logLevelLabel);
-            Controls.Add(reportErrorsCheckbox);
             Controls.Add(checkboxAutostartApplication);
             Name = "GeneralSettingsControl";
             Size = new System.Drawing.Size(417, 219);

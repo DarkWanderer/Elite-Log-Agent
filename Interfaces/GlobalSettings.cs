@@ -13,15 +13,8 @@ namespace DW.ELA.Interfaces.Settings
         [JsonProperty("pluginSettings")]
         public IDictionary<string, JObject> PluginSettings { get; set; } = new Dictionary<string, JObject>();
 
-        [Obsolete("Retained for backward compatibility")]
-        [JsonProperty("commanderName")]
-        public string CommanderName { get; set; } = null;
-
         [JsonProperty("logLevel")]
         public string LogLevel { get; set; } = "Info";
-
-        [JsonProperty("reportErrorsToCloud")]
-        public bool ReportErrorsToCloud { get; set; } = true;
 
         object ICloneable.Clone() => Clone();
 

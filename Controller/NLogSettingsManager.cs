@@ -51,25 +51,6 @@ namespace DW.ELA.Controller
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", logLevel, fileTarget));
             config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Debug, new DebuggerTarget() { Layout = DefaultLayout }));
 
-            if (settingsProvider?.Settings?.ReportErrorsToCloud ?? false)
-            {
-                var webCollector = new WebServiceTarget() { Protocol = WebServiceProtocol.JsonPost, Url = new Uri(CloudErrorReportingUrl) };
-                webCollector.Parameters.Add(new MethodCallParameter(string.Empty, GetCloudErrorLayout()));
-                var asyncWrapper = new AsyncTargetWrapper()
-                {
-                    OverflowAction = AsyncTargetWrapperOverflowAction.Discard,
-                    WrappedTarget = webCollector,
-                    BatchSize = 1,
-                    QueueLimit = 10,
-                    FullBatchSizeWriteLimit = 10,
-                    TimeToSleepBetweenBatches = 0,
-                    Name = "CloudErrorTargetAsync"
-                };
-
-                config.LoggingRules.Add(new NLog.Config.LoggingRule("*", LogLevel.Error, asyncWrapper));
-                config.AddTarget(asyncWrapper);
-            }
-
             LogManager.Configuration = config;
             Log.Info().Message("Logging enabled").Property("level", logLevel).Write();
         }
