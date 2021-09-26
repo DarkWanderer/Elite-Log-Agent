@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Controller\DW.ELA.Controller.csproj" />
     <ProjectReference Include="..\DW.ELA.Utility\DW.ELA.Utility.csproj" />
     <ProjectReference Include="..\Interfaces\DW.ELA.Interfaces.csproj" />
   </ItemGroup>

@@ -13,7 +13,7 @@ namespace DW.ELA.UnitTests.Utility
         /// Utility method for developer to get canned events from own logs
         /// </summary>
         [Test]
-        [Ignore("Developer tool")]
+        [Explicit("Developer tool")]
         public static void ToolPrepareCannedEvents()
         {
             var eventExamples = Enumerable.Empty<JObject>()

@@ -53,7 +53,7 @@ namespace DW.ELA.UnitTests.Controller
         }
 
         [Test]
-        [Ignore("Heavy test")]
+        [Explicit("Heavy test")]
         public void ShouldConvertLocalEvents()
         {
             var events = TestEventSource.LocalEventsRaw.ToList();
