@@ -31,10 +31,6 @@ install:
 build_script:
 - msbuild EliteLogAgent\EliteLogAgent.csproj /t:Publish /p:PublishProfile=EliteLogAgent\Properties\PublishProfiles\ClickOnceProfile.pubxml /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
 
-after_build:
-- 7z a ELA.Portable.%APPVEYOR_BUILD_VERSION%.zip "%CD%\EliteLogAgent\bin\Any CPU\Release\net5.0-windows\publish\EliteLogAgent.exe"
-- ps: Push-AppveyorArtifact "ELA.Portable.$env:APPVEYOR_BUILD_VERSION.zip" -DeploymentName Portable
-
 test_script:
 - dotnet test --configuration Release --test-adapter-path:. --logger:Appveyor
 
