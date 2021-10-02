@@ -43,7 +43,7 @@ namespace DW.ELA.Plugin.Inara
         protected internal IRestClient RestClient { get; }
 
         // Explicitly set to 30 as Inara prefers batches of events
-        protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(30);
+        protected override TimeSpan FlushInterval => TimeSpan.FromSeconds(60);
 
         /// <summary>
         /// Property which merges the 'new' API keys with multi-commander support with the old legacy single-commander one
