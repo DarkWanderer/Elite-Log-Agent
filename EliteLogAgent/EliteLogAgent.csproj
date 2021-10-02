@@ -9,6 +9,8 @@
     <PackageProjectUrl>https://github.com/DarkWanderer/Elite-Log-Agent</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DarkWanderer/Elite-Log-Agent</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Authors>CMDR John Kozak</Authors>
+    <PackageId>Elite Log Agent</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
