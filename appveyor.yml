@@ -29,7 +29,8 @@ install:
 - cmd: nuget install -ExcludeVersion ReportGenerator
 
 build_script:
-- msbuild EliteLogAgent\EliteLogAgent.csproj /t:Publish /p:PublishProfile=EliteLogAgent\Properties\PublishProfiles\ClickOnceProfile.pubxml /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION%
+- ps: Import-PfxCertificate -FilePath EliteLogAgent\code-signing.pfx -CertStoreLocation Cert:\CurrentUser\My -Password $(ConvertTo-SecureString "$env:PFX_PASSWORD" -AsPlainText -Force)
+- msbuild EliteLogAgent\EliteLogAgent.csproj /verbosity:minimal /t:Publish /p:PublishProfile=EliteLogAgent\Properties\PublishProfiles\ClickOnceProfile.pubxml /p:ApplicationVersion=%APPVEYOR_BUILD_VERSION% /p:MinimumRequiredVersion=%APPVEYOR_BUILD_VERSION%
 
 test_script:
 - dotnet test --configuration Release --test-adapter-path:. --logger:Appveyor
