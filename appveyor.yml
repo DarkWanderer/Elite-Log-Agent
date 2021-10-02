@@ -36,7 +36,7 @@ test_script:
 - dotnet test --configuration Release --test-adapter-path:. --logger:Appveyor
 
 artifacts:
-- path: EliteLogAgent\bin\publish
+- path: EliteLogAgent\bin\Any CPU\Release\net5.0-windows\app.publish\
   name: ClickOnce
 
 for:
