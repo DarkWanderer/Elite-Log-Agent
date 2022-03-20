@@ -1,5 +1,11 @@
 ![ELA logo](EliteLogAgent/Resources/elite-dangerous-icon.ico)
 
+:warning::warning::warning:PROJECT SUSPENDED:warning::warning::warning:
+
+The current tragic and unforgivable events are sending waves of impact throughout the world. Unfortunately, for this project, the ripple means that there is no possiblity to pay for hosting of ClickOnce update files - which are at the heart of fast & seamless updates ELA was providing. This may change in future - however, at the moment I have no choice but to recommend to move to alternative software
+
+Thank you for everyone who used and helped to improve this software
+
 # Elite Log Agent
 
 A Windows utility, sitting in tray. Feeds your commander data to INARA and/or EDSM sites. Also helps other players by sharing trade/commodity/outfitting data via EDDN
